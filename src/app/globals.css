@@ -167,3 +167,8 @@ p {
 .highlight{
   font-family: var(--dm-serif-display);
 }
+.normalize{
+  font-family: var(--bellota-text);
+}
+
+
