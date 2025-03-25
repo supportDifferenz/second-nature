@@ -1,26 +1,169 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+  --dm-serif-display: "DM Serif Display", serif;
+  --bellota-text: "Bellota Text", sans-serif;
 
-@theme inline {
+  --primary: #2bb673;
+  --primary-dark: #00683d;
+  --primary-light: #ebede0;
+  --secondary-1: #944446;
+  --secondary-1-light: #e8d8d8;
+  --secondary-2: #c98a50;
+  --secondary-2-light: #ecca9c;
+  --contrast-button: #73ffbc;
+  --white: #ffffff;
+  --text-color: #424242;
+  --warning-meal-red: #f15353;
+
+  --fs-h1: clamp(60px, 3.125vw + 30px, 121px);
+  --fs-h2: clamp(35px, 2.083vw + 15px, 70px);
+  --fs-h2-supporting: clamp(35px, 2.083vw + 15px, 70px);
+  --fs-h3: clamp(27px, 1.563vw + 12px, 54px);
+  --fs-h4: clamp(27px, 1.563vw + 12px, 54px);
+  --fs-h5: clamp(21px, 1.042vw + 10px, 31px);
+  --fs-h5-subtitle: clamp(21px, 1.042vw + 10px, 31px);
+  --fs-h6-caption: clamp(16px, 0.833vw + 8px, 24px);
+  --fs-subtitle: clamp(16px, 0.625vw + 6px, 18px);
+  --fs-body-text: clamp(16px, 0.625vw + 6px, 18px);
+  --fs-subtitle-2: clamp(14px, 0.521vw + 5px, 16px);
+
+  --fs-button-primary: clamp(18px, 0.375vw + 16.8px, 24px);
+
+  --default-leading: 1.2;
+
+  --fw-regular: 400;
+  --fw-bold: 700;
+
+  --container: clamp(
+    280px,
+    100% - 2 * (clamp(20px, 10.625vw - 14px, 190.33px)),
+    1600px
+  );
+
+  --container-lg: clamp(
+    280px,
+    100% - 2 * (clamp(20px, 10.625vw - 14px, 160px)),
+    1600px
+  );
+
+  --max-w: 1920px;
+
+  --space-10-20: clamp(10px, 0.625vw + 8px, 20px);
+  --space-20-30: clamp(20px, 0.625vw + 18px, 30px);
+  --space-8-13: clamp(8px, 0.313vw + 7px, 13px);
+  --space-27-34: clamp(27px, 0.438vw + 25.6px, 34px);
+  --space-46-95: clamp(46px, 3.063vw + 36.2px, 95px);
+  --space-34-42: clamp(34px, 0.5vw + 32.4px, 42px);
+  --space-15-30: clamp(15px, 0.938vw + 12px, 30px);
+  --space-18-32: clamp(18px, 0.875vw + 15.2px, 32px);
+  --space-20-85: clamp(20px, 4.063vw + 7px, 85px);
+  --space-30-60: clamp(30px, 1.875vw + 24.000px, 60px);
+  --space-120-180: clamp(120px, 3.750vw + 108.000px, 180px);
+  --space-50-99: clamp(50px, 3.063vw + 40.200px, 99px);
+  --space-520-827: clamp(520px, 19.188vw + 458.600px, 827px);
+
+  
+
+
+
+  --size-14-24: clamp(14px, 0.625vw + 12px, 24px);
+}
+/* dark mode */
+.dark {
+  --color-background: #121212;
+  --color-foreground: #ffffff;
+  --color-text-color: #e0e0e0;
+}
+@theme {
+  --font-dm-serif-display: var(--dm-serif-display);
+  --font-bellota-text: var(--bellota-text);
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-primary: var(--primary);
+  --color-primary-dark: var(--primary-dark);
+  --color-primary-light: var(--primary-light);
+  --color-secondary-1: var(--secondary-1);
+  --color-secondary-1-light: var(--secondary-1-light);
+  --color-secondary-2: var(--secondary-2);
+  --color-secondary-2-light: var(--secondary-2-light);
+  --color-contrast-button: var(--contrast-button);
+  --color-white: var(--white);
+  --color-text-color: var(--text-color);
+  --color-warning-meal-red: var(--warning-meal-red);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --breakpoint-sm: 576px;
+  --breakpoint-lg: 992px;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-size: var(--fs-body-text);
+  font-family: var(--bellota-text);
+  font-weight: var(--fw-regular);
+  line-height: var(--default-leading);
+  color: var(--text-color);
+}
+
+h1 {
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-regular);
+}
+h2 {
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-regular);
+}
+h2.supporting {
+  font-size: var(--fs-h2-supporting);
+  font-weight: var(--fw-regular);
+}
+h3 {
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-regular);
+}
+h4 {
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-regular);
+}
+h5 {
+  font-size: var(--fs-h5);
+  font-weight: var(--fw-bold);
+}
+h5.subtitle {
+  font-size: var(--fs-h5-subtitle);
+  font-weight: var(--fw-bold);
+
+}
+h6 {
+  font-size: var(--fs-h6-caption);
+  font-weight: var(--fw-bold);
+}
+span.subtitle {
+  font-size: var(--fs-subtitle);
+  font-weight: var(--fw-bold);
+}
+span.subtitle2 {
+  font-size: var(--fs-subtitle-2);
+  font-weight: var(--fw-bold);
+}
+button {
+  font-family: var(--bellota-text);
+  font-weight: 700;
+  line-height: 120%;
+}
+p {
+  font-size: var(--fs-body-text);
+  line-height: 1.3;
+}
+
+.container {
+  max-width: var(--container);
+  margin: 0 auto;
+}
+.container-lg {
+  max-width: var(--container-lg);
+  margin: 0 auto;
+}
+.highlight{
+  font-family: var(--dm-serif-display);
 }
