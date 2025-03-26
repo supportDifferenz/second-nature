@@ -1,4 +1,4 @@
-import { JSX } from "react";
+import { JSX, MutableRefObject, RefObject } from "react";
 
 interface TypographyProps {
     tag?: keyof JSX.IntrinsicElements;
@@ -9,6 +9,8 @@ interface TypographyProps {
     role?: string;
     ariaLabel?: string;
     ariaLabelledBy?: string;
+    ref?: MutableRefObject<(HTMLSpanElement | null)[]>; // ✅ Allows mutation
+
   }
   
   export default TypographyProps;

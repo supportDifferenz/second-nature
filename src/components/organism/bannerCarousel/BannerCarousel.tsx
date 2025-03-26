@@ -9,7 +9,7 @@ import { cva } from "class-variance-authority";
 import "./carousel.css";
 import Typography from "@/components/atoms/typography/Typography";
 import { Button } from "@/components/ui/button";
-import { HeroBannerCarouselPropsType } from "./type";
+import { HeroBannerCarouselPropsType } from "../type";
 import { HeroBannersPropsType } from "@/components/pages/landingPage/type";
 
 const bannerVariants = cva(
@@ -143,7 +143,7 @@ export default function HeroBannerCarousel({
                       <Typography
                         tag="h6"
                         text={banner.paragraph}
-                        className="first-letter:capitalize mb-(--space-20-30) sm:max-w-[45%] lg:max-w-[65%] "
+                        className="first-letter:capitalize mb-(--space-20-30) sm:max-w-[45%] lg:max-w-[65%]  "
                         style={{ color: banner.paragraphColor }}
                         role="paragraph"
                         ariaLabel={banner.paragraph}
@@ -156,6 +156,7 @@ export default function HeroBannerCarousel({
                     {hasButton && banner.buttonText && (
                       <Button
                         variant={"outlinePrimaryBtn"}
+                        className="mx-auto sm:m-0"
                         style={{
                           borderColor: banner.buttonTextColor,
                           color: banner.buttonTextColor,
@@ -234,6 +235,7 @@ export default function HeroBannerCarousel({
               {hasButton && banners[0].buttonText && (
                 <Button
                   variant={"outlinePrimaryBtn"}
+                  className="mx-auto sm:m-0"
                   style={{
                     borderColor: banners[0].buttonTextColor,
                     color: banners[0].buttonTextColor,
