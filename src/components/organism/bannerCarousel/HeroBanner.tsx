@@ -29,7 +29,7 @@ const bannerVariants = cva(
   }
 );
 
-export default function HeroBannerCarousel({
+export default function HeroBanner({
   banners,
   isCarousel = false,
   autoplay = false,
@@ -185,8 +185,8 @@ export default function HeroBannerCarousel({
               priority
             />
           </div>
-          <div className={cn(bannerVariants({ align }), "container")}>
-            <div className="lg:w-[55%] bg-amber-400">
+          <div className={cn(bannerVariants({ align }), "container items-center")}>
+            <div className="lg:w-[55%]">
               {banners[0].caption && (
                 <Typography
                   tag="span"
@@ -202,7 +202,7 @@ export default function HeroBannerCarousel({
               {banners[0].title && (
                 <Typography
                   tag="h1"
-                  className="capitalize mb-(--space-10-20) "
+                  className="capitalize highlight mb-(--space-10-20) "
                   text={banners[0].title}
                   role="heading"
                   ariaLabel={banners[0].title}
@@ -211,7 +211,7 @@ export default function HeroBannerCarousel({
                   {banners[0].halfTitle && (
                     <Typography
                       tag="h2"
-                      className="supporting capitalize sm:max-w-[50%] lg:max-w-[65%]"
+                      className="supporting capitalize normalize sm:max-w-[50%] lg:max-w-[65%]"
                       text={banners[0].halfTitle}
                       role="sub heading"
                       ariaLabel={banners[0].halfTitle}
@@ -225,7 +225,7 @@ export default function HeroBannerCarousel({
                 <Typography
                   tag="h6"
                   text={banners[0].paragraph}
-                  className="first-letter:capitalize mb-(--space-20-30) sm:max-w-[45%] lg:max-w-[65%] "
+                  className="first-letter:capitalize mb-(--space-20-30) mx-auto max-w-[90%] sm:max-w-[45%] lg:max-w-[65%] "
                   style={{ color: banners[0].paragraphColor }}
                   role="paragraph"
                   ariaLabel={banners[0].paragraph}
