@@ -9,7 +9,7 @@ import { cva } from "class-variance-authority";
 import "./carousel.css";
 import Typography from "@/components/atoms/typography/Typography";
 import { Button } from "@/components/ui/button";
-import { HeroBannerCarouselPropsType } from "./type";
+import { BannerCarouselPropsType } from "../type";
 import { HeroBannersPropsType } from "@/components/pages/landingPage/type";
 
 const bannerVariants = cva(
@@ -37,7 +37,7 @@ export default function HeroBanner({
   interval = 4000,
   hasButton = true,
   align,
-}: HeroBannerCarouselPropsType) {
+}: BannerCarouselPropsType) {
   // carousel settings
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: isCarousel });
   const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
@@ -112,8 +112,6 @@ export default function HeroBanner({
                       />
                     )}
 
-
-
                     {banner.title && (
                       <Typography
                         tag="h1"
@@ -135,15 +133,11 @@ export default function HeroBanner({
                       />
                     )}
 
-
-
-
-
                     {banner.paragraph && (
                       <Typography
                         tag="h6"
                         text={banner.paragraph}
-                        className="first-letter:capitalize mb-(--space-20-30) sm:max-w-[45%] lg:max-w-[65%] "
+                        className="first-letter:capitalize mb-(--space-20-30) sm:max-w-[45%] lg:max-w-[65%]  "
                         style={{ color: banner.paragraphColor }}
                         role="paragraph"
                         ariaLabel={banner.paragraph}
@@ -151,11 +145,10 @@ export default function HeroBanner({
                       />
                     )}
 
-
-
                     {hasButton && banner.buttonText && (
                       <Button
                         variant={"outlinePrimaryBtn"}
+                        className="mx-auto sm:m-0"
                         style={{
                           borderColor: banner.buttonTextColor,
                           color: banner.buttonTextColor,
@@ -184,7 +177,9 @@ export default function HeroBanner({
               priority
             />
           </div>
-          <div className={cn(bannerVariants({ align }), "container items-center")}>
+          <div
+            className={cn(bannerVariants({ align }), "container items-center")}
+          >
             <div className="lg:w-[55%]">
               {banners[0].caption && (
                 <Typography
@@ -234,6 +229,7 @@ export default function HeroBanner({
               {hasButton && banners[0].buttonText && (
                 <Button
                   variant={"outlinePrimaryBtn"}
+                  className="mx-auto sm:m-0"
                   style={{
                     borderColor: banners[0].buttonTextColor,
                     color: banners[0].buttonTextColor,

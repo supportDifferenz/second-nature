@@ -1,4 +1,4 @@
-import HeroBanner from "@/components/organism/bannerCarousel/HeroBanner";
+import HeroBanner from "@/components/organism/heroBanner/HeroBanner";
 import React from "react";
 
 export default function HeroSection() {

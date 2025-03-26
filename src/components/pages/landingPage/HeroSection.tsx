@@ -1,5 +1,5 @@
-import BannerCarousel from "@/components/organism/bannerCarousel/HeroBanner";
 import React from "react";
+import HeroBanner from "@/components/organism/heroBanner/HeroBanner";
 
 export default function HeroSection() {
   const banners = [
@@ -80,7 +80,7 @@ export default function HeroSection() {
 
   return (
     <section>
-        <BannerCarousel banners={banners} align="left" isCarousel />
+        <HeroBanner banners={banners} align="left" isCarousel />
     </section>
   );
 }
