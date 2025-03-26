@@ -3,7 +3,7 @@
 import { HeroBannersPropsType } from "@/components/pages/landingPage/type";
 
 // hero banner carousel props type
-export type HeroBannerCarouselPropsType = {
+export type BannerCarouselPropsType = {
   banners: HeroBannersPropsType[]; // ✅ Ensures banners array is strongly typed
   isCarousel?: boolean;
   autoplay?: boolean;

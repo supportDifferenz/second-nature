@@ -9,7 +9,7 @@ import { cva } from "class-variance-authority";
 import "./carousel.css";
 import Typography from "@/components/atoms/typography/Typography";
 import { Button } from "@/components/ui/button";
-import { HeroBannerCarouselPropsType } from "../type";
+import { BannerCarouselPropsType } from "../type";
 import { HeroBannersPropsType } from "@/components/pages/landingPage/type";
 
 const bannerVariants = cva(
@@ -37,7 +37,7 @@ export default function HeroBanner({
   interval = 4000,
   hasButton = true,
   align,
-}: HeroBannerCarouselPropsType) {
+}: BannerCarouselPropsType) {
   // carousel settings
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: isCarousel });
   const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
@@ -112,8 +112,6 @@ export default function HeroBanner({
                       />
                     )}
 
-
-
                     {banner.title && (
                       <Typography
                         tag="h1"
@@ -135,10 +133,6 @@ export default function HeroBanner({
                       />
                     )}
 
-
-
-
-
                     {banner.paragraph && (
                       <Typography
                         tag="h6"
@@ -150,8 +144,6 @@ export default function HeroBanner({
                         ariaLabelledBy="sub paragraph"
                       />
                     )}
-
-
 
                     {hasButton && banner.buttonText && (
                       <Button
@@ -185,7 +177,9 @@ export default function HeroBanner({
               priority
             />
           </div>
-          <div className={cn(bannerVariants({ align }), "container items-center")}>
+          <div
+            className={cn(bannerVariants({ align }), "container items-center")}
+          >
             <div className="lg:w-[55%]">
               {banners[0].caption && (
                 <Typography
