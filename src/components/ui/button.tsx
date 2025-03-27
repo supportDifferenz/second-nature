@@ -19,7 +19,9 @@ const buttonVariants = cva(
         linkSecondary: " text-(--fs-body-button-text) text-secondary-1 border-none underline-offset-4 hover:underline !p-0 ",
 
         primaryBtn:
-          "bg-secondary-1 border-secondary-1 hover:border-[#823234] hover:bg-[#823234]",
+          "bg-secondary-1 border-secondary-1 hover:border-[#823234] hover:bg-[#823234] shadow-[0px_6px_21px_rgba(0,0,0,0.44)] text-white",
+        secondaryBtn:
+          "bg-primary-light border-primary-light hover:border-[#d7d9cd] hover:bg-[#d7d9cd] shadow-[0px_6px_21px_rgba(0,0,0,0.44)] text-[#909090]",
       },
       size: {
         regular: "py-(--space-8-13) px-(--space-27-34) ",
