@@ -29,6 +29,7 @@
   --fs-subtitle-2: clamp(14px, 0.521vw + 5px, 16px);
 
   --fs-button-primary: clamp(18px, 0.375vw + 16.8px, 24px);
+  --fs-body-button-text: clamp(16px, 0.125vw + 15.600px, 18px);
 
   --default-leading: 1.2;
 
@@ -72,11 +73,32 @@
   --space-64-145: clamp(64px, 5.063vw + 47.800px, 145px);
   --space-20-120: clamp(20px, 6.250vw + 0.000px, 120px);
   --space-22-43: clamp(22px, 1.313vw + 17.800px, 43px);
+  --space-527-690: clamp(527px, 10.188vw + 494.400px, 690px);
+  --space-105-136: clamp(105px, 1.938vw + 98.800px, 136px);
+  --space-256-406: clamp(256px, 9.375vw + 226.000px, 406px);
+  --space-191-290: clamp(191px, 6.188vw + 171.200px, 290px);
+  --space-280-560: clamp(280px, 17.500vw + 224.000px, 560px);
+  --space-300-526: clamp(300px, 14.125vw + 254.800px, 526px);
+  --space-156-160: clamp(156px, 0.250vw + 155.200px, 160px);
+  --space-100-200: clamp(100px, 6.250vw + 80.000px, 200px);
+  --space-20-45: clamp(20px, 1.563vw + 15.000px, 45px);
+  --space-67-75: clamp(67px, 0.500vw + 65.400px, 75px);
+  --space-13-16: clamp(13px, 0.188vw + 12.400px, 16px);
+  --space-13-19: clamp(13px, 0.375vw + 11.800px, 19px);
+  --space-197-216: clamp(197px, 1.188vw + 193.200px, 216px);
+  --space-24-45: clamp(24px, 1.313vw + 19.800px, 45px);
+  --space-40-60: clamp(40px, 1.250vw + 36.000px, 60px);
+  --space-5-8: clamp(5px, 0.188vw + 4.400px, 8px);
+
+
+
+
+
   
 
 
 
-  --size-14-24: clamp(14px, 0.625vw + 12px, 24px);
+  --size-14-22: clamp(14px, 0.500vw + 12.400px, 22px);
 }
 /* dark mode */
 .dark {
@@ -155,6 +177,7 @@ span.subtitle2 {
   font-size: var(--fs-subtitle-2);
   font-weight: var(--fw-bold);
 }
+
 button {
   font-family: var(--bellota-text);
   font-weight: 700;
@@ -162,7 +185,7 @@ button {
 }
 p {
   font-size: var(--fs-body-text);
-  line-height: 1.3;
+  line-height: 1.4;
 }
 
 .container {

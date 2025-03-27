@@ -17,7 +17,7 @@ const features = [
 
 const Marquee = ({ speed = 20 }) => {
   return (
-    <div className="container-lg">
+    <div className="container-lg ">
       <div className="relative overflow-hidden bg-white border border-[#C7FCE3] w-full  rounded-full shadow-2xl p-(--space-18-32)">
         <div className="flex w-max">
           {/* Duplicated content to create seamless effect */}
