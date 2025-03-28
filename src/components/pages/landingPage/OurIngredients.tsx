@@ -71,7 +71,6 @@ export default function OurIngredients() {
           textColor="#00683D"
         />
       </div>
-
       <section className=" mt-[-70%] sm:mt-[-12%] lg:mt-[-50px]">
         {/* ingredients circle section */}
         <div className=" overflow-hidden sm:overflow-visible sm:transform sm:scale-[.7]  lg:scale-100 relative z-[3]  after:content-[''] after:absolute after:w-full after:h-1/2 after:left-0 after:top-0  after:bg-gradient-to-b after:from-white after:via-white/75 after:to-transparent after-z-[1]">
@@ -88,7 +87,6 @@ export default function OurIngredients() {
               const angle = (index / features.length) * (1.5 * Math.PI) - 0.45;
               const x = Math.cos(angle) * radius;
               const y = Math.sin(angle) * radius;
-
               return (
                 <div
                   key={uuidv4()}
@@ -107,7 +105,6 @@ export default function OurIngredients() {
                       className="rounded-full !static object-contain"
                     />
                   </div>
-
                   {/* Dynamically positioned text */}
                   <Typography
                     tag="span"
@@ -120,8 +117,7 @@ export default function OurIngredients() {
                         : align === "bottom"
                         ? "sm:top-[100%]"
                         : "sm:flex-col"
-                    }
-`}
+                    }`}
                   />
                 </div>
               );
@@ -139,7 +135,6 @@ export default function OurIngredients() {
           </div>
         </div>
         {/* Real Ingredients vs. Fillers */}
-
         <div className="container">
           <div className=" mt-[10%] lg:mt-[18%] shadow-[inset_6px_6px_16px_0px_rgba(0,0,0,0.55)] bg-primary-dark rounded-full p-(--space-20-45) pb-[130px] sm:pb-(--space-20-45) flex flex-col sm:flex-row gap-[50px] sm:gap-[3%] items-stretch lg:items-center">
             <div className="sm:basis-[50%] h-[450px] sm:h-auto">

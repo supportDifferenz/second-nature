@@ -77,7 +77,6 @@ export default function HeroSection() {
       bannerThemeColor: "orange",
     },
   ];
-
   return (
     <section>
         <HeroBanner banners={banners} align="left" isCarousel />

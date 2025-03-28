@@ -1,9 +1,11 @@
 @import "tailwindcss";
 
 :root {
+  /* fonts */
   --dm-serif-display: "DM Serif Display", serif;
   --bellota-text: "Bellota Text", sans-serif;
 
+  /* theme color */
   --primary: #2bb673;
   --primary-dark: #00683d;
   --primary-light: #ebede0;
@@ -15,7 +17,11 @@
   --white: #ffffff;
   --text-color: #424242;
   --warning-meal-red: #f15353;
+  --background:transparent;
+  --foreground:#424242;
 
+
+  /* font size */
   --fs-h1: clamp(60px, 3.125vw + 30px, 121px);
   --fs-h2: clamp(35px, 2.083vw + 15px, 70px);
   --fs-h2-supporting: clamp(35px, 2.083vw + 15px, 70px);
@@ -27,29 +33,22 @@
   --fs-subtitle: clamp(16px, 0.625vw + 6px, 18px);
   --fs-body-text: clamp(16px, 0.625vw + 6px, 18px);
   --fs-subtitle-2: clamp(14px, 0.521vw + 5px, 16px);
-
   --fs-button-primary: clamp(18px, 0.375vw + 16.8px, 24px);
   --fs-body-button-text: clamp(16px, 0.125vw + 15.600px, 18px);
 
+  /* leading */
   --default-leading: 1.2;
 
+  /* font weight */
   --fw-regular: 400;
   --fw-bold: 700;
 
-  --container: clamp(
-    280px,
-    100% - 2 * (clamp(20px, 10.625vw - 14px, 190.33px)),
-    1600px
-  );
-
-  --container-lg: clamp(
-    280px,
-    100% - 2 * (clamp(20px, 10.625vw - 14px, 160px)),
-    1600px
-  );
-
+  /* container */
+  --container: clamp(280px, 100% - 2 * (clamp(20px, 10.625vw - 14px, 190.33px)), 1600px);
+  --container-lg: clamp(280px, 100vw - clamp(40px, 40px + (132 * (100vw - 320px) / 1600), 172px), 1748px);
   --max-w: 1920px;
 
+  /* spacing */
   --space-10-20: clamp(10px, 0.625vw + 8px, 20px);
   --space-20-30: clamp(20px, 0.625vw + 18px, 30px);
   --space-8-13: clamp(8px, 0.313vw + 7px, 13px);
@@ -78,27 +77,20 @@
   --space-24-45: clamp(24px, 1.313vw + 19.800px, 45px);
   --space-40-60: clamp(40px, 1.250vw + 36.000px, 60px);
   --space-5-8: clamp(5px, 0.188vw + 4.400px, 8px);
+  --space-254-490: clamp(254px, 14.750vw + 206.800px, 490px);
+  --space-54-126: clamp(54px, 4.500vw + 39.600px, 126px);
+  --space-200-240: clamp(200px, 2.500vw + 192.000px, 240px);
+  --space-16-24: clamp(16px, 0.500vw + 14.400px, 24px);
+  --space-34-130: clamp(34px, 6.000vw + 14.800px, 130px);
+  --space-102-102: clamp(102px, 0.000vw + 102.000px, 102px);
 
 
-
-
-
-
-
-
-
-  
-
-
-
+  /* size */
   --size-14-22: clamp(14px, 0.500vw + 12.400px, 22px);
 }
-/* dark mode */
-.dark {
-  --color-background: #121212;
-  --color-foreground: #ffffff;
-  --color-text-color: #e0e0e0;
-}
+
+
+/* tailwind.config */
 @theme {
   --font-dm-serif-display: var(--dm-serif-display);
   --font-bellota-text: var(--bellota-text);
@@ -121,6 +113,7 @@
   --breakpoint-lg: 992px;
 }
 
+/* global styles */
 body {
   font-size: var(--fs-body-text);
   font-family: var(--bellota-text);
@@ -170,7 +163,6 @@ span.subtitle2 {
   font-size: var(--fs-subtitle-2);
   font-weight: var(--fw-bold);
 }
-
 button {
   font-family: var(--bellota-text);
   font-weight: 700;
@@ -180,9 +172,12 @@ p {
   font-size: var(--fs-body-text);
   line-height: 1.4;
 }
-
 .container {
   max-width: var(--container);
+  margin: 0 auto;
+}
+.container-fluid {
+  max-width: 1920px;
   margin: 0 auto;
 }
 .container-lg {
@@ -197,3 +192,9 @@ p {
 }
 
 
+/* dark mode */
+.dark {
+  --color-background: #121212;
+  --color-foreground: #ffffff;
+  --color-text-color: #e0e0e0;
+}

@@ -1,10 +1,11 @@
-
 import Typography from "@/components/atoms/typography/Typography";
 import { MealCard } from "@/components/organism/mealCard/MealCard";
 import { MealCardProps } from "@/components/organism/type";
-import React from "react";
+import React, { useState } from "react";
 
 export default function MealCategory() {
+  const [mealCategory, setMealCategory] = useState("For Dogs");
+
   const mealsData: { category: string; meals: MealCardProps[] }[] = [
     {
       category: "For Dogs",
@@ -18,7 +19,6 @@ export default function MealCategory() {
             "Probiotic-Rich",
             "Egg Yolk For Vitality",
             "Premium Protein Source",
-          
           ],
           buttons: [
             { label: "Get Started", route: "/get-started", variant: "primary" },
@@ -108,22 +108,58 @@ export default function MealCategory() {
       ],
     },
   ];
-  return (
-    <div className="space-y-(--space-40-60)">
-      {mealsData.map((categoryData, index) => (
-        <div key={index}>
-          {/* Category Header */}
-          <Typography tag="h5" text={categoryData.category} className="uppercase font-normal bg-green-800 text-white text-center py-2.5 text-lg  rounded-xl"/>
-            
 
-          {/* Meal Cards */}
-          <div className="grid gap-6 mt-4">
-            {categoryData.meals.map((meal, mealIndex) => (
-              <MealCard key={mealIndex} {...meal} />
-            ))}
+  return (
+    <div className="space-y-10">
+      {/* Mobile Category Selector */}
+      <div className="flex gap-4 sm:hidden ">
+        {mealsData.map((categoryData) => (
+          <div key={categoryData.category} onClick={() => setMealCategory(categoryData.category)} className="flex-1">
+            <Typography
+              tag="h5"
+              text={categoryData.category}
+              className={`uppercase font-normal text-white text-center py-2.5  rounded-xl cursor-pointer ${
+                mealCategory === categoryData.category ? "bg-primary-dark" : "bg-text-color"
+              }`}
+            />
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
+
+      {/* Mobile: Show only selected category */}
+      <div className=" sm:hidden ">
+        {mealsData
+          .filter((categoryData) => categoryData.category === mealCategory)
+          .map((categoryData) => (
+            <div key={categoryData.category}>
+              <div className="flex gap-6 mt-4 overflow-x-auto">
+                {categoryData.meals.map((meal, mealIndex) => (
+                  <MealCard key={mealIndex} {...meal} />
+                ))}
+              </div>
+            </div>
+          ))}
+      </div>
+
+      {/* Web: Show all categories */}
+      <div className="hidden sm:block">
+        {mealsData.map((categoryData) => (
+          <div key={categoryData.category} className="mb-15 last:mb-0">
+            {/* Category Header */}
+            <Typography
+              tag="h5"
+              text={categoryData.category}
+              className="uppercase font-normal bg-primary-dark text-white text-center py-2.5 text-lg rounded-xl"
+            />
+            {/* Meal Cards */}
+            <div className="grid gap-6 mt-4">
+              {categoryData.meals.map((meal, mealIndex) => (
+                <MealCard key={mealIndex} {...meal} />
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

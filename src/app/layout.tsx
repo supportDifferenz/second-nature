@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { DM_Serif_Display, Bellota_Text } from "next/font/google";
 import "./globals.css";
+import Footer from "@/components/organism/footer/Footer";
 
 const dmSerifDisplay = DM_Serif_Display({
   subsets: ["latin"],
@@ -27,8 +28,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className="antialiased">{children}</body>
+    <html lang="en" className="dark">
+      <body className="antialiased dark">
+        {children}
+        <Footer/>
+        </body>
     </html>
   );
 }

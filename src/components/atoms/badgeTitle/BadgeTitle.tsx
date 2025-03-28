@@ -17,7 +17,6 @@ const BadgeTitle: React.FC<BadgeProps> = ({ label, color, className = "",  }) =>
       ariaLabel={label}
       ariaLabelledBy="badge"
       />
-      
   );
 };
 

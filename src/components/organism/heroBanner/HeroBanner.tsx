@@ -51,7 +51,6 @@ export default function HeroBanner({
     }
     return banner.image.mobile; // Default for SSR
   };
-
   const [activeImages, setActiveImages] = useState<string[]>(
     banners.map((b) => b.image.mobile)
   ); // Default SSR-safe values
@@ -60,9 +59,7 @@ export default function HeroBanner({
     const updateImages = () => {
       setActiveImages(banners.map(getResponsiveImage));
     };
-
     updateImages(); // Set correct images on mount
-
     window.addEventListener("resize", updateImages);
     return () => window.removeEventListener("resize", updateImages);
   }, []);
@@ -70,11 +67,9 @@ export default function HeroBanner({
   // carousel settings
   useEffect(() => {
     if (!isCarousel || !autoplay || !emblaApi) return;
-
     const intervalId = setInterval(() => {
       emblaApi.scrollNext();
     }, interval);
-
     return () => clearInterval(intervalId);
   }, [emblaApi, autoplay, isCarousel, interval]);
 
@@ -132,7 +127,6 @@ export default function HeroBanner({
                         ariaLabelledBy="sub title"
                       />
                     )}
-
                     {banner.paragraph && (
                       <Typography
                         tag="h6"
@@ -144,7 +138,6 @@ export default function HeroBanner({
                         ariaLabelledBy="sub paragraph"
                       />
                     )}
-
                     {hasButton && banner.buttonText && (
                       <Button
                         variant={"outlinePrimaryBtn"}
@@ -192,7 +185,6 @@ export default function HeroBanner({
                   ariaLabelledBy="caption"
                 />
               )}
-
               {banners[0].title && (
                 <Typography
                   tag="h1"
@@ -214,7 +206,6 @@ export default function HeroBanner({
                   )}
                 </Typography>
               )}
-
               {banners[0].paragraph && (
                 <Typography
                   tag="h6"
