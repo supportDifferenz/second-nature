@@ -1,0 +1,51 @@
+import Typography from "@/components/atoms/typography/Typography";
+import { SecondaryInlineTitle } from "@/components/molecules/titleSyles/Title";
+import { Button } from "@/components/ui/button";
+import Image from "next/image";
+
+export default function BehindTheScenes() {
+  return (
+    <section className="bg-secondary-1 text-white  ">
+      <div className="container py-20 2xl:py-25 ">
+        <div className="mb-12 text-center lg:text-left">
+          <SecondaryInlineTitle
+            title="Behind"
+            highlight="The Scenes"
+            paragraph="Our Science-Backed Process"
+            textAlign="left"
+            textColor="#EBEDE0"
+            className=" sm:mx-auto lg:ml-0 "
+            paragraphColor="#EBEDE0"
+          />
+        </div>
+        <div className=" flex flex-col lg:flex-row lg:items-center gap-(--space-30-60)">
+          <div className="flex-1 overflow-hidden">
+            <div className="sm:max-w-[70%] lg:max-w-full mx-auto lg:ml-0">
+              <Image
+                src="/images/landing-behind-scenes-thumb.webp" // Update the path accordingly
+                width={300}
+                height={200}
+                alt="Veterinarian with cat"
+                className="rounded-(--space-20-45) !static w-full"
+              />
+            </div>
+          </div>
+          <div className=" flex-1 text-center md:text-left">
+            <Typography
+              tag="h4"
+              text="Certified By Veterinary Medical Doctors Based On FEDIAF Guidelines"
+              className="text-center lg:text-left sm:max-w-[70%] lg:max-w-[85%] font-normal  mx-auto lg:ml-0 "
+            />
+            <Button
+              variant="secondaryBtnTextSecondary1"
+              size="md"
+              className="mt-(--space-30-60) mx-auto lg:ml-0"
+            >
+              Learn More
+            </Button>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

@@ -1,7 +1,8 @@
 export type TitleProps = {
     title?: string; // Mandatory
     highlight?: string;
-    paragraph: string;
+    paragraph?: string;
+    paragraphColor?: string;
     caption?: string;
     textAlign?: "left" | "center" | "right";
     textColor?: string;

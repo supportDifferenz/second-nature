@@ -95,6 +95,8 @@
   --space-16-24: clamp(16px, 0.500vw + 14.400px, 24px);
   --space-34-130: clamp(34px, 6.000vw + 14.800px, 130px);
   --space-102-102: clamp(102px, 0.000vw + 102.000px, 102px);
+  --space-33-42: clamp(33px, 0.563vw + 31.200px, 42px);
+  --space-260-900: clamp(260px, 40.000vw + 132.000px, 900px);
 
 
   /* size */
@@ -215,8 +217,8 @@ p {
 
 
 /* dark mode */
-.dark {
+/* .dark {
   --color-background: #121212;
   --color-foreground: #ffffff;
   --color-text-color: #e0e0e0;
-}
+} */

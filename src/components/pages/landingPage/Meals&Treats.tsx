@@ -1,6 +1,6 @@
 "use client";
 
-import { InlinePrimaryTitle } from "@/components/molecules/titleSyles/Title";
+import {  SecondaryInlineTitle } from "@/components/molecules/titleSyles/Title";
 import MealCategory from "@/components/organism/mealCard/MealCategory ";
 import Image from "next/image";
 import React from "react";
@@ -11,9 +11,9 @@ export default function MealsAndTreats() {
       <div className="container flex flex-col lg:flex-row">
         <div className="basis-[50%] relative">
           <div className="sticky top-6 mb-8 lg:mb-0">
-            <InlinePrimaryTitle
+            <SecondaryInlineTitle
               title="& Treats"
-              highlight="Meals"
+              highlight="Meals "
               paragraph="Options that fit every palate "
               textAlign="left"
               textColor="#00683D"

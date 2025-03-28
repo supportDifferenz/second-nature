@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { v4 as uuidv4 } from "uuid";
 import { useEffect, useState } from "react";
-import { InlinePrimaryTitle } from "@/components/molecules/titleSyles/Title";
+import { PrimaryInlineTitle } from "@/components/molecules/titleSyles/Title";
 import Typography from "@/components/atoms/typography/Typography";
 import { Button } from "@/components/ui/button";
 
@@ -63,7 +63,7 @@ export default function OurIngredients() {
   return (
     <>
       <div className="relative z-[5]">
-        <InlinePrimaryTitle
+        <PrimaryInlineTitle
           highlight="Ingredients"
           title="Our"
           paragraph="Pure, Clean Ingredients You Can Recognize and Trust"

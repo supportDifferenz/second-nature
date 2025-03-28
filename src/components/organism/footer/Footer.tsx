@@ -7,9 +7,9 @@ import React from "react";
 const Footer = () => {
   return (
     <footer className=" text-primary-dark  lg:pt-(--space-40-60)">
-      <div className="container flex flex-col lg:flex-row  lg:gap-[5%] text-center md:text-left   pb-(--space-27-34) ">
+      <div className="container flex flex-col lg:flex-row   lg:gap-[5%] text-center md:text-left   pb-(--space-27-34) ">
         {/* logo wrapper */}
-        <div className=" flex-1 pb-(--space-27-34) pt-(--space-40-60)  border-t lg:border-0 border-contrast-button">
+        <div className=" flex-1 pb-(--space-27-34) pt-(--space-40-60) lg:pt-0 border-t lg:border-0 border-contrast-button">
           <div className="w-(--space-200-240) mb-(--space-16-24)">
             <Image
               src="/icons/logo-primary-dark.svg"
