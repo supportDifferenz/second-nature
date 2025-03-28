@@ -26,7 +26,7 @@ const bannerVariants = cva(
     defaultVariants: {
       align: "center",
     },
-  }
+  },
 );
 
 export default function HeroBanner({
@@ -52,7 +52,7 @@ export default function HeroBanner({
     return banner.image.mobile; // Default for SSR
   };
   const [activeImages, setActiveImages] = useState<string[]>(
-    banners.map((b) => b.image.mobile)
+    banners.map((b) => b.image.mobile),
   ); // Default SSR-safe values
 
   useEffect(() => {

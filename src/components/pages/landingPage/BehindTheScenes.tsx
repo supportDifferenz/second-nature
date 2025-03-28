@@ -12,9 +12,8 @@ export default function BehindTheScenes() {
             title="Behind"
             highlight="The Scenes"
             paragraph="Our Science-Backed Process"
-            textAlign="left"
             textColor="#EBEDE0"
-            className=" sm:mx-auto lg:ml-0 "
+            textAlign="text-center sm:text-center lg:text-left"
             paragraphColor="#EBEDE0"
           />
         </div>

@@ -20,7 +20,7 @@ const buttonVariants = cva(
 
         secondaryBtn:
           "bg-primary-light border-primary-light hover:border-[#d7d9cd] hover:bg-[#d7d9cd]  text-[#909090]",
-          secondaryBtnTextSecondary1:
+        secondaryBtnTextSecondary1:
           "bg-primary-light border-primary-light hover:border-[#d7d9cd] hover:bg-[#d7d9cd]  text-secondary-1",
         linkSecondary:
           " text-(--fs-body-button-text) text-secondary-1 border-none underline-offset-4 hover:underline !p-0 ",
@@ -40,7 +40,7 @@ const buttonVariants = cva(
       variant: "primaryBtn",
       size: "regular",
     },
-  }
+  },
 );
 
 function Button({

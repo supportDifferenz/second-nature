@@ -165,7 +165,7 @@ const footerCtaData = {
 export default function MealBody() {
   // State to manage the current selected meal type
   const [selectedMeal, setSelectedMeal] = useState<"beef" | "chicken" | "lamb">(
-    "beef"
+    "beef",
   );
 
   // Function to handle tab switching

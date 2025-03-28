@@ -1,19 +1,17 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Typography from "@/components/atoms/typography/Typography";
-import {  SecondaryInlineTitle } from "@/components/molecules/titleSyles/Title";
+import { SecondaryInlineTitle } from "@/components/molecules/titleSyles/Title";
 
 export default function MealTransition() {
   return (
     <section>
       <div className="container  flex flex-col lg:flex-row  gap-(--space-33-42)">
         <SecondaryInlineTitle
-        
           highlight="Transition"
           title="Meal"
-          textAlign="center"
+          textAlign="text-center sm:text-center lg:text-left"
           textColor="#00683D"
-          
           className="lg:hidden text-white"
         />
         {/* Image Section */}
@@ -31,7 +29,7 @@ export default function MealTransition() {
           <SecondaryInlineTitle
             highlight="Transition"
             title="Meal"
-            textAlign="left"
+            textAlign="text-center sm:text-center lg:text-left"
             textColor="#00683D"
             className="hidden lg:block &>text-white"
           />

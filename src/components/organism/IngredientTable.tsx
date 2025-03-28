@@ -25,8 +25,8 @@ export default function IngredientTable({ ingredients }: IngredientTableProps) {
       </div>
       <div className="grid grid-cols-2   sm:grid-cols-3 gap-4 w-[90vw] sm:w-[40vw] mx-auto">
         {ingredients.map((ingredient, index) => (
-          <div 
-            key={index} 
+          <div
+            key={index}
             className="flex flex-col items-center justify-center text-center"
           >
             <div className=" w-[31vw] sm:w-[9.6vw] aspect-square relative">
@@ -37,9 +37,9 @@ export default function IngredientTable({ ingredients }: IngredientTableProps) {
                 className="object-cover rounded-lg"
               />
             </div>
-            <Typography 
-              tag="span" 
-              text={ingredient.name} 
+            <Typography
+              tag="span"
+              text={ingredient.name}
               className="text-sm capitalize"
             />
           </div>

@@ -2,7 +2,7 @@ import Image from "next/image";
 import React from "react";
 import {
   MealTransitionTitle,
-  PetFoodLookingTitle
+  PetFoodLookingTitle,
 } from "../molecules/titleSyles/Title";
 import { Button } from "../ui/button";
 
@@ -24,7 +24,7 @@ interface FooterCtaCardProps {
 
 export default function FooterCtaCard({
   mealTransition,
-  petFood
+  petFood,
 }: FooterCtaCardProps) {
   return (
     <div className="flex flex-col sm:flex-row gap-[var(--space-30-60)] w-fit mx-auto">

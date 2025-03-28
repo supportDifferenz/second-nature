@@ -3,15 +3,24 @@ import TypographyProps from "../types";
 
 const Typography = forwardRef<HTMLSpanElement, TypographyProps>(
   (
-    { tag = "p", text = "null", className, children, style, role, ariaLabel, ariaLabelledBy },
-    ref
+    {
+      tag = "p",
+      text = "null",
+      className,
+      children,
+      style,
+      role,
+      ariaLabel,
+      ariaLabelledBy,
+    },
+    ref,
   ) => {
     return React.createElement(
       tag,
       {
         ref, // ✅ Now supports ref
         className,
-        style, 
+        style,
         role,
         "aria-label": ariaLabel,
         "aria-labelledby": ariaLabelledBy,
@@ -19,9 +28,9 @@ const Typography = forwardRef<HTMLSpanElement, TypographyProps>(
       <>
         {text}
         {children}
-      </>
+      </>,
     );
-  }
+  },
 );
 
 export default Typography;

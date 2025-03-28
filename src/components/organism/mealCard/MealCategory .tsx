@@ -114,12 +114,18 @@ export default function MealCategory() {
       {/* Mobile Category Selector */}
       <div className="flex gap-4 sm:hidden ">
         {mealsData.map((categoryData) => (
-          <div key={categoryData.category} onClick={() => setMealCategory(categoryData.category)} className="flex-1">
+          <div
+            key={categoryData.category}
+            onClick={() => setMealCategory(categoryData.category)}
+            className="flex-1"
+          >
             <Typography
               tag="h5"
               text={categoryData.category}
               className={`uppercase font-normal text-white text-center py-2.5  rounded-xl cursor-pointer ${
-                mealCategory === categoryData.category ? "bg-primary-dark" : "bg-text-color"
+                mealCategory === categoryData.category
+                  ? "bg-primary-dark"
+                  : "bg-text-color"
               }`}
             />
           </div>
