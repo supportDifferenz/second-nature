@@ -9,7 +9,7 @@ import { cva } from "class-variance-authority";
 import "./carousel.css";
 import Typography from "@/components/atoms/typography/Typography";
 import { Button } from "@/components/ui/button";
-import { HeroBannerCarouselPropsType } from "./type";
+import { BannerCarouselPropsType } from "../type";
 import { HeroBannersPropsType } from "@/components/pages/landingPage/type";
 
 const bannerVariants = cva(
@@ -37,7 +37,7 @@ export default function HeroBanner({
   interval = 4000,
   hasButton = true,
   align,
-}: HeroBannerCarouselPropsType) {
+}: BannerCarouselPropsType) {
   // carousel settings
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: isCarousel });
   const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
