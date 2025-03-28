@@ -37,7 +37,6 @@ export const MealCard: React.FC<MealCardProps> = ({
           <Image src={image} alt={title} fill className="!static" />
         </div>
       </div>
-
       <div className="flex flex-col items-center sm:items-start sm:justify-center ">
         {/* Features List */}
         <ul
@@ -67,7 +66,6 @@ export const MealCard: React.FC<MealCardProps> = ({
             </li>
           ))}
         </ul>
-
         {/* Buttons */}
         <div className="flex gap-4  mt-8">
           {buttons.map((button, index) => (

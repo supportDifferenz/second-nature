@@ -7,4 +7,5 @@ export type TitleProps = {
     textColor?: string;
     captionPosition?: "top" | "bottom"; // Only for blockPrimaryTitle & blockSecondaryTitle
     className?:string,
+    order?:"accenting" | "dissenting",
   };
