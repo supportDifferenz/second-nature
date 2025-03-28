@@ -110,7 +110,7 @@ export default function MealCategory() {
   ];
 
   return (
-    <div className="space-y-10">
+    <div className="sm:space-y-10">
       {/* Mobile Category Selector */}
       <div className="flex gap-4 sm:hidden ">
         {mealsData.map((categoryData) => (

@@ -2,13 +2,77 @@ import Typography from "@/components/atoms/typography/Typography";
 import React from "react";
 import { TitleProps } from "./type";
 
-export const InlinePrimaryTitle: React.FC<TitleProps> = ({
+export const PrimaryInlineTitle: React.FC<TitleProps> = ({
   title = "no text",
   highlight,
   paragraph,
   caption,
   textAlign = "center",
   textColor = "#00683D",
+  className,
+  order = "accenting",
+  paragraphColor,
+}) => {
+  return (
+    <div className={`text-${textAlign} ${className}`}>
+      {caption && (
+        <Typography
+          tag="p"
+          text={caption}
+          className="text-sm font-medium"
+        ></Typography>
+      )}
+
+      {order === "accenting" ? (
+        <Typography
+          tag="h2"
+          text={title}
+          style={{ color: `${textColor}` }}
+          className="mb-3"
+        >
+          {" "}
+          <span className="highlight ">{highlight}</span>
+        </Typography>
+      ) : (
+        <Typography
+          tag="h2"
+          text={highlight || ""}
+          style={{ color: `${textColor}` }}
+          className="mb-3 highlight"
+        >
+          {" "}
+          <span className="font-bellota-text font-normal ">{title}</span>
+        </Typography>
+      )}
+
+      {paragraph && (
+        <Typography
+          tag="h6"
+          text={paragraph}
+          className={`text-lg  max-w-[90%] ${
+            textAlign === "center"
+              ? "mx-auto"
+              : textAlign === "left"
+              ? "ml-0"
+              : "mr-0"
+          }`}
+          style={{
+            color: `${paragraphColor ? paragraphColor : "var(--text-color)"}`,
+          }}
+        />
+      )}
+    </div>
+  );
+};
+
+export const PrimaryBlockTitle: React.FC<TitleProps> = ({
+  title = "no text",
+  highlight,
+  paragraph,
+  caption,
+  textAlign = "center",
+  textColor = "#00683D",
+  paragraphColor,
   className,
   order = "accenting",
 }) => {
@@ -27,7 +91,73 @@ export const InlinePrimaryTitle: React.FC<TitleProps> = ({
           tag="h2"
           text={title}
           style={{ color: `${textColor}` }}
-          className="mb-(--space-10-20)"
+          className="mb-3"
+        >
+          {" "}
+          <span className="highlight block">{highlight}</span>
+        </Typography>
+      ) : (
+        <Typography
+          tag="h2"
+          text={highlight || ""}
+          style={{ color: `${textColor}` }}
+          className="mb-3 highlight"
+        >
+          {" "}
+          <span className="font-bellota-text font-normal ">{title}</span>
+        </Typography>
+      )}
+
+      {paragraph && (
+        <Typography
+          tag="h6"
+          text={paragraph}
+          className={`text-lg  max-w-[90%] ${
+            textAlign === "center"
+              ? "mx-auto"
+              : textAlign === "left"
+              ? "ml-0"
+              : "mr-0"
+          }`}
+          style={{
+            color: `${paragraphColor ? paragraphColor : "var(--text-color)"}`,
+          }}
+        />
+      )}
+    </div>
+  );
+};
+
+export const SecondaryInlineTitle: React.FC<TitleProps> = ({
+  title = "no text",
+  highlight,
+  paragraph,
+  caption,
+  textAlign = "bottom",
+  textColor = "#00683D",
+  className,
+  order = "accenting",
+  paragraphColor,
+}) => {
+  return (
+    <div className={`text-${textAlign}  ${className} `}>
+      {caption && (
+        <Typography
+          tag="p"
+          text={caption}
+          className="text-sm font-medium"
+        ></Typography>
+      )}
+
+      {order === "accenting" ? (
+        <Typography
+          tag="h2"
+          text={title}
+          className={`capitalize   mb-[var(--space-10-20)]`}
+          style={{ color: `${textColor}` }}
+          role="title"
+          ariaLabel={title + highlight}
+          ariaLabelledBy="title"
         >
           {" "}
           <span className="highlight ">{highlight}</span>
@@ -35,26 +165,29 @@ export const InlinePrimaryTitle: React.FC<TitleProps> = ({
       ) : (
         <Typography
           tag="h2"
+          className={`capitalize   mb-3`}
           text={highlight || ""}
           style={{ color: `${textColor}` }}
-          className="mb-(--space-10-20) highlight"
+          role="title"
+          ariaLabel={title + highlight}
+          ariaLabelledBy="title"
         >
-          {" "}
-          <span className="font-bellota-text font-normal ">{title}</span>
+          <span className="highlight ">{title}</span>
         </Typography>
       )}
 
-      <Typography
-        tag="h6"
-        text={paragraph}
-        className={`text-lg  max-w-[90%] ${
-          textAlign === "center"
-            ? "mx-auto"
-            : textAlign === "left"
-            ? "ml-0"
-            : "mr-0"
-        }`}
-      ></Typography>
+      {paragraph && (
+        <Typography
+          tag="h6"
+          className="max-w-(--space-260-900) text-text-color"
+          text={paragraph}
+          ariaLabel={paragraph}
+          ariaLabelledBy="title"
+          style={{
+            color: `${paragraphColor ? paragraphColor : "var(--text-color)"}`,
+          }}
+        />
+      )}
     </div>
   );
 };
@@ -67,38 +200,66 @@ export const SecondaryBlockTitle: React.FC<TitleProps> = ({
   textAlign = "bottom",
   textColor = "#00683D",
   className,
+  order = "accenting",
+  paragraphColor,
 }) => {
   return (
     <div
-      className={`text-${textAlign}  w-fit flex flex-col items-center text-center mx-auto`}
+      className={`text-${textAlign}  ${className}`}
     >
-      <Typography
-        tag="h2"
-        className="capitalize text-primary-dark mb-[var(--space-20-30)]"
-        text={title}
-        role="title"
-        ariaLabel={title + highlight}
-        ariaLabelledBy="title"
-      >
-        <span
-          className="highlight block"
+      {caption && (
+        <Typography
+          tag="p"
+          text={caption}
+          className="text-sm font-medium"
+        ></Typography>
+      )}
+
+      {order === "accenting" ? (
+        <Typography
+          tag="h2"
+          className={`capitalize   mb-[var(--space-20-30)]`}
+          text={title}
           role="title"
-          aria-label={highlight}
-          aria-labelledby="title"
+          ariaLabel={title + highlight}
+          ariaLabelledBy="title"
+          style={{ color: `${textColor}` }}
+
         >
-          {highlight}
-        </span>
-      </Typography>
-      <Typography
-        tag="h6"
-        className="w-[85%] sm:w-[50%]"
-        text={paragraph}
-        ariaLabel={paragraph}
-        ariaLabelledBy="title"
-      />
+          {" "}
+          <span className="highlight block">{highlight}</span>
+        </Typography>
+      ) : (
+        <Typography
+          tag="h2"
+          className={`capitalize   mb-[var(--space-20-30)]`}
+          text={highlight || ""}
+          role="title"
+          ariaLabel={title + highlight}
+          ariaLabelledBy="title"
+          style={{ color: `${textColor}` }}
+
+        >
+          <span className="highlight ">{title}</span>
+        </Typography>
+      )}
+
+      {paragraph && (
+        <Typography
+          tag="h6"
+          className="w-[85%] sm:w-[50%]"
+          text={paragraph}
+          ariaLabel={paragraph}
+          ariaLabelledBy="title"
+          style={{
+            color: `${paragraphColor ? paragraphColor : "var(--text-color)"}`,
+          }}
+        />
+      )}
     </div>
   );
 };
+
 export const HealthBenefitTitle: React.FC<TitleProps> = ({
   title = "no text",
   highlight,
@@ -107,6 +268,7 @@ export const HealthBenefitTitle: React.FC<TitleProps> = ({
   textAlign = "bottom",
   textColor = "#00683D",
   className,
+  paragraphColor
 }) => {
   return (
     <div
@@ -120,16 +282,22 @@ export const HealthBenefitTitle: React.FC<TitleProps> = ({
         ariaLabel={title + highlight}
         ariaLabelledBy="title"
       />
-      <Typography
-        tag="h6"
-        className="w-[90%] sm:w-[60%]"
-        text={paragraph}
-        ariaLabel={paragraph}
-        ariaLabelledBy="title"
-      />
+      {paragraph && (
+        <Typography
+          tag="h6"
+          className="w-[90%] sm:w-[60%]"
+          text={paragraph}
+          ariaLabel={paragraph}
+          ariaLabelledBy="title"
+          style={{
+            color: `${paragraphColor ? paragraphColor : "var(--text-color)"}`,
+          }}
+        />
+      )}
     </div>
   );
 };
+
 // export const HealthBenefitDescription: React.FC<TitleProps> = ({
 //   title = "no text",
 //   highlight,

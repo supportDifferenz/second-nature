@@ -9,19 +9,21 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
+        primaryBtn:
+          "bg-secondary-1 border-secondary-1 hover:border-[#823234] hover:bg-[#823234]  text-white",
+
         outlinePrimaryBtn:
           "bg-transparent border-secondary-1 hover:border-[#823234] ",
 
-        secondary:
-          "bg-secondary text-secondary-foreground shadow-xs hover:bg-secondary/80",
+        linkContrastBtn:
+          " text-(--fs-body-button-text) text-contrast-button border-none underline-offset-4 hover:underline !p-0 ",
 
-        linkContrastBtn: " text-(--fs-body-button-text) text-contrast-button border-none underline-offset-4 hover:underline !p-0 ",
-        linkSecondary: " text-(--fs-body-button-text) text-secondary-1 border-none underline-offset-4 hover:underline !p-0 ",
-
-        primaryBtn:
-          "bg-secondary-1 border-secondary-1 hover:border-[#823234] hover:bg-[#823234] shadow-[0px_6px_21px_rgba(0,0,0,0.44)] text-white",
         secondaryBtn:
-          "bg-primary-light border-primary-light hover:border-[#d7d9cd] hover:bg-[#d7d9cd] shadow-[0px_6px_21px_rgba(0,0,0,0.44)] text-[#909090]",
+          "bg-primary-light border-primary-light hover:border-[#d7d9cd] hover:bg-[#d7d9cd]  text-[#909090]",
+          secondaryBtnTextSecondary1:
+          "bg-primary-light border-primary-light hover:border-[#d7d9cd] hover:bg-[#d7d9cd]  text-secondary-1",
+        linkSecondary:
+          " text-(--fs-body-button-text) text-secondary-1 border-none underline-offset-4 hover:underline !p-0 ",
       },
       size: {
         regular: "py-(--space-8-13) px-(--space-27-34) ",
