@@ -29,7 +29,7 @@ export default function IngredientTable({ ingredients }: IngredientTableProps) {
             key={index} 
             className="flex flex-col items-center justify-center text-center"
           >
-            <div className=" w-[31vw] sm:w-[7vw] aspect-square relative mb-2">
+            <div className=" w-[31vw] sm:w-[8vw] aspect-square relative">
               <Image
                 src={ingredient.image}
                 alt={ingredient.name}
