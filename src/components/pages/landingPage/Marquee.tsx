@@ -1,7 +1,6 @@
 "use client";
 import Typography from "@/components/atoms/typography/Typography";
 import { motion } from "framer-motion";
-import { div } from "framer-motion/client";
 import Image from "next/image";
 
 const features = [

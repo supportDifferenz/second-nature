@@ -1,4 +1,5 @@
 import BehindTheScenes from "@/components/pages/landingPage/BehindTheScenes";
+import FAQSection from "@/components/pages/landingPage/FAQSection";
 import HeroSection from "@/components/pages/landingPage/HeroSection";
 import Marquee from "@/components/pages/landingPage/Marquee";
 import MealsAndTreats from "@/components/pages/landingPage/Meals&Treats";
@@ -11,7 +12,6 @@ import MainLayout from "@/components/templates/MainLayout";
 export default function Home() {
   return (
     <MainLayout>
-
       <div className="relative z-[6]">
         <HeroSection />
       </div>
@@ -39,7 +39,8 @@ export default function Home() {
       <div className="py-(--space-120-180)">
         <Testimonial />
       </div>
-      
+
+      <FAQSection />
     </MainLayout>
   );
 }

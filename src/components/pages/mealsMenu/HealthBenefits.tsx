@@ -16,20 +16,20 @@ interface HealthBenefitsProps {
   benefits: HealthBenefit[];
 }
 
-export default function HealthBenefits({ paragraph, benefits }: HealthBenefitsProps) {
+export default function HealthBenefits({
+  paragraph,
+  benefits,
+}: HealthBenefitsProps) {
   return (
     <div className="flex flex-col gap-[var(--space-40-80)] w-full sm:w-[80%] mx-auto mt-[var(--space-64-145)] bg-[#F9FAF1] sm:rounded-[1.04vw] px-[var(--space-20-120)] py-[var(--space-60-100)] ">
-      <HealthBenefitTitle
-        title="Health Benefits"
-        paragraph={paragraph}
-      />
+      <HealthBenefitTitle title="Health Benefits" paragraph={paragraph} />
       <div className="flex flex-wrap">
         {benefits.map((benefit, index) => (
-          <div 
-            key={index} 
+          <div
+            key={index}
             className={`flex flex-col items-center sm:flex-row gap-[var(--space-8-30)] 
-            ${index % 2 === 0 ? 'pr-[var(--space-22-43)] border-r' : 'pl-[var(--space-22-43)]'} 
-            ${index < 2 ? 'pb-[var(--space-22-43)] border-b' : 'pt-[var(--space-22-43)]'} 
+            ${index % 2 === 0 ? "pr-[var(--space-22-43)] border-r" : "pl-[var(--space-22-43)]"} 
+            ${index < 2 ? "pb-[var(--space-22-43)] border-b" : "pt-[var(--space-22-43)]"} 
             w-[50%] border-secondary-2`}
           >
             <div className="w-[22vw] sm:w-[12.25vw]">

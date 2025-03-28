@@ -203,22 +203,32 @@ const Footer = () => {
 
             <div className="  flex sm:max-w-[38%] items-center gap-5">
               <div className="min-w-(--space-102-102)">
-                <Image src="/images/fediaf.webp" alt="fediaf" fill className="!static"/>
+                <Image
+                  src="/images/fediaf.webp"
+                  alt="fediaf"
+                  fill
+                  className="!static"
+                />
               </div>
-                <Typography tag="p" text="European Pet Food Industry Federation guidelines to ensure complete and balanced nutrition" className="text-left"/>
+              <Typography
+                tag="p"
+                text="European Pet Food Industry Federation guidelines to ensure complete and balanced nutrition"
+                className="text-left"
+              />
             </div>
           </div>
         </div>
       </div>
       <div className="container flex flex-col items-center sm:flex-row sm:justify-between border-t border-contrast-button py-(--space-27-34) text-center sm:text-left">
         <div>
-          <Typography tag="span" text="Privacy Policy"/> 
-          {" "}{"•"} {" "}
-          <Typography tag="span" text="Terms and Conditions"/>  
+          <Typography tag="span" text="Privacy Policy" /> {"•"}{" "}
+          <Typography tag="span" text="Terms and Conditions" />
         </div>
         <div>
-        <Typography tag="span" text="©2025 Second Nature All Rights Reserved"  />  
-
+          <Typography
+            tag="span"
+            text="©2025 Second Nature All Rights Reserved"
+          />
         </div>
       </div>
     </footer>

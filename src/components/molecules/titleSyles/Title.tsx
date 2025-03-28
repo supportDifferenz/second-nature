@@ -7,19 +7,19 @@ export const PrimaryInlineTitle: React.FC<TitleProps> = ({
   highlight,
   paragraph,
   caption,
-  textAlign = "center",
+  textAlign = "text-center",
   textColor = "#00683D",
   className,
   order = "accenting",
   paragraphColor,
 }) => {
   return (
-    <div className={`text-${textAlign} ${className}`}>
+    <div className={`${textAlign} ${className}`}>
       {caption && (
         <Typography
           tag="p"
           text={caption}
-          className="text-sm font-medium"
+          className={`text-sm font-medium `}
         ></Typography>
       )}
 
@@ -49,13 +49,12 @@ export const PrimaryInlineTitle: React.FC<TitleProps> = ({
         <Typography
           tag="h6"
           text={paragraph}
-          className={`text-lg  max-w-[90%] ${
-            textAlign === "center"
-              ? "mx-auto"
-              : textAlign === "left"
-              ? "ml-0"
-              : "mr-0"
-          }`}
+          className={`
+            text-lg
+            ${textAlign === "text-left" ? "ml-0 sm:max-w-[80%]  lg:max-w-[60%]" : ""}
+            ${textAlign === "text-center" ? "mx-auto sm:max-w-[70%]  lg:max-w-[50%]" : ""}
+            ${textAlign === "text-right" ? "mr-0 sm:max-w-[80%]  lg:max-w-[60%]" : ""}
+          `}
           style={{
             color: `${paragraphColor ? paragraphColor : "var(--text-color)"}`,
           }}
@@ -70,14 +69,14 @@ export const PrimaryBlockTitle: React.FC<TitleProps> = ({
   highlight,
   paragraph,
   caption,
-  textAlign = "center",
+  textAlign = "text-center",
   textColor = "#00683D",
   paragraphColor,
   className,
   order = "accenting",
 }) => {
   return (
-    <div className={`text-${textAlign} ${className}`}>
+    <div className={`${textAlign} ${className}`}>
       {caption && (
         <Typography
           tag="p"
@@ -112,13 +111,12 @@ export const PrimaryBlockTitle: React.FC<TitleProps> = ({
         <Typography
           tag="h6"
           text={paragraph}
-          className={`text-lg  max-w-[90%] ${
-            textAlign === "center"
-              ? "mx-auto"
-              : textAlign === "left"
-              ? "ml-0"
-              : "mr-0"
-          }`}
+          className={`
+            text-lg
+            ${textAlign === "text-left" ? "ml-0 sm:max-w-[80%]  lg:max-w-[60%]" : ""}
+            ${textAlign === "text-center" ? "mx-auto sm:max-w-[70%]  lg:max-w-[50%]" : ""}
+            ${textAlign === "text-right" ? "mr-0 sm:max-w-[80%]  lg:max-w-[60%]" : ""}
+          `}
           style={{
             color: `${paragraphColor ? paragraphColor : "var(--text-color)"}`,
           }}
@@ -133,14 +131,14 @@ export const SecondaryInlineTitle: React.FC<TitleProps> = ({
   highlight,
   paragraph,
   caption,
-  textAlign = "bottom",
+  textAlign = "text-center",
   textColor = "#00683D",
   className,
   order = "accenting",
   paragraphColor,
 }) => {
   return (
-    <div className={`text-${textAlign}  ${className} `}>
+    <div className={`${textAlign}  ${className} `}>
       {caption && (
         <Typography
           tag="p"
@@ -179,10 +177,13 @@ export const SecondaryInlineTitle: React.FC<TitleProps> = ({
       {paragraph && (
         <Typography
           tag="h6"
-          className="max-w-(--space-260-900) text-text-color"
           text={paragraph}
-          ariaLabel={paragraph}
-          ariaLabelledBy="title"
+          className={`
+            text-lg
+            ${textAlign === "text-left" ? "ml-0 sm:max-w-[80%]  lg:max-w-[60%]" : ""}
+            ${textAlign === "text-center" ? "mx-auto sm:max-w-[70%]  lg:max-w-[50%]" : ""}
+            ${textAlign === "text-right" ? "mr-0 sm:max-w-[80%]  lg:max-w-[60%]" : ""}
+          `}
           style={{
             color: `${paragraphColor ? paragraphColor : "var(--text-color)"}`,
           }}
@@ -197,16 +198,14 @@ export const SecondaryBlockTitle: React.FC<TitleProps> = ({
   highlight,
   paragraph,
   caption,
-  textAlign = "bottom",
+  textAlign = "text-center",
   textColor = "#00683D",
   className,
   order = "accenting",
   paragraphColor,
 }) => {
   return (
-    <div
-      className={`text-${textAlign}  ${className}`}
-    >
+    <div className={`${textAlign}  ${className}`}>
       {caption && (
         <Typography
           tag="p"
@@ -224,7 +223,6 @@ export const SecondaryBlockTitle: React.FC<TitleProps> = ({
           ariaLabel={title + highlight}
           ariaLabelledBy="title"
           style={{ color: `${textColor}` }}
-
         >
           {" "}
           <span className="highlight block">{highlight}</span>
@@ -238,7 +236,6 @@ export const SecondaryBlockTitle: React.FC<TitleProps> = ({
           ariaLabel={title + highlight}
           ariaLabelledBy="title"
           style={{ color: `${textColor}` }}
-
         >
           <span className="highlight ">{title}</span>
         </Typography>
@@ -247,10 +244,13 @@ export const SecondaryBlockTitle: React.FC<TitleProps> = ({
       {paragraph && (
         <Typography
           tag="h6"
-          className="w-[85%] sm:w-[50%]"
           text={paragraph}
-          ariaLabel={paragraph}
-          ariaLabelledBy="title"
+          className={`
+            text-lg
+            ${textAlign === "text-left" ? "ml-0 sm:max-w-[80%]  lg:max-w-[60%]" : ""}
+            ${textAlign === "text-center" ? "mx-auto sm:max-w-[70%]  lg:max-w-[50%]" : ""}
+            ${textAlign === "text-right" ? "mr-0 sm:max-w-[80%]  lg:max-w-[60%]" : ""}
+          `}
           style={{
             color: `${paragraphColor ? paragraphColor : "var(--text-color)"}`,
           }}
@@ -265,14 +265,14 @@ export const HealthBenefitTitle: React.FC<TitleProps> = ({
   highlight,
   paragraph,
   caption,
-  textAlign = "bottom",
+  textAlign = "text-center",
   textColor = "#00683D",
   className,
-  paragraphColor
+  paragraphColor,
 }) => {
   return (
     <div
-      className={`text-${textAlign}  w-fit flex flex-col items-center text-center mx-auto`}
+      className={`${textAlign}  w-fit flex flex-col items-center text-center mx-auto`}
     >
       <Typography
         tag="h2"
@@ -282,13 +282,17 @@ export const HealthBenefitTitle: React.FC<TitleProps> = ({
         ariaLabel={title + highlight}
         ariaLabelledBy="title"
       />
+
       {paragraph && (
         <Typography
           tag="h6"
-          className="w-[90%] sm:w-[60%]"
           text={paragraph}
-          ariaLabel={paragraph}
-          ariaLabelledBy="title"
+          className={`
+            text-lg
+            ${textAlign === "text-left" ? "ml-0 sm:max-w-[80%]  lg:max-w-[60%]" : ""}
+            ${textAlign === "text-center" ? "mx-auto sm:max-w-[70%]  lg:max-w-[50%]" : ""}
+            ${textAlign === "text-right" ? "mr-0 sm:max-w-[80%]  lg:max-w-[60%]" : ""}
+          `}
           style={{
             color: `${paragraphColor ? paragraphColor : "var(--text-color)"}`,
           }}
@@ -303,12 +307,14 @@ export const MealTransitionTitle: React.FC<TitleProps> = ({
   highlight,
   paragraph,
   caption,
-  textAlign = "bottom",
-  textColor = "#fff",
+  textAlign = "text-center",
+  textColor = "#00683D",
   className,
+  order = "accenting",
+  paragraphColor,
 }) => {
   return (
-    <div className={`text-${textAlign} `}>
+    <div className={`${textAlign} `}>
       {caption && (
         <Typography
           tag="p"
@@ -325,11 +331,22 @@ export const MealTransitionTitle: React.FC<TitleProps> = ({
         {" "}
         <span className="highlight ">{highlight}</span>
       </Typography>
-      <Typography
-        tag="h6"
-        text={paragraph}
-        className="text-lg text-white max-w-[71%] sm:max-w-[64%] mx-auto"
-      ></Typography>
+
+      {paragraph && (
+        <Typography
+          tag="h6"
+          text={paragraph}
+          className={`
+            text-lg
+            ${textAlign === "text-left" ? "ml-0 sm:max-w-[80%]  lg:max-w-[60%]" : ""}
+            ${textAlign === "text-center" ? "mx-auto sm:max-w-[70%]  lg:max-w-[50%]" : ""}
+            ${textAlign === "text-right" ? "mr-0 sm:max-w-[80%]  lg:max-w-[60%]" : ""}
+          `}
+          style={{
+            color: `${paragraphColor ? paragraphColor : "var(--text-color)"}`,
+          }}
+        />
+      )}
     </div>
   );
 };
@@ -338,9 +355,11 @@ export const PetFoodLookingTitle: React.FC<TitleProps> = ({
   highlight,
   paragraph,
   caption,
-  textAlign = "bottom",
+  textAlign = "text-center",
   textColor = "#00683D",
   className,
+  order = "accenting",
+  paragraphColor,
 }) => {
   return (
     <div
@@ -363,13 +382,22 @@ export const PetFoodLookingTitle: React.FC<TitleProps> = ({
           {highlight}
         </span>
       </Typography>
-      <Typography
-        tag="h6"
-        className="w-[85%] sm:w-[50%]"
-        text={paragraph}
-        ariaLabel={paragraph}
-        ariaLabelledBy="title"
-      />
+
+      {paragraph && (
+        <Typography
+          tag="h6"
+          text={paragraph}
+          className={`
+            text-lg
+            ${textAlign === "text-left" ? "ml-0 sm:max-w-[80%]  lg:max-w-[60%]" : ""}
+            ${textAlign === "text-center" ? "mx-auto sm:max-w-[70%]  lg:max-w-[50%]" : ""}
+            ${textAlign === "text-right" ? "mr-0 sm:max-w-[80%]  lg:max-w-[60%]" : ""}
+          `}
+          style={{
+            color: `${paragraphColor ? paragraphColor : "var(--text-color)"}`,
+          }}
+        />
+      )}
     </div>
   );
 };

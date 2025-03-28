@@ -26,7 +26,7 @@ const bannerVariants = cva(
     defaultVariants: {
       align: "center",
     },
-  }
+  },
 );
 
 export default function HeroBanner({
@@ -53,7 +53,7 @@ export default function HeroBanner({
   };
 
   const [activeImages, setActiveImages] = useState<string[]>(
-    banners.map((b) => b.image.mobile)
+    banners.map((b) => b.image.mobile),
   ); // Default SSR-safe values
 
   useEffect(() => {
@@ -112,8 +112,6 @@ export default function HeroBanner({
                       />
                     )}
 
-
-
                     {banner.title && (
                       <Typography
                         tag="h1"
@@ -135,10 +133,6 @@ export default function HeroBanner({
                       />
                     )}
 
-
-
-
-
                     {banner.paragraph && (
                       <Typography
                         tag="h6"
@@ -150,8 +144,6 @@ export default function HeroBanner({
                         ariaLabelledBy="sub paragraph"
                       />
                     )}
-
-
 
                     {hasButton && banner.buttonText && (
                       <Button
@@ -184,7 +176,9 @@ export default function HeroBanner({
               priority
             />
           </div>
-          <div className={cn(bannerVariants({ align }), "container items-center")}>
+          <div
+            className={cn(bannerVariants({ align }), "container items-center")}
+          >
             <div className="lg:w-[55%]">
               {banners[0].caption && (
                 <Typography

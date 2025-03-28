@@ -31,8 +31,8 @@ export default function RootLayout({
     <html lang="en" className="dark">
       <body className="antialiased dark">
         {children}
-        <Footer/>
-        </body>
+        <Footer />
+      </body>
     </html>
   );
 }

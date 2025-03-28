@@ -67,7 +67,6 @@ export default function OurIngredients() {
           highlight="Ingredients"
           title="Our"
           paragraph="Pure, Clean Ingredients You Can Recognize and Trust"
-          textAlign="center"
           textColor="#00683D"
         />
       </div>
@@ -113,10 +112,10 @@ export default function OurIngredients() {
                       align === "left"
                         ? "sm:-left-[130%] sm:text-right"
                         : align === "right"
-                        ? "sm:-right-[130%] sm:text-left"
-                        : align === "bottom"
-                        ? "sm:top-[100%]"
-                        : "sm:flex-col"
+                          ? "sm:-right-[130%] sm:text-left"
+                          : align === "bottom"
+                            ? "sm:top-[100%]"
+                            : "sm:flex-col"
                     }`}
                   />
                 </div>

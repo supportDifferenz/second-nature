@@ -1,5 +1,4 @@
 // MealCard.tsx
-import { useNavigate } from "react-router-dom";
 import { MealCardProps } from "../type";
 import { Button } from "@/components/ui/button";
 import BadgeTitle from "@/components/atoms/badgeTitle/BadgeTitle";

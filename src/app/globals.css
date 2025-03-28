@@ -17,9 +17,8 @@
   --white: #ffffff;
   --text-color: #424242;
   --warning-meal-red: #f15353;
-  --background:transparent;
-  --foreground:#424242;
-
+  --background: transparent;
+  --foreground: #424242;
 
   /* font size */
   --fs-h1: clamp(60px, 3.125vw + 30px, 121px);
@@ -34,7 +33,7 @@
   --fs-body-text: clamp(16px, 0.625vw + 6px, 18px);
   --fs-subtitle-2: clamp(14px, 0.521vw + 5px, 16px);
   --fs-button-primary: clamp(18px, 0.375vw + 16.8px, 24px);
-  --fs-body-button-text: clamp(16px, 0.125vw + 15.600px, 18px);
+  --fs-body-button-text: clamp(16px, 0.125vw + 15.6px, 18px);
 
   /* leading */
   --default-leading: 1.2;
@@ -44,75 +43,74 @@
   --fw-bold: 700;
 
   /* container */
-  --container: clamp(280px, 100% - 2 * (clamp(20px, 10.625vw - 14px, 190.33px)), 1600px);
-  --container-lg: clamp(280px, 100vw - clamp(40px, 40px + (132 * (100vw - 320px) / 1600), 172px), 1748px);
+  --container: clamp(
+    280px,
+    100% - 2 * (clamp(20px, 10.625vw - 14px, 190.33px)),
+    1600px
+  );
+  --container-lg: clamp(
+    280px,
+    100vw - clamp(40px, 40px + (132 * (100vw - 320px) / 1600), 172px),
+    1748px
+  );
   --max-w: 1920px;
 
   /* spacing */
   --space-10-20: clamp(10px, 0.625vw + 8px, 20px);
-  --space-8-30: clamp(8px, 1.375vw + 3.600px, 30px);
+  --space-8-30: clamp(8px, 1.375vw + 3.6px, 30px);
   --space-20-30: clamp(20px, 0.625vw + 18px, 30px);
   --space-8-13: clamp(8px, 0.313vw + 7px, 13px);
-  --space-8-17: clamp(8px, 0.563vw + 6.200px, 17px);
+  --space-8-17: clamp(8px, 0.563vw + 6.2px, 17px);
   --space-27-34: clamp(27px, 0.438vw + 25.6px, 34px);
   --space-46-95: clamp(46px, 3.063vw + 36.2px, 95px);
-  --space-40-80: clamp(40px, 2.500vw + 32.000px, 80px);
+  --space-40-80: clamp(40px, 2.5vw + 32px, 80px);
   --space-34-42: clamp(34px, 0.5vw + 32.4px, 42px);
   --space-15-30: clamp(15px, 0.938vw + 12px, 30px);
   --space-18-32: clamp(18px, 0.875vw + 15.2px, 32px);
   --space-20-85: clamp(20px, 4.063vw + 7px, 85px);
-  --space-30-60: clamp(30px, 1.875vw + 24.000px, 60px);
-  --space-120-180: clamp(120px, 3.750vw + 108.000px, 180px);
-  --space-110-114: clamp(110px, 0.250vw + 109.200px, 114px);
-  --space-50-99: clamp(50px, 3.063vw + 40.200px, 99px);
-  --space-50-67: clamp(50px, 1.063vw + 46.600px, 67px);
-  --space-52-86: clamp(52px, 2.125vw + 45.200px, 86px);
-  --space-520-827: clamp(520px, 19.188vw + 458.600px, 827px);
-  --space-97-130: clamp(97px, 2.063vw + 90.400px, 130px);
-  --space-60-100: clamp(60px, 2.500vw + 52.000px, 100px);
-  --space-64-145: clamp(64px, 5.063vw + 47.800px, 145px);
-  --space-20-120: clamp(20px, 6.250vw + 0.000px, 120px);
-  --space-22-43: clamp(22px, 1.313vw + 17.800px, 43px);
-  --space-527-690: clamp(527px, 10.188vw + 494.400px, 690px);
-  --space-105-136: clamp(105px, 1.938vw + 98.800px, 136px);
-  --space-256-406: clamp(256px, 9.375vw + 226.000px, 406px);
-  --space-191-290: clamp(191px, 6.188vw + 171.200px, 290px);
-  --space-280-560: clamp(280px, 17.500vw + 224.000px, 560px);
-  --space-300-526: clamp(300px, 14.125vw + 254.800px, 526px);
-  --space-156-160: clamp(156px, 0.250vw + 155.200px, 160px);
-  --space-100-200: clamp(100px, 6.250vw + 80.000px, 200px);
-  --space-20-45: clamp(20px, 1.563vw + 15.000px, 45px);
-  --space-67-75: clamp(67px, 0.500vw + 65.400px, 75px);
-  --space-13-16: clamp(13px, 0.188vw + 12.400px, 16px);
-  --space-13-19: clamp(13px, 0.375vw + 11.800px, 19px);
-  --space-197-216: clamp(197px, 1.188vw + 193.200px, 216px);
-  --space-24-45: clamp(24px, 1.313vw + 19.800px, 45px);
-  --space-40-60: clamp(40px, 1.250vw + 36.000px, 60px);
-  --space-5-8: clamp(5px, 0.188vw + 4.400px, 8px);
-  --space-254-490: clamp(254px, 14.750vw + 206.800px, 490px);
-  --space-54-126: clamp(54px, 4.500vw + 39.600px, 126px);
-  --space-200-240: clamp(200px, 2.500vw + 192.000px, 240px);
-  --space-16-24: clamp(16px, 0.500vw + 14.400px, 24px);
-  --space-34-130: clamp(34px, 6.000vw + 14.800px, 130px);
-  --space-102-102: clamp(102px, 0.000vw + 102.000px, 102px);
-  --space-33-42: clamp(33px, 0.563vw + 31.200px, 42px);
-  --space-260-900: clamp(260px, 40.000vw + 132.000px, 900px);
-
+  --space-30-60: clamp(30px, 1.875vw + 24px, 60px);
+  --space-120-180: clamp(120px, 3.75vw + 108px, 180px);
+  --space-110-114: clamp(110px, 0.25vw + 109.2px, 114px);
+  --space-50-99: clamp(50px, 3.063vw + 40.2px, 99px);
+  --space-50-67: clamp(50px, 1.063vw + 46.6px, 67px);
+  --space-52-86: clamp(52px, 2.125vw + 45.2px, 86px);
+  --space-520-827: clamp(520px, 19.188vw + 458.6px, 827px);
+  --space-97-130: clamp(97px, 2.063vw + 90.4px, 130px);
+  --space-60-100: clamp(60px, 2.5vw + 52px, 100px);
+  --space-64-145: clamp(64px, 5.063vw + 47.8px, 145px);
+  --space-20-120: clamp(20px, 6.25vw + 0px, 120px);
+  --space-22-43: clamp(22px, 1.313vw + 17.8px, 43px);
+  --space-527-690: clamp(527px, 10.188vw + 494.4px, 690px);
+  --space-105-136: clamp(105px, 1.938vw + 98.8px, 136px);
+  --space-256-406: clamp(256px, 9.375vw + 226px, 406px);
+  --space-191-290: clamp(191px, 6.188vw + 171.2px, 290px);
+  --space-280-560: clamp(280px, 17.5vw + 224px, 560px);
+  --space-300-526: clamp(300px, 14.125vw + 254.8px, 526px);
+  --space-156-160: clamp(156px, 0.25vw + 155.2px, 160px);
+  --space-100-200: clamp(100px, 6.25vw + 80px, 200px);
+  --space-20-45: clamp(20px, 1.563vw + 15px, 45px);
+  --space-67-75: clamp(67px, 0.5vw + 65.4px, 75px);
+  --space-13-16: clamp(13px, 0.188vw + 12.4px, 16px);
+  --space-13-19: clamp(13px, 0.375vw + 11.8px, 19px);
+  --space-197-216: clamp(197px, 1.188vw + 193.2px, 216px);
+  --space-24-45: clamp(24px, 1.313vw + 19.8px, 45px);
+  --space-40-60: clamp(40px, 1.25vw + 36px, 60px);
+  --space-5-8: clamp(5px, 0.188vw + 4.4px, 8px);
+  --space-254-490: clamp(254px, 14.75vw + 206.8px, 490px);
+  --space-54-126: clamp(54px, 4.5vw + 39.6px, 126px);
+  --space-200-240: clamp(200px, 2.5vw + 192px, 240px);
+  --space-16-24: clamp(16px, 0.5vw + 14.4px, 24px);
+  --space-34-130: clamp(34px, 6vw + 14.8px, 130px);
+  --space-102-102: clamp(102px, 0vw + 102px, 102px);
+  --space-33-42: clamp(33px, 0.563vw + 31.2px, 42px);
+  --space-260-900: clamp(260px, 40vw + 132px, 900px);
+  --space-320-647: clamp(320px, 20.438vw + 254.6px, 647px);
+  --space-47-111: clamp(47px, 4vw + 34.2px, 111px);
 
   /* size */
-  --space-20-190: clamp(20px, 10.625vw + -14.000px, 190px)
-
-
-
-
-
-  
-
-
-
-  --size-14-22: clamp(14px, 0.500vw + 12.400px, 22px);
+  --space-20-190: clamp(20px, 10.625vw + -14px, 190px)
+    --size-14-22: clamp(14px, 0.5vw + 12.4px, 22px);
 }
-
 
 /* tailwind.config */
 @theme {
@@ -173,7 +171,6 @@ h5 {
 h5.subtitle {
   font-size: var(--fs-h5-subtitle);
   font-weight: var(--fw-bold);
-
 }
 h6 {
   font-size: var(--fs-h6-caption);
@@ -208,13 +205,12 @@ p {
   max-width: var(--container-lg);
   margin: 0 auto;
 }
-.highlight{
+.highlight {
   font-family: var(--dm-serif-display);
 }
-.normalize{
+.normalize {
   font-family: var(--bellota-text);
 }
-
 
 /* dark mode */
 /* .dark {

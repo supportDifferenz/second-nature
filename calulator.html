@@ -1,177 +1,186 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Clamp Calculator</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            padding: 20px;
-            display: flex;
-            flex-direction: row;
-            align-items: flex-start;
-            gap: 20px;
-            background: black;
-            color: white;
-        }
-        .container {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            width: 300px;
-        }
-        label {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        input {
-            width: 100px;
-            padding: 5px;
-        }
-        #output {
-            font-weight: bold;
-            margin-top: 20px;
-            text-align: center;
-            background: #f3f3f3;
-            padding: 10px;
-            border-radius: 5px;
-            color: black;
-        }
-        .variable-list {
-            
-            background: #f9f9f9;
-            padding: 10px;
-            border-radius: 5px;
-            max-height: 60vh;
-            overflow: auto;
-            min-width: 500px;
-        }
-        .variable-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: black;
-        }
-        .duplicate {
-            color: red;
-            font-size: 12px;
-        }
-        .controls {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .copy-all {
-            font-size: 12px;
-            padding: 3px 5px;
-            cursor: pointer;
-            background: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            margin-bottom: 5px;
-        }
-        .undo, .redo {
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 18px;
-        }
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 20px;
+        background: black;
+        color: white;
+      }
+      .container {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 300px;
+      }
+      label {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      input {
+        width: 100px;
+        padding: 5px;
+      }
+      #output {
+        font-weight: bold;
+        margin-top: 20px;
+        text-align: center;
+        background: #f3f3f3;
+        padding: 10px;
+        border-radius: 5px;
+        color: black;
+      }
+      .variable-list {
+        background: #f9f9f9;
+        padding: 10px;
+        border-radius: 5px;
+        max-height: 60vh;
+        overflow: auto;
+        min-width: 500px;
+      }
+      .variable-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: black;
+      }
+      .duplicate {
+        color: red;
+        font-size: 12px;
+      }
+      .controls {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .copy-all {
+        font-size: 12px;
+        padding: 3px 5px;
+        cursor: pointer;
+        background: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        margin-bottom: 5px;
+      }
+      .undo,
+      .redo {
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 18px;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div>
-        <h2>Clamp Function Calculator</h2>
-        <div class="container">
-            <label>Min Size (px): <input type="number" id="minSize" value="14"></label>
-            <label>Max Size (px): <input type="number" id="maxSize" value="16"></label>
-            <label>Min Width (px): <input type="number" id="minWidth" value="320"></label>
-            <label>Max Width (px): <input type="number" id="maxWidth" value="1920"></label>
-            <button onclick="calculateClamp()">Generate</button>
-        </div>
-        <div id="output">clamp(0px, 0vw + 0px, 0px)</div>
-        <div class="controls">
-            <button class="undo" onclick="undo()">⏪</button>
-            <button class="redo" onclick="redo()">⏩</button>
-        </div>
+      <h2>Clamp Function Calculator</h2>
+      <div class="container">
+        <label
+          >Min Size (px): <input type="number" id="minSize" value="14"
+        /></label>
+        <label
+          >Max Size (px): <input type="number" id="maxSize" value="16"
+        /></label>
+        <label
+          >Min Width (px): <input type="number" id="minWidth" value="320"
+        /></label>
+        <label
+          >Max Width (px): <input type="number" id="maxWidth" value="1920"
+        /></label>
+        <button onclick="calculateClamp()">Generate</button>
+      </div>
+      <div id="output">clamp(0px, 0vw + 0px, 0px)</div>
+      <div class="controls">
+        <button class="undo" onclick="undo()">⏪</button>
+        <button class="redo" onclick="redo()">⏩</button>
+      </div>
     </div>
     <div class="variable-list" id="variableList">
-        <button class="copy-all" onclick="copyAllVariables()">📋 Copy All</button>
+      <button class="copy-all" onclick="copyAllVariables()">📋 Copy All</button>
     </div>
-    
+
     <script>
-        let variables = {};
-        let history = [];
-        let historyIndex = -1;
+      let variables = {};
+      let history = [];
+      let historyIndex = -1;
 
-        function calculateClamp() {
-            let minSize = parseFloat(document.getElementById('minSize').value);
-            let maxSize = parseFloat(document.getElementById('maxSize').value);
-            let minWidth = parseFloat(document.getElementById('minWidth').value);
-            let maxWidth = parseFloat(document.getElementById('maxWidth').value);
+      function calculateClamp() {
+        let minSize = parseFloat(document.getElementById("minSize").value);
+        let maxSize = parseFloat(document.getElementById("maxSize").value);
+        let minWidth = parseFloat(document.getElementById("minWidth").value);
+        let maxWidth = parseFloat(document.getElementById("maxWidth").value);
 
-            let scalingFactor = (maxSize - minSize) / (maxWidth - minWidth) * 100;
-            let baseValue = minSize - (scalingFactor * (minWidth / 100));
-            let clampValue = `clamp(${minSize}px, ${scalingFactor.toFixed(3)}vw + ${baseValue.toFixed(3)}px, ${maxSize}px)`;
-            document.getElementById('output').innerText = clampValue;
-            storeVariable(minSize, maxSize, clampValue);
+        let scalingFactor = ((maxSize - minSize) / (maxWidth - minWidth)) * 100;
+        let baseValue = minSize - scalingFactor * (minWidth / 100);
+        let clampValue = `clamp(${minSize}px, ${scalingFactor.toFixed(3)}vw + ${baseValue.toFixed(3)}px, ${maxSize}px)`;
+        document.getElementById("output").innerText = clampValue;
+        storeVariable(minSize, maxSize, clampValue);
+      }
+
+      function storeVariable(min, max, value) {
+        let key = `--space-${min}-${max}`;
+        if (variables[key]) {
+          updateVariableList(key);
+          return;
         }
+        variables[key] = value;
+        saveHistory();
+        updateVariableList();
+      }
 
-        function storeVariable(min, max, value) {
-            let key = `--space-${min}-${max}`;
-            if (variables[key]) {
-                updateVariableList(key);
-                return;
-            }
-            variables[key] = value;
-            saveHistory();
-            updateVariableList();
+      function updateVariableList(duplicateKey = null) {
+        let listContainer = document.getElementById("variableList");
+        listContainer.innerHTML =
+          '<button class="copy-all" onclick="copyAllVariables()">📋 Copy All</button>';
+        let count = 0;
+        for (let key in variables) {
+          let div = document.createElement("div");
+          div.className = "variable-item";
+          div.innerHTML = `<span>${key}: ${variables[key]}</span> <button onclick="copyVariable('${key}')">📋</button>`;
+          listContainer.appendChild(div);
+          count++;
+          if (count >= 4) break;
         }
+        if (duplicateKey) {
+          let warning = document.createElement("div");
+          warning.className = "duplicate";
+          warning.innerText = `⚠ Duplicate: ${duplicateKey} already exists.`;
+          listContainer.appendChild(warning);
+        }
+      }
 
-        function updateVariableList(duplicateKey = null) {
-            let listContainer = document.getElementById('variableList');
-            listContainer.innerHTML = '<button class="copy-all" onclick="copyAllVariables()">📋 Copy All</button>';
-            let count = 0;
-            for (let key in variables) {
-                let div = document.createElement('div');
-                div.className = 'variable-item';
-                div.innerHTML = `<span>${key}: ${variables[key]}</span> <button onclick="copyVariable('${key}')">📋</button>`;
-                listContainer.appendChild(div);
-                count++;
-                if (count >= 4) break;
-            }
-            if (duplicateKey) {
-                let warning = document.createElement('div');
-                warning.className = 'duplicate';
-                warning.innerText = `⚠ Duplicate: ${duplicateKey} already exists.`;
-                listContainer.appendChild(warning);
-            }
-        }
+      function saveHistory() {
+        history = history.slice(0, historyIndex + 1);
+        history.push(JSON.stringify(variables));
+        if (history.length > 5) history.shift();
+        historyIndex = history.length - 1;
+      }
 
-        function saveHistory() {
-            history = history.slice(0, historyIndex + 1);
-            history.push(JSON.stringify(variables));
-            if (history.length > 5) history.shift();
-            historyIndex = history.length - 1;
+      function undo() {
+        if (historyIndex > 0) {
+          historyIndex--;
+          variables = JSON.parse(history[historyIndex]);
+          updateVariableList();
         }
+      }
 
-        function undo() {
-            if (historyIndex > 0) {
-                historyIndex--;
-                variables = JSON.parse(history[historyIndex]);
-                updateVariableList();
-            }
+      function redo() {
+        if (historyIndex < history.length - 1) {
+          historyIndex++;
+          variables = JSON.parse(history[historyIndex]);
+          updateVariableList();
         }
-
-        function redo() {
-            if (historyIndex < history.length - 1) {
-                historyIndex++;
-                variables = JSON.parse(history[historyIndex]);
-                updateVariableList();
-            }
-        }
+      }
     </script>
-</body>
+  </body>
 </html>

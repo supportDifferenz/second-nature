@@ -1,6 +1,6 @@
 "use client";
 
-import {  SecondaryInlineTitle } from "@/components/molecules/titleSyles/Title";
+import { SecondaryInlineTitle } from "@/components/molecules/titleSyles/Title";
 import MealCategory from "@/components/organism/mealCard/MealCategory ";
 import Image from "next/image";
 import React from "react";
@@ -15,12 +15,12 @@ export default function MealsAndTreats() {
               title="& Treats"
               highlight="Meals "
               paragraph="Options that fit every palate "
-              textAlign="left"
+              textAlign="text-center sm:text-center  lg:text-left"
               textColor="#00683D"
               order="dissenting"
               className="mb-(--space-54-126) sm:mx-auto lg:ml-0"
             />
-            <div className="w-(--space-254-490) lg:-ml-14 sm:mx-auto lg:mr-0">
+            <div className="w-(--space-254-490) lg:-ml-14 mx-auto lg:mr-0">
               <Image
                 src="/images/vector-meals-and-treats.svg"
                 alt="Meals & Treats"

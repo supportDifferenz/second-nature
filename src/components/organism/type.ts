@@ -1,6 +1,7 @@
-
-
-import { HeroBannersPropsType } from "@/components/pages/landingPage/type";
+import {
+  FAQSItemsProps,
+  HeroBannersPropsType,
+} from "@/components/pages/landingPage/type";
 
 // hero banner carousel props type
 export type BannerCarouselPropsType = {
@@ -13,19 +14,22 @@ export type BannerCarouselPropsType = {
   hasButton?: boolean;
 };
 
-
 // meal card prop Type
-export interface MealsButtonProps {
-    label: string;
-    route: string;
-    variant?: string;
-  }
-export interface MealCardProps {
-    tag?: string;
-    title: string;
-    image: string;
-    features?: string[];
-    buttons: MealsButtonProps[];
-}
+export type MealsButtonProps = {
+  label: string;
+  route: string;
+  variant?: string;
+};
+export type MealCardProps = {
+  tag?: string;
+  title: string;
+  image: string;
+  features?: string[];
+  buttons: MealsButtonProps[];
+};
 
-
+export type FAQSProps = {
+  faqs: FAQSItemsProps[];
+  defaultOpenIndex?: number | null;
+  className?: string;
+};

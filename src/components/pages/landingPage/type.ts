@@ -16,3 +16,8 @@ export type HeroBannersPropsType = {
   buttonLink?: string;
   bannerThemeColor: string;
 };
+
+export type FAQSItemsProps = {
+  question: string;
+  answer: string;
+};
