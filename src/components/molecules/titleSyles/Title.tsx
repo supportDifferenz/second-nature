@@ -298,6 +298,81 @@ export const HealthBenefitTitle: React.FC<TitleProps> = ({
   );
 };
 
+export const MealTransitionTitle: React.FC<TitleProps> = ({
+  title = "no text",
+  highlight,
+  paragraph,
+  caption,
+  textAlign = "bottom",
+  textColor = "#fff",
+  className,
+}) => {
+  return (
+    <div className={`text-${textAlign} `}>
+      {caption && (
+        <Typography
+          tag="p"
+          text={caption}
+          className="text-sm font-medium"
+        ></Typography>
+      )}
+      <Typography
+        tag="h2"
+        text={title}
+        style={{ color: `${textColor}` }}
+        className="mb-(--space-10-20)"
+      >
+        {" "}
+        <span className="highlight ">{highlight}</span>
+      </Typography>
+      <Typography
+        tag="h6"
+        text={paragraph}
+        className="text-lg text-white max-w-[71%] sm:max-w-[64%] mx-auto"
+      ></Typography>
+    </div>
+  );
+};
+export const PetFoodLookingTitle: React.FC<TitleProps> = ({
+  title = "no text",
+  highlight,
+  paragraph,
+  caption,
+  textAlign = "bottom",
+  textColor = "#00683D",
+  className,
+}) => {
+  return (
+    <div
+      className={`  w-fit flex flex-col px-[] items-center sm:items-start text-center sm:text-left mx-auto sm:mr-auto`}
+    >
+      <Typography
+        tag="h2"
+        className="capitalize text-secondary-1 mb-[var(--space-20-30)]"
+        text={title}
+        role="title"
+        ariaLabel={title + highlight}
+        ariaLabelledBy="title"
+      >
+        <span
+          className="highlight block"
+          role="title"
+          aria-label={highlight}
+          aria-labelledby="title"
+        >
+          {highlight}
+        </span>
+      </Typography>
+      <Typography
+        tag="h6"
+        className="w-[85%] sm:w-[50%]"
+        text={paragraph}
+        ariaLabel={paragraph}
+        ariaLabelledBy="title"
+      />
+    </div>
+  );
+};
 // export const HealthBenefitDescription: React.FC<TitleProps> = ({
 //   title = "no text",
 //   highlight,
