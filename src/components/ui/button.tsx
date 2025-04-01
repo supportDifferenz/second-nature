@@ -22,11 +22,16 @@ const buttonVariants = cva(
           "bg-primary-light border-primary-light hover:border-[#d7d9cd] hover:bg-[#d7d9cd]  text-[#909090]",
         secondaryBtnTextSecondary1:
           "bg-primary-light border-primary-light hover:border-[#d7d9cd] hover:bg-[#d7d9cd]  text-secondary-1",
+          secondaryBtnTextPrimaryDark:
+          "bg-primary-light border-primary-light hover:border-[#d7d9cd] hover:bg-[#d7d9cd]  text-primary-dark",
         linkSecondary:
           " text-(--fs-body-button-text) text-secondary-1 border-none underline-offset-4 hover:underline !p-0 ",
         secondaryGreenBtn:
           "bg-[#EBEDE0] border-[#EBEDE0] hover:border-[#d7d9cd] hover:bg-[#d7d9cd] text-primary-dark",
+          linkPrimaryLight:
+          " text-(--fs-body-button-text) text-primary-light !font-normal  border-none underline-offset-4 hover:underline !p-0",
       },
+      
       size: {
         regular: "py-(--space-8-13) px-(--space-27-34) ",
 

@@ -106,9 +106,9 @@
   --space-260-900: clamp(260px, 40vw + 132px, 900px);
   --space-320-647: clamp(320px, 20.438vw + 254.6px, 647px);
   --space-47-111: clamp(47px, 4vw + 34.2px, 111px);
+  --space-150-180: clamp(150px, 1.875vw + 144.000px, 180px);
 
   /* size */
-  --space-20-190: clamp(20px, 10.625vw + -14px, 190px)
     --size-14-22: clamp(14px, 0.5vw + 12.4px, 22px);
 }
 
@@ -133,6 +133,7 @@
 
   --breakpoint-sm: 576px;
   --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
 }
 
 /* global styles */
@@ -186,7 +187,6 @@ span.subtitle2 {
 }
 button {
   font-family: var(--bellota-text);
-  font-weight: 700;
   line-height: 120%;
 }
 p {
@@ -218,3 +218,33 @@ p {
   --color-foreground: #ffffff;
   --color-text-color: #e0e0e0;
 } */
+
+
+
+@layer utilities {
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
+  }
+
+  .animate-accordion-down {
+    animation: accordion-down 0.3s ease-out forwards;
+  }
+
+  .animate-accordion-up {
+    animation: accordion-up 0.3s ease-out forwards;
+  }
+}
