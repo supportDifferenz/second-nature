@@ -1,6 +1,6 @@
 import Typography from "@/components/atoms/typography/Typography";
 import React from "react";
-import { TitleProps } from "./type";
+import { TitleProps } from "../type";
 
 export const PrimaryInlineTitle: React.FC<TitleProps> = ({
   title = "no text",
@@ -28,7 +28,6 @@ export const PrimaryInlineTitle: React.FC<TitleProps> = ({
           tag="h2"
           text={title}
           style={{ color: `${textColor}` }}
-          className="mb-3"
         >
           {" "}
           <span className="highlight ">{highlight}</span>
@@ -38,7 +37,7 @@ export const PrimaryInlineTitle: React.FC<TitleProps> = ({
           tag="h2"
           text={highlight || ""}
           style={{ color: `${textColor}` }}
-          className="mb-3 highlight"
+          className=" highlight"
         >
           {" "}
           <span className="font-bellota-text font-normal ">{title}</span>
@@ -54,6 +53,8 @@ export const PrimaryInlineTitle: React.FC<TitleProps> = ({
             ${textAlign === "text-left" ? "ml-0 sm:max-w-[80%]  lg:max-w-[60%]" : ""}
             ${textAlign === "text-center" ? "mx-auto sm:max-w-[70%]  lg:max-w-[50%]" : ""}
             ${textAlign === "text-right" ? "mr-0 sm:max-w-[80%]  lg:max-w-[60%]" : ""}
+            mt-3
+
           `}
           style={{
             color: `${paragraphColor ? paragraphColor : "var(--text-color)"}`,
@@ -116,6 +117,7 @@ export const PrimaryBlockTitle: React.FC<TitleProps> = ({
             ${textAlign === "text-left" ? "ml-0 sm:max-w-[80%]  lg:max-w-[60%]" : ""}
             ${textAlign === "text-center" ? "mx-auto sm:max-w-[70%]  lg:max-w-[50%]" : ""}
             ${textAlign === "text-right" ? "mr-0 sm:max-w-[80%]  lg:max-w-[60%]" : ""}
+            mt-[var(--space-10-20)]
           `}
           style={{
             color: `${paragraphColor ? paragraphColor : "var(--text-color)"}`,
@@ -151,7 +153,7 @@ export const SecondaryInlineTitle: React.FC<TitleProps> = ({
         <Typography
           tag="h2"
           text={title}
-          className={`capitalize   mb-[var(--space-10-20)]`}
+          className={`capitalize   `}
           style={{ color: `${textColor}` }}
           role="title"
           ariaLabel={title + highlight}
@@ -183,6 +185,7 @@ export const SecondaryInlineTitle: React.FC<TitleProps> = ({
             ${textAlign === "text-left" ? "ml-0 sm:max-w-[80%]  lg:max-w-[60%]" : ""}
             ${textAlign === "text-center" ? "mx-auto sm:max-w-[70%]  lg:max-w-[50%]" : ""}
             ${textAlign === "text-right" ? "mr-0 sm:max-w-[80%]  lg:max-w-[60%]" : ""}
+            mt-[var(--space-10-20)]
           `}
           style={{
             color: `${paragraphColor ? paragraphColor : "var(--text-color)"}`,
@@ -217,7 +220,7 @@ export const SecondaryBlockTitle: React.FC<TitleProps> = ({
       {order === "accenting" ? (
         <Typography
           tag="h2"
-          className={`capitalize   mb-[var(--space-20-30)]`}
+          className={`capitalize   `}
           text={title}
           role="title"
           ariaLabel={title + highlight}
@@ -230,7 +233,7 @@ export const SecondaryBlockTitle: React.FC<TitleProps> = ({
       ) : (
         <Typography
           tag="h2"
-          className={`capitalize   mb-[var(--space-20-30)]`}
+          className={`capitalize   `}
           text={highlight || ""}
           role="title"
           ariaLabel={title + highlight}
@@ -250,6 +253,7 @@ export const SecondaryBlockTitle: React.FC<TitleProps> = ({
             ${textAlign === "text-left" ? "ml-0 sm:max-w-[80%]  lg:max-w-[60%]" : ""}
             ${textAlign === "text-center" ? "mx-auto sm:max-w-[70%]  lg:max-w-[50%]" : ""}
             ${textAlign === "text-right" ? "mr-0 sm:max-w-[80%]  lg:max-w-[60%]" : ""}
+            mt-[var(--space-20-30)]
           `}
           style={{
             color: `${paragraphColor ? paragraphColor : "var(--text-color)"}`,
@@ -276,7 +280,7 @@ export const HealthBenefitTitle: React.FC<TitleProps> = ({
     >
       <Typography
         tag="h2"
-        className="capitalize text-primary-dark mb-[var(--space-10-20)]"
+        className="capitalize text-primary-dark "
         text={title}
         role="title"
         ariaLabel={title + highlight}
@@ -292,6 +296,7 @@ export const HealthBenefitTitle: React.FC<TitleProps> = ({
             ${textAlign === "text-left" ? "ml-0 sm:max-w-[80%]  lg:max-w-[60%]" : ""}
             ${textAlign === "text-center" ? "mx-auto sm:max-w-[70%]  lg:max-w-[50%]" : ""}
             ${textAlign === "text-right" ? "mr-0 sm:max-w-[80%]  lg:max-w-[60%]" : ""}
+            mt-[var(--space-10-20)]
           `}
           style={{
             color: `${paragraphColor ? paragraphColor : "var(--text-color)"}`,
@@ -326,7 +331,6 @@ export const MealTransitionTitle: React.FC<TitleProps> = ({
         tag="h2"
         text={title}
         style={{ color: `${textColor}` }}
-        className="mb-(--space-10-20)"
       >
         {" "}
         <span className="highlight ">{highlight}</span>
@@ -341,6 +345,8 @@ export const MealTransitionTitle: React.FC<TitleProps> = ({
             ${textAlign === "text-left" ? "ml-0 sm:max-w-[80%]  lg:max-w-[60%]" : ""}
             ${textAlign === "text-center" ? "mx-auto sm:max-w-[70%]  lg:max-w-[50%]" : ""}
             ${textAlign === "text-right" ? "mr-0 sm:max-w-[80%]  lg:max-w-[60%]" : ""}
+              mt-(--space-10-20)
+
           `}
           style={{
             color: `${paragraphColor ? paragraphColor : "var(--text-color)"}`,
@@ -367,7 +373,7 @@ export const PetFoodLookingTitle: React.FC<TitleProps> = ({
     >
       <Typography
         tag="h2"
-        className="capitalize text-secondary-1 mb-[var(--space-20-30)]"
+        className="capitalize text-secondary-1 "
         text={title}
         role="title"
         ariaLabel={title + highlight}
@@ -392,6 +398,7 @@ export const PetFoodLookingTitle: React.FC<TitleProps> = ({
             ${textAlign === "text-left" ? "ml-0 sm:max-w-[80%]  lg:max-w-[60%]" : ""}
             ${textAlign === "text-center" ? "mx-auto sm:max-w-[70%]  lg:max-w-[50%]" : ""}
             ${textAlign === "text-right" ? "mr-0 sm:max-w-[80%]  lg:max-w-[60%]" : ""}
+            mb-[var(--space-20-30)]
           `}
           style={{
             color: `${paragraphColor ? paragraphColor : "var(--text-color)"}`,

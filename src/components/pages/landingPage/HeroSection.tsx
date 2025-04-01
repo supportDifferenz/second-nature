@@ -79,7 +79,7 @@ export default function HeroSection() {
   ];
   return (
     <section>
-      <HeroBanner banners={banners} align="left" isCarousel />
+      <HeroBanner banners={banners} align="left" bannerHeight="mainHero"  isCarousel />
     </section>
   );
 }

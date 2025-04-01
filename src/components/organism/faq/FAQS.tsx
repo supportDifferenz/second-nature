@@ -1,35 +1,44 @@
-"use client";
 
+"use client";
 import { useState } from "react";
 import { Accordion, AccordionItem } from "@/components/ui/accordion";
 import { ChevronDown } from "lucide-react";
-import { FAQSProps } from "../type";
+import Typography from "@/components/atoms/typography/Typography";
 
-const FAQS: React.FC<FAQSProps> = ({
-  faqs,
-  defaultOpenIndex = null,
-  className = "",
-}) => {
-  const [openIndex, setOpenIndex] = useState(defaultOpenIndex);
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+interface FAQProps {
+  faqs: FAQItem[];
+  defaultOpenIndex?: number;
+  className?: string;
+}
+
+const FAQS: React.FC<FAQProps> = ({ faqs, defaultOpenIndex = 0, className = "" }) => {
+  const [openIndex, setOpenIndex] = useState<number | null>(defaultOpenIndex);
 
   const toggleAccordion = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
   return (
-    <div className={`w-full max-w-2xl mx-auto ${className}`}>
-      <Accordion type="single" collapsible>
+    <div className={`w-full  mx-auto ${className}`}>
+      <Accordion type="single" collapsible className="text-secondary-1">
         {faqs.map((faq, index) => (
           <AccordionItem
             key={index}
             value={index.toString()}
-            className="border-b border-gray-200 last:border-b-0"
+            className={`border border-secondary-1 data-[state=open]:bg-[#F9FFFD] overflow-hidden ${
+              openIndex === index ? "bg-[#F9FFFD]" : ""
+            } rounded-xl`}
           >
             <button
               onClick={() => toggleAccordion(index)}
-              className="w-full flex justify-between items-center p-4 text-left font-medium text-gray-900 hover:bg-gray-100"
+              className={`w-full flex justify-between items-center  text-left px-6  py-4 cursor-pointer`}
             >
-              {faq.question}
+              <Typography tag="h6" text={faq.question} className="w-[95%] "/>
               <ChevronDown
                 className={`h-5 w-5 transition-transform ${
                   openIndex === index ? "rotate-180" : ""
@@ -37,7 +46,7 @@ const FAQS: React.FC<FAQSProps> = ({
               />
             </button>
             {openIndex === index && (
-              <div className="p-4 text-gray-700 bg-gray-50">{faq.answer}</div>
+              <Typography tag="p" text={faq.answer} className=" p-6 pb-5 pt-0 bg-[#F9FFFD] lg:w-[80%]"/>
             )}
           </AccordionItem>
         ))}
