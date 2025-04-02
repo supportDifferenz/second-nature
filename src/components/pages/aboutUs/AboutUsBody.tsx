@@ -2,7 +2,11 @@
 import Typography from "@/components/atoms/typography/Typography";
 import CardCaption from "@/components/molecules/cardTitle/CardCaption";
 import CardTitle from "@/components/molecules/cardTitle/CardTitle";
-import { SecondaryInlineTitle } from "@/components/molecules/titleSyles/Title";
+import {
+  PrimaryBlockTitle,
+  SecondaryBlockTitle,
+  SecondaryInlineTitle,
+} from "@/components/molecules/titleSyles/Title";
 import Image from "next/image";
 import React from "react";
 
@@ -25,7 +29,7 @@ export default function AboutUsBody({
   cardCaptionData,
 }: AboutUsBodyProps) {
   return (
-    <div className="w-full">
+    <div className="w-full mt-[var(--space-100-200)]">
       <div className="flex flex-col items-center w-fit mx-auto">
         <Typography
           tag="h5"
@@ -118,6 +122,121 @@ export default function AboutUsBody({
             fill
             priority
           />
+        </div>
+      </div>
+
+      <div className="mt-[33vw] sm:mt-[17.70vw]">
+        <div className="flex flex-col items-center">
+          <Typography
+            tag="h5"
+            text="our Mission"
+            className="uppercase text-secondary-1"
+          />
+          <Typography
+            tag="h1"
+            text="To nurture"
+            className="capitalize text-primary-dark highlight"
+          />
+          <Typography
+            tag="h2"
+            text="the health & happiness of pets"
+            className="text-primary-dark text-center"
+          />
+        </div>
+        <div>
+          <div className="flex justify-center">
+            <div className="flex flex-col sm:flex-row gap-[var(--space-10-20)] px-[var(--space-23-70)] sm:pr-0 items-center">
+              <div className="w-[11.44vw] sm:w-[3.12vw]">
+                <Image
+                  src="/icons/natural-food.svg"
+                  alt="mission"
+                  className="!static inset-0 w-full !h-full object-cover object-center"
+                  fill
+                  priority
+                />
+              </div>
+              <p className="sm:border-r-1 sm:border-[#79D2A7]  sm:pr-[var(--space-23-70)] text-center">
+                100% natural
+              </p>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-[var(--space-10-20)] px-[var(--space-23-70)] sm:pr-0 border border-[#79D2A7] border-y-0 sm:border-0 items-center">
+              <div className="w-[11.44vw] sm:w-[3.12vw]">
+                <Image
+                  src="/icons/carrot-quality.svg"
+                  alt="mission"
+                  className="!static inset-0 w-full !h-full object-cover object-center"
+                  fill
+                  priority
+                />
+              </div>
+              <p className="sm:border-r-1 sm:border-[#79D2A7] sm:pr-[var(--space-23-70)] text-center">
+                high-quality
+              </p>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-[var(--space-10-20)] px-[var(--space-23-70)] sm:pr-0 items-center">
+              <div className="w-[11.44vw] sm:w-[3.12vw]">
+                <Image
+                  src="/icons/natural-food.svg"
+                  alt="mission"
+                  className="!static inset-0 w-full !h-full object-cover object-center"
+                  fill
+                  priority
+                />
+              </div>
+              <p className=" sm:pr-[var(--space-23-70)] text-center">
+                locally crafted
+              </p>
+            </div>
+          </div>
+          <div>
+            <div className="relative bg-[#FDFEFA] h-[115.42vw] sm:h-[29.16vw] w-[90vw] sm:w-[66.25vw] mx-auto mt-[var(--space-32-52)] border border-secondary-1 rounded-2xl px-[var(--space-20-190)] py-[var(--space-50-67)]">
+              <div>
+                <Typography
+                  tag="h5"
+                  text="Meals to strengthen the bond between pets and their families"
+                  className="text-primary-dark text-center mb-[var(--space-11-36)]"
+                />
+                <Typography
+                  tag="h2"
+                  text="We Put Pet Wellness First with Nature’s Finest Ingredients"
+                  className="text-secondary-1 text-center highlight mb-4 "
+                />
+                <Typography
+                  tag="h6"
+                  text=" That's why we’re committed to using the best and natural ingredients, free from harmful additives or artificial fillers, ensuring every meal supports their well-being and vitality."
+                  className=" text-center"
+                />
+              </div>
+              <div className="absolute top-[76%] sm:top-[75%] left-[-11%] sm:left-[22%] w-[104.2vw] sm:w-[37.86vw]">
+                <Image
+                  src="/images/meat-edition.webp"
+                  alt=""
+                  className="!static inset-0 w-full !h-full object-cover object-center"
+                  fill
+                  priority
+                />
+              </div>
+            </div>
+
+            <div className="flex flex-col sm:flex-row w-fit mx-auto gap-[15.88vw] sm:gap-[14.06vw] my-[43.45vw] sm:my-[14.06vw]">
+              <div>
+                <CardCaption
+                  imageSrc="/images/pet-caring-1.webp"
+                  imageAlt="pet-caring"
+                  heading="At Second Nature, our mission is to revolutionize pet care."
+                  subText="Our line of natural pet food prioritizes health, quality, and trust. We believe that pets are more than companions—they're family."
+                />
+              </div>
+              <div className="sm:mt-[7.39vw]">
+                <CardCaption
+                  imageSrc="/images/pet-caring-2.webp"
+                  imageAlt="pet-caring"
+                  heading="Our focus extends beyond nutrition."
+                  subText="we aim to foster stronger bonds between pets and their families by promoting a lifestyle of care and wellness. By sourcing locally, we also strive to support local community and environment. With Second Nature, you can trust that every bite is a step toward a happier, healthier life for your beloved pet"
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
