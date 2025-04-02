@@ -8,7 +8,6 @@ export default function page() {
     <MainLayout>
                 <HeroSection />
                 <AboutUsBody />
-        
     </MainLayout>
   )
 }
