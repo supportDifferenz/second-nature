@@ -12,6 +12,7 @@ export type BannerCarouselPropsType = {
   interval?: number;
   align?: "left" | "center" | "right"; // ✅ Matches cva variants
   bannerHeight?: "mainHero" | "subHero";
+  isTitleHierarchyRegular?: boolean;
   hasButton?: boolean;
 };
 

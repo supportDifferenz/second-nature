@@ -3,8 +3,8 @@ import Typography from "@/components/atoms/typography/Typography";
 import CardCaption from "@/components/molecules/cardTitle/CardCaption";
 import CardTitle from "@/components/molecules/cardTitle/CardTitle";
 import {
-  PrimaryBlockTitle,
-  SecondaryBlockTitle,
+  // PrimaryBlockTitle,
+  // SecondaryBlockTitle,
   SecondaryInlineTitle,
 } from "@/components/molecules/titleSyles/Title";
 import FooterCtaCard from "@/components/organism/FooterCtaCard";
@@ -43,11 +43,15 @@ const footerCtaData = {
 };
 
 export default function AboutUsBody({
-  cardTitleData,
-  cardCaptionData,
+  // cardTitleData,
+  // cardCaptionData,
 }: AboutUsBodyProps) {
   return (
-    <div className="w-full mt-[var(--space-100-200)]">
+    <div>
+
+
+
+      
       <div className="flex flex-col items-center w-fit mx-auto">
         <Typography
           tag="h5"

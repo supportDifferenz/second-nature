@@ -1,5 +1,4 @@
 import Typography from "@/components/atoms/typography/Typography";
-import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,

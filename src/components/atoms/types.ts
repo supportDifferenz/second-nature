@@ -1,4 +1,4 @@
-import { JSX, MutableRefObject, RefObject } from "react";
+import { JSX, MutableRefObject } from "react";
 
 interface TypographyProps {
   tag?: keyof JSX.IntrinsicElements;

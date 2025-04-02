@@ -6,7 +6,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import { useCallback } from "react";
 import { cn } from "@/lib/utils";
 import { cva } from "class-variance-authority";
-import "./carousel.css";
+import "./heroBanner.css";
 import Typography from "@/components/atoms/typography/Typography";
 import { Button } from "@/components/ui/button";
 import { BannerCarouselPropsType } from "../type";
@@ -14,7 +14,7 @@ import { HeroBannersPropsType } from "@/components/pages/landingPage/type";
 
 const bannerVariants = cva(
   // "relative flex pt-(--space-46-95) sm:pt-0 sm:items-center w-full min-h-[500px] h-[90dvh] sm:min-h-[400px] sm:h-[d50vh] lg:min-h-[600px] sm:h-[70dvh] lg:max-h-[1200px]   bg-cover bg-center transition-all",
-    "relative flex pt-(--space-46-95) sm:pt-0 sm:items-center w-full   bg-cover bg-center transition-all",
+  "relative flex pt-(--space-46-95) sm:pt-0 sm:items-center w-full   bg-cover bg-center transition-all",
 
   {
     variants: {
@@ -24,16 +24,18 @@ const bannerVariants = cva(
           "text-center justify-center sm:justify-center sm:[&_*_*]:mx-auto text-center",
         right: "text-center justify-center sm:justify-end sm:text-left",
       },
-      bannerHeight:{
-        mainHero:"min-h-[500px] h-[90dvh] sm:min-h-[400px] sm:h-[d50vh] lg:min-h-[520px] sm:h-[70dvh] lg:max-h-[1200px] ",
-        subHero:"min-h-[500px] h-[90dvh] sm:min-h-[400px] sm:h-[d50vh] lg:min-h-[520px] sm:h-[70dvh] lg:max-h-[1200px] ",
-      }
+      bannerHeight: {
+        mainHero:
+          "min-h-[500px] h-[90dvh] sm:min-h-[400px] sm:h-[d50vh] lg:min-h-[520px] sm:h-[70dvh] lg:max-h-[1200px] ",
+        subHero:
+          "min-h-[500px] h-[90dvh] sm:min-h-[400px] sm:h-[d50vh] lg:min-h-[520px] sm:h-[70dvh] lg:max-h-[1200px] ",
+      },
     },
     defaultVariants: {
       align: "center",
-      bannerHeight:"subHero"
+      bannerHeight: "subHero",
     },
-  },
+  }
 );
 
 export default function HeroBanner({
@@ -44,7 +46,8 @@ export default function HeroBanner({
   interval = 4000,
   hasButton = true,
   align,
-  bannerHeight
+  isTitleHierarchyRegular = false,
+  bannerHeight,
 }: BannerCarouselPropsType) {
   // carousel settings
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: isCarousel });
@@ -60,7 +63,7 @@ export default function HeroBanner({
     return banner.image.mobile; // Default for SSR
   };
   const [activeImages, setActiveImages] = useState<string[]>(
-    banners.map((b) => b.image.mobile),
+    banners.map((b) => b.image.mobile)
   ); // Default SSR-safe values
 
   useEffect(() => {
@@ -101,7 +104,12 @@ export default function HeroBanner({
                     priority
                   />
                 </div>
-                <div className={cn(bannerVariants({ align, bannerHeight }), "container")}>
+                <div
+                  className={cn(
+                    bannerVariants({ align, bannerHeight }),
+                    "container"
+                  )}
+                >
                   <div className="lg:w-[55%] ">
                     {banner.caption && (
                       <Typography
@@ -123,23 +131,26 @@ export default function HeroBanner({
                         role="heading"
                         ariaLabel={banner.title}
                         ariaLabelledBy="title"
-                      />
+                      >
+                        {banner.halfTitle && (
+                          <span className="block h2 font-bellota-text capitalize sm:max-w-[50%] lg:max-w-[65%] mb-(--space-10-20)">
+                            {banner.halfTitle}
+                          </span>
+                        )}
+                      </Typography>
                     )}
-                    {banner.halfTitle && (
-                      <Typography
-                        tag="h2"
-                        className="supporting capitalize sm:max-w-[50%] lg:max-w-[65%] mb-(--space-10-20)"
-                        text={banner.halfTitle}
-                        role="sub heading"
-                        ariaLabel={banner.halfTitle}
-                        ariaLabelledBy="sub title"
-                      />
-                    )}
+
                     {banner.paragraph && (
                       <Typography
                         tag="h6"
                         text={banner.paragraph}
-                        className="first-letter:capitalize mb-(--space-20-30) sm:max-w-[45%] lg:max-w-[65%]  "
+                        className={`first-letter:capitalize mb-(--space-20-30) sm:max-w-[45%] lg:max-w-[65%] ${
+                          align === "left"
+                            ? "ml-0"
+                            : align === "right"
+                            ? "mr-0"
+                            : "mx-auto"
+                        } `}
                         style={{ color: banner.paragraphColor }}
                         role="paragraph"
                         ariaLabel={banner.paragraph}
@@ -179,9 +190,14 @@ export default function HeroBanner({
             />
           </div>
           <div
-            className={cn(bannerVariants({ align }), "container items-center")}
+            className={cn(
+              bannerVariants({ align, bannerHeight }),
+              "container items-center  "
+            )}
           >
-            <div className="lg:w-[55%]">
+            <div
+              className={`${align === "right" ? "lg:w-[43%]" : "lg:w-[55%]"}  `}
+            >
               {banners[0].caption && (
                 <Typography
                   tag="span"
@@ -193,46 +209,90 @@ export default function HeroBanner({
                   ariaLabelledBy="caption"
                 />
               )}
-              {banners[0].title && (
-                <Typography
-                  tag="h1"
-                  className="capitalize highlight mb-(--space-10-20) "
-                  text={banners[0].title}
-                  role="heading"
-                  ariaLabel={banners[0].title}
-                  ariaLabelledBy="title"
-                >
-                  {banners[0].halfTitle && (
+
+              {!isTitleHierarchyRegular ? (
+                <>
+                  {banners[0].title && (
                     <Typography
-                      tag="h2"
-                      className="supporting capitalize normalize sm:max-w-[50%] lg:max-w-[65%]"
-                      text={banners[0].halfTitle}
-                      role="sub heading"
-                      ariaLabel={banners[0].halfTitle}
-                      ariaLabelledBy="sub title"
+                      tag="h1"
+                      className="capitalize highlight mb-(--space-10-20)"
+                      text={banners[0].title}
+                      role="heading"
+                      ariaLabel={banners[0].title}
+                      ariaLabelledBy="title"
+                    >
+                      {banners[0].halfTitle && (
+                        <span className="h2 block capitalize normalize sm:max-w-[50%] lg:max-w-[65%]">
+                          {banners[0].halfTitle}
+                        </span>
+                      )}
+                    </Typography>
+                  )}
+                  {banners[0].paragraph && (
+                    <Typography
+                      tag="h6"
+                      text={banners[0].paragraph}
+                      className={`first-letter:capitalize mb-(--space-20-30) sm:max-w-[45%] lg:max-w-[65%] ${
+                        align === "left"
+                          ? "ml-0"
+                          : align === "right"
+                          ? "mr-0"
+                          : "mx-auto"
+                      }`}
+                      style={{ color: banners[0].paragraphColor }}
+                      role="paragraph"
+                      ariaLabel={banners[0].paragraph}
+                      ariaLabelledBy="sub paragraph"
                     />
                   )}
-                </Typography>
+                </>
+              ) : (
+                <>
+                  {banners[0].title && (
+                    <Typography
+                      tag="h1"
+                      className="h2 text-ye capitalize highlight mb-(--space-10-20) "
+                      text={banners[0].title}
+                      role="heading"
+                      ariaLabel={banners[0].title}
+                      ariaLabelledBy="title"
+                    >
+                      {banners[0].halfTitle && (
+                        <span className="h3 block capitalize normalize sm:max-w-[50%] lg:max-w-[65%]">
+                          {banners[0].halfTitle}
+                        </span>
+                      )}
+                    </Typography>
+                  )}
+                  {banners[0].paragraph && (
+                    <Typography
+                      tag="h6"
+                      text={banners[0].paragraph}
+                      className={`first-letter:capitalize mb-(--space-20-30) sm:max-w-[45%] lg:max-w-[65%] ${
+                        align === "left"
+                          ? "ml-0"
+                          : align === "right"
+                          ? "mr-0"
+                          : "mx-auto"
+                      } `}
+                      style={{ color: banners[0].paragraphColor }}
+                      role="paragraph"
+                      ariaLabel={banners[0].paragraph}
+                      ariaLabelledBy="sub paragraph"
+                    />
+                  )}
+                </>
               )}
-              {banners[0].paragraph && (
-                <Typography
-                  tag="h6"
-                  text={banners[0].paragraph}
-                  className="first-letter:capitalize mb-(--space-20-30) mx-auto max-w-[90%] sm:max-w-[45%] lg:max-w-[65%] "
-                  style={{ color: banners[0].paragraphColor }}
-                  role="paragraph"
-                  ariaLabel={banners[0].paragraph}
-                  ariaLabelledBy="sub paragraph"
-                />
-              )}
+
               {hasButton && banners[0].buttonText && (
                 <Button
-                  variant={"outlinePrimaryBtn"}
+                  variant={"primaryBtn"}
                   className="mx-auto sm:m-0"
                   style={{
                     borderColor: banners[0].buttonTextColor,
                     color: banners[0].buttonTextColor,
                   }}
+                  size={"md"}
                 >
                   {banners[0].buttonText}
                 </Button>

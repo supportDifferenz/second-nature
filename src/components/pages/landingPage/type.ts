@@ -22,6 +22,8 @@ export type FAQSItemsProps = {
   answer: string;
 };
 
+
+
 export type FooterBannerCTAPropsType = {
   id: string;
   image: {

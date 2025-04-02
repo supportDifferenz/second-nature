@@ -269,10 +269,10 @@ export const HealthBenefitTitle: React.FC<TitleProps> = ({
   title = "no text",
   highlight,
   paragraph,
-  caption,
+  // caption,
   textAlign = "text-center",
-  textColor = "#00683D",
-  className,
+  // textColor = "#00683D",
+  // className,
   paragraphColor,
 }) => {
   return (
@@ -315,8 +315,8 @@ export const MealTransitionTitle: React.FC<TitleProps> = ({
   caption,
   textAlign = "text-center",
   textColor = "#00683D",
-  className,
-  order = "accenting",
+  // className,
+  // order = "accenting",
   paragraphColor,
 }) => {
   return (
@@ -361,11 +361,11 @@ export const PetFoodLookingTitle: React.FC<TitleProps> = ({
   title = "no text",
   highlight,
   paragraph,
-  caption,
+  // caption,
   textAlign = "text-center",
-  textColor = "#00683D",
-  className,
-  order = "accenting",
+  // textColor = "#00683D",
+  // className,
+  // order = "accenting",
   paragraphColor,
 }) => {
   return (
