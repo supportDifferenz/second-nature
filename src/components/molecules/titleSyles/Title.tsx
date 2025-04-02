@@ -1,6 +1,7 @@
 import Typography from "@/components/atoms/typography/Typography";
 import React from "react";
 import { TitleProps } from "../type";
+import { cn } from "@/lib/utils";
 
 export const PrimaryInlineTitle: React.FC<TitleProps> = ({
   title = "no text",
@@ -319,7 +320,7 @@ export const MealTransitionTitle: React.FC<TitleProps> = ({
   paragraphColor,
 }) => {
   return (
-    <div className={`${textAlign} `}>
+    <div className={cn(`${textAlign}  ${className}`)}>
       {caption && (
         <Typography
           tag="p"
@@ -369,7 +370,7 @@ export const PetFoodLookingTitle: React.FC<TitleProps> = ({
 }) => {
   return (
     <div
-      className={`  w-fit flex flex-col px-[] items-center sm:items-start text-center sm:text-left mx-auto sm:mr-auto`}
+      className={` ${className} w-fit flex flex-col px-[] items-center sm:items-start text-center sm:text-left mx-auto sm:mr-auto`}
     >
       <Typography
         tag="h2"

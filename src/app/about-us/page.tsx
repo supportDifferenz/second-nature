@@ -7,10 +7,7 @@ export default function page() {
   return (
     <MainLayout>
                 <HeroSection />
-<div>
-<AboutUsBody />
-</div>
-        
+                <AboutUsBody />
     </MainLayout>
   )
 }

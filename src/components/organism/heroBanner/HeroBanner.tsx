@@ -27,7 +27,8 @@ const bannerVariants = cva(
       bannerHeight: {
         mainHero:
           "min-h-[500px] h-[90dvh] sm:min-h-[400px] sm:h-[d50vh] lg:min-h-[520px] sm:h-[70dvh] lg:max-h-[1200px] ",
-        subHero: "",
+        subHero:
+          "min-h-[500px] h-[90dvh] sm:min-h-[400px] sm:h-[d50vh] lg:min-h-[520px] sm:h-[70dvh] lg:max-h-[1200px] ",
       },
     },
     defaultVariants: {
@@ -195,9 +196,7 @@ export default function HeroBanner({
             )}
           >
             <div
-              className={`${
-                align === "right" ? "lg:w-[43%]" : "lg:w-[55%]"
-              }  `}
+              className={`${align === "right" ? "lg:w-[43%]" : "lg:w-[55%]"}  `}
             >
               {banners[0].caption && (
                 <Typography

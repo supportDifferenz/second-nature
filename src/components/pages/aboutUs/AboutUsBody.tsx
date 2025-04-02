@@ -7,6 +7,7 @@ import {
   // SecondaryBlockTitle,
   SecondaryInlineTitle,
 } from "@/components/molecules/titleSyles/Title";
+import FooterCtaCard from "@/components/organism/FooterCtaCard";
 import Image from "next/image";
 import React from "react";
 
@@ -23,6 +24,23 @@ interface AboutUsBodyProps {
     subText: string;
   };
 }
+
+const footerCtaData = {
+  mealTransition: {
+    title: "Meal",
+    highlight: "Transition",
+    paragraph:
+      "Gradually introduce our fresh meals to ensure a smooth adjustment and lasting benefits for your furry child",
+    imageSrc: "/images/meal-transition.webp",
+  },
+  petFood: {
+    title: "Looking for",
+    highlight: "Cat Food?",
+    paragraph:
+      "Check out our nutrient-rich and irresistibly delicious Cat Bowls for optimal feline health and wellness!",
+    imageSrc: "/images/cat.webp",
+  },
+};
 
 export default function AboutUsBody({
   // cardTitleData,
@@ -42,7 +60,7 @@ export default function AboutUsBody({
         />
         <Typography
           tag="h2"
-          text="Inspired by Love:"
+          text="Inspired By Love:"
           className="highlight text-primary-dark"
         />
         <Typography
@@ -57,7 +75,7 @@ export default function AboutUsBody({
           highlight="Nature,"
           title="At Second"
           paragraph="we believe pets are family, and they deserve the best care possible. Our journey began in Qatar, inspired by our love for animals and a deep commitment to their health and happiness."
-          textAlign="center"
+          textAlign="text-center w-auto"
           textColor="#944446"
         />
         <div className="absolute left-[-11%] sm:left-[22%] w-[104.2vw] sm:w-[37.86vw]">
@@ -71,7 +89,7 @@ export default function AboutUsBody({
         </div>
       </div>
 
-      <div className="flex flex-col h-[343vw] sm:h-auto sm:flex-row sm:gap-[10.4vw] mt-[32.4vw] sm:mt-[5vw] items-center relative">
+      <div className="flex flex-col h-[282vw] sm:h-auto sm:flex-row sm:gap-[10.4vw] mt-[32.4vw] sm:mt-[5vw] items-center relative">
         <div className="w-fit relative">
           <div className="w-[72.66vw] sm:w-[23.59vw]">
             <Image
@@ -244,7 +262,12 @@ export default function AboutUsBody({
         </div>
       </div>
 
-    
+      <div className="pb-(--space-120-180)">
+              <FooterCtaCard
+                mealTransition={footerCtaData.mealTransition}
+                petFood={footerCtaData.petFood}
+              />
+            </div>
     </div>
   );
 }

@@ -7,6 +7,9 @@ import Image from "next/image";
 import React, { useState } from "react";
 import HealthBenefits from "./HealthBenefits";
 import FooterCtaCard from "@/components/organism/FooterCtaCard";
+import FooterBannerCTA from "@/components/organism/footerBannerCTA/FooterBannerCTA";
+import FooterBannerCta from "./FooterBannerCta";
+import FaqSection from "./FaqSection";
 
 // Define the content for each meal type
 const mealContent = {
@@ -165,7 +168,7 @@ const footerCtaData = {
 export default function MealBody() {
   // State to manage the current selected meal type
   const [selectedMeal, setSelectedMeal] = useState<"beef" | "chicken" | "lamb">(
-    "beef",
+    "beef"
   );
 
   // Function to handle tab switching
@@ -233,12 +236,22 @@ export default function MealBody() {
         paragraph={currentMeal.healthBenefits.paragraph}
         benefits={currentMeal.healthBenefits.benefits}
       />
-      <div className="my-12">
+      <div className="py-(--space-120-180)">
+        <FooterBannerCta />
+      </div>
+
+      <div>
+        <FaqSection/>
+      </div>
+
+      <div className="py-(--space-120-180)">
         <FooterCtaCard
           mealTransition={footerCtaData.mealTransition}
           petFood={footerCtaData.petFood}
         />
       </div>
+
+
     </div>
   );
 }
