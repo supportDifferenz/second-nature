@@ -1,6 +1,6 @@
 import Typography from "@/components/atoms/typography/Typography";
 import { MealCard } from "@/components/organism/mealCard/MealCard";
-import { MealCardProps } from "@/components/organism/type";
+import { MealCardProps } from "../../organism/type";
 import React, { useState } from "react";
 
 export default function MealCategory() {

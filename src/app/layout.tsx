@@ -4,14 +4,14 @@ import "./globals.css";
 import Footer from "@/components/organism/footer/Footer";
 import Header from "@/components/organism/header/Header";
 
-const dmSerifDisplay = DM_Serif_Display({
+export const dmSerifDisplay = DM_Serif_Display({
   subsets: ["latin"],
   weight: ["400"], // Specify font weights if needed
   display: "swap", // Optional, improves performance
   variable: "--font-dm-serif-display", // Optional, for CSS variables
 });
 
-const bellotaText = Bellota_Text({
+export const bellotaText = Bellota_Text({
   subsets: ["latin"],
   weight: ["300", "400", "700"], // Specify font weights if needed
   display: "swap", // Optional, improves performance
@@ -30,7 +30,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body className="antialiased dark">
+      <body  className={`${dmSerifDisplay.variable} ${bellotaText.variable} antialiased dark`}>
         <Header/>
         {children}
         <Footer />

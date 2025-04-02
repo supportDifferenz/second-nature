@@ -183,6 +183,7 @@ export default function MealBody() {
         <Button
           variant={selectedMeal === "beef" ? "primaryBtn" : "secondaryBtn"}
           onClick={() => handleMealSwitch("beef")}
+          
         >
           Beef Bowl
         </Button>

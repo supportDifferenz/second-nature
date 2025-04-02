@@ -39,7 +39,7 @@ const FooterBannerCTA: React.FC<
   paragraphColor,
   subTitle,
   buttonText,
-  buttonTextColor,
+  // buttonTextColor,
   buttonLink,
   align,
 }) => {

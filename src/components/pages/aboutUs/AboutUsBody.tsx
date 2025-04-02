@@ -3,8 +3,8 @@ import Typography from "@/components/atoms/typography/Typography";
 import CardCaption from "@/components/molecules/cardTitle/CardCaption";
 import CardTitle from "@/components/molecules/cardTitle/CardTitle";
 import {
-  PrimaryBlockTitle,
-  SecondaryBlockTitle,
+  // PrimaryBlockTitle,
+  // SecondaryBlockTitle,
   SecondaryInlineTitle,
 } from "@/components/molecules/titleSyles/Title";
 import Image from "next/image";
@@ -25,11 +25,15 @@ interface AboutUsBodyProps {
 }
 
 export default function AboutUsBody({
-  cardTitleData,
-  cardCaptionData,
+  // cardTitleData,
+  // cardCaptionData,
 }: AboutUsBodyProps) {
   return (
-    <div className="w-full mt-[var(--space-100-200)]">
+    <div>
+
+
+
+      
       <div className="flex flex-col items-center w-fit mx-auto">
         <Typography
           tag="h5"
@@ -240,20 +244,7 @@ export default function AboutUsBody({
         </div>
       </div>
 
-      {/* <div className="w-fit sm:w-auto mx-auto">
-            <CardCaption 
-              imageSrc={captionData.imageSrc}
-              imageAlt={captionData.imageAlt}
-              heading={captionData.heading}
-              subText={captionData.subText}
-            />
-            <CardCaption 
-              imageSrc={captionData.imageSrc}
-              imageAlt={captionData.imageAlt}
-              heading={captionData.heading}
-              subText={captionData.subText}
-            />
-          </div> */}
+    
     </div>
   );
 }

@@ -32,5 +32,5 @@ const Typography = forwardRef<HTMLSpanElement, TypographyProps>(
     );
   },
 );
-
+Typography.displayName = "Typography";
 export default Typography;
