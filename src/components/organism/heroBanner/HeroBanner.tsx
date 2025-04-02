@@ -26,7 +26,7 @@ const bannerVariants = cva(
       },
       bannerHeight:{
         mainHero:"min-h-[500px] h-[90dvh] sm:min-h-[400px] sm:h-[d50vh] lg:min-h-[520px] sm:h-[70dvh] lg:max-h-[1200px] ",
-        subHero:"",
+        subHero:"min-h-[500px] h-[90dvh] sm:min-h-[400px] sm:h-[d50vh] lg:min-h-[520px] sm:h-[70dvh] lg:max-h-[1200px] ",
       }
     },
     defaultVariants: {

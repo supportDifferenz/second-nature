@@ -42,13 +42,14 @@ export default function FooterCtaCard({
         <div className="flex flex-col items-center gap-[var(--space-20-45)]">
           <MealTransitionTitle
             highlight={mealTransition.highlight}
-            className="text-white"
+            className="text-white w-auto px-8 sm:px-24"
             title={mealTransition.title}
             paragraph={mealTransition.paragraph}
-            textAlign="center"
+            paragraphColor="#fff"
+            textAlign="text-center jj"
             textColor="#fff"
           />
-          <Button variant={"secondaryGreenBtn"}>
+          <Button size={"md"} variant={"secondaryGreenBtn"}>
             Learn more about transitioning
           </Button>
         </div>
@@ -58,7 +59,7 @@ export default function FooterCtaCard({
       <div className="flex flex-col items-center justify-center  h-[175vw] sm:h-[31.2vw] w-[90vw] sm:w-[38.5vw] relative">
         <div className="bg-[#FBE5C7] sm:px-[3.12vw] py-[var(--space-52-86)] w-full rounded-t-2xl h-[80%]">
           <PetFoodLookingTitle
-            className="text-secondary-1"
+            className="text-secondary-1 px-12 sm:pl-0 sm:pr-28"
             title={petFood.title}
             highlight={petFood.highlight}
             paragraph={petFood.paragraph}
@@ -73,11 +74,11 @@ export default function FooterCtaCard({
           </Button>
         </div>
         <div className="flex items-center px-[3.12vw] w-full h-[20%] rounded-b-2xl bg-secondary-1">
-          <Button variant={"secondaryGreenBtn"} className="hidden sm:block">
-            Know More
+          <Button size={"md"} variant={"secondaryBtnTextSecondary1"} className="hidden sm:block">
+            Learn More
           </Button>
         </div>
-        <div className="absolute top-[38%] sm:top-[10%] left-[-5%] sm:left-[40%] inset-0 w-[99.5vw] sm:w-[26.3vw] h-[124vw] sm:h-[32.8vw]">
+        <div className="absolute top-[38%] sm:top-[10%] left-[-5%] sm:left-[48%] inset-0 w-[99.5vw] sm:w-[26.3vw] h-[124vw] sm:h-[32.8vw]">
           <Image
             alt=""
             src={petFood.imageSrc}
