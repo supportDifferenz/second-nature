@@ -1,5 +1,6 @@
 import BehindTheScenes from "@/components/pages/landingPage/BehindTheScenes";
 import FAQSection from "@/components/pages/landingPage/FAQSection";
+import FooterBannerCTASection from "@/components/pages/landingPage/FooterBannerCTASection";
 import HeroSection from "@/components/pages/landingPage/HeroSection";
 import Marquee from "@/components/pages/landingPage/Marquee";
 import MealsAndTreats from "@/components/pages/landingPage/Meals&Treats";
@@ -40,7 +41,11 @@ export default function Home() {
         <Testimonial />
       </div>
 
-      <FAQSection />
+      <FooterBannerCTASection/>
+
+      <div className="py-(--space-120-180)">
+        <FAQSection />
+      </div>
     </MainLayout>
   );
 }

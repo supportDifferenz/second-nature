@@ -11,6 +11,7 @@ export type BannerCarouselPropsType = {
   showNavigation?: boolean;
   interval?: number;
   align?: "left" | "center" | "right"; // ✅ Matches cva variants
+  bannerHeight?: "mainHero" | "subHero";
   hasButton?: boolean;
 };
 

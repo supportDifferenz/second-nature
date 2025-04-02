@@ -13,7 +13,9 @@ import { BannerCarouselPropsType } from "../type";
 import { HeroBannersPropsType } from "@/components/pages/landingPage/type";
 
 const bannerVariants = cva(
-  "relative flex pt-(--space-46-95) sm:pt-0 sm:items-center w-full min-h-[500px] h-[90dvh] sm:min-h-[400px] sm:h-[d50vh] lg:min-h-[600px] sm:h-[70dvh] lg:max-h-[1200px]   bg-cover bg-center transition-all",
+  // "relative flex pt-(--space-46-95) sm:pt-0 sm:items-center w-full min-h-[500px] h-[90dvh] sm:min-h-[400px] sm:h-[d50vh] lg:min-h-[600px] sm:h-[70dvh] lg:max-h-[1200px]   bg-cover bg-center transition-all",
+    "relative flex pt-(--space-46-95) sm:pt-0 sm:items-center w-full   bg-cover bg-center transition-all",
+
   {
     variants: {
       align: {
@@ -22,9 +24,14 @@ const bannerVariants = cva(
           "text-center justify-center sm:justify-center sm:[&_*_*]:mx-auto text-center",
         right: "text-center justify-center sm:justify-end sm:text-left",
       },
+      bannerHeight:{
+        mainHero:"min-h-[500px] h-[90dvh] sm:min-h-[400px] sm:h-[d50vh] lg:min-h-[520px] sm:h-[70dvh] lg:max-h-[1200px] ",
+        subHero:"",
+      }
     },
     defaultVariants: {
       align: "center",
+      bannerHeight:"subHero"
     },
   },
 );
@@ -37,6 +44,7 @@ export default function HeroBanner({
   interval = 4000,
   hasButton = true,
   align,
+  bannerHeight
 }: BannerCarouselPropsType) {
   // carousel settings
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: isCarousel });
@@ -93,7 +101,7 @@ export default function HeroBanner({
                     priority
                   />
                 </div>
-                <div className={cn(bannerVariants({ align }), "container")}>
+                <div className={cn(bannerVariants({ align, bannerHeight }), "container")}>
                   <div className="lg:w-[55%] ">
                     {banner.caption && (
                       <Typography
