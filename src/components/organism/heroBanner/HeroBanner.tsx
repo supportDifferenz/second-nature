@@ -73,8 +73,8 @@ export default function HeroBanner({
     updateImages(); // Set correct images on mount
     window.addEventListener("resize", updateImages);
     return () => window.removeEventListener("resize", updateImages);
-  }, []);
-
+  }, [banners]);
+  
   // carousel settings
   useEffect(() => {
     if (!isCarousel || !autoplay || !emblaApi) return;

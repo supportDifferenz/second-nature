@@ -7,7 +7,6 @@ import Image from "next/image";
 import React, { useState } from "react";
 import HealthBenefits from "./HealthBenefits";
 import FooterCtaCard from "@/components/organism/FooterCtaCard";
-import FooterBannerCTA from "@/components/organism/footerBannerCTA/FooterBannerCTA";
 import FooterBannerCta from "./FooterBannerCta";
 import FaqSection from "./FaqSection";
 
