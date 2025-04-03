@@ -2,8 +2,8 @@
 
 :root {
   /* fonts */
-  --dm-serif-display: "DM Serif Display", serif;
-  --bellota-text: "Bellota Text", sans-serif;
+  --font-dm-serif-display: "DM Serif Display", serif;
+  --font-bellota-text: "Bellota Text", sans-serif;
 
   /* theme color */
   --primary: #2bb673;
@@ -112,6 +112,9 @@
   --space-11-36: clamp(11px, 1.563vw + 6.000px, 36px);
   --space-20-190: clamp(20px, 10.625vw + -14px, 190px);
   --space-150-180: clamp(150px, 1.875vw + 144.000px, 180px);
+  --space-44-120: clamp(44px, 4.750vw + 28.800px, 120px);
+  --space-66-100: clamp(66px, 2.125vw + 59.200px, 100px);
+
 
   /* size */
     --size-14-22: clamp(14px, 0.5vw + 12.4px, 22px);
@@ -119,8 +122,8 @@
 
 /* tailwind.config */
 @theme {
-  --font-dm-serif-display: var(--dm-serif-display);
-  --font-bellota-text: var(--bellota-text);
+  --font-dm-serif-display: var(--font-dm-serif-display);
+  --font-bellota-text: var(--font-bellota-text);
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -144,7 +147,7 @@
 /* global styles */
 body {
   font-size: var(--fs-body-text);
-  font-family: var(--bellota-text);
+  font-family: var(--font-bellota-text);
   font-weight: var(--fw-regular);
   line-height: var(--default-leading);
   color: var(--text-color);
@@ -190,8 +193,54 @@ span.subtitle2 {
   font-size: var(--fs-subtitle-2);
   font-weight: var(--fw-bold);
 }
+
+
+.h1 {
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-regular);
+}
+.h2 {
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-regular);
+}
+.h2.supporting {
+  font-size: var(--fs-h2-supporting);
+  font-weight: var(--fw-regular);
+}
+.h3 {
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-regular);
+}
+.h4 {
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-regular);
+}
+.h5 {
+  font-size: var(--fs-h5);
+  font-weight: var(--fw-bold);
+}
+.h5.subtitle {
+  font-size: var(--fs-h5-subtitle);
+  font-weight: var(--fw-bold);
+}
+.h6 {
+  font-size: var(--fs-h6-caption);
+  font-weight: var(--fw-bold);
+}
+.span.subtitle {
+  font-size: var(--fs-subtitle);
+  font-weight: var(--fw-bold);
+}
+.span.subtitle2 {
+  font-size: var(--fs-subtitle-2);
+  font-weight: var(--fw-bold);
+}
+
+
+
+
 button {
-  font-family: var(--bellota-text);
+  font-family: var(--font-bellota-text);
   line-height: 120%;
 }
 p {
@@ -211,10 +260,10 @@ p {
   margin: 0 auto;
 }
 .highlight {
-  font-family: var(--dm-serif-display);
+  font-family: var(--font-dm-serif-display);
 }
 .normalize {
-  font-family: var(--bellota-text);
+  font-family: var(--font-bellota-text);
 }
 
 /* dark mode */

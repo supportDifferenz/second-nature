@@ -1,5 +1,5 @@
-import HeroSection from "@/components/pages/mealsMenu/HeroSection";
-import MealBody from "@/components/pages/mealsMenu/MealBody";
+import HeroSection from "@/components/pages/meals/HeroSection";
+import MealBody from "@/components/pages/meals/MealBody";
 import MainLayout from "@/components/templates/MainLayout";
 import React from "react";
 

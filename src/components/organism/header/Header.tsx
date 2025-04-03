@@ -9,17 +9,16 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import Typography from "@/components/atoms/typography/Typography";
 
 const Header = () => {
   return (
-    <header className="bg-white">
+    <header className="bg-white hidden lg:block">
       <TopHeader />
-      <div className="container-lg py-5    bg-red-100">
+      <div className="container-lg py-5   ">
         <MobileMenu className="lg:hidden" />
 
-        <nav className="border flex gap-2">
-          <div className="flex items-center border grow gap-[3%] 2xl:gap-[6 %]">
+        <nav className=" flex gap-2">
+          <div className="flex items-center  grow gap-[3%] 2xl:gap-[6 %]">
             <MealDropdownMenu
               label="For Dogs"
               dropDownContentTitle="Dog Meals"
@@ -93,7 +92,7 @@ const Header = () => {
             <span className="block">How it works</span>
           </div>
 
-          <div className="w-[14%] border">
+          <div className="w-[14%] ">
             <Image
               src="/icons/logo-primary.svg"
               alt="logo"
@@ -102,7 +101,7 @@ const Header = () => {
             />
           </div>
 
-          <div className="flex items-center justify-end  border grow gap-[3%] 2xl:gap-[6  %]">
+          <div className="flex items-center justify-end   grow gap-[3%] 2xl:gap-[6  %]">
             <span>Blogs</span>
             <span>Reviews</span>
             <span>FAQs</span>
