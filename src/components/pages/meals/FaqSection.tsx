@@ -39,8 +39,7 @@ const faqsData = [
 
 export default function FaqSection() {
   return (
-    <section>
-      <div className="container flex flex-col-reverse sm:flex-row gap-(--space-30-60)">
+      <section className="container flex flex-col-reverse sm:flex-row gap-(--space-30-60)">
         <div className="flex-1 relative">
           <div className="sm:-ml-[17%] h-fit sm:sticky top-[5%]">
             <Image
@@ -70,7 +69,6 @@ export default function FaqSection() {
           </div>
           <FAQS faqs={faqsData} defaultOpenIndex={0} />
         </div>
-      </div>
-    </section>
+      </section>
   )
 }
