@@ -315,7 +315,7 @@ export const MealTransitionTitle: React.FC<TitleProps> = ({
   caption,
   textAlign = "text-center",
   textColor = "#00683D",
-  // className,
+  className,
   // order = "accenting",
   paragraphColor,
 }) => {
@@ -364,7 +364,7 @@ export const PetFoodLookingTitle: React.FC<TitleProps> = ({
   // caption,
   textAlign = "text-center",
   // textColor = "#00683D",
-  // className,
+  className,
   // order = "accenting",
   paragraphColor,
 }) => {
