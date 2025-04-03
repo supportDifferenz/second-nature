@@ -6,7 +6,7 @@ export type HeroBannersPropsType = {
     mobile: string;
   };
   caption?: string;
-  captionColor: string;
+  captionColor?: string;
   title?: string;
   paragraph?: string;
   paragraphColor?: string;
@@ -14,7 +14,7 @@ export type HeroBannersPropsType = {
   buttonText?: string;
   buttonTextColor?: string;
   buttonLink?: string;
-  bannerThemeColor: string;
+  bannerThemeColor?: string;
 };
 
 export type FAQSItemsProps = {
