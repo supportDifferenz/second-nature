@@ -73,6 +73,7 @@
   --space-110-114: clamp(110px, 0.25vw + 109.2px, 114px);
   --space-50-99: clamp(50px, 3.063vw + 40.2px, 99px);
   --space-50-67: clamp(50px, 1.063vw + 46.6px, 67px);
+  --space-50-64: clamp(50px, 0.875vw + 47.200px, 64px);
   --space-52-86: clamp(52px, 2.125vw + 45.2px, 86px);
   --space-520-827: clamp(520px, 19.188vw + 458.6px, 827px);
   --space-97-130: clamp(97px, 2.063vw + 90.4px, 130px);
@@ -115,7 +116,11 @@
   --space-44-120: clamp(44px, 4.750vw + 28.800px, 120px);
   --space-66-100: clamp(66px, 2.125vw + 59.200px, 100px);
   --space-20-60: clamp(20px, 2.500vw + 12.000px, 60px);
-  --space-26-32: clamp(26px, 0.375vw + 24.800px, 32px);
+  --space-26-32: clamp(26px, 0.375vw + 24.800px, 32px); 
+  --space-3-5: clamp(3px, 0.125vw + 2.600px, 5px);
+  --space-20-57: clamp(20px, 2.313vw + 12.600px, 57px);
+  --space-34-38: clamp(34px, 0.250vw + 33.200px, 38px);
+
 
   /* size */
     --size-14-22: clamp(14px, 0.5vw + 12.4px, 22px);

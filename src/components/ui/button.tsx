@@ -34,7 +34,7 @@ const buttonVariants = cva(
       
       size: {
         regular: "py-(--space-8-13) px-(--space-27-34) ",
-
+        small: "lg:min-w-[9.58vw]  py-(--space-5-8) px-(--space-16-24)",
         md: "py-(--space-5-8) px-(--space-18-32)",
         sm: "h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5",
         lg: "h-10 rounded-md px-6 has-[>svg]:px-4",
