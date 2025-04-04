@@ -4,12 +4,18 @@ import DashboardMenu from "@/components/pages/dashboard/DashboardMenu";
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
   return (
-    <div className="flex min-h-screen bg-gray-100">
-      {/* Sidebar */}
-      <DashboardMenu />
+    <main >
+      <div className="container flex flex-col lg:flex-row gap-(--space-20-60) min-h-screen ">
+        {/* Sidebar */}
+        <div className="overflow-x-auto lg:overflow-visible  ">
+          <DashboardMenu />
+        </div>
 
-      {/* Main Content */}
-      <main className="flex-1 p-6">{children}</main>
-    </div>
+        {/* Main Content */}
+        <div className="grow p-6  bg-primary-light rounded-2xl">
+          {children}
+        </div>
+      </div>
+    </main>
   );
 }
