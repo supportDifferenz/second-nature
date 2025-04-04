@@ -120,6 +120,7 @@
   --space-3-5: clamp(3px, 0.125vw + 2.600px, 5px);
   --space-20-57: clamp(20px, 2.313vw + 12.600px, 57px);
   --space-34-38: clamp(34px, 0.250vw + 33.200px, 38px);
+  --space-50-60: clamp(50px, 0.625vw + 48.000px, 60px);
 
 
   /* size */
@@ -233,11 +234,11 @@ span.subtitle2 {
   font-size: var(--fs-h6-caption);
   font-weight: var(--fw-bold);
 }
-.span.subtitle {
+.subtitle {
   font-size: var(--fs-subtitle);
   font-weight: var(--fw-bold);
 }
-.span.subtitle2 {
+.subtitle2 {
   font-size: var(--fs-subtitle-2);
   font-weight: var(--fw-bold);
 }

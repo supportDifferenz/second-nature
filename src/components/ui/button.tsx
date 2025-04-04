@@ -9,6 +9,8 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
+        nullBtn: "border-none rounded-0 !p-0 h-fit",
+        whiteBtnSecondary2BorderAndText:"bg-white border-secondary-1   text-[#944446]",
         primaryBtn:
           "bg-secondary-1 border-secondary-1 hover:border-[#823234] hover:bg-[#823234]  text-white",
 
@@ -17,6 +19,8 @@ const buttonVariants = cva(
 
         linkContrastBtn:
           " text-(--fs-body-button-text) text-contrast-button border-none underline-offset-4 hover:underline !p-0 ",
+          linkTextBlack:
+          " text-(--fs-body-button-text) text-text-color border-none underline-offset-4 hover:underline !p-0 ",
 
         secondaryBtn:
           "bg-primary-light border-primary-light hover:border-[#d7d9cd] hover:bg-[#d7d9cd]  text-[#909090]",

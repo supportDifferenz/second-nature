@@ -20,3 +20,12 @@ export type TitleProps = {
   className?: string;
   order?: "accenting" | "dissenting";
 };
+
+export type InputLabeledProps = {
+  label?: string;
+  className?: string; 
+  error?: string; 
+  type?: string;
+  placeholder?: string;
+
+};
