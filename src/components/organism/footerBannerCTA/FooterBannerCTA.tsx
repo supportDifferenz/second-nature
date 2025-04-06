@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { cva, VariantProps } from "class-variance-authority";
-import { FooterBannerCTAPropsType } from "@/components/pages/landingPage/type";
+import { FooterBannerCTAPropsType } from "@/components/types/type";
 import Image from "next/image";
 import Typography from "@/components/atoms/typography/Typography";
 import { Button } from "@/components/ui/button";

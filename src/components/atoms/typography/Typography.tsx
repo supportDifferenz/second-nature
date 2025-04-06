@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
-import TypographyProps from "../types";
+import TypographyPropsType from "@/components/types/type";
 
-const Typography = forwardRef<HTMLSpanElement, TypographyProps>(
+const Typography = forwardRef<HTMLSpanElement, TypographyPropsType>(
   (
     {
       tag = "p",
