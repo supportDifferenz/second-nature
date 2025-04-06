@@ -1,12 +1,12 @@
 import Typography from "@/components/atoms/typography/Typography";
 import { MealCard } from "@/components/organism/mealCard/MealCard";
-import { MealCardProps } from "../../organism/type";
+import { MealCardPropsType } from "@/components/types/type";
 import React, { useState } from "react";
 
 export default function MealCategory() {
   const [mealCategory, setMealCategory] = useState("For Dogs");
 
-  const mealsData: { category: string; meals: MealCardProps[] }[] = [
+  const mealsData: { category: string; meals: MealCardPropsType[] }[] = [
     {
       category: "For Dogs",
       meals: [

@@ -1,7 +1,7 @@
 "use client";
 
 import { SecondaryInlineTitle } from "@/components/molecules/titleSyles/Title";
-import MealCategory from "@/components/pages/landingPage/MealCategory ";
+import MealCategory from "@/components/pageSections/landingPage/MealCategory";
 import Image from "next/image";
 import React from "react";
 

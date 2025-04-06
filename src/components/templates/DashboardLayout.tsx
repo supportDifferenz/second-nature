@@ -1,6 +1,6 @@
 // components/templates/DashboardLayout.tsx
 import { ReactNode } from "react";
-import DashboardMenu from "@/components/pages/dashboard/DashboardMenu";
+import DashboardMenu from "@/components/pageSections/dashboard/DashboardMenu";
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
   return (

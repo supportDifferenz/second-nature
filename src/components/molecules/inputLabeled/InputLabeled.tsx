@@ -1,9 +1,9 @@
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import React from "react";
-import { InputLabeledProps } from "../type"; // Import type correctly
+import { InputLabeledPropsType } from "@/components/types/type"; // Import type correctly
 
-export const InputLabeled: React.FC<InputLabeledProps> = ({
+export const InputLabeled: React.FC<InputLabeledPropsType> = ({
   label,
   placeholder,
   className = "",

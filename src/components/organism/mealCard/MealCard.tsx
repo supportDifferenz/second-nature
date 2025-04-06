@@ -1,11 +1,11 @@
 // MealCard.tsx
-import { MealCardProps } from "../type";
+import { MealCardPropsType } from "@/components/types/type";
 import { Button } from "@/components/ui/button";
 import BadgeTitle from "@/components/atoms/badgeTitle/BadgeTitle";
 import Typography from "@/components/atoms/typography/Typography";
 import Image from "next/image";
 
-export const MealCard: React.FC<MealCardProps> = ({
+export const MealCard: React.FC<MealCardPropsType> = ({
   tag,
   title,
   image,

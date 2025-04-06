@@ -1,9 +1,9 @@
 import Typography from "@/components/atoms/typography/Typography";
 import React from "react";
-import { TitleProps } from "../type";
+import { TitlePropsType } from "@/components/types/type";
 import { cn } from "@/lib/utils";
 
-export const PrimaryInlineTitle: React.FC<TitleProps> = ({
+export const PrimaryInlineTitle: React.FC<TitlePropsType> = ({
   title = "no text",
   highlight,
   paragraph,
@@ -66,7 +66,7 @@ export const PrimaryInlineTitle: React.FC<TitleProps> = ({
   );
 };
 
-export const PrimaryBlockTitle: React.FC<TitleProps> = ({
+export const PrimaryBlockTitle: React.FC<TitlePropsType> = ({
   title = "no text",
   highlight,
   paragraph,
@@ -129,7 +129,7 @@ export const PrimaryBlockTitle: React.FC<TitleProps> = ({
   );
 };
 
-export const SecondaryInlineTitle: React.FC<TitleProps> = ({
+export const SecondaryInlineTitle: React.FC<TitlePropsType> = ({
   title = "no text",
   highlight,
   paragraph,
@@ -197,7 +197,7 @@ export const SecondaryInlineTitle: React.FC<TitleProps> = ({
   );
 };
 
-export const SecondaryBlockTitle: React.FC<TitleProps> = ({
+export const SecondaryBlockTitle: React.FC<TitlePropsType> = ({
   title = "no text",
   highlight,
   paragraph,
@@ -265,7 +265,7 @@ export const SecondaryBlockTitle: React.FC<TitleProps> = ({
   );
 };
 
-export const HealthBenefitTitle: React.FC<TitleProps> = ({
+export const HealthBenefitTitle: React.FC<TitlePropsType> = ({
   title = "no text",
   highlight,
   paragraph,
@@ -308,7 +308,7 @@ export const HealthBenefitTitle: React.FC<TitleProps> = ({
   );
 };
 
-export const MealTransitionTitle: React.FC<TitleProps> = ({
+export const MealTransitionTitle: React.FC<TitlePropsType> = ({
   title = "no text",
   highlight,
   paragraph,
@@ -357,7 +357,7 @@ export const MealTransitionTitle: React.FC<TitleProps> = ({
     </div>
   );
 };
-export const PetFoodLookingTitle: React.FC<TitleProps> = ({
+export const PetFoodLookingTitle: React.FC<TitlePropsType> = ({
   title = "no text",
   highlight,
   paragraph,
@@ -409,7 +409,7 @@ export const PetFoodLookingTitle: React.FC<TitleProps> = ({
     </div>
   );
 };
-// export const HealthBenefitDescription: React.FC<TitleProps> = ({
+// export const HealthBenefitDescription: React.FC<TitlePropsType> = ({
 //   title = "no text",
 //   highlight,
 //   paragraph,
@@ -443,7 +443,7 @@ export const PetFoodLookingTitle: React.FC<TitleProps> = ({
 //   );
 // };
 
-// export const BlockSecondaryTitle: React.FC<TitleProps> = ({
+// export const BlockSecondaryTitle: React.FC<TitlePropsType> = ({
 //   title,
 //   highlight,
 //   paragraph,
@@ -476,7 +476,7 @@ export const PetFoodLookingTitle: React.FC<TitleProps> = ({
 //   );
 // };
 
-// export const BlockPrimaryTitle: React.FC<TitleProps> = ({
+// export const BlockPrimaryTitle: React.FC<TitlePropsType> = ({
 //   title,
 //   highlight,
 //   paragraph,
