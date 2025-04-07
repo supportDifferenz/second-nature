@@ -1,5 +1,4 @@
 import Typography from "@/components/atoms/typography/Typography";
-import EditAddresses from "@/components/pageSections/dashboard/addresses/EditAddresses";
 import DashboardLayout from "@/components/templates/DashboardLayout";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";

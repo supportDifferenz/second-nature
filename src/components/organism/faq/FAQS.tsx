@@ -6,10 +6,6 @@ import { ChevronDown } from "lucide-react";
 import Typography from "@/components/atoms/typography/Typography";
 import { FAQSPropsTypes } from "@/components/types/type";
 
-interface FAQItem {
-  question: string;
-  answer: string;
-}
 
 
 const FAQS: React.FC<FAQSPropsTypes> = ({ faqs, defaultOpenIndex = 0, className = "" }) => {

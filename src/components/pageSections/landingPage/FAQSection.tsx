@@ -32,7 +32,7 @@ export default function FAQSection() {
     <section>
       <div className="container flex flex-col-reverse sm:flex-row gap-(--space-30-60)">
         <div className="flex-1 relative">
-          <div className="sm:-ml-[17%] h-fit sm:sticky top-[5%]">
+          <div className="sm:-ml-[16%] lg:-ml-[2%] xl:-ml-[16%] h-fit sm:sticky top-[5%]">
             <Image
               src="/images/faqs-section-vector.svg"
               alt="frequently asked questions "

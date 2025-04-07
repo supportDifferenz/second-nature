@@ -50,7 +50,7 @@ export default function Testimonial() {
   const scrollNext = () => emblaApi && emblaApi.scrollNext();
   return (
     <section>
-      <div className="container  flex flex-col lg:flex-row gap-(--space-47-111)">
+      <div className="container right flex flex-col lg:flex-row gap-(--space-47-111)">
         <div className="flex-1  flex flex-col">
           <div>
             <SecondaryBlockTitle
@@ -70,7 +70,7 @@ export default function Testimonial() {
               />
             </Button>
           </div>
-          <div className=" ml-[-34%] mt-auto hidden lg:block">
+          <div className="lg:ml-[-20%] xl:ml-[-34%] mt-auto hidden lg:block">
             <Image
               src="/images/whats-customers-says-vector.svg"
               alt="What Customers Say"

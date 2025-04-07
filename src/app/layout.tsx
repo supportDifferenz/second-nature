@@ -31,9 +31,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body  className={`${dmSerifDisplay.variable} ${bellotaText.variable} antialiased dark`}>
-        <Header/>
         {children}
-        <Footer />
       </body>
     </html>
   );
