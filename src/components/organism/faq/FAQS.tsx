@@ -4,19 +4,15 @@ import { useState } from "react";
 import { Accordion, AccordionItem } from "@/components/ui/accordion";
 import { ChevronDown } from "lucide-react";
 import Typography from "@/components/atoms/typography/Typography";
+import { FAQSPropsTypes } from "@/components/types/type";
 
 interface FAQItem {
   question: string;
   answer: string;
 }
 
-interface FAQProps {
-  faqs: FAQItem[];
-  defaultOpenIndex?: number;
-  className?: string;
-}
 
-const FAQS: React.FC<FAQProps> = ({ faqs, defaultOpenIndex = 0, className = "" }) => {
+const FAQS: React.FC<FAQSPropsTypes> = ({ faqs, defaultOpenIndex = 0, className = "" }) => {
   const [openIndex, setOpenIndex] = useState<number | null>(defaultOpenIndex);
 
   const toggleAccordion = (index: number) => {

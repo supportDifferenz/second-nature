@@ -9,8 +9,8 @@ import { cva } from "class-variance-authority";
 import "./heroBanner.css";
 import Typography from "@/components/atoms/typography/Typography";
 import { Button } from "@/components/ui/button";
-import { BannerCarouselPropsType } from "../type";
-import { HeroBannersPropsType } from "@/components/pages/landingPage/type";
+import { BannerCarouselPropsType } from "@/components/types/type";
+import { HeroBannersPropsType } from "@/components/types/type";
 
 const bannerVariants = cva(
   // "relative flex pt-(--space-46-95) sm:pt-0 sm:items-center w-full min-h-[500px] h-[90dvh] sm:min-h-[400px] sm:h-[d50vh] lg:min-h-[600px] sm:h-[70dvh] lg:max-h-[1200px]   bg-cover bg-center transition-all",

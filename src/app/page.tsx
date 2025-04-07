@@ -1,13 +1,13 @@
-import BehindTheScenes from "@/components/pages/landingPage/BehindTheScenes";
-import FAQSection from "@/components/pages/landingPage/FAQSection";
-import FooterBannerCTASection from "@/components/pages/landingPage/FooterBannerCTASection";
-import HeroSection from "@/components/pages/landingPage/HeroSection";
-import Marquee from "@/components/pages/landingPage/Marquee";
-import MealsAndTreats from "@/components/pages/landingPage/Meals&Treats";
-import MealTransition from "@/components/pages/landingPage/MealTransition";
-import OurIngredients from "@/components/pages/landingPage/OurIngredients";
-import Testimonial from "@/components/pages/landingPage/Testimonial";
-import TrustedByVets from "@/components/pages/landingPage/TrustedByVets";
+import BehindTheScenes from "@/components/pageSections/landingPage/BehindTheScenes";
+import FAQSection from "@/components/pageSections/landingPage/FAQSection";
+import FooterBannerCTASection from "@/components/pageSections/landingPage/FooterBannerCTASection";
+import HeroSection from "@/components/pageSections/landingPage/HeroSection";
+import Marquee from "@/components/pageSections/landingPage/Marquee";
+import MealsAndTreats from "@/components/pageSections/landingPage/Meals&Treats";
+import MealTransition from "@/components/pageSections/landingPage/MealTransition";
+import OurIngredients from "@/components/pageSections/landingPage/OurIngredients";
+import Testimonial from "@/components/pageSections/landingPage/Testimonial";
+import TrustedByVets from "@/components/pageSections/landingPage/TrustedByVets";
 import MainLayout from "@/components/templates/MainLayout";
 
 export default function Home() {

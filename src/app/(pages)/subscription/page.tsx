@@ -1,11 +1,11 @@
-import FeaturesItems from "@/components/pages/subscription/FeaturesItems";
-import HeroSection from "@/components/pages/subscription/HeroSection";
-import HowItWorks from "@/components/pages/subscription/HowItWorks";
-import OurMealPlans from "@/components/pages/subscription/OurMealPlans";
+import FeaturesItems from "@/components/pageSections/subscription/FeaturesItems";
+import HeroSection from "@/components/pageSections/subscription/HeroSection";
+import HowItWorks from "@/components/pageSections/subscription/HowItWorks";
+import OurMealPlans from "@/components/pageSections/subscription/OurMealPlans";
 import MainLayout from "@/components/templates/MainLayout";
 import React from "react";
 
-export default function page() {
+export default function Subscription() {
   return (
     <MainLayout>
       <HeroSection />
