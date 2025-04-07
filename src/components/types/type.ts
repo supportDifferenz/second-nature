@@ -136,6 +136,15 @@ interface TypographyPropsType {
 export default TypographyPropsType;
 
 
+export type MealPlanStatus =
+  | 'current'
+  | 'paused'
+  | 'cancelled'
+  | 'payment_failed'
+  | 'expired'
+  | 'ending_soon'
+  | 'renewal_needed';
+
 export interface OrderHistoryCardPropsType {
   title: string;
   subtitle: string;
@@ -145,7 +154,7 @@ export interface OrderHistoryCardPropsType {
   planEndDate: string;
   orderDate: string;
   price: number;
-  status: string;
+  status: MealPlanStatus;
   note?: string;
   noteDetails?: string;
   processingNote?: string;

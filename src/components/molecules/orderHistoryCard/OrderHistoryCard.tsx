@@ -15,11 +15,11 @@ const OrderHistoryCard: React.FC<
 > = ({
   title,
   subtitle,
-  planDuration,
+  // planDuration,
   itemName,
   planStartDate,
   planEndDate,
-  orderDate,
+  // orderDate,
   price,
   note,
   noteDetails,

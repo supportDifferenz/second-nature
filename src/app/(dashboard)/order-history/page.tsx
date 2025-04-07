@@ -7,7 +7,7 @@ import OrderHistoryCard from "@/components/molecules/orderHistoryCard/OrderHisto
 import DashboardLayout from "@/components/templates/DashboardLayout";
 import { OrderHistoryCardPropsType } from "@/components/types/type";
 
-export const orderHistoryData: OrderHistoryCardPropsType[] = [
+const orderHistoryData: OrderHistoryCardPropsType[] = [
   {
     title: "Jackie's Meal",
     subtitle: "FOUR WEEKS PLAN - FULL BOWL",
