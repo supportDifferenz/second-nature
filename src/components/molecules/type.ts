@@ -29,3 +29,14 @@ export type InputLabeledProps = {
   placeholder?: string;
 
 };
+
+export type DropDownLabeledProps = {
+  label?: string;
+  className?: string; 
+  error?: string; 
+  type?: string;
+  placeholder?: string;
+  options: Array<{ value: string; label: string }>;
+  value?: string;
+  onValueChange?: (value: string) => void;
+};

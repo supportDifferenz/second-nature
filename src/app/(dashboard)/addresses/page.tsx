@@ -1,4 +1,5 @@
 import Typography from "@/components/atoms/typography/Typography";
+import EditAddresses from "@/components/pages/dashboard/addresses/EditAddresses";
 import DashboardLayout from "@/components/templates/DashboardLayout";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
@@ -92,7 +93,7 @@ export default function Address() {
         </div>
       </div>
       {/*if Edit Addresses */}
-      {/* <EditAddresses/> */}
+      <EditAddresses/>
     </DashboardLayout>
   );
 }
