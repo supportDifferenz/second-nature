@@ -93,7 +93,7 @@ export default function Address() {
         </div>
       </div>
       {/*if Edit Addresses */}
-      {/* <EditAddresses/> */}
+      <EditAddresses/>
     </DashboardLayout>
   );
 }
