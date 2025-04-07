@@ -7,6 +7,7 @@ import Typography from "@/components/atoms/typography/Typography";
 import { FAQSPropsTypes } from "@/components/types/type";
 
 
+
 const FAQS: React.FC<FAQSPropsTypes> = ({ faqs, defaultOpenIndex = 0, className = "" }) => {
   const [openIndex, setOpenIndex] = useState<number | null>(defaultOpenIndex);
 

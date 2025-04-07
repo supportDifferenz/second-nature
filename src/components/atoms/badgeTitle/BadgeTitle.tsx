@@ -5,15 +5,23 @@ interface BadgeProps {
   label: string;
   className?: string;
   color?: string;
+  variant?: "curved" | "squared"; // new prop
 }
 
-const BadgeTitle: React.FC<BadgeProps> = ({ label, color, className = "" }) => {
+const BadgeTitle: React.FC<BadgeProps> = ({
+  label,
+  color = "#000",
+  className = "",
+  variant = "curved",
+}) => {
+  const borderRadiusClass = variant === "curved" ? "rounded-full" : "";
+
   return (
     <Typography
-      tag={"span"}
+      tag="span"
       text={label}
-      className={`subtitle2 block max-w-fit text-white uppercase font-normal px-(--space-13-16) py-[3px] rounded-full  ${className}`}
-      style={{ background: `${color}` }}
+      className={`subtitle2 block max-w-fit text-white uppercase font-normal px-[13px] py-[3px] ${borderRadiusClass} ${className}`}
+      style={{ background: color }}
       role="badge"
       ariaLabel={label}
       ariaLabelledBy="badge"

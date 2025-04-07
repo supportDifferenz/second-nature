@@ -2,6 +2,11 @@
 
 import { JSX, MutableRefObject } from "react";
 
+
+export type HeaderPropsTypes = {
+  isOnlyBrandHeader?: boolean; // optional prop with default to false
+};
+
 // HeroBannersProps type
 export type HeroBannersPropsType = {
   id: string;
@@ -129,3 +134,33 @@ interface TypographyPropsType {
   ref?: MutableRefObject<(HTMLSpanElement | null)[]>; 
 }
 export default TypographyPropsType;
+
+
+export type MealPlanStatus =
+  | 'current'
+  | 'paused'
+  | 'cancelled'
+  | 'payment_failed'
+  | 'expired'
+  | 'ending_soon'
+  | 'renewal_needed';
+
+export interface OrderHistoryCardPropsType {
+  title: string;
+  subtitle: string;
+  planDuration: string;
+  itemName: string;
+  planStartDate: string;
+  planEndDate: string;
+  orderDate: string;
+  price: number;
+  status: MealPlanStatus;
+  note?: string;
+  noteDetails?: string;
+  processingNote?: string;
+  hasInvoice?: boolean;
+  pausedDuration?: string;
+  pausedPeriod?: string;
+  cancellationTitle?: string;
+  cancellationDate?: string;
+}
