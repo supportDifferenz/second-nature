@@ -121,6 +121,17 @@ export type InputLabeledPropsType = {
 
 };
 
+export type DropDownLabeledProps = {
+  label?: string;
+  className?: string; 
+  error?: string; 
+  type?: string;
+  placeholder?: string;
+  options: Array<{ value: string; label: string }>;
+  value?: string;
+  onValueChange?: (value: string) => void;
+};
+
 // TypographyProps type
 interface TypographyPropsType {
   tag?: keyof JSX.IntrinsicElements;
@@ -163,4 +174,15 @@ export interface OrderHistoryCardPropsType {
   pausedPeriod?: string;
   cancellationTitle?: string;
   cancellationDate?: string;
+}
+
+
+export interface PopupPropsTypes {
+  isOpen: boolean;
+  onClose: () => void;
+  title?: string;
+  children: React.ReactNode;
+  footer?: React.ReactNode;
+  size?: 'sm' | 'md' | 'lg';
+  className?: string;
 }

@@ -1,27 +1,23 @@
 import { ReactNode } from "react";
 import Header from "../organism/header/Header";
+import CheckoutProgressBar from "../molecules/checkoutProgressBar/CheckoutProgressBar";
 
 export default function BuyingFlowLayout({
   children,
   step,
-  title,
 }: {
   children: ReactNode;
   step: number;
-  title: string;
 }) {
   return (
     <>
-      <Header isOnlyBrandHeader={true}/>
-      <main>
-        <div className="min-h-screen flex flex-col items-center justify-start pt-12 px-4">
-          <div className="mb-4 text-center">
-            <p className="text-gray-500">
-              Step {step} of 3 - Pet&apos;s Information
-            </p>
-            <h3 className="text-xl mt-4">{title}</h3>
+      <Header isOnlyBrandHeader={true} />
+      <main className="border mt-3">
+        <div className=" min-h-[calc(100dvh-110px)] flex flex-col items-center justify-start ">
+          <div className="container mb-4 text-center border w-full ">
+            <CheckoutProgressBar currentStep={step} />
           </div>
-          {children}
+          <div className="container border grow bg-amber-900 flex flex-col">{children}</div>
         </div>
       </main>
     </>
