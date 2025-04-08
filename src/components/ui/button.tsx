@@ -5,7 +5,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "flex items-center gap-[5px] justify-center cursor-pointer border-[1.5px] whitespace-nowrap font-bold rounded-4xl text-(--fs-button-primary) capitalize transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-(--size-14-22) [&_img:not([class*='w-'])]:!w-[7px] shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
+  "flex items-center gap-[5px] justify-center cursor-pointer border-[1.5px] whitespace-nowrap font-bold rounded-4xl text-(--fs-button-primary) capitalize transition-all disabled:pointer-events-none  disabled:!bg-[#818181] disabled:!border-[#818181] disabled:!text-white [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-(--size-14-22) [&_img:not([class*='w-'])]:!w-[7px] shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
   {
     variants: {
       variant: {
@@ -21,7 +21,6 @@ const buttonVariants = cva(
           " text-(--fs-body-button-text) text-contrast-button border-none underline-offset-4 hover:underline !p-0 ",
           linkTextBlack:
           " text-(--fs-body-button-text) text-text-color border-none underline-offset-4 hover:underline !p-0 ",
-
         secondaryBtn:
           "bg-primary-light border-primary-light hover:border-[#d7d9cd] hover:bg-[#d7d9cd]  text-[#909090]",
         secondaryBtnTextSecondary1:
@@ -34,6 +33,8 @@ const buttonVariants = cva(
           "bg-[#EBEDE0] border-[#EBEDE0] hover:border-[#d7d9cd] hover:bg-[#d7d9cd] text-primary-dark",
           linkPrimaryLight:
           " text-(--fs-body-button-text) text-primary-light !font-normal  border-none underline-offset-4 hover:underline !p-0",
+          linkPrimaryDark:
+          " text-(--fs-body-button-text) text-primary-dark !font-normal  border-none underline-offset-4 hover:underline !p-0",
       },
       
       size: {
