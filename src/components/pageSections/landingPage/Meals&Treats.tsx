@@ -21,7 +21,7 @@ export default function MealsAndTreats() {
               className="mb-(--space-54-126) sm:mx-auto lg:ml-0"
               paragraphColor=""
             />
-            <div className="w-(--space-254-490) lg:-ml-14 mx-auto lg:mr-0">
+            <div className="w-(--space-254-490) lg:-ml-8 xl:-ml-14 mx-auto lg:mr-0">
               <Image
                 src="/images/vector-meals-and-treats.svg"
                 alt="Meals & Treats"

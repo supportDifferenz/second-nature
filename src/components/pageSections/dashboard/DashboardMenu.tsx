@@ -37,7 +37,7 @@ export default function DashboardMenu() {
   const pathname = usePathname();
 
   return (
-    <aside className="min-w-min lg:bg-primary-light lg:rounded-2xl   lg:p-6 h-full ">
+    <aside className="min-w-min lg:bg-primary-light lg:rounded-2xl   lg:p-6 lg:h-[calc(100dvh-85px)] lg:min-h-min lg:sticky lg:top-10 ">
       <nav className="flex lg:flex-col gap-1.5 ">
         {menuItems.map((item, index) => {
           const isActive =
