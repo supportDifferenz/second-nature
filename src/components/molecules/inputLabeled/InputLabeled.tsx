@@ -13,7 +13,7 @@ export const InputLabeled: React.FC<InputLabeledPropsType> = ({
   return (
     <div className={`flex flex-col ${className}`}>
       {label && <Label>{label}</Label>}
-      <Input placeholder={placeholder} className="bg-white" {...props} />
+      <Input placeholder={placeholder}  className="bg-white" {...props}  />
       {error && (
         <span className="text-sm text-red-500 block">{error}</span>
       )}{" "}
