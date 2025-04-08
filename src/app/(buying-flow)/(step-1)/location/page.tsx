@@ -1,15 +1,58 @@
+import Typography from "@/components/atoms/typography/Typography";
 import BuyingFlowLayout from "@/components/templates/BuyingFlowLayout";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import Image from "next/image";
 // import PetLocationForm from "@/components/organisms/petLocationForm";
 
-export default function PetLocationPage() {
+export default function Location() {
   return (
     <BuyingFlowLayout step={1}>
-      <div className="flex-1 bg-green-400 flex flex-col">
+      <form
+        action=""
+        className="flex-1 flex flex-col "
+      >
         {/* title,content */}
-        <div className="bg-amber-100 h-full border flex-1 flex justify-center items-center">location</div>
+        <div className="h-full border flex-1 flex flex-col justify-center items-center ">
+          <Typography
+            tag="h2"
+            text="Your Pet’s Location"
+            className="text-primary-dark mb-4 text-center"
+          />
+          <Input
+            type="text"
+            variant={"roundedEdgeInputLg"}
+            className="max-w-[800px] w-[90%] sm:w-[50%] lg:w-[40%] block mx-auto bg-white"
+            placeholder="Type your pet’s location"
+          />
+        </div>
         {/* navigation */}
-        <div>button</div>
-      </div>
+        <div className="pb-[3dvh] flex flex-col lg:flex-row items-center gap-4 lg:gap-0  lg:items-end landscape:pt-[3dvh]">
+          <div className="max-w-[900px] w-[95%] sm:w-[60%] lg:w-[50%] text-center mb-0.5 p-4 pt-3 border border-[#A1A1A1] rounded-2xl lg:mx-auto lg:mr-[-90px]">
+            <Typography
+              tag="span"
+              text="Disclaimer:"
+              className="block subtitle3 text-[#9B9B9B] "
+            />
+            <Typography
+              tag="span"
+              text="Please consult your veterinarian if your pet has specific dietary requirements, health issues, or weight targets before subscribing."
+              className="block subtitle3 text-[#9B9B9B]"
+            />
+          </div>
+          <Button className="gap-2.5 lg:ml-auto lg:mr-[-55px]">
+            Next
+            <div className="w-5">
+              <Image
+                src="/icons/arrow-next-long.svg"
+                alt="icon"
+                fill
+                className="!static w-full object-contain"
+              />
+            </div>
+          </Button>
+        </div>
+      </form>
       {/* <PetLocationForm /> */}
     </BuyingFlowLayout>
   );
