@@ -1,12 +1,12 @@
 "use client";
 
 import { SecondaryBlockTitle } from "@/components/molecules/titleSyles/Title";
-import IngredientTable from "@/components/organism/IngredientTable";
+import IngredientTable from "@/components/organism/ingredientTable/IngredientTable";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import React, { useState } from "react";
 import HealthBenefits from "./HealthBenefits";
-import FooterCtaCard from "@/components/organism/FooterCtaCard";
+import FooterCtaCard from "@/components/organism/footerCtaCard/FooterCtaCard";
 import FooterBannerCta from "./FooterBannerCta";
 import FaqSection from "./FaqSection";
 
