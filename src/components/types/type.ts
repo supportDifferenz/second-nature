@@ -1,6 +1,4 @@
-
-
-import { JSX, MutableRefObject } from "react";
+import { InputHTMLAttributes, JSX, MutableRefObject } from "react";
 
 
 export type HeaderPropsTypes = {
@@ -116,10 +114,8 @@ export type InputLabeledPropsType = {
   label?: string;
   className?: string; 
   error?: string; 
-  type?: string;
-  placeholder?: string;
-
-};
+  variant?: "default" | "roundedEdgeInput" | "dottedInput"; 
+} & InputHTMLAttributes<HTMLInputElement>;
 
 // TypographyProps type
 interface TypographyPropsType {

@@ -7,7 +7,7 @@ import {
   // SecondaryBlockTitle,
   SecondaryInlineTitle,
 } from "@/components/molecules/titleSyles/Title";
-import FooterCtaCard from "@/components/organism/FooterCtaCard";
+import FooterCtaCard from "@/components/organism/footerCtaCard/FooterCtaCard";
 import Image from "next/image";
 import React from "react";
 

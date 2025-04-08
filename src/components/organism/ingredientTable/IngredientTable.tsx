@@ -1,5 +1,5 @@
 import React from "react";
-import Typography from "../atoms/typography/Typography";
+import Typography from "@/components/atoms/typography/Typography";
 import Image from "next/image";
 
 // Define an interface for the ingredient

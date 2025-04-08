@@ -1,10 +1,7 @@
 import Image from "next/image";
 import React from "react";
-import {
-  MealTransitionTitle,
-  PetFoodLookingTitle,
-} from "../molecules/titleSyles/Title";
-import { Button } from "../ui/button";
+import { MealTransitionTitle, PetFoodLookingTitle } from "@/components/molecules/titleSyles/Title";
+import { Button } from "@/components/ui/button";
 
 // Define the prop types for the component
 interface FooterCtaCardProps {
@@ -74,7 +71,11 @@ export default function FooterCtaCard({
           </Button>
         </div>
         <div className="flex items-center px-[3.12vw] w-full h-[20%] rounded-b-2xl bg-secondary-1">
-          <Button size={"md"} variant={"secondaryBtnTextSecondary1"} className="hidden sm:block">
+          <Button
+            size={"md"}
+            variant={"secondaryBtnTextSecondary1"}
+            className="hidden sm:block"
+          >
             Learn More
           </Button>
         </div>
