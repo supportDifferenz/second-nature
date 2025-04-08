@@ -1,14 +1,6 @@
 // components/ui/Popup.tsx
 import React from 'react';
-import { 
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogFooter
-} from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { X } from "lucide-react";
 import { Popup } from '@/components/molecules/popup/Popup';
 
 
