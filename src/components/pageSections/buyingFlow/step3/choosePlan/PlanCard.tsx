@@ -6,8 +6,11 @@ import OfferBadge from "@/components/atoms/offerBadge/OfferBadge";
 interface PlanCardProps {
   bgColour: "bg-white" | "bg-[#FDFFF0]";
   offerBadge?: string;
+  heading: string;
+  description: string;
+  price: number;
 }
-export default function PlanCard({ bgColour, offerBadge }: PlanCardProps) {
+export default function PlanCard({ bgColour, offerBadge ,heading, description, price}: PlanCardProps) {
   return (
     <div
       className={cn(
@@ -19,12 +22,12 @@ export default function PlanCard({ bgColour, offerBadge }: PlanCardProps) {
       <div className="w-full border-b border-primary pb-[var(--space-30-40)] flex flex-col">
         <Typography
           tag="h3"
-          text="Regular Plan"
+          text={heading}
           className="text-center text-primary-dark mb-2 highlight"
         />
         <Typography
           tag="sub"
-          text="Auto-Renews Every 28 Days"
+          text={description}
           className="text-center font-bold text-[#000000] mb-4"
         />
         <Typography
@@ -32,7 +35,7 @@ export default function PlanCard({ bgColour, offerBadge }: PlanCardProps) {
           text="QAR "
           className="text-center text-secondary-1"
         >
-          <Typography tag="span" text="200" className="" />
+          <Typography tag="span" text={price?.toString()} className="" />
         </Typography>
       </div>
       <div className="flex flex-col pt-[var(--space-30-40)]">
