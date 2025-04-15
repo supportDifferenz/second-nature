@@ -1,4 +1,5 @@
 import { InputHTMLAttributes, JSX, MutableRefObject } from "react";
+import React from 'react';
 
 
 export type HeaderPropsTypes = {
@@ -171,6 +172,8 @@ export interface OrderHistoryCardPropsType {
   cancellationTitle?: string;
   cancellationDate?: string;
 }
+
+
 
 
 export interface PopupPropsTypes {

@@ -13,7 +13,7 @@ export default function Location() {
         className="flex-1 flex flex-col "
       >
         {/* title,content */}
-        <div className="h-full border flex-1 flex flex-col justify-center items-center ">
+        <div className="h-full flex-1 flex flex-col justify-center items-center ">
           <Typography
             tag="h2"
             text="Your Pet’s Location"
