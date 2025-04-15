@@ -143,6 +143,8 @@
   --space-6-12: clamp(6px, 0.375vw + 4.800px, 12px);
   --space-80-100: clamp(80px, 1.250vw + 76.000px, 100px);
   --space-110-140: clamp(110px, 1.875vw + 104.000px, 140px);
+  --space-511-846: clamp(511px, 20.938vw + 444.000px, 846px);
+  --space-310-400: clamp(310px, 5.625vw + 292.000px, 400px);
 
 
   /* size */
