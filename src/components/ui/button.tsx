@@ -16,6 +16,8 @@ const buttonVariants = cva(
 
         outlinePrimaryBtn:
           "bg-transparent border-secondary-1 hover:border-[#823234] ",
+          outlineSecondaryBtn:
+          "bg-transparent border-primary-dark hover:border-[#823234] text-primary-dark",
 
         linkContrastBtn:
           " text-(--fs-body-button-text) text-contrast-button border-none underline-offset-4 hover:underline !p-0 ",

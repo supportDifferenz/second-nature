@@ -15,7 +15,7 @@ export default function DogOrCat() {
         {/* content */}
         <div className="flex-1 h-full flex flex-col sm:flex-row items-center justify-center w-full max-w-3xl mx-auto gap-4 sm:gap-8">
           {/* Dog Selection */}
-          <div className="flex flex-col border w-[70%] lg:w-[30%] xl:w-[35%] 2xl:w-full max-w-[381px]">
+          <div className="flex flex-col w-[70%] lg:w-[30%] xl:w-[35%] 2xl:w-full max-w-[381px]">
             <div
               className={`relative border rounded-2xl w-[55%] sm:w-[80%] mx-auto   cursor-pointer overflow-hidden ${
                 selectedPet === "dog"
@@ -63,7 +63,7 @@ export default function DogOrCat() {
           <Typography tag="span" text="Or" className="!text-[#A1A1A1] block" />
 
           {/* Cat Selection */}
-          <div className="flex flex-col border w-[70%] lg:w-[30%] xl:w-[35%] 2xl:w-full max-w-[381px]">
+          <div className="flex flex-col w-[70%] lg:w-[30%] xl:w-[35%] 2xl:w-full max-w-[381px]">
             <div
               className={`relative border rounded-2xl w-[55%] sm:w-[80%] mx-auto   cursor-pointer overflow-hidden ${
                 selectedPet === "cat"

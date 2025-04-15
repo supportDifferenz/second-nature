@@ -12,9 +12,9 @@ export default function BuyingFlowLayout({
   return (
     <>
       <Header isOnlyBrandHeader={true} />
-      <main className="border mt-3">
+      <main className="mt-3">
         <div className="portrait:min-h-[500px] portrait:h-[98dvh] landscape:min-h-[450px] landscape:h-[calc(95dvh-110px)] landscape:max-h-[800px] flex flex-col items-center justify-start ">
-          <div className="container mb-4 text-center border w-full ">
+          <div className="container mb-4 text-center  w-full ">
             <CheckoutProgressBar currentStep={step} />
           </div>
           {/* pets name */}
@@ -22,7 +22,7 @@ export default function BuyingFlowLayout({
             <li className="font-bold underline">Jacky</li>
      
           </ul>
-          <div className="container border grow  flex flex-col">{children}</div>
+          <div className="container  grow  flex flex-col">{children}</div>
         </div>
       </main>
     </>

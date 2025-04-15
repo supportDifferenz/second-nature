@@ -20,8 +20,8 @@ const MealDropdownMenu = ({
 }: NavDropdownProps) => (
   <DropdownMenu>
     <DropdownMenuTrigger asChild>
-      <button className="outline-none cursor-pointer flex items-center gap-1.5 lg:py-0.5 lg:px-2.5 border border-[#DADBD2] rounded-full font-normal ">
-        <div className="w-7">
+      <button className="outline-none cursor-pointer flex items-center gap-1.5 lg:gap-1 2xl:gap-1.5 lg:py-2  lg:px-2.5 border border-[#DADBD2] rounded-full font-normal ">
+        <div className="w-5 xl-7">
           <Image
             src="/icons/dog-icon.svg"
             alt="icon"

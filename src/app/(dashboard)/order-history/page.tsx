@@ -7,6 +7,11 @@ import OrderHistoryCard from "@/components/molecules/orderHistoryCard/OrderHisto
 import DashboardLayout from "@/components/templates/DashboardLayout";
 import { OrderHistoryCardPropsType } from "@/components/types/type";
 
+import { Button } from "@/components/ui/button";
+import { ProteinChangePopup } from "@/components/pageSections/dashboard/orderHistory/ProteinChangePopup";
+import { DowngradePlanPopup } from "@/components/pageSections/dashboard/orderHistory/DowngradePlanPopup";
+import { CancelSubscriptionPopup } from "@/components/pageSections/dashboard/orderHistory/CancelSubscriptionPopup";
+
 const orderHistoryData: OrderHistoryCardPropsType[] = [
   {
     title: "Jackie's Meal",
@@ -110,6 +115,12 @@ const breakpointColumnsObj = {
 };
 
 export default function OrderHistory() {
+  
+  const [isProteinPopupOpen, setIsProteinPopupOpen] = React.useState(false);
+  const [isDowngradePlanOpen, setIsDowngradePlanOpen] = React.useState(false);
+  const [isCancelPopupOpen, setIsCancelPopupOpen] = React.useState(false);
+  const [_, setIsPausePopupOpen] = React.useState(false);
+  const [currentProtein, setCurrentProtein] = React.useState("chicken");
   return (
     <DashboardLayout>
       <Masonry
@@ -131,6 +142,56 @@ export default function OrderHistory() {
           );
         })}
       </Masonry>
+      <Button onClick={() => setIsProteinPopupOpen(true)}>
+        Change Protein
+      </Button>
+      <Button onClick={() => setIsDowngradePlanOpen(true)}>
+        Downgrade Plan
+      </Button>
+      <Button onClick={() => setIsCancelPopupOpen(true)}>
+        Cancel Subscription
+      </Button>
+      <Button onClick={() => setIsPausePopupOpen(true)}>
+        Pause Deliveries
+      </Button>
+      <ProteinChangePopup
+        isOpen={isProteinPopupOpen}
+        onClose={() => setIsProteinPopupOpen(false)}
+        currentSelection={currentProtein}
+        onSave={(protein) => {
+          setCurrentProtein(protein);
+          // API call to update protein
+        }}
+      />
+
+      <DowngradePlanPopup
+        isOpen={isDowngradePlanOpen}
+        onClose={() => setIsDowngradePlanOpen(false)}
+        onConfirm={() => {
+          // API call to downgrade plan
+          setIsDowngradePlanOpen(false);
+        }}
+      />
+
+      <CancelSubscriptionPopup
+        isOpen={isCancelPopupOpen}
+        onClose={() => setIsCancelPopupOpen(false)}
+        onCancel={(reason) => {
+          // API call to cancel with reason
+          console.log(`Cancellation reason: ${reason}`);
+        }}
+      />
+
+      {/* <PauseDeliveriesPopup
+        isOpen={isPausePopupOpen}
+        onClose={() => setIsPausePopupOpen(false)}
+        onPause={(startDate, endDate, reason) => {
+          // API call to pause deliveries
+          console.log(
+            `Paused from ${startDate} to ${endDate}. Reason: ${reason}`
+          );
+        }}
+      /> */}
     </DashboardLayout>
   );
 }
