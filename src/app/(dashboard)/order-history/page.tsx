@@ -119,7 +119,7 @@ export default function OrderHistory() {
   const [isProteinPopupOpen, setIsProteinPopupOpen] = React.useState(false);
   const [isDowngradePlanOpen, setIsDowngradePlanOpen] = React.useState(false);
   const [isCancelPopupOpen, setIsCancelPopupOpen] = React.useState(false);
-  const [_, setIsPausePopupOpen] = React.useState(false);
+  const [, setIsPausePopupOpen] = React.useState(false);
   const [currentProtein, setCurrentProtein] = React.useState("chicken");
   return (
     <DashboardLayout>
