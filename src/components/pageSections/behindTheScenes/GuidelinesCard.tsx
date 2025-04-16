@@ -30,12 +30,12 @@ export default function GuidelinesCard() {
       </div>
 
       <div className="w-full lg:w-[50%] gap-[var(--space-30-40)] p-16 flex flex-col ">
-        <div className="flex flex-col sm:flex-row gap-7">
+        <div className="flex flex-col items-center mt-[-120px] lg:items-start sm:flex-row gap-7">
           <div className="w-[15.6vw] sm:w-[6.6vw]">
             <Image
               src="/images/fediaf.webp"
               alt="mission"
-              className="!static w-full inset-0 h-full object-contain object-center"
+              className="!static w-full inset-0 z-100 h-full object-contain object-center"
               fill
             />
           </div>
@@ -93,7 +93,7 @@ export default function GuidelinesCard() {
             <Typography tag="text" text="Safe" className="uppercase font-bold text-secondary-1 text-start" />
           </div>
 
-          <div className="flex items-center border-x border-primary px-[var(--space-8-17)] gap-2.5">
+          <div className="flex items-center border-l lg:border-x border-primary px-[var(--space-8-17)] gap-2.5">
             <div className="w-10 ">
               <Image
                 src="/icons/balance-scale.svg"
