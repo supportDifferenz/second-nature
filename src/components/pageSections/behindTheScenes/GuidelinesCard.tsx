@@ -29,8 +29,8 @@ export default function GuidelinesCard() {
         </div>
       </div>
 
-      <div className="w-full lg:w-[50%] gap-[var(--space-30-40)] p-16 flex flex-col ">
-        <div className="flex flex-col items-center mt-[-120px] lg:items-start sm:flex-row gap-7">
+      <div className="w-full relative lg:w-[50%] gap-[var(--space-30-40)] p-16 flex flex-col ">
+        <div className="flex flex-col items-center mt-[-100px] sm:mt-0 lg:items-start sm:flex-row gap-7">
           <div className="w-[15.6vw] sm:w-[6.6vw]">
             <Image
               src="/images/fediaf.webp"

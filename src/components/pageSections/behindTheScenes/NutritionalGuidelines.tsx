@@ -57,7 +57,39 @@ const standardsData = [
 export default function NutritionalGuidelines() {
   return (
     <div className="relative">
-      <div className="h-[var(--space-511-846)]"></div>
+        <div className="relative h-[var(--space-511-846)] overflow-x-clip">
+          <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-[40%] flex flex-col items-center justify-center w-[var(--space-460-500)] h-[var(--space-460-500)]">
+            {/* White Blurred Circle Behind */}
+            <div className="absolute inset-0 rounded-full bg-white border border-primary z-0" />
+
+            {/* Logo */}
+            <div className="relative z-10 mt-[-100px] w-[15.6vw] sm:w-[6.6vw]">
+              <Image
+                src="/images/fediaf.webp"
+                alt="mission"
+                className="!static w-full inset-0 h-full object-contain object-center"
+                fill
+              />
+            </div>
+
+            {/* Typography Content on Top of Blur */}
+            <div className="absolute inset-0 bg-white opacity-100 blur-[36px] z-0 ">
+              {" "}
+            </div>
+            <div className="relative z-10 flex flex-col items-center justify-center gap-2 text-center px-4 ">
+              <Typography
+                tag="h1"
+                text="Exceptional Nutrition."
+                className="highlight lg:whitespace-nowrap text-primary-dark"
+              />
+              <Typography
+                tag="h2"
+                text="Built on FEDIAF Guidelines."
+                className="text-primary-dark text-center px-2"
+              />
+            </div>
+          </div>
+        </div>
 
       {/* standard section */}
       <div className="relative flex w-full justify-center bg-[linear-gradient(to_bottom,_#F7F9EB_0%,_#FFFFFF_100%)] ">
