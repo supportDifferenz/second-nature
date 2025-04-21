@@ -13,17 +13,17 @@ import { HeaderPropsTypes } from "@/components/types/type";
 
 const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
   return (
-    <header className="bg-white border">
+    <header className="bg-white ">
       {!isOnlyBrandHeader ? (
         <>
           <TopHeader />
           <div className="container py-5  flex items-center gap-2 ">
             {/* mobile menu */}
             <div className="xl:hidden sm:flex-2">
-            <MobileMenu  />
+              <MobileMenu />
             </div>
 
-            <div className=" items-center   hidden xl:flex flex-2 border gap-[2.5%] 2xl:gap-[4.5%]">
+            <div className=" items-center   hidden xl:flex flex-2  gap-[2.5%] 2xl:gap-[4.5%]">
               <MealDropdownMenu
                 label="For Dogs"
                 dropDownContentTitle="Dog Meals"
@@ -60,10 +60,13 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
                   },
                 ]}
               />
+              <nav>
+                <span className="block">About Us</span>
+              </nav>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <button className="outline-none cursor-pointer flex items-center gap-1.5  font-normal ">
-                    About Us
+                    How it works
                     <div className="w-2.5 h-fit">
                       <Image
                         src="/icons/black-chevron-down.svg"
@@ -84,17 +87,14 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
                     ].map((item, index) => (
                       <DropdownMenuItem
                         key={index}
-                        className="flex items-center border  gap-3 cursor-pointer"
+                        className="flex items-center   gap-3 cursor-pointer"
                       >
-                        <span className="grow border ">{item}</span>
+                        <span className="grow ">{item}</span>
                       </DropdownMenuItem>
                     ))}
                   </div>
                 </DropdownMenuContent>
               </DropdownMenu>
-              <nav>
-                <span className="block">How it works</span>
-              </nav>
             </div>
 
             {/* logo */}
@@ -107,10 +107,10 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
               />
             </div>
 
-            <div className="items-center justify-end  flex flex-2 border gap-[4.5%]">
-              <span className="border hidden xl:block">Blogs</span>
-              <span className="border hidden xl:block">Reviews</span>
-              <span className="border hidden xl:block">FAQs</span>
+            <div className="items-center justify-end  flex flex-2  gap-[4.5%]">
+              <span className=" hidden xl:block">Blogs</span>
+              <span className=" hidden xl:block">Reviews</span>
+              <span className=" hidden xl:block">FAQs</span>
               <Button
                 variant={"outlinePrimaryBtn"}
                 size={"md"}
@@ -118,7 +118,9 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
               >
                 Get Started
               </Button>
-              <Button size={"md"} className=" ">Log In</Button>
+              <Button size={"md"} className=" ">
+                Log In
+              </Button>
             </div>
           </div>
         </>

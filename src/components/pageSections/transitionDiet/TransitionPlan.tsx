@@ -30,26 +30,29 @@ export default function TransitionPlan() {
         className="text-center w-[80%] lg:w-[41%]"
       />
 
-
-
-
       {/* plan-card */}
 
-      <div className="flex flex-col gap-[var(--space-30-60)] mx-auto items-center justify-center border border-secondary-1 pt-[var(--space-40-60)] pb-[var(--space-24-45)] px-[var(--space-24-45)]">
+      <div className="flex flex-col gap-[var(--space-30-60)] mx-auto items-center justify-center border border-secondary-1 rounded-2xl pt-[var(--space-40-60)] pb-[var(--space-24-45)] px-[var(--space-24-45)]">
         <div className="flex flex-col gap-[var(--space-13-16)] items-center justify-center">
-          <Typography tag="h4" text="Your 10-Day Plan for Transitioning" className="text-center text-secondary-1" />
-          <Typography tag="h6" text="The 10-day transition process gradually increases the portions every few days, ensuring your pet adjusts comfortably and enjoys a seamless dietary change." 
-          className="text-center w-[80%] lg:w-[43%]" />
+          <Typography
+            tag="h4"
+            text="Your 10-Day Plan for Transitioning"
+            className="text-center text-secondary-1"
+          />
+          <Typography
+            tag="h6"
+            text="The 10-day transition process gradually increases the portions every few days, ensuring your pet adjusts comfortably and enjoys a seamless dietary change."
+            className="text-center w-[80%] lg:w-[43%]"
+          />
         </div>
         <div className="flex gap-6">
-            <DayPlan />
-            <DayPlan />
-            <DayPlan />
-            <DayPlan />
+          <DayPlan />
+          <DayPlan />
+          <DayPlan />
+          <DayPlan />
         </div>
-
-        
       </div>
+      
     </div>
   );
 }
