@@ -32,7 +32,7 @@ export default function Subscription() {
       <div className="py-(--space-120-180) ">
         <FeaturesItems />
       </div>
-      <div className="bg-[linear-gradient(180deg,#F9FAF1_39.88%,#F5F5F5_100%)] pb-(--space-120-180)">
+      <div className="bg-[linear-gradient(180deg,#F9FAF1_39.88%,#F5F5F5_100%)] pt-(--space-120-180)">
         <HowItWorks />
         <OurMealPlans />
       </div>
