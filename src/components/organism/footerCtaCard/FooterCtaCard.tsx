@@ -1,7 +1,11 @@
 import Image from "next/image";
 import React from "react";
-import { MealTransitionTitle, PetFoodLookingTitle } from "@/components/molecules/titleSyles/Title";
+import {
+  MealTransitionTitle,
+  PetFoodLookingTitle,
+} from "@/components/molecules/titleSyles/Title";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 // Define the prop types for the component
 interface FooterCtaCardProps {
@@ -17,11 +21,13 @@ interface FooterCtaCardProps {
     paragraph: string;
     imageSrc: string;
   };
+  ImageWrapperClassName?: string;
 }
 
 export default function FooterCtaCard({
   mealTransition,
   petFood,
+  ImageWrapperClassName,
 }: FooterCtaCardProps) {
   return (
     <div className="flex flex-col sm:flex-row gap-[var(--space-30-60)] w-fit mx-auto">
@@ -79,7 +85,13 @@ export default function FooterCtaCard({
             Learn More
           </Button>
         </div>
-        <div className="absolute top-[38%] sm:top-[10%] left-[-5%] sm:left-[48%] inset-0 w-[99.5vw] sm:w-[26.3vw] h-[124vw] sm:h-[32.8vw]">
+        <div
+          className={cn(
+            "absolute top-[38%] sm:top-[10%] left-[-5%] sm:left-[48%] inset-0 w-[99.5vw] sm:w-[26.3vw] h-[124vw] sm:h-[32.8vw]",
+            ImageWrapperClassName
+          )}
+        >
+          {" "}
           <Image
             alt=""
             src={petFood.imageSrc}

@@ -50,7 +50,7 @@ const MealDropdownMenu = ({
         {items.map((item, index) => (
           <DropdownMenuItem
             key={index}
-            className="flex items-center border  gap-3 cursor-pointer"
+            className="flex items-center   gap-3 cursor-pointer"
           >
             {item.image && (
               <div className="w-20 ">
@@ -62,7 +62,7 @@ const MealDropdownMenu = ({
                 />
               </div>
             )}
-            <span className="grow border text-primary-dark">{item.name}</span>
+            <span className="grow  text-primary-dark">{item.name}</span>
             <div className="w-1.5">
               <Image
                 src="/icons/primary-dark-chevron-right.svg"

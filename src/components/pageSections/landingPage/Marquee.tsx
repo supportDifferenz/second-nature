@@ -31,7 +31,7 @@ const Marquee = ({ speed = 20 }) => {
               {features.map((feature, index) => (
                 <div
                   key={index}
-                  className="flex items-center gap-(--space-8-13) px-(--space-15-30) relative after:content-[''] after:absolute after:w-[1px] after:h-[80%] after:bg-[#79D2A7] after:right-0 after:top-1/2 after:transform after:-translate-y-1/2 "
+                  className="flex lg:justify-center items-center gap-(--space-8-13) px-(--space-15-30) relative after:content-[''] after:absolute after:w-[1px] after:h-[80%] after:bg-[#79D2A7] after:right-0 after:top-1/2 after:transform after:-translate-y-1/2 "
                 >
                   <div className="w-(--space-34-42) h-(--space-34-42) flex items-center justify-center">
                     <Image

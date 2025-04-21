@@ -39,8 +39,8 @@ export default function OurMealPlans() {
   return (
     <section>
       <div className="container flex">
-        <div className="flex-[42%] border relative bg-amber-400">
-          <div className="sticky top-[13%] border">
+        <div className="flex-[42%]  relative ">
+          <div className="sticky top-[13%] ">
             <SecondaryInlineTitle
               title="Our"
               highlight="Meal Plans "
@@ -58,7 +58,7 @@ export default function OurMealPlans() {
             </div>
           </div>
         </div>
-        <div className="flex-[58%] border">
+        <div className="flex-[58%] ">
           <ul className="flex items-center justify-center flex-wrap gap-6 gap-y-4">
             <li className="flex gap-2.5 items-center">
               <div className="w-7">
