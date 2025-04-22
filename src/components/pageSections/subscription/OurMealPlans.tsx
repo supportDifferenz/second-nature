@@ -101,19 +101,34 @@ export default function OurMealPlans() {
               </span>
             </li>
           </ul>
-          <div className="my-15 flex justify-center">
+          <div className="my-15 flex flex-col items-center justify-center">
             <div className="flex">
-              <div className="pr-11 border-r border-primary">
-                <Typography
-                  tag="h3"
-                  text="Regular Plan"
-                  className="text-primary-dark highlight"
-                />
-                <Typography
-                  tag="text"
-                  text="Auto-Renews Every 28 Days"
-                  className="text-black"
-                />
+              <div className="">
+                <div className="pr-11 border-r border-primary">
+                  <Typography
+                    tag="h3"
+                    text="Regular Plan"
+                    className="text-primary-dark highlight"
+                  />
+                  <Typography
+                    tag="text"
+                    text="Auto-Renews Every 28 Days"
+                    className="text-black"
+                  />
+                </div>
+                <div
+                  className="w-fit ml-[10%] mt-2 text-white px-6 py-1 font-bold rounded-full"
+                  style={{
+                    backgroundImage:
+                      "linear-gradient(to right, #00683D 0%, #09B870 54%, #00683D 100%)",
+                  }}
+                >
+                  <Typography
+                    tag="text"
+                    text="Recommended"
+                    className="text-white whitespace-nowrap"
+                  />
+                </div>
               </div>
               <div className="pl-11">
                 <Typography
@@ -127,19 +142,6 @@ export default function OurMealPlans() {
                   className="text-black"
                 />
               </div>
-            </div>
-            <div
-              className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white px-16 py-1 font-bold rounded-full"
-              style={{
-                backgroundImage:
-                  "linear-gradient(to right, #00683D 0%, #09B870 54%, #00683D 100%)",
-              }}
-            >
-              <Typography
-                tag="h6"
-                text="recommended"
-                className="text-white whitespace-nowrap"
-              />
             </div>
           </div>
           <div className="flex flex-col gap-6 mt-4 ">
