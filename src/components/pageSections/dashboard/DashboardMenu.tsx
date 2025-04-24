@@ -31,6 +31,11 @@ const menuItems = [
     href: "/edit-pet-information",
     icon: "/icons/edit-pet-information.svg",
   },
+  {
+    name: "Logout",
+    href: "#",
+    icon: "/icons/logout-03.svg",
+  }
 ];
 
 export default function DashboardMenu() {
