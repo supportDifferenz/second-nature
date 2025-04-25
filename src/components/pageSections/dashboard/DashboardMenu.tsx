@@ -33,7 +33,7 @@ const menuItems = [
   },
   {
     name: "Logout",
-    href: "#",
+    href: "/",
     icon: "/icons/logout-03.svg",
   }
 ];
