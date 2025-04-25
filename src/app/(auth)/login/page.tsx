@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import React, { useState } from "react";
 import { useUserLoginHook } from "@/hooks/authHooks/loginUserHook";
 import { useRouter } from "next/navigation";
+import useAuthStore from "@/zustand/store/authDataStore";
 
 interface LoginData {
   userName?: string;
@@ -35,6 +36,8 @@ export default function Page() {
     emailId: "",
     password: "",
   });
+
+  const login = useAuthStore((state) => state.login);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -151,6 +154,11 @@ export default function Page() {
         onSuccess: (data) => {
           // Handle successful login
           console.log("Login successful", data);
+          const token = data?.result?.token;
+          if(token){
+            login(token);
+            console.log("Token stored in Zustand store is", token);
+          }
           router.push("/personal-information")
         },
         onError: (error) => {

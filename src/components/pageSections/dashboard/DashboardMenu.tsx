@@ -3,6 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import useAuthStore from "@/zustand/store/authDataStore";
+import { useRouter } from "next/navigation";
 
 const menuItems = [
   {
@@ -39,7 +41,17 @@ const menuItems = [
 ];
 
 export default function DashboardMenu() {
+
   const pathname = usePathname();
+  const router = useRouter()
+  const logout = useAuthStore((state) => state.logout);
+
+  const handleLogout = (name: string) => {
+    if(name === "Logout"){
+      logout();
+      router.push("/")
+    }
+  };
 
   return (
     <aside className="min-w-min lg:bg-primary-light lg:rounded-2xl   lg:p-6 lg:h-[calc(100dvh-85px)] lg:min-h-min lg:sticky lg:top-10 ">
@@ -50,7 +62,11 @@ export default function DashboardMenu() {
             (pathname === "/dashboard" && index === 0);
 
           return (
-            <Link key={item.href} href={item.href}>
+            <Link 
+              key={item.href} 
+              href={item.href}
+              onClick={() => handleLogout(item.name)}
+            >
               <div
                 className={`h6 !font-normal flex items-center text-black whitespace-nowrap p-1.5 lg:p-(--space-8-17)  gap-(--space-8-17)  rounded-lg cursor-pointer transition capitalize  ${
                   isActive

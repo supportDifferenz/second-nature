@@ -11,10 +11,10 @@ const createAxiosInstance = (
 
   instance.interceptors.request.use(
     (config) => {
-      const token = localStorage.getItem("authAccessToken");
-      if (token) {
-        config.headers.Authorization = `Bearer ${token}`;
-      }
+      // const token = localStorage.getItem("authAccessToken");
+      // if (token) {
+      //   config.headers.Authorization = `Bearer ${token}`;
+      // }
 
       config.headers["apiKey"] = apiKey;
       config.headers["clientKey"] = clientKey;
