@@ -34,6 +34,7 @@ const mealsData: MealCardPropsType[] = [
       { label: "Get Started", route: "/get-started", variant: "primary" },
     ],
   },
+ 
 ];
 
 export default function OurMealPlans() {
@@ -41,7 +42,7 @@ export default function OurMealPlans() {
     <section>
       <div className="container flex">
         <div className="flex-[42%]  relative ">
-          <div className="sticky top-[13%] ">
+          <div className="sticky top-[13%] tall-screen  h-fit">
             <SecondaryInlineTitle
               title="Our"
               highlight="Meal Plans "
@@ -144,7 +145,7 @@ export default function OurMealPlans() {
               </div>
             </div>
           </div>
-          <div className="flex flex-col gap-6 mt-4 ">
+          <div className="flex flex-col gap-6 mt-4 pb-25">
             {mealsData.map((meal, index) => (
               <MealCard key={`${meal.title}-${index}`} {...meal} />
             ))}

@@ -29,7 +29,7 @@ const HowItWorkHowItWork = [
 export default function HowItWorks() {
   return (
     <section>
-      <div className="container py-25 2xl:py-30">
+      <div className="container 2xl:py-30">
         <SecondaryBlockTitle
           caption="How it Works"
           title="Your subscription in"

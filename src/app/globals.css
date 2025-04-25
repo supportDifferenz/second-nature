@@ -384,3 +384,8 @@ p {
     animation: accordion-up 0.3s ease-out forwards;
   }
 }
+@media (min-height: 930px) {
+  .tall-screen{
+    @apply top-[100%];
+  }
+}
