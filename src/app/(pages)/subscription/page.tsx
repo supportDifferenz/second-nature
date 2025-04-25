@@ -29,12 +29,14 @@ export default function Subscription() {
   return (
     <MainLayout>
       <HeroSection />
-      <div className="py-(--space-120-180) ">
+      <div className="py-(--space-50-99)">
         <FeaturesItems />
       </div>
-      <div className="bg-[linear-gradient(180deg,#F9FAF1_39.88%,#F5F5F5_100%)] pt-(--space-120-180)">
+      <div className="bg-[linear-gradient(180deg,#F9FAF1_39.88%,#F5F5F5_100%)] pt-25">
         <HowItWorks />
-        <OurMealPlans />
+        <div className="pt-(--space-120-180)">
+          <OurMealPlans />
+        </div>
       </div>
       <div className="mt-[var(--space-120-180)]">
         <FaqSection />
@@ -60,7 +62,7 @@ export default function Subscription() {
         />
       </div>
 
-      <div className="py-(--space-120-180)">
+      <div className="py-(--space-120-180) overflow-x-hidden">
         <FooterCtaCard
           mealTransition={footerCtaData.mealTransition}
           petFood={footerCtaData.petFood}
