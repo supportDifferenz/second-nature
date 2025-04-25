@@ -23,7 +23,7 @@ export const userLogin = async (formData: {
       );
         return response.data;
       } catch (error) {
-          console.error("Error submitting contact form:", error);
+          console.error("Error in user login", error);
           throw error;
       }
   };

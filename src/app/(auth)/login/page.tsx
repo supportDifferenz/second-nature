@@ -8,6 +8,7 @@ import React, { useState } from "react";
 import { useUserLoginHook } from "@/hooks/authHooks/loginUserHook";
 import { useRouter } from "next/navigation";
 import useAuthStore from "@/zustand/store/authDataStore";
+import { loginSchema } from "@/schemas/authSchemas/loginSchema";
 
 interface LoginData {
   userName?: string;
@@ -15,6 +16,15 @@ interface LoginData {
   password: string;
   isWhatsapp?: boolean;
   isSubscribe?: boolean;
+}
+
+interface ApiError {
+  response?: {
+    data?: {
+      message: string;
+    };
+  };
+  message?: string;
 }
 
 export default function Page() {
@@ -32,27 +42,90 @@ export default function Page() {
     isSubscribe: true,
   });
 
-  const [formErrors, setFormErrors] = useState({
-    emailId: "",
-    password: "",
-  });
+  const [formErrors, setFormErrors] = useState<{
+    emailId?: string;
+    password?: string;
+  }>({});
 
   const login = useAuthStore((state) => state.login);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
+    
     // Clear error when user types
     if (formErrors[name as keyof typeof formErrors]) {
-      setFormErrors(prev => ({
+      setFormErrors((prev) => ({
         ...prev,
-        [name]: ""
+        [name]: "",
       }));
     }
   };
+
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    // Validate using Zod schema
+    const validationResult = loginSchema.safeParse({
+      emailId: formData.emailId,
+      password: formData.password,
+    });
+    
+    if (!validationResult.success) {
+      const zodErrors = validationResult.error.flatten().fieldErrors;
+      setFormErrors({
+        emailId: zodErrors.emailId?.[0],
+        password: zodErrors.password?.[0],
+      });
+      return;
+    }
+    
+    setIsLoading(true);
+    mutate(
+      {
+        userName: "string", // Still hardcoded
+        emailId: formData.emailId,
+        password: formData.password,
+        isWhatsapp: true,
+        isSubscribe: true,
+      },
+      {
+        onSuccess: (data) => {
+          console.log("Login successful", data);
+          const token = data?.result?.token;
+          if (token) {
+            login(token);
+            console.log("Token stored in Zustand store is", token);
+          }
+          router.push("/personal-information");
+        },
+        onError: (error) => {
+          console.error("Login failed", error);
+        },
+        onSettled: () => {
+          setIsLoading(false);
+        },
+      }
+    );
+  };
+
+  // const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const { name, value } = e.target;
+  //   setFormData(prev => ({
+  //     ...prev,
+  //     [name]: value
+  //   }));
+  //   // Clear error when user types
+  //   if (formErrors[name as keyof typeof formErrors]) {
+  //     setFormErrors(prev => ({
+  //       ...prev,
+  //       [name]: ""
+  //     }));
+  //   }
+  // };
 
   // const handleLogin = (e: React.FormEvent) => {
   //   e.preventDefault();
@@ -129,48 +202,48 @@ export default function Page() {
   // Call the function
   // loginUser();
 
-  const handleLogin = (e: React.FormEvent) => {
-    e.preventDefault();
+  // const handleLogin = (e: React.FormEvent) => {
+  //   e.preventDefault();
     
-    // Basic validation
-    const errors = {
-      emailId: !formData.emailId ? "Email is required" : "",
-      password: !formData.password ? "Password is required" : "",
-    };
+  //   // Basic validation
+  //   const errors = {
+  //     emailId: !formData.emailId ? "Email is required" : "",
+  //     password: !formData.password ? "Password is required" : "",
+  //   };
     
-    setFormErrors(errors);
+  //   setFormErrors(errors);
     
-    if (Object.values(errors).some(error => error)) return;
-    setIsLoading(true);
-    mutate(
-      {
-        userName: "string", // Still hardcoded - should this be dynamic?
-        emailId: formData.emailId,
-        password: formData.password,
-        isWhatsapp: true,
-        isSubscribe: true
-      },
-      {
-        onSuccess: (data) => {
-          // Handle successful login
-          console.log("Login successful", data);
-          const token = data?.result?.token;
-          if(token){
-            login(token);
-            console.log("Token stored in Zustand store is", token);
-          }
-          router.push("/personal-information")
-        },
-        onError: (error) => {
-          // API errors are already available via the error from useUserLoginHook
-          console.error("Login failed", error);
-        },
-        onSettled: () => {
-          setIsLoading(false);
-        }
-      }
-    );
-  };
+  //   if (Object.values(errors).some(error => error)) return;
+  //   setIsLoading(true);
+  //   mutate(
+  //     {
+  //       userName: "string", // Still hardcoded - should this be dynamic?
+  //       emailId: formData.emailId,
+  //       password: formData.password,
+  //       isWhatsapp: true,
+  //       isSubscribe: true
+  //     },
+  //     {
+  //       onSuccess: (data) => {
+  //         // Handle successful login
+  //         console.log("Login successful", data);
+  //         const token = data?.result?.token;
+  //         if(token){
+  //           login(token);
+  //           console.log("Token stored in Zustand store is", token);
+  //         }
+  //         router.push("/personal-information")
+  //       },
+  //       onError: (error) => {
+  //         // API errors are already available via the error from useUserLoginHook
+  //         console.error("Login failed", error);
+  //       },
+  //       onSettled: () => {
+  //         setIsLoading(false);
+  //       }
+  //     }
+  //   );
+  // };
   
   return (
     <AuthLayout>
@@ -212,10 +285,10 @@ export default function Page() {
                 {formErrors.password && (
                   <Typography tag="span" text={formErrors.password} className="text-red-500" />
                 )}
-              {isError && (
+                {isError && (
                 <Typography 
                   tag="span" 
-                  text={error?.message || "Login failed. Please try again."} 
+                  text={(error as ApiError)?.response?.data?.message || "Login failed. Please try again."} 
                   className="text-red-500" 
                 />
               )}
@@ -228,7 +301,7 @@ export default function Page() {
               type="submit"
               disabled={isLoading}
             >
-              {isLoading ? "Loading..." : "Login"}
+              {isLoading ? "Logging in..." : "Login"}
             </Button>
           </form>
         </div>
