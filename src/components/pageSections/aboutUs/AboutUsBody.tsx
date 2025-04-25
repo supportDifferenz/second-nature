@@ -48,11 +48,7 @@ export default function AboutUsBody({
 }: AboutUsBodyProps) {
   return (
     <div>
-
-
-
-      
-      <div className="flex flex-col items-center w-fit mx-auto">
+      <div className="flex flex-col items-center mt-[var(--space-95-195)] w-fit mx-auto">
         <Typography
           tag="h5"
           text="Our Story"
