@@ -6,12 +6,15 @@ import { Button } from "@/components/ui/button";
 import clsx from "clsx";
 import Image from "next/image";
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 
 type Gender = "Male" | "Female";
 
 const GenderPage = () => {
   const [gender, setGender] = useState<Gender>("Male");
   const options: Gender[] = ["Male", "Female"];
+
+  const router = useRouter();
 
   return (
     <BuyingFlowLayout step={1}>
@@ -84,7 +87,14 @@ const GenderPage = () => {
             </div>
             Next
           </Button>
-          <Button className="gap-2.5 lg:ml-auto lg:mr-[-55px]" disabled>
+          <Button 
+            className="gap-2.5 lg:ml-auto lg:mr-[-55px]" 
+            // disabled
+            onClick={(e) => {
+              e.preventDefault();
+              router.push("/breed");
+            }}
+          >
             Next
             <div className="w-5 relative">
               <Image

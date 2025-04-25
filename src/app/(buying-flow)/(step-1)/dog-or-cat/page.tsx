@@ -5,10 +5,14 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Typography from "@/components/atoms/typography/Typography";
 import { Input } from "@/components/ui/input";
+import { useRouter } from "next/navigation";
 
 export default function DogOrCat() {
   const [selectedPet, setSelectedPet] = useState("");
   const [, setCatName] = useState("");
+
+  const router = useRouter();
+
   return (
     <BuyingFlowLayout step={1}>
       <form action="" className="flex-1 flex flex-col ">
@@ -122,7 +126,14 @@ export default function DogOrCat() {
 
         {/* navigation */}
         <div className="pb-[3dvh] flex flex-col lg:flex-row items-center gap-4 lg:gap-0  lg:items-end pt-[3dvh]">
-          <Button className="gap-2.5 lg:ml-auto lg:mr-[-55px]" disabled>
+          <Button 
+            className="gap-2.5 lg:ml-auto lg:mr-[-55px]" 
+            // disabled
+            onClick={(e) => {
+              e.preventDefault();
+              router.push("/gender");
+            }}
+          >
             Next
             <div className="w-5">
               <Image

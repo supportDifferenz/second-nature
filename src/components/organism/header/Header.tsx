@@ -129,6 +129,9 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
                 variant={"outlinePrimaryBtn"}
                 size={"md"}
                 className="text-secondary-1 hidden sm:block"
+                onClick={() => {
+                  router.push("/location");
+                }} 
               >
                 Get Started
               </Button>

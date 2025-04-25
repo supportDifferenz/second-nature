@@ -1,11 +1,17 @@
+"use client";
+
 import Typography from "@/components/atoms/typography/Typography";
 import BuyingFlowLayout from "@/components/templates/BuyingFlowLayout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 // import PetLocationForm from "@/components/organisms/petLocationForm";
 
 export default function Location() {
+
+  const router = useRouter();
+
   return (
     <BuyingFlowLayout step={1}>
       <form
@@ -40,7 +46,13 @@ export default function Location() {
               className="block subtitle3 text-[#9B9B9B]"
             />
           </div>
-          <Button className="gap-2.5 lg:ml-auto lg:mr-[-55px]">
+          <Button 
+            className="gap-2.5 lg:ml-auto lg:mr-[-55px]"
+            onClick={(e) => {
+              e.preventDefault();
+              router.push("/dog-or-cat");
+            }}
+          >
             Next
             <div className="w-5">
               <Image
