@@ -1,10 +1,19 @@
+"use client";
+
 import BadgeTitle from "@/components/atoms/badgeTitle/BadgeTitle";
 import Typography from "@/components/atoms/typography/Typography";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import React from "react";
+import useAuthStore from "@/zustand/store/authDataStore";
+import { useRouter } from "next/navigation";
 
 const Footer = () => {
+
+  const router = useRouter();
+
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+
   return (
     <footer className=" text-primary-dark  lg:pt-(--space-40-60)">
       <div className="container flex flex-col lg:flex-row   lg:gap-[5%] text-center md:text-left   pb-(--space-27-34) ">
@@ -29,13 +38,28 @@ const Footer = () => {
             <Button size={"md"} variant={"primaryBtn"} className="text-white">
               Get Started
             </Button>
-            <Button
-              size={"md"}
-              variant={"outlinePrimaryBtn"}
-              className="text-secondary-1"
-            >
-              Log In
-            </Button>
+            { isAuthenticated
+              ? <Button
+                  size={"md"}
+                  variant={"outlinePrimaryBtn"}
+                  className="text-secondary-1"
+                  onClick={() => {
+                    router.push("/personal-information");
+                  }}
+                >
+                  Account
+                </Button>
+              : <Button
+                  size={"md"}
+                  variant={"outlinePrimaryBtn"}
+                  className="text-secondary-1"
+                  onClick={() => {
+                    router.push("/login");
+                  }}
+                >
+                  Log In
+                </Button>
+            }
           </div>
         </div>
 

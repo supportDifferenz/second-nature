@@ -13,10 +13,13 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { HeaderPropsTypes } from "@/components/types/type";
 import { useRouter } from "next/navigation";
+import useAuthStore from "@/zustand/store/authDataStore";
 
 const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
 
   const router = useRouter();
+
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
   return (
     <header className="bg-white ">
@@ -129,15 +132,27 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
               >
                 Get Started
               </Button>
-              <Button 
-                size={"md"} 
-                className=""
-                onClick={() => {
-                  router.push("/login");
-                }}
-              >
-                Log In
-              </Button>
+              { isAuthenticated
+                ? <Button 
+                    size={"md"} 
+                    className=""
+                    onClick={() => {
+                      router.push("/personal-information");
+                    }}
+                  >
+                    Account
+                  </Button>
+                : <Button 
+                    size={"md"} 
+                    className=""
+                    onClick={() => {
+                      router.push("/login");
+                    }}
+                  >
+                    Log In
+                  </Button>
+              }
+              
             </div>
           </div>
         </>
