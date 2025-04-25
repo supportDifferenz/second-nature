@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import React, { useState } from "react";
 import { useUserLoginHook } from "@/hooks/authHooks/loginUserHook";
+import { useRouter } from "next/navigation";
 
 interface LoginData {
   userName?: string;
@@ -16,6 +17,8 @@ interface LoginData {
 }
 
 export default function Page() {
+
+  const router = useRouter()
 
   const { mutate, isError, error } = useUserLoginHook();
   const [isLoading, setIsLoading] = useState(false);
@@ -148,6 +151,7 @@ export default function Page() {
         onSuccess: (data) => {
           // Handle successful login
           console.log("Login successful", data);
+          router.push("/personal-information")
         },
         onError: (error) => {
           // API errors are already available via the error from useUserLoginHook

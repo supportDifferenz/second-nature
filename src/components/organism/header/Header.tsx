@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import TopHeader from "./TopHeader";
 import MobileMenu from "./MobileMenu";
@@ -10,8 +12,12 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { HeaderPropsTypes } from "@/components/types/type";
+import { useRouter } from "next/navigation";
 
 const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
+
+  const router = useRouter();
+
   return (
     <header className="bg-white ">
       {!isOnlyBrandHeader ? (
@@ -98,7 +104,12 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
             </div>
 
             {/* logo */}
-            <div className="w-[14%] mx-[1%]">
+            <div 
+              className="w-[14%] mx-[1%]"
+              onClick={() => {
+                router.push("/");
+              }}
+            >
               <Image
                 src="/icons/logo-primary.svg"
                 alt="logo"
@@ -118,7 +129,13 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
               >
                 Get Started
               </Button>
-              <Button size={"md"} className=" ">
+              <Button 
+                size={"md"} 
+                className=""
+                onClick={() => {
+                  router.push("/login");
+                }}
+              >
                 Log In
               </Button>
             </div>
