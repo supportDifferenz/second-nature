@@ -79,6 +79,10 @@ export default function Breed() {
           <Button
             variant={"outlineSecondaryBtn"}
             className="gap-2.5 lg:ml-[-55px]"
+            onClick={(e) => {
+              e.preventDefault();
+              router.push("/gender");
+            }}
           >
             <div className="w-5 relative">
               <Image

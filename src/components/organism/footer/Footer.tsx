@@ -19,7 +19,13 @@ const Footer = () => {
       <div className="container flex flex-col lg:flex-row   lg:gap-[5%] text-center md:text-left   pb-(--space-27-34) ">
         {/* logo wrapper */}
         <div className=" flex-1 pb-(--space-27-34) pt-(--space-40-60) lg:pt-0 border-t lg:border-0 border-contrast-button">
-          <div className="w-(--space-200-240) mb-(--space-16-24)">
+          <div 
+            className="w-(--space-200-240) mb-(--space-16-24)"
+            onClick={(e) => {
+              e.preventDefault();
+              router.push("/");
+            }}
+          >
             <Image
               src="/icons/logo-primary-dark.svg"
               alt="logo"

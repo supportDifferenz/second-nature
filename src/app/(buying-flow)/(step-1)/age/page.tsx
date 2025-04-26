@@ -64,7 +64,11 @@ export default function Age() {
         <div className="pb-[3dvh] flex  justify-between items-center gap-4 lg:gap-0 lg:items-end pt-[3dvh]">
           <Button
             variant={"outlineSecondaryBtn"}
-            className="gap-2.5  lg:ml-[-55px] "
+            className="gap-2.5  lg:ml-[-55px]"
+            onClick={(e) => {
+              e.preventDefault();
+              router.push("/breed");
+            }}
           >
             <div className="w-5 relative">
               <Image

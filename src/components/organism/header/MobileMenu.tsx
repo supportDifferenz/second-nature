@@ -43,7 +43,7 @@ const MobileMenu = ({ className }: MobileMenuProps) => {
         }`}
       >
         <div className="flex flex-col px-6 py-8 space-y-6 text-lg">
-          <a href="#" onClick={() => setIsOpen(false)}>About Us</a>
+          <a href="/about-us" onClick={() => setIsOpen(false)}>About Us</a>
           <a href="#" onClick={() => setIsOpen(false)}>How it works</a>
           <a href="#" onClick={() => setIsOpen(false)}>Blogs</a>
           <a href="#" onClick={() => setIsOpen(false)}>Reviews</a>

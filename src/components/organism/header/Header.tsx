@@ -69,7 +69,12 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
                   },
                 ]}
               />
-              <nav>
+              <nav 
+                onClick={(e) => {
+                  e.preventDefault();
+                  router.push("/about-us");
+                }}
+              >
                 <span className="block">About Us</span>
               </nav>
               <DropdownMenu>
@@ -89,16 +94,20 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
                 <DropdownMenuContent className="max-w-fit" align="start">
                   <div className="grid grid-cols-1 gap-5 ">
                     {[
-                      "Subscription",
-                      "Behind The Scenes",
-                      "How to Feed",
-                      "Transition Diet",
+                      { name: "Subscription", href: "/subscription"},
+                      { name: "Behind The Scenes", href: "/behind-the-scenes"},
+                      { name: "How to Feed", href: ""},
+                      { name: "Transition Diet", href: "/transition-diet"},
                     ].map((item, index) => (
                       <DropdownMenuItem
                         key={index}
-                        className="flex items-center   gap-3 cursor-pointer"
+                        className="flex items-center gap-3 cursor-pointer"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          router.push(item.href);
+                        }}
                       >
-                        <span className="grow ">{item}</span>
+                        <span className="grow ">{item.name}</span>
                       </DropdownMenuItem>
                     ))}
                   </div>
@@ -164,7 +173,13 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
           <div className="w-400px border absolute top-1/2 transform -translate-y-1/2">
             back btn
           </div>
-          <div className="w-[14%] mx-auto">
+          <div 
+            className="w-[14%] mx-auto"
+            onClick={(e) => {
+              e.preventDefault();
+              router.push("/");
+            }}
+          >
             <Image
               src="/icons/logo-primary.svg"
               alt="logo"
