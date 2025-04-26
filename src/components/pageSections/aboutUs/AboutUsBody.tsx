@@ -48,11 +48,7 @@ export default function AboutUsBody({
 }: AboutUsBodyProps) {
   return (
     <div>
-
-
-
-      
-      <div className="flex flex-col items-center w-fit mx-auto">
+      <div className="flex flex-col items-center mt-[var(--space-95-195)] w-fit mx-auto">
         <Typography
           tag="h5"
           text="Our Story"
@@ -211,7 +207,7 @@ export default function AboutUsBody({
             </div>
           </div>
           <div>
-            <div className="relative bg-[#FDFEFA] h-[115.42vw] sm:h-[29.16vw] w-[90vw] sm:w-[66.25vw] mx-auto mt-[var(--space-32-52)] border border-secondary-1 rounded-2xl px-[var(--space-20-190)] py-[var(--space-50-67)]">
+            <div className="relative bg-[#FDFEFA]  w-[90vw] sm:w-[66.25vw] mx-auto mt-[var(--space-32-52)] pb-36 border border-secondary-1 rounded-2xl px-[var(--space-20-190)] py-[var(--space-50-67)]">
               <div>
                 <Typography
                   tag="h5"

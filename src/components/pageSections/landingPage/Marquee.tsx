@@ -14,7 +14,7 @@ const features = [
   { icon: "/icons/marquee-8.svg", text: "Boosts Energy and Vitality" },
 ];
 
-const Marquee = ({ speed = 20 }) => {
+const Marquee = ({ speed = 23 }) => {
   return (
     <div className="container-lg ">
       <div className="relative overflow-hidden bg-white border border-[#C7FCE3] w-full  rounded-full shadow-2xl p-(--space-18-32)">
