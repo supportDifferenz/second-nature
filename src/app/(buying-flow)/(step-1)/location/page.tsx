@@ -7,16 +7,36 @@ import { Input } from "@/components/ui/input";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 // import PetLocationForm from "@/components/organisms/petLocationForm";
+import { usePetStore } from "@/zustand/store/petDataStore";
+import { useState } from "react";
 
 export default function Location() {
 
   const router = useRouter();
+  const { location, setLocation } = usePetStore();
+  const [ error, setError ] = useState("");
+
+  console.log("Location ", location);
+
+  const handleNext = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    // Validate the location field
+    if (!location.trim()) {
+      setError("Please enter your pet's location"); // Show error if empty
+      return; // Block navigation
+    }
+
+    // Only navigate if location has a value
+    router.push("/dog-or-cat");
+  };
 
   return (
     <BuyingFlowLayout step={1}>
       <form
         action=""
-        className="flex-1 flex flex-col "
+        onSubmit={handleNext}
+        className="flex-1 flex flex-col"
       >
         {/* title,content */}
         <div className="h-full flex-1 flex flex-col justify-center items-center ">
@@ -30,7 +50,17 @@ export default function Location() {
             variant={"roundedEdgeInputLg"}
             className="max-w-[800px] w-[90%] sm:w-[50%] lg:w-[40%] block mx-auto bg-white"
             placeholder="Type your pet’s location"
+            value={location}
+            onChange={(e) => {
+              setLocation(e.target.value);
+              setError(""); // Clear error when typing
+            }}
           />
+          {error && (
+            <p className="text-red-500 text-sm mt-1 w-[90%] sm:w-[50%] lg:w-[40%]">
+              {error}
+            </p>
+          )}
         </div>
         {/* navigation */}
         <div className="pb-[3dvh] flex flex-col lg:flex-row items-center gap-4 lg:gap-0  lg:items-end landscape:pt-[3dvh]">
@@ -46,12 +76,13 @@ export default function Location() {
               className="block subtitle3 text-[#9B9B9B]"
             />
           </div>
-          <Button 
+          <Button
+            type="submit" 
             className="gap-2.5 lg:ml-auto lg:mr-[-55px]"
-            onClick={(e) => {
-              e.preventDefault();
-              router.push("/dog-or-cat");
-            }}
+            // onClick={(e) => {
+            //   e.preventDefault();
+            //   router.push("/dog-or-cat");
+            // }}
           >
             Next
             <div className="w-5">
