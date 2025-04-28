@@ -1,6 +1,9 @@
+"use client";
+
 import { ReactNode } from "react";
 import Header from "../organism/header/Header";
 import CheckoutProgressBar from "../molecules/checkoutProgressBar/CheckoutProgressBar";
+import { usePetStore } from "@/zustand/store/petDataStore";
 
 export default function BuyingFlowLayout({
   children,
@@ -9,6 +12,10 @@ export default function BuyingFlowLayout({
   children: ReactNode;
   step: number;
 }) {
+
+  const { pets } = usePetStore();
+  const petNames = Object.values(pets).map((pet) => pet.name);
+
   return (
     <>
       <Header isOnlyBrandHeader={true} />
@@ -19,8 +26,15 @@ export default function BuyingFlowLayout({
           </div>
           {/* pets name */}
           <ul className="flex items-center gap-5 pt-[5dvh] pb-[3dvh]">
-            <li className="font-bold underline">Jacky</li>
-     
+            {petNames.length > 0 ? (
+              petNames.map((name, index) => (
+                <li key={index} className="font-bold underline">
+                  {name}
+                </li>
+              ))
+            ) : (
+              <li className="font-bold">No pets added yet</li>
+            )}     
           </ul>
           <div className="container  grow  flex flex-col">{children}</div>
         </div>

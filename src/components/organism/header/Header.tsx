@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import TopHeader from "./TopHeader";
 import MobileMenu from "./MobileMenu";
@@ -10,8 +12,15 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { HeaderPropsTypes } from "@/components/types/type";
+import { useRouter } from "next/navigation";
+import useAuthStore from "@/zustand/store/authDataStore";
 
 const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
+
+  const router = useRouter();
+
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+
   return (
     <header className="bg-white ">
       {!isOnlyBrandHeader ? (
@@ -60,7 +69,12 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
                   },
                 ]}
               />
-              <nav>
+              <nav 
+                onClick={(e) => {
+                  e.preventDefault();
+                  router.push("/about-us");
+                }}
+              >
                 <span className="block">About Us</span>
               </nav>
               <DropdownMenu>
@@ -80,16 +94,20 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
                 <DropdownMenuContent className="max-w-fit" align="start">
                   <div className="grid grid-cols-1 gap-5 ">
                     {[
-                      "Subscription",
-                      "Behind The Scenes",
-                      "How to Feed",
-                      "Transition Diet",
+                      { name: "Subscription", href: "/subscription"},
+                      { name: "Behind The Scenes", href: "/behind-the-scenes"},
+                      { name: "How to Feed", href: ""},
+                      { name: "Transition Diet", href: "/transition-diet"},
                     ].map((item, index) => (
                       <DropdownMenuItem
                         key={index}
-                        className="flex items-center   gap-3 cursor-pointer"
+                        className="flex items-center gap-3 cursor-pointer"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          router.push(item.href);
+                        }}
                       >
-                        <span className="grow ">{item}</span>
+                        <span className="grow ">{item.name}</span>
                       </DropdownMenuItem>
                     ))}
                   </div>
@@ -98,7 +116,12 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
             </div>
 
             {/* logo */}
-            <div className="w-[14%] mx-[1%]">
+            <div 
+              className="w-[14%] mx-[1%]"
+              onClick={() => {
+                router.push("/");
+              }}
+            >
               <Image
                 src="/icons/logo-primary.svg"
                 alt="logo"
@@ -115,12 +138,33 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
                 variant={"outlinePrimaryBtn"}
                 size={"md"}
                 className="text-secondary-1 hidden sm:block"
+                onClick={() => {
+                  router.push("/location");
+                }} 
               >
                 Get Started
               </Button>
-              <Button size={"md"} className=" ">
-                Log In
-              </Button>
+              { isAuthenticated
+                ? <Button 
+                    size={"md"} 
+                    className=""
+                    onClick={() => {
+                      router.push("/personal-information");
+                    }}
+                  >
+                    Account
+                  </Button>
+                : <Button 
+                    size={"md"} 
+                    className=""
+                    onClick={() => {
+                      router.push("/login");
+                    }}
+                  >
+                    Log In
+                  </Button>
+              }
+              
             </div>
           </div>
         </>
@@ -129,7 +173,13 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
           <div className="w-400px border absolute top-1/2 transform -translate-y-1/2">
             back btn
           </div>
-          <div className="w-[14%] mx-auto">
+          <div 
+            className="w-[14%] mx-auto"
+            onClick={(e) => {
+              e.preventDefault();
+              router.push("/");
+            }}
+          >
             <Image
               src="/icons/logo-primary.svg"
               alt="logo"

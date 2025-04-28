@@ -7,9 +7,13 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Counter from "@/components/molecules/counterBuyingFlow/Counter";
 // import PetLocationForm from "@/components/organisms/petLocationForm";
+import { useRouter } from "next/navigation";
 
 export default function Age() {
+
   const [mode, setMode] = useState<"dob" | "approx">("dob");
+
+  const router = useRouter();
 
   return (
     <BuyingFlowLayout step={1}>
@@ -60,7 +64,11 @@ export default function Age() {
         <div className="pb-[3dvh] flex  justify-between items-center gap-4 lg:gap-0 lg:items-end pt-[3dvh]">
           <Button
             variant={"outlineSecondaryBtn"}
-            className="gap-2.5  lg:ml-[-55px] "
+            className="gap-2.5  lg:ml-[-55px]"
+            onClick={(e) => {
+              e.preventDefault();
+              router.push("/breed");
+            }}
           >
             <div className="w-5 relative">
               <Image
@@ -70,9 +78,16 @@ export default function Age() {
                 className="!static w-full object-contain"
               />
             </div>
-            Next
+            Back
           </Button>
-          <Button className="gap-2.5 lg:ml-auto lg:mr-[-55px]" disabled>
+          <Button 
+            className="gap-2.5 lg:ml-auto lg:mr-[-55px]" 
+            // disabled
+            onClick={(e) => {
+              e.preventDefault();
+              router.push("/weight");
+            }}
+          >
             Next
             <div className="w-5 relative">
               <Image

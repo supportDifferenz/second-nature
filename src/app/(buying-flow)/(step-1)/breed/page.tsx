@@ -13,6 +13,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useRouter } from "next/navigation";
 
 const breedOptions = [
   "Affenpoo (Affenpinscher Puppy)",
@@ -21,7 +22,10 @@ const breedOptions = [
   "German Shepherd",
 ];
 export default function Breed() {
+
   const [selectedBreed, setSelectedBreed] = useState<string>(""); // <-- start empty
+  const router = useRouter();
+
   return (
     <BuyingFlowLayout step={1}>
       <form className="flex-1 flex flex-col">
@@ -74,7 +78,11 @@ export default function Breed() {
         <div className="pb-[3dvh] flex  justify-between items-center gap-4 lg:gap-0 lg:items-end pt-[3dvh]">
           <Button
             variant={"outlineSecondaryBtn"}
-            className="gap-2.5  lg:ml-[-55px] "
+            className="gap-2.5 lg:ml-[-55px]"
+            onClick={(e) => {
+              e.preventDefault();
+              router.push("/gender");
+            }}
           >
             <div className="w-5 relative">
               <Image
@@ -84,9 +92,16 @@ export default function Breed() {
                 className="!static w-full object-contain"
               />
             </div>
-            Next
+            Back
           </Button>
-          <Button className="gap-2.5 lg:ml-auto lg:mr-[-55px]" disabled>
+          <Button 
+            className="gap-2.5 lg:ml-auto lg:mr-[-55px]" 
+            // disabled
+            onClick={(e) => {
+              e.preventDefault();
+              router.push("/age");
+            }}
+          >
             Next
             <div className="w-5 relative">
               <Image
