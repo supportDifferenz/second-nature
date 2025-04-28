@@ -13,7 +13,7 @@ export default function BuyingFlowLayout({
   step: number;
 }) {
 
-  const { pets } = usePetStore();
+  const { pets, selectedPetIndex } = usePetStore();
   const petNames = Object.values(pets).map((pet) => pet.name);
 
   return (
@@ -28,7 +28,10 @@ export default function BuyingFlowLayout({
           <ul className="flex items-center gap-5 pt-[5dvh] pb-[3dvh]">
             {petNames.length > 0 ? (
               petNames.map((name, index) => (
-                <li key={index} className="font-bold underline">
+                <li 
+                  key={index} 
+                  className={`font-bold underline ${ index === selectedPetIndex ? "text-[#944446] underline-[#944446]" : ""}`}
+                >
                   {name}
                 </li>
               ))
