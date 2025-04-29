@@ -55,6 +55,14 @@ export default function DogOrCat() {
 
   const handleNext = (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (petType && petName.trim() !== "") {
+      const newPetId = addNewPet({ catOrDog: petType, name: petName });
+      setCurrentPet(newPetId);
+      setPetType("");
+      setPetName("");
+    }
+    
     if (petType && petName.trim() !== "" && currentPetId) {
       setPetDetails(currentPetId, { catOrDog: petType, name: petName });
       router.push("/gender");
@@ -64,6 +72,8 @@ export default function DogOrCat() {
 
     setSelectedPetIndex(0); // Reset selected pet index to 0
   };
+
+  const isNextDisable = pets?.length > 0 ? false : !(petType && petName.trim() !== "");
 
   return (
     <BuyingFlowLayout step={1}>
@@ -189,7 +199,7 @@ export default function DogOrCat() {
         <div className="pb-[3dvh] flex flex-col lg:flex-row items-center gap-4 lg:gap-0  lg:items-end pt-[3dvh]">
           <Button 
             className="gap-2.5 lg:ml-auto lg:mr-[-55px]" 
-            disabled={pets?.length === 0}
+            disabled={ isNextDisable }
             onClick={handleNext}
           >
             Next
