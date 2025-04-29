@@ -5,6 +5,7 @@ import { useState } from "react";
 // import type { Metadata } from "next";
 import "./globals.css";
 import { dmSerifDisplay, bellotaText } from "@/components/config/font";
+// import Script from "next/script";
 
 // export const metadata: Metadata = {
 //   title: "Second Nature",
@@ -24,6 +25,10 @@ export default function RootLayout({
       <head>
         <title>Second Nature</title>
         <meta name="description" content="Crafted with Care for Healthier, Happier Pets" />
+        {/* <Script
+          crossOrigin="anonymous"
+          src="//unpkg.com/react-scan/dist/auto.global.js"
+        ></Script> */}
       </head>
       <body className={`${dmSerifDisplay.variable} ${bellotaText.variable} antialiased dark`}>
         <QueryClientProvider client={queryClient}>
