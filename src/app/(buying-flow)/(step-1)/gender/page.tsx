@@ -21,6 +21,7 @@ const GenderPage = () => {
   const selectedPet = selectedPetIndex !== null ? pets[selectedPetIndex] : null; // Handle null case for selectedPetIndex
   console.log("Selected Pet in gender page is ", selectedPet);
   const currentPetId = selectedPet ? selectedPet.id : null; // Get the current pet ID
+  const selectedPetName = selectedPet ? selectedPet.name : null;
 
   const handleNext = (e: React.FormEvent) => {
     e.preventDefault();
@@ -39,7 +40,7 @@ const GenderPage = () => {
         <div className="h-full  flex-1 flex flex-col justify-center items-center">
           <Typography
             tag="h2"
-            text="Jackey’s Gender"
+            text={`${selectedPetName}'s Gender`}
             className="text-primary-dark mb-5 sm:mb-14 text-center"
           />
 
