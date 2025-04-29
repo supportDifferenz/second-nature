@@ -14,17 +14,47 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useRouter } from "next/navigation";
+import { usePetStore } from "@/zustand/store/petDataStore";
+import { useGetBreedDetails } from "@/hooks/subscriptionHooks/getBreedDetailsHook";
 
-const breedOptions = [
-  "Affenpoo (Affenpinscher Puppy)",
-  "Beagle",
-  "Golden Retriever",
-  "German Shepherd",
-];
+// const breedOptions = [
+//   "Affenpoo (Affenpinscher Puppy)",
+//   "Beagle",
+//   "Golden Retriever",
+//   "German Shepherd",
+// ];
+
 export default function Breed() {
 
   const [selectedBreed, setSelectedBreed] = useState<string>(""); // <-- start empty
   const router = useRouter();
+
+  const { pets, selectedPetIndex, setPetDetails } = usePetStore();
+  const selectedPet = selectedPetIndex !== null ? pets[selectedPetIndex] : null; // Handle null case for selectedPetIndex
+  const currentPetId = selectedPet ? selectedPet.id : null; // Get the current pet ID
+  const catOrDog = selectedPet ? selectedPet.catOrDog : ""; // Get the current pet type (cat or dog)
+
+  const getBreed = catOrDog === "cat" ? "getCatBreed" : "getDogBreed";
+  const { data: breedData } = useGetBreedDetails(getBreed);
+
+  // if( catOrDog === "dog") {
+  //   setGetBreed("getDogBreed");
+  // } else if (catOrDog === "cat") {
+  //   setGetBreed("getCatBreed");
+  // }
+
+  console.log("Selected Pet in breed page is", selectedPet);
+  console.log("Breed data in breed page is", breedData);
+
+  const handleNext = (e: React.FormEvent) => {
+      e.preventDefault();
+      if (selectedBreed && currentPetId) {
+        setPetDetails(currentPetId, { breed: selectedBreed.toLowerCase() });
+        router.push("/age");
+      } else {
+        router.push("/breed");
+      }
+    };
 
   return (
     <BuyingFlowLayout step={1}>
@@ -46,8 +76,10 @@ export default function Breed() {
               >
                 <SelectValue placeholder="Select a breed" />
               </SelectTrigger>
-              <SelectContent className="bg-white border-secondary-1 rounded-2xl text-primary-dark">
-                {breedOptions.map((breed) => (
+              <SelectContent
+                className="bg-white border-secondary-1 rounded-2xl text-primary-dark"
+              >
+                {breedData?.result?.map((breed: string) => (
                   <SelectItem
                     key={breed}
                     value={breed}
@@ -97,10 +129,7 @@ export default function Breed() {
           <Button 
             className="gap-2.5 lg:ml-auto lg:mr-[-55px]" 
             // disabled
-            onClick={(e) => {
-              e.preventDefault();
-              router.push("/age");
-            }}
+            onClick={handleNext}
           >
             Next
             <div className="w-5 relative">

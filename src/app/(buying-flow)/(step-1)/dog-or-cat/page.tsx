@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import BuyingFlowLayout from "@/components/templates/BuyingFlowLayout";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
@@ -18,11 +18,16 @@ export default function DogOrCat() {
     pets, 
     currentPetId, 
     setCurrentPet, 
-    setPetDetails ,
-    addNewPet
+    setPetDetails,
+    addNewPet,
+    setSelectedPetIndex
   } = usePetStore();
 
   console.log("Pets after adding new pet ", pets);
+
+  useEffect(() => {
+    setSelectedPetIndex(null); // Reset selected pet index
+  }, [setSelectedPetIndex]);
 
   const [petType, setPetType] = useState<"dog" | "cat" | "">("");
   const [petName, setPetName] = useState("");
@@ -56,6 +61,8 @@ export default function DogOrCat() {
     } else {
       router.push("/gender");
     }
+
+    setSelectedPetIndex(0); // Reset selected pet index to 0
   };
 
   return (

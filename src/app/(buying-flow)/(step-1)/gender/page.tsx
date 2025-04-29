@@ -7,14 +7,30 @@ import clsx from "clsx";
 import Image from "next/image";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import { usePetStore } from "@/zustand/store/petDataStore";
 
-type Gender = "Male" | "Female";
+// type Gender = "Male" | "Female";
 
 const GenderPage = () => {
-  const [gender, setGender] = useState<Gender>("Male");
-  const options: Gender[] = ["Male", "Female"];
+  const [gender, setGender] = useState("");
+  const options = ["Male", "Female"];
 
   const router = useRouter();
+
+  const { pets, selectedPetIndex, setPetDetails } = usePetStore();
+  const selectedPet = selectedPetIndex !== null ? pets[selectedPetIndex] : null; // Handle null case for selectedPetIndex
+  console.log("Selected Pet in gender page is ", selectedPet);
+  const currentPetId = selectedPet ? selectedPet.id : null; // Get the current pet ID
+
+  const handleNext = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (gender && currentPetId) {
+      setPetDetails(currentPetId, { gender: gender.toLowerCase() as 'male' | 'female' });
+      router.push("/breed");
+    } else {
+      router.push("/gender");
+    }
+  };
 
   return (
     <BuyingFlowLayout step={1}>
@@ -94,10 +110,7 @@ const GenderPage = () => {
           <Button 
             className="gap-2.5 lg:ml-auto lg:mr-[-55px]" 
             // disabled
-            onClick={(e) => {
-              e.preventDefault();
-              router.push("/breed");
-            }}
+            onClick={handleNext}
           >
             Next
             <div className="w-5 relative">

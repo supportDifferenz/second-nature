@@ -8,12 +8,20 @@ import Image from "next/image";
 import Counter from "@/components/molecules/counterBuyingFlow/Counter";
 // import PetLocationForm from "@/components/organisms/petLocationForm";
 import { useRouter } from "next/navigation";
+import { usePetStore } from "@/zustand/store/petDataStore";
 
 export default function Age() {
 
   const [mode, setMode] = useState<"dob" | "approx">("dob");
 
   const router = useRouter();
+
+  // const { pets, selectedPetIndex, setPetDetails } = usePetStore();
+  const { pets, selectedPetIndex } = usePetStore();
+  const selectedPet = selectedPetIndex !== null ? pets[selectedPetIndex] : null; // Handle null case for selectedPetIndex
+  // const currentPetId = selectedPet ? selectedPet.id : null; // Get the current pet ID
+
+  console.log("Selected Pet in age page is", selectedPet);
 
   return (
     <BuyingFlowLayout step={1}>
