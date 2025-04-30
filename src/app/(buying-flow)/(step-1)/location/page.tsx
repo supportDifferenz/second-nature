@@ -132,6 +132,7 @@ export default function Location() {
           <Button
             type="submit" 
             className="gap-2.5 lg:ml-auto lg:mr-[-55px]"
+            disabled={!selectedMunicipality}
             // onClick={(e) => {
             //   e.preventDefault();
             //   router.push("/dog-or-cat");
