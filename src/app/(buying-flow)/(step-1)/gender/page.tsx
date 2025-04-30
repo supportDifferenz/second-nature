@@ -12,7 +12,6 @@ import { usePetStore } from "@/zustand/store/petDataStore";
 // type Gender = "Male" | "Female";
 
 const GenderPage = () => {
-  const [gender, setGender] = useState("");
   const options = ["Male", "Female"];
 
   const router = useRouter();
@@ -22,11 +21,15 @@ const GenderPage = () => {
   console.log("Selected Pet in gender page is ", selectedPet);
   const currentPetId = selectedPet ? selectedPet.id : null; // Get the current pet ID
   const selectedPetName = selectedPet ? selectedPet.name : null;
+  const selectedPetGender = selectedPet ? selectedPet.gender : null;
+  const [gender, setGender] = useState(selectedPetGender || "");
 
   const handleNext = (e: React.FormEvent) => {
     e.preventDefault();
     if (gender && currentPetId) {
       setPetDetails(currentPetId, { gender: gender.toLowerCase() as 'male' | 'female' });
+      router.push("/breed");
+    } else if ( selectedPetGender ) {
       router.push("/breed");
     } else {
       router.push("/gender");
@@ -47,7 +50,8 @@ const GenderPage = () => {
           {/* Gender Selector */}
           <div className="flex items-center gap-2.5 sm:gap-8   w-full sm:w-[70%] lg:w-[50%] xl:w-[45%] 2xl:w-full max-w-[683px]">
             {options.map((option) => {
-              const isSelected = gender === option;
+              const isSelected = gender.toLowerCase() === option.toLowerCase();
+              console.log("isSelected in gender page is", isSelected,"gender is", gender.toLowerCase(), "option is",option.toLowerCase());
               return (
                 <button
                   key={option}
