@@ -91,6 +91,14 @@ export default function Breed() {
     }
   }, [crossBreedData, selectedPet?.crossBreed]);
 
+  useEffect(() => {
+    if(!selectedBreed && !iDontKnowBreed){
+      setIDontKnowBreed(false);
+    } else if (!selectedCrossBreed){
+      setIDontKnowBreed(false);
+    }
+  },[selectedBreed,selectedCrossBreed])
+
   const handleNext = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Selected Breed is", selectedBreed,"Selected Cross Breed is", selectedCrossBreed,"Selected pet ID is", currentPetId);
@@ -108,7 +116,8 @@ export default function Breed() {
     setShowCrossBreed(!showCrossBreed);
   };
 
-  const handleIdontKnowBreed = () => {
+  const handleIdontKnowBreed = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
     setSelectedBreed("");
     setSelectedCrossBreed("");
     setShowCrossBreed(false);
@@ -119,6 +128,8 @@ export default function Breed() {
     setSelectedCrossBreed("");
     setShowCrossBreed(false);
   }
+
+  console.log("I don't know breed is",iDontKnowBreed);
 
   return (
     <BuyingFlowLayout step={1}>
@@ -242,7 +253,7 @@ export default function Breed() {
           </Button>
           <Button 
             className="gap-2.5 lg:ml-auto lg:mr-[-55px]" 
-            // disabled
+            disabled={ (selectedBreed && selectedCrossBreed) ? false : !iDontKnowBreed }
             onClick={handleNext}
           >
             Next
