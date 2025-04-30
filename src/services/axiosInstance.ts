@@ -18,8 +18,8 @@ const createAxiosInstance = (
 
       config.headers["apiKey"] = apiKey;
       config.headers["clientKey"] = clientKey;
-      console.log("Request Headers:", config.headers);
-      console.log("Config keys:", configKeys);
+      // console.log("Request Headers:", config.headers);
+      // console.log("Config keys:", configKeys);
       return config;
     },
     (error) => Promise.reject(error)

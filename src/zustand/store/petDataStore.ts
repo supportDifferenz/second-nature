@@ -6,8 +6,9 @@ type PetDetails = {
   catOrDog: 'cat' | 'dog' | '';
   name: string;
   age?: number;
-  breed?: string;
   gender?: 'male' | 'female' | '';
+  breed?: string;
+  crossBreed?: string;
 };
 
 type PetStore = {
@@ -59,6 +60,7 @@ export const usePetStore = create<PetStore>()((set) => ({
         catOrDog,
         name,
         gender: "", // Matches the union type "" | "male" | "female" | undefined
+        crossBreed: "",
       };
       return {
         pets: [...state.pets, newPet],
