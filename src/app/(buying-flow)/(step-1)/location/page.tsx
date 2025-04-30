@@ -3,18 +3,37 @@
 import Typography from "@/components/atoms/typography/Typography";
 import BuyingFlowLayout from "@/components/templates/BuyingFlowLayout";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+// import { Input } from "@/components/ui/input";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 // import PetLocationForm from "@/components/organisms/petLocationForm";
 import { usePetStore } from "@/zustand/store/petDataStore";
 import { useState } from "react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export default function Location() {
 
   const router = useRouter();
   const { location, setLocation } = usePetStore();
   const [ error, setError ] = useState("");
+  const [ selectedMunicipality, setSelectedMunicipality ] = useState<string>("");
+
+  const qatarMunicipalities = [
+    "Al Shamal",
+    "Al Khor",
+    "Al Shahaniya",
+    "Umm Salal",
+    "Al Daayen",
+    "Ad Dawhah(Doha)",
+    "Al Rayyan",
+    "Al Wakrah",
+  ]
 
   console.log("Location ", location);
 
@@ -22,13 +41,21 @@ export default function Location() {
     e.preventDefault();
 
     // Validate the location field
-    if (!location.trim()) {
-      setError("Please enter your pet's location"); // Show error if empty
+    // if (!location.trim()) {
+    //   setError("Please enter your pet's location"); // Show error if empty
+    //   return; // Block navigation
+    // }
+
+    if(!selectedMunicipality) {
+      setError("Please select a location"); // Show error if empty
       return; // Block navigation
     }
 
-    // Only navigate if location has a value
-    router.push("/dog-or-cat");
+    if(selectedMunicipality){
+      setLocation(selectedMunicipality);
+      router.push("/dog-or-cat");
+    }
+
   };
 
   return (
@@ -45,7 +72,7 @@ export default function Location() {
             text="Your Pet’s Location"
             className="text-primary-dark mb-4 text-center"
           />
-          <Input
+          {/* <Input
             type="text"
             variant={"roundedEdgeInputLg"}
             className="max-w-[800px] w-[90%] sm:w-[50%] lg:w-[40%] block mx-auto bg-white"
@@ -55,7 +82,33 @@ export default function Location() {
               setLocation(e.target.value);
               setError(""); // Clear error when typing
             }}
-          />
+          /> */}
+          <div className="max-w-[800px] w-[90%] sm:w-[50%] lg:w-[40%] block mx-auto bg-white">
+            <Select 
+              value={selectedMunicipality} 
+              onValueChange={setSelectedMunicipality}
+            >
+              <SelectTrigger
+                variant="roundedEdgeInputLgSecondary"
+                className="text-primary-dark data-[placeholder]:text-[#9B9B9B]"
+              >
+                <SelectValue placeholder="Select a location" />
+              </SelectTrigger>
+              <SelectContent
+                className="bg-white border-secondary-1 rounded-2xl text-primary-dark"
+              >
+                {qatarMunicipalities.map((municipality: string) => (
+                  <SelectItem
+                    key={municipality}
+                    value={municipality}
+                    className="px-4 py-2 text-sm hover:bg-gray-100 focus:bg-gray-100 data-[state=checked]:bg-white"
+                  >
+                    {municipality}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
           {error && (
             <p className="text-red-500 text-sm mt-1 w-[90%] sm:w-[50%] lg:w-[40%]">
               {error}
