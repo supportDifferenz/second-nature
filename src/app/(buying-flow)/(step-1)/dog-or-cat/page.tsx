@@ -177,7 +177,7 @@ export default function DogOrCat() {
         </div>
         <Button 
           variant={"linkPrimaryDark"} 
-          className="justify-start mx-auto mt-[2.5dvh]"
+          className="justify-start mx-auto mt-[2.5dvh] disabled:!opacity-100 disabled:!bg-transparent disabled:!text-primary-dark"
           disabled={!petType || !petName.trim()}
           onClick={(e) => {
             e.preventDefault();
