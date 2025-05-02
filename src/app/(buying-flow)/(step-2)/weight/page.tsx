@@ -65,7 +65,7 @@ export default function Page() {
           </Button>
           <Button 
             className="gap-2.5 lg:ml-auto lg:mr-[-55px]" 
-            // disabled
+            disabled={!currentWeight || !targetWeight}
             onClick={handleNext}
           >
             Next
