@@ -20,6 +20,7 @@ export default function Age() {
   const { pets, selectedPetIndex, setPetDetails } = usePetStore();
   const selectedPet = selectedPetIndex !== null ? pets[selectedPetIndex] : null; // Handle null case for selectedPetIndex
   const currentPetId = selectedPet ? selectedPet.id : null; // Get the current pet ID
+  const selectedPetName = selectedPet ? selectedPet.name : null;
   const ageMonth = selectedPet ? Number(selectedPet.ageMonth) : 0;
   const ageYear = selectedPet ? Number(selectedPet.ageYear) : 0;
   
@@ -43,7 +44,8 @@ export default function Age() {
         <div className="h-full  flex-1 flex flex-col justify-center items-center ">
           <Typography
             tag="h2"
-            text="How old is Jackey?"
+            // text="How old is Jackey?"
+            text={`How old is ${selectedPetName}?`}
             className="text-primary-dark mb-4 text-center"
           />
 
