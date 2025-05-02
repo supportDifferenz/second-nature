@@ -22,7 +22,7 @@ export default function Location() {
   const router = useRouter();
   const { location, setLocation } = usePetStore();
   const [ error, setError ] = useState("");
-  const [ selectedMunicipality, setSelectedMunicipality ] = useState<string>("");
+  const [ selectedMunicipality, setSelectedMunicipality ] = useState<string>(location);
 
   const qatarMunicipalities = [
     "Al Shamal",
