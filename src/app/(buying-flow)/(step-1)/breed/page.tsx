@@ -27,6 +27,7 @@ export default function Breed() {
   const { pets, selectedPetIndex, setPetDetails } = usePetStore();
   const selectedPet = selectedPetIndex !== null ? pets[selectedPetIndex] : null; // Handle null case for selectedPetIndex
   const currentPetId = selectedPet ? selectedPet.id : null; // Get the current pet ID
+  const selectedPetName = selectedPet ? selectedPet.name : null;
   const catOrDog = selectedPet ? selectedPet.catOrDog : ""; // Get the current pet type (cat or dog)
   const breed = selectedPet ? selectedPet?.breed : "";
   const crossBreed = selectedPet ? selectedPet?.crossBreed : "";
@@ -154,7 +155,8 @@ export default function Breed() {
         <div className="h-full  flex-1 flex flex-col justify-center items-center">
           <Typography
             tag="h2"
-            text="Jackey’s Breed"
+            // text="Jackey’s Breed"
+            text={`${selectedPetName}'s Breed`}
             className="text-primary-dark portrait:mb-[5dvh] landscape:mb-[3dvh] text-center"
           />
 
