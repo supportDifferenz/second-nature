@@ -27,6 +27,7 @@ export default function Breed() {
   const { pets, selectedPetIndex, setPetDetails } = usePetStore();
   const selectedPet = selectedPetIndex !== null ? pets[selectedPetIndex] : null; // Handle null case for selectedPetIndex
   const currentPetId = selectedPet ? selectedPet.id : null; // Get the current pet ID
+  const selectedPetName = selectedPet ? selectedPet.name : null;
   const catOrDog = selectedPet ? selectedPet.catOrDog : ""; // Get the current pet type (cat or dog)
   const breed = selectedPet ? selectedPet?.breed : "";
   const crossBreed = selectedPet ? selectedPet?.crossBreed : "";
@@ -92,23 +93,31 @@ export default function Breed() {
   }, [crossBreedData, selectedPet?.crossBreed]);
 
   useEffect(() => {
-    if(!selectedBreed && !iDontKnowBreed){
-      setIDontKnowBreed(false);
-    } else if (!selectedCrossBreed){
+    if ((selectedBreed || selectedCrossBreed) && iDontKnowBreed) {
       setIDontKnowBreed(false);
     }
-  },[selectedBreed,selectedCrossBreed])
+  }, [selectedBreed, selectedCrossBreed]);
+
+  // useEffect(() => {
+  //   if(!selectedBreed && !iDontKnowBreed){
+  //     setIDontKnowBreed(false);
+  //   } else if (!selectedCrossBreed){
+  //     setIDontKnowBreed(false);
+  //   }
+  // },[selectedBreed,selectedCrossBreed])
 
   const handleNext = (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (iDontKnowBreed) {
+      router.push("/age");
+      return;
+    }
+
     console.log("Selected Breed is", selectedBreed,"Selected Cross Breed is", selectedCrossBreed,"Selected pet ID is", currentPetId);
     if (selectedBreed && selectedCrossBreed && currentPetId) {
       setPetDetails(currentPetId, { breed: selectedBreed, crossBreed: selectedCrossBreed });
       router.push("/age");
-    } else if (iDontKnowBreed){
-      router.push("/age");
-    } else {
-      router.push("/breed");
     }
   };
 
@@ -122,6 +131,14 @@ export default function Breed() {
     setSelectedCrossBreed("");
     setShowCrossBreed(false);
     setIDontKnowBreed(true);
+
+    // if (currentPetId) {
+    //   setPetDetails(currentPetId, { 
+    //     breed: "", 
+    //     crossBreed: "" 
+    //   });
+    // }
+
   }
 
   const handleRemoveCrossBreed = () => {
@@ -138,7 +155,8 @@ export default function Breed() {
         <div className="h-full  flex-1 flex flex-col justify-center items-center">
           <Typography
             tag="h2"
-            text="Jackey’s Breed"
+            // text="Jackey’s Breed"
+            text={`${selectedPetName}'s Breed`}
             className="text-primary-dark portrait:mb-[5dvh] landscape:mb-[3dvh] text-center"
           />
 
@@ -253,7 +271,7 @@ export default function Breed() {
           </Button>
           <Button 
             className="gap-2.5 lg:ml-auto lg:mr-[-55px]" 
-            disabled={ (selectedBreed && selectedCrossBreed) ? false : !iDontKnowBreed }
+            disabled={!iDontKnowBreed && !(selectedBreed && selectedCrossBreed)}
             onClick={handleNext}
           >
             Next
