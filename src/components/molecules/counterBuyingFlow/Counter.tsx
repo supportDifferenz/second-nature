@@ -1,37 +1,57 @@
 'use client';
 
 import Typography from '@/components/atoms/typography/Typography';
-import React, { useState } from 'react';
+import React from 'react';
 
 interface CounterProps {
   label: string;
   min?: number;
   max?: number;
-  defaultValue?: number;
+  // defaultValue?: number;
+  value?: number;
+  setValue: (value: number) => void;
 }
 
 export default function Counter({
   label,
-  min = 0,
-  max = 100,
-  defaultValue = 0
+  min,
+  max,
+  // defaultValue,
+  value,
+  setValue,
 }: CounterProps) {
-  const [value, setValue] = useState<number>(defaultValue);
 
-  const handleDecrease = () => {
-    if (value > min) setValue(value - 1);
+  // const [value, setValue] = useState<number>(defaultValue ?? 0);
+  // const [value, setValue] = useState<number>(defaultValue);
+
+  const handleDecrease = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    if ((value ?? 0) > (min ?? 0)) setValue((value ?? 0) - 1);
   };
 
-  const handleIncrease = () => {
-    if (value < max) setValue(value + 1);
+  // const handleDecrease = () => {
+  //   if (value > (min ?? 0)) setValue(value - 1);
+  // };
+
+  const handleIncrease = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    if ((value ?? 0) < (max ?? Infinity)) setValue((value ?? 0) + 1);
   };
+
+  // const handleIncrease = () => {
+  //   if (value < max) setValue(value + 1);
+  // };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
     const newValue = parseInt(e.target.value, 10);
     if (!isNaN(newValue)) {
-      if (newValue >= min && newValue <= max) {
+      if (newValue >= (min ?? 0) && newValue <= (max ?? 100)) {
         setValue(newValue);
       }
+      // if (newValue >= min && newValue <= max) {
+      //   setValue(newValue);
+      // }
     } else {
       setValue(0); // Reset if invalid
     }
