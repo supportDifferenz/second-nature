@@ -10,6 +10,8 @@ type PetDetails = {
   gender?: 'male' | 'female' | '';
   breed?: string;
   crossBreed?: string;
+  ageMonth?: string;
+  ageYear?: string;
 };
 
 type PetStore = {

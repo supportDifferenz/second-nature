@@ -12,16 +12,29 @@ import { usePetStore } from "@/zustand/store/petDataStore";
 
 export default function Age() {
 
-  const [mode, setMode] = useState<"dob" | "approx">("dob");
+  const [ mode, setMode ] = useState<"dob" | "approx">("dob");
 
   const router = useRouter();
 
   // const { pets, selectedPetIndex, setPetDetails } = usePetStore();
-  const { pets, selectedPetIndex } = usePetStore();
+  const { pets, selectedPetIndex, setPetDetails } = usePetStore();
   const selectedPet = selectedPetIndex !== null ? pets[selectedPetIndex] : null; // Handle null case for selectedPetIndex
-  // const currentPetId = selectedPet ? selectedPet.id : null; // Get the current pet ID
+  const currentPetId = selectedPet ? selectedPet.id : null; // Get the current pet ID
+  const ageMonth = selectedPet ? Number(selectedPet.ageMonth) : 0; // Get the current pet ID
+  const ageYear = selectedPet ? Number(selectedPet.ageYear) : 0; // Ensure ageYear is a number
+  
+  const [ month, setMonth ] = useState(ageMonth);
+  const [ year, setYear ] = useState(ageYear);
 
   console.log("Selected Pet in age page is", selectedPet);
+
+  const handleNext = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (month && year &&currentPetId) {
+      setPetDetails(currentPetId, { ageMonth: month.toString(), ageYear: year.toString() });
+      router.push("/weight");
+    }
+  }
 
   return (
     <BuyingFlowLayout step={1}>
@@ -63,8 +76,8 @@ export default function Age() {
             <DateOfBirthPicker />
           ) : (
             <div className="w-full mx-auto items-center justify-center flex flex-col lg:flex-row gap-4">
-              <Counter label="Months" />
-              <Counter label="Years" />
+              <Counter label="Months" min={0} max={12} value={month} setValue={setMonth} />
+              <Counter label="Years" min={0} max={100} value={year} setValue={setYear} />
             </div>
           )}
         </div>
@@ -91,10 +104,7 @@ export default function Age() {
           <Button 
             className="gap-2.5 lg:ml-auto lg:mr-[-55px]" 
             // disabled
-            onClick={(e) => {
-              e.preventDefault();
-              router.push("/weight");
-            }}
+            onClick={handleNext}
           >
             Next
             <div className="w-5 relative">
