@@ -15,6 +15,8 @@ type PetDetails = {
   currentWeight?: number;
   targetWeight?: number;
   activityLevel?: string;
+  protein?: string;
+  bowlSize?: string;
 };
 
 type PetStore = {
