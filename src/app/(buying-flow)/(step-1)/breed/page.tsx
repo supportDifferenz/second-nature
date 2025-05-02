@@ -186,7 +186,7 @@ export default function Breed() {
 
             {/* Add a cross-breed */}
             {
-              !showCrossBreed && (
+              !showCrossBreed && selectedBreed && (
                 <Button 
                   variant={"secondaryBtn"} 
                   type="button" 
