@@ -12,6 +12,8 @@ type PetDetails = {
   crossBreed?: string;
   ageMonth?: string;
   ageYear?: string;
+  currentWeight?: number;
+  targetWeight?: number;
 };
 
 type PetStore = {

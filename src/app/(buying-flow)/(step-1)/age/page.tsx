@@ -20,8 +20,8 @@ export default function Age() {
   const { pets, selectedPetIndex, setPetDetails } = usePetStore();
   const selectedPet = selectedPetIndex !== null ? pets[selectedPetIndex] : null; // Handle null case for selectedPetIndex
   const currentPetId = selectedPet ? selectedPet.id : null; // Get the current pet ID
-  const ageMonth = selectedPet ? Number(selectedPet.ageMonth) : 0; // Get the current pet ID
-  const ageYear = selectedPet ? Number(selectedPet.ageYear) : 0; // Ensure ageYear is a number
+  const ageMonth = selectedPet ? Number(selectedPet.ageMonth) : 0;
+  const ageYear = selectedPet ? Number(selectedPet.ageYear) : 0;
   
   const [ month, setMonth ] = useState(ageMonth);
   const [ year, setYear ] = useState(ageYear);
