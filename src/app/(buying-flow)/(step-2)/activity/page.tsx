@@ -15,6 +15,7 @@ export default function Page() {
   const { pets, selectedPetIndex, setPetDetails } = usePetStore();
   const selectedPet = selectedPetIndex !== null ? pets[selectedPetIndex] : null; // Handle null case for selectedPetIndex
   const currentPetId = selectedPet ? selectedPet.id : null;
+  const selectedPetName = selectedPet ? selectedPet.name : null;
   const activityLevel = selectedPet ? selectedPet.activityLevel : "";
 
   const [selectedActivity, setSelectedActivity] = useState(activityLevel);
@@ -35,7 +36,8 @@ export default function Page() {
       <div className="flex flex-col items-center gap-8 bg-white">
         <Typography
           tag="h3"
-          text="How active is Jackey?"
+          // text="How active is Jackey?"
+          text={`How active is ${selectedPetName}?`}
           className="text-center text-primary-dark"
         />
         <div className="w-full mx-auto items-center justify-center flex flex-wrap lg:gap-[var(--space-20-60)] ">
