@@ -14,12 +14,17 @@ export default function Page() {
   return (
     <BuyingFlowLayout step={2}>
 
-      <div className="flex flex-col items-center gap-8 bg-white"  >
+      <div className="flex flex-col items-center gap-8 bg-white" >
         <Typography tag="h3" text="Add more pets?" className="text-center text-primary-dark" />
-        <div className="mx-auto items-center justify-center flex flex-wrap border border-[#A1A1A1] rounded-full px-[var(--space-80-100)] py-[var( --space-10-15)] gap-2.5 lg:gap-3.5 ">
+        <div 
+          className="mx-auto items-center justify-center flex flex-wrap border border-[#A1A1A1] rounded-full px-[var(--space-80-100)] py-[var( --space-10-15)] gap-2.5 lg:gap-3.5 cursor-pointer"
+          onClick={(e) => {
+            e.preventDefault();
+            router.push("/dog-or-cat");
+          }}
+        >
           <Typography tag="h6" text="Add more pets" className="text-center text-primary-dark" />
-          <Typography tag="h3" text="+" className="text-center text-primary-dark" />
-          
+          <Typography tag="h3" text="+" className="text-center text-primary-dark" />  
         </div>
       </div>
 
