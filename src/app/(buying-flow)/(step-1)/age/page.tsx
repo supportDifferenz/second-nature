@@ -103,7 +103,7 @@ export default function Age() {
           </Button>
           <Button 
             className="gap-2.5 lg:ml-auto lg:mr-[-55px]" 
-            // disabled
+          disabled={ !( month || year )}
             onClick={handleNext}
           >
             Next
