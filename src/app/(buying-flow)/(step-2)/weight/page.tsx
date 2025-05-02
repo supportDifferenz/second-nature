@@ -16,6 +16,7 @@ export default function Page() {
   const { pets, selectedPetIndex, setPetDetails } = usePetStore();
   const selectedPet = selectedPetIndex !== null ? pets[selectedPetIndex] : null; // Handle null case for selectedPetIndex
   const currentPetId = selectedPet ? selectedPet.id : null; // Get the current pet ID
+  const selectedPetName = selectedPet ? selectedPet.name : null;
   const currentWeightFromStore = selectedPet ? selectedPet.currentWeight : 0;
   const targetWeightFromStore = selectedPet ? selectedPet.targetWeight : 0;
 
@@ -36,7 +37,12 @@ export default function Page() {
     <BuyingFlowLayout step={2}>
 
         <div className="flex flex-col items-center gap-8 bg-white"  >
-          <Typography tag="h3" text="Jackey’s Weight and Target Weight" className="text-center text-primary-dark" />
+          <Typography 
+            tag="h3" 
+            // text="Jackey’s Weight and Target Weight"
+            text={`${selectedPetName}'s Weight and Target Weight`}
+            className="text-center text-primary-dark" 
+          />
           <div className="w-full mx-auto items-center justify-center flex flex-col lg:flex-row gap-4">
           <Counter label="Weight" min={0} max={100} value={currentWeight} setValue={setCurrentWeight} />
           <Counter label="Target Weight" min={0} max={100} value={targetWeight} setValue={setTargetWeight} />
