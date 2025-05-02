@@ -14,6 +14,7 @@ type PetDetails = {
   ageYear?: string;
   currentWeight?: number;
   targetWeight?: number;
+  activityLevel?: string;
 };
 
 type PetStore = {

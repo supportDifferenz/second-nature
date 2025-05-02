@@ -6,14 +6,28 @@ import PetActiveCard from "@/components/molecules/petActiveCard/PetActiveCard";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { usePetStore } from "@/zustand/store/petDataStore";
 
 export default function Page() {
 
-  const [selectedPet, setSelectedPet] = useState<
-    "sedentary" | "less-active" | "active" | ""
-  >("");
-
   const router = useRouter();
+
+  const { pets, selectedPetIndex, setPetDetails } = usePetStore();
+  const selectedPet = selectedPetIndex !== null ? pets[selectedPetIndex] : null; // Handle null case for selectedPetIndex
+  const currentPetId = selectedPet ? selectedPet.id : null;
+  const activityLevel = selectedPet ? selectedPet.activityLevel : "";
+
+  const [selectedActivity, setSelectedActivity] = useState(activityLevel);
+
+  const handleNext = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (selectedActivity &&currentPetId) {
+      setPetDetails(currentPetId, { activityLevel: selectedActivity })
+      router.push("/add-more-pets");
+    }
+  }
+
+  console.log("Selected pet in activity page is", selectedPet);
 
   return (
     <BuyingFlowLayout step={2}>
@@ -27,21 +41,21 @@ export default function Page() {
         <div className="w-full mx-auto items-center justify-center flex flex-wrap lg:gap-[var(--space-20-60)] ">
           <PetActiveCard
             image="/images/sedentary.webp"
-            text="Sedentary"
-            selectedPet={selectedPet === "sedentary"}
-            setSelectedCharacter={() => setSelectedPet("sedentary")}
+            text="SEDENTARY"
+            selectedPet={selectedActivity === "sedentary"}
+            setSelectedCharacter={() => setSelectedActivity("sedentary")}
           />
           <PetActiveCard
             image="/images/less-acive.webp"
-            text="Sedentary"
-            selectedPet={selectedPet === "less-active"}
-            setSelectedCharacter={() => setSelectedPet("less-active")}
+            text="LESS-ACTIVE"
+            selectedPet={selectedActivity === "lessActive"}
+            setSelectedCharacter={() => setSelectedActivity("lessActive")}
           />
           <PetActiveCard
             image="/images/active-pet.webp"
-            text="Sedentary"
-            selectedPet={selectedPet === "active"}
-            setSelectedCharacter={() => setSelectedPet("active")}
+            text="ACTIVE"
+            selectedPet={selectedActivity === "active"}
+            setSelectedCharacter={() => setSelectedActivity("active")}
           />
         </div>
       </div>
@@ -68,11 +82,8 @@ export default function Page() {
         </Button>
         <Button 
           className="gap-2.5 lg:ml-auto lg:mr-[-55px]" 
-          // disabled
-          onClick={(e) => {
-            e.preventDefault();
-            router.push("/add-more-pets");
-          }}
+          disabled={!selectedActivity}
+          onClick={handleNext}
         >
           Next
           <div className="w-5 relative">
