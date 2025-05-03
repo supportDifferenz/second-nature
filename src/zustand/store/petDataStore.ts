@@ -15,6 +15,7 @@ type PetDetails = {
   currentWeight?: number;
   targetWeight?: number;
   activityLevel?: string;
+  planType?: string;
   protein?: string;
   bowlSize?: string;
 };

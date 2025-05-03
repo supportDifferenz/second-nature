@@ -1,4 +1,4 @@
-import React,{ useState } from "react";
+import React from "react";
 import Typography from "@/components/atoms/typography/Typography";
 // import PetSelectCard from "@/components/molecules/petSelectCard/PetSelectCard";
 import PetProteinCard from "@/components/molecules/petProteinCard/PetProteinCard";
@@ -12,6 +12,10 @@ interface PlanCardProps {
   description: string;
   price: number;
   isSelected?: boolean;
+  protein?: string;
+  setProtein?: (protein: string) => void;
+  bowlSize?: string;
+  setBowlSize?: (bowlSize: string) => void;
   onClick?: () => void;
 }
 export default function PlanCard({ 
@@ -21,11 +25,13 @@ export default function PlanCard({
   description,
   price,
   isSelected = false,
+  protein,
+  setProtein,
+  bowlSize,
+  setBowlSize,
   onClick
 }: PlanCardProps) {
 
-  const [ selectedProtein, setSelectedProtein ] = useState("");
-  const [ selectedBowlSize, setSelectedBowlSize ] = useState("");
 
   return (
     <div
@@ -67,22 +73,22 @@ export default function PlanCard({
             imageSrc="/icons/card-chicken.svg"
             label="Chicken"
             altText="Chicken"
-            selectedProtein={ selectedProtein === "chicken"}
-            setSelectedProtein={ () => setSelectedProtein("chicken")}
+            selectedProtein={ protein === "chicken"}
+            setSelectedProtein={ () => setProtein && setProtein("chicken")}
           />
           <PetProteinCard
             imageSrc="/icons/card-beef.svg"
             label="beef"
             altText="beef"
-            selectedProtein={ selectedProtein === "beef"}
-            setSelectedProtein={ () => setSelectedProtein("beef")}
+            selectedProtein={ protein === "beef"}
+            setSelectedProtein={ () => setProtein && setProtein("beef")}
           />
           <PetProteinCard
             imageSrc="/icons/card-lamb.svg"
             label="lamb"
             altText="lamb"
-            selectedProtein={ selectedProtein === "lamb"}
-            setSelectedProtein={ () => setSelectedProtein("lamb")}
+            selectedProtein={ protein === "lamb"}
+            setSelectedProtein={ () => setProtein && setProtein("lamb")}
           />
         </div>
       </div>
@@ -97,15 +103,15 @@ export default function PlanCard({
             imageSrc="/icons/full-bowl.svg"
             label="full-bowl"
             altText="full-bowl"
-            selectedBowlSize={ selectedBowlSize === "full"}
-            setSelectedBowlSize={ () => setSelectedBowlSize("full")}
+            selectedBowlSize={ bowlSize === "full"}
+            setSelectedBowlSize={ () => setBowlSize && setBowlSize("full")}
           />
           <PetBowlSizeCard
             imageSrc="/icons/half-bowl.svg"
             label="half-bowl"
             altText="half-bowl"
-            selectedBowlSize={ selectedBowlSize === "half"}
-            setSelectedBowlSize={ () => setSelectedBowlSize("half")}
+            selectedBowlSize={ bowlSize === "half"}
+            setSelectedBowlSize={ () => setBowlSize && setBowlSize("half")}
           />
         </div>
       </div>

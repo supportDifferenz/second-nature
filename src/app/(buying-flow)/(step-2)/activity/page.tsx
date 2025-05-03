@@ -22,7 +22,7 @@ export default function Page() {
 
   const handleNext = (e: React.FormEvent) => {
     e.preventDefault();
-    if (selectedActivity &&currentPetId) {
+    if (selectedActivity && currentPetId) {
       setPetDetails(currentPetId, { activityLevel: selectedActivity })
       router.push("/add-more-pets");
     }

@@ -3,12 +3,12 @@
 import Typography from "@/components/atoms/typography/Typography";
 import PlanCard from "@/components/pageSections/buyingFlow/step3/choosePlan/PlanCard";
 import BuyingFlowLayout from "@/components/templates/BuyingFlowLayout";
-import React,{ useState} from "react";
+import React,{ useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import FAQS from "@/components/organism/faq/FAQS";
-// import { usePetStore } from "@/zustand/store/petDataStore";
+import { usePetStore } from "@/zustand/store/petDataStore";
 
 const faqsData = [
   {
@@ -47,31 +47,102 @@ export default function Page() {
 
   const router = useRouter();
 
-  const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
+  const { pets, selectedPetIndex, setPetDetails } = usePetStore();
+  const selectedPet = selectedPetIndex !== null ? pets[selectedPetIndex] : null; // Handle null case for selectedPetIndex
+  const currentPetId = selectedPet ? selectedPet.id : null;
+  // const selectedPetName = selectedPet ? selectedPet.name : null;
+  const planType = selectedPet ? selectedPet.planType : "";
+  const protein = selectedPet ? selectedPet.protein : "";
+  const bowlSize = selectedPet ? selectedPet.bowlSize : "";
 
-  const plans = [
-    {
-      id: "regular",
-      heading: "Regular Plan",
-      description: "Auto-Renews Every 28 Days",
-      price: 400,
-      bgColour: "bg-[#FDFFF0]" as const,
-      offerBadge: "Enjoy 25% Off Your First Month!"
-    },
-    {
-      id: "trial",
-      heading: "Trial Plan",
-      description: "One-Time Purchase for 7 Days",
-      price: 100,
-      bgColour: "bg-white" as const
+  const [ selectedPlan, setSelectedPlan ] = useState<string>("");
+  // const [ selectedProtein, setSelectedProtein ] = useState<string>("");
+  // const [ selectedBowlSize, setSelectedBowlSize ] = useState<string>("");
+  const [ regularProtein, setRegularProtein ] = useState<string>();
+  const [ regularBowlSize, setRegularBowlSize ] = useState<string>("");
+  const [ trialProtein, setTrialProtein ] = useState<string>("");
+  const [ trialBowlSize, setTrialBowlSize ] = useState<string>("");
+
+  // const plans = [
+  //   {
+  //     id: "regular",
+  //     heading: "Regular Plan",
+  //     description: "Auto-Renews Every 28 Days",
+  //     price: 400,
+  //     bgColour: "bg-[#FDFFF0]" as const,
+  //     offerBadge: "Enjoy 25% Off Your First Month!"
+  //   },
+  //   {
+  //     id: "trial",
+  //     heading: "Trial Plan",
+  //     description: "One-Time Purchase for 7 Days",
+  //     price: 100,
+  //     bgColour: "bg-white" as const
+  //   }
+  // ]
+
+  // useEffect(() => {
+  //   setSelectedProtein("")
+  //   setSelectedBowlSize("")
+  // },[selectedPlan])
+
+  useEffect(() => {
+    if(planType === "regular") {
+      setSelectedPlan("regular");
+      setRegularProtein(protein);
+      setRegularBowlSize(bowlSize || "");
+    } else if(planType === "trial") {
+      setSelectedPlan("trial");
+      setTrialProtein(protein || "");
+      setTrialBowlSize(bowlSize || "");
     }
-  ]
+  },[planType, protein, bowlSize])
+
 
   const handleNext = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    router.push("/add-more-pets");
+
+    if(selectedPlan === "regular" && regularProtein && regularBowlSize && currentPetId) {
+      // setSelectedProtein(regularProtein || "");
+      // setSelectedBowlSize(regularBowlSize);
+      setPetDetails(currentPetId, { planType: selectedPlan, protein: regularProtein, bowlSize: regularBowlSize });
+      router.push("/add-more-pets");
+    } else if(selectedPlan === "trial" && trialProtein && trialBowlSize && currentPetId) {
+      // setSelectedProtein(trialProtein || "");
+      // setSelectedBowlSize(trialBowlSize);
+      setPetDetails(currentPetId, { planType: selectedPlan, protein: trialProtein, bowlSize: trialBowlSize });
+      router.push("/add-more-pets");
+    }
+
+    // if( selectedProtein && selectedBowlSize && currentPetId ) {
+    //   setPetDetails(currentPetId, { planType: selectedPlan, protein: selectedProtein, bowlSize: selectedBowlSize });
+    //   router.push("/add-more-pets");
+    // }
+
+    // if(selectedPlan === "regular" && regularProtein && regularBowlSize && currentPetId) {
+    //   setSelectedProtein(regularProtein || "");
+    //   setSelectedBowlSize(regularBowlSize);
+    //   setPetDetails(currentPetId, { planType: selectedPlan, protein: selectedProtein, bowlSize: selectedBowlSize });
+    //   router.push("/add-more-pets");
+    // } else if(selectedPlan === "trial" && trialProtein && trialBowlSize && currentPetId) {
+    //   setSelectedProtein(trialProtein || "");
+    //   setSelectedBowlSize(trialBowlSize);
+    //   setPetDetails(currentPetId, { planType: selectedPlan, protein: selectedProtein, bowlSize: selectedBowlSize });
+    //   router.push("/add-more-pets");
+    // }
+
   }
 
+  console.log("Selected pet in choose our plans page is", selectedPet);
+  console.log("Current pet id in choose our plans page is", currentPetId);
+  console.log("Selected Plan", selectedPlan);
+  // console.log("Selected Protein", selectedProtein);
+  // console.log("Selected Bowl Size", selectedBowlSize);
+  console.log("Regular Protein", regularProtein);
+  console.log("Regular Bowl Size", regularBowlSize);
+  console.log("Trial Protein", trialProtein);
+  console.log("Trial Bowl Size", trialBowlSize);
+  
   return (
     <BuyingFlowLayout step={2}>
       <div className="flex flex-col gap-16">
@@ -81,14 +152,47 @@ export default function Page() {
           className="text-center text-primary-dark"
         />
         <div className="flex flex-col lg:flex-row justify-center gap-16 lg:gap-[var(--space-20-30)]">
-          {plans.map((plan) => (
+          {/* {plans.map((plan) => (
             <PlanCard
               key={plan.id}
               {...plan}
               isSelected={selectedPlan === plan.id}
               onClick={() => setSelectedPlan(plan.id)}
             />
-          ))}
+          ))} */}
+
+          <PlanCard
+            heading="Regular Plan"
+            description="Auto-Renews Every 28 Days"
+            price={400}
+            bgColour="bg-[#FDFFF0]"
+            offerBadge="Enjoy 25% Off Your First Month!"
+            isSelected={selectedPlan === "regular"}
+            protein={regularProtein}
+            setProtein={setRegularProtein}
+            bowlSize={regularBowlSize}
+            setBowlSize={setRegularBowlSize}
+            onClick={() => {
+              setSelectedPlan("regular");
+              setTrialProtein("");
+              setTrialBowlSize("");
+            }}
+          />
+          <PlanCard bgColour="bg-white" 
+            heading="Trail Plan"
+            description="One-Time Purchase for 7 Days"
+            price={100}
+            isSelected={selectedPlan === "trial"}
+            protein={trialProtein}
+            setProtein={setTrialProtein}
+            bowlSize={trialBowlSize}
+            setBowlSize={setTrialBowlSize}
+            onClick={() => {
+              setSelectedPlan("trial");
+              setRegularProtein("");
+              setRegularBowlSize("");
+            }}
+          />
         </div>
         <Typography
           tag="h3"
@@ -122,7 +226,8 @@ export default function Page() {
         </Button>
         <Button 
           className="gap-2.5 lg:ml-auto lg:mr-[-55px]" 
-          // disabled={!selectedActivity}
+          disabled={ !( (regularProtein && regularBowlSize) || (trialProtein && trialBowlSize)) }
+          // disabled={ !(selectedProtein && selectedBowlSize) }
           onClick={handleNext}
         >
           Next
