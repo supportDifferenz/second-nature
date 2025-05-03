@@ -106,12 +106,12 @@ export default function Page() {
       // setSelectedProtein(regularProtein || "");
       // setSelectedBowlSize(regularBowlSize);
       setPetDetails(currentPetId, { planType: selectedPlan, protein: regularProtein, bowlSize: regularBowlSize });
-      router.push("/add-more-pets");
+      router.push("/user-details");
     } else if(selectedPlan === "trial" && trialProtein && trialBowlSize && currentPetId) {
       // setSelectedProtein(trialProtein || "");
       // setSelectedBowlSize(trialBowlSize);
       setPetDetails(currentPetId, { planType: selectedPlan, protein: trialProtein, bowlSize: trialBowlSize });
-      router.push("/add-more-pets");
+      router.push("/user-details");
     }
 
     // if( selectedProtein && selectedBowlSize && currentPetId ) {
