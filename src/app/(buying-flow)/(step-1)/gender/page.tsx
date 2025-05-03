@@ -12,6 +12,7 @@ import { usePetStore } from "@/zustand/store/petDataStore";
 // type Gender = "Male" | "Female";
 
 const GenderPage = () => {
+  
   const options = ["Male", "Female"];
 
   const router = useRouter();
