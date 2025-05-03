@@ -1,9 +1,10 @@
 "use client";
 import Typography from "@/components/atoms/typography/Typography";
 import BuyingFlowLayout from "@/components/templates/BuyingFlowLayout";
-import { useState } from "react";
-import PetActiveCard from "@/components/molecules/petActiveCard/PetActiveCard";
+// import { useState } from "react";
+// import PetActiveCard from "@/components/molecules/petActiveCard/PetActiveCard";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { usePetStore } from "@/zustand/store/petDataStore";
@@ -12,20 +13,21 @@ export default function Page() {
 
   const router = useRouter();
 
-  const { pets, selectedPetIndex, setPetDetails } = usePetStore();
+  const { pets, selectedPetIndex } = usePetStore();
   const selectedPet = selectedPetIndex !== null ? pets[selectedPetIndex] : null; // Handle null case for selectedPetIndex
-  const currentPetId = selectedPet ? selectedPet.id : null;
-  const selectedPetName = selectedPet ? selectedPet.name : null;
-  const activityLevel = selectedPet ? selectedPet.activityLevel : "";
+//   const currentPetId = selectedPet ? selectedPet.id : null;
+//   const selectedPetName = selectedPet ? selectedPet.name : null;
+//   const activityLevel = selectedPet ? selectedPet.activityLevel : "";
 
-  const [selectedActivity, setSelectedActivity] = useState(activityLevel);
+//   const [selectedActivity, setSelectedActivity] = useState(activityLevel);
 
   const handleNext = (e: React.FormEvent) => {
     e.preventDefault();
-    if (selectedActivity && currentPetId) {
-      setPetDetails(currentPetId, { activityLevel: selectedActivity })
-      router.push("/add-more-pets");
-    }
+    // if (selectedActivity && currentPetId) {
+    //   setPetDetails(currentPetId, { activityLevel: selectedActivity })
+    //   router.push("/add-more-pets");
+    // }
+    router.push("/checkout");
   }
 
   console.log("Selected pet in activity page is", selectedPet);
@@ -36,30 +38,31 @@ export default function Page() {
       <div className="flex flex-col items-center gap-8 bg-white">
         <Typography
           tag="h3"
-          // text="How active is Jackey?"
-          text={`How active is ${selectedPetName}?`}
+          text="Your Premium Pet Meal Journey a Click Away"
           className="text-center text-primary-dark"
         />
-        <div className="w-full mx-auto items-center justify-center flex flex-wrap lg:gap-[var(--space-20-60)] ">
-          <PetActiveCard
-            image="/images/sedentary.webp"
-            text="SEDENTARY"
-            selectedPet={selectedActivity === "sedentary"}
-            setSelectedCharacter={() => setSelectedActivity("sedentary")}
-          />
-          <PetActiveCard
-            image="/images/less-acive.webp"
-            text="LESS-ACTIVE"
-            selectedPet={selectedActivity === "lessActive"}
-            setSelectedCharacter={() => setSelectedActivity("lessActive")}
-          />
-          <PetActiveCard
-            image="/images/active-pet.webp"
-            text="ACTIVE"
-            selectedPet={selectedActivity === "active"}
-            setSelectedCharacter={() => setSelectedActivity("active")}
-          />
-        </div>
+        <Input
+            type="text"
+            variant={"roundedEdgeInputLg"}
+            className="max-w-[800px] w-[90%] sm:w-[50%] lg:w-[40%] block mx-auto bg-white"
+            placeholder="Type Your Name"
+            // value={location}
+            onChange={() => {
+            //   setLocation(e.target.value);
+            //   setError(""); // Clear error when typing
+            }}
+        />
+        <Input
+            type="text"
+            variant={"roundedEdgeInputLg"}
+            className="max-w-[800px] w-[90%] sm:w-[50%] lg:w-[40%] block mx-auto bg-white"
+            placeholder="Type Your Mail"
+            // value={location}
+            onChange={() => {
+            //   setLocation(e.target.value);
+            //   setError(""); // Clear error when typing
+            }}
+        />
       </div>
 
       {/* Navigation */}
@@ -69,7 +72,7 @@ export default function Page() {
           className="gap-2.5  lg:ml-[-55px]"
           onClick={(e) => {
             e.preventDefault();
-            router.push("/weight");
+            router.push("/choose-our-plans");
           }}
         >
           <div className="w-5 relative">
@@ -84,7 +87,7 @@ export default function Page() {
         </Button>
         <Button 
           className="gap-2.5 lg:ml-auto lg:mr-[-55px]" 
-          disabled={!selectedActivity}
+        //   disabled={!selectedActivity}
           onClick={handleNext}
         >
           Next
