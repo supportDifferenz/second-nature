@@ -144,7 +144,7 @@ export default function Page() {
   console.log("Trial Bowl Size", trialBowlSize);
   
   return (
-    <BuyingFlowLayout step={2}>
+    <BuyingFlowLayout step={3}>
       <div className="flex flex-col gap-16">
         <Typography
           tag="h3"

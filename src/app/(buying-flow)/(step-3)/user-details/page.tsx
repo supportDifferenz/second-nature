@@ -33,7 +33,7 @@ export default function Page() {
   console.log("Selected pet in activity page is", selectedPet);
 
   return (
-    <BuyingFlowLayout step={2}>
+    <BuyingFlowLayout step={3}>
 
       <div className="flex flex-col items-center gap-8 bg-white">
         <Typography
