@@ -47,7 +47,7 @@ export default function Page() {
 
   const router = useRouter();
 
-  const { pets, selectedPetIndex, setPetDetails } = usePetStore();
+  const { pets, selectedPetIndex, noOfPets, setPetDetails } = usePetStore();
   const selectedPet = selectedPetIndex !== null ? pets[selectedPetIndex] : null; // Handle null case for selectedPetIndex
   const currentPetId = selectedPet ? selectedPet.id : null;
   // const selectedPetName = selectedPet ? selectedPet.name : null;
@@ -230,7 +230,7 @@ export default function Page() {
           // disabled={ !(selectedProtein && selectedBowlSize) }
           onClick={handleNext}
         >
-          Next
+          { (selectedPetIndex ?? 0) < noOfPets - 1 ? "Next" : "Checkout"}
           <div className="w-5 relative">
             <Image
               src="/icons/arrow-next-long.svg"
