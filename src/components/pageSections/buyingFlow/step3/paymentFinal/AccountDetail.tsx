@@ -1,12 +1,24 @@
+"use client";
+
 import Typography from "@/components/atoms/typography/Typography";
 import AlertBar from "@/components/molecules/alertBar/AlertBar";
 import { InputLabeled } from "@/components/molecules/inputLabeled/InputLabeled";
 import { Button } from "@/components/ui/button";
-import React from "react";
+import React,{ useState} from "react";
+import ShippingDetail from "./ShippingDetail";
 
 export default function AccountDetail() {
+
+  const [ showShippingDetails, setShowShippingDetails ] = useState(false);
+
+  const handleContinue = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setShowShippingDetails(true);
+  }
+
   return (
     <div className="flex flex-col gap-[var(--space-30-60)]">
+
       <div>
         <Typography
           tag="h5"
@@ -27,8 +39,16 @@ export default function AccountDetail() {
         <AlertBar text="Email me with exclusive offers, new arrival alerts and cart reminders." />
         <InputLabeled label="Password" placeholder="Enter your password" variant="roundedEdgeInput" type="password"/>
         <InputLabeled label="Repeat Password" placeholder="Repeat your password" variant="roundedEdgeInput" type="password"/>
-        <Button className="w-full">Continue</Button>
+        <Button 
+          className="w-full"
+          onClick={handleContinue}
+        >
+          Continue
+        </Button>
       </form>
+
+      { showShippingDetails && <ShippingDetail /> }
+      
     </div>
   );
 }

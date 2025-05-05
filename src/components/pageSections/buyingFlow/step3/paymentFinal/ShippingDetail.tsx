@@ -3,15 +3,25 @@ import AlertBar from '@/components/molecules/alertBar/AlertBar'
 import { InputLabeled } from '@/components/molecules/inputLabeled/InputLabeled'
 import { Input } from '@/components/ui/input'
 import React from 'react'
+import BillingDetails from './BillingDetails'
 
 export default function ShippingDetail() {
+
+  // const [ showBillingDetails, setShowBillingDetails ] = useState(false);
+
+  // const handleContinue = (e: React.MouseEvent<HTMLButtonElement>) => {
+  //   e.preventDefault();
+  //   setShowBillingDetails(false);
+  // }
+
   return (
     <div className="flex flex-col gap-[var(--space-30-60)]">
-        <Typography
-          tag="h5"
-          text="Shipping Details"
-          className="uppercase text-primary-dark"
-        />
+
+      <Typography
+        tag="h5"
+        text="Shipping Details"
+        className="uppercase text-primary-dark"
+      />
       <form className="flex flex-col gap-[var(--space-30-52)]">
         <InputLabeled label="First Name" placeholder="Enter your first name" variant="roundedEdgeInput" />
         <InputLabeled label="Last Name" placeholder="Enter your last name" variant="roundedEdgeInput" />
@@ -25,6 +35,9 @@ export default function ShippingDetail() {
 
         <AlertBar text="Email me with exclusive offers, new arrival alerts and cart reminders." />
       </form>
+
+      <BillingDetails />
+        
     </div>
   )
 }
