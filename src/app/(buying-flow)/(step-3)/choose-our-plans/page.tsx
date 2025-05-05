@@ -106,12 +106,12 @@ export default function Page() {
       // setSelectedProtein(regularProtein || "");
       // setSelectedBowlSize(regularBowlSize);
       setPetDetails(currentPetId, { planType: selectedPlan, protein: regularProtein, bowlSize: regularBowlSize });
-      router.push("/user-details");
+      router.push("/add-more-pets");
     } else if(selectedPlan === "trial" && trialProtein && trialBowlSize && currentPetId) {
       // setSelectedProtein(trialProtein || "");
       // setSelectedBowlSize(trialBowlSize);
       setPetDetails(currentPetId, { planType: selectedPlan, protein: trialProtein, bowlSize: trialBowlSize });
-      router.push("/user-details");
+      router.push("/add-more-pets");
     }
 
     // if( selectedProtein && selectedBowlSize && currentPetId ) {
@@ -211,7 +211,7 @@ export default function Page() {
           className="gap-2.5  lg:ml-[-55px]"
           onClick={(e) => {
             e.preventDefault();
-            router.push("/add-more-pets");
+            router.push("/activity");
           }}
         >
           <div className="w-5 relative">

@@ -6,10 +6,23 @@ import React from 'react'
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { usePetStore } from "@/zustand/store/petDataStore";
 
 export default function Page() {
 
   const router = useRouter();
+
+  const { selectedPetIndex, noOfPets, setSelectedPetIndex } = usePetStore();
+
+  const handleNextPet = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.preventDefault();
+
+    if((selectedPetIndex ?? 0) < noOfPets - 1){
+      setSelectedPetIndex((selectedPetIndex ?? 0) + 1);
+      router.push("/gender")
+    }
+    
+  }
 
   return (
     <BuyingFlowLayout step={2}>
@@ -27,15 +40,29 @@ export default function Page() {
             <Typography tag="h6" text="Add more pets" className="text-center text-primary-dark" />
             <Typography tag="h3" text="+" className="text-center text-primary-dark" />  
           </div>
-          <div 
+          { 
+            (selectedPetIndex ?? 0) < noOfPets - 1
+              &&<div 
+                  className="mx-auto items-center justify-center flex flex-wrap border border-[#A1A1A1] rounded-full px-[var(--space-80-100)] py-[var( --space-10-15)] gap-2.5 lg:gap-3.5 cursor-pointer"
+                  onClick={handleNextPet}
+                >
+                  <Typography tag="h6" text="Next Pet" className="text-center text-primary-dark" />
+                  {/* <Typography tag="h3" text="+" className="text-center text-primary-dark" />   */}
+                  <div className="w-5 relative">
+                    <Image
+                      src="/icons/nextIcon.svg"
+                      alt="icon"
+                      fill
+                      className="!static w-full object-contain"
+                    />
+                  </div>
+                </div>
+          }
+          {/* <div 
             className="mx-auto items-center justify-center flex flex-wrap border border-[#A1A1A1] rounded-full px-[var(--space-80-100)] py-[var( --space-10-15)] gap-2.5 lg:gap-3.5 cursor-pointer"
-            onClick={(e) => {
-              e.preventDefault();
-              router.push("/dog-or-cat");
-            }}
+            onClick={handleNextPet}
           >
             <Typography tag="h6" text="Next Pet" className="text-center text-primary-dark" />
-            {/* <Typography tag="h3" text="+" className="text-center text-primary-dark" />   */}
             <div className="w-5 relative">
               <Image
                 src="/icons/nextIcon.svg"
@@ -44,7 +71,7 @@ export default function Page() {
                 className="!static w-full object-contain"
               />
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
 
@@ -55,10 +82,10 @@ export default function Page() {
           // disabled
           onClick={(e) => {
             e.preventDefault();
-            router.push("/choose-our-plans");
+            router.push("/checkout");
           }}
         >
-          Choose Plan
+          Checkout
           <div className="w-5 relative">
             <Image
               src="/icons/arrow-next-long.svg"
