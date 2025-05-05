@@ -2,11 +2,21 @@ import Typography from "@/components/atoms/typography/Typography";
 import { InputLabeled } from "@/components/molecules/inputLabeled/InputLabeled";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import React from "react";
+import React, { useState} from "react";
+import Payment from "./Payment";
 
 export default function BillingDetails() {
+
+  const [ showPaymentDetails, setShowPaymentDetails ] = useState(false);
+
+  const handleContinue = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setShowPaymentDetails(true);
+  }
+
   return (
     <div className="flex flex-col gap-[var(--space-30-60)]">
+
       <Typography
         tag="h5"
         text="Shipping Details"
@@ -46,8 +56,16 @@ export default function BillingDetails() {
             className="bg-white"
           />
         </div>
-        <Button className="w-full">Continue</Button>
+        <Button 
+          className="w-full"
+          onClick={handleContinue}
+        >
+          Continue
+        </Button>
       </form>
+
+      { showPaymentDetails && <Payment /> }
+
     </div>
   );
 }

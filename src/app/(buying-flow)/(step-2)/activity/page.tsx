@@ -24,7 +24,7 @@ export default function Page() {
     e.preventDefault();
     if (selectedActivity && currentPetId) {
       setPetDetails(currentPetId, { activityLevel: selectedActivity })
-      router.push("/add-more-pets");
+      router.push("/choose-our-plans");
     }
   }
 

@@ -10,8 +10,8 @@ type PetDetails = {
   gender?: 'male' | 'female' | '';
   breed?: string;
   crossBreed?: string;
-  ageMonth?: string;
-  ageYear?: string;
+  ageMonth?: number;
+  ageYear?: number;
   currentWeight?: number;
   targetWeight?: number;
   activityLevel?: string;
@@ -25,6 +25,7 @@ type PetStore = {
   pets: PetDetails[];
   currentPetId: string | null;
   selectedPetIndex: number | null;
+  noOfPets: number;
   
   setLocation: (location: string) => void;
   setCurrentPet: (petId: string) => void;
@@ -41,6 +42,7 @@ export const usePetStore = create<PetStore>()(
       pets: [],
       currentPetId: null,
       selectedPetIndex: null,
+      noOfPets: 0,
       
       setLocation: (location) => {
         set((state) => ({
@@ -49,6 +51,7 @@ export const usePetStore = create<PetStore>()(
             ...pet,
             location,
           })),
+          noOfPets: state.pets.length
         }));
       },
 
@@ -61,6 +64,7 @@ export const usePetStore = create<PetStore>()(
               ? { ...pet, ...details }
               : pet
           ),
+          noOfPets: state.pets.length
         })),
 
       addNewPet: ({ catOrDog, name }) => {
@@ -77,6 +81,7 @@ export const usePetStore = create<PetStore>()(
           return {
             pets: [...state.pets, newPet],
             currentPetId: newPet.id,
+            noOfPets: state.pets.length + 1
           };
         });
         return newPetId;
@@ -89,6 +94,7 @@ export const usePetStore = create<PetStore>()(
           return {
             pets: newPets,
             currentPetId: newCurrentPetId,
+            noOfPets: newPets.length
           };
         }),
 

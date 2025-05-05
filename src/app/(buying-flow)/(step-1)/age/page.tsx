@@ -21,8 +21,8 @@ export default function Age() {
   const selectedPet = selectedPetIndex !== null ? pets[selectedPetIndex] : null; // Handle null case for selectedPetIndex
   const currentPetId = selectedPet ? selectedPet.id : null; // Get the current pet ID
   const selectedPetName = selectedPet ? selectedPet.name : null;
-  const ageMonth = selectedPet ? Number(selectedPet.ageMonth) : 0;
-  const ageYear = selectedPet ? Number(selectedPet.ageYear) : 0;
+  const ageMonth = selectedPet ? selectedPet.ageMonth : 0;
+  const ageYear = selectedPet ? selectedPet.ageYear : 0;
   
   const [ month, setMonth ] = useState(ageMonth);
   const [ year, setYear ] = useState(ageYear);
@@ -32,7 +32,7 @@ export default function Age() {
   const handleNext = (e: React.FormEvent) => {
     e.preventDefault();
     if (month && year &&currentPetId) {
-      setPetDetails(currentPetId, { ageMonth: month.toString(), ageYear: year.toString() });
+      setPetDetails(currentPetId, { ageMonth: month, ageYear: year });
       router.push("/weight");
     }
   }

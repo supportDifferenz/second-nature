@@ -47,7 +47,7 @@ export default function Page() {
 
   const router = useRouter();
 
-  const { pets, selectedPetIndex, setPetDetails } = usePetStore();
+  const { pets, selectedPetIndex, noOfPets, setPetDetails } = usePetStore();
   const selectedPet = selectedPetIndex !== null ? pets[selectedPetIndex] : null; // Handle null case for selectedPetIndex
   const currentPetId = selectedPet ? selectedPet.id : null;
   // const selectedPetName = selectedPet ? selectedPet.name : null;
@@ -106,12 +106,12 @@ export default function Page() {
       // setSelectedProtein(regularProtein || "");
       // setSelectedBowlSize(regularBowlSize);
       setPetDetails(currentPetId, { planType: selectedPlan, protein: regularProtein, bowlSize: regularBowlSize });
-      router.push("/user-details");
+      router.push("/add-more-pets");
     } else if(selectedPlan === "trial" && trialProtein && trialBowlSize && currentPetId) {
       // setSelectedProtein(trialProtein || "");
       // setSelectedBowlSize(trialBowlSize);
       setPetDetails(currentPetId, { planType: selectedPlan, protein: trialProtein, bowlSize: trialBowlSize });
-      router.push("/user-details");
+      router.push("/add-more-pets");
     }
 
     // if( selectedProtein && selectedBowlSize && currentPetId ) {
@@ -144,7 +144,7 @@ export default function Page() {
   console.log("Trial Bowl Size", trialBowlSize);
   
   return (
-    <BuyingFlowLayout step={2}>
+    <BuyingFlowLayout step={3}>
       <div className="flex flex-col gap-16">
         <Typography
           tag="h3"
@@ -211,7 +211,7 @@ export default function Page() {
           className="gap-2.5  lg:ml-[-55px]"
           onClick={(e) => {
             e.preventDefault();
-            router.push("/add-more-pets");
+            router.push("/activity");
           }}
         >
           <div className="w-5 relative">
@@ -230,7 +230,7 @@ export default function Page() {
           // disabled={ !(selectedProtein && selectedBowlSize) }
           onClick={handleNext}
         >
-          Next
+          { (selectedPetIndex ?? 0) < noOfPets - 1 ? "Next" : "Checkout"}
           <div className="w-5 relative">
             <Image
               src="/icons/arrow-next-long.svg"
