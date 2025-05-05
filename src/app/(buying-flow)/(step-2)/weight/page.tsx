@@ -36,7 +36,7 @@ export default function Page() {
   return (
     <BuyingFlowLayout step={2}>
 
-        <div className="flex flex-col items-center gap-8 bg-white"  >
+        <div className="flex flex-col items-center gap-8 bg-white">
           <Typography 
             tag="h3" 
             // text="Jackey’s Weight and Target Weight"
@@ -50,7 +50,7 @@ export default function Page() {
         </div>
 
         {/* Navigation */}
-        <div className="pb-[3dvh] flex  justify-between items-center gap-4 lg:gap-0 lg:items-end pt-[3dvh]">
+        <div className="pb-[3dvh] flex justify-between items-center gap-4 lg:gap-0 lg:items-end pt-[3dvh]">
           <Button
             variant={"outlineSecondaryBtn"}
             className="gap-2.5  lg:ml-[-55px]"
