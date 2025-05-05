@@ -6,7 +6,7 @@ import BuyingFlowLayout from "@/components/templates/BuyingFlowLayout";
 export default function PaymentFinal() {
   return (
     <BuyingFlowLayout step={3}>
-      <div className="flex flex-col lg:flex-row gap-[30.84vw] lg:gap-[3.8vw]  px-[4.67vw] lg:px-[9.89vw]">
+      <div className="flex flex-col lg:flex-row gap-[30.84vw] lg:gap-[3.8vw] px-[4.67vw] lg:px-[9.89vw]">
         <div className="order-2 lg:order-1 flex-1">
           <FormSection />
         </div>

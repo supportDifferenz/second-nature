@@ -17,7 +17,7 @@ export default function Counter({
   min,
   max,
   // defaultValue,
-  value,
+  value = 0,
   setValue,
 }: CounterProps) {
 
