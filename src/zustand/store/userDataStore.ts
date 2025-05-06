@@ -2,8 +2,11 @@ import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 
 type UserDetails = {
-  name: string;
-  email: string;
+  firstName: string;
+  lastName: string;
+  emailAddress: string;
+  phoneNumber: string;
+  password: string;
 };
 
 type UserStore = {
@@ -18,8 +21,11 @@ export const useUserStore = create<UserStore>()(
   persist(
     (set) => ({
       userDetails: {
-        name: "",
-        email: ""
+        firstName: "",
+        lastName: "",
+        emailAddress: "",
+        phoneNumber: "",
+        password: "",
       },
       
       // Set partial user details (can update just name or just email)
@@ -35,8 +41,11 @@ export const useUserStore = create<UserStore>()(
       clearUserDetails: () => 
         set({
           userDetails: {
-            name: "",
-            email: ""
+            firstName: "",
+            lastName: "",
+            emailAddress: "",
+            phoneNumber: "",
+            password: "",
           }
         })
     }),
