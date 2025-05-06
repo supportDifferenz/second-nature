@@ -4,7 +4,7 @@ import Typography from "@/components/atoms/typography/Typography";
 import AlertBar from "@/components/molecules/alertBar/AlertBar";
 import { InputLabeled } from "@/components/molecules/inputLabeled/InputLabeled";
 import { Button } from "@/components/ui/button";
-import React,{ useState} from "react";
+import React,{ useState } from "react";
 import ShippingDetail from "./ShippingDetail";
 import { useUserStore } from "@/zustand/store/userDataStore";
 import { useCreateUserHook } from "@/hooks/userHooks/createUserHook";
@@ -13,8 +13,9 @@ export default function AccountDetail() {
 
   const { userDetails, setUserDetails } = useUserStore();
   const { mutate } = useCreateUserHook();
-
   const [ showShippingDetails, setShowShippingDetails ] = useState(false);
+  const [ accountDetailsError, setAccountDetailsError ] = useState("");
+  const [ isLoading, setIsLoading ] = useState(false);
 
   const [formData, setFormData] = useState({
     firstName: userDetails.firstName || "",
@@ -112,6 +113,8 @@ export default function AccountDetail() {
 
     e.preventDefault();
 
+    setIsLoading(true);
+
     if (validateForm()) {
 
       setUserDetails({
@@ -134,9 +137,13 @@ export default function AccountDetail() {
           onSuccess: (data) => {
             console.log("Create user successful", data);
             setShowShippingDetails(true);
+            setAccountDetailsError("");
+            setIsLoading(false);
           },
           onError: (error) => {
             console.error("Create user failed", error);
+            setAccountDetailsError((error as { response?: { data?: { message?: string } } })?.response?.data?.message || "An unexpected error occurred");
+            setIsLoading(false);
           },
           // onSettled: () => {
           //   setIsLoading(false);
@@ -239,10 +246,16 @@ export default function AccountDetail() {
         <Button 
           type="submit"
           className="w-full"
+          disabled={ !(formData.firstName && formData.lastName && formData.email && formData.mobile && formData.password === formData.repeatPassword) }
           // onClick={handleContinue}
         >
-          Continue
+          { isLoading ? "Loading..." : "Continue" }
         </Button>
+        <Typography
+          tag="p"
+          text={accountDetailsError}
+          className="text-sm text-red-500 block"
+        />
       </form>
 
       { showShippingDetails && <ShippingDetail /> }
