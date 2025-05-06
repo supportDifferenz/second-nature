@@ -4,25 +4,25 @@ import React from 'react'
 
 type AlertBarProps = {
   text: string
-  selected?: boolean
-  setSelected?: (selected: boolean) => void
+  selectedCheckBox?: boolean
+  setSelectedCheckBox?: (selected: boolean) => void
 }
 
-export default function AlertBar({ text, selected, setSelected }: AlertBarProps) {
+export default function AlertBar({ text, selectedCheckBox, setSelectedCheckBox }: AlertBarProps) {
 
   return (
     <div className='flex items-center gap-3 bg-[#F7F9EB] rounded-2xl py-[var(--space-15-30)] px-5'>
-          { selected 
+          { selectedCheckBox
             ? 
               <div 
                 className="w-[5.6vw] sm:w-[1.45vw]"
-                onClick={() => setSelected && setSelected(!selected)}
+                onClick={() => setSelectedCheckBox && setSelectedCheckBox(!selectedCheckBox)}
               >
                 <Image src="/icons/unchecked.svg" alt="tick" fill className="!static" />
               </div>
             : <div 
                 className="w-[5.6vw] sm:w-[1.45vw]"
-                onClick={() => setSelected && setSelected(!selected)}
+                onClick={() => setSelectedCheckBox && setSelectedCheckBox(!selectedCheckBox)}
               >
                 <Image src="/icons/checked.svg" alt="tick" fill className="!static" />
               </div>

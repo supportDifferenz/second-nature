@@ -16,7 +16,7 @@ export default function AccountDetail() {
   const [ showShippingDetails, setShowShippingDetails ] = useState(false);
   const [ accountDetailsError, setAccountDetailsError ] = useState("");
   const [ isLoading, setIsLoading ] = useState(false);
-  const [ selected, setSelected ] = useState(false);
+  const [ selectedCheckBox, setSelectedCheckBox ] = useState(false);
 
   const [formData, setFormData] = useState({
     firstName: userDetails.firstName || "",
@@ -224,8 +224,8 @@ export default function AccountDetail() {
         />
         <AlertBar 
           text="Email me with exclusive offers, new arrival alerts and cart reminders."
-          selected={selected}
-          setSelected={setSelected}
+          selectedCheckBox={selectedCheckBox}
+          setSelectedCheckBox={setSelectedCheckBox}
         />
         <InputLabeled 
           name="password"

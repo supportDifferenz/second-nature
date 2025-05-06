@@ -14,7 +14,7 @@ export default function ShippingDetail() {
   //   setShowBillingDetails(false);
   // }
 
-  const [selected, setSelected] = useState(false);
+  const [selectedCheckBox, setSelectedCheckBox] = useState(false);
 
   return (
     <div className="flex flex-col gap-[var(--space-30-60)]">
@@ -35,11 +35,11 @@ export default function ShippingDetail() {
             <Input variant='roundedEdgeInput' placeholder='Municipality*' className='bg-white'/>
         </div>
 
-        <AlertBar text="My billing details different from shipping address" selected={selected} setSelected={setSelected} />
+        <AlertBar text="My billing details different from shipping address" selectedCheckBox={selectedCheckBox} setSelectedCheckBox={setSelectedCheckBox} />
       </form>
 
       {
-        !selected && <BillingDetails />
+        !selectedCheckBox && <BillingDetails />
       }
 
       {/* <BillingDetails /> */}
