@@ -38,7 +38,11 @@ export default function ShippingDetail() {
         <AlertBar text="My billing details different from shipping address" selected={selected} setSelected={setSelected} />
       </form>
 
-      <BillingDetails />
+      {
+        !selected && <BillingDetails />
+      }
+
+      {/* <BillingDetails /> */}
         
     </div>
   )
