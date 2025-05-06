@@ -145,9 +145,9 @@ export default function AccountDetail() {
             setAccountDetailsError((error as { response?: { data?: { message?: string } } })?.response?.data?.message || "An unexpected error occurred");
             setIsLoading(false);
           },
-          // onSettled: () => {
-          //   setIsLoading(false);
-          // },
+          onSettled: () => {
+            setIsLoading(false);
+          },
         }
       );
 
