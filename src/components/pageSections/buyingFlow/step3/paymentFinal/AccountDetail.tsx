@@ -16,6 +16,7 @@ export default function AccountDetail() {
   const [ showShippingDetails, setShowShippingDetails ] = useState(false);
   const [ accountDetailsError, setAccountDetailsError ] = useState("");
   const [ isLoading, setIsLoading ] = useState(false);
+  const [ selected, setSelected ] = useState(false);
 
   const [formData, setFormData] = useState({
     firstName: userDetails.firstName || "",
@@ -127,6 +128,7 @@ export default function AccountDetail() {
 
       mutate(
         {
+          ...userDetails,
           firstname: formData.firstName,
           lastname: formData.lastName,
           emailId: formData.email,
@@ -139,6 +141,8 @@ export default function AccountDetail() {
             setShowShippingDetails(true);
             setAccountDetailsError("");
             setIsLoading(false);
+            console.log("User ID is",data.result.userId);
+            setUserDetails({ ...userDetails, userId: data.result.userId });
           },
           onError: (error) => {
             console.error("Create user failed", error);
@@ -219,7 +223,9 @@ export default function AccountDetail() {
           error={errors.mobile} 
         />
         <AlertBar 
-          text="Email me with exclusive offers, new arrival alerts and cart reminders." 
+          text="Email me with exclusive offers, new arrival alerts and cart reminders."
+          selected={selected}
+          setSelected={setSelected}
         />
         <InputLabeled 
           name="password"

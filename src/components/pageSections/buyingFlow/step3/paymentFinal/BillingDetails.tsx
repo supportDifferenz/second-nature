@@ -19,7 +19,7 @@ export default function BillingDetails() {
 
       <Typography
         tag="h5"
-        text="Shipping Details"
+        text="Billing Details"
         className="uppercase text-primary-dark"
       />
       <form className="flex flex-col gap-[var(--space-30-52)]  pb-14 border-b border-secondary-2">

@@ -2,7 +2,7 @@ import Typography from '@/components/atoms/typography/Typography'
 import AlertBar from '@/components/molecules/alertBar/AlertBar'
 import { InputLabeled } from '@/components/molecules/inputLabeled/InputLabeled'
 import { Input } from '@/components/ui/input'
-import React from 'react'
+import React,{ useState} from 'react'
 import BillingDetails from './BillingDetails'
 
 export default function ShippingDetail() {
@@ -13,6 +13,8 @@ export default function ShippingDetail() {
   //   e.preventDefault();
   //   setShowBillingDetails(false);
   // }
+
+  const [selected, setSelected] = useState(false);
 
   return (
     <div className="flex flex-col gap-[var(--space-30-60)]">
@@ -33,7 +35,7 @@ export default function ShippingDetail() {
             <Input variant='roundedEdgeInput' placeholder='Municipality*' className='bg-white'/>
         </div>
 
-        <AlertBar text="Email me with exclusive offers, new arrival alerts and cart reminders." />
+        <AlertBar text="My billing details different from shipping address" selected={selected} setSelected={setSelected} />
       </form>
 
       <BillingDetails />

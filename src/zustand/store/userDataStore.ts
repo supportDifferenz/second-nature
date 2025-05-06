@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 
 type UserDetails = {
+  userId: string;
   firstName: string;
   lastName: string;
   emailAddress: string;
@@ -21,6 +22,7 @@ export const useUserStore = create<UserStore>()(
   persist(
     (set) => ({
       userDetails: {
+        userId: "",
         firstName: "",
         lastName: "",
         emailAddress: "",
@@ -41,6 +43,7 @@ export const useUserStore = create<UserStore>()(
       clearUserDetails: () => 
         set({
           userDetails: {
+            userId: "",
             firstName: "",
             lastName: "",
             emailAddress: "",
