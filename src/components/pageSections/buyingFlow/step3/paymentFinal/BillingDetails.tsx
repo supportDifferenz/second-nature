@@ -88,6 +88,11 @@ export default function BillingDetails({ billingFormData, setBillingFormData, is
 
     // if (isSynced) return; // Prevent changes when synced
     const { name, value } = e.target;
+
+    if (name === "mobile" && /[^0-9]/.test(value)) {
+      return; // Block input if non-numeric
+    }
+    
     setBillingFormData(prev => ({ ...prev, [name]: value }));
     
     // Validate on change if the field has been touched
@@ -163,7 +168,7 @@ export default function BillingDetails({ billingFormData, setBillingFormData, is
           onChange={handleChange}
           onBlur={handleBlur}
           error={billingErrors.firstName}
-          disabled={!isSynced}
+          disabled={isSynced}
         />
         <InputLabeled
           name="lastName"
@@ -174,18 +179,19 @@ export default function BillingDetails({ billingFormData, setBillingFormData, is
           onChange={handleChange}
           onBlur={handleBlur}
           error={billingErrors.lastName}
-          disabled={!isSynced}
+          disabled={isSynced}
         />
         <InputLabeled
           name="mobile"
           label="Mobile Number"
           placeholder="Enter your mobile number"
           variant="roundedEdgeInput"
+          type="tel"
           value={billingFormData.mobile}
           onChange={handleChange}
           onBlur={handleBlur}
           error={billingErrors.mobile}
-          disabled={!isSynced}
+          disabled={isSynced}
         />
 
         <div className="flex flex-col gap-[var(--space-8-17)]">
@@ -198,7 +204,7 @@ export default function BillingDetails({ billingFormData, setBillingFormData, is
             onChange={handleChange}
             onBlur={handleBlur}
             error={billingErrors.address}
-            disabled={!isSynced}
+            disabled={isSynced}
           />
           <InputLabeled
             name="aptSuite"
@@ -208,7 +214,7 @@ export default function BillingDetails({ billingFormData, setBillingFormData, is
             value={billingFormData.aptSuite}
             onChange={handleChange}
             onBlur={handleBlur}
-            disabled={!isSynced}
+            disabled={isSynced}
           />
           {/* <Input
             variant="roundedEdgeInput"
@@ -224,7 +230,7 @@ export default function BillingDetails({ billingFormData, setBillingFormData, is
             onChange={handleChange}
             onBlur={handleBlur}
             error={billingErrors.municipality}
-            disabled={!isSynced}
+            disabled={isSynced}
           />
           {/* <Input
             variant="roundedEdgeInput"

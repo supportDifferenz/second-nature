@@ -18,13 +18,13 @@ export default function AlertBar({ text, selectedCheckBox, setSelectedCheckBox }
                 className="w-[5.6vw] sm:w-[1.45vw]"
                 onClick={() => setSelectedCheckBox && setSelectedCheckBox(!selectedCheckBox)}
               >
-                <Image src="/icons/unchecked.svg" alt="tick" fill className="!static" />
+                <Image src="/icons/checked.svg" alt="tick" fill className="!static" />
               </div>
             : <div 
                 className="w-[5.6vw] sm:w-[1.45vw]"
                 onClick={() => setSelectedCheckBox && setSelectedCheckBox(!selectedCheckBox)}
               >
-                <Image src="/icons/checked.svg" alt="tick" fill className="!static" />
+                <Image src="/icons/unchecked.svg" alt="tick" fill className="!static" />
               </div>
           }
         <div>

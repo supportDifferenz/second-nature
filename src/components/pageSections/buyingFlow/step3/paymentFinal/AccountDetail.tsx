@@ -65,7 +65,13 @@ export default function AccountDetail() {
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+
     const { name, value } = e.target;
+
+    if (name === "mobile" && /[^0-9]/.test(value)) {
+      return; // Block input if non-numeric
+    }
+
     setFormData(prev => ({ ...prev, [name]: value }));
     
     // Validate on change if the field has been touched
@@ -217,7 +223,7 @@ export default function AccountDetail() {
           name="mobile"
           label="Mobile Number" 
           placeholder="Enter your mobile number" 
-          type="number"
+          type="tel"
           variant="roundedEdgeInput"
           value={formData.mobile}
           onChange={handleChange}

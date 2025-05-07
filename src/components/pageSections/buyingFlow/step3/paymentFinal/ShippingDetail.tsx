@@ -36,7 +36,7 @@ export default function ShippingDetail() {
   //   setShowBillingDetails(false);
   // }
 
-  const [selectedCheckBox, setSelectedCheckBox] = useState(false);
+  const [selectedCheckBox, setSelectedCheckBox] = useState(true);
   const [shippingErrors, setShippingErrors] = useState<Record<string, string>>({});
   const [billingErrors, setBillingErrors] = useState<Record<string, string>>({});
   const [touched, setTouched] = useState<Record<string, boolean>>({});
@@ -67,9 +67,9 @@ export default function ShippingDetail() {
 
   // Sync billing data when checkbox is unchecked
   useEffect(() => {
-    if (selectedCheckBox) {
+    if (!selectedCheckBox) {
       setBillingFormData({ ...shippingFormData });
-    } else if(!selectedCheckBox) {
+    } else if(selectedCheckBox) {
       setBillingFormData({
         firstName: "",
         lastName: "",
@@ -108,13 +108,20 @@ export default function ShippingDetail() {
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+
     const { name, value } = e.target;
+
+    if (name === "mobile" && /[^0-9]/.test(value)) {
+      return; // Block input if non-numeric
+    }
+
     setShippingFormData(prev => ({ ...prev, [name]: value }));
     
     // Validate on change if the field has been touched
     if (touched[name]) {
       setShippingErrors(prev => ({ ...prev, [name]: validateField(name, value) }));
     }
+    
   };
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
