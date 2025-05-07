@@ -5,7 +5,9 @@ import AlertBar from '@/components/molecules/alertBar/AlertBar'
 import { InputLabeled } from '@/components/molecules/inputLabeled/InputLabeled'
 // import { Input } from '@/components/ui/input'
 import React,{ useState, useEffect } from 'react'
+import { Button } from "@/components/ui/button"
 import BillingDetails from './BillingDetails'
+import Payment from './Payment';
 
 interface ShippingFormData {
   firstName: string;
@@ -35,8 +37,10 @@ export default function ShippingDetail() {
   // }
 
   const [selectedCheckBox, setSelectedCheckBox] = useState(false);
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [shippingErrors, setShippingErrors] = useState<Record<string, string>>({});
+  const [billingErrors, setBillingErrors] = useState<Record<string, string>>({});
   const [touched, setTouched] = useState<Record<string, boolean>>({});
+  const [ showPaymentDetails, setShowPaymentDetails ] = useState(false);
 
   const [shippingFormData, setShippingFormData] = useState<ShippingFormData>({
     firstName: '',
@@ -56,7 +60,7 @@ export default function ShippingDetail() {
     municipality: ''
   });
 
-  const isContinueButtonDisabled = shippingFormData.firstName === '' || shippingFormData.lastName === '' || shippingFormData.mobile === '' || shippingFormData.address === '' || shippingFormData.municipality === '' || billingFormData.firstName === '' || billingFormData.lastName === '' || billingFormData.mobile === '' || billingFormData.address === '' || billingFormData.municipality === '';
+  const isContinueButtonDisabled = shippingFormData.firstName === '' || shippingFormData.lastName === '' || shippingFormData.mobile === '' || shippingFormData.address === '' || shippingFormData.municipality === '' || billingFormData.firstName === '' || billingFormData.lastName === '' || billingFormData.mobile === '' || billingFormData.address === '' || billingFormData.municipality === '' || ( shippingErrors.firstName !== '' || shippingErrors.lastName !== '' || shippingErrors.mobile !== '' || shippingErrors.address !== '' || shippingErrors.municipality !== '' || shippingErrors.aptSuite !== '' || billingErrors.firstName !== '' || billingErrors.lastName !== '' || billingErrors.mobile !== '' || billingErrors.address !== '' || billingErrors.municipality !== '' || billingErrors.aptSuite !== '');
 
   console.log('Shipping form data in checkout page is', shippingFormData);
   console.log('Billing form data in checkout page is', billingFormData);
@@ -65,7 +69,7 @@ export default function ShippingDetail() {
   useEffect(() => {
     if (selectedCheckBox) {
       setBillingFormData({ ...shippingFormData });
-    } else {
+    } else if(!selectedCheckBox) {
       setBillingFormData({
         firstName: "",
         lastName: "",
@@ -75,7 +79,7 @@ export default function ShippingDetail() {
         municipality: ""
       });
     }
-  }, [selectedCheckBox, shippingFormData]);
+  }, [selectedCheckBox]);
 
   const validateField = (name: string, value: string) => {
     switch (name) {
@@ -100,8 +104,8 @@ export default function ShippingDetail() {
         return '';
       default:
         return '';
-      }
-    };
+    }
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -109,14 +113,14 @@ export default function ShippingDetail() {
     
     // Validate on change if the field has been touched
     if (touched[name]) {
-      setErrors(prev => ({ ...prev, [name]: validateField(name, value) }));
+      setShippingErrors(prev => ({ ...prev, [name]: validateField(name, value) }));
     }
   };
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setTouched(prev => ({ ...prev, [name]: true }));
-    setErrors(prev => ({ ...prev, [name]: validateField(name, value) }));
+    setShippingErrors(prev => ({ ...prev, [name]: validateField(name, value) }));
   };
 
   const validateForm = () => {
@@ -133,7 +137,7 @@ export default function ShippingDetail() {
       }
     });
 
-    setErrors(newErrors);
+    setShippingErrors(newErrors);
     // Mark all fields as touched to show errors
     setTouched({
       firstName: true,
@@ -152,6 +156,7 @@ export default function ShippingDetail() {
     if (validateForm()) {
       // Proceed with shipping details submission
       console.log('Shipping details submitted:', shippingFormData);
+      setShowPaymentDetails(true);
     }
   };
 
@@ -176,7 +181,7 @@ export default function ShippingDetail() {
           value={shippingFormData.firstName}
           onChange={handleChange}
           onBlur={handleBlur}
-          error={errors.firstName}
+          error={shippingErrors.firstName}
         />
         <InputLabeled
           name="lastName"
@@ -186,7 +191,7 @@ export default function ShippingDetail() {
           value={shippingFormData.lastName}
           onChange={handleChange}
           onBlur={handleBlur}
-          error={errors.lastName}
+          error={shippingErrors.lastName}
         />
         <InputLabeled 
           name="mobile"
@@ -196,7 +201,7 @@ export default function ShippingDetail() {
           value={shippingFormData.mobile}
           onChange={handleChange}
           onBlur={handleBlur}
-          error={errors.mobile}
+          error={shippingErrors.mobile}
         />
 
         <div className='flex flex-col gap-[var(--space-8-17)]'>
@@ -208,7 +213,7 @@ export default function ShippingDetail() {
               value={shippingFormData.address}
               onChange={handleChange}
               onBlur={handleBlur}
-              error={errors.address}
+              error={shippingErrors.address}
             />
             {/* <Input
               name="aptSuite"
@@ -246,7 +251,7 @@ export default function ShippingDetail() {
               value={shippingFormData.municipality}
               onChange={handleChange}
               onBlur={handleBlur}
-              error={errors.municipality}
+              error={shippingErrors.municipality}
             />
         </div>
 
@@ -256,14 +261,28 @@ export default function ShippingDetail() {
           setSelectedCheckBox={setSelectedCheckBox} 
         />
 
+        <BillingDetails
+          billingFormData={billingFormData}
+          setBillingFormData={setBillingFormData}
+          isSynced={!selectedCheckBox}
+          billingErrors={billingErrors}
+          setBillingErrors={setBillingErrors}
+          // isContinueButtonDisabled={isContinueButtonDisabled}
+        />
+
+        <Button
+          type="submit"
+          className="w-full"
+          disabled={isContinueButtonDisabled}
+          // onClick={handleContinue}
+        >
+          Continue
+        </Button>
+
       </form>
 
-      <BillingDetails
-        billingFormData={billingFormData}
-        setBillingFormData={setBillingFormData}
-        isSynced={!selectedCheckBox}
-        isContinueButtonDisabled={isContinueButtonDisabled}
-      />
+      { showPaymentDetails && <Payment /> }
+
         
     </div>
   )

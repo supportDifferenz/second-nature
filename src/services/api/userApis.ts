@@ -13,22 +13,22 @@ export const createUser = async (formData: {
     // "isSubscribe": boolean;
 }) => {
     
-    console.log("formData", formData);
+  console.log("formData", formData);
 
-    try {
-        const response = await userAxiosInstance.post(
-          "/api/user/createUser",
-          formData
-        //   {
-        //       headers: {
-        //         "Content-Type": "application/x-www-form-urlencoded",
-        //         "Authorization": "Basic Y2tfNWFkNGU4OTA2NGZiYmQ2ZjEyZWEwYWNiNDgwYTFiZGI2YTBmODMwZTpjc19iNGMxYjk4MDgxMWFmYmI3YTEzMGY0YmQzOWMyNDdjMDVhYzNkNzM4"
-        //       },
-        //   }
-      );
-        return response.data;
-      } catch (error) {
-          console.error("Error in user login", error);
-          throw error;
-      }
-  };
+  try {
+      const response = await userAxiosInstance.post(
+        "/api/user/createUser",
+        formData
+      //   {
+      //       headers: {
+      //         "Content-Type": "application/x-www-form-urlencoded",
+      //         "Authorization": "Basic Y2tfNWFkNGU4OTA2NGZiYmQ2ZjEyZWEwYWNiNDgwYTFiZGI2YTBmODMwZTpjc19iNGMxYjk4MDgxMWFmYmI3YTEzMGY0YmQzOWMyNDdjMDVhYzNkNzM4"
+      //       },
+      //   }
+    );
+      return response.data;
+    } catch (error) {
+        console.error("Error in user login", error);
+        throw error;
+    }
+};

@@ -2,10 +2,10 @@
 
 import Typography from "@/components/atoms/typography/Typography";
 import { InputLabeled } from "@/components/molecules/inputLabeled/InputLabeled";
-import { Button } from "@/components/ui/button";
+// import { Button } from "@/components/ui/button";
 // import { Input } from "@/components/ui/input";
-import React, { useState} from "react";
-import Payment from "./Payment";
+import React, { useState, useEffect } from "react";
+// import Payment from "./Payment";
 
 interface BillingFormData {
   firstName: string;
@@ -20,13 +20,14 @@ interface BillingDetailsProps {
   billingFormData: BillingFormData;
   setBillingFormData: React.Dispatch<React.SetStateAction<BillingFormData>>;
   isSynced: boolean;
-  isContinueButtonDisabled: boolean;
+  billingErrors: Record<string, string>;
+  setBillingErrors: React.Dispatch<React.SetStateAction<Record<string, string>>>;
+  // isContinueButtonDisabled: boolean;
 }
 
-export default function BillingDetails({ billingFormData, setBillingFormData, isSynced, isContinueButtonDisabled }: BillingDetailsProps) {
+export default function BillingDetails({ billingFormData, setBillingFormData, isSynced, billingErrors, setBillingErrors }: BillingDetailsProps) {
 
-  const [ showPaymentDetails, setShowPaymentDetails ] = useState(false);
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  // const [errors, setErrors] = useState<Record<string, string>>({});
   const [touched, setTouched] = useState<Record<string, boolean>>({});
 
   // const [billingFormData, setBillingFormData] = useState<BillingFormData>({
@@ -38,31 +39,50 @@ export default function BillingDetails({ billingFormData, setBillingFormData, is
   //   municipality: ''
   // });
 
+  useEffect(() => {
+    const updatedErrors: Record<string, string> = { ...billingErrors };
+    let changed = false;
+  
+    Object.keys(billingErrors).forEach((key) => {
+      const field = key as keyof BillingFormData;
+      const currentError = validateField(field, billingFormData[field]);
+      if (!currentError && billingErrors[field]) {
+        delete updatedErrors[field];
+        changed = true;
+      }
+    });
+  
+    if (changed) {
+      setBillingErrors(updatedErrors);
+    }
+  }, [billingFormData]);
+  
+
   const validateField = (name: string, value: string) => {
-      switch (name) {
-        case 'firstName':
-          if (!value.trim()) return 'First name is required';
-          if (value.length < 2) return 'First name must be at least 2 characters';
-          return '';
-        case 'lastName':
-          if (!value.trim()) return 'Last name is required';
-          if (value.length < 2) return 'Last name must be at least 2 characters';
-          return '';
-        case 'mobile':
-          if (!value) return 'Mobile number is required';
-          if (!/^[0-9]{10,15}$/.test(value)) return 'Please enter a valid mobile number (10-15 digits)';
-          return '';
-        case 'address':
-          if (!value.trim()) return 'Address is required';
-          if (value.length < 5) return 'Address must be at least 5 characters';
-          return '';
-        case 'municipality':
-          if (!value.trim()) return 'Municipality is required';
-          return '';
-        default:
-          return '';
-        }
-      };
+    switch (name) {
+      case 'firstName':
+        if (!value.trim()) return 'First name is required';
+        if (value.length < 2) return 'First name must be at least 2 characters';
+        return '';
+      case 'lastName':
+        if (!value.trim()) return 'Last name is required';
+        if (value.length < 2) return 'Last name must be at least 2 characters';
+        return '';
+      case 'mobile':
+        if (!value) return 'Mobile number is required';
+        if (!/^[0-9]{10,15}$/.test(value)) return 'Please enter a valid mobile number (10-15 digits)';
+        return '';
+      case 'address':
+        if (!value.trim()) return 'Address is required';
+        if (value.length < 5) return 'Address must be at least 5 characters';
+        return '';
+      case 'municipality':
+        if (!value.trim()) return 'Municipality is required';
+        return '';
+      default:
+        return '';
+    }
+  };
   
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 
@@ -72,52 +92,52 @@ export default function BillingDetails({ billingFormData, setBillingFormData, is
     
     // Validate on change if the field has been touched
     if (touched[name]) {
-      setErrors(prev => ({ ...prev, [name]: validateField(name, value) }));
+      setBillingErrors(prev => ({ ...prev, [name]: validateField(name, value) }));
     }
   };
   
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setTouched(prev => ({ ...prev, [name]: true }));
-    setErrors(prev => ({ ...prev, [name]: validateField(name, value) }));
+    setBillingErrors(prev => ({ ...prev, [name]: validateField(name, value) }));
   };
   
-  const validateForm = () => {
-    const newErrors: Record<string, string> = {};
-    let isValid = true;
+  // const validateForm = () => {
+  //   const newErrors: Record<string, string> = {};
+  //   let isValid = true;
 
-    Object.keys(billingFormData).forEach(key => {
-      if (key !== 'aptSuite') { // aptSuite is optional
-        const error = validateField(key, billingFormData[key as keyof BillingFormData]);
-        if (error) {
-          newErrors[key] = error;
-          isValid = false;
-        }
-      }
-    });
+  //   Object.keys(billingFormData).forEach(key => {
+  //     if (key !== 'aptSuite') { // aptSuite is optional
+  //       const error = validateField(key, billingFormData[key as keyof BillingFormData]);
+  //       if (error) {
+  //         newErrors[key] = error;
+  //         isValid = false;
+  //       }
+  //     }
+  //   });
 
-    setErrors(newErrors);
-    // Mark all fields as touched to show errors
-    setTouched({
-      firstName: true,
-      lastName: true,
-      mobile: true,
-      address: true,
-      aptSuite: true,
-      municipality: true
-    });
+  //   setErrors(newErrors);
+  //   // Mark all fields as touched to show errors
+  //   setTouched({
+  //     firstName: true,
+  //     lastName: true,
+  //     mobile: true,
+  //     address: true,
+  //     aptSuite: true,
+  //     municipality: true
+  //   });
 
-    return isValid;
-  };
+  //   return isValid;
+  // };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (validateForm()) {
-      // Proceed with shipping details submission
-      console.log('Shipping details submitted:', billingFormData);
-      setShowPaymentDetails(true);
-    }
-  };
+  // const handleSubmit = (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   if (validateForm()) {
+  //     // Proceed with shipping details submission
+  //     console.log('Shipping details submitted:', billingFormData);
+  //     setShowPaymentDetails(true);
+  //   }
+  // };
 
   // const handleContinue = (e: React.MouseEvent<HTMLButtonElement>) => {
   //   e.preventDefault();
@@ -132,10 +152,7 @@ export default function BillingDetails({ billingFormData, setBillingFormData, is
         text="Billing Details"
         className="uppercase text-primary-dark"
       />
-      <form 
-        onSubmit={handleSubmit}
-        className="flex flex-col gap-[var(--space-30-52)]  pb-14 border-b border-secondary-2"
-      >
+      <div className="flex flex-col gap-[var(--space-30-52)]  pb-14 border-b border-secondary-2">
 
         <InputLabeled
           name="firstName"
@@ -145,7 +162,7 @@ export default function BillingDetails({ billingFormData, setBillingFormData, is
           value={billingFormData.firstName}
           onChange={handleChange}
           onBlur={handleBlur}
-          error={errors.firstName}
+          error={billingErrors.firstName}
           disabled={!isSynced}
         />
         <InputLabeled
@@ -156,7 +173,7 @@ export default function BillingDetails({ billingFormData, setBillingFormData, is
           value={billingFormData.lastName}
           onChange={handleChange}
           onBlur={handleBlur}
-          error={errors.lastName}
+          error={billingErrors.lastName}
           disabled={!isSynced}
         />
         <InputLabeled
@@ -167,7 +184,7 @@ export default function BillingDetails({ billingFormData, setBillingFormData, is
           value={billingFormData.mobile}
           onChange={handleChange}
           onBlur={handleBlur}
-          error={errors.mobile}
+          error={billingErrors.mobile}
           disabled={!isSynced}
         />
 
@@ -180,7 +197,7 @@ export default function BillingDetails({ billingFormData, setBillingFormData, is
             value={billingFormData.address}
             onChange={handleChange}
             onBlur={handleBlur}
-            error={errors.address}
+            error={billingErrors.address}
             disabled={!isSynced}
           />
           <InputLabeled
@@ -206,7 +223,7 @@ export default function BillingDetails({ billingFormData, setBillingFormData, is
             value={billingFormData.municipality}
             onChange={handleChange}
             onBlur={handleBlur}
-            error={errors.municipality}
+            error={billingErrors.municipality}
             disabled={!isSynced}
           />
           {/* <Input
@@ -215,17 +232,15 @@ export default function BillingDetails({ billingFormData, setBillingFormData, is
             className="bg-white"
           /> */}
         </div>
-        <Button
+        {/* <Button
           type="submit"
           className="w-full"
           disabled={isContinueButtonDisabled}
           // onClick={handleContinue}
         >
           Continue
-        </Button>
-      </form>
-
-      { showPaymentDetails && <Payment /> }
+        </Button> */}
+      </div>
 
     </div>
   );
