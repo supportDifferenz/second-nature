@@ -17,6 +17,7 @@ export default function AccountDetail() {
   const [ accountDetailsError, setAccountDetailsError ] = useState("");
   const [ isLoading, setIsLoading ] = useState(false);
   const [ selectedCheckBox, setSelectedCheckBox ] = useState(false);
+  const [ showContinueButton, setShowContinueButton ] = useState(true);
 
   const [formData, setFormData] = useState({
     firstName: userDetails.firstName || "",
@@ -143,6 +144,7 @@ export default function AccountDetail() {
             setIsLoading(false);
             console.log("User ID is",data.result.userId);
             setUserDetails({ ...userDetails, userId: data.result.userId });
+            setShowContinueButton(false);
           },
           onError: (error) => {
             console.error("Create user failed", error);
@@ -249,14 +251,18 @@ export default function AccountDetail() {
           onBlur={handleBlur}
           error={errors.repeatPassword}
         />
-        <Button 
-          type="submit"
-          className="w-full"
-          disabled={ !(formData.firstName && formData.lastName && formData.email && formData.mobile && formData.password === formData.repeatPassword) }
-          // onClick={handleContinue}
-        >
-          { isLoading ? "Loading..." : "Continue" }
-        </Button>
+
+        { showContinueButton &&
+            <Button 
+              type="submit"
+              className="w-full"
+              disabled={ !(formData.firstName && formData.lastName && formData.email && formData.mobile && formData.password === formData.repeatPassword) }
+              // onClick={handleContinue}
+            >
+              { isLoading ? "Loading..." : "Continue" }
+            </Button>
+        }
+        
         <Typography
           tag="p"
           text={accountDetailsError}

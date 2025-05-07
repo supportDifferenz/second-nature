@@ -8,7 +8,27 @@ type UserDetails = {
   emailAddress: string;
   phoneNumber: string;
   password: string;
+  shippingDetails: ShippingDetails;
+  billingDetails: BillingDetails;
 };
+
+interface ShippingDetails {
+  firstName: string;
+  lastName: string;
+  mobile: string;
+  address: string;
+  aptSuite: string;
+  municipality: string;
+}
+
+interface BillingDetails {
+  firstName: string;
+  lastName: string;
+  mobile: string;
+  address: string;
+  aptSuite: string;
+  municipality: string;
+}
 
 type UserStore = {
   userDetails: UserDetails;
@@ -28,6 +48,22 @@ export const useUserStore = create<UserStore>()(
         emailAddress: "",
         phoneNumber: "",
         password: "",
+        shippingDetails: {
+          firstName: "",
+          lastName: "",
+          mobile: "",
+          address: "",
+          aptSuite: "",
+          municipality: "",
+        },
+        billingDetails: {
+          firstName: "",
+          lastName: "",
+          mobile: "",
+          address: "",
+          aptSuite: "",
+          municipality: "",
+        },
       },
       
       // Set partial user details (can update just name or just email)
@@ -49,6 +85,22 @@ export const useUserStore = create<UserStore>()(
             emailAddress: "",
             phoneNumber: "",
             password: "",
+            shippingDetails: {
+              firstName: "",
+              lastName: "",
+              mobile: "",
+              address: "",
+              aptSuite: "",
+              municipality: "",
+            },
+            billingDetails: {
+              firstName: "",
+              lastName: "",
+              mobile: "",
+              address: "",
+              aptSuite: "",
+              municipality: "",
+            },
           }
         })
     }),
