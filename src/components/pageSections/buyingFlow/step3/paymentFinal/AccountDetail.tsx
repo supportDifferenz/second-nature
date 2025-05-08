@@ -7,17 +7,20 @@ import { Button } from "@/components/ui/button";
 import React,{ useState } from "react";
 import ShippingDetail from "./ShippingDetail";
 import { useUserStore } from "@/zustand/store/userDataStore";
+import useAuthStore from "@/zustand/store/authDataStore";
 import { useCreateUserHook } from "@/hooks/userHooks/createUserHook";
 
 export default function AccountDetail() {
 
   const { userDetails, setUserDetails } = useUserStore();
+  const { isAuthenticated, setIsAuthenticated } = useAuthStore();
   const { mutate } = useCreateUserHook();
-  const [ showShippingDetails, setShowShippingDetails ] = useState(false);
+  // const [ showShippingDetails, setShowShippingDetails ] = useState(false);
   const [ accountDetailsError, setAccountDetailsError ] = useState("");
   const [ isLoading, setIsLoading ] = useState(false);
-  const [ selectedCheckBox, setSelectedCheckBox ] = useState(false);
-  const [ showContinueButton, setShowContinueButton ] = useState(true);
+  const [ selectedCheckBox, setSelectedCheckBox ] = useState(true);
+  // const [ showContinueButton, setShowContinueButton ] = useState(true);
+  // const [ isUserCreated, setIsUserCreated ] = useState(false);
 
   const [formData, setFormData] = useState({
     firstName: userDetails.firstName || "",
@@ -145,17 +148,20 @@ export default function AccountDetail() {
         {
           onSuccess: (data) => {
             console.log("Create user successful", data);
-            setShowShippingDetails(true);
+            // setShowShippingDetails(true);
             setAccountDetailsError("");
             setIsLoading(false);
             console.log("User ID is",data.result.userId);
             setUserDetails({ ...userDetails, userId: data.result.userId });
-            setShowContinueButton(false);
+            // setShowContinueButton(false);
+            // setIsUserCreated(true);
+            setIsAuthenticated(true);
           },
           onError: (error) => {
             console.error("Create user failed", error);
             setAccountDetailsError((error as { response?: { data?: { message?: string } } })?.response?.data?.message || "An unexpected error occurred");
             setIsLoading(false);
+            // setIsUserCreated(false);
           },
           onSettled: () => {
             setIsLoading(false);
@@ -235,7 +241,36 @@ export default function AccountDetail() {
           selectedCheckBox={selectedCheckBox}
           setSelectedCheckBox={setSelectedCheckBox}
         />
-        <InputLabeled 
+
+        {
+          !isAuthenticated &&
+          <>
+            <InputLabeled 
+              name="password"
+              label="Password" 
+              placeholder="Enter your password" 
+              type="password"
+              variant="roundedEdgeInput" 
+              value={formData.password}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={errors.password}
+            />
+            <InputLabeled 
+              name="repeatPassword"
+              label="Repeat Password" 
+              placeholder="Repeat your password" 
+              type="password"
+              variant="roundedEdgeInput" 
+              value={formData.repeatPassword}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={errors.repeatPassword}
+            />
+          </>
+        }
+
+        {/* <InputLabeled 
           name="password"
           label="Password" 
           placeholder="Enter your password" 
@@ -256,9 +291,9 @@ export default function AccountDetail() {
           onChange={handleChange}
           onBlur={handleBlur}
           error={errors.repeatPassword}
-        />
+        /> */}
 
-        { showContinueButton &&
+        { !isAuthenticated &&
             <Button 
               type="submit"
               className="w-full"
@@ -276,7 +311,7 @@ export default function AccountDetail() {
         />
       </form>
 
-      { showShippingDetails && <ShippingDetail /> }
+      { isAuthenticated && <ShippingDetail /> }
       
     </div>
   );

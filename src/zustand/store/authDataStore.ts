@@ -7,6 +7,7 @@ interface AuthState {
   isAuthenticated: boolean;
   login: (accessToken: string) => void;
   logout: () => void;
+  setIsAuthenticated: (isAuthenticated: boolean) => void;
 }
 
 const getAuthStatus = () => {
@@ -34,6 +35,7 @@ const useAuthStore = create<AuthState, [["zustand/persist", AuthState]]>(
         }
         set({ isAuthenticated: false });
       },
+      setIsAuthenticated: (isAuthenticated: boolean) => set({ isAuthenticated }),
     }),
     {
       name: "auth",

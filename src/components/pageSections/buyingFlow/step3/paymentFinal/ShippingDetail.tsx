@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button"
 import BillingDetails from './BillingDetails'
 import Payment from './Payment';
 import { useUserStore } from '@/zustand/store/userDataStore';
+import useAuthStore from '@/zustand/store/authDataStore';
 import { useCreateAddressHook } from '@/hooks/subscriptionHooks/createAddressHook';
 
 interface ShippingFormData {
@@ -40,6 +41,7 @@ export default function ShippingDetail() {
   // }
 
   const { userDetails, setUserDetails } = useUserStore();
+  const { isAuthenticated } = useAuthStore();
   const { mutate } = useCreateAddressHook();
   const [selectedCheckBox, setSelectedCheckBox] = useState(true);
   const [touched, setTouched] = useState<Record<string, boolean>>({});
@@ -47,22 +49,22 @@ export default function ShippingDetail() {
   const [ isSubmittingAddress, setIsSubmittingAddress ] = useState(false);
 
   const [shippingFormData, setShippingFormData] = useState<ShippingFormData>({
-    firstName: '',
-    lastName: '',
-    mobile: '',
-    address: '',
-    aptSuite: '',
-    municipality: ''
+    firstName: userDetails?.shippingDetails?.firstName || "",
+    lastName: userDetails?.shippingDetails?.lastName || "",
+    mobile: userDetails?.shippingDetails?.mobile || "",
+    address: userDetails?.shippingDetails?.address || "",
+    aptSuite: userDetails?.shippingDetails?.aptSuite || "",
+    municipality: userDetails?.shippingDetails?.municipality || "",
   });
 
   const [billingFormData, setBillingFormData] = useState<BillingFormData>({
-    firstName: '',
-    lastName: '',
-    mobile: '',
-    address: '',
-    aptSuite: '',
-    municipality: '',
-    useDifferentBilling: true,
+    firstName: userDetails?.billingDetails?.firstName || "",
+    lastName:  userDetails?.billingDetails?.lastName || "",
+    mobile: userDetails?.billingDetails?.mobile || "",
+    address: userDetails?.billingDetails?.address || "",
+    aptSuite: userDetails?.billingDetails?.aptSuite || "",
+    municipality: userDetails?.billingDetails?.municipality || "",
+    useDifferentBilling: userDetails?.billingDetails?.useDifferentBilling || true,
   });
 
   const [shippingErrors, setShippingErrors] = useState<Record<string, string>>({
@@ -91,7 +93,7 @@ export default function ShippingDetail() {
 
   // Sync billing data when checkbox is unchecked
   useEffect(() => {
-    if (!selectedCheckBox) {
+    if (!selectedCheckBox || isAuthenticated) {
       setBillingFormData({ ...shippingFormData, useDifferentBilling: false });
     } else if(selectedCheckBox) {
       setBillingFormData({
