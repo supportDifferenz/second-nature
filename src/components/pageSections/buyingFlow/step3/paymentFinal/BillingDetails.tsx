@@ -14,6 +14,7 @@ interface BillingFormData {
   address: string;
   aptSuite: string;
   municipality: string;
+  useDifferentBilling: boolean;
 }
 
 interface BillingDetailsProps {
@@ -44,11 +45,20 @@ export default function BillingDetails({ billingFormData, setBillingFormData, is
     let changed = false;
   
     Object.keys(billingErrors).forEach((key) => {
+
+      // Skip non-string fields (like useDifferentBilling)
+      if (key === 'useDifferentBilling') return;
+
       const field = key as keyof BillingFormData;
-      const currentError = validateField(field, billingFormData[field]);
-      if (!currentError && billingErrors[field]) {
-        delete updatedErrors[field];
-        changed = true;
+      const value = billingFormData[field];
+
+      // Ensure we only validate string fields
+      if (typeof value === 'string') {
+        const currentError = validateField(field, value);
+        if (!currentError && billingErrors[field]) {
+          delete updatedErrors[field];
+          changed = true;
+        }
       }
     });
   
@@ -92,7 +102,7 @@ export default function BillingDetails({ billingFormData, setBillingFormData, is
     if (name === "mobile" && /[^0-9]/.test(value)) {
       return; // Block input if non-numeric
     }
-    
+
     setBillingFormData(prev => ({ ...prev, [name]: value }));
     
     // Validate on change if the field has been touched
@@ -214,6 +224,7 @@ export default function BillingDetails({ billingFormData, setBillingFormData, is
             value={billingFormData.aptSuite}
             onChange={handleChange}
             onBlur={handleBlur}
+            error={billingErrors.aptSuite}
             disabled={isSynced}
           />
           {/* <Input

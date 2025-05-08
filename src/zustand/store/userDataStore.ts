@@ -28,6 +28,7 @@ interface BillingDetails {
   address: string;
   aptSuite: string;
   municipality: string;
+  useDifferentBilling: boolean;
 }
 
 type UserStore = {
@@ -63,6 +64,7 @@ export const useUserStore = create<UserStore>()(
           address: "",
           aptSuite: "",
           municipality: "",
+          useDifferentBilling: true,
         },
       },
       
@@ -100,6 +102,7 @@ export const useUserStore = create<UserStore>()(
               address: "",
               aptSuite: "",
               municipality: "",
+              useDifferentBilling: true,
             },
           }
         })
