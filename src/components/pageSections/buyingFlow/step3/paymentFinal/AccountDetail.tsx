@@ -301,7 +301,7 @@ export default function AccountDetail() {
             <Button 
               type="submit"
               className="w-full"
-              disabled={ !(formData.firstName && formData.lastName && formData.email && formData.mobile && formData.password === formData.repeatPassword) }
+              disabled={ !(formData.firstName && formData.lastName && formData.email && formData.mobile && formData.password !== "" && formData.repeatPassword !== "" && formData.password === formData.repeatPassword) }
               // onClick={handleContinue}
             >
               { isLoading ? "Loading..." : "Continue" }
