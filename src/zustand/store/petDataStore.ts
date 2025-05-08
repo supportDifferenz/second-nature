@@ -33,6 +33,7 @@ type PetStore = {
   addNewPet: ({ catOrDog, name }: { catOrDog: 'cat' | 'dog'; name: string }) => string;
   removePet: (petId: string) => void;
   setSelectedPetIndex: (index: number | null) => void;
+  clearPetDetails: () => void;
 };
 
 export const usePetStore = create<PetStore>()(
@@ -99,6 +100,14 @@ export const usePetStore = create<PetStore>()(
         }),
 
       setSelectedPetIndex: (index) => set({ selectedPetIndex: index }),
+
+      clearPetDetails: () => set({
+        location: "",
+        pets: [],
+        currentPetId: null,
+        selectedPetIndex: null,
+        noOfPets: 0,
+      }),
     }),
     {
       name: 'pet-store', // unique name for the storage key
