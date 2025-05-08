@@ -152,7 +152,7 @@ export default function AccountDetail() {
             setAccountDetailsError("");
             setIsLoading(false);
             console.log("User ID is",data.result.userId);
-            setUserDetails({ ...userDetails, userId: data.result.userId });
+            setUserDetails({userId: data.result.userId });
             // setShowContinueButton(false);
             // setIsUserCreated(true);
             setIsAuthenticated(true);
@@ -203,6 +203,7 @@ export default function AccountDetail() {
           onChange={handleChange}
           onBlur={handleBlur}
           error={errors.firstName}
+          disabled={isAuthenticated}
         />
         <InputLabeled
           name="lastName"
@@ -213,6 +214,7 @@ export default function AccountDetail() {
           onChange={handleChange}
           onBlur={handleBlur}
           error={errors.lastName}
+          disabled={isAuthenticated}
         />
         <InputLabeled
           name="email"
@@ -224,6 +226,7 @@ export default function AccountDetail() {
           onChange={handleChange}
           onBlur={handleBlur}
           error={errors.email}
+          disabled={isAuthenticated}
         />
         <InputLabeled 
           name="mobile"
@@ -234,7 +237,8 @@ export default function AccountDetail() {
           value={formData.mobile}
           onChange={handleChange}
           onBlur={handleBlur}
-          error={errors.mobile} 
+          error={errors.mobile}
+          disabled={isAuthenticated}
         />
         <AlertBar 
           text="Email me with exclusive offers, new arrival alerts and cart reminders."
