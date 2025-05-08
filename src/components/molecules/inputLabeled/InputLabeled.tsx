@@ -9,7 +9,7 @@ export const InputLabeled: React.FC<InputLabeledPropsType> = ({
   className = "",
   error,
   ...props
-}) => {
+}) => { 
   return (
     <div className={`flex flex-col ${className}`}>
       {label && <Label>{label}</Label>}

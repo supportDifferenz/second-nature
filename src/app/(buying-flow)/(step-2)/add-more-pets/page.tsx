@@ -76,7 +76,7 @@ export default function Page() {
           disabled={!checkout}
           onClick={(e) => {
             e.preventDefault();
-            router.push("/checkout");
+            router.push("/user-details");
           }}
         >
           Checkout

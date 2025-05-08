@@ -8,7 +8,7 @@ export default function Payment() {
     <div className="flex flex-col gap-[var(--space-30-60)]">
       <Typography
         tag="h5"
-        text="Shipping Details"
+        text="Payment"
         className="uppercase text-primary-dark"
       />
       <div className='w-[300px]'>

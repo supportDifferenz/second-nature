@@ -2,9 +2,16 @@ import Typography from "@/components/atoms/typography/Typography";
 import Image from "next/image";
 import React from "react";
 
-export default function CardItem() {
+interface CardItemProps {
+  key: string;
+  petName: string;
+  planType: string;
+  protein: string;
+}
+
+export default function CardItem({ key, petName, planType, protein }: CardItemProps) {
   return (
-    <div className="flex">
+    <div key={key} className="flex">
       <div className="w-[23.3vw] lg:w-[13.22vw] h-full">
         <Image
           src="/images/cart-cardboard.webp"
@@ -17,19 +24,22 @@ export default function CardItem() {
         <div>
           <Typography
             tag="h6"
-            text="Jackey’s Plan"
+            text={`${petName}'s Plan`}
+            // text="Jackey’s Plan"
             className="text-primary-dark"
           />
           <Typography
             tag="sub"
-            text="Regular Plan"
+            text={`${planType.charAt(0).toUpperCase() + planType.slice(1)} Plan`}
+            // text="Regular Plan"
             className="text-primary-dark "
           />
         </div>
         <div>
           <Typography
             tag="sub"
-            text="Chicken Bowl"
+            text={`${protein.charAt(0).toUpperCase() + protein.slice(1)} Bowl`}
+            // text="Chicken Bowl"
             className=""
           />
         </div>

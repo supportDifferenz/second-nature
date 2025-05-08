@@ -35,8 +35,8 @@ export default function Page() {
   const { userDetails, setUserDetails } = useUserStore();
   
   const [formData, setFormData] = useState<FormData>({
-    name: userDetails.name || "",
-    email: userDetails.email || "",
+    name: userDetails.firstName || "",
+    email: userDetails.emailAddress || "",
   });
 
   const [errors, setErrors] = useState<FormErrors>({
@@ -92,8 +92,8 @@ export default function Page() {
 
     if(formData.name && formData.email) {
       setUserDetails({
-        name: formData.name,
-        email: formData.email
+        firstName: formData.name,
+        emailAddress: formData.email
       });
       router.push("/checkout");
     }

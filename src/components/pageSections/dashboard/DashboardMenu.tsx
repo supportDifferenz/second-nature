@@ -4,6 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import useAuthStore from "@/zustand/store/authDataStore";
+import { useUserStore } from "@/zustand/store/userDataStore";
+import { usePetStore } from "@/zustand/store/petDataStore";
 import { useRouter } from "next/navigation";
 
 const menuItems = [
@@ -46,9 +48,13 @@ export default function DashboardMenu() {
   const pathname = usePathname();
   const router = useRouter()
   const logout = useAuthStore((state) => state.logout);
+  const { clearPetDetails } = usePetStore();
+  const { clearUserDetails } = useUserStore();
 
   const handleLogout = () => {
       logout();
+      clearUserDetails();
+      clearPetDetails();
       router.push("/")
   };
 
