@@ -23,22 +23,24 @@ export default function EditPasswordManagement({ setIsEditing }: EditPasswordMan
           placeholder="******************"
           className="max-w-[400px]"
         />
-        <Button
-          type="submit"
-          variant={"whiteBtnSecondary2BorderAndText"}
-          className="w-fit"
-          onClick={() => setIsEditing(false)}
-        >
-          Update Password
-        </Button>
-        <Button
-          type="submit"
-          variant="outlineSecondaryBtn"
-          className="w-fit"
-          onClick={() => setIsEditing(false)}
-        >
-          Cancel
-        </Button>
+        <div className="flex gap-3">
+          <Button
+            type="submit"
+            variant={"whiteBtnSecondary2BorderAndText"}
+            className="w-fit"
+            onClick={() => setIsEditing(false)}
+          >
+            Update Password
+          </Button>
+          <Button
+            type="submit"
+            variant="outlineSecondaryBtn"
+            className="w-fit"
+            onClick={() => setIsEditing(false)}
+          >
+            Cancel
+          </Button>
+        </div>
       </div>
     </form>
   );
