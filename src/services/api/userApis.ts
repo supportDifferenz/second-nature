@@ -32,3 +32,15 @@ export const createUser = async (formData: {
         throw error;
     }
 };
+
+export const getUserDetails = async (userId: string) => {
+  try {
+      const response = await userAxiosInstance.get(
+        `/api/user/getCustomerById/${userId}`
+    );
+      return response.data;
+    } catch (error) {
+        console.error("Error in getting user details", error);
+        throw error;
+    }
+};

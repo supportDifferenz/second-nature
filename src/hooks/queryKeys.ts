@@ -4,4 +4,5 @@ export const QUERY_KEYS = {
     GET_CROSS_BREED_DETAILS: "getCrossBreedDetails",
     CREATE_USER: "createUser",
     CREATE_ADDRESS: "createAddress",
+    GET_USER_DETAILS: "getUserDetails",
 }

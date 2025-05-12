@@ -9,6 +9,7 @@ import { useUserLoginHook } from "@/hooks/authHooks/loginUserHook";
 import { useRouter } from "next/navigation";
 import useAuthStore from "@/zustand/store/authDataStore";
 import { loginSchema } from "@/schemas/authSchemas/loginSchema";
+import { useUserStore } from "@/zustand/store/userDataStore";
 
 interface LoginData {
   userName?: string;
@@ -32,6 +33,7 @@ export default function Page() {
   const router = useRouter()
 
   const { mutate, isError, error } = useUserLoginHook();
+  const { userDetails, setUserDetails } = useUserStore();
   const [isLoading, setIsLoading] = useState(false);
 
   const [formData, setFormData] = useState<LoginData>({
@@ -100,6 +102,15 @@ export default function Page() {
             login(token);
             console.log("Token stored in Zustand store is", token);
           }
+
+          setUserDetails({
+            userId: data?.result?.userId,
+            firstName: data?.result?.firstname,
+            lastName: data?.result?.lastname,
+            emailAddress: data?.result?.emailId,
+            phoneNumber: data?.result?.ContactNo,
+          })
+
           router.push("/personal-information");
         },
         onError: (error) => {
@@ -244,6 +255,8 @@ export default function Page() {
   //     }
   //   );
   // };
+
+  console.log("User details in login page", userDetails);
   
   return (
     <AuthLayout>

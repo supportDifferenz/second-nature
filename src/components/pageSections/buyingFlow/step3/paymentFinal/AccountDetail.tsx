@@ -41,7 +41,7 @@ export default function AccountDetail() {
         return '';
       case 'lastName':
         if (!value.trim()) return 'Last name is required';
-        if (value.length < 2) return 'Last name must be at least 2 characters';
+        if (value.length < 1) return 'Last name must be at least 2 characters';
         return '';
       case 'email':
         if (!value) return 'Email is required';
