@@ -5,4 +5,5 @@ export const QUERY_KEYS = {
     CREATE_USER: "createUser",
     CREATE_ADDRESS: "createAddress",
     GET_USER_DETAILS: "getUserDetails",
-}
+    UPDATE_USER: "updateUser",
+}   
