@@ -58,7 +58,7 @@ export default function Page() {
   console.log("ProteinData", proteinData);
   console.log("BowlData", bowlData);
 
-  const { pets, selectedPetIndex, noOfPets, setPetDetails } = usePetStore();
+  const { pets, selectedPetIndex, noOfPets, setPetDetails, setSelectedPetIndex } = usePetStore();
   const selectedPet = selectedPetIndex !== null ? pets[selectedPetIndex] : null; // Handle null case for selectedPetIndex
   const currentPetId = selectedPet ? selectedPet.id : null;
   // const selectedPetName = selectedPet ? selectedPet.name : null;
@@ -122,6 +122,13 @@ export default function Page() {
       // setSelectedProtein(trialProtein || "");
       // setSelectedBowlSize(trialBowlSize);
       setPetDetails(currentPetId, { planType: selectedPlan, protein: trialProtein, bowlSize: trialBowlSize });
+      router.push("/add-more-pets");
+    }
+
+    if((selectedPetIndex ?? 0) < noOfPets - 1){
+      setSelectedPetIndex((selectedPetIndex ?? 0) + 1);
+      router.push("/gender")
+    } else {
       router.push("/add-more-pets");
     }
 
