@@ -117,19 +117,24 @@ export default function Page() {
       // setSelectedProtein(regularProtein || "");
       // setSelectedBowlSize(regularBowlSize);
       setPetDetails(currentPetId, { planType: selectedPlan, protein: regularProtein, bowlSize: regularBowlSize });
-      router.push("/add-more-pets");
+      if((selectedPetIndex ?? 0) < noOfPets - 1){
+        setSelectedPetIndex((selectedPetIndex ?? 0) + 1);
+        router.push("/gender")
+      } else {
+        router.push("/add-more-pets");
+      }
+      // router.push("/add-more-pets");
     } else if(selectedPlan === "Trial" && trialProtein && trialBowlSize && currentPetId) {
       // setSelectedProtein(trialProtein || "");
       // setSelectedBowlSize(trialBowlSize);
       setPetDetails(currentPetId, { planType: selectedPlan, protein: trialProtein, bowlSize: trialBowlSize });
-      router.push("/add-more-pets");
-    }
-
-    if((selectedPetIndex ?? 0) < noOfPets - 1){
-      setSelectedPetIndex((selectedPetIndex ?? 0) + 1);
-      router.push("/gender")
-    } else {
-      router.push("/add-more-pets");
+      if((selectedPetIndex ?? 0) < noOfPets - 1){
+        setSelectedPetIndex((selectedPetIndex ?? 0) + 1);
+        router.push("/gender")
+      } else {
+        router.push("/add-more-pets");
+      }
+      // router.push("/add-more-pets");
     }
 
     // if( selectedProtein && selectedBowlSize && currentPetId ) {
