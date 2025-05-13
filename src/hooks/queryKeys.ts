@@ -6,4 +6,7 @@ export const QUERY_KEYS = {
     CREATE_ADDRESS: "createAddress",
     GET_USER_DETAILS: "getUserDetails",
     UPDATE_USER: "updateUser",
+    GET_ALL_PLANS: "getAllPlans",
+    GET_ALL_PROTEINS: "getAllProteins",
+    GET_ALL_BOWLS: "getAllBowls",
 }   

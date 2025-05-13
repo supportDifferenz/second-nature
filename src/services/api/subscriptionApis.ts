@@ -69,3 +69,42 @@ try {
       throw error;
   }
 };
+
+export const getAllPlan = async () => {
+  
+try {
+    const response = await subscriptionAxiosInstance.post(
+      "/api/subscription/plan/getAllplan",
+  );
+    return response.data;
+  } catch (error) {
+      console.error("Error in getting all plan details", error);
+      throw error;
+  }
+};
+
+export const getAllProtein = async () => {
+  
+try {
+    const response = await subscriptionAxiosInstance.post(
+      "/api/subscription/protein/getAllProtein",
+  );
+    return response.data;
+  } catch (error) {
+      console.error("Error in getting all protein details", error);
+      throw error;
+  }
+};
+
+export const getAllBowl = async () => {
+  
+try {
+    const response = await subscriptionAxiosInstance.post(
+      "/api/subscription/bowl/getAllbowl",
+  );
+    return response.data;
+  } catch (error) {
+      console.error("Error in getting all bowl details", error);
+      throw error;
+  }
+};

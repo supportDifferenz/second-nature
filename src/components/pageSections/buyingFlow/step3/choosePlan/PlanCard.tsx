@@ -5,6 +5,9 @@ import PetProteinCard from "@/components/molecules/petProteinCard/PetProteinCard
 import PetBowlSizeCard from "@/components/molecules/petBowlSizeCard/PetBowlSizeCard";
 import { cn } from "@/lib/utils";
 import OfferBadge from "@/components/atoms/offerBadge/OfferBadge";
+import { useGetAllProtein } from "@/hooks/subscriptionHooks/getAllProteinHook";
+import { useGetAllBowl } from "@/hooks/subscriptionHooks/getAllBowlHook";
+
 interface PlanCardProps {
   bgColour: "bg-white" | "bg-[#FDFFF0]";
   offerBadge?: string;
@@ -32,6 +35,11 @@ export default function PlanCard({
   onClick
 }: PlanCardProps) {
 
+  const { data: proteinData }: { data?: { result: { _id: string; protein_name: string }[] } } = useGetAllProtein();
+  const { data: bowlData } = useGetAllBowl();
+
+  console.log("Protein in plan card",protein);
+  console.log("Protein data in plan card",proteinData?.result);
 
   return (
     <div
@@ -69,27 +77,28 @@ export default function PlanCard({
           className="text-center  pb-[var(--space-10-20)]"
         />
         <div className="flex justify-center gap-[var(--space-10-20)]">
-          <PetProteinCard
+
+          {
+            proteinData?.result?.map((proteinDetails: { _id: string; protein_name: string }) => (
+              <PetProteinCard
+                key={proteinDetails._id}
+                imageSrc={proteinDetails.protein_name === "chicken" ? "/icons/card-chicken.svg" : proteinDetails.protein_name === "beef" ? "/icons/card-beef.svg" : "/icons/card-lamb.svg"}
+                label={proteinDetails.protein_name}
+                altText={proteinDetails.protein_name}
+                selectedProtein={ protein === proteinDetails.protein_name}
+                setSelectedProtein={ () => setProtein && setProtein(proteinDetails.protein_name)}
+              />
+            ))
+          }
+
+          {/* <PetProteinCard
             imageSrc="/icons/card-chicken.svg"
             label="Chicken"
             altText="Chicken"
             selectedProtein={ protein === "chicken"}
             setSelectedProtein={ () => setProtein && setProtein("chicken")}
-          />
-          <PetProteinCard
-            imageSrc="/icons/card-beef.svg"
-            label="beef"
-            altText="beef"
-            selectedProtein={ protein === "beef"}
-            setSelectedProtein={ () => setProtein && setProtein("beef")}
-          />
-          <PetProteinCard
-            imageSrc="/icons/card-lamb.svg"
-            label="lamb"
-            altText="lamb"
-            selectedProtein={ protein === "lamb"}
-            setSelectedProtein={ () => setProtein && setProtein("lamb")}
-          />
+          /> */}
+          
         </div>
       </div>
       <div className="flex flex-col pt-[var(--space-30-40)]">
@@ -99,20 +108,28 @@ export default function PlanCard({
           className="text-center pb-[var(--space-10-20)]"
         />
         <div className="flex justify-center gap-[var(--space-10-20)]">
-          <PetBowlSizeCard
+
+          {
+            bowlData?.result?.map((bowlDetails: { _id: string; bowl_type: string }) => (
+              <PetBowlSizeCard
+                key={bowlDetails._id}
+                imageSrc={bowlDetails.bowl_type === "full" ? "/icons/full-bowl.svg" : "/icons/half-bowl.svg"}
+                label={`${bowlDetails.bowl_type} bowl`}
+                altText={bowlDetails.bowl_type}
+                selectedBowlSize={bowlSize === bowlDetails.bowl_type}
+                setSelectedBowlSize={ () => setBowlSize && setBowlSize(bowlDetails.bowl_type)}
+              />
+            ))
+          }
+
+          {/* <PetBowlSizeCard
             imageSrc="/icons/full-bowl.svg"
             label="full-bowl"
             altText="full-bowl"
             selectedBowlSize={ bowlSize === "full"}
             setSelectedBowlSize={ () => setBowlSize && setBowlSize("full")}
-          />
-          <PetBowlSizeCard
-            imageSrc="/icons/half-bowl.svg"
-            label="half-bowl"
-            altText="half-bowl"
-            selectedBowlSize={ bowlSize === "half"}
-            setSelectedBowlSize={ () => setBowlSize && setBowlSize("half")}
-          />
+          /> */}
+          
         </div>
       </div>
     </div>

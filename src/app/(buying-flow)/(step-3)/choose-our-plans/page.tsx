@@ -9,6 +9,9 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import FAQS from "@/components/organism/faq/FAQS";
 import { usePetStore } from "@/zustand/store/petDataStore";
+import { useGetAllPlan } from "@/hooks/subscriptionHooks/getAllPlanHook";
+import { useGetAllProtein } from "@/hooks/subscriptionHooks/getAllProteinHook";
+import { useGetAllBowl } from "@/hooks/subscriptionHooks/getAllBowlHook";
 
 const faqsData = [
   {
@@ -47,6 +50,14 @@ export default function Page() {
 
   const router = useRouter();
 
+  const { data: planData } = useGetAllPlan();
+  const { data: proteinData } = useGetAllProtein();
+  const { data: bowlData } = useGetAllBowl();
+  // const { data: plans, isLoading, error } = useGetAllPlan();
+  console.log("PlanData", planData);
+  console.log("ProteinData", proteinData);
+  console.log("BowlData", bowlData);
+
   const { pets, selectedPetIndex, noOfPets, setPetDetails } = usePetStore();
   const selectedPet = selectedPetIndex !== null ? pets[selectedPetIndex] : null; // Handle null case for selectedPetIndex
   const currentPetId = selectedPet ? selectedPet.id : null;
@@ -58,7 +69,7 @@ export default function Page() {
   const [ selectedPlan, setSelectedPlan ] = useState<string>("");
   // const [ selectedProtein, setSelectedProtein ] = useState<string>("");
   // const [ selectedBowlSize, setSelectedBowlSize ] = useState<string>("");
-  const [ regularProtein, setRegularProtein ] = useState<string>();
+  const [ regularProtein, setRegularProtein ] = useState<string>("");
   const [ regularBowlSize, setRegularBowlSize ] = useState<string>("");
   const [ trialProtein, setTrialProtein ] = useState<string>("");
   const [ trialBowlSize, setTrialBowlSize ] = useState<string>("");
@@ -87,12 +98,12 @@ export default function Page() {
   // },[selectedPlan])
 
   useEffect(() => {
-    if(planType === "regular") {
-      setSelectedPlan("regular");
-      setRegularProtein(protein);
+    if(planType === "Regular") {
+      setSelectedPlan("Regular");
+      setRegularProtein(protein || "");
       setRegularBowlSize(bowlSize || "");
-    } else if(planType === "trial") {
-      setSelectedPlan("trial");
+    } else if(planType === "Trial") {
+      setSelectedPlan("Trial");
       setTrialProtein(protein || "");
       setTrialBowlSize(bowlSize || "");
     }
@@ -102,12 +113,12 @@ export default function Page() {
   const handleNext = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
-    if(selectedPlan === "regular" && regularProtein && regularBowlSize && currentPetId) {
+    if(selectedPlan === "Regular" && regularProtein && regularBowlSize && currentPetId) {
       // setSelectedProtein(regularProtein || "");
       // setSelectedBowlSize(regularBowlSize);
       setPetDetails(currentPetId, { planType: selectedPlan, protein: regularProtein, bowlSize: regularBowlSize });
       router.push("/add-more-pets");
-    } else if(selectedPlan === "trial" && trialProtein && trialBowlSize && currentPetId) {
+    } else if(selectedPlan === "Trial" && trialProtein && trialBowlSize && currentPetId) {
       // setSelectedProtein(trialProtein || "");
       // setSelectedBowlSize(trialBowlSize);
       setPetDetails(currentPetId, { planType: selectedPlan, protein: trialProtein, bowlSize: trialBowlSize });
@@ -161,7 +172,42 @@ export default function Page() {
             />
           ))} */}
 
-          <PlanCard
+          {
+            planData?.result?.map((plan: { _id: string; plan_type: string; price: number }) => (
+              <PlanCard
+                key={plan._id}
+                heading={`${plan.plan_type} Plan`}
+                description={plan.plan_type === "Regular" ? "Auto-Renews Every 28 Days" : "One-Time Purchase for 7 Days"}
+                price={plan.price}
+                bgColour={plan.plan_type === "Regular" ? "bg-[#FDFFF0]" : "bg-white"}
+                offerBadge={plan.plan_type === "Regular" ? "Enjoy 25% Off Your First Month!" : ""}
+                isSelected={selectedPlan === plan.plan_type}
+                protein={plan.plan_type === "Regular" ? regularProtein : trialProtein}
+                setProtein={plan.plan_type === "Regular" ? setRegularProtein : setTrialProtein}
+                bowlSize={plan.plan_type === "Regular" ? regularBowlSize : trialBowlSize}
+                setBowlSize={plan.plan_type === "Regular" ? setRegularBowlSize : setTrialBowlSize}
+                onClick={() => {
+                  if (plan.plan_type !== selectedPlan) {
+                    if (plan.plan_type === "Regular"){
+                      setTrialProtein("");
+                      setTrialBowlSize("");
+                    } else if(plan.plan_type === "Trial"){
+                      setRegularProtein("");
+                      setRegularBowlSize("");
+                    }
+                  }
+                  setSelectedPlan(plan.plan_type);
+                }}
+                // onClick={() => {
+                //   setSelectedPlan(plan.plan_type);
+                //   setTrialProtein("");
+                //   setTrialBowlSize("");
+                // }}              
+              />
+            ))
+          }
+
+          {/* <PlanCard
             heading="Regular Plan"
             description="Auto-Renews Every 28 Days"
             price={400}
@@ -178,10 +224,11 @@ export default function Page() {
               setTrialBowlSize("");
             }}
           />
-          <PlanCard bgColour="bg-white" 
+          <PlanCard 
             heading="Trail Plan"
             description="One-Time Purchase for 7 Days"
             price={100}
+            bgColour="bg-white"
             isSelected={selectedPlan === "trial"}
             protein={trialProtein}
             setProtein={setTrialProtein}
@@ -192,7 +239,8 @@ export default function Page() {
               setRegularProtein("");
               setRegularBowlSize("");
             }}
-          />
+          /> */}
+
         </div>
         <Typography
           tag="h3"
