@@ -175,25 +175,30 @@ export default function DogOrCat() {
             </div>
           </div>
         </div>
-        <Button 
-          variant={"linkPrimaryDark"} 
-          className="justify-start mx-auto mt-[2.5dvh] disabled:!opacity-100 disabled:!bg-transparent disabled:!text-primary-dark"
-          disabled={!petType || !petName.trim()}
-          onClick={(e) => {
-            e.preventDefault();
-            handleAddMorePets();
-          }}  
-        >
-          Add More Pets
-          <div className="w-4">
-            <Image
-              src="/icons/add-primary-dark.svg"
-              alt="Add new shipping address"
-              fill
-              className="!static w-full object-contain"
-            />
-          </div>
-        </Button>
+        
+        {
+          isNextDisable
+          ? ""
+          : <Button 
+              variant={"linkPrimaryDark"} 
+              className="justify-start mx-auto mt-[2.5dvh] disabled:!opacity-100 disabled:!bg-transparent disabled:!text-primary-dark"
+              disabled={!petType || !petName.trim()}
+              onClick={(e) => {
+                e.preventDefault();
+                handleAddMorePets();
+              }}  
+            >
+              Add More Pets
+              <div className="w-4">
+                <Image
+                  src="/icons/add-primary-dark.svg"
+                  alt="Add new shipping address"
+                  fill
+                  className="!static w-full object-contain"
+                />
+              </div>
+            </Button>
+        }
 
         {/* navigation */}
         <div className="pb-[3dvh] flex flex-col lg:flex-row items-center gap-4 lg:gap-0  lg:items-end pt-[3dvh]">
