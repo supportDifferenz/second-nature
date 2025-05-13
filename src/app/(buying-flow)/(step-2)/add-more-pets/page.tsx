@@ -7,12 +7,15 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 // import { usePetStore } from "@/zustand/store/petDataStore";
+import useAuthStore from '@/zustand/store/authDataStore';
 
 export default function Page() {
 
   const router = useRouter();
 
   const [ checkout, setCheckout ] = useState(false);
+
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
   // const { selectedPetIndex, noOfPets, setSelectedPetIndex } = usePetStore();
 
@@ -76,7 +79,11 @@ export default function Page() {
           disabled={!checkout}
           onClick={(e) => {
             e.preventDefault();
-            router.push("/user-details");
+            if(isAuthenticated){
+              router.push("/checkout");
+            } else {
+              router.push("/user-details");
+            }
           }}
         >
           Checkout
