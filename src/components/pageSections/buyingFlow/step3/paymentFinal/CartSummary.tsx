@@ -23,7 +23,8 @@ export default function CartSummary() {
                     <CardItem 
                         key={petDetails.id ?? ''} 
                         petName={petDetails.name ?? ''} 
-                        planType={petDetails.planType ?? ''} 
+                        planType={petDetails.planType ?? ''}
+                        planPrice={petDetails.planPrice ?? 0}
                         protein={petDetails.protein ?? ''} 
                     />
                 ))
