@@ -108,7 +108,7 @@ export default function Page() {
             firstName: data?.result?.firstname,
             lastName: data?.result?.lastname,
             emailAddress: data?.result?.emailId,
-            phoneNumber: data?.result?.ContactNo,
+            phoneNumber: data?.result?.contactNo,
           })
 
           router.push("/personal-information");
