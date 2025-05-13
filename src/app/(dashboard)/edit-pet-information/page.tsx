@@ -4,18 +4,19 @@ import Typography from "@/components/atoms/typography/Typography";
 import PetInfoCard from "@/components/organism/petInfo/PetInfoCard";
 // import EditPetInfo from "@/components/pages/dashboard/editPetInformation/EditPetInfo";
 import DashboardLayout from "@/components/templates/DashboardLayout";
+import EditPetInfo from "@/components/pageSections/dashboard/editPetInformation/EditPetInfo";
 import React from "react";
 
 export default function Page() {
   return (
     <DashboardLayout>
-    
-    
+
           <Typography
             tag="h5"
             text="Edit Pet Information"
             className="capitalize !font-normal mb-6 text-black"
           />
+
           {/* personal information */}
           <div className="flex flex-wrap gap-5 sm:gap-6">
             <PetInfoCard />
@@ -25,7 +26,8 @@ export default function Page() {
 
           
           {/*if Edit Pet Information */}
-          {/* <EditPetInfo /> */}
+          <EditPetInfo />
+          
         </DashboardLayout>
   );
 }
