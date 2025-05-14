@@ -75,21 +75,22 @@ export default function DogOrCat() {
       if(selectedPetIndex === noOfPets) {
         if(petType && petName.trim() !== "") {
           setSelectedPetIndex(selectedPetIndex);
+          router.push("/gender");
         } else {
-          setSelectedPetIndex(0);
+          setSelectedPetIndex(selectedPetIndex - 1);
+          router.push("/add-more-pets");
         }
       } else {
         setSelectedPetIndex(selectedPetIndex);
+        router.push("/gender");
       }
     }else{
       setSelectedPetIndex(0); // Reset selected pet index
+      router.push("/gender");
     }
 
     setPetType("");
     setPetName("");
-
-    router.push("/gender");
-
     // if (petType && petName.trim() !== "") {
     //   const newPetId = addNewPet({ catOrDog: petType, name: petName });
     //   setCurrentPet(newPetId);
