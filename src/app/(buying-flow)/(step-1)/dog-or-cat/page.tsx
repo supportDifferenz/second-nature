@@ -85,7 +85,15 @@ export default function DogOrCat() {
     // }
 
     if(noOfPets > 0) {
-      setSelectedPetIndex(selectedPetIndex);
+      if(selectedPetIndex === noOfPets) {
+        if(petType && petName.trim() === "") {
+          setSelectedPetIndex(0);
+        } else {
+          setSelectedPetIndex(selectedPetIndex);
+        }
+      } else {
+        setSelectedPetIndex(selectedPetIndex);
+      }
     }else{
       setSelectedPetIndex(0); // Reset selected pet index
     }
