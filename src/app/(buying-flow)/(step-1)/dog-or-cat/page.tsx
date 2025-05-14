@@ -16,7 +16,9 @@ export default function DogOrCat() {
   // const [, setCatName] = useState("");
   const { 
     pets, 
-    // currentPetId, 
+    // currentPetId,
+    noOfPets,
+    selectedPetIndex,
     setCurrentPet, 
     setPetDetails,
     addNewPet,
@@ -26,7 +28,7 @@ export default function DogOrCat() {
   console.log("Pets after adding new pet ", pets);
 
   useEffect(() => {
-    setSelectedPetIndex(null); // Reset selected pet index
+    setSelectedPetIndex(selectedPetIndex || 0); // Reset selected pet index
   }, [setSelectedPetIndex]);
 
   const [petType, setPetType] = useState<"dog" | "cat" | "">("");
@@ -82,7 +84,13 @@ export default function DogOrCat() {
     //   router.push("/gender");
     // }
 
-    setSelectedPetIndex(0); // Reset selected pet index to 0
+    if(noOfPets > 0) {
+      setSelectedPetIndex(selectedPetIndex);
+    }else{
+      setSelectedPetIndex(0); // Reset selected pet index
+    }
+
+    // setSelectedPetIndex(0); // Reset selected pet index to 0
   };
 
   const isNextDisable = pets?.length > 0 ? false : !(petType && petName.trim() !== "");
