@@ -3,7 +3,7 @@ import { subscriptionAxiosInstance } from "../axiosInstance";
 export const getBreedDetails = async (catOrDog: string) => {
   try {
       const response = await subscriptionAxiosInstance.get(
-        `/api/subscription/customerAddress/${catOrDog}`,
+        `/api/subscription/${catOrDog}`,
     );
       return response.data;
     } catch (error) {
@@ -15,7 +15,7 @@ export const getBreedDetails = async (catOrDog: string) => {
 export const getCrossBreedDetails = async (catOrDog: string) => {
   try {
       const response = await subscriptionAxiosInstance.get(
-        `/api/subscription/customerAddress/${catOrDog}`,
+        `/api/subscription/${catOrDog}`,
     );
       return response.data;
     } catch (error) {
@@ -54,7 +54,7 @@ console.log("formData", formData);
 
 try {
     const response = await subscriptionAxiosInstance.post(
-      "/api/subscription/customerAddress/createAddress",
+      "/api/subscription/createAddress",
       formData
     //   {
     //       headers: {
