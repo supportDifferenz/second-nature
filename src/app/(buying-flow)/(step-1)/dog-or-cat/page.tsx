@@ -34,6 +34,9 @@ export default function DogOrCat() {
   const [petType, setPetType] = useState<"dog" | "cat" | "">("");
   const [petName, setPetName] = useState("");
 
+  console.log("###Pet Type is", petType);
+  console.log("###Pet Name is", petName);
+
   // Get the current pet's details
   // const currentPetDetails = currentPetId ? pets[currentPetId] : null;
 
@@ -63,10 +66,27 @@ export default function DogOrCat() {
       setCurrentPet(newPetId);
       if(newPetId) {
         setPetDetails(newPetId, { catOrDog: petType, name: petName });
-        setPetType("");
-        setPetName("");
+        // setPetType("");
+        // setPetName("");
       }
     }
+
+    if(noOfPets > 0) {
+      if(selectedPetIndex === noOfPets) {
+        if(petType && petName.trim() !== "") {
+          setSelectedPetIndex(selectedPetIndex);
+        } else {
+          setSelectedPetIndex(0);
+        }
+      } else {
+        setSelectedPetIndex(selectedPetIndex);
+      }
+    }else{
+      setSelectedPetIndex(0); // Reset selected pet index
+    }
+
+    setPetType("");
+    setPetName("");
 
     router.push("/gender");
 
@@ -83,20 +103,6 @@ export default function DogOrCat() {
     // } else {
     //   router.push("/gender");
     // }
-
-    if(noOfPets > 0) {
-      if(selectedPetIndex === noOfPets) {
-        if(petType && petName.trim() === "") {
-          setSelectedPetIndex(0);
-        } else {
-          setSelectedPetIndex(selectedPetIndex);
-        }
-      } else {
-        setSelectedPetIndex(selectedPetIndex);
-      }
-    }else{
-      setSelectedPetIndex(0); // Reset selected pet index
-    }
 
     // setSelectedPetIndex(0); // Reset selected pet index to 0
   };
