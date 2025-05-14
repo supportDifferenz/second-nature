@@ -16,7 +16,7 @@ export default function DogOrCat() {
   // const [, setCatName] = useState("");
   const { 
     pets, 
-    currentPetId, 
+    // currentPetId, 
     setCurrentPet, 
     setPetDetails,
     addNewPet,
@@ -59,16 +59,28 @@ export default function DogOrCat() {
     if (petType && petName.trim() !== "") {
       const newPetId = addNewPet({ catOrDog: petType, name: petName });
       setCurrentPet(newPetId);
-      setPetType("");
-      setPetName("");
+      if(newPetId) {
+        setPetDetails(newPetId, { catOrDog: petType, name: petName });
+        setPetType("");
+        setPetName("");
+      }
     }
+
+    router.push("/gender");
+
+    // if (petType && petName.trim() !== "") {
+    //   const newPetId = addNewPet({ catOrDog: petType, name: petName });
+    //   setCurrentPet(newPetId);
+    //   setPetType("");
+    //   setPetName("");
+    // }
     
-    if (petType && petName.trim() !== "" && currentPetId) {
-      setPetDetails(currentPetId, { catOrDog: petType, name: petName });
-      router.push("/gender");
-    } else {
-      router.push("/gender");
-    }
+    // if (petType && petName.trim() !== "" && currentPetId) {
+    //   setPetDetails(currentPetId, { catOrDog: petType, name: petName });
+    //   router.push("/gender");
+    // } else {
+    //   router.push("/gender");
+    // }
 
     setSelectedPetIndex(0); // Reset selected pet index to 0
   };
