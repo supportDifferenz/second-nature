@@ -183,7 +183,7 @@ export default function Page() {
 
       mutate(
         {
-          weight: selectedPet?.currentWeight?.toString() || "",
+          weight: selectedPet?.currentWeight || 0,
           proteinType: selectedPlan === "Regular" ? regularProtein : trialProtein,
           activityLevel: selectedPet?.activityLevel || "",
           bowlSize: selectedPlan === "Regular" ? regularBowlSize : trialBowlSize,

@@ -110,14 +110,14 @@ try {
 };
 
 export const getPrice = async (formData: {
-    weight: string;
+    weight: number;
     proteinType: string;
     activityLevel: string;
     bowlSize: string;
     planType: string;
 }) => {
   
-console.log("formData", formData);
+console.log("Formdata in getPrice", formData);
 
 try {
     const response = await subscriptionAxiosInstance.post(

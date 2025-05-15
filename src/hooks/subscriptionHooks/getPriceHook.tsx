@@ -14,7 +14,7 @@ export const useGetPriceHook = () => {
       bowlSize,
       planType,
     }: {
-      weight: string;
+      weight: number;
       proteinType: string;
       activityLevel: string;
       bowlSize: string;
