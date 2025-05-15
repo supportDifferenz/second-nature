@@ -116,7 +116,7 @@ export default function ShippingDetail() {
         return '';
       case 'lastName':
         if (!value.trim()) return 'Last name is required';
-        if (value.length < 2) return 'Last name must be at least 2 characters';
+        if (value.length < 1) return 'Last name must be at least 1 character';
         return '';
       case 'mobile':
         if (!value) return 'Mobile number is required';

@@ -67,9 +67,8 @@ export default function Page() {
   const planType = selectedPet ? selectedPet.planType : "Regular";
   const protein = selectedPet ? selectedPet.protein : "chicken";
   const bowlSize = selectedPet ? selectedPet.bowlSize : "full";
-
   const [ selectedPlan, setSelectedPlan ] = useState<string>("");
-  const [ selectedPrice, setSelectedPrice ] = useState<number>(0);
+  // const [ selectedPrice, setSelectedPrice ] = useState<number>(0);
   // const [ selectedProtein, setSelectedProtein ] = useState<string>("");
   // const [ selectedBowlSize, setSelectedBowlSize ] = useState<string>("");
   const [ regularProtein, setRegularProtein ] = useState<string>("");
@@ -123,7 +122,7 @@ export default function Page() {
     if(selectedPlan === "Regular" && regularProtein && regularBowlSize && currentPetId) {
       // setSelectedProtein(regularProtein || "");
       // setSelectedBowlSize(regularBowlSize);
-      setPetDetails(currentPetId, { planType: selectedPlan, planPrice: selectedPrice, protein: regularProtein, bowlSize: regularBowlSize });
+      setPetDetails(currentPetId, { planType: selectedPlan, planPrice: regularPrice, protein: regularProtein, bowlSize: regularBowlSize });
       if((selectedPetIndex ?? 0) < noOfPets - 1){
         setSelectedPetIndex((selectedPetIndex ?? 0) + 1);
         router.push("/gender")
@@ -134,7 +133,7 @@ export default function Page() {
     } else if(selectedPlan === "Trial" && trialProtein && trialBowlSize && currentPetId) {
       // setSelectedProtein(trialProtein || "");
       // setSelectedBowlSize(trialBowlSize);
-      setPetDetails(currentPetId, { planType: selectedPlan, planPrice: selectedPrice, protein: trialProtein, bowlSize: trialBowlSize });
+      setPetDetails(currentPetId, { planType: selectedPlan, planPrice: trialPrice, protein: trialProtein, bowlSize: trialBowlSize });
       if((selectedPetIndex ?? 0) < noOfPets - 1){
         setSelectedPetIndex((selectedPetIndex ?? 0) + 1);
         router.push("/gender")
@@ -254,9 +253,11 @@ export default function Page() {
                   if (plan.plan_type === "Regular") {
                     setRegularPrice(price);
                     setTrialPrice(0);
+                    // setSelectedPrice(price);
                   } else {
                     setRegularPrice(0);
                     setTrialPrice(price);
+                    // setSelectedPrice(price);
                   }
                 }}
                 bgColour={plan.plan_type === "Regular" ? "bg-[#FDFFF0]" : "bg-white"}
@@ -278,7 +279,7 @@ export default function Page() {
                     }
                   }
                   setSelectedPlan(plan.plan_type);
-                  setSelectedPrice(plan.price);
+                  // setSelectedPrice(plan.price);
                 }}
                 // onClick={() => {
                 //   setSelectedPlan(plan.plan_type);
