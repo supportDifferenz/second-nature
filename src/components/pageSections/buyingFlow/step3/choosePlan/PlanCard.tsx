@@ -14,11 +14,13 @@ interface PlanCardProps {
   heading: string;
   description: string;
   price: number;
+  setPrice?: (price: number) => void;
   isSelected?: boolean;
   protein?: string;
   setProtein?: (protein: string) => void;
   bowlSize?: string;
   setBowlSize?: (bowlSize: string) => void;
+  isPriceLoading?: boolean;
   onClick?: () => void;
 }
 export default function PlanCard({ 
@@ -32,6 +34,7 @@ export default function PlanCard({
   setProtein,
   bowlSize,
   setBowlSize,
+  isPriceLoading = false,
   onClick
 }: PlanCardProps) {
 
@@ -62,13 +65,24 @@ export default function PlanCard({
           text={description}
           className="text-center font-bold text-[#000000] mb-4"
         />
-        <Typography
-          tag="h5"
-          text="QAR "
-          className="text-center text-secondary-1"
-        >
-          <Typography tag="span" text={price?.toString()} className="" />
-        </Typography>
+        {
+          isPriceLoading 
+          ? <Typography tag="span" text="Loading..." className="text-center text-secondary-1" /> 
+          : <>
+              <Typography
+                tag="h5"
+                text="QAR "
+                className="text-center text-secondary-1"
+              >
+              <Typography 
+                tag="span" 
+                text={price?.toString()} 
+                className="" 
+              />
+              </Typography>
+            </>
+        }
+
       </div>
       <div className="flex flex-col pt-[var(--space-30-40)]">
         <Typography

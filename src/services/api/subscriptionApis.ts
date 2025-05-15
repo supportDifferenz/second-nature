@@ -108,3 +108,25 @@ try {
       throw error;
   }
 };
+
+export const getPrice = async (formData: {
+    weight: string;
+    proteinType: string;
+    activityLevel: string;
+    bowlSize: string;
+    planType: string;
+}) => {
+  
+console.log("formData", formData);
+
+try {
+    const response = await subscriptionAxiosInstance.post(
+      "/api/subscription/setting/getPrice",
+      formData
+  );
+    return response.data;
+  } catch (error) {
+      console.error("Error in getting price", error);
+      throw error;
+  }
+};

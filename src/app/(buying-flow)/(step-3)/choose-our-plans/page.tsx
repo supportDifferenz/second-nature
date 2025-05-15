@@ -12,6 +12,7 @@ import { usePetStore } from "@/zustand/store/petDataStore";
 import { useGetAllPlan } from "@/hooks/subscriptionHooks/getAllPlanHook";
 import { useGetAllProtein } from "@/hooks/subscriptionHooks/getAllProteinHook";
 import { useGetAllBowl } from "@/hooks/subscriptionHooks/getAllBowlHook";
+import { useGetPriceHook } from "@/hooks/subscriptionHooks/getPriceHook";
 
 const faqsData = [
   {
@@ -53,6 +54,7 @@ export default function Page() {
   const { data: planData } = useGetAllPlan();
   const { data: proteinData } = useGetAllProtein();
   const { data: bowlData } = useGetAllBowl();
+  const { mutate } = useGetPriceHook();
   // const { data: plans, isLoading, error } = useGetAllPlan();
   console.log("PlanData", planData);
   console.log("ProteinData", proteinData);
@@ -62,9 +64,9 @@ export default function Page() {
   const selectedPet = selectedPetIndex !== null ? pets[selectedPetIndex] : null; // Handle null case for selectedPetIndex
   const currentPetId = selectedPet ? selectedPet.id : null;
   // const selectedPetName = selectedPet ? selectedPet.name : null;
-  const planType = selectedPet ? selectedPet.planType : "";
-  const protein = selectedPet ? selectedPet.protein : "";
-  const bowlSize = selectedPet ? selectedPet.bowlSize : "";
+  const planType = selectedPet ? selectedPet.planType : "Regular";
+  const protein = selectedPet ? selectedPet.protein : "chicken";
+  const bowlSize = selectedPet ? selectedPet.bowlSize : "full";
 
   const [ selectedPlan, setSelectedPlan ] = useState<string>("");
   const [ selectedPrice, setSelectedPrice ] = useState<number>(0);
@@ -74,6 +76,10 @@ export default function Page() {
   const [ regularBowlSize, setRegularBowlSize ] = useState<string>("");
   const [ trialProtein, setTrialProtein ] = useState<string>("");
   const [ trialBowlSize, setTrialBowlSize ] = useState<string>("");
+  const [ regularPrice, setRegularPrice ] = useState<number>(0);
+  const [ trialPrice, setTrialPrice ] = useState<number>(0);
+  const [ isRegularPriceLoading, setIsRegularPriceLoading ] = useState<boolean>(false);
+  const [ isTrialPriceLoading, setIsTrialPriceLoading ] = useState<boolean>(false);
 
   // const plans = [
   //   {
@@ -157,6 +163,58 @@ export default function Page() {
 
   }
 
+  useEffect(() => {
+
+    if(selectedPlan === "Regular") {
+        setTrialPrice(0);
+    } else if(selectedPlan === "Trial") {
+        setRegularPrice(0);
+    }
+    
+    if(selectedPlan && ( (regularProtein && regularBowlSize) || (trialProtein && trialBowlSize) )) {
+
+      if(selectedPlan === "Regular") {
+        setTrialPrice(0);
+        setIsRegularPriceLoading(true);
+      } else if(selectedPlan === "Trial") {
+        setRegularPrice(0);
+        setIsTrialPriceLoading(true);
+      }
+
+      mutate(
+        {
+          weight: selectedPet?.currentWeight?.toString() || "",
+          proteinType: selectedPlan === "Regular" ? regularProtein : trialProtein,
+          activityLevel: selectedPet?.activityLevel || "",
+          bowlSize: selectedPlan === "Regular" ? regularBowlSize : trialBowlSize,
+          planType: selectedPlan,
+        },
+        {
+          onSuccess: (data) => {
+            console.log("Get price successful", data);
+            if(selectedPlan === "Regular") {
+              setRegularPrice(data?.result?.price);
+            } else if(selectedPlan === "Trial") {
+              setTrialPrice(data?.result?.price);
+            }
+            setIsRegularPriceLoading(false);
+            setIsTrialPriceLoading(false);
+          },
+          onError: (error) => {
+            console.error("Get price failed", error);
+            setIsRegularPriceLoading(false);
+            setIsTrialPriceLoading(false);          
+          },
+          onSettled: () => {
+            setIsRegularPriceLoading(false);
+            setIsTrialPriceLoading(false);          
+          },
+        }
+      );
+    }
+
+  },[ selectedPlan, regularProtein, regularBowlSize, trialProtein, trialBowlSize ]);
+
   console.log("Selected pet in choose our plans page is", selectedPet);
   console.log("Current pet id in choose our plans page is", currentPetId);
   console.log("Selected Plan", selectedPlan);
@@ -191,7 +249,16 @@ export default function Page() {
                 key={plan._id}
                 heading={`${plan.plan_type} Plan`}
                 description={plan.plan_type === "Regular" ? "Auto-Renews Every 28 Days" : "One-Time Purchase for 7 Days"}
-                price={plan.price}
+                price={plan.plan_type === "Regular" ? regularPrice : trialPrice}
+                setPrice={(price) => {
+                  if (plan.plan_type === "Regular") {
+                    setRegularPrice(price);
+                    setTrialPrice(0);
+                  } else {
+                    setRegularPrice(0);
+                    setTrialPrice(price);
+                  }
+                }}
                 bgColour={plan.plan_type === "Regular" ? "bg-[#FDFFF0]" : "bg-white"}
                 offerBadge={plan.plan_type === "Regular" ? "Enjoy 25% Off Your First Month!" : ""}
                 isSelected={selectedPlan === plan.plan_type}
@@ -199,6 +266,7 @@ export default function Page() {
                 setProtein={plan.plan_type === "Regular" ? setRegularProtein : setTrialProtein}
                 bowlSize={plan.plan_type === "Regular" ? regularBowlSize : trialBowlSize}
                 setBowlSize={plan.plan_type === "Regular" ? setRegularBowlSize : setTrialBowlSize}
+                isPriceLoading={plan.plan_type === "Regular" ? isRegularPriceLoading : isTrialPriceLoading}
                 onClick={() => {
                   if (plan.plan_type !== selectedPlan) {
                     if (plan.plan_type === "Regular"){
