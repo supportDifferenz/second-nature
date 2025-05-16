@@ -11,6 +11,12 @@ export default function CartSummary() {
     const { pets } = usePetStore();
     console.log("Pets in cart summary",pets);
 
+    const totalPrice = pets.reduce((sum, pet) => {
+    const price = Number(pet.planPrice) || 0;
+    return sum + price;
+    }, 0);    
+    console.log("Total price in cart summary", totalPrice);
+
   return (
     <div className='bg-[#F1F5DB] py-[var(--space-30-60)] rounded-2xl border border-[#C5C5C5]'>
         <div>
@@ -37,7 +43,7 @@ export default function CartSummary() {
         </div>
         <div className='flex justify-between pt-[var(--space-33-42)] mx-[var(--space-30-60)]'>
             <Typography tag='h5' text='Order total' className='uppercase !font-normal text-primary-dark'/>
-            <Typography tag='h5' text='900.00 ' className='text-primary-dark'>
+            <Typography tag='h5' text={totalPrice.toString()} className='text-primary-dark'>
                 <Typography tag='span' text='QAR' className='text-primary-dark'/>
             </Typography>
         </div>
