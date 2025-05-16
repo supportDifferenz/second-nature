@@ -143,3 +143,16 @@ try {
       throw error;
   }
 };
+
+export const getPromoOffer= async (promoCode: string) => {
+  
+try {
+    const response = await subscriptionAxiosInstance.get(
+      `/api/subscription/promocode/getpromocodeByCode/${promoCode}`,
+  );
+    return response.data;
+  } catch (error) {
+      console.error("Error in getting promo offer", error);
+      throw error;
+  }
+};

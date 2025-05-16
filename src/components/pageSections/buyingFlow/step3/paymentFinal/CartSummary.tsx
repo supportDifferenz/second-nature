@@ -3,7 +3,7 @@
 import Typography from '@/components/atoms/typography/Typography'
 import CardItem from '@/components/molecules/cartItem/CardItem'
 import PromoCode from '@/components/molecules/promoCode/PromoCode'
-import React from 'react'
+import React,{ useState } from 'react'
 import { usePetStore } from "@/zustand/store/petDataStore"
 
 export default function CartSummary() {
@@ -16,6 +16,8 @@ export default function CartSummary() {
     return sum + price;
     }, 0);    
     console.log("Total price in cart summary", totalPrice);
+
+    const [ productPrice, setProductPrice ] = useState<number>(totalPrice);
 
   return (
     <div className='bg-[#F1F5DB] py-[var(--space-30-60)] rounded-2xl border border-[#C5C5C5]'>
@@ -39,12 +41,16 @@ export default function CartSummary() {
         </div>
         <div className='flex flex-col gap-[var(--space-20-30)] border-y border-[#CAD585] pt-[var(--space-32-52)] pb-[var(--space-70-80)] mx-[var(--space-30-60)]'>
             <Typography tag='h5' text='Promo/referal code' className='uppercase text-primary-dark'/>
-            <PromoCode/>    
+            <PromoCode
+                totalPrice={totalPrice}
+                productPrice={productPrice}
+                setProductPrice={setProductPrice}
+            />    
         </div>
         <div className='flex justify-between pt-[var(--space-33-42)] mx-[var(--space-30-60)]'>
             <Typography tag='h5' text='Order total' className='uppercase !font-normal text-primary-dark'/>
-            <Typography tag='h5' text={totalPrice.toString()} className='text-primary-dark'>
-                <Typography tag='span' text='QAR' className='text-primary-dark'/>
+            <Typography tag='h5' text={productPrice.toFixed(3)} className='text-primary-dark'>
+                <Typography tag='span' text=' QAR' className='text-primary-dark'/>
             </Typography>
         </div>
         
