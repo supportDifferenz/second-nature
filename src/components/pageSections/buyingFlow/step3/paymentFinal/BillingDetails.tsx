@@ -17,13 +17,21 @@ interface BillingFormData {
   useDifferentBilling: boolean;
 }
 
+interface FormErrors {
+  firstName: string;
+  lastName: string;
+  mobile: string;
+  address: string;
+  aptSuite: string;
+  municipality: string;
+}
+
 interface BillingDetailsProps {
   billingFormData: BillingFormData;
   setBillingFormData: React.Dispatch<React.SetStateAction<BillingFormData>>;
   isSynced: boolean;
-  billingErrors: Record<string, string>;
-  setBillingErrors: React.Dispatch<React.SetStateAction<Record<string, string>>>;
-  // isContinueButtonDisabled: boolean;
+  billingErrors: FormErrors;
+  setBillingErrors: React.Dispatch<React.SetStateAction<FormErrors>>;  // isContinueButtonDisabled: boolean;
 }
 
 export default function BillingDetails({ billingFormData, setBillingFormData, isSynced, billingErrors, setBillingErrors }: BillingDetailsProps) {
@@ -41,22 +49,25 @@ export default function BillingDetails({ billingFormData, setBillingFormData, is
   // });
 
   useEffect(() => {
-    const updatedErrors: Record<string, string> = { ...billingErrors };
+    const updatedErrors: FormErrors = {
+      firstName: billingErrors.firstName,
+      lastName: billingErrors.lastName,
+      mobile: billingErrors.mobile,
+      address: billingErrors.address,
+      aptSuite: billingErrors.aptSuite,
+      municipality: billingErrors.municipality,
+    };
     let changed = false;
   
-    Object.keys(billingErrors).forEach((key) => {
-
-      // Skip non-string fields (like useDifferentBilling)
-      if (key === 'useDifferentBilling') return;
-
+    (Object.keys(billingErrors) as (keyof FormErrors)[]).forEach((key) => {
       const field = key as keyof BillingFormData;
       const value = billingFormData[field];
 
       // Ensure we only validate string fields
       if (typeof value === 'string') {
         const currentError = validateField(field, value);
-        if (!currentError && billingErrors[field]) {
-          delete updatedErrors[field];
+        if (!currentError && billingErrors[key]) {
+          updatedErrors[key] = '';
           changed = true;
         }
       }
@@ -76,7 +87,7 @@ export default function BillingDetails({ billingFormData, setBillingFormData, is
         return '';
       case 'lastName':
         if (!value.trim()) return 'Last name is required';
-        if (value.length < 2) return 'Last name must be at least 2 characters';
+        if (value.length < 1) return 'Last name must be at least 1 character';
         return '';
       case 'mobile':
         if (!value) return 'Mobile number is required';
@@ -99,8 +110,13 @@ export default function BillingDetails({ billingFormData, setBillingFormData, is
     // if (isSynced) return; // Prevent changes when synced
     const { name, value } = e.target;
 
-    if (name === "mobile" && /[^0-9]/.test(value)) {
-      return; // Block input if non-numeric
+    if (name === "mobile") {
+      const numbersOnly = value.replace(/\D/g, '').slice(0, 15);
+      setBillingFormData(prev => ({ ...prev, [name]: numbersOnly }));
+      if (touched[name]) {
+        setBillingErrors(prev => ({ ...prev, [name]: validateField(name,numbersOnly) }));
+      }
+      return;
     }
 
     setBillingFormData(prev => ({ ...prev, [name]: value }));

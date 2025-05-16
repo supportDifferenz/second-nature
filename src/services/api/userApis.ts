@@ -32,3 +32,40 @@ export const createUser = async (formData: {
         throw error;
     }
 };
+
+export const getUserDetails = async (userId: string) => {
+  try {
+      const response = await userAxiosInstance.get(
+        `/api/user/getCustomerById/${userId}`
+    );
+      return response.data;
+    } catch (error) {
+        console.error("Error in getting user details", error);
+        throw error;
+    }
+};
+
+export const updateUser = async (
+  userId: string,
+  formData: {
+    firstname: string;
+    lastname: string;
+    emailId: string;
+    alternativeEmail: string;
+    contactNo: string;
+    alternativeMobile: string;
+  }
+) => {
+  console.log("formData", formData);
+
+  try {
+    const response = await userAxiosInstance.put(
+      `/api/user/${userId}`,
+      formData
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error in updating user details", error);
+    throw error;
+  }
+};

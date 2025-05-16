@@ -6,10 +6,11 @@ interface CardItemProps {
   key: string;
   petName: string;
   planType: string;
+  planPrice: number;
   protein: string;
 }
 
-export default function CardItem({ key, petName, planType, protein }: CardItemProps) {
+export default function CardItem({ key, petName, planType, planPrice, protein }: CardItemProps) {
   return (
     <div key={key} className="flex">
       <div className="w-[23.3vw] lg:w-[13.22vw] h-full">
@@ -45,7 +46,12 @@ export default function CardItem({ key, petName, planType, protein }: CardItemPr
         </div>
       </div>
       <div className="ml-auto mt-[var(--space-8-30)]">
-        <Typography tag="h6" text="400.00 QAR" className="text-primary-dark" />
+        <Typography 
+          tag="h6"
+          text={`${planPrice} QAR`}
+          // text="400.00 QAR"
+          className="text-primary-dark" 
+        />
       </div>
     </div>
   );

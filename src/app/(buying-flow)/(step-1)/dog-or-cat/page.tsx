@@ -16,7 +16,9 @@ export default function DogOrCat() {
   // const [, setCatName] = useState("");
   const { 
     pets, 
-    currentPetId, 
+    // currentPetId,
+    noOfPets,
+    selectedPetIndex,
     setCurrentPet, 
     setPetDetails,
     addNewPet,
@@ -26,11 +28,14 @@ export default function DogOrCat() {
   console.log("Pets after adding new pet ", pets);
 
   useEffect(() => {
-    setSelectedPetIndex(null); // Reset selected pet index
+    setSelectedPetIndex(selectedPetIndex || 0); // Reset selected pet index
   }, [setSelectedPetIndex]);
 
   const [petType, setPetType] = useState<"dog" | "cat" | "">("");
   const [petName, setPetName] = useState("");
+
+  console.log("###Pet Type is", petType);
+  console.log("###Pet Name is", petName);
 
   // Get the current pet's details
   // const currentPetDetails = currentPetId ? pets[currentPetId] : null;
@@ -59,18 +64,48 @@ export default function DogOrCat() {
     if (petType && petName.trim() !== "") {
       const newPetId = addNewPet({ catOrDog: petType, name: petName });
       setCurrentPet(newPetId);
-      setPetType("");
-      setPetName("");
+      if(newPetId) {
+        setPetDetails(newPetId, { catOrDog: petType, name: petName });
+        // setPetType("");
+        // setPetName("");
+      }
     }
-    
-    if (petType && petName.trim() !== "" && currentPetId) {
-      setPetDetails(currentPetId, { catOrDog: petType, name: petName });
-      router.push("/gender");
-    } else {
+
+    if(noOfPets > 0) {
+      if(selectedPetIndex === noOfPets) {
+        if(petType && petName.trim() !== "") {
+          setSelectedPetIndex(selectedPetIndex);
+          router.push("/gender");
+        } else {
+          setSelectedPetIndex(selectedPetIndex - 1);
+          router.push("/add-more-pets");
+        }
+      } else {
+        setSelectedPetIndex(selectedPetIndex);
+        router.push("/gender");
+      }
+    }else{
+      setSelectedPetIndex(0); // Reset selected pet index
       router.push("/gender");
     }
 
-    setSelectedPetIndex(0); // Reset selected pet index to 0
+    setPetType("");
+    setPetName("");
+    // if (petType && petName.trim() !== "") {
+    //   const newPetId = addNewPet({ catOrDog: petType, name: petName });
+    //   setCurrentPet(newPetId);
+    //   setPetType("");
+    //   setPetName("");
+    // }
+    
+    // if (petType && petName.trim() !== "" && currentPetId) {
+    //   setPetDetails(currentPetId, { catOrDog: petType, name: petName });
+    //   router.push("/gender");
+    // } else {
+    //   router.push("/gender");
+    // }
+
+    // setSelectedPetIndex(0); // Reset selected pet index to 0
   };
 
   const isNextDisable = pets?.length > 0 ? false : !(petType && petName.trim() !== "");
@@ -175,25 +210,30 @@ export default function DogOrCat() {
             </div>
           </div>
         </div>
-        <Button 
-          variant={"linkPrimaryDark"} 
-          className="justify-start mx-auto mt-[2.5dvh] disabled:!opacity-100 disabled:!bg-transparent disabled:!text-primary-dark"
-          disabled={!petType || !petName.trim()}
-          onClick={(e) => {
-            e.preventDefault();
-            handleAddMorePets();
-          }}  
-        >
-          Add More Pets
-          <div className="w-4">
-            <Image
-              src="/icons/add-primary-dark.svg"
-              alt="Add new shipping address"
-              fill
-              className="!static w-full object-contain"
-            />
-          </div>
-        </Button>
+        
+        {
+          isNextDisable
+          ? ""
+          : <Button 
+              variant={"linkPrimaryDark"} 
+              className="justify-start mx-auto mt-[2.5dvh] disabled:!opacity-100 disabled:!bg-transparent disabled:!text-primary-dark"
+              disabled={!petType || !petName.trim()}
+              onClick={(e) => {
+                e.preventDefault();
+                handleAddMorePets();
+              }}  
+            >
+              Add More Pets
+              <div className="w-4">
+                <Image
+                  src="/icons/add-primary-dark.svg"
+                  alt="Add new shipping address"
+                  fill
+                  className="!static w-full object-contain"
+                />
+              </div>
+            </Button>
+        }
 
         {/* navigation */}
         <div className="pb-[3dvh] flex flex-col lg:flex-row items-center gap-4 lg:gap-0  lg:items-end pt-[3dvh]">

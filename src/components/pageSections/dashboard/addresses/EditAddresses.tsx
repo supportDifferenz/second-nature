@@ -1,10 +1,21 @@
 import { InputLabeled } from "@/components/molecules/inputLabeled/InputLabeled";
+import Typography from "@/components/atoms/typography/Typography";
 import { Button } from "@/components/ui/button";
 import React from "react";
 
-export default function EditAddresses() {
+interface EditAddressesProps {
+  selectedAddress: string;
+  setIsEditing: (isEditing: boolean) => void;
+}
+
+export default function EditAddresses({ selectedAddress, setIsEditing }: EditAddressesProps) {
   return (
     <form action="">
+      <Typography
+        tag="h6"
+        text={selectedAddress === "shipping" ? "Shipping Address" : "Billing Address"}
+        className="capitalize !font-normal mb-6 text-black"
+      />
       <div className="grid sm:grid-cols-2 gap-x-5 gap-y-(--space-22-43) ">
         {/* First Name */}
         <InputLabeled
@@ -54,13 +65,24 @@ export default function EditAddresses() {
           placeholder="Type you App/Suite"
           className="sm:col-span-2"
         />
-        <Button
-          type="submit"
-          variant={"whiteBtnSecondary2BorderAndText"}
-          className="w-fit"
-        >
-          Update your address
-        </Button>
+        <div className="flex gap-3">
+          <Button
+            type="submit"
+            variant={"whiteBtnSecondary2BorderAndText"}
+            className="w-fit"
+            onClick={() => setIsEditing(false)}
+          >
+            Update your address
+          </Button>
+          <Button
+            type="submit"
+            variant="outlineSecondaryBtn"
+            className="w-fit"
+            onClick={() => setIsEditing(false)}
+          >
+            Cancel
+          </Button>
+        </div>
       </div>
     </form>
   );

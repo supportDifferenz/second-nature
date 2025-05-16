@@ -4,4 +4,12 @@ export const QUERY_KEYS = {
     GET_CROSS_BREED_DETAILS: "getCrossBreedDetails",
     CREATE_USER: "createUser",
     CREATE_ADDRESS: "createAddress",
-}
+    GET_USER_DETAILS: "getUserDetails",
+    UPDATE_USER: "updateUser",
+    GET_ALL_PLANS: "getAllPlans",
+    GET_ALL_PROTEINS: "getAllProteins",
+    GET_ALL_BOWLS: "getAllBowls",
+    GET_PRICE: "getPrice",
+    GET_ADDRESS_BY_ID: "getAddressById",
+    GET_PROMO_OFFER: "getPromoOffer",
+}   

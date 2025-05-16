@@ -3,7 +3,7 @@ import { subscriptionAxiosInstance } from "../axiosInstance";
 export const getBreedDetails = async (catOrDog: string) => {
   try {
       const response = await subscriptionAxiosInstance.get(
-        `/api/subscription/customerAddress/${catOrDog}`,
+        `/api/subscription/${catOrDog}`,
     );
       return response.data;
     } catch (error) {
@@ -15,7 +15,7 @@ export const getBreedDetails = async (catOrDog: string) => {
 export const getCrossBreedDetails = async (catOrDog: string) => {
   try {
       const response = await subscriptionAxiosInstance.get(
-        `/api/subscription/customerAddress/${catOrDog}`,
+        `/api/subscription/${catOrDog}`,
     );
       return response.data;
     } catch (error) {
@@ -54,7 +54,7 @@ console.log("formData", formData);
 
 try {
     const response = await subscriptionAxiosInstance.post(
-      "/api/subscription/customerAddress/createAddress",
+      "/api/subscription/createAddress",
       formData
     //   {
     //       headers: {
@@ -66,6 +66,93 @@ try {
     return response.data;
   } catch (error) {
       console.error("Error in create address", error);
+      throw error;
+  }
+};
+
+export const getAllPlan = async () => {
+  
+try {
+    const response = await subscriptionAxiosInstance.post(
+      "/api/subscription/plan/getAllplan",
+  );
+    return response.data;
+  } catch (error) {
+      console.error("Error in getting all plan details", error);
+      throw error;
+  }
+};
+
+export const getAllProtein = async () => {
+  
+try {
+    const response = await subscriptionAxiosInstance.post(
+      "/api/subscription/protein/getAllProtein",
+  );
+    return response.data;
+  } catch (error) {
+      console.error("Error in getting all protein details", error);
+      throw error;
+  }
+};
+
+export const getAllBowl = async () => {
+  
+try {
+    const response = await subscriptionAxiosInstance.post(
+      "/api/subscription/bowl/getAllbowl",
+  );
+    return response.data;
+  } catch (error) {
+      console.error("Error in getting all bowl details", error);
+      throw error;
+  }
+};
+
+export const getPrice = async (formData: {
+    weight: number;
+    proteinType: string;
+    activityLevel: string;
+    bowlSize: string;
+    planType: string;
+}) => {
+  
+console.log("Formdata in getPrice", formData);
+
+try {
+    const response = await subscriptionAxiosInstance.post(
+      "/api/subscription/setting/getPrice",
+      formData
+  );
+    return response.data;
+  } catch (error) {
+      console.error("Error in getting price", error);
+      throw error;
+  }
+};
+
+export const getAddressById= async (userId: string) => {
+  
+try {
+    const response = await subscriptionAxiosInstance.get(
+      `/api/subscription/getAddressById/${userId}`,
+  );
+    return response.data;
+  } catch (error) {
+      console.error("Error in getting address by id", error);
+      throw error;
+  }
+};
+
+export const getPromoOffer= async (promoCode: string) => {
+  
+try {
+    const response = await subscriptionAxiosInstance.get(
+      `/api/subscription/promocode/getpromocodeByCode/${promoCode}`,
+  );
+    return response.data;
+  } catch (error) {
+      console.error("Error in getting promo offer", error);
       throw error;
   }
 };

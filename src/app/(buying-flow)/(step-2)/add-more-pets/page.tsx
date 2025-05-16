@@ -6,13 +6,24 @@ import React, { useState} from 'react'
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-// import { usePetStore } from "@/zustand/store/petDataStore";
+import { usePetStore } from "@/zustand/store/petDataStore";
+import useAuthStore from '@/zustand/store/authDataStore';
 
 export default function Page() {
 
   const router = useRouter();
 
   const [ checkout, setCheckout ] = useState(false);
+
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+
+    const { selectedPetIndex, setSelectedPetIndex } = usePetStore();
+
+  const handleAddAnotherPet = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setSelectedPetIndex((selectedPetIndex ?? 0) + 1); // Reset selected pet index
+    router.push("/dog-or-cat");
+  }
 
   // const { selectedPetIndex, noOfPets, setSelectedPetIndex } = usePetStore();
 
@@ -44,10 +55,7 @@ export default function Page() {
           </div>
           <div 
             className="mx-auto items-center justify-center flex flex-wrap border border-[#A1A1A1] rounded-full px-[var(--space-80-100)] py-[var( --space-10-15)] py-3 gap-2.5 lg:gap-3.5 cursor-pointer"
-            onClick={(e) => {
-              e.preventDefault();
-              router.push("/dog-or-cat");
-            }}
+            onClick={handleAddAnotherPet}
           >
             <Typography tag="h6" text="Yes, I want to add another pet" className="text-center text-primary-dark" />
             {/* <Typography tag="h3" text="+" className="text-center text-primary-dark" />   */}
@@ -76,7 +84,11 @@ export default function Page() {
           disabled={!checkout}
           onClick={(e) => {
             e.preventDefault();
-            router.push("/user-details");
+            if(isAuthenticated){
+              router.push("/checkout");
+            } else {
+              router.push("/user-details");
+            }
           }}
         >
           Checkout
