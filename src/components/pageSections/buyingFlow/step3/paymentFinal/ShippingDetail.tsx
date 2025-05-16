@@ -3,14 +3,16 @@
 import Typography from '@/components/atoms/typography/Typography'
 import AlertBar from '@/components/molecules/alertBar/AlertBar'
 import { InputLabeled } from '@/components/molecules/inputLabeled/InputLabeled'
-// import { Input } from '@/components/ui/input'
-import React,{ useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { Button } from "@/components/ui/button"
 import BillingDetails from './BillingDetails'
 import Payment from './Payment';
 import { useUserStore } from '@/zustand/store/userDataStore';
-import useAuthStore from '@/zustand/store/authDataStore';
+// import useAuthStore from '@/zustand/store/authDataStore';
 import { useCreateAddressHook } from '@/hooks/subscriptionHooks/createAddressHook';
+import { useGetAddressById } from '@/hooks/subscriptionHooks/getAddressByIdHook';
+
+type FormField = 'firstName' | 'lastName' | 'mobile' | 'address' | 'aptSuite' | 'municipality';
 
 interface ShippingFormData {
   firstName: string;
@@ -21,53 +23,51 @@ interface ShippingFormData {
   municipality: string;
 }
 
-export interface BillingFormData {
+interface BillingFormData extends ShippingFormData {
+  useDifferentBilling: boolean;
+}
+
+interface FormErrors {
   firstName: string;
   lastName: string;
   mobile: string;
   address: string;
   aptSuite: string;
   municipality: string;
-  useDifferentBilling: boolean;
 }
 
 export default function ShippingDetail() {
-
-  // const [ showBillingDetails, setShowBillingDetails ] = useState(false);
-
-  // const handleContinue = (e: React.MouseEvent<HTMLButtonElement>) => {
-  //   e.preventDefault();
-  //   setShowBillingDetails(false);
-  // }
-
   const { userDetails, setUserDetails } = useUserStore();
-  const { isAuthenticated } = useAuthStore();
+  // const { isAuthenticated } = useAuthStore();
   const { mutate } = useCreateAddressHook();
+  const { data: addressData } = useGetAddressById(userDetails.userId || "");
+  
+  const [isLoading, setIsLoading] = useState(true);
   const [selectedCheckBox, setSelectedCheckBox] = useState(true);
   const [touched, setTouched] = useState<Record<string, boolean>>({});
-  const [ showPaymentDetails, setShowPaymentDetails ] = useState(false);
-  const [ isSubmittingAddress, setIsSubmittingAddress ] = useState(false);
-
+  const [showPaymentDetails, setShowPaymentDetails] = useState(false);
+  const [isSubmittingAddress, setIsSubmittingAddress] = useState(false);
+  
   const [shippingFormData, setShippingFormData] = useState<ShippingFormData>({
-    firstName: userDetails?.shippingDetails?.firstName || "",
-    lastName: userDetails?.shippingDetails?.lastName || "",
-    mobile: userDetails?.shippingDetails?.mobile || "",
-    address: userDetails?.shippingDetails?.address || "",
-    aptSuite: userDetails?.shippingDetails?.aptSuite || "",
-    municipality: userDetails?.shippingDetails?.municipality || "",
+    firstName: "",
+    lastName: "",
+    mobile: "",
+    address: "",
+    aptSuite: "",
+    municipality: ""
   });
 
   const [billingFormData, setBillingFormData] = useState<BillingFormData>({
-    firstName: userDetails?.billingDetails?.firstName || "",
-    lastName:  userDetails?.billingDetails?.lastName || "",
-    mobile: userDetails?.billingDetails?.mobile || "",
-    address: userDetails?.billingDetails?.address || "",
-    aptSuite: userDetails?.billingDetails?.aptSuite || "",
-    municipality: userDetails?.billingDetails?.municipality || "",
-    useDifferentBilling: userDetails?.billingDetails?.useDifferentBilling || true,
+    firstName: "",
+    lastName: "",
+    mobile: "",
+    address: "",
+    aptSuite: "",
+    municipality: "",
+    useDifferentBilling: true
   });
 
-  const [shippingErrors, setShippingErrors] = useState<Record<string, string>>({
+  const [shippingErrors, setShippingErrors] = useState<FormErrors>({
     firstName: '',
     lastName: '',
     mobile: '',
@@ -75,71 +75,92 @@ export default function ShippingDetail() {
     aptSuite: '',
     municipality: ''
   });
-  const [billingErrors, setBillingErrors] = useState<Record<string, string>>({
+
+  const [billingErrors, setBillingErrors] = useState<FormErrors>({
     firstName: '',
     lastName: '',
     mobile: '',
     address: '',
     aptSuite: '',
-    municipality: '',
+    municipality: ''
   });
 
-  // const isContinueButtonDisabled = shippingFormData.firstName === '' || shippingFormData.lastName === '' || shippingFormData.mobile === '' || shippingFormData.address === '' || shippingFormData.municipality === '' || billingFormData.firstName === '' || billingFormData.lastName === '' || billingFormData.mobile === '' || billingFormData.address === '' || billingFormData.municipality === '' || ( shippingErrors.firstName !== '' || shippingErrors.lastName !== '' || shippingErrors.mobile !== '' || shippingErrors.address !== '' || shippingErrors.municipality !== '' || shippingErrors.aptSuite !== '' || billingErrors.firstName !== '' || billingErrors.lastName !== '' || billingErrors.mobile !== '' || billingErrors.address !== '' || billingErrors.municipality !== '' || billingErrors.aptSuite !== '');
+  // Initialize form data with proper priority
+  useEffect(() => {
+    if (addressData || userDetails) {
+      setShippingFormData({
+        firstName: addressData?.result?.shippingAddress?.[0]?.firstName || userDetails?.shippingDetails?.firstName || "",
+        lastName: addressData?.result?.shippingAddress?.[0]?.lastName || userDetails?.shippingDetails?.lastName || "",
+        mobile: addressData?.result?.shippingAddress?.[0]?.contactNo || userDetails?.shippingDetails?.mobile || "",
+        address: addressData?.result?.shippingAddress?.[0]?.address || userDetails?.shippingDetails?.address || "",
+        aptSuite: addressData?.result?.shippingAddress?.[0]?.aptSuite || userDetails?.shippingDetails?.aptSuite || "",
+        municipality: addressData?.result?.shippingAddress?.[0]?.municipality || userDetails?.shippingDetails?.municipality || "",
+      });
 
-  console.log('Shipping form data in checkout page is', shippingFormData);
-  console.log('Shipping errors in checkout page is', shippingErrors);
-  console.log('Billing form data in checkout page is', billingFormData);
-  console.log('Billing errors in checkout page is', billingErrors);
+      setBillingFormData({
+        firstName: addressData?.result?.billingAddress?.[0]?.firstName || userDetails?.billingDetails?.firstName || "",
+        lastName: addressData?.result?.billingAddress?.[0]?.lastName || userDetails?.billingDetails?.lastName || "",
+        mobile: addressData?.result?.billingAddress?.[0]?.contactNo || userDetails?.billingDetails?.mobile || "",
+        address: addressData?.result?.billingAddress?.[0]?.address || userDetails?.billingDetails?.address || "",
+        aptSuite: addressData?.result?.billingAddress?.[0]?.aptSuite || userDetails?.billingDetails?.aptSuite || "",
+        municipality: addressData?.result?.billingAddress?.[0]?.municipality || userDetails?.billingDetails?.municipality || "",
+        useDifferentBilling: userDetails?.billingDetails?.useDifferentBilling ?? true,
+      });
+
+      // Set checkbox state based on fetched data
+      if (addressData?.result?.billingAddress?.[0] || userDetails?.billingDetails) {
+        setSelectedCheckBox(
+          userDetails?.billingDetails?.useDifferentBilling ??
+          addressData?.result?.billingAddress?.[0]?.useDifferentBilling ??
+          true
+        );
+      }
+    }
+    setIsLoading(false);
+  }, [addressData, userDetails]);
 
   // Sync billing data when checkbox is unchecked
   useEffect(() => {
-    if (!selectedCheckBox || isAuthenticated) {
-      setBillingFormData({ ...shippingFormData, useDifferentBilling: false });
-    } else if(selectedCheckBox) {
-      setBillingFormData({
-        firstName: "",
-        lastName: "",
-        mobile: "",
-        address: "",
-        aptSuite: "",
-        municipality: "",
-        useDifferentBilling: true,
-      });
+    if (!selectedCheckBox) {
+      setBillingFormData(() => ({ 
+        ...shippingFormData, 
+        useDifferentBilling: false 
+      }));
     }
-  }, [selectedCheckBox]);
+  }, [selectedCheckBox, shippingFormData]);
 
-  const validateField = (name: string, value: string) => {
+  const validateField = useCallback((name: FormField, value: string): string => {
+    const trimmedValue = value.trim();
     switch (name) {
       case 'firstName':
-        if (!value.trim()) return 'First name is required';
-        if (value.length < 2) return 'First name must be at least 2 characters';
+        if (!trimmedValue) return 'First name is required';
+        if (trimmedValue.length < 2) return 'First name must be at least 2 characters';
         return '';
       case 'lastName':
-        if (!value.trim()) return 'Last name is required';
-        if (value.length < 1) return 'Last name must be at least 1 character';
+        if (!trimmedValue) return 'Last name is required';
+        if (trimmedValue.length < 1) return 'Last name must be at least 1 character';
         return '';
       case 'mobile':
-        if (!value) return 'Mobile number is required';
-        if (!/^[0-9]{10,15}$/.test(value)) return 'Please enter a valid mobile number (10-15 digits)';
+        if (!trimmedValue) return 'Mobile number is required';
+        if (!/^[0-9]{10,15}$/.test(trimmedValue)) return 'Please enter a valid mobile number (10-15 digits)';
         return '';
       case 'address':
-        if (!value.trim()) return 'Address is required';
-        if (value.length < 5) return 'Address must be at least 5 characters';
+        if (!trimmedValue) return 'Address is required';
+        if (trimmedValue.length < 5) return 'Address must be at least 5 characters';
         return '';
       case 'aptSuite':
-        if (!value.trim()) return 'Apartment or Suite is required';
-        if (value.length < 2) return 'Apartment/Suite must be at least 2 characters';
+        if (!trimmedValue) return 'Apartment or Suite is required';
+        if (trimmedValue.length < 2) return 'Apartment/Suite must be at least 2 characters';
         return '';
       case 'municipality':
-        if (!value.trim()) return 'Municipality is required';
+        if (!trimmedValue) return 'Municipality is required';
         return '';
       default:
         return '';
     }
-  };
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-
     const { name, value } = e.target;
 
     if (name === "mobile" && /[^0-9]/.test(value)) {
@@ -148,33 +169,30 @@ export default function ShippingDetail() {
 
     setShippingFormData(prev => ({ ...prev, [name]: value }));
     
-    // Validate on change if the field has been touched
     if (touched[name]) {
-      setShippingErrors(prev => ({ ...prev, [name]: validateField(name, value) }));
+      setShippingErrors(prev => ({ ...prev, [name]: validateField(name as FormField, value) }));
     }
-
   };
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setTouched(prev => ({ ...prev, [name]: true }));
-    setShippingErrors(prev => ({ ...prev, [name]: validateField(name, value) }));
+    setShippingErrors(prev => ({ ...prev, [name]: validateField(name as FormField, value) }));
   };
 
-  const validateShippingForm = () => {
-    const newErrors: Record<string, string> = {};
+  const validateShippingForm = (): boolean => {
+    const newErrors: FormErrors = {} as FormErrors;
     let isValid = true;
 
-    Object.keys(shippingFormData).forEach(key => {
-        const error = validateField(key, shippingFormData[key as keyof ShippingFormData]);
-        if (error) {
-          newErrors[key] = error;
-          isValid = false;
-        }
+    (Object.keys(shippingFormData) as FormField[]).forEach(key => {
+      const error = validateField(key, shippingFormData[key]);
+      if (error) {
+        newErrors[key] = error;
+        isValid = false;
+      }
     });
 
     setShippingErrors(newErrors);
-    // Mark all fields as touched to show errors
     setTouched({
       firstName: true,
       lastName: true,
@@ -187,22 +205,21 @@ export default function ShippingDetail() {
     return isValid;
   };
 
-  const validateBillingForm = () => {
-    const newErrors: Record<string, string> = {};
+  const validateBillingForm = (): boolean => {
+    const newErrors: FormErrors = {} as FormErrors;
     let isValid = true;
 
-    Object.keys(billingFormData).forEach(key => {
-      if (key !== 'isUseDifferentBilling') {
-        const error = validateField(key, billingFormData[key as keyof ShippingFormData]);
+    (Object.keys(billingFormData) as (keyof BillingFormData)[]).forEach(key => {
+      if (key !== 'useDifferentBilling') {
+        const error = validateField(key as FormField, billingFormData[key] as string);
         if (error) {
-          newErrors[key] = error;
+          newErrors[key as FormField] = error;
           isValid = false;
         }
       }
     });
 
     setBillingErrors(newErrors);
-    // Mark all fields as touched to show errors
     setTouched({
       firstName: true,
       lastName: true,
@@ -221,18 +238,16 @@ export default function ShippingDetail() {
     const shippingValid = validateShippingForm();
     const billingValid = validateBillingForm();
 
-    if(shippingValid && billingValid) {
-
-      // Proceed with shipping details submission
-      console.log('Shipping details submitted:', shippingFormData);
-      setShowPaymentDetails(true);
+    if (shippingValid && billingValid) {
       setIsSubmittingAddress(true);
 
-      setUserDetails({
+      const updatedUserDetails = {
         ...userDetails,
         shippingDetails: shippingFormData,
         billingDetails: billingFormData,
-      })
+      };
+
+      setUserDetails(updatedUserDetails);
 
       mutate({
         user_id: userDetails.userId,
@@ -253,37 +268,34 @@ export default function ShippingDetail() {
           municipality: billingFormData.municipality,
           useDifferentBilling: billingFormData.useDifferentBilling,
         }],
-      },
-    {
-      onSuccess: (data) => {
-        console.log('User details updated successfully:', data);
-        setIsSubmittingAddress(false);
-      },
-      onError: (error) => {
-        console.error('Error updating user details:', error);
-        setIsSubmittingAddress(false);
-      },
-    });
-
-    }  
-
+      }, {
+        onSuccess: () => {
+          setShowPaymentDetails(true);
+          setIsSubmittingAddress(false);
+        },
+        onError: (error) => {
+          console.error('Error updating address:', error);
+          setIsSubmittingAddress(false);
+        },
+      });
+    }
   };
 
-  console.log("User details in checkout page when click on continue button in address section is", userDetails);
+  if (isLoading) {
+    return <div className="flex justify-center items-center h-64">
+      <Typography tag="p" text="Loading address data..." />
+    </div>;
+  }
 
   return (
     <div className="flex flex-col gap-[var(--space-30-60)]">
-
       <Typography
         tag="h5"
         text="Shipping Details"
         className="uppercase text-primary-dark"
       />
-      <form 
-        onSubmit={handleSubmit}
-        className="flex flex-col gap-[var(--space-30-52)]"
-      >
 
+      <form onSubmit={handleSubmit} className="flex flex-col gap-[var(--space-30-52)]">
         <InputLabeled
           name="firstName"
           label="First Name" 
@@ -294,6 +306,7 @@ export default function ShippingDetail() {
           onBlur={handleBlur}
           error={shippingErrors.firstName}
         />
+
         <InputLabeled
           name="lastName"
           label="Last Name" 
@@ -304,6 +317,7 @@ export default function ShippingDetail() {
           onBlur={handleBlur}
           error={shippingErrors.lastName}
         />
+
         <InputLabeled 
           name="mobile"
           label="Mobile Number" 
@@ -316,55 +330,38 @@ export default function ShippingDetail() {
         />
 
         <div className='flex flex-col gap-[var(--space-8-17)]'>
-            <InputLabeled
-              name="address"
-              label="Address" 
-              placeholder="Address*" 
-              variant="roundedEdgeInput"
-              value={shippingFormData.address}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              error={shippingErrors.address}
-            />
-            {/* <Input
-              name="aptSuite"
-              variant='roundedEdgeInput' 
-              placeholder='Apt, Suite*' 
-              className='bg-white'
-              value={formData.aptSuite}
-              onChange={handleChange}
-              onBlur={handleBlur}
-            /> */}
-            <InputLabeled
-              name="aptSuite"
-              variant='roundedEdgeInput' 
-              placeholder='Apt, Suite*' 
-              className='bg-white'
-              value={shippingFormData.aptSuite}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              error={shippingErrors.aptSuite}
-            />
-            {/* <Input
-              name="municipality"
-              variant='roundedEdgeInput' 
-              placeholder='Municipality*' 
-              className='bg-white'
-              value={formData.municipality}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              // error={errors.municipality}
-            /> */}
-            <InputLabeled
-              name="municipality"
-              variant='roundedEdgeInput' 
-              placeholder='Municipality*' 
-              className='bg-white'
-              value={shippingFormData.municipality}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              error={shippingErrors.municipality}
-            />
+          <InputLabeled
+            name="address"
+            label="Address" 
+            placeholder="Address*" 
+            variant="roundedEdgeInput"
+            value={shippingFormData.address}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={shippingErrors.address}
+          />
+
+          <InputLabeled
+            name="aptSuite"
+            variant='roundedEdgeInput' 
+            placeholder='Apt, Suite*' 
+            className='bg-white'
+            value={shippingFormData.aptSuite}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={shippingErrors.aptSuite}
+          />
+
+          <InputLabeled
+            name="municipality"
+            variant='roundedEdgeInput' 
+            placeholder='Municipality*' 
+            className='bg-white'
+            value={shippingFormData.municipality}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={shippingErrors.municipality}
+          />
         </div>
 
         <AlertBar 
@@ -379,23 +376,18 @@ export default function ShippingDetail() {
           isSynced={!selectedCheckBox}
           billingErrors={billingErrors}
           setBillingErrors={setBillingErrors}
-          // isContinueButtonDisabled={isContinueButtonDisabled}
         />
 
         <Button
           type="submit"
           className="w-full"
           disabled={isSubmittingAddress}
-          // onClick={handleContinue}
         >
-          { isSubmittingAddress ? "Loading..." : "Continue" }
+          {isSubmittingAddress ? "Loading..." : "Continue"}
         </Button>
-
       </form>
 
-      { showPaymentDetails && <Payment /> }
-
-        
+      {showPaymentDetails && <Payment />}
     </div>
-  )
+  );
 }

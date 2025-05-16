@@ -130,3 +130,16 @@ try {
       throw error;
   }
 };
+
+export const getAddressById= async (userId: string) => {
+  
+try {
+    const response = await subscriptionAxiosInstance.get(
+      `/api/subscription/getAddressById/${userId}`,
+  );
+    return response.data;
+  } catch (error) {
+      console.error("Error in getting address by id", error);
+      throw error;
+  }
+};

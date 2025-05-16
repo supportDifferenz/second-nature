@@ -10,4 +10,5 @@ export const QUERY_KEYS = {
     GET_ALL_PROTEINS: "getAllProteins",
     GET_ALL_BOWLS: "getAllBowls",
     GET_PRICE: "getPrice",
+    GET_ADDRESS_BY_ID: "getAddressById",
 }   
