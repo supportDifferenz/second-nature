@@ -110,8 +110,13 @@ export default function BillingDetails({ billingFormData, setBillingFormData, is
     // if (isSynced) return; // Prevent changes when synced
     const { name, value } = e.target;
 
-    if (name === "mobile" && /[^0-9]/.test(value)) {
-      return; // Block input if non-numeric
+    if (name === "mobile") {
+      const numbersOnly = value.replace(/\D/g, '').slice(0, 15);
+      setBillingFormData(prev => ({ ...prev, [name]: numbersOnly }));
+      if (touched[name]) {
+        setBillingErrors(prev => ({ ...prev, [name]: validateField(name,numbersOnly) }));
+      }
+      return;
     }
 
     setBillingFormData(prev => ({ ...prev, [name]: value }));

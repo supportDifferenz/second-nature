@@ -163,8 +163,11 @@ export default function ShippingDetail() {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
-    if (name === "mobile" && /[^0-9]/.test(value)) {
-      return; // Block input if non-numeric
+    if (name === "mobile") {
+    // Allow only numbers and limit to 15 characters
+      const numbersOnly = value.replace(/\D/g, '').slice(0, 15);
+      setShippingFormData(prev => ({ ...prev, [name]: numbersOnly }));
+      return;    
     }
 
     setShippingFormData(prev => ({ ...prev, [name]: value }));
