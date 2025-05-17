@@ -113,6 +113,8 @@ export default function ShippingDetail() {
 
       // Set checkbox state based on fetched data
       if (addressData?.result?.billingAddress?.[0] || userDetails?.billingDetails) {
+        console.log("Shipping address data", addressData?.result?.shippingAddress);
+        console.log("Billing address data", addressData?.result?.billingAddress);
         setSelectedCheckBox(
           userDetails?.billingDetails?.useDifferentBilling ??
           addressData?.result?.billingAddress?.[0]?.useDifferentBilling ??
@@ -125,7 +127,7 @@ export default function ShippingDetail() {
 
   // Sync billing data when checkbox is unchecked
   useEffect(() => {
-    if (!selectedCheckBox) {
+    if (selectedCheckBox) {
       setBillingFormData(() => ({ 
         ...shippingFormData, 
         useDifferentBilling: false 
