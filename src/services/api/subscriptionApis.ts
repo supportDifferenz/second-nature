@@ -193,3 +193,75 @@ try {
       throw error;
   }
 };
+
+export const createSubscription = async (formData: {
+    user_id: string;
+    account: {
+      firstName: string;
+      lastName: string;
+      email: string;
+      mobileNumber: string;
+      password: string;
+    },
+    shippingDetails: {
+      firstName: string;
+      lastName: string;
+      contactNo: string;
+      address: string;
+      aptSuite: string;
+      municipality: string;
+    },
+    billingDetails: {
+      firstName: string;
+      lastName: string;
+      contactNo: string;
+      address: string;
+      aptSuite: string;
+      municipality: string;
+      useDifferentBilling: boolean;
+    },
+    subscriptionDate: string;
+    promocode: string;
+    subscribeToOffers: boolean;
+    pets: Array<{
+      name: string;
+      type: string;
+      gender: string;
+      location: string;
+      dateOfBirth: string;
+      ageMonth: number;
+      ageYear: number;
+      breed: string;
+      crossBreeds: Array<string>;
+      activityLevel: string;
+      currentWeight: number;
+      targetWeight: number;
+      plan: {
+        type: string;
+        duration: string;
+        price: number;
+        protein: string;
+        bowlSize: string;
+      }
+    }>;
+    payment: {
+      method: string;
+      cardNumber: string;
+      cardExpiry: string;
+      cardCVV: string;
+    }
+}) => {
+  
+console.log("formData", formData);
+
+try {
+    const response = await subscriptionAxiosInstance.post(
+      "/api/subscription/createSubscription",
+      formData
+  );
+    return response.data;
+  } catch (error) {
+      console.error("Error in create subscription", error);
+      throw error;
+  }
+};
