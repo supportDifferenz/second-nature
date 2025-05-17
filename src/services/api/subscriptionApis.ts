@@ -156,3 +156,40 @@ try {
       throw error;
   }
 };
+
+export const createPet = async (formData: {
+    user_id: string;
+    name: string;
+    type: string;
+    gender: string;
+    location: string;
+    dateOfBirth: string;
+    ageMonth: number;
+    ageYear: number;
+    breed: string;
+    crossBreeds: Array<string>;
+    activityLevel: string;
+    currentWeight: number;
+    targetWeight: number;
+    plan: {
+      type: string;
+      duration: string;
+      price: number;
+      protein: string;
+      bowlSize: string;
+    }
+}) => {
+  
+console.log("formData", formData);
+
+try {
+    const response = await subscriptionAxiosInstance.post(
+      "api/subscription/createPet",
+      formData
+  );
+    return response.data;
+  } catch (error) {
+      console.error("Error in create pet", error);
+      throw error;
+  }
+};

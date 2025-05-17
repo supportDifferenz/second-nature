@@ -8,9 +8,11 @@ import { Button } from "@/components/ui/button"
 import BillingDetails from './BillingDetails'
 import Payment from './Payment';
 import { useUserStore } from '@/zustand/store/userDataStore';
+import { usePetStore } from '@/zustand/store/petDataStore';
 // import useAuthStore from '@/zustand/store/authDataStore';
 import { useCreateAddressHook } from '@/hooks/subscriptionHooks/createAddressHook';
 import { useGetAddressById } from '@/hooks/subscriptionHooks/getAddressByIdHook';
+import { useCreatePetHook } from '@/hooks/subscriptionHooks/createPetHook';
 
 type FormField = 'firstName' | 'lastName' | 'mobile' | 'address' | 'aptSuite' | 'municipality';
 
@@ -40,7 +42,9 @@ export default function ShippingDetail() {
   const { userDetails, setUserDetails } = useUserStore();
   // const { isAuthenticated } = useAuthStore();
   const { mutate } = useCreateAddressHook();
+  const { mutate: createPet } = useCreatePetHook();
   const { data: addressData } = useGetAddressById(userDetails.userId || "");
+  const { pets } = usePetStore();
   
   const [isLoading, setIsLoading] = useState(true);
   const [selectedCheckBox, setSelectedCheckBox] = useState(true);
@@ -282,6 +286,42 @@ export default function ShippingDetail() {
         },
       });
     }
+
+    pets.map((pet) => {
+      createPet({
+        user_id: userDetails.userId,
+        name: pet.name || "",
+        type: pet.catOrDog || "",
+        gender: pet.gender || "",
+        location: pet.location || "",
+        dateOfBirth: "",
+        ageMonth: pet.ageMonth || 0,
+        ageYear: pet.ageYear || 0,
+        breed: pet.breed || "",
+        crossBreeds: [ pet.crossBreed || "" ],
+        activityLevel: pet.activityLevel || "",
+        currentWeight: pet.currentWeight || 0,
+        targetWeight: pet.targetWeight || 0,
+        plan: {
+            type: pet.planType || "",
+            duration: pet.planType === "regular" ? "28" : "7",
+            price: pet.planPrice || 0,
+            protein: pet.protein || "",
+            bowlSize: pet.bowlSize || "",
+        },
+      }, {
+        onSuccess: (data) => {
+          console.log('Pet created successfully:', data);
+          // setShowPaymentDetails(true);
+          // setIsSubmittingAddress(false);
+        },
+        onError: (error) => {
+          console.error('Error updating address:', error);
+          // setIsSubmittingAddress(false);
+        },
+      });
+    })
+
   };
 
   if (isLoading) {
@@ -289,6 +329,8 @@ export default function ShippingDetail() {
       <Typography tag="p" text="Loading address data..." />
     </div>;
   }
+
+  console.log("Pet data in shipping details page is", pets);
 
   return (
     <div className="flex flex-col gap-[var(--space-30-60)]">
