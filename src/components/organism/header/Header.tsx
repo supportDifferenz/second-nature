@@ -40,14 +40,17 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
                   {
                     name: "Beef Bowl",
                     image: "/images/beef-bowl-dog-circle.webp",
+                    url: "/meals?protein=beef",
                   },
                   {
                     name: "Chicken Bowl",
                     image: "/images/chicken-bowl-dog-circle.webp",
+                    url: "/meals?protein=chicken",
                   },
                   {
                     name: "Lamb Bowl",
                     image: "/images/lamb-bowl-dog-circle.webp",
+                    url: "/meals?protein=lamb",
                   },
                 ]}
               />
@@ -58,14 +61,17 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
                   {
                     name: "Beef Bowl",
                     image: "/images/beef-bowl-dog-circle.webp",
+                    url: "/meals?protein=beef",
                   },
                   {
                     name: "Chicken Bowl",
                     image: "/images/chicken-bowl-dog-circle.webp",
+                    url: "/meals?protein=chicken",
                   },
                   {
                     name: "Lamb Bowl",
                     image: "/images/lamb-bowl-dog-circle.webp",
+                    url: "/meals?protein=lamb",
                   },
                 ]}
               />
