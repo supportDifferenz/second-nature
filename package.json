@@ -3,12 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prepare": "husky",
-    "install": "npm install --legacy-peer-deps"
+    "prepare": "husky"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",
