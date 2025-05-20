@@ -92,32 +92,36 @@ export default function ShippingDetail() {
   // Initialize form data with proper priority
   useEffect(() => {
     if (addressData || userDetails) {
+
+      const shippingAddressLength = addressData?.result?.shippingAddress?.length;
+      const billingAddressLength = addressData?.result?.billingAddress?.length;
+
       setShippingFormData({
-        firstName: addressData?.result?.shippingAddress?.[0]?.firstName || userDetails?.shippingDetails?.firstName || "",
-        lastName: addressData?.result?.shippingAddress?.[0]?.lastName || userDetails?.shippingDetails?.lastName || "",
-        mobile: addressData?.result?.shippingAddress?.[0]?.contactNo || userDetails?.shippingDetails?.mobile || "",
-        address: addressData?.result?.shippingAddress?.[0]?.address || userDetails?.shippingDetails?.address || "",
-        aptSuite: addressData?.result?.shippingAddress?.[0]?.aptSuite || userDetails?.shippingDetails?.aptSuite || "",
-        municipality: addressData?.result?.shippingAddress?.[0]?.municipality || userDetails?.shippingDetails?.municipality || "",
+        firstName: addressData?.result?.shippingAddress?.[shippingAddressLength]?.firstName || userDetails?.shippingDetails?.firstName || "",
+        lastName: addressData?.result?.shippingAddress?.[shippingAddressLength]?.lastName || userDetails?.shippingDetails?.lastName || "",
+        mobile: addressData?.result?.shippingAddress?.[shippingAddressLength]?.contactNo || userDetails?.shippingDetails?.mobile || "",
+        address: addressData?.result?.shippingAddress?.[shippingAddressLength]?.address || userDetails?.shippingDetails?.address || "",
+        aptSuite: addressData?.result?.shippingAddress?.[shippingAddressLength]?.aptSuite || userDetails?.shippingDetails?.aptSuite || "",
+        municipality: addressData?.result?.shippingAddress?.[shippingAddressLength]?.municipality || userDetails?.shippingDetails?.municipality || "",
       });
 
       setBillingFormData({
-        firstName: addressData?.result?.billingAddress?.[0]?.firstName || userDetails?.billingDetails?.firstName || "",
-        lastName: addressData?.result?.billingAddress?.[0]?.lastName || userDetails?.billingDetails?.lastName || "",
-        mobile: addressData?.result?.billingAddress?.[0]?.contactNo || userDetails?.billingDetails?.mobile || "",
-        address: addressData?.result?.billingAddress?.[0]?.address || userDetails?.billingDetails?.address || "",
-        aptSuite: addressData?.result?.billingAddress?.[0]?.aptSuite || userDetails?.billingDetails?.aptSuite || "",
-        municipality: addressData?.result?.billingAddress?.[0]?.municipality || userDetails?.billingDetails?.municipality || "",
+        firstName: addressData?.result?.billingAddress?.[billingAddressLength]?.firstName || userDetails?.billingDetails?.firstName || "",
+        lastName: addressData?.result?.billingAddress?.[billingAddressLength]?.lastName || userDetails?.billingDetails?.lastName || "",
+        mobile: addressData?.result?.billingAddress?.[billingAddressLength]?.contactNo || userDetails?.billingDetails?.mobile || "",
+        address: addressData?.result?.billingAddress?.[billingAddressLength]?.address || userDetails?.billingDetails?.address || "",
+        aptSuite: addressData?.result?.billingAddress?.[billingAddressLength]?.aptSuite || userDetails?.billingDetails?.aptSuite || "",
+        municipality: addressData?.result?.billingAddress?.[billingAddressLength]?.municipality || userDetails?.billingDetails?.municipality || "",
         useDifferentBilling: userDetails?.billingDetails?.useDifferentBilling ?? true,
       });
 
       // Set checkbox state based on fetched data
-      if (addressData?.result?.billingAddress?.[0] || userDetails?.billingDetails) {
+      if (addressData?.result?.billingAddress?.[billingAddressLength] || userDetails?.billingDetails) {
         console.log("Shipping address data", addressData?.result?.shippingAddress);
         console.log("Billing address data", addressData?.result?.billingAddress);
         setSelectedCheckBox(
           userDetails?.billingDetails?.useDifferentBilling ??
-          addressData?.result?.billingAddress?.[0]?.useDifferentBilling ??
+          addressData?.result?.billingAddress?.[billingAddressLength]?.useDifferentBilling ??
           true
         );
       }
@@ -127,10 +131,10 @@ export default function ShippingDetail() {
 
   // Sync billing data when checkbox is unchecked
   useEffect(() => {
-    if (selectedCheckBox) {
+    if (!selectedCheckBox) {
       setBillingFormData(() => ({ 
         ...shippingFormData, 
-        useDifferentBilling: false 
+        useDifferentBilling: true 
       }));
     }
   }, [selectedCheckBox, shippingFormData]);

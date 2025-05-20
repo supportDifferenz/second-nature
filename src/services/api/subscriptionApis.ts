@@ -135,7 +135,7 @@ export const getAddressById= async (userId: string) => {
   
 try {
     const response = await subscriptionAxiosInstance.get(
-      `/api/subscription/getAddressById/${userId}`,
+      `/api/subscription/getAddressByUserId/${userId}`,
   );
     return response.data;
   } catch (error) {
