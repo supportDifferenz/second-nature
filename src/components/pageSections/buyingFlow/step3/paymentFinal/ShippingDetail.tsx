@@ -116,12 +116,12 @@ export default function ShippingDetail() {
       });
 
       // Set checkbox state based on fetched data
-      if (addressData?.result?.billingAddress?.[0] || userDetails?.billingDetails) {
+      if (addressData?.result?.billingAddress?.[billingAddressLength] || userDetails?.billingDetails) {
         console.log("Shipping address data", addressData?.result?.shippingAddress);
         console.log("Billing address data", addressData?.result?.billingAddress);
         setSelectedCheckBox(
           userDetails?.billingDetails?.useDifferentBilling ??
-          addressData?.result?.billingAddress?.[0]?.useDifferentBilling ??
+          addressData?.result?.billingAddress?.[billingAddressLength]?.useDifferentBilling ??
           true
         );
       }
