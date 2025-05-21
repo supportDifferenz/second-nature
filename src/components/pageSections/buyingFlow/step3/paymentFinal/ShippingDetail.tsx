@@ -5,6 +5,7 @@ import AlertBar from '@/components/molecules/alertBar/AlertBar'
 import { InputLabeled } from '@/components/molecules/inputLabeled/InputLabeled'
 import React, { useState, useEffect, useCallback } from 'react'
 import { Button } from "@/components/ui/button"
+import Image from 'next/image'
 import BillingDetails from './BillingDetails'
 import Payment from './Payment';
 import { useUserStore } from '@/zustand/store/userDataStore';
@@ -12,7 +13,7 @@ import { usePetStore } from '@/zustand/store/petDataStore';
 // import useAuthStore from '@/zustand/store/authDataStore';
 import { useCreateAddressHook } from '@/hooks/subscriptionHooks/createAddressHook';
 import { useGetAddressById } from '@/hooks/subscriptionHooks/getAddressByIdHook';
-import { useCreatePetHook } from '@/hooks/subscriptionHooks/createPetHook';
+// import { useCreatePetHook } from '@/hooks/subscriptionHooks/createPetHook';
 
 type FormField = 'firstName' | 'lastName' | 'mobile' | 'address' | 'aptSuite' | 'municipality';
 
@@ -38,34 +39,11 @@ interface FormErrors {
   municipality: string;
 }
 
-type createdPetDetails = {
-  petId: string;
-  name: string;
-  type: string;
-  gender: string;
-  location: string;
-  dateOfBirth?: string;
-  ageMonth?: number;
-  ageYear?: number;
-  breed?: string;
-  crossBreeds?: string[];
-  activityLevel?: string;
-  currentWeight?: number;
-  targetWeight?: number;
-  plan: {
-    type: string;
-    duration: string;
-    price: number;
-    protein: string;
-    bowlSize: string;
-  }
-}
-
 export default function ShippingDetail() {
   const { userDetails, setUserDetails } = useUserStore();
   // const { isAuthenticated } = useAuthStore();
   const { mutate } = useCreateAddressHook();
-  const { mutate: createPet } = useCreatePetHook();
+  // const { mutate: createPet } = useCreatePetHook();
   const { data: addressData } = useGetAddressById(userDetails.userId || "");
   const { pets } = usePetStore();
   
@@ -74,6 +52,7 @@ export default function ShippingDetail() {
   const [touched, setTouched] = useState<Record<string, boolean>>({});
   const [showPaymentDetails, setShowPaymentDetails] = useState(false);
   const [isSubmittingAddress, setIsSubmittingAddress] = useState(false);
+  const [isShippingEditEnabled, setIsShippingEditEnabled] = useState(true);
   
   const [shippingFormData, setShippingFormData] = useState<ShippingFormData>({
     firstName: "",
@@ -147,6 +126,10 @@ export default function ShippingDetail() {
           addressData?.result?.billingAddress?.[billingAddressLength]?.useDifferentBilling ??
           true
         );
+      }
+
+      if(shippingAddressLength > 0 || userDetails?.shippingDetails?.firstName) {
+        setIsShippingEditEnabled(false);
       }
     }
     setIsLoading(false);
@@ -316,73 +299,13 @@ export default function ShippingDetail() {
       });
     }
 
-    pets.map((pet) => {
-      createPet({
-        user_id: userDetails.userId,
-        name: pet.name || "",
-        type: pet.catOrDog || "",
-        gender: pet.gender || "",
-        location: pet.location || "",
-        dateOfBirth: pet.dateOfBirth || "",
-        ageMonth: pet.ageMonth || 0,
-        ageYear: pet.ageYear || 0,
-        breed: pet.breed || "",
-        crossBreeds: [ pet.crossBreed || "" ],
-        activityLevel: pet.activityLevel || "",
-        currentWeight: pet.currentWeight || 0,
-        targetWeight: pet.targetWeight || 0,
-        plan: {
-            type: pet.planType || "",
-            duration: pet.planType === "regular" ? "28" : "7",
-            price: pet.planPrice || 0,
-            protein: pet.protein || "",
-            bowlSize: pet.bowlSize || "",
-        },
-      }, {
-        onSuccess: (response) => {
-          console.log('Pet created successfully:', response);
-          // setShowPaymentDetails(true);
-          // setIsSubmittingAddress(false);
-          // Transform the API response to match createdPetDetails type
-          const createdPet: createdPetDetails = {
-            petId: response.result.Pets._id, // Using the MongoDB _id
-            name: response.result.Pets.name,
-            type: response.result.Pets.type,
-            gender: response.result.Pets.gender,
-            location: response.result.Pets.location,
-            dateOfBirth: response.result.Pets.dateOfBirth,
-            ageMonth: response.result.Pets.ageMonth,
-            ageYear: response.result.Pets.ageYear,
-            breed: response.result.Pets.breed,
-            crossBreeds: response.result.Pets.crossBreeds,
-            activityLevel: response.result.Pets.activityLevel,
-            currentWeight: response.result.Pets.currentWeight ?? 0,
-            targetWeight: response.result.Pets.targetWeight ?? 0,
-            plan: {
-              type: response.result.Pets.plan.type,
-              duration: response.result.Pets.plan.duration,
-              price: response.result.Pets.plan.price,
-              protein: response.result.Pets.plan.protein,
-              bowlSize: response.result.Pets.plan.bowlSize
-            }
-          };
-
-          // Add to Zustand store
-            usePetStore.getState().addCreatedPet({
-            ...createdPet,
-            currentWeight: createdPet.currentWeight ?? 0,
-            targetWeight: createdPet.targetWeight ?? 0,
-            });
-
-        },
-        onError: (error) => {
-          console.error('Error updating address:', error);
-          // setIsSubmittingAddress(false);
-        },
-      });
-    })
-
   };
+
+  const handleEdit = (address: string) => {
+    if(address === "shipping"){
+      setIsShippingEditEnabled(true)
+    }
+  }
 
   if (isLoading) {
     return <div className="flex justify-center items-center h-64">
@@ -394,11 +317,28 @@ export default function ShippingDetail() {
 
   return (
     <div className="flex flex-col gap-[var(--space-30-60)]">
-      <Typography
-        tag="h5"
-        text="Shipping Details"
-        className="uppercase text-primary-dark"
-      />
+      
+      <div className="flex justify-between">
+        <Typography
+          tag="h5"
+          text="Shipping Details"
+          className="uppercase text-primary-dark"
+        />
+        <Button 
+          variant={"nullBtn"} 
+          className="text-secondary-1"
+          onClick={() => handleEdit("shipping")}
+        >
+          <Image
+            src="/icons/edit.svg"
+            alt="Edit"
+            width={24}
+            height={24}
+            className="!static w-full object-contain"
+          />
+          Edit
+        </Button>
+      </div>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-[var(--space-30-52)]">
         <InputLabeled
@@ -410,6 +350,7 @@ export default function ShippingDetail() {
           onChange={handleChange}
           onBlur={handleBlur}
           error={shippingErrors.firstName}
+          disabled={!isShippingEditEnabled}
         />
 
         <InputLabeled
@@ -421,6 +362,7 @@ export default function ShippingDetail() {
           onChange={handleChange}
           onBlur={handleBlur}
           error={shippingErrors.lastName}
+          disabled={!isShippingEditEnabled}
         />
 
         <InputLabeled 
@@ -432,6 +374,7 @@ export default function ShippingDetail() {
           onChange={handleChange}
           onBlur={handleBlur}
           error={shippingErrors.mobile}
+          disabled={!isShippingEditEnabled}
         />
 
         <div className='flex flex-col gap-[var(--space-8-17)]'>
@@ -444,6 +387,7 @@ export default function ShippingDetail() {
             onChange={handleChange}
             onBlur={handleBlur}
             error={shippingErrors.address}
+            disabled={!isShippingEditEnabled}
           />
 
           <InputLabeled
@@ -455,6 +399,7 @@ export default function ShippingDetail() {
             onChange={handleChange}
             onBlur={handleBlur}
             error={shippingErrors.aptSuite}
+            disabled={!isShippingEditEnabled}
           />
 
           <InputLabeled
@@ -466,6 +411,7 @@ export default function ShippingDetail() {
             onChange={handleChange}
             onBlur={handleBlur}
             error={shippingErrors.municipality}
+            disabled={!isShippingEditEnabled}
           />
         </div>
 

@@ -2,9 +2,10 @@
 
 import Typography from "@/components/atoms/typography/Typography";
 import { InputLabeled } from "@/components/molecules/inputLabeled/InputLabeled";
-// import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 // import { Input } from "@/components/ui/input";
 import React, { useState, useEffect } from "react";
+import Image from "next/image"; // Add this import if using Next.js
 // import Payment from "./Payment";
 
 interface BillingFormData {
@@ -178,11 +179,33 @@ export default function BillingDetails({ billingFormData, setBillingFormData, is
   return (
     <div className="flex flex-col gap-[var(--space-30-60)]">
 
-      <Typography
-        tag="h5"
-        text="Billing Details"
-        className="uppercase text-primary-dark"
-      />
+      <div className="flex justify-between">
+        <Typography
+          tag="h5"
+          text="Billing Details"
+          className="uppercase text-primary-dark"
+        />
+
+        {
+          !isSynced && (
+            <Button 
+              variant={"nullBtn"} 
+              className="text-secondary-1"
+              // onClick={() => handleEdit("shipping")}
+            >
+              <Image
+                src="/icons/edit.svg"
+                alt="Edit"
+                width={24}
+                height={24}
+                className="!static w-full object-contain"
+              />
+              Edit
+            </Button>
+          )
+        }
+        
+      </div>
       <div className="flex flex-col gap-[var(--space-30-52)]  pb-14 border-b border-secondary-2">
 
         <InputLabeled
