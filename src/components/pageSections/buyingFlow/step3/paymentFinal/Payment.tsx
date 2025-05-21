@@ -422,17 +422,17 @@ export default function Payment({ shippingFormData, billingFormData }: PaymentPr
         },
         {
           onSuccess: () => {
-            console.log("✅ Subscription created successfully");
+            console.log("Subscription created successfully");
           },
           onError: (error) => {
-            console.error("❌ Failed to create subscription:", error);
+            console.error("Failed to create subscription:", error);
             alert("Subscription failed. Please try again.");
           },
         }
       );
 
     } catch (error) {
-      console.error("🚨 Error in pet/subscription flow:", error);
+      console.error("Error in pet/subscription flow:", error);
       alert("Something went wrong. Please check console.");
     }
   };
