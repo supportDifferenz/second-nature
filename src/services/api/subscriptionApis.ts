@@ -220,20 +220,21 @@ export const createSubscription = async (formData: {
       municipality: string;
       useDifferentBilling: boolean;
     },
-    subscriptionDate: string;
-    promocode: string;
+    subscriptiondate: string;
+    promoCode: string;
     subscribeToOffers: boolean;
     pets: Array<{
+      petId: string;
       name: string;
       type: string;
       gender: string;
       location: string;
-      dateOfBirth: string;
-      ageMonth: number;
-      ageYear: number;
-      breed: string;
-      crossBreeds: Array<string>;
-      activityLevel: string;
+      dateOfBirth?: string;
+      ageMonth?: number;
+      ageYear?: number;
+      breed?: string;
+      crossBreeds?: Array<string>;
+      activityLevel?: string;
       currentWeight: number;
       targetWeight: number;
       plan: {

@@ -38,6 +38,29 @@ interface FormErrors {
   municipality: string;
 }
 
+type createdPetDetails = {
+  petId: string;
+  name: string;
+  type: string;
+  gender: string;
+  location: string;
+  dateOfBirth?: string;
+  ageMonth?: number;
+  ageYear?: number;
+  breed?: string;
+  crossBreeds?: string[];
+  activityLevel?: string;
+  currentWeight?: number;
+  targetWeight?: number;
+  plan: {
+    type: string;
+    duration: string;
+    price: number;
+    protein: string;
+    bowlSize: string;
+  }
+}
+
 export default function ShippingDetail() {
   const { userDetails, setUserDetails } = useUserStore();
   // const { isAuthenticated } = useAuthStore();
@@ -300,7 +323,7 @@ export default function ShippingDetail() {
         type: pet.catOrDog || "",
         gender: pet.gender || "",
         location: pet.location || "",
-        dateOfBirth: "",
+        dateOfBirth: pet.dateOfBirth || "",
         ageMonth: pet.ageMonth || 0,
         ageYear: pet.ageYear || 0,
         breed: pet.breed || "",
@@ -316,10 +339,41 @@ export default function ShippingDetail() {
             bowlSize: pet.bowlSize || "",
         },
       }, {
-        onSuccess: (data) => {
-          console.log('Pet created successfully:', data);
+        onSuccess: (response) => {
+          console.log('Pet created successfully:', response);
           // setShowPaymentDetails(true);
           // setIsSubmittingAddress(false);
+          // Transform the API response to match createdPetDetails type
+          const createdPet: createdPetDetails = {
+            petId: response.result.Pets._id, // Using the MongoDB _id
+            name: response.result.Pets.name,
+            type: response.result.Pets.type,
+            gender: response.result.Pets.gender,
+            location: response.result.Pets.location,
+            dateOfBirth: response.result.Pets.dateOfBirth,
+            ageMonth: response.result.Pets.ageMonth,
+            ageYear: response.result.Pets.ageYear,
+            breed: response.result.Pets.breed,
+            crossBreeds: response.result.Pets.crossBreeds,
+            activityLevel: response.result.Pets.activityLevel,
+            currentWeight: response.result.Pets.currentWeight ?? 0,
+            targetWeight: response.result.Pets.targetWeight ?? 0,
+            plan: {
+              type: response.result.Pets.plan.type,
+              duration: response.result.Pets.plan.duration,
+              price: response.result.Pets.plan.price,
+              protein: response.result.Pets.plan.protein,
+              bowlSize: response.result.Pets.plan.bowlSize
+            }
+          };
+
+          // Add to Zustand store
+            usePetStore.getState().addCreatedPet({
+            ...createdPet,
+            currentWeight: createdPet.currentWeight ?? 0,
+            targetWeight: createdPet.targetWeight ?? 0,
+            });
+
         },
         onError: (error) => {
           console.error('Error updating address:', error);
@@ -438,7 +492,7 @@ export default function ShippingDetail() {
         </Button>
       </form>
 
-      {showPaymentDetails && <Payment />}
+      {showPaymentDetails && <Payment shippingFormData={shippingFormData} billingFormData={billingFormData} />}
     </div>
   );
 }
