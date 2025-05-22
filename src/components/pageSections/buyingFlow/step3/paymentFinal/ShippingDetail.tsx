@@ -55,6 +55,8 @@ export default function ShippingDetail() {
   const [isShippingEditEnabled, setIsShippingEditEnabled] = useState(true);
   const [isBillingEditEnabled, setIsBillingEditEnabled] = useState(true);
   const [showAddressContinueButton, setShowAddressContinueButton] = useState(true);
+  const [showEditShipControl, setShowEditShipControl] = useState(false);
+  const [showEditBillControl, setShowEditBillControl] = useState(false);
   
   const [shippingFormData, setShippingFormData] = useState<ShippingFormData>({
     firstName: "",
@@ -134,11 +136,17 @@ export default function ShippingDetail() {
         setIsShippingEditEnabled(false);
         setShowAddressContinueButton(false);
         setShowPaymentDetails(true);
+        setShowEditShipControl(true);
+      } else if (shippingAddressLength === 0 && userDetails?.shippingDetails?.firstName === "") {
+        setShowEditShipControl(false);
       }
       if(billingAddressLength > 0 || userDetails?.billingDetails?.firstName) {
         setIsBillingEditEnabled(false);
         setShowAddressContinueButton(false);
         setShowPaymentDetails(true);
+        setShowEditBillControl(true);
+      } else if (billingAddressLength === 0 && userDetails?.billingDetails?.firstName === "") {
+        setShowEditBillControl(false);
       }
     }
     setIsLoading(false);
@@ -339,31 +347,42 @@ export default function ShippingDetail() {
           className="uppercase text-primary-dark"
         />
         <div className="flex flex-row items-center">
-          <Button 
-            variant={"nullBtn"} 
-            className="text-secondary-1"
-            onClick={() => setIsShippingEditEnabled(true)}
-          >
-            <Image
-              src="/icons/edit.svg"
-              alt="Edit"
-              width={24}
-              height={24}
-              className="!static w-full object-contain"
-            />
-            Edit
-          </Button>
+
           {
-            isShippingEditEnabled && (
-              <Button 
-                variant={"nullBtn"} 
-                className="text-secondary-1 ml-3 "
-                onClick={() => setIsShippingEditEnabled(false)}
-              >
-                Exit
-              </Button>
-            )
+            showEditShipControl && 
+            <>
+              {
+                !isShippingEditEnabled && (
+                  <Button 
+                    variant={"nullBtn"} 
+                    className="text-secondary-1"
+                    onClick={() => setIsShippingEditEnabled(true)}
+                  >
+                    <Image
+                      src="/icons/edit.svg"
+                      alt="Edit"
+                      width={24}
+                      height={24}
+                      className="!static w-full object-contain"
+                    />
+                    Edit
+                  </Button>
+                )
+              }
+              {
+                isShippingEditEnabled && (
+                  <Button 
+                    variant={"nullBtn"} 
+                    className="text-secondary-1 ml-3 "
+                    onClick={() => setIsShippingEditEnabled(false)}
+                  >
+                    Exit
+                  </Button>
+                )
+              }
+            </>
           }
+          
         </div>
       </div>
 
@@ -456,6 +475,7 @@ export default function ShippingDetail() {
           setBillingErrors={setBillingErrors}
           isBillingEditEnabled={isBillingEditEnabled}
           setIsBillingEditEnabled={setIsBillingEditEnabled}
+          showEditBillControl={showEditBillControl}
         />
 
         {

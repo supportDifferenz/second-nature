@@ -35,9 +35,10 @@ interface BillingDetailsProps {
   setBillingErrors: React.Dispatch<React.SetStateAction<FormErrors>>;  // isContinueButtonDisabled: boolean;
   isBillingEditEnabled: boolean;
   setIsBillingEditEnabled: React.Dispatch<React.SetStateAction<boolean>>;
+  showEditBillControl: boolean;
 }
 
-export default function BillingDetails({ billingFormData, setBillingFormData, isSynced, billingErrors, setBillingErrors, isBillingEditEnabled, setIsBillingEditEnabled }: BillingDetailsProps) {
+export default function BillingDetails({ billingFormData, setBillingFormData, isSynced, billingErrors, setBillingErrors, isBillingEditEnabled, setIsBillingEditEnabled, showEditBillControl }: BillingDetailsProps) {
 
   // const [errors, setErrors] = useState<Record<string, string>>({});
   const [touched, setTouched] = useState<Record<string, boolean>>({});
@@ -189,37 +190,49 @@ export default function BillingDetails({ billingFormData, setBillingFormData, is
         />
 
         <div className="flex flex-row items-center">
+
           {
-            !isSynced && (
+            showEditBillControl && (
               <>
-                <Button 
-                  variant={"nullBtn"} 
-                  className="text-secondary-1"
-                  onClick={() => setIsBillingEditEnabled(true)}
-                >
-                  <Image
-                    src="/icons/edit.svg"
-                    alt="Edit"
-                    width={24}
-                    height={24}
-                    className="!static w-full object-contain"
-                  />
-                  Edit
-                </Button>
                 {
-                  isBillingEditEnabled && (
-                    <Button 
-                      variant={"nullBtn"} 
-                      className="text-secondary-1 ml-3"
-                      onClick={() => setIsBillingEditEnabled(false)}
-                    >
-                      Exit
-                    </Button>
+                  !isSynced && (
+                    <>
+                      {
+                        !isBillingEditEnabled && (
+                          <Button 
+                            variant={"nullBtn"} 
+                            className="text-secondary-1"
+                            onClick={() => setIsBillingEditEnabled(true)}
+                          >
+                            <Image
+                              src="/icons/edit.svg"
+                              alt="Edit"
+                              width={24}
+                              height={24}
+                              className="!static w-full object-contain"
+                            />
+                            Edit
+                          </Button>
+                        )
+                      }
+                      {
+                        isBillingEditEnabled && (
+                          <Button 
+                            variant={"nullBtn"} 
+                            className="text-secondary-1 ml-3"
+                            onClick={() => setIsBillingEditEnabled(false)}
+                          >
+                            Exit
+                          </Button>
+                        )
+                      }
+                    </>
                   )
                 }
               </>
             )
           }
+          
         </div>
         
       </div>
