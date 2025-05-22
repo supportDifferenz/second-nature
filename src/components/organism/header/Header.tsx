@@ -180,7 +180,7 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
             back btn
           </div> */}
           <div 
-            className="w-[14%] mx-auto"
+            className="w-[14%] mx-auto cursor-pointer"
             onClick={(e) => {
               e.preventDefault();
               router.push("/");
