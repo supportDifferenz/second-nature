@@ -1,7 +1,7 @@
 "use client";
 import Typography from "@/components/atoms/typography/Typography";
 import BuyingFlowLayout from "@/components/templates/BuyingFlowLayout";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PetActiveCard from "@/components/molecules/petActiveCard/PetActiveCard";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
@@ -18,7 +18,7 @@ export default function Page() {
   const selectedPetName = selectedPet ? selectedPet.name : null;
   const activityLevel = selectedPet ? selectedPet.activityLevel : "";
 
-  const [selectedActivity, setSelectedActivity] = useState(activityLevel);
+  const [selectedActivity, setSelectedActivity] = useState("");
 
   const handleNext = (e: React.FormEvent) => {
     e.preventDefault();
@@ -27,6 +27,12 @@ export default function Page() {
       router.push("/choose-our-plans");
     }
   }
+
+  useEffect(() => {
+    if (activityLevel) {
+      setSelectedActivity(activityLevel);
+    }
+  },[activityLevel])
 
   console.log("Selected pet in activity page is", selectedPet);
 

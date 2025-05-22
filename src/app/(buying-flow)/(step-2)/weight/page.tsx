@@ -2,7 +2,7 @@
 
 import Typography from "@/components/atoms/typography/Typography";
 import BuyingFlowLayout from "@/components/templates/BuyingFlowLayout";
-import React,{ useState } from "react";
+import React,{ useState, useEffect } from "react";
 import Counter from "@/components/molecules/counterBuyingFlow/Counter";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -32,6 +32,15 @@ export default function Page() {
       router.push("/activity");
     }
   }
+
+  useEffect(() => {
+    if(currentWeightFromStore){
+      setCurrentWeight(currentWeightFromStore);
+    }
+    if(targetWeightFromStore){
+      setTargetWeight(targetWeightFromStore);
+    }
+  },[currentWeightFromStore, targetWeightFromStore])
 
   return (
     <BuyingFlowLayout step={2}>
