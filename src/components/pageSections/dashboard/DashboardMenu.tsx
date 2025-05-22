@@ -7,6 +7,7 @@ import useAuthStore from "@/zustand/store/authDataStore";
 import { useUserStore } from "@/zustand/store/userDataStore";
 import { usePetStore } from "@/zustand/store/petDataStore";
 import { useRouter } from "next/navigation";
+import { startTransition } from "react";
 
 const menuItems = [
   {
@@ -55,7 +56,10 @@ export default function DashboardMenu() {
       logout();
       clearUserDetails();
       clearPetDetails();
-      router.push("/")
+      startTransition(() => {
+        router.push("/");
+      })
+      // router.push("/")
   };
 
   return (

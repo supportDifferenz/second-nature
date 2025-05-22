@@ -16,6 +16,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { startTransition } from "react";
 
 export default function Location() {
 
@@ -53,7 +54,10 @@ export default function Location() {
 
     if(selectedMunicipality){
       setLocation(selectedMunicipality);
-      router.push("/dog-or-cat");
+      startTransition(() => {
+        router.push("/dog-or-cat");
+      })
+      // router.push("/dog-or-cat");
     }
 
   };

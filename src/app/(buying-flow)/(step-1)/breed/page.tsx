@@ -17,6 +17,7 @@ import { useRouter } from "next/navigation";
 import { usePetStore } from "@/zustand/store/petDataStore";
 import { useGetBreedDetails } from "@/hooks/subscriptionHooks/getBreedDetailsHook";
 import { useGetCrossBreedDetails } from "@/hooks/subscriptionHooks/getCrossBreedDetailsHook";
+import { startTransition } from "react";
 
 export default function Breed() {
 
@@ -110,14 +111,20 @@ export default function Breed() {
     e.preventDefault();
 
     if (iDontKnowBreed) {
-      router.push("/age");
+      startTransition(() => {
+        router.push("/age");
+      })
+      // router.push("/age");
       return;
     }
 
     console.log("Selected Breed is", selectedBreed,"Selected Cross Breed is", selectedCrossBreed,"Selected pet ID is", currentPetId);
     if (selectedBreed && selectedCrossBreed && currentPetId) {
       setPetDetails(currentPetId, { breed: selectedBreed, crossBreed: selectedCrossBreed });
-      router.push("/age");
+      startTransition(() => {
+        router.push("/age");
+      })
+      // router.push("/age");
     }
   };
 
@@ -256,7 +263,10 @@ export default function Breed() {
             className="gap-2.5 lg:ml-[-55px]"
             onClick={(e) => {
               e.preventDefault();
-              router.push("/gender");
+              startTransition(() => {
+                router.push("/gender");
+              })
+              // router.push("/gender");
             }}
           >
             <div className="w-5 relative">

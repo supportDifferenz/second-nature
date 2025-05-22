@@ -14,6 +14,7 @@ import { useGetAllProtein } from "@/hooks/subscriptionHooks/getAllProteinHook";
 import { useGetAllBowl } from "@/hooks/subscriptionHooks/getAllBowlHook";
 import { useGetPriceHook } from "@/hooks/subscriptionHooks/getPriceHook";
 import PlanCardSkeleton from "@/components/skeltons/PlanCardSkelton";
+import { startTransition } from "react";
 
 const faqsData = [
   {
@@ -127,9 +128,15 @@ export default function Page() {
       setPetDetails(currentPetId, { planType: selectedPlan, planPrice: regularPrice, protein: regularProtein, bowlSize: regularBowlSize });
       if((selectedPetIndex ?? 0) < noOfPets - 1){
         setSelectedPetIndex((selectedPetIndex ?? 0) + 1);
-        router.push("/gender")
+        startTransition(() => {
+          router.push("/gender")
+        })
+        // router.push("/gender")
       } else {
-        router.push("/add-more-pets");
+        startTransition(() => {
+          router.push("/add-more-pets")
+        })
+        // router.push("/add-more-pets");
       }
       // router.push("/add-more-pets");
     } else if(selectedPlan === "Trial" && trialProtein && trialBowlSize && currentPetId) {
@@ -138,9 +145,15 @@ export default function Page() {
       setPetDetails(currentPetId, { planType: selectedPlan, planPrice: trialPrice, protein: trialProtein, bowlSize: trialBowlSize });
       if((selectedPetIndex ?? 0) < noOfPets - 1){
         setSelectedPetIndex((selectedPetIndex ?? 0) + 1);
-        router.push("/gender")
+        startTransition(() => {
+          router.push("/gender")
+        })
+        // router.push("/gender")
       } else {
-        router.push("/add-more-pets");
+        startTransition(() => {
+          router.push("/add-more-pets")
+        })
+        // router.push("/add-more-pets");
       }
       // router.push("/add-more-pets");
     }
@@ -314,7 +327,10 @@ export default function Page() {
           className="gap-2.5  lg:ml-[-55px]"
           onClick={(e) => {
             e.preventDefault();
-            router.push("/activity");
+            startTransition(() => {
+              router.push("/activity");
+            })
+            // router.push("/activity");
           }}
         >
           <div className="w-5 relative">

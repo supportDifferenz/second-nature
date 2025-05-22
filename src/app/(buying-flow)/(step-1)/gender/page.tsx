@@ -8,6 +8,7 @@ import Image from "next/image";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { usePetStore } from "@/zustand/store/petDataStore";
+import { startTransition } from "react";
 
 // type Gender = "Male" | "Female";
 
@@ -29,11 +30,20 @@ const GenderPage = () => {
     e.preventDefault();
     if (gender && currentPetId) {
       setPetDetails(currentPetId, { gender: gender.toLowerCase() as 'male' | 'female' });
-      router.push("/breed");
+      startTransition(() => {
+        router.push("/breed");
+      })
+      // router.push("/breed");
     } else if ( selectedPetGender ) {
-      router.push("/breed");
+      startTransition(() => {
+        router.push("/breed");
+      })
+      // router.push("/breed");
     } else {
-      router.push("/gender");
+      startTransition(() => {
+        router.push("/gender");
+      })
+      // router.push("/gender");
     }
   };
 
@@ -106,7 +116,10 @@ const GenderPage = () => {
             className="gap-2.5  lg:ml-[-55px]"
             onClick={(e) => {
               e.preventDefault();
-              router.push("/dog-or-cat");
+              startTransition(() => {
+                router.push("/dog-or-cat");
+              })
+              // router.push("/dog-or-cat");
             }}
           >
             <div className="w-5 relative">

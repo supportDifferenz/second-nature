@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { usePetStore } from "@/zustand/store/petDataStore";
+import { startTransition } from "react";
 
 export default function Page() {
 
@@ -24,7 +25,10 @@ export default function Page() {
     e.preventDefault();
     if (selectedActivity && currentPetId) {
       setPetDetails(currentPetId, { activityLevel: selectedActivity })
-      router.push("/choose-our-plans");
+      startTransition(() => {
+        router.push("/choose-our-plans");
+      })
+      // router.push("/choose-our-plans");
     }
   }
 
@@ -75,7 +79,10 @@ export default function Page() {
           className="gap-2.5  lg:ml-[-55px]"
           onClick={(e) => {
             e.preventDefault();
-            router.push("/weight");
+            startTransition(() => {
+              router.push("/weight");
+            })
+            // router.push("/weight");
           }}
         >
           <div className="w-5 relative">

@@ -8,6 +8,7 @@ import {
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { startTransition } from "react";
 
 interface NavDropdownProps {
   label: string;
@@ -27,7 +28,10 @@ const MealDropdownMenu = ({
   const handleItemClick = (url: string, e: React.MouseEvent) => {
     e.preventDefault();
     setIsOpen(false); // Close the dropdown
-    router.push(url); // Navigate to the selected URL
+    startTransition(() => {
+      router.push(url);
+    });
+    // router.push(url); // Navigate to the selected URL
   };
 
   return (

@@ -8,6 +8,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { usePetStore } from "@/zustand/store/petDataStore";
 import useAuthStore from '@/zustand/store/authDataStore';
+import { startTransition } from "react";
 
 export default function Page() {
 
@@ -22,7 +23,10 @@ export default function Page() {
   const handleAddAnotherPet = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
     setSelectedPetIndex((selectedPetIndex ?? 0) + 1); // Reset selected pet index
-    router.push("/dog-or-cat");
+    startTransition(() => {
+      router.push("/dog-or-cat");
+    })
+    // router.push("/dog-or-cat");
   }
 
   // const { selectedPetIndex, noOfPets, setSelectedPetIndex } = usePetStore();
@@ -85,9 +89,15 @@ export default function Page() {
           onClick={(e) => {
             e.preventDefault();
             if(isAuthenticated){
-              router.push("/checkout");
+              startTransition(() => {
+                router.push("/checkout");
+              })
+              // router.push("/checkout");
             } else {
-              router.push("/user-details");
+              startTransition(() => {
+                router.push("/user-details");
+              })
+              // router.push("/user-details");
             }
           }}
         >

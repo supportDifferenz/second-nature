@@ -14,6 +14,7 @@ import {
 import { HeaderPropsTypes } from "@/components/types/type";
 import { useRouter } from "next/navigation";
 import useAuthStore from "@/zustand/store/authDataStore";
+import { startTransition } from "react";
 
 const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
 
@@ -78,7 +79,10 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
               <nav 
                 onClick={(e) => {
                   e.preventDefault();
-                  router.push("/about-us");
+                  startTransition(() => {
+                    router.push("/about-us");
+                  })
+                  // router.push("/about-us");
                 }}
               >
                 <span className="block">About Us</span>
@@ -110,7 +114,10 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
                         className="flex items-center gap-3 cursor-pointer"
                         onClick={(e) => {
                           e.preventDefault();
-                          router.push(item.href);
+                          startTransition(() => {
+                            router.push(item.href);
+                          })
+                          // router.push(item.href);
                         }}
                       >
                         <span className="grow ">{item.name}</span>
@@ -125,7 +132,10 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
             <div 
               className="w-[14%] mx-[1%]"
               onClick={() => {
-                router.push("/");
+                startTransition(() => {
+                  router.push("/");
+                })
+                // router.push("/");
               }}
             >
               <Image
@@ -145,7 +155,10 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
                 size={"md"}
                 className="text-secondary-1 hidden sm:block"
                 onClick={() => {
-                  router.push("/location");
+                  startTransition(() => {
+                    router.push("/location");
+                  })
+                  // router.push("/location");
                 }} 
               >
                 Get Started
@@ -155,7 +168,10 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
                     size={"md"} 
                     className=""
                     onClick={() => {
-                      router.push("/personal-information");
+                      startTransition(() => {
+                        router.push("/personal-information");
+                      })
+                      // router.push("/personal-information");
                     }}
                   >
                     Account
@@ -164,7 +180,10 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
                     size={"md"} 
                     className=""
                     onClick={() => {
-                      router.push("/login");
+                      startTransition(() => {
+                        router.push("/login");
+                      })
+                      // router.push("/login");
                     }}
                   >
                     Log In
@@ -183,7 +202,10 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
             className="w-[14%] mx-auto cursor-pointer"
             onClick={(e) => {
               e.preventDefault();
-              router.push("/");
+              startTransition(() => {
+                router.push("/");
+              })
+              // router.push("/");
             }}
           >
             <Image
