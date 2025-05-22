@@ -8,7 +8,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 // import PetLocationForm from "@/components/organisms/petLocationForm";
 import { usePetStore } from "@/zustand/store/petDataStore";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Select,
   SelectContent,
@@ -22,7 +22,7 @@ export default function Location() {
   const router = useRouter();
   const { location, setLocation } = usePetStore();
   const [ error, setError ] = useState("");
-  const [ selectedMunicipality, setSelectedMunicipality ] = useState<string>(location);
+  const [ selectedMunicipality, setSelectedMunicipality ] = useState<string>("");
 
   const qatarMunicipalities = [
     "Al Shamal",
@@ -57,6 +57,16 @@ export default function Location() {
     }
 
   };
+
+  useEffect(() => {
+    if (selectedMunicipality) {
+      setSelectedMunicipality(selectedMunicipality);
+      return
+    } else if (location) {
+      setSelectedMunicipality(location);
+      return;
+    }
+  }, [location,selectedMunicipality]);
 
   return (
     <BuyingFlowLayout step={1}>
