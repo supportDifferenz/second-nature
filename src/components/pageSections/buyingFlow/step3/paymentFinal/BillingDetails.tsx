@@ -33,9 +33,11 @@ interface BillingDetailsProps {
   isSynced: boolean;
   billingErrors: FormErrors;
   setBillingErrors: React.Dispatch<React.SetStateAction<FormErrors>>;  // isContinueButtonDisabled: boolean;
+  isBillingEditEnabled: boolean;
+  setIsBillingEditEnabled: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function BillingDetails({ billingFormData, setBillingFormData, isSynced, billingErrors, setBillingErrors }: BillingDetailsProps) {
+export default function BillingDetails({ billingFormData, setBillingFormData, isSynced, billingErrors, setBillingErrors, isBillingEditEnabled, setIsBillingEditEnabled }: BillingDetailsProps) {
 
   // const [errors, setErrors] = useState<Record<string, string>>({});
   const [touched, setTouched] = useState<Record<string, boolean>>({});
@@ -186,24 +188,39 @@ export default function BillingDetails({ billingFormData, setBillingFormData, is
           className="uppercase text-primary-dark"
         />
 
-        {
-          !isSynced && (
-            <Button 
-              variant={"nullBtn"} 
-              className="text-secondary-1"
-              // onClick={() => handleEdit("shipping")}
-            >
-              <Image
-                src="/icons/edit.svg"
-                alt="Edit"
-                width={24}
-                height={24}
-                className="!static w-full object-contain"
-              />
-              Edit
-            </Button>
-          )
-        }
+        <div className="flex flex-row items-center">
+          {
+            !isSynced && (
+              <>
+                <Button 
+                  variant={"nullBtn"} 
+                  className="text-secondary-1"
+                  onClick={() => setIsBillingEditEnabled(true)}
+                >
+                  <Image
+                    src="/icons/edit.svg"
+                    alt="Edit"
+                    width={24}
+                    height={24}
+                    className="!static w-full object-contain"
+                  />
+                  Edit
+                </Button>
+                {
+                  isBillingEditEnabled && (
+                    <Button 
+                      variant={"nullBtn"} 
+                      className="text-secondary-1 ml-3"
+                      onClick={() => setIsBillingEditEnabled(false)}
+                    >
+                      Exit
+                    </Button>
+                  )
+                }
+              </>
+            )
+          }
+        </div>
         
       </div>
       <div className="flex flex-col gap-[var(--space-30-52)]  pb-14 border-b border-secondary-2">
@@ -217,7 +234,7 @@ export default function BillingDetails({ billingFormData, setBillingFormData, is
           onChange={handleChange}
           onBlur={handleBlur}
           error={billingErrors.firstName}
-          disabled={isSynced}
+          disabled={isSynced && !isBillingEditEnabled}
         />
         <InputLabeled
           name="lastName"
@@ -228,7 +245,7 @@ export default function BillingDetails({ billingFormData, setBillingFormData, is
           onChange={handleChange}
           onBlur={handleBlur}
           error={billingErrors.lastName}
-          disabled={isSynced}
+          disabled={isSynced && !isBillingEditEnabled}
         />
         <InputLabeled
           name="mobile"
@@ -240,7 +257,7 @@ export default function BillingDetails({ billingFormData, setBillingFormData, is
           onChange={handleChange}
           onBlur={handleBlur}
           error={billingErrors.mobile}
-          disabled={isSynced}
+          disabled={isSynced && !isBillingEditEnabled}
         />
 
         <div className="flex flex-col gap-[var(--space-8-17)]">
@@ -253,7 +270,7 @@ export default function BillingDetails({ billingFormData, setBillingFormData, is
             onChange={handleChange}
             onBlur={handleBlur}
             error={billingErrors.address}
-            disabled={isSynced}
+            disabled={isSynced && !isBillingEditEnabled}
           />
           <InputLabeled
             name="aptSuite"
@@ -264,7 +281,7 @@ export default function BillingDetails({ billingFormData, setBillingFormData, is
             onChange={handleChange}
             onBlur={handleBlur}
             error={billingErrors.aptSuite}
-            disabled={isSynced}
+            disabled={isSynced && !isBillingEditEnabled}
           />
           {/* <Input
             variant="roundedEdgeInput"
@@ -280,7 +297,7 @@ export default function BillingDetails({ billingFormData, setBillingFormData, is
             onChange={handleChange}
             onBlur={handleBlur}
             error={billingErrors.municipality}
-            disabled={isSynced}
+            disabled={isSynced && !isBillingEditEnabled}
           />
           {/* <Input
             variant="roundedEdgeInput"

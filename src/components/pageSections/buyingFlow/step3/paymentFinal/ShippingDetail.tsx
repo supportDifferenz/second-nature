@@ -53,6 +53,8 @@ export default function ShippingDetail() {
   const [showPaymentDetails, setShowPaymentDetails] = useState(false);
   const [isSubmittingAddress, setIsSubmittingAddress] = useState(false);
   const [isShippingEditEnabled, setIsShippingEditEnabled] = useState(true);
+  const [isBillingEditEnabled, setIsBillingEditEnabled] = useState(true);
+  const [showAddressContinueButton, setShowAddressContinueButton] = useState(true);
   
   const [shippingFormData, setShippingFormData] = useState<ShippingFormData>({
     firstName: "",
@@ -130,6 +132,13 @@ export default function ShippingDetail() {
 
       if(shippingAddressLength > 0 || userDetails?.shippingDetails?.firstName) {
         setIsShippingEditEnabled(false);
+        setShowAddressContinueButton(false);
+        setShowPaymentDetails(true);
+      }
+      if(billingAddressLength > 0 || userDetails?.billingDetails?.firstName) {
+        setIsBillingEditEnabled(false);
+        setShowAddressContinueButton(false);
+        setShowPaymentDetails(true);
       }
     }
     setIsLoading(false);
@@ -144,6 +153,14 @@ export default function ShippingDetail() {
       }));
     }
   }, [selectedCheckBox, shippingFormData]);
+
+  useEffect(() => {
+    if(isShippingEditEnabled || isBillingEditEnabled) {
+      setShowPaymentDetails(false);
+    } else {
+      setShowPaymentDetails(true);
+    }
+  },[showPaymentDetails, isShippingEditEnabled, isBillingEditEnabled]);
 
   const validateField = useCallback((name: FormField, value: string): string => {
     const trimmedValue = value.trim();
@@ -254,6 +271,9 @@ export default function ShippingDetail() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
+    setIsShippingEditEnabled(false);
+    setIsBillingEditEnabled(false);
+
     const shippingValid = validateShippingForm();
     const billingValid = validateBillingForm();
 
@@ -301,12 +321,6 @@ export default function ShippingDetail() {
 
   };
 
-  const handleEdit = (address: string) => {
-    if(address === "shipping"){
-      setIsShippingEditEnabled(true)
-    }
-  }
-
   if (isLoading) {
     return <div className="flex justify-center items-center h-64">
       <Typography tag="p" text="Loading address data..." />
@@ -318,26 +332,39 @@ export default function ShippingDetail() {
   return (
     <div className="flex flex-col gap-[var(--space-30-60)]">
       
-      <div className="flex justify-between">
+      <div className="flex justify-between items-center">
         <Typography
           tag="h5"
           text="Shipping Details"
           className="uppercase text-primary-dark"
         />
-        <Button 
-          variant={"nullBtn"} 
-          className="text-secondary-1"
-          onClick={() => handleEdit("shipping")}
-        >
-          <Image
-            src="/icons/edit.svg"
-            alt="Edit"
-            width={24}
-            height={24}
-            className="!static w-full object-contain"
-          />
-          Edit
-        </Button>
+        <div className="flex flex-row items-center">
+          <Button 
+            variant={"nullBtn"} 
+            className="text-secondary-1"
+            onClick={() => setIsShippingEditEnabled(true)}
+          >
+            <Image
+              src="/icons/edit.svg"
+              alt="Edit"
+              width={24}
+              height={24}
+              className="!static w-full object-contain"
+            />
+            Edit
+          </Button>
+          {
+            isShippingEditEnabled && (
+              <Button 
+                variant={"nullBtn"} 
+                className="text-secondary-1 ml-3 "
+                onClick={() => setIsShippingEditEnabled(false)}
+              >
+                Exit
+              </Button>
+            )
+          }
+        </div>
       </div>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-[var(--space-30-52)]">
@@ -427,15 +454,22 @@ export default function ShippingDetail() {
           isSynced={!selectedCheckBox}
           billingErrors={billingErrors}
           setBillingErrors={setBillingErrors}
+          isBillingEditEnabled={isBillingEditEnabled}
+          setIsBillingEditEnabled={setIsBillingEditEnabled}
         />
 
-        <Button
-          type="submit"
-          className="w-full"
-          disabled={isSubmittingAddress}
-        >
-          {isSubmittingAddress ? "Loading..." : "Continue"}
-        </Button>
+        {
+          showAddressContinueButton && (
+            <Button
+              type="submit"
+              className="w-full"
+              disabled={isSubmittingAddress}
+            >
+              {isSubmittingAddress ? "Loading..." : "Continue"}
+            </Button>
+          )
+        }
+
       </form>
 
       {showPaymentDetails && <Payment shippingFormData={shippingFormData} billingFormData={billingFormData} />}
