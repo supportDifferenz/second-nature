@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Typography from "@/components/atoms/typography/Typography";
 import DateOfBirthPicker from "@/components/molecules/datePicker/DatePicker";
 import BuyingFlowLayout from "@/components/templates/BuyingFlowLayout";
@@ -25,9 +25,9 @@ export default function Age() {
   const ageYear = selectedPet ? selectedPet.ageYear : 0;
   const dateOfBirthString = selectedPet ? selectedPet.dateOfBirth : "";
   
-  const [ dateOfBirth, setDateOfBirth ] = useState<string>(dateOfBirthString || "");
-  const [ month, setMonth ] = useState(ageMonth);
-  const [ year, setYear ] = useState(ageYear);
+  const [ dateOfBirth, setDateOfBirth ] = useState("");
+  const [ month, setMonth ] = useState(0);
+  const [ year, setYear ] = useState(0);
 
   console.log("Selected Pet in age page is", selectedPet);
 
@@ -52,6 +52,18 @@ export default function Age() {
       }    
     } 
   }
+
+  useEffect(() => {
+    if(ageMonth){
+      setMonth(ageMonth);
+    }
+    if(ageYear){
+      setYear(ageYear);
+    }
+    if(dateOfBirthString){
+      setDateOfBirth(dateOfBirthString);
+    }
+  },[ageMonth, ageYear, dateOfBirthString])
 
   return (
     <BuyingFlowLayout step={1}>
