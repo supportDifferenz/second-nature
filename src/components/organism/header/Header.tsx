@@ -176,9 +176,9 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
         </>
       ) : (
         <div className=" container py-5 flex relative">
-          <div className="w-400px border absolute top-1/2 transform -translate-y-1/2">
+          {/* <div className="w-400px border absolute top-1/2 transform -translate-y-1/2">
             back btn
-          </div>
+          </div> */}
           <div 
             className="w-[14%] mx-auto"
             onClick={(e) => {
