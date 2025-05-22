@@ -5,7 +5,7 @@ import BuyingFlowLayout from "@/components/templates/BuyingFlowLayout";
 import { Button } from "@/components/ui/button";
 import clsx from "clsx";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { usePetStore } from "@/zustand/store/petDataStore";
 
@@ -22,8 +22,8 @@ const GenderPage = () => {
   console.log("Selected Pet in gender page is ", selectedPet);
   const currentPetId = selectedPet ? selectedPet.id : null; // Get the current pet ID
   const selectedPetName = selectedPet ? selectedPet.name : null;
-  const selectedPetGender = selectedPet ? selectedPet.gender : null;
-  const [gender, setGender] = useState(selectedPetGender || "");
+  const selectedPetGender = selectedPet ? selectedPet.gender : "";
+  const [gender, setGender] = useState("");
 
   const handleNext = (e: React.FormEvent) => {
     e.preventDefault();
@@ -36,6 +36,12 @@ const GenderPage = () => {
       router.push("/gender");
     }
   };
+
+  useEffect(() => {
+    if (selectedPetGender) {
+      setGender(selectedPetGender);
+    }
+  },[selectedPetGender])
 
   return (
     <BuyingFlowLayout step={1}>
@@ -115,7 +121,7 @@ const GenderPage = () => {
           </Button>
           <Button 
             className="gap-2.5 lg:ml-auto lg:mr-[-55px]" 
-            // disabled
+            disabled={!gender}
             onClick={handleNext}
           >
             Next
