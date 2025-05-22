@@ -266,3 +266,41 @@ try {
       throw error;
   }
 };
+
+export const updateAddressById = async (
+  addressId: string,
+  subId: string,
+  type: string,
+  formData: {
+    shippingAddress: {
+      firstName: string;
+      lastName: string;
+      contactNo: string;
+      address: string;
+      aptSuite: string;
+      municipality: string;
+    },
+    billingAddress: {
+      firstName: string;
+      lastName: string;
+      contactNo: string;
+      address: string;
+      aptSuite: string;
+      municipality: string;
+      useDifferentBilling: boolean;
+    }
+  }
+) => {
+  console.log("formData in update address by ID", formData);
+
+  try {
+    const response = await subscriptionAxiosInstance.put(
+      `/api/subscription/updateAddressById/${addressId}/${subId}/${type}`,
+      formData
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error in updating address details", error);
+    throw error;
+  }
+};

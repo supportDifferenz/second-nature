@@ -247,7 +247,8 @@ export default function BillingDetails({ billingFormData, setBillingFormData, is
           onChange={handleChange}
           onBlur={handleBlur}
           error={billingErrors.firstName}
-          disabled={isSynced && !isBillingEditEnabled}
+          // disabled={isSynced && !isBillingEditEnabled}
+          disabled={!isBillingEditEnabled}
         />
         <InputLabeled
           name="lastName"
@@ -258,7 +259,8 @@ export default function BillingDetails({ billingFormData, setBillingFormData, is
           onChange={handleChange}
           onBlur={handleBlur}
           error={billingErrors.lastName}
-          disabled={isSynced && !isBillingEditEnabled}
+          // disabled={isSynced && !isBillingEditEnabled}
+          disabled={!isBillingEditEnabled}
         />
         <InputLabeled
           name="mobile"
@@ -270,7 +272,8 @@ export default function BillingDetails({ billingFormData, setBillingFormData, is
           onChange={handleChange}
           onBlur={handleBlur}
           error={billingErrors.mobile}
-          disabled={isSynced && !isBillingEditEnabled}
+          // disabled={isSynced && !isBillingEditEnabled}
+          disabled={!isBillingEditEnabled}
         />
 
         <div className="flex flex-col gap-[var(--space-8-17)]">
@@ -283,7 +286,8 @@ export default function BillingDetails({ billingFormData, setBillingFormData, is
             onChange={handleChange}
             onBlur={handleBlur}
             error={billingErrors.address}
-            disabled={isSynced && !isBillingEditEnabled}
+            // disabled={isSynced && !isBillingEditEnabled}
+            disabled={!isBillingEditEnabled}
           />
           <InputLabeled
             name="aptSuite"
@@ -294,7 +298,8 @@ export default function BillingDetails({ billingFormData, setBillingFormData, is
             onChange={handleChange}
             onBlur={handleBlur}
             error={billingErrors.aptSuite}
-            disabled={isSynced && !isBillingEditEnabled}
+            // disabled={isSynced && !isBillingEditEnabled}
+            disabled={!isBillingEditEnabled}
           />
           {/* <Input
             variant="roundedEdgeInput"
@@ -310,7 +315,8 @@ export default function BillingDetails({ billingFormData, setBillingFormData, is
             onChange={handleChange}
             onBlur={handleBlur}
             error={billingErrors.municipality}
-            disabled={isSynced && !isBillingEditEnabled}
+            // disabled={isSynced && !isBillingEditEnabled}
+            disabled={!isBillingEditEnabled}
           />
           {/* <Input
             variant="roundedEdgeInput"

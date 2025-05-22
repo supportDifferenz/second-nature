@@ -14,4 +14,5 @@ export const QUERY_KEYS = {
     GET_PROMO_OFFER: "getPromoOffer",
     CREATE_PET: "createPet",
     CREATE_SUBSCRIPTION: "createSubscription",
+    UPDATE_ADDRESS_BY_ID: "updateAddressById",
 }   
