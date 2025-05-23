@@ -1,7 +1,7 @@
 import Typography from '@/components/atoms/typography/Typography'
 import { Button } from '@/components/ui/button'
 import Image from 'next/image'
-import React from 'react'
+import React, { useState } from 'react'
 import { useUserStore } from '@/zustand/store/userDataStore'
 import { usePetStore } from '@/zustand/store/petDataStore'
 import { useCreatePetHook } from '@/hooks/subscriptionHooks/createPetHook';
@@ -55,6 +55,9 @@ export default function Payment({ shippingFormData, billingFormData }: PaymentPr
   const { pets } = usePetStore();
   const { mutate: createPet } = useCreatePetHook();
   const { mutate: createSubscription } = useCreateSubscriptionHook();
+
+  const [createPetError, setCreatePetError] = useState("");
+  const [createSubscriptionError, setCreateSubscriptionError] = useState("");
 
   // const handleContinue = () => {
 
@@ -373,6 +376,7 @@ export default function Payment({ shippingFormData, billingFormData }: PaymentPr
                 resolve();
               },
               onError: (error) => {
+                setCreatePetError("Error in creating pet");
                 console.error('Failed to create pet:', error);
                 reject(error);
               }
@@ -425,6 +429,7 @@ export default function Payment({ shippingFormData, billingFormData }: PaymentPr
             console.log("Subscription created successfully");
           },
           onError: (error) => {
+            setCreateSubscriptionError("Error in creating subscription");
             console.error("Failed to create subscription:", error);
             alert("Subscription failed. Please try again.");
           },
@@ -453,6 +458,16 @@ export default function Payment({ shippingFormData, billingFormData }: PaymentPr
       >
         Continue
       </Button>
+      <Typography
+        tag="p"
+        text={createPetError}
+        className="text-sm text-red-500 block"
+      />
+      <Typography
+        tag="p"
+        text={createSubscriptionError}
+        className="text-sm text-red-500 block"
+      />
     </div>
   )
 }

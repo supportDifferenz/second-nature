@@ -62,6 +62,7 @@ export default function ShippingDetail() {
   const [addressId, setAddressId] = useState<string>("");
   const [shippingSubId, setShippingSubId] = useState<string>("");
   const [billingSubId, setBillingSubId] = useState<string>("");
+  const [submittingAddressError, setSubmittingAddressError] = useState("");
   
   const [shippingFormData, setShippingFormData] = useState<ShippingFormData>({
     firstName: "",
@@ -340,6 +341,7 @@ export default function ShippingDetail() {
                 setIsSubmittingAddress(false);
               },
               onError: (error) => {
+                setSubmittingAddressError('Error updating shipping address by ID');
                 console.error('Error updating shipping address by ID:', error);
                 setIsSubmittingAddress(false);
               }
@@ -359,6 +361,7 @@ export default function ShippingDetail() {
                 setIsSubmittingAddress(false);
               },
               onError: (error) => {
+                setSubmittingAddressError("Error updating billing address by ID");
                 console.error('Error updating billing address by ID:', error);
                 setIsSubmittingAddress(false);
               }
@@ -379,6 +382,7 @@ export default function ShippingDetail() {
                 setIsSubmittingAddress(false);
               },
               onError: (error) => {
+                setSubmittingAddressError("Error updating shipping address by ID");
                 console.error('Error updating shipping address by ID:', error);
                 setIsSubmittingAddress(false);
               }
@@ -399,6 +403,7 @@ export default function ShippingDetail() {
                 setIsSubmittingAddress(false);
               },
               onError: (error) => {
+                setSubmittingAddressError("Error updating billing address by ID");
                 console.error('Error updating billing address by ID:', error);
                 setIsSubmittingAddress(false);
               }
@@ -434,6 +439,8 @@ export default function ShippingDetail() {
             setIsSubmittingAddress(false);
           },
           onError: (error) => {
+            setSubmittingAddressError("Error updating address");
+            // setSubmittingAddressError((error as { response?: { data?: { message?: string } } })?.response?.data?.message || "An unexpected error occurred");
             console.error('Error updating address:', error);
             setIsSubmittingAddress(false);
           },
@@ -600,13 +607,20 @@ export default function ShippingDetail() {
 
         {
           (!showPaymentDetails || showAddressContinueButton) && (
-            <Button
-              type="submit"
-              className="w-full"
-              disabled={isSubmittingAddress}
-            >
-              {isSubmittingAddress ? "Loading..." : "Continue"}
-            </Button>
+            <div className="flex flex-col">
+              <Button
+                type="submit"
+                className="w-full"
+                disabled={isSubmittingAddress}
+              >
+                {isSubmittingAddress ? "Loading..." : "Continue"}
+              </Button>
+              <Typography
+                tag="p"
+                text={submittingAddressError}
+                className="text-sm text-red-500 block"
+              />
+            </div>
           )
         }
 
