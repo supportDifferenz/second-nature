@@ -4,7 +4,7 @@ import Typography from "@/components/atoms/typography/Typography";
 
 export default function DayPlan() {
   return (
-    <div className="flex flex-col gap-6 w-[80%] lg:w-[17.7vw] p-9 rounded-xl bg-primary-light">
+    <div className="flex flex-col gap-6 w-[79.43vw] sm:w-[35vw] lg:w-[17.7vw] p-9 rounded-xl bg-primary-light">
       <div className="w-40">
         <Image
           src="/icons/day1-3.svg"

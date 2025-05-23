@@ -1,8 +1,15 @@
 import Typography from "@/components/atoms/typography/Typography";
 import React from "react";
 import DayPlan from "./DayPlan";
+import { PetFoodLookingTitle } from "@/components/molecules/titleSyles/Title";
+import { Button } from "@/components/ui/button";
+import Image from "next/image";
+
+// Move this inside or import it properly if it's external
 
 export default function TransitionPlan() {
+
+
   return (
     <div
       style={{
@@ -31,8 +38,7 @@ export default function TransitionPlan() {
       />
 
       {/* plan-card */}
-
-      <div className="flex flex-col gap-[var(--space-30-60)] mx-auto items-center justify-center border border-secondary-1 rounded-2xl pt-[var(--space-40-60)] pb-[var(--space-24-45)] px-[var(--space-24-45)]">
+      <div className="flex flex-col gap-[var(--space-30-60)] max-w-[90.65vw] lg:max-w-[80.2vw] mx-auto items-center justify-center border border-secondary-1 rounded-2xl pt-[var(--space-40-60)] pb-[var(--space-24-45)] px-[var(--space-24-45)]">
         <div className="flex flex-col gap-[var(--space-13-16)] items-center justify-center">
           <Typography
             tag="h4"
@@ -42,17 +48,16 @@ export default function TransitionPlan() {
           <Typography
             tag="h6"
             text="The 10-day transition process gradually increases the portions every few days, ensuring your pet adjusts comfortably and enjoys a seamless dietary change."
-            className="text-center w-[80%] lg:w-[43%]"
+            className="text-center w-[80%] lg:w-[57%]"
           />
         </div>
-        <div className="flex gap-6">
+        <div className="flex flex-wrap items-center justify-center gap-5">
           <DayPlan />
           <DayPlan />
           <DayPlan />
           <DayPlan />
         </div>
       </div>
-      
     </div>
   );
 }
