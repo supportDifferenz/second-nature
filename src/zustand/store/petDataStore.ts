@@ -10,6 +10,7 @@ type PetDetails = {
   gender?: 'male' | 'female' | '';
   breed?: string;
   crossBreed?: string;
+  dateOfBirth?: string;
   ageMonth?: number;
   ageYear?: number;
   currentWeight?: number;

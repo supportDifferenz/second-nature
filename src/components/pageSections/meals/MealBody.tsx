@@ -4,11 +4,12 @@ import { SecondaryBlockTitle } from "@/components/molecules/titleSyles/Title";
 import IngredientTable from "@/components/organism/ingredientTable/IngredientTable";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import HealthBenefits from "./HealthBenefits";
 import FooterCtaCard from "@/components/organism/footerCtaCard/FooterCtaCard";
 import FooterBannerCta from "./FooterBannerCta";
 import FaqSection from "./FaqSection";
+import { useSearchParams } from "next/navigation";
 
 // Define the content for each meal type
 const mealContent = {
@@ -165,14 +166,29 @@ const footerCtaData = {
 };
 
 export default function MealBody() {
+
+  const searchParams = useSearchParams();
+  const protein = searchParams.get("protein");
+  console.log("Protein in meals page", protein);
+
   // State to manage the current selected meal type
   const [selectedMeal, setSelectedMeal] = useState<"beef" | "chicken" | "lamb">(
-    "beef"
+    (protein && ["beef", "chicken", "lamb"].includes(protein) 
+      ? protein as "beef" | "chicken" | "lamb" 
+      : "beef")
   );
+
+  // Sync URL changes with state
+  useEffect(() => {
+    if (protein && ["beef", "chicken", "lamb"].includes(protein)) {
+      setSelectedMeal(protein as "beef" | "chicken" | "lamb");
+    }
+  }, [protein]);
 
   // Function to handle tab switching
   const handleMealSwitch = (meal: "beef" | "chicken" | "lamb") => {
     setSelectedMeal(meal);
+    window.history.pushState({}, "", `?protein=${meal}`);
   };
 
   // Get the current meal's content

@@ -8,9 +8,11 @@ import { Button } from "@/components/ui/button"
 import BillingDetails from './BillingDetails'
 import Payment from './Payment';
 import { useUserStore } from '@/zustand/store/userDataStore';
+import { usePetStore } from '@/zustand/store/petDataStore';
 // import useAuthStore from '@/zustand/store/authDataStore';
 import { useCreateAddressHook } from '@/hooks/subscriptionHooks/createAddressHook';
 import { useGetAddressById } from '@/hooks/subscriptionHooks/getAddressByIdHook';
+import { useCreatePetHook } from '@/hooks/subscriptionHooks/createPetHook';
 
 type FormField = 'firstName' | 'lastName' | 'mobile' | 'address' | 'aptSuite' | 'municipality';
 
@@ -40,7 +42,9 @@ export default function ShippingDetail() {
   const { userDetails, setUserDetails } = useUserStore();
   // const { isAuthenticated } = useAuthStore();
   const { mutate } = useCreateAddressHook();
+  const { mutate: createPet } = useCreatePetHook();
   const { data: addressData } = useGetAddressById(userDetails.userId || "");
+  const { pets } = usePetStore();
   
   const [isLoading, setIsLoading] = useState(true);
   const [selectedCheckBox, setSelectedCheckBox] = useState(true);
@@ -88,30 +92,36 @@ export default function ShippingDetail() {
   // Initialize form data with proper priority
   useEffect(() => {
     if (addressData || userDetails) {
+
+      const shippingAddressLength = addressData?.result?.shippingAddress?.length;
+      const billingAddressLength = addressData?.result?.billingAddress?.length;
+
       setShippingFormData({
-        firstName: addressData?.result?.shippingAddress?.[0]?.firstName || userDetails?.shippingDetails?.firstName || "",
-        lastName: addressData?.result?.shippingAddress?.[0]?.lastName || userDetails?.shippingDetails?.lastName || "",
-        mobile: addressData?.result?.shippingAddress?.[0]?.contactNo || userDetails?.shippingDetails?.mobile || "",
-        address: addressData?.result?.shippingAddress?.[0]?.address || userDetails?.shippingDetails?.address || "",
-        aptSuite: addressData?.result?.shippingAddress?.[0]?.aptSuite || userDetails?.shippingDetails?.aptSuite || "",
-        municipality: addressData?.result?.shippingAddress?.[0]?.municipality || userDetails?.shippingDetails?.municipality || "",
+        firstName: addressData?.result?.shippingAddress?.[shippingAddressLength]?.firstName || userDetails?.shippingDetails?.firstName || "",
+        lastName: addressData?.result?.shippingAddress?.[shippingAddressLength]?.lastName || userDetails?.shippingDetails?.lastName || "",
+        mobile: addressData?.result?.shippingAddress?.[shippingAddressLength]?.contactNo || userDetails?.shippingDetails?.mobile || "",
+        address: addressData?.result?.shippingAddress?.[shippingAddressLength]?.address || userDetails?.shippingDetails?.address || "",
+        aptSuite: addressData?.result?.shippingAddress?.[shippingAddressLength]?.aptSuite || userDetails?.shippingDetails?.aptSuite || "",
+        municipality: addressData?.result?.shippingAddress?.[shippingAddressLength]?.municipality || userDetails?.shippingDetails?.municipality || "",
       });
 
       setBillingFormData({
-        firstName: addressData?.result?.billingAddress?.[0]?.firstName || userDetails?.billingDetails?.firstName || "",
-        lastName: addressData?.result?.billingAddress?.[0]?.lastName || userDetails?.billingDetails?.lastName || "",
-        mobile: addressData?.result?.billingAddress?.[0]?.contactNo || userDetails?.billingDetails?.mobile || "",
-        address: addressData?.result?.billingAddress?.[0]?.address || userDetails?.billingDetails?.address || "",
-        aptSuite: addressData?.result?.billingAddress?.[0]?.aptSuite || userDetails?.billingDetails?.aptSuite || "",
-        municipality: addressData?.result?.billingAddress?.[0]?.municipality || userDetails?.billingDetails?.municipality || "",
+        firstName: addressData?.result?.billingAddress?.[billingAddressLength]?.firstName || userDetails?.billingDetails?.firstName || "",
+        lastName: addressData?.result?.billingAddress?.[billingAddressLength]?.lastName || userDetails?.billingDetails?.lastName || "",
+        mobile: addressData?.result?.billingAddress?.[billingAddressLength]?.contactNo || userDetails?.billingDetails?.mobile || "",
+        address: addressData?.result?.billingAddress?.[billingAddressLength]?.address || userDetails?.billingDetails?.address || "",
+        aptSuite: addressData?.result?.billingAddress?.[billingAddressLength]?.aptSuite || userDetails?.billingDetails?.aptSuite || "",
+        municipality: addressData?.result?.billingAddress?.[billingAddressLength]?.municipality || userDetails?.billingDetails?.municipality || "",
         useDifferentBilling: userDetails?.billingDetails?.useDifferentBilling ?? true,
       });
 
       // Set checkbox state based on fetched data
-      if (addressData?.result?.billingAddress?.[0] || userDetails?.billingDetails) {
+      if (addressData?.result?.billingAddress?.[billingAddressLength] || userDetails?.billingDetails) {
+        console.log("Shipping address data", addressData?.result?.shippingAddress);
+        console.log("Billing address data", addressData?.result?.billingAddress);
         setSelectedCheckBox(
           userDetails?.billingDetails?.useDifferentBilling ??
-          addressData?.result?.billingAddress?.[0]?.useDifferentBilling ??
+          addressData?.result?.billingAddress?.[billingAddressLength]?.useDifferentBilling ??
           true
         );
       }
@@ -124,7 +134,7 @@ export default function ShippingDetail() {
     if (!selectedCheckBox) {
       setBillingFormData(() => ({ 
         ...shippingFormData, 
-        useDifferentBilling: false 
+        useDifferentBilling: true 
       }));
     }
   }, [selectedCheckBox, shippingFormData]);
@@ -282,6 +292,42 @@ export default function ShippingDetail() {
         },
       });
     }
+
+    pets.map((pet) => {
+      createPet({
+        user_id: userDetails.userId,
+        name: pet.name || "",
+        type: pet.catOrDog || "",
+        gender: pet.gender || "",
+        location: pet.location || "",
+        dateOfBirth: "",
+        ageMonth: pet.ageMonth || 0,
+        ageYear: pet.ageYear || 0,
+        breed: pet.breed || "",
+        crossBreeds: [ pet.crossBreed || "" ],
+        activityLevel: pet.activityLevel || "",
+        currentWeight: pet.currentWeight || 0,
+        targetWeight: pet.targetWeight || 0,
+        plan: {
+            type: pet.planType || "",
+            duration: pet.planType === "regular" ? "28" : "7",
+            price: pet.planPrice || 0,
+            protein: pet.protein || "",
+            bowlSize: pet.bowlSize || "",
+        },
+      }, {
+        onSuccess: (data) => {
+          console.log('Pet created successfully:', data);
+          // setShowPaymentDetails(true);
+          // setIsSubmittingAddress(false);
+        },
+        onError: (error) => {
+          console.error('Error updating address:', error);
+          // setIsSubmittingAddress(false);
+        },
+      });
+    })
+
   };
 
   if (isLoading) {
@@ -289,6 +335,8 @@ export default function ShippingDetail() {
       <Typography tag="p" text="Loading address data..." />
     </div>;
   }
+
+  console.log("Pet data in shipping details page is", pets);
 
   return (
     <div className="flex flex-col gap-[var(--space-30-60)]">

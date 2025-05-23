@@ -38,7 +38,7 @@ function Calendar({
             : "[&:has([aria-selected])]:rounded-md"
         ),
         day: cn(
-          "size-8 p-0 font-normal text-primary-dark aria-selected:opacity-100"
+          "cursor-pointer disabled:cursor-not-allowed size-8 p-0 font-normal text-primary-dark aria-selected:opacity-100"
         ),
         day_range_start:
           "day-range-start aria-selected:bg-primary aria-selected:text-primary-foreground",
@@ -63,6 +63,9 @@ function Calendar({
           <ChevronRight className={cn("size-4", className)} {...props} />
         ),
       }}
+      disabled={[
+        { after: new Date() }, // Disable all future dates
+      ]}
       {...props}
     />
   )

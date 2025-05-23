@@ -23,7 +23,9 @@ export default function Age() {
   const selectedPetName = selectedPet ? selectedPet.name : null;
   const ageMonth = selectedPet ? selectedPet.ageMonth : 0;
   const ageYear = selectedPet ? selectedPet.ageYear : 0;
+  const dateOfBirthString = selectedPet ? selectedPet.dateOfBirth : "";
   
+  const [ dateOfBirth, setDateOfBirth ] = useState<string>(dateOfBirthString || "");
   const [ month, setMonth ] = useState(ageMonth);
   const [ year, setYear ] = useState(ageYear);
 
@@ -31,10 +33,24 @@ export default function Age() {
 
   const handleNext = (e: React.FormEvent) => {
     e.preventDefault();
-    if (month && year &&currentPetId) {
-      setPetDetails(currentPetId, { ageMonth: month, ageYear: year });
-      router.push("/weight");
-    }
+    if (mode === "dob") {
+      if (dateOfBirth && currentPetId) {
+        setPetDetails(
+          currentPetId,
+          { dateOfBirth: dateOfBirth, ageMonth: 0, ageYear: 0 }
+        );
+        router.push("/weight");
+      } else {
+        console.log("Please select a valid date of birth");
+      }
+    } else if (mode === "approx") {
+      if (month && year && currentPetId) {
+        setPetDetails(currentPetId, { dateOfBirth: "", ageMonth: month, ageYear: year });
+        router.push("/weight");
+      } else {
+        console.log("Please select a valid age");
+      }    
+    } 
   }
 
   return (
@@ -75,7 +91,7 @@ export default function Age() {
           </div>
 
           {mode === "dob" ? (
-            <DateOfBirthPicker />
+            <DateOfBirthPicker dateOfBirth={dateOfBirth} setDateOfBirth={setDateOfBirth} />
           ) : (
             <div className="w-full mx-auto items-center justify-center flex flex-col lg:flex-row gap-4">
               <Counter label="Months" min={0} max={12} value={month} setValue={setMonth} />
@@ -105,7 +121,7 @@ export default function Age() {
           </Button>
           <Button 
             className="gap-2.5 lg:ml-auto lg:mr-[-55px]" 
-          disabled={ !( month || year )}
+          disabled={ !( month || year || dateOfBirth ) }
             onClick={handleNext}
           >
             Next
