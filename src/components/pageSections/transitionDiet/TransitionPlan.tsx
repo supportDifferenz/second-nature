@@ -1,9 +1,9 @@
 import Typography from "@/components/atoms/typography/Typography";
 import React from "react";
 import DayPlan from "./DayPlan";
-import { PetFoodLookingTitle } from "@/components/molecules/titleSyles/Title";
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
+// import { PetFoodLookingTitle } from "@/components/molecules/titleSyles/Title";
+// import { Button } from "@/components/ui/button";
+// import Image from "next/image";
 
 // Move this inside or import it properly if it's external
 
