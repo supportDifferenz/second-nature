@@ -71,12 +71,12 @@ export default function Page() {
   const planType = selectedPet ? selectedPet.planType : "Regular";
   const protein = selectedPet ? selectedPet.protein : "chicken";
   const bowlSize = selectedPet ? selectedPet.bowlSize : "full";
-  const [ selectedPlan, setSelectedPlan ] = useState<string>("");
+  const [ selectedPlan, setSelectedPlan ] = useState<string>("Regular");
   // const [ selectedPrice, setSelectedPrice ] = useState<number>(0);
   // const [ selectedProtein, setSelectedProtein ] = useState<string>("");
   // const [ selectedBowlSize, setSelectedBowlSize ] = useState<string>("");
-  const [ regularProtein, setRegularProtein ] = useState<string>("");
-  const [ regularBowlSize, setRegularBowlSize ] = useState<string>("");
+  const [ regularProtein, setRegularProtein ] = useState<string>("chicken");
+  const [ regularBowlSize, setRegularBowlSize ] = useState<string>("full");
   const [ trialProtein, setTrialProtein ] = useState<string>("");
   const [ trialBowlSize, setTrialBowlSize ] = useState<string>("");
   const [ regularPrice, setRegularPrice ] = useState<number>(0);
@@ -111,10 +111,14 @@ export default function Page() {
     if(planType === "Regular") {
       setSelectedPlan("Regular");
       setRegularProtein(protein || "");
+      setTrialProtein("");
       setRegularBowlSize(bowlSize || "");
+      setTrialBowlSize("");
     } else if(planType === "Trial") {
       setSelectedPlan("Trial");
+      setRegularProtein("");
       setTrialProtein(protein || "");
+      setRegularBowlSize("");
       setTrialBowlSize(bowlSize || "");
     }
   },[planType, protein, bowlSize])

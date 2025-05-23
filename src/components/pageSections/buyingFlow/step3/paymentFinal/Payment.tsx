@@ -6,6 +6,7 @@ import { useUserStore } from '@/zustand/store/userDataStore'
 import { usePetStore } from '@/zustand/store/petDataStore'
 import { useCreatePetHook } from '@/hooks/subscriptionHooks/createPetHook';
 import { useCreateSubscriptionHook } from '@/hooks/subscriptionHooks/createSubscriptionHook'
+import { useRouter } from 'next/navigation'
 
 interface ShippingFormData {
   firstName: string;
@@ -51,8 +52,10 @@ type CreatedPet = {
 
 export default function Payment({ shippingFormData, billingFormData }: PaymentProps) {
 
+  const router = useRouter();
+
   const { userDetails } = useUserStore();
-  const { pets } = usePetStore();
+  const { pets, clearPetDetails } = usePetStore();
   const { mutate: createPet } = useCreatePetHook();
   const { mutate: createSubscription } = useCreateSubscriptionHook();
 
@@ -385,6 +388,8 @@ export default function Payment({ shippingFormData, billingFormData }: PaymentPr
         });
       }
 
+      clearPetDetails();
+
       // After all pets created, create subscription
       createSubscription(
         {
@@ -427,6 +432,7 @@ export default function Payment({ shippingFormData, billingFormData }: PaymentPr
         {
           onSuccess: () => {
             console.log("Subscription created successfully");
+            router.push("/");
           },
           onError: (error) => {
             setCreateSubscriptionError("Error in creating subscription");
