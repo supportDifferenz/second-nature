@@ -61,6 +61,7 @@ export default function Payment({ shippingFormData, billingFormData }: PaymentPr
 
   const [createPetError, setCreatePetError] = useState("");
   const [createSubscriptionError, setCreateSubscriptionError] = useState("");
+  const [isSubscribing, setIsSubscribing] = useState(false);
 
   // const handleContinue = () => {
 
@@ -329,6 +330,8 @@ export default function Payment({ shippingFormData, billingFormData }: PaymentPr
   const handleContinue = async () => {
     const createdPets: CreatedPet[] = [];
 
+    setIsSubscribing(true);
+
     try {
       // Create pets one-by-one (sequentially)
       for (const pet of pets) {
@@ -432,19 +435,19 @@ export default function Payment({ shippingFormData, billingFormData }: PaymentPr
         {
           onSuccess: () => {
             console.log("Subscription created successfully");
+            setIsSubscribing(false);
             router.push("/");
           },
           onError: (error) => {
             setCreateSubscriptionError("Error in creating subscription");
             console.error("Failed to create subscription:", error);
-            alert("Subscription failed. Please try again.");
-          },
+            setIsSubscribing(false);},
         }
       );
 
     } catch (error) {
       console.error("Error in pet/subscription flow:", error);
-      alert("Something went wrong. Please check console.");
+      setIsSubscribing(false);
     }
   };
 
@@ -461,8 +464,9 @@ export default function Payment({ shippingFormData, billingFormData }: PaymentPr
       <Button 
         className="w-full"
         onClick={handleContinue}
+        disabled={isSubscribing}
       >
-        Continue
+        { isSubscribing ? "Loading..." : "Continue" }
       </Button>
       <Typography
         tag="p"
