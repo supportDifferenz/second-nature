@@ -2,12 +2,13 @@
 
 import Typography from "@/components/atoms/typography/Typography";
 import BuyingFlowLayout from "@/components/templates/BuyingFlowLayout";
-import React,{ useState } from "react";
+import React,{ useState, useEffect } from "react";
 import Counter from "@/components/molecules/counterBuyingFlow/Counter";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { usePetStore } from "@/zustand/store/petDataStore";
+import { startTransition } from "react";
 
 export default function Page() {
 
@@ -29,9 +30,21 @@ export default function Page() {
     e.preventDefault();
     if (currentWeight && targetWeight &&currentPetId) {
       setPetDetails(currentPetId, { currentWeight: currentWeight, targetWeight: targetWeight });
-      router.push("/activity");
+      startTransition(() => {
+        router.push("/activity");
+      })
+      // router.push("/activity");
     }
   }
+
+  useEffect(() => {
+    if(currentWeightFromStore){
+      setCurrentWeight(currentWeightFromStore);
+    }
+    if(targetWeightFromStore){
+      setTargetWeight(targetWeightFromStore);
+    }
+  },[currentWeightFromStore, targetWeightFromStore])
 
   return (
     <BuyingFlowLayout step={2}>
@@ -56,7 +69,10 @@ export default function Page() {
             className="gap-2.5  lg:ml-[-55px]"
             onClick={(e) => {
               e.preventDefault();
-              router.push("/age");
+              startTransition(() => {
+                router.push("/age");
+              })
+              // router.push("/age");
             }}
           >
             <div className="w-5 relative">

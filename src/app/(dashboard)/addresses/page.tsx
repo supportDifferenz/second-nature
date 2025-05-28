@@ -6,7 +6,23 @@ import EditAddresses from "@/components/pageSections/dashboard/addresses/EditAdd
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import React,{ useState } from "react";
+import { useUserStore } from "@/zustand/store/userDataStore";
+import { useGetAddressById } from "@/hooks/subscriptionHooks/getAddressByIdHook";
+
+type Address = {
+    address: string;
+    aptSuite?: string;
+    municipality?: string;
+    // Add other fields as needed
+};
+
 export default function Address() {
+
+  const { userDetails } = useUserStore();
+  const { data: addressData } = useGetAddressById(userDetails.userId || "");
+
+  console.log("Address data in edit address page is", addressData);
+
 
   const [ isEditing, setIsEditing ] = useState(false);
   // const [ isShippingAddressEditing, setIsShippingAddressEditing ] = useState(false);
@@ -45,36 +61,62 @@ export default function Address() {
                   Add new shipping address
                 </Button>
               </div>
-              <div className="bg-[#FDFFF4] border border-[#E4E7D3] rounded-xl p-6 flex flex-col items-start sm:flex-row gap-5 lg:gap-[30%] ">
-                <div className="grow ">
-                  <Typography
-                    tag="span"
-                    text="Shipping Address "
-                    className="h6 block !font-normal   mb-3"
-                  />
 
-                  <Typography
-                    tag="h5"
-                    text="Museum Park St, Old Salata, Corniche, Doha "
-                    className="capitalize"
+              {
+                addressData?.statusCode === 200
+                ? (
+                    addressData?.result?.shippingAddress?.map((address: Address, index: number) => (
+                      <div key={index} className="bg-[#FDFFF4] border border-[#E4E7D3] rounded-xl p-6 flex flex-col items-start sm:flex-row gap-5 lg:gap-[30%] ">
+                        <div className="grow ">
+                          <Typography
+                            tag="span"
+                            text="Shipping Address"
+                            className="h6 block !font-normal mb-3"
+                          />
+
+                          <Typography
+                            tag="h5"
+                            text={address?.address}
+                            // text="Museum Park St, Old Salata, Corniche, Doha "
+                            className="capitalize"
+                          />
+                          <Typography
+                            tag="h5"
+                            text={address?.aptSuite ?? ""}
+                            className="capitalize"
+                          />
+                          <Typography
+                            tag="h5"
+                            text={address?.municipality ?? ""}
+                            className="capitalize"
+                          />
+                        </div>
+                        <Button 
+                          variant={"nullBtn"} 
+                          className="text-secondary-1"
+                          onClick={() => handleEdit("shipping")}
+                        >
+                          <div className="w-(--size-14-22) gap-2.5">
+                            <Image
+                              src="/icons/edit.svg"
+                              alt="Edit "
+                              fill
+                              className="!static w-full object-contain"
+                            />
+                          </div>
+                          Edit
+                        </Button>
+                      </div>
+                    ))
+                  )
+                : <Typography
+                    tag="p"
+                    text="No shipping address found"
+                    className="capitalize text-red-500"
                   />
-                </div>
-                <Button 
-                  variant={"nullBtn"} 
-                  className="text-secondary-1"
-                  onClick={() => handleEdit("shipping")}
-                >
-                  <div className="w-(--size-14-22) gap-2.5">
-                    <Image
-                      src="/icons/edit.svg"
-                      alt="Edit "
-                      fill
-                      className="!static w-full object-contain"
-                    />
-                  </div>
-                  Edit
-                </Button>
-              </div>
+              }
+
+              
             </div>
             {/* Billing Address  */}
             <div>
@@ -87,39 +129,61 @@ export default function Address() {
                   Add new billing address
                 </Button>
               </div>
-              <div className="bg-[#FDFFF4] border border-[#E4E7D3] rounded-xl p-6 flex flex-col items-start sm:flex-row gap-5 lg:gap-[30%] ">
-                <div className="grow ">
-                  <Typography
-                    tag="span"
-                    text="Billing Address "
-                    className="h6 block !font-normal   mb-3"
-                  />
 
-                  <Typography
-                    tag="h5"
-                    text="Museum Park St, Old Salata, Corniche, Doha"
-                    className="capitalize"
+              {
+                addressData?.statusCode === 200
+                ? (
+                    addressData?.result?.billingAddress?.map((address: Address, index: number) => (
+                      <div key={index} className="bg-[#FDFFF4] border border-[#E4E7D3] rounded-xl p-6 flex flex-col items-start sm:flex-row gap-5 lg:gap-[30%] ">
+                        <div className="grow ">
+                          <Typography
+                            tag="span"
+                            text="Billing Address"
+                            className="h6 block !font-normal mb-3"
+                          />
+
+                          <Typography
+                            tag="h5"
+                            text={address?.address}
+                            // text="Museum Park St, Old Salata, Corniche, Doha "
+                            className="capitalize"
+                          />
+                          <Typography
+                            tag="h5"
+                            text={address?.aptSuite ?? ""}
+                            className="capitalize"
+                          />
+                          <Typography
+                            tag="h5"
+                            text={address?.municipality ?? ""}
+                            className="capitalize"
+                          />
+                        </div>
+                        <Button 
+                          variant={"nullBtn"} 
+                          className="text-secondary-1"
+                          onClick={() => handleEdit("billing")}
+                        >
+                          <div className="w-(--size-14-22) gap-2.5">
+                            <Image
+                              src="/icons/edit.svg"
+                              alt="Edit "
+                              fill
+                              className="!static w-full object-contain"
+                            />
+                          </div>
+                          Edit
+                        </Button>
+                      </div>
+                    ))
+                  )
+                : <Typography
+                    tag="p"
+                    text="No billing address found"
+                    className="capitalize text-red-500"
                   />
-                </div>
-                <Button 
-                  variant={"nullBtn"} 
-                  className="text-secondary-1"
-                  onClick={() => {
-                    setIsEditing(true);
-                    setSelectedAddress("billing");
-                  }}
-                >
-                  <div className="w-(--size-14-22) gap-2.5">
-                    <Image
-                      src="/icons/edit.svg"
-                      alt="Edit "
-                      fill
-                      className="!static w-full object-contain"
-                    />
-                  </div>
-                  Edit
-                </Button>
-              </div>
+              }
+
             </div>
           </div>
       }

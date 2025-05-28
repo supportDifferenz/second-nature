@@ -5,6 +5,7 @@ import AlertBar from '@/components/molecules/alertBar/AlertBar'
 import { InputLabeled } from '@/components/molecules/inputLabeled/InputLabeled'
 import React, { useState, useEffect, useCallback } from 'react'
 import { Button } from "@/components/ui/button"
+import Image from 'next/image'
 import BillingDetails from './BillingDetails'
 import Payment from './Payment';
 import { useUserStore } from '@/zustand/store/userDataStore';
@@ -12,7 +13,8 @@ import { usePetStore } from '@/zustand/store/petDataStore';
 // import useAuthStore from '@/zustand/store/authDataStore';
 import { useCreateAddressHook } from '@/hooks/subscriptionHooks/createAddressHook';
 import { useGetAddressById } from '@/hooks/subscriptionHooks/getAddressByIdHook';
-import { useCreatePetHook } from '@/hooks/subscriptionHooks/createPetHook';
+// import { useCreatePetHook } from '@/hooks/subscriptionHooks/createPetHook';
+import { useUpdateAddressByIdHook } from '@/hooks/subscriptionHooks/updateAddressByIdHook';
 
 type FormField = 'firstName' | 'lastName' | 'mobile' | 'address' | 'aptSuite' | 'municipality';
 
@@ -42,7 +44,8 @@ export default function ShippingDetail() {
   const { userDetails, setUserDetails } = useUserStore();
   // const { isAuthenticated } = useAuthStore();
   const { mutate } = useCreateAddressHook();
-  const { mutate: createPet } = useCreatePetHook();
+  const { mutate: updateAddressById } = useUpdateAddressByIdHook();
+  // const { mutate: createPet } = useCreatePetHook();
   const { data: addressData } = useGetAddressById(userDetails.userId || "");
   const { pets } = usePetStore();
   
@@ -51,6 +54,15 @@ export default function ShippingDetail() {
   const [touched, setTouched] = useState<Record<string, boolean>>({});
   const [showPaymentDetails, setShowPaymentDetails] = useState(false);
   const [isSubmittingAddress, setIsSubmittingAddress] = useState(false);
+  const [isShippingEditEnabled, setIsShippingEditEnabled] = useState(true);
+  const [isBillingEditEnabled, setIsBillingEditEnabled] = useState(true);
+  const [showAddressContinueButton, setShowAddressContinueButton] = useState(true);
+  const [showEditShipControl, setShowEditShipControl] = useState(false);
+  const [showEditBillControl, setShowEditBillControl] = useState(false);
+  const [addressId, setAddressId] = useState<string>("");
+  const [shippingSubId, setShippingSubId] = useState<string>("");
+  const [billingSubId, setBillingSubId] = useState<string>("");
+  const [submittingAddressError, setSubmittingAddressError] = useState("");
   
   const [shippingFormData, setShippingFormData] = useState<ShippingFormData>({
     firstName: "",
@@ -89,12 +101,35 @@ export default function ShippingDetail() {
     municipality: ''
   });
 
+  const formData = {
+                      shippingAddress: {
+                        firstName: shippingFormData.firstName,
+                        lastName: shippingFormData.lastName,
+                        contactNo: shippingFormData.mobile,
+                        address: shippingFormData.address,
+                        aptSuite: shippingFormData.aptSuite,
+                        municipality: shippingFormData.municipality,
+                      },
+                      billingAddress: {
+                        firstName: billingFormData.firstName,
+                        lastName: billingFormData.lastName,
+                        contactNo: billingFormData.mobile,
+                        address: billingFormData.address,
+                        aptSuite: billingFormData.aptSuite,
+                        municipality: billingFormData.municipality,
+                        useDifferentBilling: billingFormData.useDifferentBilling,
+                      },
+                    }
+
   // Initialize form data with proper priority
   useEffect(() => {
     if (addressData || userDetails) {
 
       const shippingAddressLength = addressData?.result?.shippingAddress?.length;
       const billingAddressLength = addressData?.result?.billingAddress?.length;
+      setAddressId(addressData?.result?._id);
+      setShippingSubId(addressData?.result?.shippingAddress?.[shippingAddressLength]?._id);
+      setBillingSubId(addressData?.result?.billingAddress?.[billingAddressLength]?._id);
 
       setShippingFormData({
         firstName: addressData?.result?.shippingAddress?.[shippingAddressLength]?.firstName || userDetails?.shippingDetails?.firstName || "",
@@ -125,6 +160,23 @@ export default function ShippingDetail() {
           true
         );
       }
+
+      if(shippingAddressLength > 0 || userDetails?.shippingDetails?.firstName) {
+        setIsShippingEditEnabled(false);
+        setShowAddressContinueButton(false);
+        setShowPaymentDetails(true);
+        setShowEditShipControl(true);
+      } else if (shippingAddressLength === 0 && userDetails?.shippingDetails?.firstName === "") {
+        setShowEditShipControl(false);
+      }
+      if(billingAddressLength > 0 || userDetails?.billingDetails?.firstName) {
+        setIsBillingEditEnabled(false);
+        setShowAddressContinueButton(false);
+        setShowPaymentDetails(true);
+        setShowEditBillControl(true);
+      } else if (billingAddressLength === 0 && userDetails?.billingDetails?.firstName === "") {
+        setShowEditBillControl(false);
+      }
     }
     setIsLoading(false);
   }, [addressData, userDetails]);
@@ -138,6 +190,14 @@ export default function ShippingDetail() {
       }));
     }
   }, [selectedCheckBox, shippingFormData]);
+
+  useEffect(() => {
+    if(isShippingEditEnabled || isBillingEditEnabled) {
+      setShowPaymentDetails(false);
+    } else {
+      setShowPaymentDetails(true);
+    }
+  },[showPaymentDetails, isShippingEditEnabled, isBillingEditEnabled]);
 
   const validateField = useCallback((name: FormField, value: string): string => {
     const trimmedValue = value.trim();
@@ -248,6 +308,9 @@ export default function ShippingDetail() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
+    setIsShippingEditEnabled(false);
+    setIsBillingEditEnabled(false);
+
     const shippingValid = validateShippingForm();
     const billingValid = validateBillingForm();
 
@@ -262,71 +325,129 @@ export default function ShippingDetail() {
 
       setUserDetails(updatedUserDetails);
 
-      mutate({
-        user_id: userDetails.userId,
-        shippingAddress: [{
-          firstName: shippingFormData.firstName,
-          lastName: shippingFormData.lastName,
-          contactNo: shippingFormData.mobile,
-          address: shippingFormData.address,
-          aptSuite: shippingFormData.aptSuite,
-          municipality: shippingFormData.municipality,
-        }],
-        billingAddress: [{
-          firstName: billingFormData.firstName,
-          lastName: billingFormData.lastName,
-          contactNo: billingFormData.mobile,
-          address: billingFormData.address,
-          aptSuite: billingFormData.aptSuite,
-          municipality: billingFormData.municipality,
-          useDifferentBilling: billingFormData.useDifferentBilling,
-        }],
-      }, {
-        onSuccess: () => {
-          setShowPaymentDetails(true);
+      if(showEditShipControl || showEditBillControl) {
+        if(isShippingEditEnabled && isBillingEditEnabled) {
+          updateAddressById(
+            {
+              addressId: addressId,
+              subId: shippingSubId,
+              type: "shippingAddress",
+              formData
+            },
+            {
+              onSuccess: (response) => {
+                console.log("Shipping address updated by ID successfully", response);
+                setShowPaymentDetails(true);
+                setIsSubmittingAddress(false);
+              },
+              onError: (error) => {
+                setSubmittingAddressError('Error updating shipping address by ID');
+                console.error('Error updating shipping address by ID:', error);
+                setIsSubmittingAddress(false);
+              }
+            }
+          )
+          updateAddressById(
+            {
+              addressId: addressId,
+              subId: billingSubId,
+              type: "billingAddress",
+              formData
+            },
+            {
+              onSuccess: (response) => {
+                console.log("Billing address updated by ID successfully", response);
+                setShowPaymentDetails(true);
+                setIsSubmittingAddress(false);
+              },
+              onError: (error) => {
+                setSubmittingAddressError("Error updating billing address by ID");
+                console.error('Error updating billing address by ID:', error);
+                setIsSubmittingAddress(false);
+              }
+            }
+          )
+        } else if(isShippingEditEnabled && !isBillingEditEnabled){
+          updateAddressById(
+            {
+              addressId: addressId,
+              subId: shippingSubId,
+              type: "shippingAddress",
+              formData
+            },
+            {
+              onSuccess: (response) => {
+                console.log("Shipping address updated by ID successfully", response);
+                setShowPaymentDetails(true);
+                setIsSubmittingAddress(false);
+              },
+              onError: (error) => {
+                setSubmittingAddressError("Error updating shipping address by ID");
+                console.error('Error updating shipping address by ID:', error);
+                setIsSubmittingAddress(false);
+              }
+            }
+          )
+        } else if(!isShippingEditEnabled && isBillingEditEnabled){
+          updateAddressById(
+            {
+              addressId: addressId,
+              subId: billingSubId,
+              type: "billingAddress",
+              formData
+            },
+            {
+              onSuccess: (response) => {
+                console.log("Billing address updated by ID successfully", response);
+                setShowPaymentDetails(true);
+                setIsSubmittingAddress(false);
+              },
+              onError: (error) => {
+                setSubmittingAddressError("Error updating billing address by ID");
+                console.error('Error updating billing address by ID:', error);
+                setIsSubmittingAddress(false);
+              }
+            }
+          )
+        } else {
+          console.log("No address data to update");
           setIsSubmittingAddress(false);
-        },
-        onError: (error) => {
-          console.error('Error updating address:', error);
-          setIsSubmittingAddress(false);
-        },
-      });
-    }
+        }
+      } else {
+        mutate({
+          user_id: userDetails.userId,
+          shippingAddress: [{
+            firstName: shippingFormData.firstName,
+            lastName: shippingFormData.lastName,
+            contactNo: shippingFormData.mobile,
+            address: shippingFormData.address,
+            aptSuite: shippingFormData.aptSuite,
+            municipality: shippingFormData.municipality,
+          }],
+          billingAddress: [{
+            firstName: billingFormData.firstName,
+            lastName: billingFormData.lastName,
+            contactNo: billingFormData.mobile,
+            address: billingFormData.address,
+            aptSuite: billingFormData.aptSuite,
+            municipality: billingFormData.municipality,
+            useDifferentBilling: billingFormData.useDifferentBilling,
+          }],
+        }, {
+          onSuccess: () => {
+            setShowPaymentDetails(true);
+            setIsSubmittingAddress(false);
+          },
+          onError: (error) => {
+            setSubmittingAddressError("Error updating address");
+            // setSubmittingAddressError((error as { response?: { data?: { message?: string } } })?.response?.data?.message || "An unexpected error occurred");
+            console.error('Error updating address:', error);
+            setIsSubmittingAddress(false);
+          },
+        });
+      }
 
-    pets.map((pet) => {
-      createPet({
-        user_id: userDetails.userId,
-        name: pet.name || "",
-        type: pet.catOrDog || "",
-        gender: pet.gender || "",
-        location: pet.location || "",
-        dateOfBirth: "",
-        ageMonth: pet.ageMonth || 0,
-        ageYear: pet.ageYear || 0,
-        breed: pet.breed || "",
-        crossBreeds: [ pet.crossBreed || "" ],
-        activityLevel: pet.activityLevel || "",
-        currentWeight: pet.currentWeight || 0,
-        targetWeight: pet.targetWeight || 0,
-        plan: {
-            type: pet.planType || "",
-            duration: pet.planType === "regular" ? "28" : "7",
-            price: pet.planPrice || 0,
-            protein: pet.protein || "",
-            bowlSize: pet.bowlSize || "",
-        },
-      }, {
-        onSuccess: (data) => {
-          console.log('Pet created successfully:', data);
-          // setShowPaymentDetails(true);
-          // setIsSubmittingAddress(false);
-        },
-        onError: (error) => {
-          console.error('Error updating address:', error);
-          // setIsSubmittingAddress(false);
-        },
-      });
-    })
+    }
 
   };
 
@@ -337,14 +458,56 @@ export default function ShippingDetail() {
   }
 
   console.log("Pet data in shipping details page is", pets);
+  console.table([isShippingEditEnabled, isBillingEditEnabled])
 
   return (
     <div className="flex flex-col gap-[var(--space-30-60)]">
-      <Typography
-        tag="h5"
-        text="Shipping Details"
-        className="uppercase text-primary-dark"
-      />
+      
+      <div className="flex justify-between items-center">
+        <Typography
+          tag="h5"
+          text="Shipping Details"
+          className="uppercase text-primary-dark"
+        />
+        <div className="flex flex-row items-center">
+
+          {
+            showEditShipControl && 
+            <>
+              {
+                !isShippingEditEnabled && (
+                  <Button 
+                    variant={"nullBtn"} 
+                    className="text-secondary-1"
+                    onClick={() => setIsShippingEditEnabled(true)}
+                  >
+                    <Image
+                      src="/icons/edit.svg"
+                      alt="Edit"
+                      width={24}
+                      height={24}
+                      className="!static w-full object-contain"
+                    />
+                    Edit
+                  </Button>
+                )
+              }
+              {
+                isShippingEditEnabled && (
+                  <Button 
+                    variant={"nullBtn"} 
+                    className="text-secondary-1 ml-3 "
+                    onClick={() => setIsShippingEditEnabled(false)}
+                  >
+                    Exit
+                  </Button>
+                )
+              }
+            </>
+          }
+          
+        </div>
+      </div>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-[var(--space-30-52)]">
         <InputLabeled
@@ -356,6 +519,7 @@ export default function ShippingDetail() {
           onChange={handleChange}
           onBlur={handleBlur}
           error={shippingErrors.firstName}
+          disabled={!isShippingEditEnabled}
         />
 
         <InputLabeled
@@ -367,6 +531,7 @@ export default function ShippingDetail() {
           onChange={handleChange}
           onBlur={handleBlur}
           error={shippingErrors.lastName}
+          disabled={!isShippingEditEnabled}
         />
 
         <InputLabeled 
@@ -378,6 +543,7 @@ export default function ShippingDetail() {
           onChange={handleChange}
           onBlur={handleBlur}
           error={shippingErrors.mobile}
+          disabled={!isShippingEditEnabled}
         />
 
         <div className='flex flex-col gap-[var(--space-8-17)]'>
@@ -390,6 +556,7 @@ export default function ShippingDetail() {
             onChange={handleChange}
             onBlur={handleBlur}
             error={shippingErrors.address}
+            disabled={!isShippingEditEnabled}
           />
 
           <InputLabeled
@@ -401,6 +568,7 @@ export default function ShippingDetail() {
             onChange={handleChange}
             onBlur={handleBlur}
             error={shippingErrors.aptSuite}
+            disabled={!isShippingEditEnabled}
           />
 
           <InputLabeled
@@ -412,6 +580,7 @@ export default function ShippingDetail() {
             onChange={handleChange}
             onBlur={handleBlur}
             error={shippingErrors.municipality}
+            disabled={!isShippingEditEnabled}
           />
         </div>
 
@@ -421,24 +590,43 @@ export default function ShippingDetail() {
           setSelectedCheckBox={setSelectedCheckBox} 
         />
 
-        <BillingDetails
-          billingFormData={billingFormData}
-          setBillingFormData={setBillingFormData}
-          isSynced={!selectedCheckBox}
-          billingErrors={billingErrors}
-          setBillingErrors={setBillingErrors}
-        />
+        {
+          selectedCheckBox && (
+            <BillingDetails
+              billingFormData={billingFormData}
+              setBillingFormData={setBillingFormData}
+              isSynced={!selectedCheckBox}
+              billingErrors={billingErrors}
+              setBillingErrors={setBillingErrors}
+              isBillingEditEnabled={isBillingEditEnabled}
+              setIsBillingEditEnabled={setIsBillingEditEnabled}
+              showEditBillControl={showEditBillControl}
+            />
+          )
+        }
 
-        <Button
-          type="submit"
-          className="w-full"
-          disabled={isSubmittingAddress}
-        >
-          {isSubmittingAddress ? "Loading..." : "Continue"}
-        </Button>
+        {
+          (!showPaymentDetails || showAddressContinueButton) && (
+            <div className="flex flex-col">
+              <Button
+                type="submit"
+                className="w-full"
+                disabled={isSubmittingAddress}
+              >
+                {isSubmittingAddress ? "Loading..." : "Continue"}
+              </Button>
+              <Typography
+                tag="p"
+                text={submittingAddressError}
+                className="text-sm text-red-500 block"
+              />
+            </div>
+          )
+        }
+
       </form>
 
-      {showPaymentDetails && <Payment />}
+      {showPaymentDetails && <Payment shippingFormData={shippingFormData} billingFormData={billingFormData} />}
     </div>
   );
 }

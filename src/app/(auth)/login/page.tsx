@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import useAuthStore from "@/zustand/store/authDataStore";
 import { loginSchema } from "@/schemas/authSchemas/loginSchema";
 import { useUserStore } from "@/zustand/store/userDataStore";
+import { startTransition } from "react";
 
 interface LoginData {
   userName?: string;
@@ -111,7 +112,10 @@ export default function Page() {
             phoneNumber: data?.result?.contactNo,
           })
 
-          router.push("/personal-information");
+          startTransition(() => {
+            router.push("/personal-information");
+          })
+          // router.push("/personal-information");
         },
         onError: (error) => {
           console.error("Login failed", error);

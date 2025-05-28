@@ -2,9 +2,10 @@
 
 import Typography from "@/components/atoms/typography/Typography";
 import { InputLabeled } from "@/components/molecules/inputLabeled/InputLabeled";
-// import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 // import { Input } from "@/components/ui/input";
 import React, { useState, useEffect } from "react";
+import Image from "next/image"; // Add this import if using Next.js
 // import Payment from "./Payment";
 
 interface BillingFormData {
@@ -32,9 +33,12 @@ interface BillingDetailsProps {
   isSynced: boolean;
   billingErrors: FormErrors;
   setBillingErrors: React.Dispatch<React.SetStateAction<FormErrors>>;  // isContinueButtonDisabled: boolean;
+  isBillingEditEnabled: boolean;
+  setIsBillingEditEnabled: React.Dispatch<React.SetStateAction<boolean>>;
+  showEditBillControl: boolean;
 }
 
-export default function BillingDetails({ billingFormData, setBillingFormData, isSynced, billingErrors, setBillingErrors }: BillingDetailsProps) {
+export default function BillingDetails({ billingFormData, setBillingFormData, isSynced, billingErrors, setBillingErrors, isBillingEditEnabled, setIsBillingEditEnabled, showEditBillControl }: BillingDetailsProps) {
 
   // const [errors, setErrors] = useState<Record<string, string>>({});
   const [touched, setTouched] = useState<Record<string, boolean>>({});
@@ -178,11 +182,60 @@ export default function BillingDetails({ billingFormData, setBillingFormData, is
   return (
     <div className="flex flex-col gap-[var(--space-30-60)]">
 
-      <Typography
-        tag="h5"
-        text="Billing Details"
-        className="uppercase text-primary-dark"
-      />
+      <div className="flex justify-between">
+        <Typography
+          tag="h5"
+          text="Billing Details"
+          className="uppercase text-primary-dark"
+        />
+
+        <div className="flex flex-row items-center">
+
+          {
+            showEditBillControl && (
+              <>
+                {
+                  !isSynced && (
+                    <>
+                      {
+                        !isBillingEditEnabled && (
+                          <Button 
+                            variant={"nullBtn"} 
+                            className="text-secondary-1"
+                            onClick={() => setIsBillingEditEnabled(true)}
+                          >
+                            <Image
+                              src="/icons/edit.svg"
+                              alt="Edit"
+                              width={24}
+                              height={24}
+                              className="!static w-full object-contain"
+                            />
+                            Edit
+                          </Button>
+                        )
+                      }
+                      {
+                        isBillingEditEnabled && (
+                          <Button 
+                            variant={"nullBtn"} 
+                            className="text-secondary-1 ml-3"
+                            onClick={() => setIsBillingEditEnabled(false)}
+                          >
+                            Exit
+                          </Button>
+                        )
+                      }
+                    </>
+                  )
+                }
+              </>
+            )
+          }
+          
+        </div>
+        
+      </div>
       <div className="flex flex-col gap-[var(--space-30-52)]  pb-14 border-b border-secondary-2">
 
         <InputLabeled
@@ -194,7 +247,8 @@ export default function BillingDetails({ billingFormData, setBillingFormData, is
           onChange={handleChange}
           onBlur={handleBlur}
           error={billingErrors.firstName}
-          disabled={isSynced}
+          // disabled={isSynced && !isBillingEditEnabled}
+          disabled={!isBillingEditEnabled}
         />
         <InputLabeled
           name="lastName"
@@ -205,7 +259,8 @@ export default function BillingDetails({ billingFormData, setBillingFormData, is
           onChange={handleChange}
           onBlur={handleBlur}
           error={billingErrors.lastName}
-          disabled={isSynced}
+          // disabled={isSynced && !isBillingEditEnabled}
+          disabled={!isBillingEditEnabled}
         />
         <InputLabeled
           name="mobile"
@@ -217,7 +272,8 @@ export default function BillingDetails({ billingFormData, setBillingFormData, is
           onChange={handleChange}
           onBlur={handleBlur}
           error={billingErrors.mobile}
-          disabled={isSynced}
+          // disabled={isSynced && !isBillingEditEnabled}
+          disabled={!isBillingEditEnabled}
         />
 
         <div className="flex flex-col gap-[var(--space-8-17)]">
@@ -230,7 +286,8 @@ export default function BillingDetails({ billingFormData, setBillingFormData, is
             onChange={handleChange}
             onBlur={handleBlur}
             error={billingErrors.address}
-            disabled={isSynced}
+            // disabled={isSynced && !isBillingEditEnabled}
+            disabled={!isBillingEditEnabled}
           />
           <InputLabeled
             name="aptSuite"
@@ -241,7 +298,8 @@ export default function BillingDetails({ billingFormData, setBillingFormData, is
             onChange={handleChange}
             onBlur={handleBlur}
             error={billingErrors.aptSuite}
-            disabled={isSynced}
+            // disabled={isSynced && !isBillingEditEnabled}
+            disabled={!isBillingEditEnabled}
           />
           {/* <Input
             variant="roundedEdgeInput"
@@ -257,7 +315,8 @@ export default function BillingDetails({ billingFormData, setBillingFormData, is
             onChange={handleChange}
             onBlur={handleBlur}
             error={billingErrors.municipality}
-            disabled={isSynced}
+            // disabled={isSynced && !isBillingEditEnabled}
+            disabled={!isBillingEditEnabled}
           />
           {/* <Input
             variant="roundedEdgeInput"

@@ -22,9 +22,33 @@ type PetDetails = {
   bowlSize?: string;
 };
 
+type createdPetDetails = {
+  petId: string;
+  name: string;
+  type: string;
+  gender: string;
+  location: string;
+  dateOfBirth?: string;
+  ageMonth?: number;
+  ageYear?: number;
+  breed?: string;
+  crossBreeds?: Array<string>;
+  activityLevel?: string;
+  currentWeight: number;
+  targetWeight: number;
+  plan: {
+    type: string;
+    duration: string;
+    price: number;
+    protein: string;
+    bowlSize: string;
+  }
+}
+
 type PetStore = {
   location: string;
   pets: PetDetails[];
+  createdPets: createdPetDetails[];
   currentPetId: string | null;
   selectedPetIndex: number | null;
   noOfPets: number;
@@ -36,6 +60,7 @@ type PetStore = {
   removePet: (petId: string) => void;
   setSelectedPetIndex: (index: number | null) => void;
   clearPetDetails: () => void;
+  addCreatedPet: (pet: createdPetDetails) => void;
 };
 
 export const usePetStore = create<PetStore>()(
@@ -43,6 +68,7 @@ export const usePetStore = create<PetStore>()(
     (set) => ({
       location: "",
       pets: [],
+      createdPets: [],
       currentPetId: null,
       selectedPetIndex: null,
       noOfPets: 0,
@@ -110,6 +136,10 @@ export const usePetStore = create<PetStore>()(
         selectedPetIndex: null,
         noOfPets: 0,
       }),
+
+      addCreatedPet: (pet) => set((state) => ({
+        createdPets: [...state.createdPets, pet],
+      })),
     }),
     {
       name: 'pet-store', // unique name for the storage key

@@ -7,6 +7,7 @@ import Typography from "@/components/atoms/typography/Typography";
 import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
 import { usePetStore } from "@/zustand/store/petDataStore";
+import { startTransition } from "react";
 
 export default function DogOrCat() {
 
@@ -75,18 +76,30 @@ export default function DogOrCat() {
       if(selectedPetIndex === noOfPets) {
         if(petType && petName.trim() !== "") {
           setSelectedPetIndex(selectedPetIndex);
-          router.push("/gender");
+          startTransition(() => {
+            router.push("/gender");
+          })
+          // router.push("/gender");
         } else {
           setSelectedPetIndex(selectedPetIndex - 1);
-          router.push("/add-more-pets");
+          startTransition(() => {
+            router.push("/add-more-pets");
+          })
+          // router.push("/add-more-pets");
         }
       } else {
         setSelectedPetIndex(selectedPetIndex);
-        router.push("/gender");
+        startTransition(() => {
+          router.push("/gender");
+        })
+        // router.push("/gender");
       }
     }else{
       setSelectedPetIndex(0); // Reset selected pet index
-      router.push("/gender");
+      startTransition(() => {
+        router.push("/gender");
+      })
+      // router.push("/gender");
     }
 
     setPetType("");

@@ -220,20 +220,21 @@ export const createSubscription = async (formData: {
       municipality: string;
       useDifferentBilling: boolean;
     },
-    subscriptionDate: string;
-    promocode: string;
+    subscriptiondate: string;
+    promoCode: string;
     subscribeToOffers: boolean;
     pets: Array<{
+      petId: string;
       name: string;
       type: string;
       gender: string;
       location: string;
-      dateOfBirth: string;
-      ageMonth: number;
-      ageYear: number;
-      breed: string;
-      crossBreeds: Array<string>;
-      activityLevel: string;
+      dateOfBirth?: string;
+      ageMonth?: number;
+      ageYear?: number;
+      breed?: string;
+      crossBreeds?: Array<string>;
+      activityLevel?: string;
       currentWeight: number;
       targetWeight: number;
       plan: {
@@ -263,5 +264,43 @@ try {
   } catch (error) {
       console.error("Error in create subscription", error);
       throw error;
+  }
+};
+
+export const updateAddressById = async (
+  addressId: string,
+  subId: string,
+  type: string,
+  formData: {
+    shippingAddress: {
+      firstName: string;
+      lastName: string;
+      contactNo: string;
+      address: string;
+      aptSuite: string;
+      municipality: string;
+    },
+    billingAddress: {
+      firstName: string;
+      lastName: string;
+      contactNo: string;
+      address: string;
+      aptSuite: string;
+      municipality: string;
+      useDifferentBilling: boolean;
+    }
+  }
+) => {
+  console.log("formData in update address by ID", formData);
+
+  try {
+    const response = await subscriptionAxiosInstance.put(
+      `/api/subscription/updateAddressById/${addressId}/${subId}/${type}`,
+      formData
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error in updating address details", error);
+    throw error;
   }
 };
