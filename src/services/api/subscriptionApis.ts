@@ -304,3 +304,15 @@ export const updateAddressById = async (
     throw error;
   }
 };
+
+export const getPetDetailsByUserId = async (userId: string) => {
+  try {
+      const response = await subscriptionAxiosInstance.get(
+        `/api/subscription/getPetByUserId/${userId}`,
+    );
+      return response.data;
+    } catch (error) {
+        console.error("Error in getting pet details", error);
+        throw error;
+    }
+};

@@ -125,12 +125,6 @@ export default function PasswordManagement() {
           onError: (error) => {
             console.error("Password update failed", error);
             // Handle API specific errors
-            if (error?.message) {
-              setErrors(prev => ({
-                ...prev,
-                currentPassword: error?.message
-              }));
-            }
           },
         }
       );
