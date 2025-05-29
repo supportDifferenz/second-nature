@@ -5,7 +5,7 @@ import DashboardLayout from "@/components/templates/DashboardLayout";
 import EditAddresses from "@/components/pageSections/dashboard/addresses/EditAddresses";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import React,{ useState } from "react";
+import React,{ useEffect, useState } from "react";
 import { useUserStore } from "@/zustand/store/userDataStore";
 import { useGetAddressById } from "@/hooks/subscriptionHooks/getAddressByIdHook";
 
@@ -16,10 +16,14 @@ type Address = {
     // Add other fields as needed
 };
 
+// type AddressType = "shippingAddress" | "billingAddress";
+
 export default function Address() {
 
-  const { userDetails } = useUserStore();
-  const { data: addressData } = useGetAddressById(userDetails.userId || "");
+  // const { userDetails } = useUserStore();
+  const userId = useUserStore((state) => state.userDetails.userId || "");
+  const { data: addressData, refetch: refetchAddress } = useGetAddressById(userId || "");
+  const addressId = addressData?.result?._id;
 
   console.log("Address data in edit address page is", addressData);
 
@@ -27,12 +31,27 @@ export default function Address() {
   const [ isEditing, setIsEditing ] = useState(false);
   // const [ isShippingAddressEditing, setIsShippingAddressEditing ] = useState(false);
   // const [ isBillingAddressEditing, setIsBillingAddressEditing ] = useState(false);
-  const [ selectedAddress, setSelectedAddress ] = useState("shipping");
+  const [ selectedAddress, setSelectedAddress ] = useState("shippingAddress");
+  const [ editPrefilledAddress, setEditPrefilledAddress ] = useState({});
+  const [ createOrUpdateAddress, setCreateOrUpdateAddress ] = useState("");
 
-  const handleEdit = (addressType: string) => {
+  const handleEdit = ({ address, type: addressType }: { address: Address; type: string }) => {
     setIsEditing(true);
     setSelectedAddress(addressType);
+    setEditPrefilledAddress(address);
+    setCreateOrUpdateAddress("update");
   }
+
+  const handleAddNewAddress = ({ type: addressType }: { type: string }) => {
+    setIsEditing(true);
+    setSelectedAddress(addressType);
+    setEditPrefilledAddress({});
+    setCreateOrUpdateAddress("create");
+  }
+
+  useEffect(() => {
+    refetchAddress();
+  }, [isEditing])
 
   return (
     <DashboardLayout>
@@ -48,13 +67,21 @@ export default function Address() {
         ? <EditAddresses
             selectedAddress={selectedAddress}
             setIsEditing={setIsEditing}
+            addressId={addressId}
+            type={selectedAddress}
+            editPrefilledAddress={editPrefilledAddress}
+            createOrUpdateAddress={createOrUpdateAddress}
           />
         : <div className="flex flex-col gap-15">
             {/* Shipping Address  */}
             <div>
               <div className="mb-5 flex flex-col sm:flex-row sm:items-center gap-4 sm:justify-between">
                 <Typography tag="h6" text="Shipping Address " />
-                <Button variant={'linkTextBlack'} className="justify-start">
+                <Button 
+                  variant={'linkTextBlack'} 
+                  className="justify-start"
+                  onClick={() => handleAddNewAddress({ type: "shippingAddress" })}
+                >
                   <div className="w-4">
                     <Image src="/icons/add-icon.svg" alt="Add new shipping address" fill  className="!static w-full object-contain"/>
                   </div>
@@ -66,7 +93,7 @@ export default function Address() {
                 addressData?.statusCode === 200
                 ? (
                     addressData?.result?.shippingAddress?.map((address: Address, index: number) => (
-                      <div key={index} className="bg-[#FDFFF4] border border-[#E4E7D3] rounded-xl p-6 flex flex-col items-start sm:flex-row gap-5 lg:gap-[30%] ">
+                      <div key={index} className="bg-[#FDFFF4] border border-[#E4E7D3] rounded-xl mb-6 p-6 flex flex-col items-start sm:flex-row gap-5 lg:gap-[30%] ">
                         <div className="grow ">
                           <Typography
                             tag="span"
@@ -94,12 +121,12 @@ export default function Address() {
                         <Button 
                           variant={"nullBtn"} 
                           className="text-secondary-1"
-                          onClick={() => handleEdit("shipping")}
+                          onClick={() => handleEdit({ address: address, type: "shippingAddress" })}
                         >
                           <div className="w-(--size-14-22) gap-2.5">
                             <Image
                               src="/icons/edit.svg"
-                              alt="Edit "
+                              alt="Edit"
                               fill
                               className="!static w-full object-contain"
                             />
@@ -122,7 +149,11 @@ export default function Address() {
             <div>
               <div className="mb-5 flex flex-col sm:flex-row sm:items-center gap-4  sm:justify-between">
                 <Typography tag="h6" text="Billing Address  "  />
-                <Button variant={'linkTextBlack'} className="justify-start">
+                <Button 
+                  variant={'linkTextBlack'} 
+                  className="justify-start"
+                  onClick={() => handleAddNewAddress({ type: "billingAddress" })}
+                >
                   <div className="w-4">
                     <Image src="/icons/add-icon.svg" alt="Add new shipping address" fill  className="!static w-full object-contain"/>
                   </div>
@@ -134,7 +165,7 @@ export default function Address() {
                 addressData?.statusCode === 200
                 ? (
                     addressData?.result?.billingAddress?.map((address: Address, index: number) => (
-                      <div key={index} className="bg-[#FDFFF4] border border-[#E4E7D3] rounded-xl p-6 flex flex-col items-start sm:flex-row gap-5 lg:gap-[30%] ">
+                      <div key={index} className="bg-[#FDFFF4] border border-[#E4E7D3] rounded-xl mb-6 p-6 flex flex-col items-start sm:flex-row gap-5 lg:gap-[30%] ">
                         <div className="grow ">
                           <Typography
                             tag="span"
@@ -162,7 +193,7 @@ export default function Address() {
                         <Button 
                           variant={"nullBtn"} 
                           className="text-secondary-1"
-                          onClick={() => handleEdit("billing")}
+                          onClick={() => handleEdit({address: address, type: "billingAddress"})}
                         >
                           <div className="w-(--size-14-22) gap-2.5">
                             <Image

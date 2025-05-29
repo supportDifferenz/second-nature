@@ -46,7 +46,7 @@ export default function ShippingDetail() {
   const { mutate } = useCreateAddressHook();
   const { mutate: updateAddressById } = useUpdateAddressByIdHook();
   // const { mutate: createPet } = useCreatePetHook();
-  const { data: addressData } = useGetAddressById(userDetails.userId || "");
+  const { data: addressData, refetch: refetchAddress } = useGetAddressById(userDetails.userId || "");
   const { pets } = usePetStore();
   
   const [isLoading, setIsLoading] = useState(true);
@@ -125,8 +125,8 @@ export default function ShippingDetail() {
   useEffect(() => {
     if (addressData || userDetails) {
 
-      const shippingAddressLength = addressData?.result?.shippingAddress?.length;
-      const billingAddressLength = addressData?.result?.billingAddress?.length;
+      const shippingAddressLength = addressData?.result?.shippingAddress?.length - 1;
+      const billingAddressLength = addressData?.result?.billingAddress?.length - 1;
       setAddressId(addressData?.result?._id);
       setShippingSubId(addressData?.result?.shippingAddress?.[shippingAddressLength]?._id);
       setBillingSubId(addressData?.result?.billingAddress?.[billingAddressLength]?._id);
@@ -308,9 +308,6 @@ export default function ShippingDetail() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    setIsShippingEditEnabled(false);
-    setIsBillingEditEnabled(false);
-
     const shippingValid = validateShippingForm();
     const billingValid = validateBillingForm();
 
@@ -339,11 +336,16 @@ export default function ShippingDetail() {
                 console.log("Shipping address updated by ID successfully", response);
                 setShowPaymentDetails(true);
                 setIsSubmittingAddress(false);
+                setIsShippingEditEnabled(false);
+                refetchAddress().then(() => {
+                  console.log("Address data refetched successfully");
+                });
               },
               onError: (error) => {
                 setSubmittingAddressError('Error updating shipping address by ID');
                 console.error('Error updating shipping address by ID:', error);
                 setIsSubmittingAddress(false);
+                setShowPaymentDetails(false);
               }
             }
           )
@@ -359,11 +361,16 @@ export default function ShippingDetail() {
                 console.log("Billing address updated by ID successfully", response);
                 setShowPaymentDetails(true);
                 setIsSubmittingAddress(false);
+                setIsBillingEditEnabled(false);
+                refetchAddress().then(() => {
+                  console.log("Address data refetched successfully");
+                });
               },
               onError: (error) => {
                 setSubmittingAddressError("Error updating billing address by ID");
                 console.error('Error updating billing address by ID:', error);
                 setIsSubmittingAddress(false);
+                setShowPaymentDetails(false);
               }
             }
           )
@@ -380,11 +387,16 @@ export default function ShippingDetail() {
                 console.log("Shipping address updated by ID successfully", response);
                 setShowPaymentDetails(true);
                 setIsSubmittingAddress(false);
+                setIsShippingEditEnabled(false);
+                refetchAddress().then(() => {
+                  console.log("Address data refetched successfully");
+                });
               },
               onError: (error) => {
                 setSubmittingAddressError("Error updating shipping address by ID");
                 console.error('Error updating shipping address by ID:', error);
                 setIsSubmittingAddress(false);
+                setShowPaymentDetails(false);
               }
             }
           )
@@ -401,11 +413,16 @@ export default function ShippingDetail() {
                 console.log("Billing address updated by ID successfully", response);
                 setShowPaymentDetails(true);
                 setIsSubmittingAddress(false);
+                setIsBillingEditEnabled(false);
+                refetchAddress().then(() => {
+                  console.log("Address data refetched successfully");
+                });
               },
               onError: (error) => {
                 setSubmittingAddressError("Error updating billing address by ID");
                 console.error('Error updating billing address by ID:', error);
                 setIsSubmittingAddress(false);
+                setShowPaymentDetails(false);
               }
             }
           )
@@ -437,12 +454,18 @@ export default function ShippingDetail() {
           onSuccess: () => {
             setShowPaymentDetails(true);
             setIsSubmittingAddress(false);
+            setIsShippingEditEnabled(false);
+            setIsBillingEditEnabled(false);
+            refetchAddress().then(() => {
+              console.log("Address data refetched successfully");
+            });
           },
           onError: (error) => {
             setSubmittingAddressError("Error updating address");
             // setSubmittingAddressError((error as { response?: { data?: { message?: string } } })?.response?.data?.message || "An unexpected error occurred");
             console.error('Error updating address:', error);
             setIsSubmittingAddress(false);
+            setShowPaymentDetails(false);
           },
         });
       }

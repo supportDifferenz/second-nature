@@ -41,7 +41,7 @@ export const createAddress = async (formData: {
       address: string;
       aptSuite: string;
       municipality: string;
-      useDifferentBilling: boolean;
+      useDifferentBilling?: boolean;
     }>;
     // isActive?: boolean;
     // isDeleted?: boolean;
@@ -287,7 +287,7 @@ export const updateAddressById = async (
       address: string;
       aptSuite: string;
       municipality: string;
-      useDifferentBilling: boolean;
+      useDifferentBilling?: boolean;
     }
   }
 ) => {
@@ -303,4 +303,16 @@ export const updateAddressById = async (
     console.error("Error in updating address details", error);
     throw error;
   }
+};
+
+export const getPetDetailsByUserId = async (userId: string) => {
+  try {
+      const response = await subscriptionAxiosInstance.get(
+        `/api/subscription/getPetByUserId/${userId}`,
+    );
+      return response.data;
+    } catch (error) {
+        console.error("Error in getting pet details", error);
+        throw error;
+    }
 };

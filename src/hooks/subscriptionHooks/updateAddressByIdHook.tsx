@@ -30,7 +30,7 @@ export const useUpdateAddressByIdHook = () => {
                 address: string;
                 aptSuite: string;
                 municipality: string;
-                useDifferentBilling: boolean;
+                useDifferentBilling?: boolean;
             };
         }
     }) => {
