@@ -41,7 +41,7 @@ export const createAddress = async (formData: {
       address: string;
       aptSuite: string;
       municipality: string;
-      useDifferentBilling: boolean;
+      useDifferentBilling?: boolean;
     }>;
     // isActive?: boolean;
     // isDeleted?: boolean;
@@ -287,7 +287,7 @@ export const updateAddressById = async (
       address: string;
       aptSuite: string;
       municipality: string;
-      useDifferentBilling: boolean;
+      useDifferentBilling?: boolean;
     }
   }
 ) => {
