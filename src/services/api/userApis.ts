@@ -69,3 +69,30 @@ export const updateUser = async (
     throw error;
   }
 };
+
+export const changePassword = async ({
+  userId,
+  currentPassword,
+  newPassword,
+  confirmNewPassword,
+}: {
+  userId: string;
+  currentPassword: string;
+  newPassword: string;
+  confirmNewPassword: string;
+}) => {
+  try {
+    const response = await userAxiosInstance.post(
+      `/api/user/changePassword/${userId}`,
+      {
+        currentPassword,
+        newPassword,
+        confirmNewPassword,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error in changing password", error);
+    throw error;
+  }
+};

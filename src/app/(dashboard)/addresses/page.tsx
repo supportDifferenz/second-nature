@@ -93,7 +93,7 @@ export default function Address() {
                 addressData?.statusCode === 200
                 ? (
                     addressData?.result?.shippingAddress?.map((address: Address, index: number) => (
-                      <div key={index} className="bg-[#FDFFF4] border border-[#E4E7D3] rounded-xl p-6 flex flex-col items-start sm:flex-row gap-5 lg:gap-[30%] ">
+                      <div key={index} className="bg-[#FDFFF4] border border-[#E4E7D3] rounded-xl mb-6 p-6 flex flex-col items-start sm:flex-row gap-5 lg:gap-[30%] ">
                         <div className="grow ">
                           <Typography
                             tag="span"
@@ -165,7 +165,7 @@ export default function Address() {
                 addressData?.statusCode === 200
                 ? (
                     addressData?.result?.billingAddress?.map((address: Address, index: number) => (
-                      <div key={index} className="bg-[#FDFFF4] border border-[#E4E7D3] rounded-xl p-6 flex flex-col items-start sm:flex-row gap-5 lg:gap-[30%] ">
+                      <div key={index} className="bg-[#FDFFF4] border border-[#E4E7D3] rounded-xl mb-6 p-6 flex flex-col items-start sm:flex-row gap-5 lg:gap-[30%] ">
                         <div className="grow ">
                           <Typography
                             tag="span"
