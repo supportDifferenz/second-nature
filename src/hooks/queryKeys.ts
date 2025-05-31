@@ -17,4 +17,5 @@ export const QUERY_KEYS = {
     UPDATE_ADDRESS_BY_ID: "updateAddressById",
     UPDATE_PASSWORD: "updatePassword",
     GET_PET_DETAILS_BY_USER_ID: "getPetDetailsByUserId",
+    UPDATE_PET_BY_PET_ID: "updatePetByPetId",
 }   

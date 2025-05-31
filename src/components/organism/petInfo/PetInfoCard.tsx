@@ -15,9 +15,10 @@ type PetDetails = {
 type PetInfoCardProps = {
   petDetails: PetDetails;
   setIsEditPetInfo: (value: boolean) => void;
+  setPetData: (value: PetDetails) => void;
 };
 
-export default function PetInfoCard({ petDetails, setIsEditPetInfo }: PetInfoCardProps) {
+export default function PetInfoCard({ petDetails, setIsEditPetInfo, setPetData }: PetInfoCardProps) {
 
   const [ ageHeading, setAgeHeading ] = useState("");
   const [ ageContent, setAgeContent ] = useState("");
@@ -30,7 +31,12 @@ export default function PetInfoCard({ petDetails, setIsEditPetInfo }: PetInfoCar
       setAgeHeading("Date Of Birth");
       setAgeContent(`${petDetails?.dateOfBirth}`);
     }
-  },[]);
+  },[petDetails]);
+
+  const handleEdit = () => {
+    setIsEditPetInfo(true);
+    setPetData(petDetails);
+  }
 
   return (
     <div className="flex flex-col bg-[#FDFFF4] w-[300px] rounded-lg h-auto">
@@ -93,7 +99,7 @@ export default function PetInfoCard({ petDetails, setIsEditPetInfo }: PetInfoCar
         <Button 
           variant={"nullBtn"} 
           className="text-secondary-1"
-          onClick={() => setIsEditPetInfo(true)}
+          onClick={() => handleEdit()}
         >
           <div className="w-(--size-14-22) gap-2.5">
             <Image
