@@ -25,10 +25,10 @@ export const DropDownLabeled: React.FC<DropDownLabeledProps> = ({
     <div className={`flex flex-col  w-full ${className}`}>
       {label && <Label>{label}</Label>}
       <Select value={value} onValueChange={onValueChange}>
-        <SelectTrigger className="bg-white">
+        <SelectTrigger className="bg-white capitalize">
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>
-        <SelectContent className="bg-white">
+        <SelectContent className="bg-white capitalize">
           {options.map((option) => (
             <SelectItem key={option.value} value={option.value}>
               {option.label}

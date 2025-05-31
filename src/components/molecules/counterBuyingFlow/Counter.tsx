@@ -10,6 +10,10 @@ interface CounterProps {
   // defaultValue?: number;
   value?: number;
   setValue: (value: number) => void;
+  colorClass?: string;
+  className1?: string;
+  className2?: string;
+  className3?: string;
 }
 
 export default function Counter({
@@ -19,6 +23,10 @@ export default function Counter({
   // defaultValue,
   value = 0,
   setValue,
+  colorClass,
+  className1,
+  className2,
+  className3
 }: CounterProps) {
 
   // const [value, setValue] = useState<number>(defaultValue ?? 0);
@@ -58,29 +66,29 @@ export default function Counter({
   };
 
   return (
-    <div className='flex items-center justify-between w-full max-w-80 sm:max-w-96 px-7 h-[var(--space-60-80)] bg-white rounded-full border border-[#A1A1A1] '>
-      <div className='flex items-center gap-4'>
+    <div className={`${className1} flex items-center justify-between w-full max-w-80 sm:max-w-96 px-7 h-[var(--space-60-80)] bg-white rounded-full border border-[#A1A1A1]`}>
+      <div className={`${className2} flex items-center gap-4`}>
         <button
           onClick={handleDecrease}
           className='text-primary-dark font-medium text-lg focus:outline-none cursor-pointer'
         >
-          <Typography tag='h3' text='-' className='text-primary-dark' />
+          <Typography tag='h3' text='-' className={`${colorClass} text-primary-dark`} />
         </button>
         <input
-          type='number'
+          // type='number'
           value={value}
           onChange={handleInputChange}
-          className='w-12 text-center font-bold text-primary-dark bg-transparent border-none focus:outline-none focus:ring-0'
+          className={`${colorClass} ${className3} w-12 text-center font-bold text-primary-dark bg-transparent border-none focus:outline-none focus:ring-0`}
         />
         <button
           onClick={handleIncrease}
           className='text-primary-dark font-medium text-lg focus:outline-none cursor-pointer'
         >
-          <Typography tag='h3' text='+' className='text-primary-dark' />
+          <Typography tag='h3' text='+' className={`${colorClass} text-primary-dark`} />
         </button>
       </div>
       <div>
-        <Typography tag='h6' text={label} className='text-primary-dark' />
+        <Typography tag='h6' text={label} className={`${colorClass} text-primary-dark`} />
       </div>
     </div>
   );
