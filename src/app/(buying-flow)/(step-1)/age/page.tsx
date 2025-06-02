@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Typography from "@/components/atoms/typography/Typography";
 import DateOfBirthPicker from "@/components/molecules/datePicker/DatePicker";
 import BuyingFlowLayout from "@/components/templates/BuyingFlowLayout";
@@ -9,6 +9,7 @@ import Counter from "@/components/molecules/counterBuyingFlow/Counter";
 // import PetLocationForm from "@/components/organisms/petLocationForm";
 import { useRouter } from "next/navigation";
 import { usePetStore } from "@/zustand/store/petDataStore";
+import { startTransition } from "react";
 
 export default function Age() {
 
@@ -25,9 +26,9 @@ export default function Age() {
   const ageYear = selectedPet ? selectedPet.ageYear : 0;
   const dateOfBirthString = selectedPet ? selectedPet.dateOfBirth : "";
   
-  const [ dateOfBirth, setDateOfBirth ] = useState<string>(dateOfBirthString || "");
-  const [ month, setMonth ] = useState(ageMonth);
-  const [ year, setYear ] = useState(ageYear);
+  const [ dateOfBirth, setDateOfBirth ] = useState("");
+  const [ month, setMonth ] = useState(0);
+  const [ year, setYear ] = useState(0);
 
   console.log("Selected Pet in age page is", selectedPet);
 
@@ -39,19 +40,37 @@ export default function Age() {
           currentPetId,
           { dateOfBirth: dateOfBirth, ageMonth: 0, ageYear: 0 }
         );
-        router.push("/weight");
+        startTransition(() => {
+          router.push("/weight");
+        })
+        // router.push("/weight");
       } else {
         console.log("Please select a valid date of birth");
       }
     } else if (mode === "approx") {
       if (month && year && currentPetId) {
         setPetDetails(currentPetId, { dateOfBirth: "", ageMonth: month, ageYear: year });
-        router.push("/weight");
+        startTransition(() => {
+          router.push("/weight");
+        })
+        // router.push("/weight");
       } else {
         console.log("Please select a valid age");
       }    
     } 
   }
+
+  useEffect(() => {
+    if(ageMonth){
+      setMonth(ageMonth);
+    }
+    if(ageYear){
+      setYear(ageYear);
+    }
+    if(dateOfBirthString){
+      setDateOfBirth(dateOfBirthString);
+    }
+  },[ageMonth, ageYear, dateOfBirthString])
 
   return (
     <BuyingFlowLayout step={1}>
@@ -106,7 +125,10 @@ export default function Age() {
             className="gap-2.5  lg:ml-[-55px]"
             onClick={(e) => {
               e.preventDefault();
-              router.push("/breed");
+              startTransition(() => {
+                router.push("/breed");
+              })
+              // router.push("/breed");
             }}
           >
             <div className="w-5 relative">

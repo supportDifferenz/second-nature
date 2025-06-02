@@ -9,6 +9,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { usePetStore } from "@/zustand/store/petDataStore";
 import { useUserStore } from "@/zustand/store/userDataStore";
+import { startTransition } from "react";
 
 interface FormData {
   name: string;
@@ -95,7 +96,10 @@ export default function Page() {
         firstName: formData.name,
         emailAddress: formData.email
       });
-      router.push("/checkout");
+      startTransition(() => {
+        router.push("/checkout");
+      })
+      // router.push("/checkout");
     }
 
     // setTimeout(() => {
@@ -196,7 +200,10 @@ export default function Page() {
           className="gap-2.5  lg:ml-[-55px]"
           onClick={(e) => {
             e.preventDefault();
-            router.push("/choose-our-plans");
+            startTransition(() => {
+              router.push("/choose-our-plans");
+            })
+            // router.push("/choose-our-plans");
           }}
           // disabled={isSubmitting}
         >

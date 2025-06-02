@@ -30,20 +30,21 @@ interface SubscriptionData {
     municipality: string;
     useDifferentBilling: boolean;
   };
-  subscriptionDate: string;
-  promocode: string;
+  subscriptiondate: string;
+  promoCode: string;
   subscribeToOffers: boolean;
   pets: Array<{
+    petId: string;
     name: string;
     type: string;
     gender: string;
     location: string;
-    dateOfBirth: string;
-    ageMonth: number;
-    ageYear: number;
-    breed: string;
-    crossBreeds: string[];
-    activityLevel: string;
+    dateOfBirth?: string;
+    ageMonth?: number;
+    ageYear?: number;
+    breed?: string;
+    crossBreeds?: Array<string>;
+    activityLevel?: string;
     currentWeight: number;
     targetWeight: number;
     plan: {
@@ -52,7 +53,7 @@ interface SubscriptionData {
       price: number;
       protein: string;
       bowlSize: string;
-    };
+    }
   }>;
   payment: {
     method: string;

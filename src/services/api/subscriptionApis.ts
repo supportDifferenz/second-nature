@@ -41,7 +41,7 @@ export const createAddress = async (formData: {
       address: string;
       aptSuite: string;
       municipality: string;
-      useDifferentBilling: boolean;
+      useDifferentBilling?: boolean;
     }>;
     // isActive?: boolean;
     // isDeleted?: boolean;
@@ -220,20 +220,21 @@ export const createSubscription = async (formData: {
       municipality: string;
       useDifferentBilling: boolean;
     },
-    subscriptionDate: string;
-    promocode: string;
+    subscriptiondate: string;
+    promoCode: string;
     subscribeToOffers: boolean;
     pets: Array<{
+      petId: string;
       name: string;
       type: string;
       gender: string;
       location: string;
-      dateOfBirth: string;
-      ageMonth: number;
-      ageYear: number;
-      breed: string;
-      crossBreeds: Array<string>;
-      activityLevel: string;
+      dateOfBirth?: string;
+      ageMonth?: number;
+      ageYear?: number;
+      breed?: string;
+      crossBreeds?: Array<string>;
+      activityLevel?: string;
       currentWeight: number;
       targetWeight: number;
       plan: {
@@ -262,6 +263,101 @@ try {
     return response.data;
   } catch (error) {
       console.error("Error in create subscription", error);
+      throw error;
+  }
+};
+
+export const updateAddressById = async (
+  addressId: string,
+  subId: string,
+  type: string,
+  formData: {
+    shippingAddress: {
+      firstName: string;
+      lastName: string;
+      contactNo: string;
+      address: string;
+      aptSuite: string;
+      municipality: string;
+    },
+    billingAddress: {
+      firstName: string;
+      lastName: string;
+      contactNo: string;
+      address: string;
+      aptSuite: string;
+      municipality: string;
+      useDifferentBilling?: boolean;
+    }
+  }
+) => {
+  console.log("formData in update address by ID", formData);
+
+  try {
+    const response = await subscriptionAxiosInstance.put(
+      `/api/subscription/updateAddressById/${addressId}/${subId}/${type}`,
+      formData
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error in updating address details", error);
+    throw error;
+  }
+};
+
+export const getPetDetailsByUserId = async (userId: string) => {
+  try {
+      const response = await subscriptionAxiosInstance.get(
+        `/api/subscription/getPetByUserId/${userId}`,
+    );
+      return response.data;
+    } catch (error) {
+        console.error("Error in getting pet details", error);
+        throw error;
+    }
+};
+
+export const updatePetByPetId = async (
+  {
+    petId,
+    formData,
+  } : {
+    petId: string;
+    formData: {
+      user_id: string;
+      name: string;
+      type: string;
+      gender: string;
+      location: string;
+      dateOfBirth: string;
+      ageMonth: number;
+      ageYear: number;
+      breed: string;
+      crossBreeds: Array<string>;
+      activityLevel: string;
+      currentWeight: number;
+      targetWeight: number;
+      plan: {
+        type: string;
+        duration: string;
+        price: number;
+        protein: string;
+        bowlSize: string;
+      }
+    }
+  }
+) => {
+  
+console.log("formData", formData);
+
+try {
+    const response = await subscriptionAxiosInstance.put(
+      `/api/subscription/updatePetById/${petId}`,
+      formData
+  );
+    return response.data;
+  } catch (error) {
+      console.error("Error in updating pet details", error);
       throw error;
   }
 };

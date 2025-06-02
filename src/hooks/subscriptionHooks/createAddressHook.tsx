@@ -31,7 +31,7 @@ export const useCreateAddressHook = () => {
                 address: string;
                 aptSuite: string;
                 municipality: string;
-                useDifferentBilling: boolean;
+                useDifferentBilling?: boolean;
             }
         ];
       }) => createAddress({ 

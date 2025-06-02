@@ -1,12 +1,13 @@
 "use client";
 import Typography from "@/components/atoms/typography/Typography";
 import BuyingFlowLayout from "@/components/templates/BuyingFlowLayout";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PetActiveCard from "@/components/molecules/petActiveCard/PetActiveCard";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { usePetStore } from "@/zustand/store/petDataStore";
+import { startTransition } from "react";
 
 export default function Page() {
 
@@ -18,15 +19,24 @@ export default function Page() {
   const selectedPetName = selectedPet ? selectedPet.name : null;
   const activityLevel = selectedPet ? selectedPet.activityLevel : "";
 
-  const [selectedActivity, setSelectedActivity] = useState(activityLevel);
+  const [selectedActivity, setSelectedActivity] = useState("");
 
   const handleNext = (e: React.FormEvent) => {
     e.preventDefault();
     if (selectedActivity && currentPetId) {
       setPetDetails(currentPetId, { activityLevel: selectedActivity })
-      router.push("/choose-our-plans");
+      startTransition(() => {
+        router.push("/choose-our-plans");
+      })
+      // router.push("/choose-our-plans");
     }
   }
+
+  useEffect(() => {
+    if (activityLevel) {
+      setSelectedActivity(activityLevel);
+    }
+  },[activityLevel])
 
   console.log("Selected pet in activity page is", selectedPet);
 
@@ -69,7 +79,10 @@ export default function Page() {
           className="gap-2.5  lg:ml-[-55px]"
           onClick={(e) => {
             e.preventDefault();
-            router.push("/weight");
+            startTransition(() => {
+              router.push("/weight");
+            })
+            // router.push("/weight");
           }}
         >
           <div className="w-5 relative">

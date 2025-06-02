@@ -5,29 +5,59 @@ import PetInfoCard from "@/components/organism/petInfo/PetInfoCard";
 // import EditPetInfo from "@/components/pages/dashboard/editPetInformation/EditPetInfo";
 import DashboardLayout from "@/components/templates/DashboardLayout";
 import EditPetInfo from "@/components/pageSections/dashboard/editPetInformation/EditPetInfo";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useUserStore } from "@/zustand/store/userDataStore";
+import { useGetPetDetailsByUserId } from "@/hooks/subscriptionHooks/getPetDetailsByUserIdHook";
+
+type PetDetails = {
+  name?: string;
+  gender?: string;
+  ageYear?: number | string;
+  dateOfBirth?: string | null;
+  currentWeight?: string | number;
+};
 
 export default function Page() {
+
+  const { userDetails } = useUserStore();
+  const userId = userDetails?.userId;
+  const { data: petDetails, refetch: refetchPetDetails } = useGetPetDetailsByUserId(userId);
+  const [ isEditPetInfo, setIsEditPetInfo ] = useState(false);
+  const [ petData, setPetData ] = useState({});
+
+  console.log("Pet details in edit pet information page is", petDetails);
+
+  useEffect(() => {
+    refetchPetDetails();
+  }, [isEditPetInfo]);
+
   return (
     <DashboardLayout>
 
-          <Typography
-            tag="h5"
-            text="Edit Pet Information"
-            className="capitalize !font-normal mb-6 text-black"
-          />
+      <Typography
+        tag="h5"
+        text="Edit Pet Information"
+        className="capitalize !font-normal mb-6 text-black"
+      />
 
-          {/* personal information */}
-          <div className="flex flex-wrap gap-5 sm:gap-6">
-            <PetInfoCard />
-            <PetInfoCard />
-            <PetInfoCard />
+      {
+        isEditPetInfo
+        ? <EditPetInfo setIsEditPetInfo={setIsEditPetInfo} petData={petData} />
+        : <div>
+            {
+              petDetails
+              ? <div className="flex flex-wrap gap-5 sm:gap-6">
+                  {
+                    petDetails?.result?.map((pet: PetDetails, index: number) => (
+                      <PetInfoCard key={index} setIsEditPetInfo={setIsEditPetInfo} petDetails={pet} setPetData={setPetData} />
+                    ))
+                  }
+                </div>
+              : <div>Loading...</div>
+            }
           </div>
-
+      }
           
-          {/*if Edit Pet Information */}
-          <EditPetInfo />
-          
-        </DashboardLayout>
+    </DashboardLayout>
   );
 }

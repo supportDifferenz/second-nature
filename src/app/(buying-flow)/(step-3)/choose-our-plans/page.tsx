@@ -13,6 +13,8 @@ import { useGetAllPlan } from "@/hooks/subscriptionHooks/getAllPlanHook";
 import { useGetAllProtein } from "@/hooks/subscriptionHooks/getAllProteinHook";
 import { useGetAllBowl } from "@/hooks/subscriptionHooks/getAllBowlHook";
 import { useGetPriceHook } from "@/hooks/subscriptionHooks/getPriceHook";
+import PlanCardSkeleton from "@/components/skeltons/PlanCardSkelton";
+import { startTransition } from "react";
 
 const faqsData = [
   {
@@ -51,14 +53,16 @@ export default function Page() {
 
   const router = useRouter();
 
-  const { data: planData } = useGetAllPlan();
-  const { data: proteinData } = useGetAllProtein();
-  const { data: bowlData } = useGetAllBowl();
+  const { data: planData, isLoading: isPlanLoading } = useGetAllPlan();
+  const { data: proteinData, isLoading: isProteinLoading } = useGetAllProtein();
+  const { data: bowlData, isLoading: isBowlLoading } = useGetAllBowl();
   const { mutate } = useGetPriceHook();
   // const { data: plans, isLoading, error } = useGetAllPlan();
   console.log("PlanData", planData);
   console.log("ProteinData", proteinData);
   console.log("BowlData", bowlData);
+
+  const isLoading = isPlanLoading || isProteinLoading || isBowlLoading;
 
   const { pets, selectedPetIndex, noOfPets, setPetDetails, setSelectedPetIndex } = usePetStore();
   const selectedPet = selectedPetIndex !== null ? pets[selectedPetIndex] : null; // Handle null case for selectedPetIndex
@@ -67,12 +71,12 @@ export default function Page() {
   const planType = selectedPet ? selectedPet.planType : "Regular";
   const protein = selectedPet ? selectedPet.protein : "chicken";
   const bowlSize = selectedPet ? selectedPet.bowlSize : "full";
-  const [ selectedPlan, setSelectedPlan ] = useState<string>("");
+  const [ selectedPlan, setSelectedPlan ] = useState<string>("Regular");
   // const [ selectedPrice, setSelectedPrice ] = useState<number>(0);
   // const [ selectedProtein, setSelectedProtein ] = useState<string>("");
   // const [ selectedBowlSize, setSelectedBowlSize ] = useState<string>("");
-  const [ regularProtein, setRegularProtein ] = useState<string>("");
-  const [ regularBowlSize, setRegularBowlSize ] = useState<string>("");
+  const [ regularProtein, setRegularProtein ] = useState<string>("chicken");
+  const [ regularBowlSize, setRegularBowlSize ] = useState<string>("full");
   const [ trialProtein, setTrialProtein ] = useState<string>("");
   const [ trialBowlSize, setTrialBowlSize ] = useState<string>("");
   const [ regularPrice, setRegularPrice ] = useState<number>(0);
@@ -107,14 +111,17 @@ export default function Page() {
     if(planType === "Regular") {
       setSelectedPlan("Regular");
       setRegularProtein(protein || "");
+      setTrialProtein("");
       setRegularBowlSize(bowlSize || "");
+      setTrialBowlSize("");
     } else if(planType === "Trial") {
       setSelectedPlan("Trial");
+      setRegularProtein("");
       setTrialProtein(protein || "");
+      setRegularBowlSize("");
       setTrialBowlSize(bowlSize || "");
     }
   },[planType, protein, bowlSize])
-
 
   const handleNext = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -125,9 +132,15 @@ export default function Page() {
       setPetDetails(currentPetId, { planType: selectedPlan, planPrice: regularPrice, protein: regularProtein, bowlSize: regularBowlSize });
       if((selectedPetIndex ?? 0) < noOfPets - 1){
         setSelectedPetIndex((selectedPetIndex ?? 0) + 1);
-        router.push("/gender")
+        startTransition(() => {
+          router.push("/gender")
+        })
+        // router.push("/gender")
       } else {
-        router.push("/add-more-pets");
+        startTransition(() => {
+          router.push("/add-more-pets")
+        })
+        // router.push("/add-more-pets");
       }
       // router.push("/add-more-pets");
     } else if(selectedPlan === "Trial" && trialProtein && trialBowlSize && currentPetId) {
@@ -136,9 +149,15 @@ export default function Page() {
       setPetDetails(currentPetId, { planType: selectedPlan, planPrice: trialPrice, protein: trialProtein, bowlSize: trialBowlSize });
       if((selectedPetIndex ?? 0) < noOfPets - 1){
         setSelectedPetIndex((selectedPetIndex ?? 0) + 1);
-        router.push("/gender")
+        startTransition(() => {
+          router.push("/gender")
+        })
+        // router.push("/gender")
       } else {
-        router.push("/add-more-pets");
+        startTransition(() => {
+          router.push("/add-more-pets")
+        })
+        // router.push("/add-more-pets");
       }
       // router.push("/add-more-pets");
     }
@@ -232,97 +251,67 @@ export default function Page() {
           text="Choose Our Plan"
           className="text-center text-primary-dark"
         />
-        <div className="flex flex-col lg:flex-row justify-center gap-16 lg:gap-[var(--space-20-30)]">
-          {/* {plans.map((plan) => (
-            <PlanCard
-              key={plan.id}
-              {...plan}
-              isSelected={selectedPlan === plan.id}
-              onClick={() => setSelectedPlan(plan.id)}
-            />
-          ))} */}
+        <div className="">
+          
 
           {
-            planData?.result?.map((plan: { _id: string; plan_type: string; price: number }) => (
-              <PlanCard
-                key={plan._id}
-                heading={`${plan.plan_type} Plan`}
-                description={plan.plan_type === "Regular" ? "Auto-Renews Every 28 Days" : "One-Time Purchase for 7 Days"}
-                price={plan.plan_type === "Regular" ? regularPrice : trialPrice}
-                setPrice={(price) => {
-                  if (plan.plan_type === "Regular") {
-                    setRegularPrice(price);
-                    setTrialPrice(0);
-                    // setSelectedPrice(price);
-                  } else {
-                    setRegularPrice(0);
-                    setTrialPrice(price);
-                    // setSelectedPrice(price);
-                  }
-                }}
-                bgColour={plan.plan_type === "Regular" ? "bg-[#FDFFF0]" : "bg-white"}
-                offerBadge={plan.plan_type === "Regular" ? "Enjoy 25% Off Your First Month!" : ""}
-                isSelected={selectedPlan === plan.plan_type}
-                protein={plan.plan_type === "Regular" ? regularProtein : trialProtein}
-                setProtein={plan.plan_type === "Regular" ? setRegularProtein : setTrialProtein}
-                bowlSize={plan.plan_type === "Regular" ? regularBowlSize : trialBowlSize}
-                setBowlSize={plan.plan_type === "Regular" ? setRegularBowlSize : setTrialBowlSize}
-                isPriceLoading={plan.plan_type === "Regular" ? isRegularPriceLoading : isTrialPriceLoading}
-                onClick={() => {
-                  if (plan.plan_type !== selectedPlan) {
-                    if (plan.plan_type === "Regular"){
-                      setTrialProtein("");
-                      setTrialBowlSize("");
-                    } else if(plan.plan_type === "Trial"){
-                      setRegularProtein("");
-                      setRegularBowlSize("");
+            isLoading ? (
+              <div className="flex flex-col lg:flex-row justify-center gap-16 lg:gap-[var(--space-20-30)]">
+                <PlanCardSkeleton />
+                <PlanCardSkeleton />
+              </div>
+            ) : (
+                  <div className="flex flex-col lg:flex-row justify-center gap-16 lg:gap-[var(--space-20-30)]">
+                    {
+                      planData?.result?.map((plan: { _id: string; plan_type: string; price: number }) => (
+                        <PlanCard
+                          key={plan._id}
+                          heading={`${plan.plan_type} Plan`}
+                          description={plan.plan_type === "Regular" ? "Auto-Renews Every 28 Days" : "One-Time Purchase for 7 Days"}
+                          price={plan.plan_type === "Regular" ? regularPrice : trialPrice}
+                          setPrice={(price) => {
+                            if (plan.plan_type === "Regular") {
+                              setRegularPrice(price);
+                              setTrialPrice(0);
+                              // setSelectedPrice(price);
+                            } else {
+                              setRegularPrice(0);
+                              setTrialPrice(price);
+                              // setSelectedPrice(price);
+                            }
+                          }}
+                          bgColour={plan.plan_type === "Regular" ? "bg-[#FDFFF0]" : "bg-white"}
+                          offerBadge={plan.plan_type === "Regular" ? "Enjoy 25% Off Your First Month!" : ""}
+                          isSelected={selectedPlan === plan.plan_type}
+                          protein={plan.plan_type === "Regular" ? regularProtein : trialProtein}
+                          setProtein={plan.plan_type === "Regular" ? setRegularProtein : setTrialProtein}
+                          bowlSize={plan.plan_type === "Regular" ? regularBowlSize : trialBowlSize}
+                          setBowlSize={plan.plan_type === "Regular" ? setRegularBowlSize : setTrialBowlSize}
+                          isPriceLoading={plan.plan_type === "Regular" ? isRegularPriceLoading : isTrialPriceLoading}
+                          onClick={() => {
+                            if (plan.plan_type !== selectedPlan) {
+                              if (plan.plan_type === "Regular"){
+                                setTrialProtein("");
+                                setTrialBowlSize("");
+                              } else if(plan.plan_type === "Trial"){
+                                setRegularProtein("");
+                                setRegularBowlSize("");
+                              }
+                            }
+                            setSelectedPlan(plan.plan_type);
+                            // setSelectedPrice(plan.price);
+                          }}
+                          // onClick={() => {
+                          //   setSelectedPlan(plan.plan_type);
+                          //   setTrialProtein("");
+                          //   setTrialBowlSize("");
+                          // }}              
+                        />
+                      ))
                     }
-                  }
-                  setSelectedPlan(plan.plan_type);
-                  // setSelectedPrice(plan.price);
-                }}
-                // onClick={() => {
-                //   setSelectedPlan(plan.plan_type);
-                //   setTrialProtein("");
-                //   setTrialBowlSize("");
-                // }}              
-              />
-            ))
-          }
-
-          {/* <PlanCard
-            heading="Regular Plan"
-            description="Auto-Renews Every 28 Days"
-            price={400}
-            bgColour="bg-[#FDFFF0]"
-            offerBadge="Enjoy 25% Off Your First Month!"
-            isSelected={selectedPlan === "regular"}
-            protein={regularProtein}
-            setProtein={setRegularProtein}
-            bowlSize={regularBowlSize}
-            setBowlSize={setRegularBowlSize}
-            onClick={() => {
-              setSelectedPlan("regular");
-              setTrialProtein("");
-              setTrialBowlSize("");
-            }}
-          />
-          <PlanCard 
-            heading="Trail Plan"
-            description="One-Time Purchase for 7 Days"
-            price={100}
-            bgColour="bg-white"
-            isSelected={selectedPlan === "trial"}
-            protein={trialProtein}
-            setProtein={setTrialProtein}
-            bowlSize={trialBowlSize}
-            setBowlSize={setTrialBowlSize}
-            onClick={() => {
-              setSelectedPlan("trial");
-              setRegularProtein("");
-              setRegularBowlSize("");
-            }}
-          /> */}
+                  </div>
+                )
+      }
 
         </div>
         <Typography
@@ -342,7 +331,10 @@ export default function Page() {
           className="gap-2.5  lg:ml-[-55px]"
           onClick={(e) => {
             e.preventDefault();
-            router.push("/activity");
+            startTransition(() => {
+              router.push("/activity");
+            })
+            // router.push("/activity");
           }}
         >
           <div className="w-5 relative">

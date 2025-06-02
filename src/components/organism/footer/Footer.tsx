@@ -7,6 +7,7 @@ import Image from "next/image";
 import React from "react";
 import useAuthStore from "@/zustand/store/authDataStore";
 import { useRouter } from "next/navigation";
+import { startTransition } from "react";
 
 const Footer = () => {
 
@@ -23,7 +24,10 @@ const Footer = () => {
             className="w-(--space-200-240) mb-(--space-16-24)"
             onClick={(e) => {
               e.preventDefault();
-              router.push("/");
+              startTransition(() => {
+                router.push("/");
+              });
+              // router.push("/");
             }}
           >
             <Image
@@ -50,7 +54,10 @@ const Footer = () => {
                   variant={"outlinePrimaryBtn"}
                   className="text-secondary-1"
                   onClick={() => {
-                    router.push("/personal-information");
+                    startTransition(() => {
+                      router.push("/personal-information");
+                    })
+                    // router.push("/personal-information");
                   }}
                 >
                   Account
@@ -60,7 +67,10 @@ const Footer = () => {
                   variant={"outlinePrimaryBtn"}
                   className="text-secondary-1"
                   onClick={() => {
-                    router.push("/login");
+                    startTransition(() => {
+                      router.push("/login");
+                    })
+                    // router.push("/login");
                   }}
                 >
                   Log In
