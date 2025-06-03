@@ -126,6 +126,12 @@ const currentMealPlan: OrderHistoryCardPropsType = {
   hasInvoice: true,
 }
 
+const currentMealConfig = {
+  label: "CURRENT MEAL PLAN",
+  tagColor: "#2ECC71",
+  buttons: ["Downgrade to Half-Bowl", "Pause Plan", "Cancel"],
+}
+
 const breakpointColumnsObj = {
   default: 2,
   1150: 1,
@@ -168,6 +174,15 @@ export default function OrderHistory() {
         </ul>
       }
 
+      <div className="mb-6">
+        <OrderHistoryCard
+          {...currentMealPlan}
+          statusLabel={currentMealConfig.label}
+          statusColor={currentMealConfig.tagColor}
+          buttons={currentMealConfig.buttons}
+        />
+      </div>
+
       <Masonry
         breakpointCols={breakpointColumnsObj}
         className="flex gap-(--space-20-40) "
@@ -177,12 +192,6 @@ export default function OrderHistory() {
           const config = orderHistoryConfig[order.status];
           return (
             <div key={index}>
-              <OrderHistoryCard
-                {...currentMealPlan}
-                statusLabel={config.label}
-                statusColor={config.tagColor}
-                buttons={config.buttons}
-              />
               <OrderHistoryCard
                 {...order}
                 statusLabel={config.label}
