@@ -1,10 +1,13 @@
-import React from "react";
+import React,{ useState } from "react";
 import { OrderHistoryCardPropsType } from "@/components/types/type";
 import BadgeTitle from "@/components/atoms/badgeTitle/BadgeTitle";
 import Typography from "@/components/atoms/typography/Typography";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 // import Icon from "@/components/atoms/icon/Icon";
+import { ProteinChangePopup } from "@/components/pageSections/dashboard/orderHistory/ProteinChangePopup";
+import { DowngradePlanPopup } from "@/components/pageSections/dashboard/orderHistory/DowngradePlanPopup";
+import { CancelSubscriptionPopup } from "@/components/pageSections/dashboard/orderHistory/CancelSubscriptionPopup";
 
 const OrderHistoryCard: React.FC<
   OrderHistoryCardPropsType & {
@@ -34,6 +37,12 @@ const OrderHistoryCard: React.FC<
   buttons,
   status,
 }) => {
+
+  const [isProteinPopupOpen, setIsProteinPopupOpen] = useState(false);
+  const [isDowngradePopupOpen, setIsDowngradePopupOpen] = useState(false);
+  const [isCancelPopupOpen, setIsCancelPopupOpen] = useState(false);
+  const [currentProtein, setCurrentProtein] = useState("chicken");
+
   return (
     <div className="break-inside-avoid rounded-xl border border-[#E4E7D3] bg-[#FDFFF4] p-4 sm:p-6  h-fit relative space-y-6 max-w-[345px]">
       {/* status */}
@@ -124,6 +133,7 @@ const OrderHistoryCard: React.FC<
             <Button
               variant={"linkSecondary"}
               className="underline mt-2 whitespace-normal"
+              onClick={() => setIsProteinPopupOpen(true)}
             >
               Change protein for my next order
             </Button>
@@ -194,7 +204,11 @@ const OrderHistoryCard: React.FC<
       {status === "current" ? (
         <div className="grid grid-cols-2 gap-2 mt-4">
           <div className="col-span-2">
-            <Button className="w-full " size="md">
+            <Button 
+              className="w-full"
+              size="md"
+              onClick={() => setIsDowngradePopupOpen(true)}
+            >
               {buttons[0]} {/* Downgrade to Half-Bowl */}
             </Button>
           </div>
@@ -204,7 +218,11 @@ const OrderHistoryCard: React.FC<
             </Button>
           </div>
           <div className="col-span-1">
-            <Button className="w-full" size="md">
+            <Button 
+              className="w-full" 
+              size="md"
+              onClick={() => setIsCancelPopupOpen(true)}
+            >
               {buttons[2]} {/* Cancel */}
             </Button>
           </div>
@@ -218,6 +236,34 @@ const OrderHistoryCard: React.FC<
           ))}
         </div>
       )}
+
+      <ProteinChangePopup
+        isOpen={isProteinPopupOpen}
+        onClose={() => setIsProteinPopupOpen(false)}
+        currentSelection={currentProtein}
+        onSave={(protein) => {
+          setCurrentProtein(protein);
+          // API call to update protein
+        }}
+      />
+      
+      <DowngradePlanPopup
+        isOpen={isDowngradePopupOpen}
+        onClose={() => setIsDowngradePopupOpen(false)}
+        onConfirm={() => {
+          // API call to downgrade plan
+          setIsDowngradePopupOpen(false);
+        }}
+      />
+      
+      <CancelSubscriptionPopup
+        isOpen={isCancelPopupOpen}
+        onClose={() => setIsCancelPopupOpen(false)}
+        onCancel={(reason) => {
+          // API call to cancel with reason
+          console.log(`Cancellation reason: ${reason}`);
+        }}
+      />
     </div>
   );
 };
