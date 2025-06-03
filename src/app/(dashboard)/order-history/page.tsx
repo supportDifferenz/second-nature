@@ -1,6 +1,7 @@
 "use client";
 
-import React from "react";
+import React,{ useState } from "react";
+import Typography from "@/components/atoms/typography/Typography";
 import Masonry from "react-masonry-css";
 import { orderHistoryConfig } from "@/components/config/orderHistoryConfig";
 import OrderHistoryCard from "@/components/molecules/orderHistoryCard/OrderHistoryCard";
@@ -109,6 +110,22 @@ const orderHistoryData: OrderHistoryCardPropsType[] = [
   },
 ];
 
+const currentMealPlan: OrderHistoryCardPropsType = {
+  title: "Jackie's Meal",
+  subtitle: "FOUR WEEKS PLAN - FULL BOWL",
+  planDuration: "4 weeks",
+  itemName: "Chicken Bowl",
+  note: "Change protein for my next order",
+  noteDetails: "Order today get new protein from: 24 Apr 2025",
+  processingNote: "(We need 5 days to process your request)",
+  planStartDate: "01 Mar 2025",
+  planEndDate: "29 Mar 2025",
+  orderDate: "29 Mar 2025",
+  price: 300,
+  status: "current",
+  hasInvoice: true,
+}
+
 const breakpointColumnsObj = {
   default: 2,
   1150: 1,
@@ -116,13 +133,41 @@ const breakpointColumnsObj = {
 
 export default function OrderHistory() {
   
-  const [isProteinPopupOpen, setIsProteinPopupOpen] = React.useState(false);
-  const [isDowngradePlanOpen, setIsDowngradePlanOpen] = React.useState(false);
-  const [isCancelPopupOpen, setIsCancelPopupOpen] = React.useState(false);
-  const [, setIsPausePopupOpen] = React.useState(false);
-  const [currentProtein, setCurrentProtein] = React.useState("chicken");
+  const [isProteinPopupOpen, setIsProteinPopupOpen] = useState(false);
+  const [isDowngradePlanOpen, setIsDowngradePlanOpen] = useState(false);
+  const [isCancelPopupOpen, setIsCancelPopupOpen] = useState(false);
+  const [, setIsPausePopupOpen] = useState(false);
+  const [currentProtein, setCurrentProtein] = useState("chicken");
+
+  const petNames = ["Dog1","Dog2","Cat1"];
+
+  const selectedPetIndex = 0;
+
   return (
     <DashboardLayout>
+      <Typography
+        tag="h5"
+        text="Order History"
+        className="capitalize !font-normal mb-6 text-black"
+      />
+
+      {
+        <ul className="flex items-center gap-5 pb-[7dvh]">
+          {petNames.length > 0 ? (
+            petNames.map((name, index) => (
+              <li 
+                key={index} 
+                className={`font-bold underline ${ index === selectedPetIndex ? "text-[#944446] underline-[#944446]" : ""}`}
+              >
+                {name}
+              </li>
+            ))
+          ) : (
+            <li className="font-bold">No Subscriptions found</li>
+          )}     
+        </ul>
+      }
+
       <Masonry
         breakpointCols={breakpointColumnsObj}
         className="flex gap-(--space-20-40) "
@@ -132,6 +177,12 @@ export default function OrderHistory() {
           const config = orderHistoryConfig[order.status];
           return (
             <div key={index}>
+              <OrderHistoryCard
+                {...currentMealPlan}
+                statusLabel={config.label}
+                statusColor={config.tagColor}
+                buttons={config.buttons}
+              />
               <OrderHistoryCard
                 {...order}
                 statusLabel={config.label}

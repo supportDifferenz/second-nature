@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{ useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
@@ -25,7 +25,7 @@ export const CancelSubscriptionPopup: React.FC<CancelSubscriptionPopupProps> = (
     "Other reasons"
   ],
 }) => {
-  const [reason, setReason] = React.useState('');
+  const [reason, setReason] = useState("");
 
   const handleCancel = () => {
     if (reason) {
@@ -35,12 +35,11 @@ export const CancelSubscriptionPopup: React.FC<CancelSubscriptionPopupProps> = (
   };
 
   // Only reset if the reason isn't already ''
-  React.useEffect(() => {
+  useEffect(() => {
     if (isOpen && reason !== '') {
       setReason('');
     }
   }, [isOpen, reason]);
-  
 
   return (
     <Popup
@@ -52,7 +51,7 @@ export const CancelSubscriptionPopup: React.FC<CancelSubscriptionPopupProps> = (
         <div className="flex justify-center w-full px-7 border-t border-[#E4E7D3] py-7 pt-5 mt-5">
           <Button
             onClick={handleCancel}
-            disabled={!reason}
+            // disabled={!reason}
             className="w-full" size={"md"}>
             Submit
           </Button>
