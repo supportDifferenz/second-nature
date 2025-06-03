@@ -361,3 +361,39 @@ try {
       throw error;
   }
 };
+
+export const getSubscriptionDetailsByUserId = async (userId: string) => {
+  try {
+      const response = await subscriptionAxiosInstance.get(
+        `/api/subscription/getSubscriptionByUserId/${userId}`,
+    );
+      return response.data;
+    } catch (error) {
+        console.error("Error in getting subscription details", error);
+        throw error;
+    }
+};
+
+export const getSubscriptionDetailsBySubIdAndPetId = async (subId: string, petId: string) => {
+  try {
+      const response = await subscriptionAxiosInstance.get(
+        `/api/subscription/getSubscriptionById/${subId}/${petId}`,
+    );
+      return response.data;
+    } catch (error) {
+        console.error("Error in getting subscription details by pet ID and subscription ID", error);
+        throw error;
+    }
+};
+
+export const getInvoiceBySubIdAndPetId = async (subId: string, petId: string) => {
+  try {
+      const response = await subscriptionAxiosInstance.get(
+        `/api/subscription/invoiceGeneration/${subId}/${petId}`,
+    );
+      return response.data;
+    } catch (error) {
+        console.error("Error in getting invoice details by pet ID and subscription ID", error);
+        throw error;
+    }
+};
