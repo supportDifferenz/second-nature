@@ -34,7 +34,7 @@ export default function TransitionDiet() {
         <TransitionPlan />
         <FooterCTASection />
         <div className="py-(--space-120-180) overflow-x-hidden">
-          <div className="flex flex-col items-center justify-center  h-[175vw] sm:h-[31.2vw] w-[90vw] sm:w-full lg:max-w-[80.2vw] mx-auto relative">
+          <div className="flex flex-col items-center justify-center  h-[175vw] sm:h-[24.2vw] w-[90vw] sm:w-full lg:max-w-[80.2vw] mx-auto relative">
             <div className="bg-[#FBE5C7] sm:px-[3.12vw] py-[var(--space-52-86)] w-full rounded-t-2xl h-[80%]">
               {/* <PetFoodLookingTitle
                 className="text-secondary-1 px-12 sm:pl-0 sm:pr-[35%]"
@@ -44,11 +44,11 @@ export default function TransitionDiet() {
                 textColor="text-secondary-1"
                 textAlign="left"
               /> */}
-                  <div className=" w-fit flex flex-col px-[] items-center sm:items-start text-center sm:text-left mx-auto sm:mr-auto">
+                  <div className=" w-fit flex flex-col sm:flex-row px-[] items-center sm:items-start text-center sm:text-left mx-auto sm:mr-auto">
                     <Typography
                       tag="h2"
-                      className="capitalize text-secondary-1 "
-                      text="hjdgjsa"
+                      className="capitalize text-secondary-1 lg:w-[30%]"
+                      text="Begin Your Pet’s"
                       role="title"
                       ariaLabelledBy="title"
                     >
@@ -57,14 +57,14 @@ export default function TransitionDiet() {
                         role="title"
                         aria-labelledby="title"
                       >
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Meal Journey
                       </span>
                     </Typography>
 
                     <Typography
                       tag="h6"
-                      text="Lorem ipsum dolor sit amet consectetur adipisicing elit."
-                      className=""
+                      text="Lorem ipsum dolor sit amet consectetur. Diam pharetra id aliquet ultricies nullam. Condimentum est lacinia gravida cursus nulla. Lorem ipsum dolor sit amet consectetur. "
+                      className="w-[72%] sm:w-auto lg:w-[38%]"
                     />
                   </div>
               <Button
@@ -83,7 +83,7 @@ export default function TransitionDiet() {
                 Learn More
               </Button>
             </div>
-            <div className="absolute top-[38%] sm:top-[10%] left-[-5%] sm:left-[48%] inset-0 w-[99.5vw] sm:w-[26.3vw] h-[124vw] sm:h-[32.8vw]">
+            <div className="absolute top-[38%] sm:top-auto left-[-5%] sm:left-auto sm:right-0 inset-0 w-[99.5vw] sm:w-[26.3vw] h-[124vw] sm:h-[32.8vw]">
               <Image
                 alt=""
                 src={petFood.imageSrc}

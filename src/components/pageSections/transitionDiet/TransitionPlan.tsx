@@ -67,7 +67,7 @@ export default function TransitionPlan() {
             className="text-center w-[80%] lg:w-[57%]"
           />
         </div>
-        <div className="flex flex-wrap h-max-full items-center justify-center gap-5">
+        <div className="flex flex-wrap items-stretch justify-center gap-5">
           {planData.map((plan, index) => (
             <DayPlan
               key={index}
