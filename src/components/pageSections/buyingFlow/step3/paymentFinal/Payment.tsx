@@ -47,6 +47,8 @@ type CreatedPet = {
       price: number;
       protein: string;
       bowlSize: string;
+      isActive: boolean;
+      planStatus: string;
     };
   };
 
@@ -55,7 +57,7 @@ export default function Payment({ shippingFormData, billingFormData }: PaymentPr
   const router = useRouter();
 
   const { userDetails } = useUserStore();
-  const { pets, clearPetDetails } = usePetStore();
+  const { pets, clearPetDetails, createdPetsFromAPI, removeCreatedPetsFromAPI } = usePetStore();
   const { mutate: createPet } = useCreatePetHook();
   const { mutate: createSubscription } = useCreateSubscriptionHook();
 
@@ -376,9 +378,14 @@ export default function Payment({ shippingFormData, billingFormData }: PaymentPr
                   activityLevel: p.activityLevel,
                   currentWeight: p.currentWeight,
                   targetWeight: p.targetWeight,
-                  plan: p.plan,
+                  plan: {
+                    ...p.plan,
+                    isActive: true,
+                    planStatus: "string",
+                  },
                 };
                 createdPets.push(createdPet);
+                usePetStore.getState().addCreatedPetsFromAPI(createdPet);
                 resolve();
               },
               onError: (error) => {
@@ -392,6 +399,8 @@ export default function Payment({ shippingFormData, billingFormData }: PaymentPr
       }
 
       clearPetDetails();
+
+      console.log("Created pets from API", createdPetsFromAPI);
 
       // After all pets created, create subscription
       createSubscription(
@@ -424,18 +433,28 @@ export default function Payment({ shippingFormData, billingFormData }: PaymentPr
           subscriptiondate: new Date().toISOString().split("T")[0],
           promoCode: "",
           subscribeToOffers: true,
-          pets: createdPets,
+          pets: createdPets.length > 0 ? createdPets : createdPetsFromAPI.map(pet => ({
+            ...pet,
+            plan: {
+              ...pet.plan,
+              isActive: (pet.plan as { isActive?: boolean; planStatus?: string }).isActive ?? true,
+              planStatus: (pet.plan as { isActive?: boolean; planStatus?: string }).planStatus ?? "active",
+            }
+          })),
+          // pets: createdPets,
           payment: {
             method: "credit_card",
             cardNumber: "4111111111111111",
             cardExpiry: "12/25",
             cardCVV: "123",
           },
+          isDeleted: false,
         },
         {
           onSuccess: () => {
             console.log("Subscription created successfully");
             setIsSubscribing(false);
+            removeCreatedPetsFromAPI();
             router.push("/");
           },
           onError: (error) => {

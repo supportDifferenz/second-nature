@@ -243,7 +243,9 @@ export const createSubscription = async (formData: {
         price: number;
         protein: string;
         bowlSize: string;
-      }
+        isActive: boolean;
+        planStatus: string;
+      };
     }>;
     payment: {
       method: string;
@@ -251,6 +253,7 @@ export const createSubscription = async (formData: {
       cardExpiry: string;
       cardCVV: string;
     }
+    isDeleted: boolean;
 }) => {
   
 console.log("formData", formData);

@@ -53,6 +53,8 @@ interface SubscriptionData {
       price: number;
       protein: string;
       bowlSize: string;
+      isActive: boolean;
+      planStatus: string;
     }
   }>;
   payment: {
@@ -61,6 +63,7 @@ interface SubscriptionData {
     cardExpiry: string;
     cardCVV: string;
   };
+  isDeleted: boolean;
 }
 
 export const useCreateSubscriptionHook = () => {
