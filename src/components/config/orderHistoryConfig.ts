@@ -8,7 +8,7 @@ export const orderHistoryConfig: Record<
     buttons: string[];
   }
 > = {
-  current: {
+  active: {
     label: "CURRENT MEAL PLAN",
     tagColor: "#2ECC71",
     buttons: ["Downgrade to Half-Bowl", "Pause Plan", "Cancel"],
@@ -18,12 +18,12 @@ export const orderHistoryConfig: Record<
     tagColor: "#F39C12",
     buttons: ["Restart Plan"],
   },
-  cancelled: {
+  cancel: {
     label: "CANCELLATION DATE",
     tagColor: "#E63946",
     buttons: ["Restart Plan"],
   },
-  payment_failed: {
+  paymentfailed: {
     label: "PAYMENT FAILED",
     tagColor: "#E74C3C",
     buttons: ["Update Payment"],
@@ -33,12 +33,12 @@ export const orderHistoryConfig: Record<
     tagColor: "#BDBDBD",
     buttons: ["Reorder"],
   },
-  ending_soon: {
+  endingsoon: {
     label: "ENDING SOON",
     tagColor: "#F39C12",
     buttons: ["Reorder"],
   },
-  renewal_needed: {
+  renewalneeded: {
     label: "RENEWAL NEEDED",
     tagColor: "#D35400",
     buttons: ["Update Payment"],

@@ -47,8 +47,10 @@ type CreatedPet = {
       price: number;
       protein: string;
       bowlSize: string;
-      isActive: boolean;
       planStatus: string;
+      isChangedprotein: boolean;
+      isDowngrade: boolean;
+      isUpgrade: boolean;
     };
   };
 
@@ -380,8 +382,10 @@ export default function Payment({ shippingFormData, billingFormData }: PaymentPr
                   targetWeight: p.targetWeight,
                   plan: {
                     ...p.plan,
-                    isActive: true,
-                    planStatus: "string",
+                    planStatus: "active",
+                    isChangeprotein: false,
+                    isDowngrade: false,
+                    isPaused: false,       
                   },
                 };
                 createdPets.push(createdPet);
@@ -437,8 +441,10 @@ export default function Payment({ shippingFormData, billingFormData }: PaymentPr
             ...pet,
             plan: {
               ...pet.plan,
-              isActive: (pet.plan as { isActive?: boolean; planStatus?: string }).isActive ?? true,
-              planStatus: (pet.plan as { isActive?: boolean; planStatus?: string }).planStatus ?? "active",
+              planStatus: (pet.plan as { planStatus?: string }).planStatus ?? "active",
+              isChangedprotein: (pet.plan as { isChangedprotein?: boolean }).isChangedprotein ?? false,
+              isDowngrade: (pet.plan as { isDowngrade?: boolean }).isDowngrade ?? false,
+              isUpgrade: (pet.plan as { isUpgrade?: boolean }).isUpgrade ?? false
             }
           })),
           // pets: createdPets,

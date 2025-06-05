@@ -243,8 +243,10 @@ export const createSubscription = async (formData: {
         price: number;
         protein: string;
         bowlSize: string;
-        isActive: boolean;
         planStatus: string;
+        isChangedprotein: boolean;
+        isDowngrade: boolean;
+        isUpgrade: boolean;
       };
     }>;
     payment: {

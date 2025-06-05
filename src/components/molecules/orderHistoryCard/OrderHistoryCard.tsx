@@ -90,7 +90,7 @@ const OrderHistoryCard: React.FC<
         </div>
       )}
 
-      {status === "cancelled" && cancellationTitle && cancellationDate && (
+      {status === "cancel" && cancellationTitle && cancellationDate && (
         <div className=" rounded-lg border border-secondary-1 p-4 px-1 text-center relative ">
           <Typography
             tag="p"
@@ -201,7 +201,7 @@ const OrderHistoryCard: React.FC<
       </div>
 
       {/*nav button */}
-      {status === "current" ? (
+      {status === "active" ? (
         <div className="grid grid-cols-2 gap-2 mt-4">
           <div className="col-span-2">
             <Button 
