@@ -7,6 +7,7 @@ import { orderHistoryConfig } from "@/components/config/orderHistoryConfig";
 import OrderHistoryCard from "@/components/molecules/orderHistoryCard/OrderHistoryCard";
 import DashboardLayout from "@/components/templates/DashboardLayout";
 import { OrderHistoryCardPropsType } from "@/components/types/type";
+import { MealPlanStatus } from "@/components/types/type";
 import { Button } from "@/components/ui/button";
 import { ProteinChangePopup } from "@/components/pageSections/dashboard/orderHistory/ProteinChangePopup";
 import { DowngradePlanPopup } from "@/components/pageSections/dashboard/orderHistory/DowngradePlanPopup";
@@ -113,21 +114,122 @@ const orderHistoryData: OrderHistoryCardPropsType[] = [
   },
 ];
 
-const currentMealPlan: OrderHistoryCardPropsType = {
-  title: "Jackie's Meal",
-  subtitle: "FOUR WEEKS PLAN - FULL BOWL",
-  planDuration: "4 weeks",
-  itemName: "Chicken Bowl",
-  note: "Change protein for my next order",
-  noteDetails: "Order today get new protein from: 24 Apr 2025",
-  processingNote: "(We need 5 days to process your request)",
-  planStartDate: "01 Mar 2025",
-  planEndDate: "29 Mar 2025",
-  orderDate: "29 Mar 2025",
-  price: 300,
-  status: "current",
-  hasInvoice: true,
+const planCardData = {
+  regular: {
+    currentPlan: {
+      title: "Jackie's Meal",
+      subtitle: "FOUR WEEKS PLAN - FULL BOWL",
+      planDuration: "4 weeks",
+      itemName: "Chicken Bowl",
+      note: "Change protein for my next order",
+      noteDetails: "Order today get new protein from: 24 Apr 2025",
+      processingNote: "(We need 5 days to process your request)",
+      planStartDate: "01 Mar 2025",
+      planEndDate: "29 Mar 2025",
+      orderDate: "29 Mar 2025",
+      price: 300,
+      status: "current" as MealPlanStatus,
+      hasInvoice: true,
+    },
+    pausedPlan: {
+      title: "Jackie's Meal",
+      subtitle: "FOUR WEEKS PLAN - FULL BOWL",
+      planDuration: "4 weeks",
+      itemName: "Chicken Bowl",
+      planStartDate: "01 Mar 2025",
+      planEndDate: "29 Mar 2025",
+      orderDate: "29 Mar 2025",
+      price: 300,
+      status: "paused" as MealPlanStatus,
+      hasInvoice: true,
+      pausedDuration: "PAUSED DURATION",
+      pausedPeriod: "13 Mar 2025 to 20 Mar 2025",
+    },
+    cancelledPlan: {
+      title: "Jackie's Meal",
+      subtitle: "FOUR WEEKS PLAN - FULL BOWL",
+      planDuration: "4 weeks",
+      itemName: "Chicken Bowl",
+      planStartDate: "01 Mar 2025",
+      planEndDate: "29 Mar 2025",
+      orderDate: "29 Mar 2025",
+      price: 300,
+      status: "cancelled" as MealPlanStatus,
+      hasInvoice: true,
+      cancellationTitle: "CANCELLATION DATE",
+      cancellationDate: "13 Mar 2025",
+    },
+    paymentFailedPlan: {
+      title: "Jackie's Meal",
+      subtitle: "FOUR WEEKS PLAN - FULL BOWL",
+      planDuration: "4 weeks",
+      itemName: "Chicken Bowl",
+      note: "Change protein for my next order",
+      noteDetails: "Order today get new protein from: 24 Apr 2025",
+      processingNote: "(We need 5 days to process your request)",
+      planStartDate: "01 Mar 2025",
+      planEndDate: "29 Mar 2025",
+      orderDate: "29 Mar 2025",
+      price: 300,
+      status: "payment_failed" as MealPlanStatus,
+      hasInvoice: true,
+    },
+  },
+  trial: {
+    currentPlan: {
+      title: "Jackie's Meal",
+      subtitle: "ONE WEEK PLAN - FULL BOWL",
+      planDuration: "1 week",
+      itemName: "Chicken Bowl",
+      planStartDate: "01 Mar 2025",
+      planEndDate: "08 Mar 2025",
+      orderDate: "08 Mar 2025",
+      price: 100,
+      status: "current" as MealPlanStatus,
+      hasInvoice: true,
+    },
+    endingSoonPlan: {
+      title: "Jackie's Meal",
+      subtitle: "ONE WEEK PLAN - FULL BOWL",
+      planDuration: "1 week",
+      itemName: "Chicken Bowl",
+      planStartDate: "01 Mar 2025",
+      planEndDate: "08 Mar 2025",
+      orderDate: "08 Mar 2025",
+      price: 100,
+      status: "ending_soon" as MealPlanStatus,
+      hasInvoice: true,
+    },
+    expiredPlan: {
+      title: "Jackie's Meal",
+      subtitle: "ONE WEEK PLAN - FULL BOWL",
+      planDuration: "1 week",
+      itemName: "Chicken Bowl",
+      planStartDate: "01 Mar 2025",
+      planEndDate: "08 Mar 2025",
+      orderDate: "08 Mar 2025",
+      price: 100,
+      status: "expired" as MealPlanStatus,
+      hasInvoice: true,
+    },
+  }
 }
+
+// const currentMealPlan: OrderHistoryCardPropsType = {
+//   title: "Jackie's Meal",
+//   subtitle: "FOUR WEEKS PLAN - FULL BOWL",
+//   planDuration: "4 weeks",
+//   itemName: "Chicken Bowl",
+//   note: "Change protein for my next order",
+//   noteDetails: "Order today get new protein from: 24 Apr 2025",
+//   processingNote: "(We need 5 days to process your request)",
+//   planStartDate: "01 Mar 2025",
+//   planEndDate: "29 Mar 2025",
+//   orderDate: "29 Mar 2025",
+//   price: 300,
+//   status: "current",
+//   hasInvoice: true,
+// }
 
 const currentMealConfig = {
   label: "CURRENT MEAL PLAN",
@@ -238,7 +340,7 @@ export default function OrderHistory() {
 
       <div className="mb-6">
         <OrderHistoryCard
-          {...currentMealPlan}
+          {...planCardData.regular.currentPlan}
           statusLabel={currentMealConfig.label}
           statusColor={currentMealConfig.tagColor}
           buttons={currentMealConfig.buttons}

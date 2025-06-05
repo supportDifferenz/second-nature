@@ -31,6 +31,8 @@ export default function PasswordManagement() {
     confirmNewPassword: false,
   });
 
+  const [ successMessage, setSuccessMessage ] = useState("");
+
   const validateField = (name: string, value: string) => {
     switch (name) {
       case "currentPassword":
@@ -121,6 +123,8 @@ export default function PasswordManagement() {
               newPassword: false,
               confirmNewPassword: false,
             });
+
+            setSuccessMessage("Password updated successfully");
           },
           onError: (error) => {
             console.error("Password update failed", error);
@@ -201,6 +205,12 @@ export default function PasswordManagement() {
             {isError && (
               <div className="mt-4 text-red-500">
                 {error?.message || "Failed to update password"}
+              </div>
+            )}
+
+            {successMessage && (
+              <div className="mt-4 text-green-500">
+                {successMessage}
               </div>
             )}
           </form>
