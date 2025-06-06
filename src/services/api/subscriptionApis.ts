@@ -402,3 +402,145 @@ export const getInvoiceBySubIdAndPetId = async (subId: string, petId: string) =>
         throw error;
     }
 };
+
+export const changeProteinBySubIdPetIdUserId = async (
+  {
+    subId,
+    petId,
+    userId,
+    proteinType,
+  } : {
+    subId: string;
+    petId: string;
+    userId: string;
+    proteinType: string;
+  }
+) => {
+  
+
+try {
+    const response = await subscriptionAxiosInstance.put(
+      `/api/subscription/changeProtein/${subId}/${petId}/${userId}`,
+      proteinType
+  );
+    return response.data;
+  } catch (error) {
+      console.error("Error in change protein", error);
+      throw error;
+  }
+};
+
+export const upgradePlanBySubIdPetIdUserId = async (
+  {
+    subId,
+    petId,
+    userId,
+    upgradeReason,
+  } : {
+    subId: string;
+    petId: string;
+    userId: string;
+    upgradeReason: string;
+  }
+) => {
+  
+
+try {
+    const response = await subscriptionAxiosInstance.put(
+      `/api/subscription/upgradePlan/${subId}/${petId}/${userId}`,
+      upgradeReason
+  );
+    return response.data;
+  } catch (error) {
+      console.error("Error in upgrading plan", error);
+      throw error;
+  }
+};
+
+export const downgradePlanBySubIdPetIdUserId = async (
+  {
+    subId,
+    petId,
+    userId,
+    downgradeReason,
+  } : {
+    subId: string;
+    petId: string;
+    userId: string;
+    downgradeReason: string;
+  }
+) => {
+  
+
+try {
+    const response = await subscriptionAxiosInstance.put(
+      `/api/subscription/downgradePlan/${subId}/${petId}/${userId}`,
+      downgradeReason
+  );
+    return response.data;
+  } catch (error) {
+      console.error("Error in downgrading plan", error);
+      throw error;
+  }
+};
+
+export const pausePlanBySubIdPetIdUserId = async (
+  {
+    subId,
+    petId,
+    userId,
+    formData,
+  } : {
+    subId: string;
+    petId: string;
+    userId: string;
+    formData: {
+      pauseReason: string;
+      weeks: number;
+      startDate: string;
+      endDate: string;
+    }
+  }
+) => {
+  
+
+try {
+    const response = await subscriptionAxiosInstance.put(
+      `/api/subscription/pausePlan/${subId}/${petId}/${userId}`,
+      formData
+  );
+    return response.data;
+  } catch (error) {
+      console.error("Error in pause plan", error);
+      throw error;
+  }
+};
+
+export const cancelPlanBySubIdPetIdUserId = async (
+  {
+    subId,
+    petId,
+    userId,
+    formData,
+  } : {
+    subId: string;
+    petId: string;
+    userId: string;
+    formData: {
+      cancelReason: string;
+    }
+  }
+) => {
+  
+
+try {
+    const response = await subscriptionAxiosInstance.put(
+      `/api/subscription/cancelPlan/${subId}/${petId}/${userId}`,
+      formData
+  );
+    return response.data;
+  } catch (error) {
+      console.error("Error in updating pet details", error);
+      throw error;
+  }
+};
