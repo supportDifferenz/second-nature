@@ -14,6 +14,7 @@ const OrderHistoryCard: React.FC<
     statusLabel: string;
     statusColor: string;
     buttons: string[];
+    planType: "regular" | "trial";
   }
 > = ({
   title,
@@ -36,6 +37,7 @@ const OrderHistoryCard: React.FC<
   statusColor,
   buttons,
   status,
+  planType,
 }) => {
 
   const [isProteinPopupOpen, setIsProteinPopupOpen] = useState(false);
@@ -202,31 +204,41 @@ const OrderHistoryCard: React.FC<
 
       {/*nav button */}
       {status === "active" ? (
-        <div className="grid grid-cols-2 gap-2 mt-4">
-          <div className="col-span-2">
-            <Button 
-              className="w-full"
-              size="md"
-              onClick={() => setIsDowngradePopupOpen(true)}
-            >
-              {buttons[0]} {/* Downgrade to Half-Bowl */}
-            </Button>
+        planType === "regular" ? (
+          <div className="grid grid-cols-2 gap-2 mt-4">
+            <div className="col-span-2">
+              <Button 
+                className="w-full"
+                size="md"
+                onClick={() => setIsDowngradePopupOpen(true)}
+              >
+                {buttons[0]} {/* Downgrade to Half-Bowl */}
+              </Button>
+            </div>
+            <div className="col-span-1">
+              <Button className="w-full" size="md">
+                {buttons[1]} {/* Pause Plan */}
+              </Button>
+            </div>
+            <div className="col-span-1">
+              <Button 
+                className="w-full" 
+                size="md"
+                onClick={() => setIsCancelPopupOpen(true)}
+              >
+                {buttons[2]} {/* Cancel */}
+              </Button>
+            </div>
           </div>
-          <div className="col-span-1">
-            <Button className="w-full" size="md">
-              {buttons[1]} {/* Pause Plan */}
-            </Button>
+        ) : (
+          <div className="flex flex-col gap-2 mt-4">
+            {buttons.map((btn, i) => (
+              <Button key={i} className="w-full" size="md">
+                {btn}
+              </Button>
+            ))}
           </div>
-          <div className="col-span-1">
-            <Button 
-              className="w-full" 
-              size="md"
-              onClick={() => setIsCancelPopupOpen(true)}
-            >
-              {buttons[2]} {/* Cancel */}
-            </Button>
-          </div>
-        </div>
+        )
       ) : (
         <div className="flex flex-col gap-2 mt-4">
           {buttons.map((btn, i) => (

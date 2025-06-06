@@ -114,107 +114,6 @@ const orderHistoryData: OrderHistoryCardPropsType[] = [
   },
 ];
 
-const planCardData = {
-  regular: {
-    currentPlan: {
-      title: "Jackie's Meal",
-      subtitle: "FOUR WEEKS PLAN - FULL BOWL",
-      planDuration: "4 weeks",
-      itemName: "Chicken Bowl",
-      note: "Change protein for my next order",
-      noteDetails: "Order today get new protein from: 24 Apr 2025",
-      processingNote: "(We need 5 days to process your request)",
-      planStartDate: "01 Mar 2025",
-      planEndDate: "29 Mar 2025",
-      orderDate: "29 Mar 2025",
-      price: 300,
-      status: "active" as MealPlanStatus,
-      hasInvoice: true,
-    },
-    pausedPlan: {
-      title: "Jackie's Meal",
-      subtitle: "FOUR WEEKS PLAN - FULL BOWL",
-      planDuration: "4 weeks",
-      itemName: "Chicken Bowl",
-      planStartDate: "01 Mar 2025",
-      planEndDate: "29 Mar 2025",
-      orderDate: "29 Mar 2025",
-      price: 300,
-      status: "paused" as MealPlanStatus,
-      hasInvoice: true,
-      pausedDuration: "PAUSED DURATION",
-      pausedPeriod: "13 Mar 2025 to 20 Mar 2025",
-    },
-    cancelledPlan: {
-      title: "Jackie's Meal",
-      subtitle: "FOUR WEEKS PLAN - FULL BOWL",
-      planDuration: "4 weeks",
-      itemName: "Chicken Bowl",
-      planStartDate: "01 Mar 2025",
-      planEndDate: "29 Mar 2025",
-      orderDate: "29 Mar 2025",
-      price: 300,
-      status: "cancel" as MealPlanStatus,
-      hasInvoice: true,
-      cancellationTitle: "CANCELLATION DATE",
-      cancellationDate: "13 Mar 2025",
-    },
-    paymentFailedPlan: {
-      title: "Jackie's Meal",
-      subtitle: "FOUR WEEKS PLAN - FULL BOWL",
-      planDuration: "4 weeks",
-      itemName: "Chicken Bowl",
-      note: "Change protein for my next order",
-      noteDetails: "Order today get new protein from: 24 Apr 2025",
-      processingNote: "(We need 5 days to process your request)",
-      planStartDate: "01 Mar 2025",
-      planEndDate: "29 Mar 2025",
-      orderDate: "29 Mar 2025",
-      price: 300,
-      status: "paymentfailed" as MealPlanStatus,
-      hasInvoice: true,
-    },
-  },
-  trial: {
-    currentPlan: {
-      title: "Jackie's Meal",
-      subtitle: "ONE WEEK PLAN - FULL BOWL",
-      planDuration: "1 week",
-      itemName: "Chicken Bowl",
-      planStartDate: "01 Mar 2025",
-      planEndDate: "08 Mar 2025",
-      orderDate: "08 Mar 2025",
-      price: 100,
-      status: "active" as MealPlanStatus,
-      hasInvoice: true,
-    },
-    endingSoonPlan: {
-      title: "Jackie's Meal",
-      subtitle: "ONE WEEK PLAN - FULL BOWL",
-      planDuration: "1 week",
-      itemName: "Chicken Bowl",
-      planStartDate: "01 Mar 2025",
-      planEndDate: "08 Mar 2025",
-      orderDate: "08 Mar 2025",
-      price: 100,
-      status: "endingsoon" as MealPlanStatus,
-      hasInvoice: true,
-    },
-    expiredPlan: {
-      title: "Jackie's Meal",
-      subtitle: "ONE WEEK PLAN - FULL BOWL",
-      planDuration: "1 week",
-      itemName: "Chicken Bowl",
-      planStartDate: "01 Mar 2025",
-      planEndDate: "08 Mar 2025",
-      orderDate: "08 Mar 2025",
-      price: 100,
-      status: "expired" as MealPlanStatus,
-      hasInvoice: true,
-    },
-  }
-}
-
 // const currentMealPlan: OrderHistoryCardPropsType = {
 //   title: "Jackie's Meal",
 //   subtitle: "FOUR WEEKS PLAN - FULL BOWL",
@@ -231,11 +130,13 @@ const planCardData = {
 //   hasInvoice: true,
 // }
 
-const currentMealConfig = {
-  label: "CURRENT MEAL PLAN",
-  tagColor: "#2ECC71",
-  buttons: ["Downgrade to Half-Bowl", "Pause Plan", "Cancel"],
-}
+
+
+// const currentMealConfig = {
+//   label: "CURRENT MEAL PLAN",
+//   tagColor: "#2ECC71",
+//   buttons: ["Downgrade to Half-Bowl", "Pause Plan", "Cancel"],
+// }
 
 const breakpointColumnsObj = {
   default: 2,
@@ -259,6 +160,222 @@ export default function OrderHistory() {
   const { data: subscriptionDetails } = useGetSubscriptionDetailsByUserId(userId);
   const { data: subscriptionDetailsBySubIdAndPetId } = useGetSubscriptionDetailsBySubIdAndPetId(selectedPet?.subId ?? "", selectedPet?.petId ?? "");
   const { data: invoiceData } = useGetInvoiceBySubIdAndPetId(selectedPet?.subId ?? "", selectedPet?.petId ?? "");
+
+  const dataFromAPI = subscriptionDetailsBySubIdAndPetId?.result;
+  const planDataFromAPI = subscriptionDetailsBySubIdAndPetId?.result?.pets[0]?.plan;
+  const planStartDateFromAPI = dataFromAPI?.subscriptiondate;
+  let formattedStartDate = "DD MM YY";
+  let formattedEndDate = "DD MM YY";
+  if (planStartDateFromAPI) {
+
+    const [year, month, day] = planStartDateFromAPI.split("-");
+    const startDate = new Date(year, month - 1, day);
+    formattedStartDate = startDate.toLocaleDateString('en-GB', {
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric'
+    });
+
+    // Calculate end date (28 days later)
+    const endDate = new Date(startDate);
+    endDate.setDate(startDate.getDate() + 28);
+    formattedEndDate = endDate.toLocaleDateString('en-GB', {
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric'
+    });
+
+  } else {
+    // handle the case where planStartDateFromAPI is undefined
+    // for example, you can set a default value for formattedDate
+    formattedStartDate = 'Unknown';
+    formattedEndDate = 'Unknown';
+  }
+
+  const planCardData = {
+    regular: {
+      activePlan: {
+        title: `${dataFromAPI?.pets[0]?.name}'s Meal`,
+        // title: "Jackie's Meal",
+        subtitle: "FOUR WEEKS PLAN - FULL BOWL",
+        planDuration: "4 weeks",
+        itemName: `${dataFromAPI?.pets[0]?.plan.protein} Bowl`,
+        // itemName: "Chicken Bowl",
+        note: "Change protein for my next order",
+        noteDetails: "Order today get new protein from: 24 Apr 2025",
+        processingNote: "(We need 5 days to process your request)",
+        planStartDate: `${formattedStartDate}`,
+        // planStartDate: "01 Mar 2025",
+        planEndDate: `${formattedEndDate}`,
+        orderDate: "29 Mar 2025",
+        price: Number(dataFromAPI?.pets[0]?.plan.price),
+        // price: 300,
+        status: "active" as MealPlanStatus,
+        hasInvoice: true,
+      },
+      pausedPlan: {
+        title: `${dataFromAPI?.pets[0]?.name}'s Meal`,
+        // title: "Jackie's Meal",
+        subtitle: "FOUR WEEKS PLAN - FULL BOWL",
+        planDuration: "4 weeks",
+        itemName: `${dataFromAPI?.pets[0]?.plan.protein} Bowl`,
+        // itemName: "Chicken Bowl",
+        planStartDate: `${formattedStartDate}`,
+        // planStartDate: "01 Mar 2025",
+        planEndDate: `${formattedEndDate}`,
+        // planEndDate: "29 Mar 2025",
+        orderDate: "29 Mar 2025",
+        price: Number(dataFromAPI?.pets[0]?.plan.price),
+        // price: 300,
+        status: "paused" as MealPlanStatus,
+        hasInvoice: true,
+        pausedDuration: "PAUSED DURATION",
+        pausedPeriod: "13 Mar 2025 to 20 Mar 2025",
+      },
+      cancelledPlan: {
+        title: `${dataFromAPI?.pets[0]?.name}'s Meal`,
+        // title: "Jackie's Meal",
+        subtitle: "FOUR WEEKS PLAN - FULL BOWL",
+        planDuration: "4 weeks",
+        itemName: `${dataFromAPI?.pets[0]?.plan.protein} Bowl`,
+        // itemName: "Chicken Bowl",
+        planStartDate: `${formattedStartDate}`,
+        // planStartDate: "01 Mar 2025",
+        planEndDate: `${formattedEndDate}`,
+        // planEndDate: "29 Mar 2025",
+        orderDate: "29 Mar 2025",
+        price: Number(dataFromAPI?.pets[0]?.plan.price),
+        // price: 300,
+        status: "cancel" as MealPlanStatus,
+        hasInvoice: true,
+        cancellationTitle: "CANCELLATION DATE",
+        cancellationDate: "13 Mar 2025",
+      },
+      paymentFailedPlan: {
+        title: `${dataFromAPI?.pets[0]?.name}'s Meal`,
+        // title: "Jackie's Meal",
+        subtitle: "FOUR WEEKS PLAN - FULL BOWL",
+        planDuration: "4 weeks",
+        itemName: `${dataFromAPI?.pets[0]?.plan.protein} Bowl`,
+        // itemName: "Chicken Bowl",
+        note: "Change protein for my next order",
+        noteDetails: "Order today get new protein from: 24 Apr 2025",
+        processingNote: "(We need 5 days to process your request)",
+        planStartDate: `${formattedStartDate}`,
+        // planStartDate: "01 Mar 2025",
+        planEndDate: `${formattedEndDate}`,
+        // planEndDate: "29 Mar 2025",
+        orderDate: "29 Mar 2025",
+        price: Number(dataFromAPI?.pets[0]?.plan.price),
+        // price: 300,
+        status: "paymentfailed" as MealPlanStatus,
+        hasInvoice: true,
+      },
+    },
+    trial: {
+      activePlan: {
+        title: `${dataFromAPI?.pets[0]?.name}'s Meal`,
+        // title: "Jackie's Meal",
+        subtitle: "ONE WEEK PLAN - FULL BOWL",
+        planDuration: "1 week",
+        itemName: `${dataFromAPI?.pets[0]?.plan.protein} Bowl`,
+        // itemName: "Chicken Bowl",
+        planStartDate: `${formattedStartDate}`,
+        // planStartDate: "01 Mar 2025",
+        planEndDate: `${formattedEndDate}`,
+        // planEndDate: "08 Mar 2025",
+        orderDate: "08 Mar 2025",
+        price: Number(dataFromAPI?.pets[0]?.plan.price),
+        // price: 100,
+        status: "active" as MealPlanStatus,
+        hasInvoice: true,
+      },
+      endingSoonPlan: {
+        title: `${dataFromAPI?.pets[0]?.name}'s Meal`,
+        // title: "Jackie's Meal",
+        subtitle: "ONE WEEK PLAN - FULL BOWL",
+        planDuration: "1 week",
+        itemName: `${dataFromAPI?.pets[0]?.plan.protein} Bowl`,
+        // itemName: "Chicken Bowl",
+        planStartDate: `${formattedStartDate}`,
+        // planStartDate: "01 Mar 2025",
+        planEndDate: `${formattedEndDate}`,
+        // planEndDate: "08 Mar 2025",
+        orderDate: "08 Mar 2025",
+        price: Number(dataFromAPI?.pets[0]?.plan.price),
+        // price: 100,
+        status: "endingsoon" as MealPlanStatus,
+        hasInvoice: true,
+      },
+      expiredPlan: {
+        title: `${dataFromAPI?.pets[0]?.name}'s Meal`,
+        // title: "Jackie's Meal",
+        subtitle: "ONE WEEK PLAN - FULL BOWL",
+        planDuration: "1 week",
+        itemName: `${dataFromAPI?.pets[0]?.plan.protein} Bowl`,
+        // itemName: "Chicken Bowl",
+        planStartDate: `${formattedStartDate}`,
+        // planStartDate: "01 Mar 2025",
+        planEndDate: `${formattedEndDate}`,
+        // planEndDate: "08 Mar 2025",
+        orderDate: "08 Mar 2025",
+        price: Number(dataFromAPI?.pets[0]?.plan.price),
+        // price: 100,
+        status: "expired" as MealPlanStatus,
+        hasInvoice: true,
+      },
+    }
+  }
+
+  const mealConfig = {
+    regular: {
+      activeMealConfig: {
+        planType: "regular",
+        label: "CURRENT MEAL PLAN",
+        tagColor: "#2ECC71",
+        buttons: ["Downgrade to Half-Bowl", "Pause Plan", "Cancel"],
+      },
+      pausedMealConfig: {
+        planType: "regular",
+        label: "PAUSED PLAN",
+        tagColor: "#F39C12",
+        buttons: ["Restart Plan"],
+      },
+      cancelledMealConfig: {
+        planType: "regular",
+        label: "CANCELLATION DATE",
+        tagColor: "#E63946",
+        buttons: ["Restart Plan"],
+      },
+      paymentFailedMealConfig: {
+        planType: "regular",
+        label: "PAYMENT FAILED",
+        tagColor: "#E74C3C",
+        buttons: ["Update Payment"],
+      },
+    },
+    trial: {
+      activeMealConfig: {
+        planType: "trial",
+        label: "CURRENT MEAL PLAN",
+        tagColor: "#2ECC71",
+        buttons: []
+        // buttons: ["Downgrade to Half-Bowl", "Pause Plan", "Cancel"],
+      },
+      endingSoonMealConfig: {
+        planType: "trial",
+        label: "ENDING SOON",
+        tagColor: "#F39C12",
+        buttons: ["Reorder"],
+      },
+      expiredMealConfig: {
+        planType: "trial",
+        label: "EXPIRED PLAN",
+        tagColor: "#BDBDBD",
+        buttons: ["Reorder"],
+      },
+    }
+  }
 
   type Pet = { petId?: string; name?: string };
   type SubscriptionRecord = { _id: string; pets?: Pet[] };
@@ -307,6 +424,7 @@ export default function OrderHistory() {
   console.log("subscription Details in order history", subscriptionDetails);
   console.log("subscription Details By SubId And PetId in order history", subscriptionDetailsBySubIdAndPetId);
   console.log("invoice Data in order history", invoiceData);
+  console.log("Card data", subscriptionDetailsBySubIdAndPetId?.result);
 
   return (
     <DashboardLayout>
@@ -339,13 +457,81 @@ export default function OrderHistory() {
       }
 
       <div className="mb-6">
-        <OrderHistoryCard
-          {...planCardData.regular.currentPlan}
-          statusLabel={currentMealConfig.label}
-          statusColor={currentMealConfig.tagColor}
-          buttons={currentMealConfig.buttons}
-        />
+        {planDataFromAPI?.type === "Regular" && planDataFromAPI?.planStatus === "active" && (
+          <OrderHistoryCard
+            {...planCardData.regular.activePlan}
+            statusLabel={mealConfig.regular.activeMealConfig.label}
+            statusColor={mealConfig.regular.activeMealConfig.tagColor}
+            buttons={mealConfig.regular.activeMealConfig.buttons}
+            planType={mealConfig.regular.activeMealConfig.planType as "regular" | "trial"}
+            // dataFromAPI={dataFromAPI}
+          />
+        )}
+        {planDataFromAPI?.type === "Regular" && planDataFromAPI?.planStatus === "paused" && (
+          <OrderHistoryCard
+            {...planCardData.regular.pausedPlan}
+            statusLabel={mealConfig.regular.pausedMealConfig.label}
+            statusColor={mealConfig.regular.pausedMealConfig.tagColor}
+            buttons={mealConfig.regular.pausedMealConfig.buttons}
+            planType={mealConfig.regular.pausedMealConfig.planType as "regular" | "trial"}
+          />
+        )}
+        {planDataFromAPI?.type === "Regular" && planDataFromAPI?.planStatus === "cancel" && (
+          <OrderHistoryCard
+            {...planCardData.regular.cancelledPlan}
+            statusLabel={mealConfig.regular.cancelledMealConfig.label}
+            statusColor={mealConfig.regular.cancelledMealConfig.tagColor}
+            buttons={mealConfig.regular.cancelledMealConfig.buttons}
+            planType={mealConfig.regular.cancelledMealConfig.planType as "regular" | "trial"}
+          />
+        )}
+        {planDataFromAPI?.type === "Regular" && planDataFromAPI?.planStatus === "paymentfailed" && (
+          <OrderHistoryCard
+            {...planCardData.regular.paymentFailedPlan}
+            statusLabel={mealConfig.regular.paymentFailedMealConfig.label}
+            statusColor={mealConfig.regular.paymentFailedMealConfig.tagColor}
+            buttons={mealConfig.regular.paymentFailedMealConfig.buttons}
+            planType={mealConfig.regular.paymentFailedMealConfig.planType as "regular" | "trial"}
+          />
+        )}
+        {planDataFromAPI?.type === "Trial" && planDataFromAPI?.planStatus === "active" && (
+          <OrderHistoryCard
+            {...planCardData.trial.activePlan}
+            statusLabel={mealConfig.trial.activeMealConfig.label}
+            statusColor={mealConfig.trial.activeMealConfig.tagColor}
+            buttons={mealConfig.trial.activeMealConfig.buttons}
+            planType={mealConfig.trial.activeMealConfig.planType as "regular" | "trial"}
+          />
+        )}
+        {planDataFromAPI?.type === "Trial" && planDataFromAPI?.planStatus === "endingsoon" && (
+          <OrderHistoryCard
+            {...planCardData.trial.endingSoonPlan}
+            statusLabel={mealConfig.trial.endingSoonMealConfig.label}
+            statusColor={mealConfig.trial.endingSoonMealConfig.tagColor}
+            buttons={mealConfig.trial.endingSoonMealConfig.buttons}
+            planType={mealConfig.trial.endingSoonMealConfig.planType as "regular" | "trial"}
+          />
+        )}
+        {planDataFromAPI?.type === "Trial" && planDataFromAPI?.planStatus === "expired" && (
+          <OrderHistoryCard
+            {...planCardData.trial.expiredPlan}
+            statusLabel={mealConfig.trial.expiredMealConfig.label}
+            statusColor={mealConfig.trial.expiredMealConfig.tagColor}
+            buttons={mealConfig.trial.expiredMealConfig.buttons}
+            planType={mealConfig.trial.expiredMealConfig.planType as "regular" | "trial"}
+          />
+        )}
       </div>
+
+      {/* <div className="mb-6">
+        <OrderHistoryCard
+          {...planCardData.regular.activePlan}
+          statusLabel={mealConfig.regular.activeMealConfig.label}
+          statusColor={mealConfig.regular.activeMealConfig.tagColor}
+          buttons={mealConfig.regular.activeMealConfig.buttons}
+          planType={mealConfig.regular.activeMealConfig.planType as "regular" | "trial"}
+        />
+      </div> */}
 
       <Masonry
         breakpointCols={breakpointColumnsObj}
@@ -361,6 +547,7 @@ export default function OrderHistory() {
                 statusLabel={config.label}
                 statusColor={config.tagColor}
                 buttons={config.buttons}
+                planType={config.planType as "regular" | "trial"}
               />
             </div>
           );
