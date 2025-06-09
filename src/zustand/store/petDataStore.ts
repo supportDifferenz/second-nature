@@ -52,6 +52,7 @@ type PetStore = {
   currentPetId: string | null;
   selectedPetIndex: number | null;
   noOfPets: number;
+  createdPetsFromAPI: createdPetDetails[];
   
   setLocation: (location: string) => void;
   setCurrentPet: (petId: string) => void;
@@ -61,6 +62,8 @@ type PetStore = {
   setSelectedPetIndex: (index: number | null) => void;
   clearPetDetails: () => void;
   addCreatedPet: (pet: createdPetDetails) => void;
+  addCreatedPetsFromAPI: (pet: createdPetDetails) => void;
+  removeCreatedPetsFromAPI: () => void;
 };
 
 export const usePetStore = create<PetStore>()(
@@ -69,6 +72,7 @@ export const usePetStore = create<PetStore>()(
       location: "",
       pets: [],
       createdPets: [],
+      createdPetsFromAPI: [],
       currentPetId: null,
       selectedPetIndex: null,
       noOfPets: 0,
@@ -140,6 +144,15 @@ export const usePetStore = create<PetStore>()(
       addCreatedPet: (pet) => set((state) => ({
         createdPets: [...state.createdPets, pet],
       })),
+
+      addCreatedPetsFromAPI: (pet) => set((state) => ({
+        createdPetsFromAPI: [...state.createdPetsFromAPI, pet],
+      })),
+
+      removeCreatedPetsFromAPI: () => set({
+        createdPetsFromAPI: [],
+      }),
+
     }),
     {
       name: 'pet-store', // unique name for the storage key

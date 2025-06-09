@@ -3,16 +3,16 @@ import Image from "next/image";
 import React from "react";
 
 interface CardItemProps {
-  key: string;
+  // key: string;
   petName: string;
   planType: string;
   planPrice: number;
   protein: string;
 }
 
-export default function CardItem({ key, petName, planType, planPrice, protein }: CardItemProps) {
+export default function CardItem({ petName, planType, planPrice, protein }: CardItemProps) {
   return (
-    <div key={key} className="flex">
+    <div className="flex">
       <div className="w-[23.3vw] lg:w-[13.22vw] h-full">
         <Image
           src="/images/cart-cardboard.webp"
