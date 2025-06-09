@@ -30,7 +30,7 @@ export default function TransitionPlan() {
   return (
     <div
       style={{
-        background: "linear-gradient(to right, #F9FAF1 20%, #FFFFFF 100%)",
+        background: "linear-gradient(to bottom, #F9FAF1 20%, #FFFFFF 100%)",
       }}
       className="flex items-center justify-center flex-col gap-[var(--space-20-40)] pt-[var(--space-40-80)]"
     >

@@ -25,7 +25,12 @@ export default function HeroSection() {
   ];
   return (
     <section>
-      <HeroBanner banners={banners} align="right" bannerHeight="mainHero"  isCarousel />
+      <HeroBanner
+        banners={banners}
+        align="right"
+        isTitleHierarchyRegular={true}
+        hasButton
+      />
     </section>
   );
 }

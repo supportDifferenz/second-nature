@@ -16,13 +16,13 @@ export default function HeroSection() {
           bannerThemeColor: "#00683D",
           buttonText: "sign up today",
           buttonLink: "#",
-          paragraph: "lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ut erat nec enim facilisis efficitur. Donec euismod, nisi vel consectetur interdum, nisl nisi aliquet nunc, eget bibendum nunc nisl euismod nisi.",
+          paragraph: "Our step-by-step guide ensures a smooth adjustment, minimizing digestive upset and maximizing health benefits.",
           
         },
       ];
       return (
         <section>
-          <HeroBanner banners={banners}  bannerHeight="mainHero" hasButton={false} isCarousel />
+          <HeroBanner banners={banners}  bannerHeight="mainHero" hasButton={false} />
         </section>
       );
     }

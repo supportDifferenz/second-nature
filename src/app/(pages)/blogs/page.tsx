@@ -55,33 +55,37 @@ function Page() {
   };
   return (
     <MainLayout>
-      <div className="container mt-[var(--space-40-90)] mb-[var(--space-80-85)] flex flex-col items-center">
-        <Typography
-          tag="h2"
-          text="The curated home"
-          className="capitalize text-primary-dark text-center"
-        />
-        <Typography
-          tag="h2"
-          text="for the healthy pup"
-          className="capitalize highlight text-primary-dark text-center"
-        />
-        <Typography
-          tag="h6"
-          text="Find insights, guides and tips and tricks — all aiming to help your pup live longer."
-          className="text-secondary-1 text-center w-[80%] lg:w-[35vw]"
-        />
-      </div>
-
-      <div className="container grid grid-cols-1 sm:grid-cols-2 gap-[var(--space-60-100)] pt-[var(--space-80-85)] pb-[var(--space-122-176)]">
-        {blogData.map((blog, index) => (
-          <BlogListCard
-            key={index}
-            title={blog.title}
-            description={blog.description}
-            image={blog.image}
+      <div style={{
+        background: "linear-gradient(to bottom, #F9FAF1 20%, #FFFFFF 100%)",
+      }}>
+        <div className="container pt-14 sm:pt-12 mb-[var(--space-80-85)] flex flex-col items-center">
+          <Typography
+            tag="h2"
+            text="The curated home"
+            className="capitalize text-primary-dark text-center"
           />
-        ))}
+          <Typography
+            tag="h2"
+            text="for the healthy pup"
+            className="capitalize highlight text-primary-dark text-center"
+          />
+          <Typography
+            tag="h6"
+            text="Find insights, guides and tips and tricks — all aiming to help your pup live longer."
+            className="text-secondary-1 text-center w-[80%] lg:w-[35vw]"
+          />
+        </div>
+
+        <div className="container grid grid-cols-1 sm:grid-cols-2 gap-[var(--space-60-100)] pt-[var(--space-80-85)] pb-[var(--space-122-176)]">
+          {blogData.map((blog, index) => (
+            <BlogListCard
+              key={index}
+              title={blog.title}
+              description={blog.description}
+              image={blog.image}
+            />
+          ))}
+        </div>
       </div>
 
       <div className="flex flex-col sm:flex-row justify-between container pt-11 sm:pt-0 bg-[#EBEDE0] rounded-2xl">
