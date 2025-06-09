@@ -1,4 +1,4 @@
-import React,{ useState, useEffect } from "react";
+import React,{ useState } from "react";
 import { OrderHistoryCardPropsType } from "@/components/types/type";
 import BadgeTitle from "@/components/atoms/badgeTitle/BadgeTitle";
 import Typography from "@/components/atoms/typography/Typography";
@@ -8,7 +8,9 @@ import Image from "next/image";
 import { ProteinChangePopup } from "@/components/pageSections/dashboard/orderHistory/ProteinChangePopup";
 import { DowngradePlanPopup } from "@/components/pageSections/dashboard/orderHistory/DowngradePlanPopup";
 import { CancelSubscriptionPopup } from "@/components/pageSections/dashboard/orderHistory/CancelSubscriptionPopup";
-import { useChangeProtein } from "@/hooks/subscriptionHooks/changeProtein";
+import { useChangeProtein } from "@/hooks/subscriptionHooks/changeProteinHook";
+import { useDowngradePlan } from "@/hooks/subscriptionHooks/downgradePlanHook";
+import { useUpgradePlan } from "@/hooks/subscriptionHooks/upgradePlanHook";
 
 const OrderHistoryCard: React.FC<
   OrderHistoryCardPropsType & {
@@ -70,11 +72,15 @@ const OrderHistoryCard: React.FC<
   const [isCancelPopupOpen, setIsCancelPopupOpen] = useState(false);
   const [currentProtein, setCurrentProtein] = useState(protein);
   const [changeProteinError, setChangeProteinError] = useState("");
+  const [planChangeError, setPlanChangeError] = useState("");
+  const [planChangeReason, setPlanChangeReason] = useState("");
   // const [subIdFromProp, setSubIdFromProp] = useState("");
   // const [petIdFromProp, setPetIdFromProp] = useState("");
   // const [userIdFromProp, setUserIdFromProp] = useState("");
 
-  const { mutate: changeProtein, isPending: isChangeProteinPending } = useChangeProtein();  
+  const { mutate: changeProtein, isPending: isChangeProteinPending } = useChangeProtein();
+  const { mutate: downgradePlan } = useDowngradePlan();
+  const { mutate: upgradePlan } = useUpgradePlan();
 
   const handleChangeProtein = (subId: string, petId: string, userId: string, proteinType: string) => {
     changeProtein(
@@ -100,9 +106,63 @@ const OrderHistoryCard: React.FC<
     );
   }
 
-  useEffect(() => {
-    console.log('Current protein:', currentProtein);
-  }, [currentProtein]);
+  const handleDowngrade = () => {
+    // const downgradeReason = "User requested downgrade"; // Set your reason here or get from user input
+    if (subId && petId && userId) {
+      downgradePlan(
+        { 
+          subId, 
+          petId, 
+          userId,
+          downgradeReason: planChangeReason,
+        },
+        {
+          onSuccess: () => {
+            setIsDowngradePopupOpen(false);
+            setPlanChangeError("");
+          },
+          onError: (error) => {
+            if (error instanceof Error) {
+              setPlanChangeError(error.message || "Error in downgrade plan");
+            }
+          }
+        }
+      );
+    } else {
+      console.error("subId, petId, or userId is undefined");
+    }
+  }
+
+  const handleUpgrade = () => {
+    // const upgradeReason = "User requested upgrade"; // Set your reason here or get from user input
+    if (subId && petId && userId) {
+      upgradePlan(
+        { 
+          subId, 
+          petId, 
+          userId, 
+          upgradeReason: planChangeReason,
+        },
+        {
+          onSuccess: () => {
+            setIsDowngradePopupOpen(false);
+            setPlanChangeError("");
+          },
+          onError: (error) => {
+            if (error instanceof Error) {
+              setPlanChangeError(error.message || "Error in upgrade plan");
+            }
+          }
+        }
+      );
+    } else {
+      console.error("subId, petId, or userId is undefined");
+    }
+  }
+
+  // useEffect(() => {
+  //   console.log('Current protein:', currentProtein);
+  // }, [currentProtein]);
 
   console.log("Current protein in order history card", currentProtein);
   console.log("Protein in order history card", protein);
@@ -376,6 +436,15 @@ const OrderHistoryCard: React.FC<
           // API call to downgrade plan
           setIsDowngradePopupOpen(false);
         }}
+        bowlSize={bowlSize}
+        isDowngrade={buttonStatus?.isDowngrade}
+        isUpgrade={buttonStatus?.isUpgrade}
+        planStartDate={planStartDate}
+        planChangeError={planChangeError}
+        planChangeReason={planChangeReason}
+        setPlanChangeReason={setPlanChangeReason}
+        handleDowngrade={handleDowngrade}
+        handleUpgrade={handleUpgrade}
       />
       
       <CancelSubscriptionPopup

@@ -1,5 +1,5 @@
 // components/molecules/subscription/ProteinChangePopup.tsx
-import React from "react";
+import React,{ useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Popup } from "@/components/molecules/popupSkelton/popup";
 import Image from "next/image";
@@ -28,7 +28,8 @@ export const ProteinChangePopup: React.FC<ProteinChangePopupProps> = ({
   changeProteinError,
   isChangeProteinLoading,
 }) => {
-  const [selected, setSelected] = React.useState(currentSelection);
+
+  const [selected, setSelected] = useState(currentSelection);
 
   const proteinOptions: ProteinOption[] = [
     {
