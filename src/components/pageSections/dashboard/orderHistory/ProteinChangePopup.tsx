@@ -16,6 +16,8 @@ interface ProteinChangePopupProps {
   onClose: () => void;
   currentSelection?: string;
   onSave: (selection: string) => void;
+  changeProteinError?: string;
+  isChangeProteinLoading?: boolean;
 }
 
 export const ProteinChangePopup: React.FC<ProteinChangePopupProps> = ({
@@ -23,6 +25,8 @@ export const ProteinChangePopup: React.FC<ProteinChangePopupProps> = ({
   onClose,
   currentSelection = "chicken",
   onSave,
+  changeProteinError,
+  isChangeProteinLoading,
 }) => {
   const [selected, setSelected] = React.useState(currentSelection);
 
@@ -58,8 +62,13 @@ export const ProteinChangePopup: React.FC<ProteinChangePopupProps> = ({
       footer={
         <div className="flex justify-center w-full px-7 py-7 pt-5">
           <Button onClick={handleSave} className="w-fit " size={"md"}>
-            Update Protein
+            { isChangeProteinLoading ? "Updating..." : "Update Protein" }
+            {/* Update Protein */}
           </Button>
+          <Typography
+            tag="p"
+            text={changeProteinError ?? ""}
+            className="text-red-600 text-center mt-2"/>
         </div>
       }
     >

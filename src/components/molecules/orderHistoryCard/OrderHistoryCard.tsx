@@ -1,4 +1,4 @@
-import React,{ useState } from "react";
+import React,{ useState, useEffect } from "react";
 import { OrderHistoryCardPropsType } from "@/components/types/type";
 import BadgeTitle from "@/components/atoms/badgeTitle/BadgeTitle";
 import Typography from "@/components/atoms/typography/Typography";
@@ -8,6 +8,7 @@ import Image from "next/image";
 import { ProteinChangePopup } from "@/components/pageSections/dashboard/orderHistory/ProteinChangePopup";
 import { DowngradePlanPopup } from "@/components/pageSections/dashboard/orderHistory/DowngradePlanPopup";
 import { CancelSubscriptionPopup } from "@/components/pageSections/dashboard/orderHistory/CancelSubscriptionPopup";
+import { useChangeProtein } from "@/hooks/subscriptionHooks/changeProtein";
 
 const OrderHistoryCard: React.FC<
   OrderHistoryCardPropsType & {
@@ -17,6 +18,15 @@ const OrderHistoryCard: React.FC<
     planType: "regular" | "trial";
     invoiceData?: { filePath: string };
     bowlSize?: string;
+    buttonStatus?: {
+      isDowngrade: boolean;
+      isUpgrade: boolean;
+      isChangeprotein: boolean;
+    };
+    subId?: string;
+    petId?: string;
+    userId?: string;
+    protein?: string;
   }
 > = ({
   title,
@@ -42,12 +52,60 @@ const OrderHistoryCard: React.FC<
   planType,
   invoiceData,
   bowlSize,
+  buttonStatus,
+  protein,
+  subId,
+  petId,
+  userId,
 }) => {
+
+  const proteinImageSrc = protein === "lamb"
+    ? "/icons/card-lamb.svg"
+    : protein === "beef"
+    ? "/icons/card-beef.svg"
+    : "/icons/card-chicken.svg";
 
   const [isProteinPopupOpen, setIsProteinPopupOpen] = useState(false);
   const [isDowngradePopupOpen, setIsDowngradePopupOpen] = useState(false);
   const [isCancelPopupOpen, setIsCancelPopupOpen] = useState(false);
-  const [currentProtein, setCurrentProtein] = useState("chicken");
+  const [currentProtein, setCurrentProtein] = useState(protein);
+  const [changeProteinError, setChangeProteinError] = useState("");
+  // const [subIdFromProp, setSubIdFromProp] = useState("");
+  // const [petIdFromProp, setPetIdFromProp] = useState("");
+  // const [userIdFromProp, setUserIdFromProp] = useState("");
+
+  const { mutate: changeProtein, isPending: isChangeProteinPending } = useChangeProtein();  
+
+  const handleChangeProtein = (subId: string, petId: string, userId: string, proteinType: string) => {
+    changeProtein(
+      { 
+        subId,
+        petId, 
+        userId, 
+        proteinType
+      },
+      {
+        onSuccess: () => {
+          setCurrentProtein(protein);
+          setIsProteinPopupOpen(false);
+          setChangeProteinError("");
+        },
+        onError: (error) => {
+          setCurrentProtein(protein);
+          if (error instanceof Error) {
+            setChangeProteinError(error.message || "Error in protein change");
+          }
+        }
+      }
+    );
+  }
+
+  useEffect(() => {
+    console.log('Current protein:', currentProtein);
+  }, [currentProtein]);
+
+  console.log("Current protein in order history card", currentProtein);
+  console.log("Protein in order history card", protein);
 
   return (
     <div className="break-inside-avoid rounded-xl border border-[#E4E7D3] bg-[#FDFFF4] p-4 sm:p-6  h-fit relative space-y-6 max-w-[345px]">
@@ -123,8 +181,10 @@ const OrderHistoryCard: React.FC<
         <div className="flex justify-center items-center gap-1">
           <div className="w-7">
             <Image
-              src="icons/chicken-vector-icon.svg"
-              alt="Chicken"
+              src={proteinImageSrc}
+              // src="icons/chicken-vector-icon.svg"
+              alt={itemName}
+              // alt="Chicken"
               fill
               className="!static w-full object-contain"
             />
@@ -132,19 +192,31 @@ const OrderHistoryCard: React.FC<
           <Typography
             tag="h5"
             text={itemName}
-            className="text-sm font-semibold text-primary-dark"
+            className="text-sm font-semibold capitalize text-primary-dark"
           />
         </div>
 
         {note && (
           <>
-            <Button
-              variant={"linkSecondary"}
-              className="underline mt-2 whitespace-normal"
-              onClick={() => setIsProteinPopupOpen(true)}
-            >
-              Change protein for my next order
-            </Button>
+            {
+              buttonStatus?.isChangeprotein
+              ? (
+                  <Typography
+                    tag="p"
+                    text="Protein has been changed"
+                  />
+                )
+              : (
+                <Button
+                  variant={"linkSecondary"}
+                  className="underline mt-2 whitespace-normal"
+                  onClick={() => setIsProteinPopupOpen(true)}
+                >
+                  Change protein for my next order
+                </Button>
+              )
+            }
+            
             {/* {noteDetails && (
               <Typography
                 tag="p"
@@ -279,13 +351,22 @@ const OrderHistoryCard: React.FC<
       )}
 
       <ProteinChangePopup
+        key={currentProtein}
         isOpen={isProteinPopupOpen}
         onClose={() => setIsProteinPopupOpen(false)}
         currentSelection={currentProtein}
-        onSave={(protein) => {
-          setCurrentProtein(protein);
+        onSave={(proteinType) => {
+          setCurrentProtein(proteinType);
+          if (subId && petId && userId) {
+            handleChangeProtein(subId, petId, userId, proteinType);
+          } else {
+            console.error("subId, petId, or userId is undefined");
+            setChangeProteinError("subId, petId, or userId is undefined");
+          }
           // API call to update protein
         }}
+        changeProteinError={changeProteinError}
+        isChangeProteinLoading={isChangeProteinPending}
       />
       
       <DowngradePlanPopup
