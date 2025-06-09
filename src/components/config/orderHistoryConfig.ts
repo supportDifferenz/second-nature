@@ -6,42 +6,50 @@ export const orderHistoryConfig: Record<
     label: string;
     tagColor: string;
     buttons: string[];
+    planType?: "regular" | "trial";
   }
 > = {
-  current: {
+  active: {
     label: "CURRENT MEAL PLAN",
     tagColor: "#2ECC71",
     buttons: ["Downgrade to Half-Bowl", "Pause Plan", "Cancel"],
+    planType: "regular",
   },
   paused: {
     label: "PAUSED PLAN",
     tagColor: "#F39C12",
     buttons: ["Restart Plan"],
+    planType: "regular",
   },
-  cancelled: {
+  cancel: {
     label: "CANCELLATION DATE",
     tagColor: "#E63946",
     buttons: ["Restart Plan"],
+    planType: "regular",
   },
-  payment_failed: {
+  paymentfailed: {
     label: "PAYMENT FAILED",
     tagColor: "#E74C3C",
     buttons: ["Update Payment"],
+    planType: "regular",
   },
   expired: {
     label: "EXPIRED PLAN",
     tagColor: "#BDBDBD",
     buttons: ["Reorder"],
+    planType: "trial",
   },
-  ending_soon: {
+  endingsoon: {
     label: "ENDING SOON",
     tagColor: "#F39C12",
     buttons: ["Reorder"],
+    planType: "trial",
   },
-  renewal_needed: {
+  renewalneeded: {
     label: "RENEWAL NEEDED",
     tagColor: "#D35400",
     buttons: ["Update Payment"],
+    planType: "trial",
   },
 };
 

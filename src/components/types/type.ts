@@ -145,13 +145,13 @@ export default TypographyPropsType;
 
 
 export type MealPlanStatus =
-  | 'current'
+  | 'active'
   | 'paused'
-  | 'cancelled'
-  | 'payment_failed'
+  | 'cancel'
+  | 'paymentfailed'
   | 'expired'
-  | 'ending_soon'
-  | 'renewal_needed';
+  | 'endingsoon'
+  | 'renewalneeded';
 
 export interface OrderHistoryCardPropsType {
   title: string;
