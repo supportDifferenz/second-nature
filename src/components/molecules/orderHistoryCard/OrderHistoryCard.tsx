@@ -15,6 +15,8 @@ const OrderHistoryCard: React.FC<
     statusColor: string;
     buttons: string[];
     planType: "regular" | "trial";
+    invoiceData?: { filePath: string };
+    bowlSize?: string;
   }
 > = ({
   title,
@@ -26,7 +28,7 @@ const OrderHistoryCard: React.FC<
   // orderDate,
   price,
   note,
-  noteDetails,
+  // noteDetails,
   processingNote,
   hasInvoice,
   pausedDuration,
@@ -38,6 +40,8 @@ const OrderHistoryCard: React.FC<
   buttons,
   status,
   planType,
+  invoiceData,
+  bowlSize,
 }) => {
 
   const [isProteinPopupOpen, setIsProteinPopupOpen] = useState(false);
@@ -64,7 +68,8 @@ const OrderHistoryCard: React.FC<
         />
         {hasInvoice && (
           <Button variant={"nullBtn"} className="border mx-auto">
-            <div className="w-5">
+            <a href={invoiceData?.filePath} target="_blank" className="flex items-center">
+              <div className="w-5">
               <Image
                 src="/icons/download.svg"
                 alt="INVOICE"
@@ -72,7 +77,8 @@ const OrderHistoryCard: React.FC<
                 className="!static w-full object-contain"
               />
             </div>
-            invoice
+              invoice
+            </a>
           </Button>
         )}
       </div>
@@ -139,13 +145,13 @@ const OrderHistoryCard: React.FC<
             >
               Change protein for my next order
             </Button>
-            {noteDetails && (
+            {/* {noteDetails && (
               <Typography
                 tag="p"
                 text={noteDetails}
                 className="mt-2 subtitle3"
               />
-            )}
+            )} */}
             {processingNote && (
               <Typography
                 tag="p"
@@ -207,13 +213,36 @@ const OrderHistoryCard: React.FC<
         planType === "regular" ? (
           <div className="grid grid-cols-2 gap-2 mt-4">
             <div className="col-span-2">
-              <Button 
+              {/* <Button 
                 className="w-full"
                 size="md"
                 onClick={() => setIsDowngradePopupOpen(true)}
               >
-                {buttons[0]} {/* Downgrade to Half-Bowl */}
-              </Button>
+                {buttons[0]}
+              </Button> */}
+
+              {
+                bowlSize === "half"
+                ? (
+                  <Button 
+                    className="w-full"
+                    size="md"
+                    onClick={() => setIsDowngradePopupOpen(true)}
+                  >
+                    Upgrade to Full-Bowl
+                  </Button>
+                )
+                : (
+                  <Button 
+                    className="w-full"
+                    size="md"
+                    onClick={() => setIsDowngradePopupOpen(true)}
+                  >
+                    Downgrade to Half-Bowl
+                  </Button>
+                )
+              }
+              
             </div>
             <div className="col-span-1">
               <Button className="w-full" size="md">
