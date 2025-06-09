@@ -150,6 +150,7 @@ export default function OrderHistory() {
   const [isCancelPopupOpen, setIsCancelPopupOpen] = useState(false);
   const [, setIsPausePopupOpen] = useState(false);
   const [currentProtein, setCurrentProtein] = useState("chicken");
+  const [selectedPetIndex, setselectedPetIndex] = useState(0);
 
   // const [subId, setSubId] = useState<string>("");
   // const [petId, setPetId] = useState<string>("");
@@ -413,7 +414,7 @@ export default function OrderHistory() {
 
   // const petNames = ["Dog1","Dog2","Cat1"];
 
-  const selectedPetIndex = 0;
+  // const selectedPetIndex = 0;
 
   useEffect(() => {
     if (petInfoList.length > 0 && !selectedPet) {
@@ -421,10 +422,11 @@ export default function OrderHistory() {
     }
   }, [petInfoList, selectedPet]);
 
-  console.log("subscription Details in order history", subscriptionDetails);
-  console.log("subscription Details By SubId And PetId in order history", subscriptionDetailsBySubIdAndPetId);
-  console.log("invoice Data in order history", invoiceData);
+  console.log("Subscription Details in order history", subscriptionDetails);
+  console.log("Subscription Details By SubId And PetId in order history", subscriptionDetailsBySubIdAndPetId);
+  console.log("Invoice Data in order history", invoiceData);
   console.log("Card data", subscriptionDetailsBySubIdAndPetId?.result);
+  // console.log("Selected Pet in order history", selectedPet);
 
   return (
     <DashboardLayout>
@@ -440,10 +442,11 @@ export default function OrderHistory() {
             petInfoList.map((petData, index) => (
               <li 
                 key={index} 
-                className={`font-bold underline ${ index === selectedPetIndex ? "text-[#944446] underline-[#944446]" : ""}`}
+                className={`font-bold cursor-pointer underline ${ index === selectedPetIndex ? "text-[#944446] underline-[#944446]" : ""}`}
                 onClick={() => {
                   // setSubId(petData.subId);
                   // setPetId(petData.petId);
+                  setselectedPetIndex(index);
                   setSelectedPet(petData);
                 }}
               >
@@ -465,6 +468,13 @@ export default function OrderHistory() {
             buttons={mealConfig.regular.activeMealConfig.buttons}
             planType={mealConfig.regular.activeMealConfig.planType as "regular" | "trial"}
             // dataFromAPI={dataFromAPI}
+            invoiceData={invoiceData}
+            bowlSize={planDataFromAPI?.bowlSize}
+            buttonStatus={planDataFromAPI}
+            subId={selectedPet?.subId}
+            petId={selectedPet?.petId}
+            userId={userId}
+            protein={dataFromAPI?.pets[0]?.plan.protein}
           />
         )}
         {planDataFromAPI?.type === "Regular" && planDataFromAPI?.planStatus === "paused" && (

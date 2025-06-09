@@ -419,9 +419,9 @@ export const changeProteinBySubIdPetIdUserId = async (
   
 
 try {
-    const response = await subscriptionAxiosInstance.put(
+    const response = await subscriptionAxiosInstance.post(
       `/api/subscription/changeProtein/${subId}/${petId}/${userId}`,
-      proteinType
+      { "proteinType": proteinType }
   );
     return response.data;
   } catch (error) {
@@ -446,7 +446,7 @@ export const upgradePlanBySubIdPetIdUserId = async (
   
 
 try {
-    const response = await subscriptionAxiosInstance.put(
+    const response = await subscriptionAxiosInstance.post(
       `/api/subscription/upgradePlan/${subId}/${petId}/${userId}`,
       upgradeReason
   );
@@ -473,7 +473,7 @@ export const downgradePlanBySubIdPetIdUserId = async (
   
 
 try {
-    const response = await subscriptionAxiosInstance.put(
+    const response = await subscriptionAxiosInstance.post(
       `/api/subscription/downgradePlan/${subId}/${petId}/${userId}`,
       downgradeReason
   );
@@ -505,7 +505,7 @@ export const pausePlanBySubIdPetIdUserId = async (
   
 
 try {
-    const response = await subscriptionAxiosInstance.put(
+    const response = await subscriptionAxiosInstance.post(
       `/api/subscription/pausePlan/${subId}/${petId}/${userId}`,
       formData
   );
@@ -534,7 +534,7 @@ export const cancelPlanBySubIdPetIdUserId = async (
   
 
 try {
-    const response = await subscriptionAxiosInstance.put(
+    const response = await subscriptionAxiosInstance.post(
       `/api/subscription/cancelPlan/${subId}/${petId}/${userId}`,
       formData
   );
