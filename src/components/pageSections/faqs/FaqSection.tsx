@@ -27,16 +27,30 @@ const faqsData = [
     answer:
       "We offer a flexible meal subscription service that delivers fresh meals straight to your door. Choose your schedule, and we ensure your pet never runs out of nutritious food. You can pause, modify, or cancel anytime.",
   },
+  {
+    question: "How does the meal delivery and schedule work?",
+    answer:
+      "We offer a flexible meal subscription service that delivers fresh meals straight to your door. Choose your schedule, and we ensure your pet never runs out of nutritious food. You can pause, modify, or cancel anytime.",
+  },
+  {
+    question: "How does the meal delivery and schedule work?",
+    answer:
+      "We offer a flexible meal subscription service that delivers fresh meals straight to your door. Choose your schedule, and we ensure your pet never runs out of nutritious food. You can pause, modify, or cancel anytime.",
+  },
 ];
 
-export default function FaqSection() {
+interface FaqSectionProps {
+  onAskUsClick: () => void;
+}
+
+export default function FaqSection({ onAskUsClick }: FaqSectionProps) {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const scrollRight = () => {
     if (scrollContainerRef.current) {
       scrollContainerRef.current.scrollBy({
         left: 200, // Adjust scroll distance as needed
-        behavior: 'smooth'
+        behavior: "smooth",
       });
     }
   };
@@ -55,7 +69,7 @@ export default function FaqSection() {
 
             <div className="relative">
               {/* Scrollable container */}
-              <div 
+              <div
                 ref={scrollContainerRef}
                 className="flex flex-row sm:flex-col gap-[var(--space-10-15)] mt-[var(--space-34-42)] pr-11 sm:pr-0 overflow-x-auto scrollbar-hide"
               >
@@ -69,7 +83,7 @@ export default function FaqSection() {
                 <Button
                   size={"md"}
                   variant={"primaryBtnGrey"}
-                  className="w-fit text-white"
+                  className="w-fit  text-white"
                 >
                   Creating Your Plan
                 </Button>
@@ -93,16 +107,16 @@ export default function FaqSection() {
               <div className="absolute top-0 right-[-2px] h-full w-20 sm:hidden pointer-events-none">
                 {/* Gradient overlay */}
                 <div className="absolute inset-0 bg-gradient-to-l from-white via-white/80 to-transparent"></div>
-                
+
                 {/* Scroll button */}
                 <button
                   onClick={scrollRight}
                   className="absolute top-1/2 right-2 -translate-y-1/2 w-8 h-8 transition-shadow pointer-events-auto flex items-center justify-center"
                   aria-label="Scroll right"
                 >
-                  <Image 
-                    src="/icons/push-right.svg" 
-                    alt="Scroll right" 
+                  <Image
+                    src="/icons/push-right.svg"
+                    alt="Scroll right"
                     width={32}
                     height={32}
                   />
@@ -116,7 +130,9 @@ export default function FaqSection() {
                 text="Got a question we haven't answered,"
                 className="text-secondary-1"
               >
-                <Typography tag="span" text="Ask us" className="underline" />
+                <span onClick={onAskUsClick} className="cursor-pointer">
+                  <Typography tag="span" text="Ask us" className="underline" />
+                </span>
               </Typography>
             </div>
           </div>

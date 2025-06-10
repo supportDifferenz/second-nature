@@ -26,18 +26,6 @@ export default function Subscription() {
   return (
     <MainLayout>
       <HeroSection />
-      {/* <div className="py-(--space-50-99)">
-        <FeaturesItems />
-      </div>
-      <div className="bg-[linear-gradient(180deg,#F9FAF1_39.88%,#F5F5F5_100%)] pt-25">
-        <HowItWorks />
-        <div className="pt-(--space-120-180)">
-          <OurMealPlans />
-        </div>
-      </div>
-      <div className="mt-[var(--space-120-180)]">
-        <FaqSection />
-      </div> */}
       <div className="py-(--space-50-99) max-w-[90.65vw] lg:max-w-[80.2vw] mx-auto">
         <ReadyToServe />
       </div>
@@ -52,9 +40,9 @@ export default function Subscription() {
           }}
           caption="get started with us"
           captionColor="#fff"
-          title="Give Your Fur Baby"
-          subTitle="the Gift of Real Food Today!"
-          paragraph="Pets deserve better than processed kibble or canned food. Second Nature believes in nourishing your fur baby with fresh meals made from real, human-grade ingredients."
+          title="Start Feeding"
+          subTitle="Naturally Today!"
+          paragraph="Click below to explore our range and start your journey toward better pet nutrition today."
           paragraphColor="#FFFFFF"
           buttonText="Build your plan"
           buttonLink="/signup"

@@ -47,19 +47,19 @@ export default function Testimonials() {
           <div className="order-2 sm:order-1 flex flex-col sm:w-[30%] justify-center">
             <Typography
               tag="h5"
-              text="Switching to Second Nature's natural pet food was the best decision for my cat. Her coat is shinier, and her energy levels are amazing!"
+              text="My dog loves mealtime now! Knowing he’s getting natural, healthy food gives me so much peace of mind."
               className="text-center sm:text-start text-secondary-1 mb-[var(--space-10-20)]"
             />
             <Typography
               tag="h6"
-              text="Sarah . A"
+              text="Khalid M."
               className="text-center sm:text-start text-primary-dark  capitalize"
             />
-            <Typography tag="p" text="Happy cat mom in Doha" className="text-center sm:text-start" />
+            <Typography tag="p" text="Proud dog owner" className="text-center sm:text-start" />
           </div>
           <div className="order-1 sm:order-2 w-full sm:w-[60%]  relative">
             <Image
-              src="/images/testimony-1.webp"
+              src="/images/testimony-2.webp"
               fill
               alt="Dog image"
               className="!static w-full h-full object-cover object-center"
@@ -69,7 +69,7 @@ export default function Testimonials() {
         <div className="flex flex-col sm:flex-row  gap-[var(--space-20-60)] ">
           <div className="w-full sm:w-[60%]  relative">
             <Image
-              src="/images/testimony-1.webp"
+              src="/images/testimony-3.webp"
               fill
               alt="Dog image"
               className="!static w-full h-full object-cover object-center"
@@ -78,15 +78,15 @@ export default function Testimonials() {
           <div className="flex flex-col sm:w-[30%] justify-center">
             <Typography
               tag="h5"
-              text="Switching to Second Nature's natural pet food was the best decision for my cat. Her coat is shinier, and her energy levels are amazing!"
+              text="The transition was so easy, and my puppy absolutely adores the food. Thank you for bringing this to Qatar!"
               className="text-center sm:text-start text-secondary-1 mb-[var(--space-10-20)]"
             />
             <Typography
               tag="h6"
-              text="Sarah . A"
+              text="Leena R."
               className="text-center sm:text-start text-primary-dark  capitalize"
             />
-            <Typography tag="p" text="Happy cat mom in Doha" className="text-center sm:text-start" />
+            <Typography tag="p" text="First-time pet parent" className="text-center sm:text-start" />
           </div>
         </div>
       </div>

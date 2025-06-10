@@ -13,10 +13,12 @@ export default function HeroSection() {
           captionColor: "#00683D",
           title: "One Step at a Time",
           caption: "Transition Diet",
+          
           bannerThemeColor: "#00683D",
           buttonText: "sign up today",
           buttonLink: "#",
           paragraph: "Our step-by-step guide ensures a smooth adjustment, minimizing digestive upset and maximizing health benefits.",
+          paragraphColor: "#944446",
           
         },
       ];
