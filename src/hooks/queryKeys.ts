@@ -24,4 +24,5 @@ export const QUERY_KEYS = {
     CHANGE_PROTEIN: "changeProtein",
     UPGRADE_PLAN: "upgradePlan",
     DOWNGRADE_PLAN: "downgradePlan",
+    CANCEL_PLAN: "cancelPlan",
 }   
