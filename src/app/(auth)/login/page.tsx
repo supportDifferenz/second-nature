@@ -310,7 +310,16 @@ export default function Page() {
                 />
               )}
             </div>
-            <Typography tag="span" text="Forgot Password" className="underline" />
+            <div
+              className="!cursor-pointer"
+              onClick={() => startTransition(() => router.push("/reset-password"))}
+            >
+              <Typography 
+                tag="span" 
+                text="Forgot Password" 
+                className="underline"
+              />
+            </div>
             <Button
               size={"small"}
               variant={"primaryBtn"}

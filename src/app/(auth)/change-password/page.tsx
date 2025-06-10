@@ -40,7 +40,10 @@ export default function Page() {
           {!isLinkSent ? (
             <div>
               <div className="flex flex-col gap-2 sm:pr-7 pb-[var(--space-16-24)]">
-                <Input variant="roundedEdgeInput" placeholder="Account mail" />
+                <Input variant="roundedEdgeInput" placeholder="New Password" />
+              </div>
+              <div className="flex flex-col gap-2 sm:pr-7 pb-[var(--space-16-24)]">
+                <Input variant="roundedEdgeInput" placeholder="Repeat Password" />
               </div>
               <Button
                 size={"small"}
@@ -48,15 +51,22 @@ export default function Page() {
                 className="mx-auto sm:ml-0"
                 onClick={handleResetClick}
               >
-                Reset Password
+                Update Password
               </Button>
             </div>
           ) : (
-            <Typography
-              tag="p"
-              text="A reset password link has been sent to your email."
-              className=" lg:w-[66%]"
-            />
+            <>
+                <Typography
+                    tag="p"
+                    text="Password has been updated."
+                    className=" lg:w-[66%]"
+                />
+                <Typography
+                    tag="p"
+                    text="Please login again."
+                    className=" lg:w-[66%]"
+                />
+            </>
           )}
         </div>
         <div 
