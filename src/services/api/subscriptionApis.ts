@@ -540,7 +540,7 @@ try {
   );
     return response.data;
   } catch (error) {
-      console.error("Error in updating pet details", error);
+      console.error("Error in cancel plan", error);
       throw error;
   }
 };

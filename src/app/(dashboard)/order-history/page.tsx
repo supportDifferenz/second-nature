@@ -151,6 +151,7 @@ export default function OrderHistory() {
   const [, setIsPausePopupOpen] = useState(false);
   const [currentProtein, setCurrentProtein] = useState("chicken");
   const [selectedPetIndex, setselectedPetIndex] = useState(0);
+  // const [cancelReason, setCancelReason] = useState("");
 
   // const [subId, setSubId] = useState<string>("");
   // const [petId, setPetId] = useState<string>("");
@@ -599,8 +600,11 @@ export default function OrderHistory() {
         onClose={() => setIsCancelPopupOpen(false)}
         onCancel={(reason) => {
           // API call to cancel with reason
+          // setCancelReason(reason);
           console.log(`Cancellation reason: ${reason}`);
         }}
+        // cancelReason={cancelReason}
+        // setCancelReason={setCancelReason}
       />
 
       {/* <PauseDeliveriesPopup

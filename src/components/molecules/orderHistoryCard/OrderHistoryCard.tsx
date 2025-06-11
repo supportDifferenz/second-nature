@@ -74,6 +74,7 @@ const OrderHistoryCard: React.FC<
   const [changeProteinError, setChangeProteinError] = useState("");
   const [planChangeError, setPlanChangeError] = useState("");
   const [planChangeReason, setPlanChangeReason] = useState("");
+  const [cancelReason, setCancelReason] = useState("");
   // const [subIdFromProp, setSubIdFromProp] = useState("");
   // const [petIdFromProp, setPetIdFromProp] = useState("");
   // const [userIdFromProp, setUserIdFromProp] = useState("");
@@ -166,6 +167,7 @@ const OrderHistoryCard: React.FC<
 
   console.log("Current protein in order history card", currentProtein);
   console.log("Protein in order history card", protein);
+  console.log("Cancel reason in order history page", cancelReason);
 
   return (
     <div className="break-inside-avoid rounded-xl border border-[#E4E7D3] bg-[#FDFFF4] p-4 sm:p-6  h-fit relative space-y-6 max-w-[345px]">
@@ -452,6 +454,7 @@ const OrderHistoryCard: React.FC<
         onClose={() => setIsCancelPopupOpen(false)}
         onCancel={(reason) => {
           // API call to cancel with reason
+          setCancelReason(reason);
           console.log(`Cancellation reason: ${reason}`);
         }}
       />
