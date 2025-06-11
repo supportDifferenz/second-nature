@@ -11,6 +11,7 @@ import { CancelSubscriptionPopup } from "@/components/pageSections/dashboard/ord
 import { useChangeProtein } from "@/hooks/subscriptionHooks/changeProteinHook";
 import { useDowngradePlan } from "@/hooks/subscriptionHooks/downgradePlanHook";
 import { useUpgradePlan } from "@/hooks/subscriptionHooks/upgradePlanHook";
+import { useCancelPlan } from "@/hooks/subscriptionHooks/cancelPlanHook";
 
 const OrderHistoryCard: React.FC<
   OrderHistoryCardPropsType & {
@@ -82,6 +83,7 @@ const OrderHistoryCard: React.FC<
   const { mutate: changeProtein, isPending: isChangeProteinPending } = useChangeProtein();
   const { mutate: downgradePlan } = useDowngradePlan();
   const { mutate: upgradePlan } = useUpgradePlan();
+  const { mutate: cancelPlan } = useCancelPlan();
 
   const handleChangeProtein = (subId: string, petId: string, userId: string, proteinType: string) => {
     changeProtein(
@@ -158,6 +160,34 @@ const OrderHistoryCard: React.FC<
       );
     } else {
       console.error("subId, petId, or userId is undefined");
+    }
+  }
+
+  const handleCancel = () => {
+    if (subId && petId && userId) {
+      cancelPlan(
+        {
+          subId,
+          petId,
+          userId,
+          formData: {
+            cancelReason: cancelReason
+          }
+        },
+        {
+          onSuccess: () => {
+            setIsCancelPopupOpen(false);
+          },
+          onError: (error: unknown) => {
+            if (error instanceof Error) {
+              setPlanChangeError(error.message || "Error in cancel plan");
+            }
+          }
+        }
+      );
+    } else {
+      console.error("subId, petId, or userId is undefined");
+      setPlanChangeError("subId, petId, or userId is undefined");
     }
   }
 
@@ -455,6 +485,7 @@ const OrderHistoryCard: React.FC<
         onCancel={(reason) => {
           // API call to cancel with reason
           setCancelReason(reason);
+          handleCancel();
           console.log(`Cancellation reason: ${reason}`);
         }}
       />

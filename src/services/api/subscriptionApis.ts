@@ -544,3 +544,26 @@ try {
       throw error;
   }
 };
+
+export const restartPlanBySubIdPetIdUserId = async (
+  {
+    subId,
+    petId,
+    userId,
+  } : {
+    subId: string;
+    petId: string;
+    userId: string;
+  }
+) => {
+
+try {
+    const response = await subscriptionAxiosInstance.post(
+      `/api/subscription/restartPlan/${subId}/${petId}/${userId}`
+  );
+    return response.data;
+  } catch (error) {
+      console.error("Error in restart plan", error);
+      throw error;
+  }
+};
