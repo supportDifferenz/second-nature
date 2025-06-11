@@ -3,20 +3,52 @@ import Typography from "@/components/atoms/typography/Typography";
 import AuthLayout from "@/components/templates/AuthLayout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import React, { startTransition, useState } from "react";
+import React, { startTransition, useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { useForgotPassword } from "@/hooks/authHooks/forgotPasswordHook";
 
 export default function Page() {
 
   const router = useRouter();
+  const [emailId, setEmailId] = useState("");
+  
+  useEffect(() => {
+    // This runs only on client side after component mounts
+    const params = new URLSearchParams(window.location.search);
+    setEmailId(params.get('emailId') || "");
+  }, []);
 
-  // Add state to track whether the reset link has been sent
+  console.log("Email id from url", emailId);
+
+  const { mutate: forgotPassword } = useForgotPassword();
+
   const [isLinkSent, setIsLinkSent] = useState(false);
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmNewPassword, setConfirmNewPassword] = useState("");
+  const [forgotPasswordError, setForgotPasswordError] = useState("");
 
-  // Handle button click
   const handleResetClick = () => {
     setIsLinkSent(true);
-    // Here you would also add your actual reset password API call
+    forgotPassword(
+      {
+        formData: {
+          emailId: emailId,
+          newPassword: newPassword,
+          confirmNewPassword: confirmNewPassword
+        }
+      },
+      {
+        onSuccess: () => {
+          setIsLinkSent(true);
+          setForgotPasswordError("");
+        },
+        onError: (error) => {
+          setIsLinkSent(false);
+          setForgotPasswordError("Error in changing password");
+          console.log(error);
+        }
+      }
+    )
   };
 
   return (
@@ -26,7 +58,7 @@ export default function Page() {
           <div className="flex gap-2 pb-[var(--space-16-24)]">
             <Typography
               tag="h3"
-              text="Reset Your"
+              text="Change Your"
               className="font-bold text-primary-dark"
             />
             <Typography
@@ -40,10 +72,24 @@ export default function Page() {
           {!isLinkSent ? (
             <div>
               <div className="flex flex-col gap-2 sm:pr-7 pb-[var(--space-16-24)]">
-                <Input variant="roundedEdgeInput" placeholder="New Password" />
+                <Input
+                  type="password"
+                  name="password"
+                  value={newPassword}
+                  onChange={(e) => setNewPassword(e.target.value)}
+                  variant="roundedEdgeInput" 
+                  placeholder="New Password" 
+                />
               </div>
               <div className="flex flex-col gap-2 sm:pr-7 pb-[var(--space-16-24)]">
-                <Input variant="roundedEdgeInput" placeholder="Repeat Password" />
+                <Input
+                  type="password"
+                  name="password"
+                  value={confirmNewPassword}
+                  onChange={(e) => setConfirmNewPassword(e.target.value)}
+                  variant="roundedEdgeInput" 
+                  placeholder="Repeat Password" 
+                />
               </div>
               <Button
                 size={"small"}
@@ -53,6 +99,13 @@ export default function Page() {
               >
                 Update Password
               </Button>
+              {forgotPasswordError && (
+                <Typography
+                  tag="p"
+                  text={forgotPasswordError}
+                  className="text-red-600 mt-2"
+                />
+              )}
             </div>
           ) : (
             <>

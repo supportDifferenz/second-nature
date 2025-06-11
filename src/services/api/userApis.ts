@@ -96,3 +96,49 @@ export const changePassword = async ({
     throw error;
   }
 };
+
+export const sendEmailForPassword = async (
+  {
+    emailId,
+  } : {
+    emailId: string;
+  }
+) => {
+  
+
+try {
+    const response = await userAxiosInstance.post(
+      `/api/user/sendEmailforPassword`,
+      { emailId: emailId }
+  );
+    return response.data;
+  } catch (error) {
+      console.error("Error in sending email address for change password", error);
+      throw error;
+  }
+};
+
+export const forgotPassword = async (
+  {
+    formData,
+  } : {
+    formData: {
+      emailId: string;
+      newPassword: string;
+      confirmNewPassword: string;
+    }
+  }
+) => {
+  
+
+try {
+    const response = await userAxiosInstance.post(
+      `/api/user/forgotPassword`,
+      formData
+  );
+    return response.data;
+  } catch (error) {
+      console.error("Error in change password", error);
+      throw error;
+  }
+};
