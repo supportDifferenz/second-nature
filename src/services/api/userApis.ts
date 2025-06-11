@@ -123,7 +123,7 @@ export const forgotPassword = async (
     formData,
   } : {
     formData: {
-      emailId: string;
+      userId: string;
       newPassword: string;
       confirmNewPassword: string;
     }

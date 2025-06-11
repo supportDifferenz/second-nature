@@ -10,15 +10,15 @@ import { useForgotPassword } from "@/hooks/authHooks/forgotPasswordHook";
 export default function Page() {
 
   const router = useRouter();
-  const [emailId, setEmailId] = useState("");
+  const [userId, setUserId] = useState("");
   
   useEffect(() => {
     // This runs only on client side after component mounts
     const params = new URLSearchParams(window.location.search);
-    setEmailId(params.get('emailId') || "");
+    setUserId(params.get('emailId') || "");
   }, []);
 
-  console.log("Email id from url", emailId);
+  console.log("Email id from url", userId);
 
   const { mutate: forgotPassword } = useForgotPassword();
 
@@ -32,7 +32,7 @@ export default function Page() {
     forgotPassword(
       {
         formData: {
-          emailId: emailId,
+          userId: userId,
           newPassword: newPassword,
           confirmNewPassword: confirmNewPassword
         }

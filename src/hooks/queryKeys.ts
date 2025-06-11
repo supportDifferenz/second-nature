@@ -26,5 +26,6 @@ export const QUERY_KEYS = {
     DOWNGRADE_PLAN: "downgradePlan",
     CANCEL_PLAN: "cancelPlan",
     SEND_EMAIL_FOR_PASSWORD: "sendEmailForPassword",
-    FORGOT_PASSWORD: "forgotPassword"
+    FORGOT_PASSWORD: "forgotPassword",
+    RESTART_PLAN: "restartPlan",
 }   

@@ -10,7 +10,7 @@ export const useForgotPassword = () => {
             formData,
         } : {
             formData: {
-                emailId: string;
+                userId: string;
                 newPassword: string;
                 confirmNewPassword: string;
             }
