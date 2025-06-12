@@ -1,36 +1,67 @@
-import React from "react";
-import HeroBanner from "@/components/organism/heroBanner/HeroBanner";
+"use client";
 
-export default function HeroSection() {
-  const banners = [
-    {
-      id: "1",
-      image: {
-        web: "/images/how-to-feed-banner.webp",
-        tablet: "/images/how-to-feed-banner-mob.webp",
-        mobile: "/images/how-to-feed-banner-mob.webp",
-      },
-      caption: "introducing",
-      captionColor: "#424242",
-      title: "real food,",
-      halfTitle: "just as nature intended",
-      paragraph:
-        "freshly prepared and delivered to your door that fuels a life full of happy tails",
-      paragraphColor: "#424242",
-      buttonText: "know more",
-      buttonTextColor: "#944446",
-      buttonLink: "#",
-      bannerThemeColor: "#00683D",
-    },
-  ];
+import { useEffect, useState } from "react";
+import Image from "next/image";
+import { cn } from "@/lib/utils";
+import Typography from "@/components/atoms/typography/Typography";
+
+const bannerBaseClass = cn(
+  "relative flex  text-center items-center w-full min-h-[500px] h-[90dvh] sm:min-h-[400px] sm:h-[d50vh] lg:min-h-[520px] sm:h-[70dvh] lg:max-h-[1200px] bg-cover bg-center transition-all"
+);
+
+export default function StaticHeroBanner() {
+  const [imageSrc, setImageSrc] = useState("/images/how-to-feed-banner-mob.webp");
+
+  useEffect(() => {
+    const updateImage = () => {
+      const width = window.innerWidth;
+      if (width <= 575) {
+        setImageSrc("/images/how-to-feed-banner-mob.webp");
+      } else if (width <= 991) {
+        setImageSrc("/images/how-to-feed-banner-mob.webp");
+      } else {
+        setImageSrc("/images/how-to-feed-banner.webp");
+      }
+    };
+
+    updateImage(); // set on initial load
+    window.addEventListener("resize", updateImage); // update on resize
+
+    return () => window.removeEventListener("resize", updateImage);
+  }, []);
+
   return (
-    <section>
-      <HeroBanner
-        banners={banners}
-        align="right"
-        isTitleHierarchyRegular={true}
-        hasButton
-      />
-    </section>
+    <div className={bannerBaseClass} style={{ color: "#ffffff" }}>
+      {/* Background Image */}
+      <div className="h-full w-full  left-1/2 transform -translate-x-1/2 absolute top-0 z-[-1]">
+        <Image
+          src={imageSrc}
+          alt="Hero Banner"
+          className="!static inset-0 w-full !h-full object-cover object-center"
+          fill
+          priority
+        />
+      </div>
+
+      {/* Content */}
+      <div className="w-full mt-auto lg:mt-0 lg:ml-auto">
+        <div className=" lg:w-[50%] lg:ml-auto">
+          <Typography
+            tag="h4"
+            className="text-center lg:text-left text-primary-dark"
+            text="Feeding Your Pet"
+            role="caption"
+            ariaLabel="Feeding Your Pet"
+          />
+          <Typography
+            tag="h1"
+            className="capitalize highlight mb-20 lg:mb-0 text-center lg:text-left text-primary-dark"
+            text="the Natural Way"
+            role="heading"
+            ariaLabel="the Natural Way"
+          />
+        </div>
+      </div>
+    </div>
   );
 }
