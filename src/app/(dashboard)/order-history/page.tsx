@@ -181,7 +181,12 @@ export default function OrderHistory() {
 
     // Calculate end date (28 days later)
     const endDate = new Date(startDate);
-    endDate.setDate(startDate.getDate() + 28);
+    if(planDataFromAPI?.type === "Trial"){
+      endDate.setDate(startDate.getDate() + 7);
+    } else {
+      endDate.setDate(startDate.getDate() + 28);
+    }
+    // endDate.setDate(startDate.getDate() + 28);
     formattedEndDate = endDate.toLocaleDateString('en-GB', {
       day: 'numeric',
       month: 'short',
@@ -194,6 +199,8 @@ export default function OrderHistory() {
     formattedStartDate = 'Unknown';
     formattedEndDate = 'Unknown';
   }
+
+  console.log("Plan type in order history page is", planDataFromAPI?.type);
 
   const planCardData = {
     regular: {
