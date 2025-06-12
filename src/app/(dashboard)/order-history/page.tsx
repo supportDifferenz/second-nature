@@ -16,6 +16,7 @@ import { useUserStore } from "@/zustand/store/userDataStore";
 import { useGetSubscriptionDetailsByUserId } from "@/hooks/subscriptionHooks/getSubscriptionDetailsByUserIdHook";
 import { useGetSubscriptionDetailsBySubIdAndPetId } from "@/hooks/subscriptionHooks/getSubscriptionDetailsBySubIdAndPetId";
 import { useGetInvoiceBySubIdAndPetId } from "@/hooks/subscriptionHooks/getInvoiceDetailsBySubIdAndPetId";
+import OrderHistoryCardSkelton from "@/components/skeltons/OrderHistoryCardSkelton";
 
 const orderHistoryData: OrderHistoryCardPropsType[] = [
   {
@@ -150,6 +151,8 @@ export default function OrderHistory() {
   const [isCancelPopupOpen, setIsCancelPopupOpen] = useState(false);
   const [, setIsPausePopupOpen] = useState(false);
   const [currentProtein, setCurrentProtein] = useState("chicken");
+  const [selectedPetIndex, setselectedPetIndex] = useState(0);
+  // const [cancelReason, setCancelReason] = useState("");
 
   // const [subId, setSubId] = useState<string>("");
   // const [petId, setPetId] = useState<string>("");
@@ -413,7 +416,7 @@ export default function OrderHistory() {
 
   // const petNames = ["Dog1","Dog2","Cat1"];
 
-  const selectedPetIndex = 0;
+  // const selectedPetIndex = 0;
 
   useEffect(() => {
     if (petInfoList.length > 0 && !selectedPet) {
@@ -421,10 +424,11 @@ export default function OrderHistory() {
     }
   }, [petInfoList, selectedPet]);
 
-  console.log("subscription Details in order history", subscriptionDetails);
-  console.log("subscription Details By SubId And PetId in order history", subscriptionDetailsBySubIdAndPetId);
-  console.log("invoice Data in order history", invoiceData);
+  console.log("Subscription Details in order history", subscriptionDetails);
+  console.log("Subscription Details By SubId And PetId in order history", subscriptionDetailsBySubIdAndPetId);
+  console.log("Invoice Data in order history", invoiceData);
   console.log("Card data", subscriptionDetailsBySubIdAndPetId?.result);
+  // console.log("Selected Pet in order history", selectedPet);
 
   return (
     <DashboardLayout>
@@ -440,10 +444,11 @@ export default function OrderHistory() {
             petInfoList.map((petData, index) => (
               <li 
                 key={index} 
-                className={`font-bold underline ${ index === selectedPetIndex ? "text-[#944446] underline-[#944446]" : ""}`}
+                className={`font-bold cursor-pointer underline ${ index === selectedPetIndex ? "text-[#944446] underline-[#944446]" : ""}`}
                 onClick={() => {
                   // setSubId(petData.subId);
                   // setPetId(petData.petId);
+                  setselectedPetIndex(index);
                   setSelectedPet(petData);
                 }}
               >
@@ -457,70 +462,87 @@ export default function OrderHistory() {
       }
 
       <div className="mb-6">
-        {planDataFromAPI?.type === "Regular" && planDataFromAPI?.planStatus === "active" && (
-          <OrderHistoryCard
-            {...planCardData.regular.activePlan}
-            statusLabel={mealConfig.regular.activeMealConfig.label}
-            statusColor={mealConfig.regular.activeMealConfig.tagColor}
-            buttons={mealConfig.regular.activeMealConfig.buttons}
-            planType={mealConfig.regular.activeMealConfig.planType as "regular" | "trial"}
-            // dataFromAPI={dataFromAPI}
-          />
-        )}
-        {planDataFromAPI?.type === "Regular" && planDataFromAPI?.planStatus === "paused" && (
-          <OrderHistoryCard
-            {...planCardData.regular.pausedPlan}
-            statusLabel={mealConfig.regular.pausedMealConfig.label}
-            statusColor={mealConfig.regular.pausedMealConfig.tagColor}
-            buttons={mealConfig.regular.pausedMealConfig.buttons}
-            planType={mealConfig.regular.pausedMealConfig.planType as "regular" | "trial"}
-          />
-        )}
-        {planDataFromAPI?.type === "Regular" && planDataFromAPI?.planStatus === "cancel" && (
-          <OrderHistoryCard
-            {...planCardData.regular.cancelledPlan}
-            statusLabel={mealConfig.regular.cancelledMealConfig.label}
-            statusColor={mealConfig.regular.cancelledMealConfig.tagColor}
-            buttons={mealConfig.regular.cancelledMealConfig.buttons}
-            planType={mealConfig.regular.cancelledMealConfig.planType as "regular" | "trial"}
-          />
-        )}
-        {planDataFromAPI?.type === "Regular" && planDataFromAPI?.planStatus === "paymentfailed" && (
-          <OrderHistoryCard
-            {...planCardData.regular.paymentFailedPlan}
-            statusLabel={mealConfig.regular.paymentFailedMealConfig.label}
-            statusColor={mealConfig.regular.paymentFailedMealConfig.tagColor}
-            buttons={mealConfig.regular.paymentFailedMealConfig.buttons}
-            planType={mealConfig.regular.paymentFailedMealConfig.planType as "regular" | "trial"}
-          />
-        )}
-        {planDataFromAPI?.type === "Trial" && planDataFromAPI?.planStatus === "active" && (
-          <OrderHistoryCard
-            {...planCardData.trial.activePlan}
-            statusLabel={mealConfig.trial.activeMealConfig.label}
-            statusColor={mealConfig.trial.activeMealConfig.tagColor}
-            buttons={mealConfig.trial.activeMealConfig.buttons}
-            planType={mealConfig.trial.activeMealConfig.planType as "regular" | "trial"}
-          />
-        )}
-        {planDataFromAPI?.type === "Trial" && planDataFromAPI?.planStatus === "endingsoon" && (
-          <OrderHistoryCard
-            {...planCardData.trial.endingSoonPlan}
-            statusLabel={mealConfig.trial.endingSoonMealConfig.label}
-            statusColor={mealConfig.trial.endingSoonMealConfig.tagColor}
-            buttons={mealConfig.trial.endingSoonMealConfig.buttons}
-            planType={mealConfig.trial.endingSoonMealConfig.planType as "regular" | "trial"}
-          />
-        )}
-        {planDataFromAPI?.type === "Trial" && planDataFromAPI?.planStatus === "expired" && (
-          <OrderHistoryCard
-            {...planCardData.trial.expiredPlan}
-            statusLabel={mealConfig.trial.expiredMealConfig.label}
-            statusColor={mealConfig.trial.expiredMealConfig.tagColor}
-            buttons={mealConfig.trial.expiredMealConfig.buttons}
-            planType={mealConfig.trial.expiredMealConfig.planType as "regular" | "trial"}
-          />
-        )}
+        {
+          planDataFromAPI
+          ? (
+            <>
+              {planDataFromAPI?.type === "Regular" && planDataFromAPI?.planStatus === "active" && (
+                <OrderHistoryCard
+                  {...planCardData.regular.activePlan}
+                  statusLabel={mealConfig.regular.activeMealConfig.label}
+                  statusColor={mealConfig.regular.activeMealConfig.tagColor}
+                  buttons={mealConfig.regular.activeMealConfig.buttons}
+                  planType={mealConfig.regular.activeMealConfig.planType as "regular" | "trial"}
+                  // dataFromAPI={dataFromAPI}
+                  invoiceData={invoiceData}
+                  bowlSize={planDataFromAPI?.bowlSize}
+                  buttonStatus={planDataFromAPI}
+                  subId={selectedPet?.subId}
+                  petId={selectedPet?.petId}
+                  userId={userId}
+                  protein={dataFromAPI?.pets[0]?.plan.protein}
+                />
+              )}
+              {planDataFromAPI?.type === "Regular" && planDataFromAPI?.planStatus === "paused" && (
+                <OrderHistoryCard
+                  {...planCardData.regular.pausedPlan}
+                  statusLabel={mealConfig.regular.pausedMealConfig.label}
+                  statusColor={mealConfig.regular.pausedMealConfig.tagColor}
+                  buttons={mealConfig.regular.pausedMealConfig.buttons}
+                  planType={mealConfig.regular.pausedMealConfig.planType as "regular" | "trial"}
+                />
+              )}
+              {planDataFromAPI?.type === "Regular" && planDataFromAPI?.planStatus === "cancel" && (
+                <OrderHistoryCard
+                  {...planCardData.regular.cancelledPlan}
+                  statusLabel={mealConfig.regular.cancelledMealConfig.label}
+                  statusColor={mealConfig.regular.cancelledMealConfig.tagColor}
+                  buttons={mealConfig.regular.cancelledMealConfig.buttons}
+                  planType={mealConfig.regular.cancelledMealConfig.planType as "regular" | "trial"}
+                />
+              )}
+              {planDataFromAPI?.type === "Regular" && planDataFromAPI?.planStatus === "paymentfailed" && (
+                <OrderHistoryCard
+                  {...planCardData.regular.paymentFailedPlan}
+                  statusLabel={mealConfig.regular.paymentFailedMealConfig.label}
+                  statusColor={mealConfig.regular.paymentFailedMealConfig.tagColor}
+                  buttons={mealConfig.regular.paymentFailedMealConfig.buttons}
+                  planType={mealConfig.regular.paymentFailedMealConfig.planType as "regular" | "trial"}
+                />
+              )}
+              {planDataFromAPI?.type === "Trial" && planDataFromAPI?.planStatus === "active" && (
+                <OrderHistoryCard
+                  {...planCardData.trial.activePlan}
+                  statusLabel={mealConfig.trial.activeMealConfig.label}
+                  statusColor={mealConfig.trial.activeMealConfig.tagColor}
+                  buttons={mealConfig.trial.activeMealConfig.buttons}
+                  planType={mealConfig.trial.activeMealConfig.planType as "regular" | "trial"}
+                />
+              )}
+              {planDataFromAPI?.type === "Trial" && planDataFromAPI?.planStatus === "endingsoon" && (
+                <OrderHistoryCard
+                  {...planCardData.trial.endingSoonPlan}
+                  statusLabel={mealConfig.trial.endingSoonMealConfig.label}
+                  statusColor={mealConfig.trial.endingSoonMealConfig.tagColor}
+                  buttons={mealConfig.trial.endingSoonMealConfig.buttons}
+                  planType={mealConfig.trial.endingSoonMealConfig.planType as "regular" | "trial"}
+                />
+              )}
+              {planDataFromAPI?.type === "Trial" && planDataFromAPI?.planStatus === "expired" && (
+                <OrderHistoryCard
+                  {...planCardData.trial.expiredPlan}
+                  statusLabel={mealConfig.trial.expiredMealConfig.label}
+                  statusColor={mealConfig.trial.expiredMealConfig.tagColor}
+                  buttons={mealConfig.trial.expiredMealConfig.buttons}
+                  planType={mealConfig.trial.expiredMealConfig.planType as "regular" | "trial"}
+                />
+              )}
+            </>
+          )
+          : <div>
+              <OrderHistoryCardSkelton />
+            </div>
+        }
       </div>
 
       {/* <div className="mb-6">
@@ -589,8 +611,11 @@ export default function OrderHistory() {
         onClose={() => setIsCancelPopupOpen(false)}
         onCancel={(reason) => {
           // API call to cancel with reason
+          // setCancelReason(reason);
           console.log(`Cancellation reason: ${reason}`);
         }}
+        // cancelReason={cancelReason}
+        // setCancelReason={setCancelReason}
       />
 
       {/* <PauseDeliveriesPopup

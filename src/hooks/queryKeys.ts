@@ -21,4 +21,11 @@ export const QUERY_KEYS = {
     GET_SUBSCRIPTION_DETAILS_BY_USER_ID: "getSubscriptionDetailsByUserId",
     GET_SUBSCRIPTION_DETAILS_BY_SUB_ID_AND_PET_ID: "getSubscriptionDetailsBySubIdAndPetId",
     GET_INVOICE_BY_SUB_ID_AND_PET_ID: "getInvoiceBySubIdAndPetId",
+    CHANGE_PROTEIN: "changeProtein",
+    UPGRADE_PLAN: "upgradePlan",
+    DOWNGRADE_PLAN: "downgradePlan",
+    CANCEL_PLAN: "cancelPlan",
+    SEND_EMAIL_FOR_PASSWORD: "sendEmailForPassword",
+    FORGOT_PASSWORD: "forgotPassword",
+    RESTART_PLAN: "restartPlan",
 }   
