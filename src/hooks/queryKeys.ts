@@ -28,4 +28,5 @@ export const QUERY_KEYS = {
     SEND_EMAIL_FOR_PASSWORD: "sendEmailForPassword",
     FORGOT_PASSWORD: "forgotPassword",
     RESTART_PLAN: "restartPlan",
+    PAUSE_PLAN: "pausePlan",
 }   

@@ -229,24 +229,65 @@
 import { useState } from "react"
 import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover"
 import { Calendar } from "@/components/ui/calendar"
-import { startOfWeek, endOfWeek, format } from "date-fns"
+import { format, isBefore, isToday, isAfter, isSameDay } from "date-fns"
 
-export default function WeeklyRangeSelector() {
-  const [selectedDate, setSelectedDate] = useState<Date | undefined>()
-  const [weekRange, setWeekRange] = useState<{ from: Date; to: Date } | null>(null)
-  const [open, setOpen] = useState(false)
+export default function DayRangeSelector({
+  setDateRangeFromCalender,
+  setIsWeekSelected,
+}: {
+  setDateRangeFromCalender: (range: { from: Date; to: Date }) => void;
+  setIsWeekSelected: (selected: boolean) => void;
+}) {
+  const [selectionMode, setSelectionMode] = useState<'from' | 'to'>('from')
+  const [dateRange, setDateRange] = useState<{ from: Date; to: Date } | null>(null)
+  const [open, setOpen] = useState(false);
 
-  const handleSelect = (date: Date | undefined) => {
+  console.log("Date range weekly range selector:", dateRange)
+
+  const handleDateSelect = (date: Date | undefined) => {
+    setIsWeekSelected(false);
     if (!date) return
-    const from = startOfWeek(date, { weekStartsOn: 1 })
-    const to = endOfWeek(date, { weekStartsOn: 1 })
-    setSelectedDate(date)
-    setWeekRange({ from, to })
-    setOpen(false)
+
+    // Prevent selecting past dates (except today)
+    if (isBefore(date, new Date()) && !isToday(date)) {
+      return
+    }
+
+    if (selectionMode === 'from') {
+      const newFrom = date
+      const newTo = dateRange?.to && !isBefore(date, dateRange.to) 
+        ? date
+        : dateRange?.to || date
+      
+      setDateRange({
+        from: newFrom,
+        to: newTo
+      })
+      setDateRangeFromCalender({ 
+        from: newFrom, 
+        to: newTo 
+      })
+      setSelectionMode('to')
+    } else {
+      const newTo = date
+      const newFrom = dateRange?.from && isAfter(dateRange.from, date)
+        ? date
+        : dateRange?.from || date
+      
+      setDateRange({
+        from: newFrom,
+        to: newTo
+      })
+      setDateRangeFromCalender({
+        from: newFrom,
+        to: newTo
+      })
+      setOpen(false)
+    }
   }
 
   const renderDateBox = (date: Date | null, part: "day" | "month" | "year") => {
-    if (!date) return <div className="border border-r-0 w-full  last:border-r-[1px] border-[#944446] px-3 py-2 text-center">--</div>
+    if (!date) return <div className="border border-r-0 w-full last:border-r-[1px] border-[#944446] px-3 py-2 text-center">--</div>
     const value = {
       day: format(date, "dd"),
       month: format(date, "MM"),
@@ -261,40 +302,71 @@ export default function WeeklyRangeSelector() {
         <PopoverTrigger asChild>
           <div className="flex flex-col sm:flex-row cursor-pointer gap-4 sm:gap-8 select-none w-full">
             {/* FROM */}
-            <div className="flex flex-col items-start grow ">
+            <div 
+              className="flex flex-col items-start grow"
+              onClick={() => setSelectionMode('from')}
+            >
               <label className="mb-1 text-sm">From</label>
               <div className="flex w-full grow">
-                {renderDateBox(weekRange?.from ?? null, "day")}
-                {renderDateBox(weekRange?.from ?? null, "month")}
-                {renderDateBox(weekRange?.from ?? null, "year")}
+                {renderDateBox(dateRange?.from ?? null, "day")}
+                {renderDateBox(dateRange?.from ?? null, "month")}
+                {renderDateBox(dateRange?.from ?? null, "year")}
               </div>
             </div>
 
-
             {/* TO */}
-            <div className="flex flex-col items-start grow ">
+            <div 
+              className="flex flex-col items-start grow"
+              onClick={() => setSelectionMode('to')}
+            >
               <label className="mb-1 text-sm">To</label>
-              <div className="flex w-full ">
-                {renderDateBox(weekRange?.to ?? null, "day")}
-                {renderDateBox(weekRange?.to ?? null, "month")}
-                {renderDateBox(weekRange?.to ?? null, "year")}
+              <div className="flex w-full">
+                {renderDateBox(dateRange?.to ?? null, "day")}
+                {renderDateBox(dateRange?.to ?? null, "month")}
+                {renderDateBox(dateRange?.to ?? null, "year")}
               </div>
             </div>
           </div>
         </PopoverTrigger>
 
         <PopoverContent className="w-auto p-0 mt-2">
+          <div className="p-2 text-sm font-medium text-center">
+            {selectionMode === 'from' ? 'Select start date' : 'Select end date'}
+          </div>
           <Calendar
             mode="single"
-            selected={selectedDate}
-            onSelect={handleSelect}
-            weekStartsOn={1}
+            selected={selectionMode === 'from' ? dateRange?.from : dateRange?.to}
+            onSelect={handleDateSelect}
+            disabled={(date) => {
+              // Disable past dates except today
+              const isPastDate = isBefore(date, new Date()) && !isToday(date)
+              
+              // For 'to' date selection, disable dates before from date
+              if (selectionMode === 'to' && dateRange?.from) {
+                return isPastDate || isBefore(date, dateRange.from)
+              }
+              
+              return isPastDate
+            }}
             modifiers={{
-              selectedWeek: (date) =>
-                weekRange ? date >= weekRange.from && date <= weekRange.to : false
+              rangeStart: (date) => dateRange ? isSameDay(date, dateRange.from) : false,
+              rangeEnd: (date) => dateRange ? isSameDay(date, dateRange.to) : false,
+              inRange: (date) => {
+                if (!dateRange) return false
+                return date > dateRange.from && date < dateRange.to
+              },
+              today: isToday
             }}
             modifiersClassNames={{
-              selectedWeek: "bg-green-600 text-white"
+              rangeStart: "bg-blue-500 text-white",
+              rangeEnd: "bg-green-600 text-white",
+              inRange: "bg-green-600 text-white",
+              today: "border border-green-500"
+            }}
+            modifiersStyles={{
+              rangeStart: { borderRadius: '6px 0 0 6px' },
+              rangeEnd: { borderRadius: '0 6px 6px 0' },
+              inRange: { borderRadius: '0' }
             }}
           />
         </PopoverContent>

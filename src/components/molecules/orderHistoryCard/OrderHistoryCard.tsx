@@ -18,6 +18,9 @@ import { useGetSubscriptionDetailsByUserIdAndPetId } from "@/hooks/subscriptionH
 import { useCreateSubscriptionHook } from "@/hooks/subscriptionHooks/createSubscriptionHook";
 import { useGetInvoiceBySubIdAndPetId } from "@/hooks/subscriptionHooks/getInvoiceDetailsBySubIdAndPetId";
 import { useUserStore } from "@/zustand/store/userDataStore";
+import { PauseDeliveriesPopup } from "@/components/pageSections/dashboard/orderHistory/PauseDeliveriesPopup";
+import { format } from "date-fns";
+import { usePausePlan } from "@/hooks/subscriptionHooks/pausePlanHook";
 
 const OrderHistoryCard: React.FC<
   OrderHistoryCardPropsType & {
@@ -115,6 +118,7 @@ const OrderHistoryCard: React.FC<
   const [isProteinPopupOpen, setIsProteinPopupOpen] = useState(false);
   const [isDowngradePopupOpen, setIsDowngradePopupOpen] = useState(false);
   const [isCancelPopupOpen, setIsCancelPopupOpen] = useState(false);
+  const [isPausePopupOpen, setIsPausePopupOpen] = useState(false);
   const [currentProtein, setCurrentProtein] = useState(protein);
   const [changeProteinError, setChangeProteinError] = useState("");
   const [planChangeError, setPlanChangeError] = useState("");
@@ -122,6 +126,8 @@ const OrderHistoryCard: React.FC<
   const [cancelReason, setCancelReason] = useState("");
   const [restartPlanError, setRestartPlanError] = useState("");
   const [reOrderPlanError, setReOrderPlanError] = useState("");
+  const [pauseStartDate, setPauseStartDate] = useState("");
+  const [pauseEndDate, setPauseEndDate] = useState("");
   // const [subIdFromProp, setSubIdFromProp] = useState("");
   // const [petIdFromProp, setPetIdFromProp] = useState("");
   // const [userIdFromProp, setUserIdFromProp] = useState("");
@@ -132,6 +138,7 @@ const OrderHistoryCard: React.FC<
   const { mutate: cancelPlan } = useCancelPlan();
   const { mutate: restartPlan } = useRestartPlan();
   const { mutate: createSubscription } = useCreateSubscriptionHook();
+  const { mutate: pausePlan } = usePausePlan();
   const { data: invoiceDataFromAPI } = useGetInvoiceBySubIdAndPetId(subIdFromStore, petIdFromStore);
   
 
@@ -313,6 +320,36 @@ const OrderHistoryCard: React.FC<
         }
       }
     )
+  }
+
+  const handlePausePlan = () => {
+    if (subId && petId && userId) {
+      pausePlan(
+        {
+          subId,
+          petId,
+          userId,
+          formData: {
+            pauseReason: "User requested pause",
+            weeks: 0,
+            startDate: pauseStartDate,
+            endDate: pauseEndDate
+          }
+        },
+        {
+          onSuccess: () => {
+            // setPausePlanError("");
+            window.location.reload();
+          },
+          onError: (error: unknown) => {
+            // if (error instanceof Error) {
+            //   setPausePlanError(error.message || "Error in pause plan");
+            // }
+            console.log("Error in pause plan", error);
+          }
+        }
+      );
+    }
   }
 
   // useEffect(() => {
@@ -551,7 +588,11 @@ const OrderHistoryCard: React.FC<
               
             </div>
             <div className="col-span-1">
-              <Button className="w-full" size="md">
+              <Button 
+                className="w-full" 
+                size="md"
+                onClick={() => setIsPausePopupOpen(true)}
+              >
                 {buttons[1]} {/* Pause Plan */}
               </Button>
             </div>
@@ -664,6 +705,19 @@ const OrderHistoryCard: React.FC<
           setCancelReason(reason);
           handleCancel();
           console.log(`Cancellation reason: ${reason}`);
+        }}
+      />
+
+      <PauseDeliveriesPopup
+        isOpen={isPausePopupOpen}
+        onClose={() => setIsPausePopupOpen(false)}
+        onConfirm={(dateRange) => {
+          setPauseStartDate(format(dateRange.from, "dd MMM yyyy"));
+          setPauseEndDate(format(dateRange.to, "dd MMM yyyy"));
+          console.log(`Paused from ${format(dateRange.from, "dd MMM yyyy")} to ${format(dateRange.to, "dd MMM yyyy")}`);
+          console.log(`Paused from ${dateRange.from} to ${dateRange.to}`);
+          handlePausePlan();
+          setIsPausePopupOpen(false);
         }}
       />
     </div>

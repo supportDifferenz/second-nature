@@ -34,19 +34,28 @@ export const PauseDeliveriesPopup: React.FC<PauseDeliveriesPopupProps> = ({
   const [selectedOption, setSelectedOption] = useState<WeekOption>("1week");
   const today = new Date();
 
+  const [isWeekSelected, setIsWeekSelected] = useState(true);
   const [dateRange, setDateRange] = useState<DateRange>({
     from: initialRange?.from || startOfWeek(today, { weekStartsOn: 1 }),
     to: initialRange?.to || endOfWeek(addWeeks(today, 1), { weekStartsOn: 1 }),
   });
+  const [dateRangeFromCalender, setDateRangeFromCalender] = useState<{ from: Date; to: Date } | null>(null);
+
+  console.log("Date range in pop up:", dateRange);
 
   const [reason, ] = useState<string>("");
 
   const handleSubmit = () => {
-    onConfirm(dateRange, reason);
+    if(isWeekSelected === true){
+      onConfirm(dateRange, reason)
+    } else if(isWeekSelected === false){
+      onConfirm(dateRangeFromCalender!, reason)
+    }
   };
 
   const handleWeekOptionChange = (value: WeekOption) => {
     setSelectedOption(value);
+    setIsWeekSelected(true);
 
     if (value !== "custom") {
       const weekCount = parseInt(value.replace("week", ""), 10);
@@ -57,6 +66,8 @@ export const PauseDeliveriesPopup: React.FC<PauseDeliveriesPopupProps> = ({
       });
     }
   };
+
+  console.log("Is week selected", isWeekSelected);
 
   const formatDisplayDate = (date: Date): string => format(date, "dd.MMM.yyyy");
 
@@ -152,7 +163,7 @@ export const PauseDeliveriesPopup: React.FC<PauseDeliveriesPopupProps> = ({
             </Label>
           </div>
         </RadioGroup>
-        <WeeklyRangeSelector />
+        <WeeklyRangeSelector setDateRangeFromCalender={setDateRangeFromCalender} setIsWeekSelected={setIsWeekSelected} />
 
       </div>
     </Popup>

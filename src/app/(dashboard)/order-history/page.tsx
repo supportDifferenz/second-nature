@@ -18,8 +18,6 @@ import { useGetSubscriptionDetailsByUserIdAndPetId } from "@/hooks/subscriptionH
 import { useGetInvoiceBySubIdAndPetId } from "@/hooks/subscriptionHooks/getInvoiceDetailsBySubIdAndPetId";
 import OrderHistoryCardSkelton from "@/components/skeltons/OrderHistoryCardSkelton";
 import { useOrderHistoryStore } from "@/zustand/store/orderHistoryDataStore";
-import { PauseDeliveriesPopup } from "@/components/pageSections/dashboard/orderHistory/PauseDeliveriesPopup";
-import { format } from "date-fns";
 
 // const orderHistoryData: OrderHistoryCardPropsType[] = [
 //   {
@@ -152,11 +150,10 @@ export default function OrderHistory() {
   const [isProteinPopupOpen, setIsProteinPopupOpen] = useState(false);
   const [isDowngradePlanOpen, setIsDowngradePlanOpen] = useState(false);
   const [isCancelPopupOpen, setIsCancelPopupOpen] = useState(false);
-  const [isPausePopupOpen, setIsPausePopupOpen] = useState(false);
   
-  const [isProteinPopupOpen, setIsProteinPopupOpen] = useState(false);
-  const [isDowngradePlanOpen, setIsDowngradePlanOpen] = useState(false);
-  const [isCancelPopupOpen, setIsCancelPopupOpen] = useState(false);
+  // const [isProteinPopupOpen, setIsProteinPopupOpen] = useState(false);
+  // const [isDowngradePlanOpen, setIsDowngradePlanOpen] = useState(false);
+  // const [isCancelPopupOpen, setIsCancelPopupOpen] = useState(false);
   // const [, setIsPausePopupOpen] = useState(false);
   const [currentProtein, setCurrentProtein] = useState("chicken");
   const [selectedPetIndex, setselectedPetIndex] = useState(0);
@@ -679,13 +676,13 @@ export default function OrderHistory() {
         }}
       /> */}
 
-      <PauseDeliveriesPopup
-  isOpen={isPausePopupOpen}
-  onClose={() => setIsPausePopupOpen(false)}
-  onConfirm={(dateRange) => {
-    console.log(`Paused from ${format(dateRange.from, "dd MMM yyyy")} to ${format(dateRange.to, "dd MMM yyyy")}`);
-  }}
-/>
+      {/* <PauseDeliveriesPopup
+        isOpen={isPausePopupOpen}
+        onClose={() => setIsPausePopupOpen(false)}
+        onConfirm={(dateRange) => {
+          console.log(`Paused from ${format(dateRange.from, "dd MMM yyyy")} to ${format(dateRange.to, "dd MMM yyyy")}`);
+        }}
+      /> */}
 
     </DashboardLayout>
   );
