@@ -20,9 +20,9 @@ export const Popup: React.FC<PopupPropsTypes> = ({
   };
 
   return (
-    <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
+    <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()} >
       <DialogContent
-        className={`p-0  bg-white rounded-2xl w-[85%] sm:w-[60%] lg:w-fit  ${sizeClasses[size] || sizeClasses['md']} ${className}`}
+        className={`p-0 bg-[#FDFFF4] rounded-2xl w-[85%] sm:w-[60%] lg:w-fit   ${sizeClasses[size] || sizeClasses['md']} ${className}`}
       >
         <div className="flex flex-col">
           {title && (
