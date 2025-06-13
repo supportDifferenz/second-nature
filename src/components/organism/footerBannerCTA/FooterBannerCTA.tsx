@@ -53,7 +53,10 @@ const FooterBannerCTA: React.FC<
   }, [image]);
 
   return (
-    <section id={id} className={` bg-blue-500 relative py-[35%] sm:py-[9%] lg:py-[6%]`}>
+    <section
+      id={id}
+      className={` bg-blue-500 relative py-[35%] sm:py-[9%] lg:py-[6%]`}
+    >
       <div className="w-full absolute top-0 left-0 h-full">
         <Image
           src={activeImage}
@@ -62,8 +65,16 @@ const FooterBannerCTA: React.FC<
           className="!static w-full !h-full object-cover"
         />
       </div>
-      <div className={`relative z-10 container text-white ${footerCTAVariants({ align })}`}>
-        <div className={`max-w-[95%] sm:max-w-[70%] lg:max-w-[55%] ${footerCTAVariants({ align })}`}>
+      <div
+        className={`relative z-10 container text-white ${footerCTAVariants({
+          align,
+        })}`}
+      >
+        <div
+          className={`max-w-[95%] sm:max-w-[70%] lg:max-w-[55%] ${footerCTAVariants(
+            { align }
+          )}`}
+        >
           {caption && (
             <Typography
               tag="h5"
@@ -73,24 +84,25 @@ const FooterBannerCTA: React.FC<
             />
           )}
 
-          {title && <Typography tag="h2" text={title} className="highlight" />}
+          {title && <Typography tag="h1" text={title} className="highlight" />}
 
           {subTitle && (
             <Typography
-              tag="h2"
+              tag="h3"
               text={subTitle}
-              className="supporting capitalize"
+              className="supporting capitalize mb-(--space-20-30)"
             />
           )}
           {paragraph && (
-            <p className="mt-(--space-24-45)" style={{ color: paragraphColor }}>
-              {paragraph}
-            </p>
+            <Typography tag="h6" text={paragraph} className="" style={{ color: paragraphColor }} />
+            // <p className="" style={{ color: paragraphColor }}>
+            //   {paragraph}
+            // </p>
           )}
           {buttonText && buttonLink && (
             <Button
               // href={buttonLink}
-              variant={"secondaryBtnTextPrimaryDark"}
+              variant={"secondaryBtnTextSecondary1"}
               size={"md"}
               className="mt-(--space-24-45)"
             >

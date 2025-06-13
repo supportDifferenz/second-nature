@@ -230,20 +230,21 @@ export default function HeroBanner({
                   )}
                   {banners[0].paragraph && (
                     <Typography
-                      tag="h6"
-                      text={banners[0].paragraph}
-                      className={`first-letter:capitalize mb-(--space-20-30) sm:max-w-[45%] lg:max-w-[65%] ${
-                        align === "left"
-                          ? "ml-0"
-                          : align === "right"
-                          ? "mr-0"
-                          : "mx-auto"
-                      }`}
-                      style={{ color: banners[0].paragraphColor }}
-                      role="paragraph"
-                      ariaLabel={banners[0].paragraph}
-                      ariaLabelledBy="sub paragraph"
-                    />
+                    tag="h6"
+                    text={banners[0].paragraph}
+                    className={`first-letter:capitalize mb-[var(--space-20-30)] sm:max-w-[45%] ${
+                      align === "left"
+                        ? "ml-0 lg:max-w-[65%]"
+                        : align === "right"
+                        ? "mr-0 lg:max-w-[65%]"
+                        : "mx-auto lg:max-w-[80%]"
+                    }`}
+                    style={{ color: banners[0].paragraphColor }}
+                    role="paragraph"
+                    ariaLabel={banners[0].paragraph}
+                    ariaLabelledBy="sub paragraph"
+                  />
+                  
                   )}
                 </>
               ) : (

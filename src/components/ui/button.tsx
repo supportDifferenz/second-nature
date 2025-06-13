@@ -13,6 +13,10 @@ const buttonVariants = cva(
         whiteBtnSecondary2BorderAndText:"bg-white border-secondary-1   text-[#944446]",
         primaryBtn:
           "bg-secondary-1 border-secondary-1 hover:border-[#823234] hover:bg-[#823234]  text-white",
+        primaryBtnGrey:
+          "bg-[#424242] border-[#424242] hover:border-[#823234] hover:bg-[#823234]  text-white",
+        LinkBtnPrimaryText:
+          "bg-[#F7F9EB] hover:bg-[#FEFFF6] border-0 gap-[10px] !text-primary-dark",
 
         outlinePrimaryBtn:
           "bg-transparent border-secondary-1 hover:border-[#823234] ",
