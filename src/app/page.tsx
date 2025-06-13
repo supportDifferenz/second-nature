@@ -1,3 +1,6 @@
+
+"use client";
+
 import BehindTheScenes from "@/components/pageSections/landingPage/BehindTheScenes";
 import FAQSection from "@/components/pageSections/landingPage/FAQSection";
 import FooterBannerCTASection from "@/components/pageSections/landingPage/FooterBannerCTASection";
@@ -9,8 +12,10 @@ import OurIngredients from "@/components/pageSections/landingPage/OurIngredients
 import Testimonial from "@/components/pageSections/landingPage/Testimonial";
 import TrustedByVets from "@/components/pageSections/landingPage/TrustedByVets";
 import MainLayout from "@/components/templates/MainLayout";
+import React from "react";
 
 export default function Home() {
+
   return (
     <MainLayout>
       <div className="relative z-[6]">
@@ -41,11 +46,14 @@ export default function Home() {
         <Testimonial />
       </div>
 
-      <FooterBannerCTASection/>
+      <FooterBannerCTASection />
 
       <div className="py-(--space-120-180)">
         <FAQSection />
       </div>
+
+
+
     </MainLayout>
   );
 }
