@@ -14,9 +14,10 @@ import { useUpgradePlan } from "@/hooks/subscriptionHooks/upgradePlanHook";
 import { useCancelPlan } from "@/hooks/subscriptionHooks/cancelPlanHook";
 import { useRestartPlan } from "@/hooks/subscriptionHooks/restartPlanHook";
 import { useOrderHistoryStore } from "@/zustand/store/orderHistoryDataStore";
-import { useGetSubscriptionDetailsBySubIdAndPetId } from "@/hooks/subscriptionHooks/getSubscriptionDetailsBySubIdAndPetId";
+import { useGetSubscriptionDetailsByUserIdAndPetId } from "@/hooks/subscriptionHooks/getSubscriptionDetailsBySubIdAndPetId";
 import { useCreateSubscriptionHook } from "@/hooks/subscriptionHooks/createSubscriptionHook";
 import { useGetInvoiceBySubIdAndPetId } from "@/hooks/subscriptionHooks/getInvoiceDetailsBySubIdAndPetId";
+import { useUserStore } from "@/zustand/store/userDataStore";
 
 const OrderHistoryCard: React.FC<
   OrderHistoryCardPropsType & {
@@ -67,10 +68,12 @@ const OrderHistoryCard: React.FC<
   userId,
 }) => {
 
+  const { userDetails } = useUserStore();
+  const userIdFromStore = userDetails?.userId;
   const { selectedPetFromOrderHistory } = useOrderHistoryStore();
   const subIdFromStore = selectedPetFromOrderHistory?.subId ?? "";
   const petIdFromStore = selectedPetFromOrderHistory?.petId ?? "";
-  const { data: subscriptionDetails } = useGetSubscriptionDetailsBySubIdAndPetId(subIdFromStore, petIdFromStore);
+  const { data: subscriptionDetails } = useGetSubscriptionDetailsByUserIdAndPetId(userIdFromStore ?? "", petIdFromStore ?? "");
   const userIdFromAPI = subscriptionDetails?.result?.user_id ?? "";
   const accountFromAPI = subscriptionDetails?.result?.account ?? "";
   const shippingDetailsFromAPI = subscriptionDetails?.result?.shippingDetails ?? "";
@@ -80,7 +83,7 @@ const OrderHistoryCard: React.FC<
   const subscribeToOffersFromAPI = subscriptionDetails?.result?.subscribeToOffers ?? true;
   const petsFromAPI = subscriptionDetails?.result?.pets ?? [];
   const paymentFromAPI = subscriptionDetails?.result?.payment ?? "";
-  const isDeletedFromAPI = subscriptionDetails?.result?.isDeleted ?? false;
+  // const isDeletedFromAPI = subscriptionDetails?.result?.isDeleted ?? false;
 
   const proteinImageSrc = protein === "lamb"
     ? "/icons/card-lamb.svg"
@@ -124,6 +127,7 @@ const OrderHistoryCard: React.FC<
           setCurrentProtein(protein);
           setIsProteinPopupOpen(false);
           setChangeProteinError("");
+          window.location.reload();
         },
         onError: (error) => {
           setCurrentProtein(protein);
@@ -149,6 +153,7 @@ const OrderHistoryCard: React.FC<
           onSuccess: () => {
             setIsDowngradePopupOpen(false);
             setPlanChangeError("");
+            window.location.reload();
           },
           onError: (error) => {
             if (error instanceof Error) {
@@ -176,6 +181,7 @@ const OrderHistoryCard: React.FC<
           onSuccess: () => {
             setIsDowngradePopupOpen(false);
             setPlanChangeError("");
+            window.location.reload();
           },
           onError: (error) => {
             if (error instanceof Error) {
@@ -203,6 +209,7 @@ const OrderHistoryCard: React.FC<
         {
           onSuccess: () => {
             setIsCancelPopupOpen(false);
+            window.location.reload();
           },
           onError: (error: unknown) => {
             if (error instanceof Error) {
@@ -231,6 +238,7 @@ const OrderHistoryCard: React.FC<
           onSuccess: () => {
             // setIsCancelPopupOpen(false);
             setRestartPlanError("");
+            window.location.reload();
           },
           onError: (error: unknown) => {
             if (error instanceof Error) {
@@ -269,12 +277,13 @@ const OrderHistoryCard: React.FC<
             }))
           : petsFromAPI,
         payment: paymentFromAPI,
-        isDeleted: isDeletedFromAPI,
+        isDeleted: false,
       },
       {
         onSuccess: (data) => {
           console.log("Re order success",data);
           setReOrderPlanError("");
+          window.location.reload();
         },
         onError: (error: unknown) => {
           if (error instanceof Error) {

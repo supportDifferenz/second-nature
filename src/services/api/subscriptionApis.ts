@@ -379,14 +379,14 @@ export const getSubscriptionDetailsByUserId = async (userId: string) => {
     }
 };
 
-export const getSubscriptionDetailsBySubIdAndPetId = async (subId: string, petId: string) => {
+export const getSubscriptionDetailsByUserIdAndPetId = async (userId: string, petId: string) => {
   try {
       const response = await subscriptionAxiosInstance.get(
-        `/api/subscription/getSubscriptionById/${subId}/${petId}`,
+        `/api/subscription/getSubscriptionById/${userId}/${petId}`,
     );
       return response.data;
     } catch (error) {
-        console.error("Error in getting subscription details by pet ID and subscription ID", error);
+        console.error("Error in getting subscription details by user ID and pet ID", error);
         throw error;
     }
 };
