@@ -12,6 +12,11 @@ import { useChangeProtein } from "@/hooks/subscriptionHooks/changeProteinHook";
 import { useDowngradePlan } from "@/hooks/subscriptionHooks/downgradePlanHook";
 import { useUpgradePlan } from "@/hooks/subscriptionHooks/upgradePlanHook";
 import { useCancelPlan } from "@/hooks/subscriptionHooks/cancelPlanHook";
+import { useRestartPlan } from "@/hooks/subscriptionHooks/restartPlanHook";
+import { useOrderHistoryStore } from "@/zustand/store/orderHistoryDataStore";
+import { useGetSubscriptionDetailsBySubIdAndPetId } from "@/hooks/subscriptionHooks/getSubscriptionDetailsBySubIdAndPetId";
+import { useCreateSubscriptionHook } from "@/hooks/subscriptionHooks/createSubscriptionHook";
+import { useGetInvoiceBySubIdAndPetId } from "@/hooks/subscriptionHooks/getInvoiceDetailsBySubIdAndPetId";
 
 const OrderHistoryCard: React.FC<
   OrderHistoryCardPropsType & {
@@ -53,7 +58,7 @@ const OrderHistoryCard: React.FC<
   buttons,
   status,
   planType,
-  invoiceData,
+  // invoiceData,
   bowlSize,
   buttonStatus,
   protein,
@@ -61,6 +66,21 @@ const OrderHistoryCard: React.FC<
   petId,
   userId,
 }) => {
+
+  const { selectedPetFromOrderHistory } = useOrderHistoryStore();
+  const subIdFromStore = selectedPetFromOrderHistory?.subId ?? "";
+  const petIdFromStore = selectedPetFromOrderHistory?.petId ?? "";
+  const { data: subscriptionDetails } = useGetSubscriptionDetailsBySubIdAndPetId(subIdFromStore, petIdFromStore);
+  const userIdFromAPI = subscriptionDetails?.result?.user_id ?? "";
+  const accountFromAPI = subscriptionDetails?.result?.account ?? "";
+  const shippingDetailsFromAPI = subscriptionDetails?.result?.shippingDetails ?? "";
+  const billingDetailsFromAPI = subscriptionDetails?.result?.billingDetails ?? "";
+  const subscriptionDateFromAPI = subscriptionDetails?.result?.subscriptiondate ?? "";
+  const promoCodeFromAPI = subscriptionDetails?.result?.promocode ?? "";
+  const subscribeToOffersFromAPI = subscriptionDetails?.result?.subscribeToOffers ?? true;
+  const petsFromAPI = subscriptionDetails?.result?.pets ?? [];
+  const paymentFromAPI = subscriptionDetails?.result?.payment ?? "";
+  const isDeletedFromAPI = subscriptionDetails?.result?.isDeleted ?? false;
 
   const proteinImageSrc = protein === "lamb"
     ? "/icons/card-lamb.svg"
@@ -76,6 +96,8 @@ const OrderHistoryCard: React.FC<
   const [planChangeError, setPlanChangeError] = useState("");
   const [planChangeReason, setPlanChangeReason] = useState("");
   const [cancelReason, setCancelReason] = useState("");
+  const [restartPlanError, setRestartPlanError] = useState("");
+  const [reOrderPlanError, setReOrderPlanError] = useState("");
   // const [subIdFromProp, setSubIdFromProp] = useState("");
   // const [petIdFromProp, setPetIdFromProp] = useState("");
   // const [userIdFromProp, setUserIdFromProp] = useState("");
@@ -84,6 +106,10 @@ const OrderHistoryCard: React.FC<
   const { mutate: downgradePlan } = useDowngradePlan();
   const { mutate: upgradePlan } = useUpgradePlan();
   const { mutate: cancelPlan } = useCancelPlan();
+  const { mutate: restartPlan } = useRestartPlan();
+  const { mutate: createSubscription } = useCreateSubscriptionHook();
+  const { data: invoiceDataFromAPI } = useGetInvoiceBySubIdAndPetId(subIdFromStore, petIdFromStore);
+  
 
   const handleChangeProtein = (subId: string, petId: string, userId: string, proteinType: string) => {
     changeProtein(
@@ -191,13 +217,95 @@ const OrderHistoryCard: React.FC<
     }
   }
 
+  const handleRestart = () => {
+    alert(`SubId: ${subId}, PetId: ${petId}, UserId: ${userId}`);  
+    if (subId && petId && userId) {
+      // alert("Clicked restart plan");
+      restartPlan(
+        {
+          subId,
+          petId,
+          userId,
+        },
+        {
+          onSuccess: () => {
+            // setIsCancelPopupOpen(false);
+            setRestartPlanError("");
+          },
+          onError: (error: unknown) => {
+            if (error instanceof Error) {
+              setRestartPlanError(error.message || "Error in restart plan");
+            }
+          }
+        }
+      );
+    } else {
+      console.error("subId, petId, or userId is undefined");
+      setRestartPlanError("subId, petId, or userId is undefined");
+    }
+  }
+
+  const handleReOrder = () => {
+    createSubscription(
+      {
+        user_id: userIdFromAPI,
+        account: accountFromAPI,
+        shippingDetails: shippingDetailsFromAPI,
+        billingDetails: billingDetailsFromAPI,
+        subscriptiondate: subscriptionDateFromAPI,
+        promoCode: promoCodeFromAPI,
+        subscribeToOffers: subscribeToOffersFromAPI,
+        // pets: petsFromAPI,
+        pets: Array.isArray(petsFromAPI)
+          ? petsFromAPI.map((pet: {
+              plan: { [key: string]: unknown; planStatus?: string };
+              [key: string]: unknown;
+            }) => ({
+              ...pet,
+              plan: {
+                ...pet.plan,
+                planStatus: "active",
+              },
+            }))
+          : petsFromAPI,
+        payment: paymentFromAPI,
+        isDeleted: isDeletedFromAPI,
+      },
+      {
+        onSuccess: (data) => {
+          console.log("Re order success",data);
+          setReOrderPlanError("");
+        },
+        onError: (error: unknown) => {
+          if (error instanceof Error) {
+            setReOrderPlanError(error.message || "Error in re order");
+          }
+        }
+      }
+    )
+  }
+
   // useEffect(() => {
   //   console.log('Current protein:', currentProtein);
   // }, [currentProtein]);
 
-  console.log("Current protein in order history card", currentProtein);
-  console.log("Protein in order history card", protein);
-  console.log("Cancel reason in order history page", cancelReason);
+  // console.log("Current protein in order history card", currentProtein);
+  // console.log("Protein in order history card", protein);
+  // console.log("Cancel reason in order history page", cancelReason);
+  // console.log("Buttons in order history card", buttons);
+  // console.log(`SubId: ${subId}, PetId: ${petId}, UserId: ${userId}`);
+  // console.log("Selected pet from order history page", selectedPetFromOrderHistory);
+  // console.log("Subscription data from order history page", subscriptionDetails);
+  // console.log("User id from API", userIdFromAPI);
+  // console.log("Account from API", accountFromAPI);
+  // console.log("Shipping details from API", shippingDetailsFromAPI);
+  // console.log("Billing details from API", billingDetailsFromAPI);
+  // console.log("Subscription date from API", subscriptionDateFromAPI);
+  // console.log("Promo code from API", promoCodeFromAPI);
+  // console.log("Subscribe to offers from API", subscribeToOffersFromAPI);
+  // console.log("Pets from API", petsFromAPI);
+  // console.log("Payment from API", paymentFromAPI);
+  console.log("Invoice file path", invoiceDataFromAPI?.filePath);
 
   return (
     <div className="break-inside-avoid rounded-xl border border-[#E4E7D3] bg-[#FDFFF4] p-4 sm:p-6  h-fit relative space-y-6 max-w-[345px]">
@@ -218,7 +326,7 @@ const OrderHistoryCard: React.FC<
         />
         {hasInvoice && (
           <Button variant={"nullBtn"} className="border mx-auto">
-            <a href={invoiceData?.filePath} target="_blank" className="flex items-center">
+            <a href={invoiceDataFromAPI?.filePath} target="_blank" className="flex items-center">
             {/* <a href="https://conasems-ava-prod.s3.sa-east-1.amazonaws.com/aulas/ava/dummy-1641923583.pdf" target="_blank" className="flex items-center"> */}
               <div className="w-5">
               <Image
@@ -239,7 +347,7 @@ const OrderHistoryCard: React.FC<
           <Typography
             tag="p"
             text={pausedDuration}
-            className="absolute -top-[.8px]  left-1/2 transform -translate-x-1/2 -translate-y-1/2 whitespace-nowrap subtitle3 font-bold bg-[#FDFFF4] px-1 text-secondary-1"
+            className="absolute -top-[.8px] left-1/2 transform -translate-x-1/2 -translate-y-1/2 whitespace-nowrap subtitle3 font-bold bg-[#FDFFF4] px-1 text-secondary-1"
           />
           <Typography
             tag="p"
@@ -250,11 +358,11 @@ const OrderHistoryCard: React.FC<
       )}
 
       {status === "cancel" && cancellationTitle && cancellationDate && (
-        <div className=" rounded-lg border border-secondary-1 p-4 px-1 text-center relative ">
+        <div className="rounded-lg border border-secondary-1 p-4 px-1 text-center relative">
           <Typography
             tag="p"
             text={cancellationTitle}
-            className="absolute -top-[.8px]  left-1/2 transform -translate-x-1/2 -translate-y-1/2 whitespace-nowrap subtitle3 font-bold bg-[#FDFFF4] px-1 text-secondary-1"
+            className="absolute -top-[.8px] left-1/2 transform -translate-x-1/2 -translate-y-1/2 whitespace-nowrap subtitle3 font-bold bg-[#FDFFF4] px-1 text-secondary-1"
           />
           <Typography
             tag="p"
@@ -269,7 +377,7 @@ const OrderHistoryCard: React.FC<
         <Typography
           tag="p"
           text={subtitle}
-          className="absolute -top-[.8px]  left-1/2 transform -translate-x-1/2 -translate-y-1/2 whitespace-nowrap subtitle3 font-bold bg-[#FDFFF4] px-1 text-secondary-1"
+          className="absolute -top-[.8px] left-1/2 transform -translate-x-1/2 -translate-y-1/2 whitespace-nowrap subtitle3 font-bold bg-[#FDFFF4] px-1 text-secondary-1"
         />
         <div className="flex justify-center items-center gap-1">
           <div className="w-7">
@@ -427,7 +535,11 @@ const OrderHistoryCard: React.FC<
         ) : (
           <div className="flex flex-col gap-2 mt-4">
             {buttons.map((btn, i) => (
-              <Button key={i} className="w-full" size="md">
+              <Button 
+                key={i} 
+                className="w-full" 
+                size="md"
+              >
                 {btn}
               </Button>
             ))}
@@ -436,9 +548,40 @@ const OrderHistoryCard: React.FC<
       ) : (
         <div className="flex flex-col gap-2 mt-4">
           {buttons.map((btn, i) => (
-            <Button key={i} className="w-full" size="md">
-              {btn}
-            </Button>
+            <>
+              <Button 
+                key={i} 
+                className="w-full" 
+                size="md"
+                onClick={() => {
+                  if (btn === "Restart Plan") {
+                    handleRestart();
+                  } else if (btn === "Reorder") {
+                    handleReOrder();
+                  }
+                }}
+              >
+                {
+                  btn === "Restart Plan"
+                    ? "Restart Plan"
+                    : btn === "Reorder"
+                    ? "Reorder"
+                    : btn
+                }
+              </Button>
+              <Typography
+                tag="p"
+                text={restartPlanError}
+                // text="Restart plan error"
+                className="text-red-600 text-center"
+              />
+              <Typography
+                tag="p"
+                text={reOrderPlanError}
+                // text="Restart plan error"
+                className="text-red-600 text-center"
+              />
+            </> 
           ))}
         </div>
       )}
