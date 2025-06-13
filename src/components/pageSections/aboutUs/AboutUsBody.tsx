@@ -42,10 +42,9 @@ const footerCtaData = {
   },
 };
 
-export default function AboutUsBody({
-  // cardTitleData,
-  // cardCaptionData,
-}: AboutUsBodyProps) {
+export default function AboutUsBody({}: // cardTitleData,
+// cardCaptionData,
+AboutUsBodyProps) {
   return (
     <div>
       <div className="flex flex-col items-center mt-[var(--space-95-195)] w-fit mx-auto">
@@ -258,12 +257,12 @@ export default function AboutUsBody({
         </div>
       </div>
 
-      <div className="pb-(--space-120-180)">
-              <FooterCtaCard
-                mealTransition={footerCtaData.mealTransition}
-                petFood={footerCtaData.petFood}
-              />
-            </div>
+      <div className="pb-[var(--space-120-180)]">
+        <FooterCtaCard
+          mealTransition={footerCtaData.mealTransition}
+          petFood={footerCtaData.petFood}
+        />
+      </div>
     </div>
   );
 }

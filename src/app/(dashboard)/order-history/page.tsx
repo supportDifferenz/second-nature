@@ -2,121 +2,121 @@
 
 import React, { useState, useEffect } from "react";
 import Typography from "@/components/atoms/typography/Typography";
-import Masonry from "react-masonry-css";
-import { orderHistoryConfig } from "@/components/config/orderHistoryConfig";
+// import Masonry from "react-masonry-css";
+// import { orderHistoryConfig } from "@/components/config/orderHistoryConfig";
 import OrderHistoryCard from "@/components/molecules/orderHistoryCard/OrderHistoryCard";
 import DashboardLayout from "@/components/templates/DashboardLayout";
-import { OrderHistoryCardPropsType } from "@/components/types/type";
+// import { OrderHistoryCardPropsType } from "@/components/types/type";
 import { MealPlanStatus } from "@/components/types/type";
-import { Button } from "@/components/ui/button";
+// import { Button } from "@/components/ui/button";
 import { ProteinChangePopup } from "@/components/pageSections/dashboard/orderHistory/ProteinChangePopup";
 import { DowngradePlanPopup } from "@/components/pageSections/dashboard/orderHistory/DowngradePlanPopup";
 import { CancelSubscriptionPopup } from "@/components/pageSections/dashboard/orderHistory/CancelSubscriptionPopup";
 import { useUserStore } from "@/zustand/store/userDataStore";
 import { useGetSubscriptionDetailsByUserId } from "@/hooks/subscriptionHooks/getSubscriptionDetailsByUserIdHook";
-import { useGetSubscriptionDetailsBySubIdAndPetId } from "@/hooks/subscriptionHooks/getSubscriptionDetailsBySubIdAndPetId";
+import { useGetSubscriptionDetailsByUserIdAndPetId } from "@/hooks/subscriptionHooks/getSubscriptionDetailsBySubIdAndPetId";
 import { useGetInvoiceBySubIdAndPetId } from "@/hooks/subscriptionHooks/getInvoiceDetailsBySubIdAndPetId";
 import OrderHistoryCardSkelton from "@/components/skeltons/OrderHistoryCardSkelton";
 import { useOrderHistoryStore } from "@/zustand/store/orderHistoryDataStore";
 import { PauseDeliveriesPopup } from "@/components/pageSections/dashboard/orderHistory/PauseDeliveriesPopup";
 import { format } from "date-fns";
 
-const orderHistoryData: OrderHistoryCardPropsType[] = [
-  {
-    title: "Jackie's Meal",
-    subtitle: "FOUR WEEKS PLAN - FULL BOWL",
-    planDuration: "4 weeks",
-    itemName: "Chicken Bowl",
-    note: "Change protein for my next order",
-    noteDetails: "Order today get new protein from: 24 Apr 2025",
-    processingNote: "(We need 5 days to process your request)",
-    planStartDate: "01 Mar 2025",
-    planEndDate: "29 Mar 2025",
-    orderDate: "29 Mar 2025",
-    price: 300,
-    status: "active",
-    hasInvoice: true,
-  },
-  {
-    title: "Jackie's Meal",
-    subtitle: "FOUR WEEKS PLAN - FULL BOWL",
-    planDuration: "4 weeks",
-    itemName: "Chicken Bowl",
-    planStartDate: "01 Mar 2025",
-    planEndDate: "29 Mar 2025",
-    orderDate: "29 Mar 2025",
-    price: 300,
-    status: "paused",
-    hasInvoice: true,
-    pausedDuration: "PAUSED DURATION",
-    pausedPeriod: "13 Mar 2025 to 20 Mar 2025",
-  },
-  {
-    title: "Jackie's Meal",
-    subtitle: "FOUR WEEKS PLAN - FULL BOWL",
-    planDuration: "4 weeks",
-    itemName: "Chicken Bowl",
-    planStartDate: "01 Mar 2025",
-    planEndDate: "29 Mar 2025",
-    orderDate: "29 Mar 2025",
-    price: 300,
-    status: "cancel",
-    hasInvoice: true,
-    cancellationTitle: "CANCELLATION DATE",
-    cancellationDate: "13 Mar 2025",
-  },
-  {
-    title: "Jackie's Meal",
-    subtitle: "FOUR WEEKS PLAN - FULL BOWL",
-    planDuration: "4 weeks",
-    itemName: "Chicken Bowl",
-    note: "Change protein for my next order",
-    noteDetails: "Order today get new protein from: 24 Apr 2025",
-    processingNote: "(We need 5 days to process your request)",
-    planStartDate: "01 Mar 2025",
-    planEndDate: "29 Mar 2025",
-    orderDate: "29 Mar 2025",
-    price: 300,
-    status: "paymentfailed",
-    hasInvoice: true,
-  },
-  {
-    title: "Jackie's Meal",
-    subtitle: "ONE WEEK PLAN - FULL BOWL",
-    planDuration: "1 week",
-    itemName: "Chicken Bowl",
-    planStartDate: "01 Mar 2025",
-    planEndDate: "08 Mar 2025",
-    orderDate: "08 Mar 2025",
-    price: 100,
-    status: "active",
-    hasInvoice: true,
-  },
-  {
-    title: "Jackie's Meal",
-    subtitle: "ONE WEEK PLAN - FULL BOWL",
-    planDuration: "1 week",
-    itemName: "Chicken Bowl",
-    planStartDate: "01 Mar 2025",
-    planEndDate: "08 Mar 2025",
-    orderDate: "08 Mar 2025",
-    price: 100,
-    status: "endingsoon",
-    hasInvoice: true,
-  },
-  {
-    title: "Jackie's Meal",
-    subtitle: "ONE WEEK PLAN - FULL BOWL",
-    planDuration: "1 week",
-    itemName: "Chicken Bowl",
-    planStartDate: "01 Mar 2025",
-    planEndDate: "08 Mar 2025",
-    orderDate: "08 Mar 2025",
-    price: 100,
-    status: "expired",
-    hasInvoice: true,
-  },
-];
+// const orderHistoryData: OrderHistoryCardPropsType[] = [
+//   {
+//     title: "Jackie's Meal",
+//     subtitle: "FOUR WEEKS PLAN - FULL BOWL",
+//     planDuration: "4 weeks",
+//     itemName: "Chicken Bowl",
+//     note: "Change protein for my next order",
+//     noteDetails: "Order today get new protein from: 24 Apr 2025",
+//     processingNote: "(We need 5 days to process your request)",
+//     planStartDate: "01 Mar 2025",
+//     planEndDate: "29 Mar 2025",
+//     orderDate: "29 Mar 2025",
+//     price: 300,
+//     status: "active",
+//     hasInvoice: true,
+//   },
+//   {
+//     title: "Jackie's Meal",
+//     subtitle: "FOUR WEEKS PLAN - FULL BOWL",
+//     planDuration: "4 weeks",
+//     itemName: "Chicken Bowl",
+//     planStartDate: "01 Mar 2025",
+//     planEndDate: "29 Mar 2025",
+//     orderDate: "29 Mar 2025",
+//     price: 300,
+//     status: "paused",
+//     hasInvoice: true,
+//     pausedDuration: "PAUSED DURATION",
+//     pausedPeriod: "13 Mar 2025 to 20 Mar 2025",
+//   },
+//   {
+//     title: "Jackie's Meal",
+//     subtitle: "FOUR WEEKS PLAN - FULL BOWL",
+//     planDuration: "4 weeks",
+//     itemName: "Chicken Bowl",
+//     planStartDate: "01 Mar 2025",
+//     planEndDate: "29 Mar 2025",
+//     orderDate: "29 Mar 2025",
+//     price: 300,
+//     status: "cancel",
+//     hasInvoice: true,
+//     cancellationTitle: "CANCELLATION DATE",
+//     cancellationDate: "13 Mar 2025",
+//   },
+//   {
+//     title: "Jackie's Meal",
+//     subtitle: "FOUR WEEKS PLAN - FULL BOWL",
+//     planDuration: "4 weeks",
+//     itemName: "Chicken Bowl",
+//     note: "Change protein for my next order",
+//     noteDetails: "Order today get new protein from: 24 Apr 2025",
+//     processingNote: "(We need 5 days to process your request)",
+//     planStartDate: "01 Mar 2025",
+//     planEndDate: "29 Mar 2025",
+//     orderDate: "29 Mar 2025",
+//     price: 300,
+//     status: "paymentfailed",
+//     hasInvoice: true,
+//   },
+//   {
+//     title: "Jackie's Meal",
+//     subtitle: "ONE WEEK PLAN - FULL BOWL",
+//     planDuration: "1 week",
+//     itemName: "Chicken Bowl",
+//     planStartDate: "01 Mar 2025",
+//     planEndDate: "08 Mar 2025",
+//     orderDate: "08 Mar 2025",
+//     price: 100,
+//     status: "active",
+//     hasInvoice: true,
+//   },
+//   {
+//     title: "Jackie's Meal",
+//     subtitle: "ONE WEEK PLAN - FULL BOWL",
+//     planDuration: "1 week",
+//     itemName: "Chicken Bowl",
+//     planStartDate: "01 Mar 2025",
+//     planEndDate: "08 Mar 2025",
+//     orderDate: "08 Mar 2025",
+//     price: 100,
+//     status: "endingsoon",
+//     hasInvoice: true,
+//   },
+//   {
+//     title: "Jackie's Meal",
+//     subtitle: "ONE WEEK PLAN - FULL BOWL",
+//     planDuration: "1 week",
+//     itemName: "Chicken Bowl",
+//     planStartDate: "01 Mar 2025",
+//     planEndDate: "08 Mar 2025",
+//     orderDate: "08 Mar 2025",
+//     price: 100,
+//     status: "expired",
+//     hasInvoice: true,
+//   },
+// ];
 
 // const currentMealPlan: OrderHistoryCardPropsType = {
 //   title: "Jackie's Meal",
@@ -140,10 +140,10 @@ const orderHistoryData: OrderHistoryCardPropsType[] = [
 //   buttons: ["Downgrade to Half-Bowl", "Pause Plan", "Cancel"],
 // }
 
-const breakpointColumnsObj = {
-  default: 2,
-  1150: 1,
-};
+// const breakpointColumnsObj = {
+//   default: 2,
+//   1150: 1,
+// };
 
 export default function OrderHistory() {
 
@@ -153,6 +153,11 @@ export default function OrderHistory() {
   const [isDowngradePlanOpen, setIsDowngradePlanOpen] = useState(false);
   const [isCancelPopupOpen, setIsCancelPopupOpen] = useState(false);
   const [isPausePopupOpen, setIsPausePopupOpen] = useState(false);
+  
+  const [isProteinPopupOpen, setIsProteinPopupOpen] = useState(false);
+  const [isDowngradePlanOpen, setIsDowngradePlanOpen] = useState(false);
+  const [isCancelPopupOpen, setIsCancelPopupOpen] = useState(false);
+  // const [, setIsPausePopupOpen] = useState(false);
   const [currentProtein, setCurrentProtein] = useState("chicken");
   const [selectedPetIndex, setselectedPetIndex] = useState(0);
   // const [cancelReason, setCancelReason] = useState("");
@@ -164,7 +169,7 @@ export default function OrderHistory() {
   const { userDetails } = useUserStore();
   const userId = userDetails?.userId;
   const { data: subscriptionDetails } = useGetSubscriptionDetailsByUserId(userId);
-  const { data: subscriptionDetailsBySubIdAndPetId } = useGetSubscriptionDetailsBySubIdAndPetId(selectedPet?.subId ?? "", selectedPet?.petId ?? "");
+  const { data: subscriptionDetailsBySubIdAndPetId } = useGetSubscriptionDetailsByUserIdAndPetId(userId ?? "", selectedPet?.petId ?? "");
   const { data: invoiceData } = useGetInvoiceBySubIdAndPetId(selectedPet?.subId ?? "", selectedPet?.petId ?? "");
 
   const dataFromAPI = subscriptionDetailsBySubIdAndPetId?.result;
@@ -174,7 +179,7 @@ export default function OrderHistory() {
   let formattedEndDate = "DD MM YY";
   if (planStartDateFromAPI) {
 
-    const [year, month, day] = planStartDateFromAPI.split("-");
+    const [year, month, day] = planStartDateFromAPI.split("-"); 
     const startDate = new Date(year, month - 1, day);
     formattedStartDate = startDate.toLocaleDateString('en-GB', {
       day: 'numeric',
@@ -600,7 +605,7 @@ export default function OrderHistory() {
         />
       </div> */}
 
-      <Masonry
+      {/* <Masonry
         breakpointCols={breakpointColumnsObj}
         className="flex gap-(--space-20-40) "
         columnClassName="space-y-(--space-20-40)"
@@ -619,19 +624,19 @@ export default function OrderHistory() {
             </div>
           );
         })}
-      </Masonry>
-      <Button onClick={() => setIsProteinPopupOpen(true)}>
+      </Masonry> */}
+      {/* <Button onClick={() => setIsProteinPopupOpen(true)}>
         Change Protein
-      </Button>
-      <Button onClick={() => setIsDowngradePlanOpen(true)}>
+      </Button> */}
+      {/* <Button onClick={() => setIsDowngradePlanOpen(true)}>
         Downgrade Plan
-      </Button>
-      <Button onClick={() => setIsCancelPopupOpen(true)}>
+      </Button> */}
+      {/* <Button onClick={() => setIsCancelPopupOpen(true)}>
         Cancel Subscription
-      </Button>
-      <Button onClick={() => setIsPausePopupOpen(true)}>
+      </Button> */}
+      {/* <Button onClick={() => setIsPausePopupOpen(true)}>
         Pause Deliveries
-      </Button>
+      </Button> */}
       <ProteinChangePopup
         isOpen={isProteinPopupOpen}
         onClose={() => setIsProteinPopupOpen(false)}

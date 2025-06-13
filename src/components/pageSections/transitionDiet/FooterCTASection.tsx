@@ -12,9 +12,9 @@ export default function FooterCTASection() {
         }}
         caption="get started with us"
         captionColor="#fff"
-        title="Give Your Fur Baby"
-        subTitle="the Gift of Real Food Today!"
-        paragraph="Pets deserve better than processed kibble or canned food. Second Nature believes in nourishing your fur baby with fresh meals made from real, human-grade ingredients."
+        title="Make the Switch Today!"
+        // subTitle="the Gift of Real Food Today!"
+        paragraph="Your pet deserves the best. Start their transition to a healthier, natural diet today and see the difference in their energy, health, and happiness."
         paragraphColor="#FFFFFF"
         buttonText="Build your plan"
         buttonLink="/signup"

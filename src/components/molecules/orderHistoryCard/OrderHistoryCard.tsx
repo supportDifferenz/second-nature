@@ -14,9 +14,10 @@ import { useUpgradePlan } from "@/hooks/subscriptionHooks/upgradePlanHook";
 import { useCancelPlan } from "@/hooks/subscriptionHooks/cancelPlanHook";
 import { useRestartPlan } from "@/hooks/subscriptionHooks/restartPlanHook";
 import { useOrderHistoryStore } from "@/zustand/store/orderHistoryDataStore";
-import { useGetSubscriptionDetailsBySubIdAndPetId } from "@/hooks/subscriptionHooks/getSubscriptionDetailsBySubIdAndPetId";
+import { useGetSubscriptionDetailsByUserIdAndPetId } from "@/hooks/subscriptionHooks/getSubscriptionDetailsBySubIdAndPetId";
 import { useCreateSubscriptionHook } from "@/hooks/subscriptionHooks/createSubscriptionHook";
 import { useGetInvoiceBySubIdAndPetId } from "@/hooks/subscriptionHooks/getInvoiceDetailsBySubIdAndPetId";
+import { useUserStore } from "@/zustand/store/userDataStore";
 
 const OrderHistoryCard: React.FC<
   OrderHistoryCardPropsType & {
@@ -67,10 +68,12 @@ const OrderHistoryCard: React.FC<
   userId,
 }) => {
 
+  const { userDetails } = useUserStore();
+  const userIdFromStore = userDetails?.userId;
   const { selectedPetFromOrderHistory } = useOrderHistoryStore();
   const subIdFromStore = selectedPetFromOrderHistory?.subId ?? "";
   const petIdFromStore = selectedPetFromOrderHistory?.petId ?? "";
-  const { data: subscriptionDetails } = useGetSubscriptionDetailsBySubIdAndPetId(subIdFromStore, petIdFromStore);
+  const { data: subscriptionDetails } = useGetSubscriptionDetailsByUserIdAndPetId(userIdFromStore ?? "", petIdFromStore ?? "");
   const userIdFromAPI = subscriptionDetails?.result?.user_id ?? "";
   const accountFromAPI = subscriptionDetails?.result?.account ?? "";
   const shippingDetailsFromAPI = subscriptionDetails?.result?.shippingDetails ?? "";
@@ -80,7 +83,28 @@ const OrderHistoryCard: React.FC<
   const subscribeToOffersFromAPI = subscriptionDetails?.result?.subscribeToOffers ?? true;
   const petsFromAPI = subscriptionDetails?.result?.pets ?? [];
   const paymentFromAPI = subscriptionDetails?.result?.payment ?? "";
-  const isDeletedFromAPI = subscriptionDetails?.result?.isDeleted ?? false;
+  // const isDeletedFromAPI = subscriptionDetails?.result?.isDeleted ?? false;
+  const cancellationDateFromAPI = subscriptionDetails?.result?.lastChange?.Date;
+
+  let formattedCancellationDate = "";
+
+  if (cancellationDateFromAPI) {
+    // 1. SAFELY PARSE THE DATE (Handles YYYY-MM-DD or ISO formats)
+    const parsedDate = new Date(cancellationDateFromAPI);
+
+    // 2. VALIDATE THE DATE
+    if (!isNaN(parsedDate.getTime())) { // Check if date is valid
+      // 3. FORMAT AS "DD MMM YYYY" (e.g., "13 Mar 2025")
+      formattedCancellationDate = parsedDate.toLocaleDateString('en-GB', {
+        day: 'numeric',
+        month: 'short',
+        year: 'numeric'
+      });
+    } else {
+      console.error("Invalid date format:", cancellationDateFromAPI);
+      formattedCancellationDate = "Invalid date"; // Fallback
+    }
+  }
 
   const proteinImageSrc = protein === "lamb"
     ? "/icons/card-lamb.svg"
@@ -124,6 +148,7 @@ const OrderHistoryCard: React.FC<
           setCurrentProtein(protein);
           setIsProteinPopupOpen(false);
           setChangeProteinError("");
+          window.location.reload();
         },
         onError: (error) => {
           setCurrentProtein(protein);
@@ -149,6 +174,7 @@ const OrderHistoryCard: React.FC<
           onSuccess: () => {
             setIsDowngradePopupOpen(false);
             setPlanChangeError("");
+            window.location.reload();
           },
           onError: (error) => {
             if (error instanceof Error) {
@@ -176,6 +202,7 @@ const OrderHistoryCard: React.FC<
           onSuccess: () => {
             setIsDowngradePopupOpen(false);
             setPlanChangeError("");
+            window.location.reload();
           },
           onError: (error) => {
             if (error instanceof Error) {
@@ -203,6 +230,7 @@ const OrderHistoryCard: React.FC<
         {
           onSuccess: () => {
             setIsCancelPopupOpen(false);
+            window.location.reload();
           },
           onError: (error: unknown) => {
             if (error instanceof Error) {
@@ -231,6 +259,7 @@ const OrderHistoryCard: React.FC<
           onSuccess: () => {
             // setIsCancelPopupOpen(false);
             setRestartPlanError("");
+            window.location.reload();
           },
           onError: (error: unknown) => {
             if (error instanceof Error) {
@@ -269,12 +298,13 @@ const OrderHistoryCard: React.FC<
             }))
           : petsFromAPI,
         payment: paymentFromAPI,
-        isDeleted: isDeletedFromAPI,
+        isDeleted: false,
       },
       {
         onSuccess: (data) => {
           console.log("Re order success",data);
           setReOrderPlanError("");
+          window.location.reload();
         },
         onError: (error: unknown) => {
           if (error instanceof Error) {
@@ -305,7 +335,8 @@ const OrderHistoryCard: React.FC<
   // console.log("Subscribe to offers from API", subscribeToOffersFromAPI);
   // console.log("Pets from API", petsFromAPI);
   // console.log("Payment from API", paymentFromAPI);
-  console.log("Invoice file path", invoiceDataFromAPI?.filePath);
+  // console.log("Invoice file path", invoiceDataFromAPI?.filePath);
+  console.log("Formatted cancellation date", formattedCancellationDate);
 
   return (
     <div className="break-inside-avoid rounded-xl border border-[#E4E7D3] bg-[#FDFFF4] p-4 sm:p-6  h-fit relative space-y-6 max-w-[345px]">
@@ -366,7 +397,9 @@ const OrderHistoryCard: React.FC<
           />
           <Typography
             tag="p"
-            text={cancellationDate}
+            // text={cancellationDate}
+            text={formattedCancellationDate}
+            // text={cancellationDateFromAPI}
             className="text-primary-dark font-bold block"
           />
         </div>

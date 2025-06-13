@@ -19,7 +19,7 @@ export const QUERY_KEYS = {
     GET_PET_DETAILS_BY_USER_ID: "getPetDetailsByUserId",
     UPDATE_PET_BY_PET_ID: "updatePetByPetId",
     GET_SUBSCRIPTION_DETAILS_BY_USER_ID: "getSubscriptionDetailsByUserId",
-    GET_SUBSCRIPTION_DETAILS_BY_SUB_ID_AND_PET_ID: "getSubscriptionDetailsBySubIdAndPetId",
+    GET_SUBSCRIPTION_DETAILS_BY_USER_ID_AND_PET_ID: "getSubscriptionDetailsBySubIdAndPetId",
     GET_INVOICE_BY_SUB_ID_AND_PET_ID: "getInvoiceBySubIdAndPetId",
     CHANGE_PROTEIN: "changeProtein",
     UPGRADE_PLAN: "upgradePlan",
