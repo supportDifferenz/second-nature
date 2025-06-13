@@ -17,6 +17,7 @@ import { useGetSubscriptionDetailsByUserId } from "@/hooks/subscriptionHooks/get
 import { useGetSubscriptionDetailsBySubIdAndPetId } from "@/hooks/subscriptionHooks/getSubscriptionDetailsBySubIdAndPetId";
 import { useGetInvoiceBySubIdAndPetId } from "@/hooks/subscriptionHooks/getInvoiceDetailsBySubIdAndPetId";
 import OrderHistoryCardSkelton from "@/components/skeltons/OrderHistoryCardSkelton";
+import { useOrderHistoryStore } from "@/zustand/store/orderHistoryDataStore";
 
 const orderHistoryData: OrderHistoryCardPropsType[] = [
   {
@@ -131,8 +132,6 @@ const orderHistoryData: OrderHistoryCardPropsType[] = [
 //   hasInvoice: true,
 // }
 
-
-
 // const currentMealConfig = {
 //   label: "CURRENT MEAL PLAN",
 //   tagColor: "#2ECC71",
@@ -145,6 +144,8 @@ const breakpointColumnsObj = {
 };
 
 export default function OrderHistory() {
+
+  const { selectedPetFromOrderHistory, selectedPetIndexFromOrderHistory, setSelectedPetIndexFromOrderHistory,setSelectedPetFromOrderHistory } = useOrderHistoryStore();
   
   const [isProteinPopupOpen, setIsProteinPopupOpen] = useState(false);
   const [isDowngradePlanOpen, setIsDowngradePlanOpen] = useState(false);
@@ -181,7 +182,12 @@ export default function OrderHistory() {
 
     // Calculate end date (28 days later)
     const endDate = new Date(startDate);
-    endDate.setDate(startDate.getDate() + 28);
+    if(planDataFromAPI?.type === "Trial"){
+      endDate.setDate(startDate.getDate() + 7);
+    } else {
+      endDate.setDate(startDate.getDate() + 28);
+    }
+    // endDate.setDate(startDate.getDate() + 28);
     formattedEndDate = endDate.toLocaleDateString('en-GB', {
       day: 'numeric',
       month: 'short',
@@ -194,6 +200,8 @@ export default function OrderHistory() {
     formattedStartDate = 'Unknown';
     formattedEndDate = 'Unknown';
   }
+
+  console.log("Plan type in order history page is", planDataFromAPI?.type);
 
   const planCardData = {
     regular: {
@@ -421,14 +429,28 @@ export default function OrderHistory() {
   useEffect(() => {
     if (petInfoList.length > 0 && !selectedPet) {
       setSelectedPet(petInfoList[0]);
+      setSelectedPetFromOrderHistory(petInfoList[0]);
     }
   }, [petInfoList, selectedPet]);
+
+  useEffect(() => {
+    if (selectedPetIndexFromOrderHistory) {
+      setselectedPetIndex(selectedPetIndexFromOrderHistory)
+    }
+  }, [selectedPetIndexFromOrderHistory]);
+  
+  useEffect(() => {
+    if (selectedPetFromOrderHistory) {
+      setSelectedPet(selectedPetFromOrderHistory);
+    }
+  }, [selectedPetFromOrderHistory]);
 
   console.log("Subscription Details in order history", subscriptionDetails);
   console.log("Subscription Details By SubId And PetId in order history", subscriptionDetailsBySubIdAndPetId);
   console.log("Invoice Data in order history", invoiceData);
   console.log("Card data", subscriptionDetailsBySubIdAndPetId?.result);
-  // console.log("Selected Pet in order history", selectedPet);
+  console.log("Selected Pet in order history", selectedPet);
+  console.log("Selected pet index from store", selectedPetIndexFromOrderHistory);
 
   return (
     <DashboardLayout>
@@ -449,7 +471,9 @@ export default function OrderHistory() {
                   // setSubId(petData.subId);
                   // setPetId(petData.petId);
                   setselectedPetIndex(index);
+                  setSelectedPetIndexFromOrderHistory(index);
                   setSelectedPet(petData);
+                  setSelectedPetFromOrderHistory(petData);
                 }}
               >
                 {petData.name}
@@ -490,6 +514,9 @@ export default function OrderHistory() {
                   statusColor={mealConfig.regular.pausedMealConfig.tagColor}
                   buttons={mealConfig.regular.pausedMealConfig.buttons}
                   planType={mealConfig.regular.pausedMealConfig.planType as "regular" | "trial"}
+                  subId={selectedPet?.subId}
+                  petId={selectedPet?.petId}
+                  userId={userId}
                 />
               )}
               {planDataFromAPI?.type === "Regular" && planDataFromAPI?.planStatus === "cancel" && (
@@ -499,6 +526,9 @@ export default function OrderHistory() {
                   statusColor={mealConfig.regular.cancelledMealConfig.tagColor}
                   buttons={mealConfig.regular.cancelledMealConfig.buttons}
                   planType={mealConfig.regular.cancelledMealConfig.planType as "regular" | "trial"}
+                  subId={selectedPet?.subId}
+                  petId={selectedPet?.petId}
+                  userId={userId}
                 />
               )}
               {planDataFromAPI?.type === "Regular" && planDataFromAPI?.planStatus === "paymentfailed" && (
@@ -508,6 +538,9 @@ export default function OrderHistory() {
                   statusColor={mealConfig.regular.paymentFailedMealConfig.tagColor}
                   buttons={mealConfig.regular.paymentFailedMealConfig.buttons}
                   planType={mealConfig.regular.paymentFailedMealConfig.planType as "regular" | "trial"}
+                  subId={selectedPet?.subId}
+                  petId={selectedPet?.petId}
+                  userId={userId}
                 />
               )}
               {planDataFromAPI?.type === "Trial" && planDataFromAPI?.planStatus === "active" && (
@@ -517,6 +550,9 @@ export default function OrderHistory() {
                   statusColor={mealConfig.trial.activeMealConfig.tagColor}
                   buttons={mealConfig.trial.activeMealConfig.buttons}
                   planType={mealConfig.trial.activeMealConfig.planType as "regular" | "trial"}
+                  subId={selectedPet?.subId}
+                  petId={selectedPet?.petId}
+                  userId={userId}
                 />
               )}
               {planDataFromAPI?.type === "Trial" && planDataFromAPI?.planStatus === "endingsoon" && (
@@ -526,6 +562,9 @@ export default function OrderHistory() {
                   statusColor={mealConfig.trial.endingSoonMealConfig.tagColor}
                   buttons={mealConfig.trial.endingSoonMealConfig.buttons}
                   planType={mealConfig.trial.endingSoonMealConfig.planType as "regular" | "trial"}
+                  subId={selectedPet?.subId}
+                  petId={selectedPet?.petId}
+                  userId={userId}
                 />
               )}
               {planDataFromAPI?.type === "Trial" && planDataFromAPI?.planStatus === "expired" && (
@@ -535,6 +574,9 @@ export default function OrderHistory() {
                   statusColor={mealConfig.trial.expiredMealConfig.tagColor}
                   buttons={mealConfig.trial.expiredMealConfig.buttons}
                   planType={mealConfig.trial.expiredMealConfig.planType as "regular" | "trial"}
+                  subId={selectedPet?.subId}
+                  petId={selectedPet?.petId}
+                  userId={userId}
                 />
               )}
             </>
