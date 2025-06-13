@@ -559,7 +559,8 @@ export const restartPlanBySubIdPetIdUserId = async (
 
 try {
     const response = await subscriptionAxiosInstance.post(
-      `/api/subscription/restartPlan/${subId}/${petId}/${userId}`
+      `/api/subscription/restartPlan/${subId}/${petId}/${userId}`,
+      {}
   );
     return response.data;
   } catch (error) {
