@@ -172,7 +172,7 @@ export default function OrderHistory() {
   let formattedEndDate = "DD MM YY";
   if (planStartDateFromAPI) {
 
-    const [year, month, day] = planStartDateFromAPI.split("-");
+    const [year, month, day] = planStartDateFromAPI.split("-"); 
     const startDate = new Date(year, month - 1, day);
     formattedStartDate = startDate.toLocaleDateString('en-GB', {
       day: 'numeric',

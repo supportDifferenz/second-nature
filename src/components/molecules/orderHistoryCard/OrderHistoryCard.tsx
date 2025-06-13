@@ -84,6 +84,27 @@ const OrderHistoryCard: React.FC<
   const petsFromAPI = subscriptionDetails?.result?.pets ?? [];
   const paymentFromAPI = subscriptionDetails?.result?.payment ?? "";
   // const isDeletedFromAPI = subscriptionDetails?.result?.isDeleted ?? false;
+  const cancellationDateFromAPI = subscriptionDetails?.result?.lastChange?.Date;
+
+  let formattedCancellationDate = "";
+
+  if (cancellationDateFromAPI) {
+    // 1. SAFELY PARSE THE DATE (Handles YYYY-MM-DD or ISO formats)
+    const parsedDate = new Date(cancellationDateFromAPI);
+
+    // 2. VALIDATE THE DATE
+    if (!isNaN(parsedDate.getTime())) { // Check if date is valid
+      // 3. FORMAT AS "DD MMM YYYY" (e.g., "13 Mar 2025")
+      formattedCancellationDate = parsedDate.toLocaleDateString('en-GB', {
+        day: 'numeric',
+        month: 'short',
+        year: 'numeric'
+      });
+    } else {
+      console.error("Invalid date format:", cancellationDateFromAPI);
+      formattedCancellationDate = "Invalid date"; // Fallback
+    }
+  }
 
   const proteinImageSrc = protein === "lamb"
     ? "/icons/card-lamb.svg"
@@ -314,7 +335,8 @@ const OrderHistoryCard: React.FC<
   // console.log("Subscribe to offers from API", subscribeToOffersFromAPI);
   // console.log("Pets from API", petsFromAPI);
   // console.log("Payment from API", paymentFromAPI);
-  console.log("Invoice file path", invoiceDataFromAPI?.filePath);
+  // console.log("Invoice file path", invoiceDataFromAPI?.filePath);
+  console.log("Formatted cancellation date", formattedCancellationDate);
 
   return (
     <div className="break-inside-avoid rounded-xl border border-[#E4E7D3] bg-[#FDFFF4] p-4 sm:p-6  h-fit relative space-y-6 max-w-[345px]">
@@ -375,7 +397,9 @@ const OrderHistoryCard: React.FC<
           />
           <Typography
             tag="p"
-            text={cancellationDate}
+            // text={cancellationDate}
+            text={formattedCancellationDate}
+            // text={cancellationDateFromAPI}
             className="text-primary-dark font-bold block"
           />
         </div>
