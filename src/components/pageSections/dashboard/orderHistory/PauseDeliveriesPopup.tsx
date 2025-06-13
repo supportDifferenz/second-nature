@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { format, startOfWeek, endOfWeek, addWeeks } from "date-fns";
+import { format, endOfWeek, addWeeks, addDays } from "date-fns";
+// import { format, startOfWeek, endOfWeek, addWeeks, addDays } from "date-fns";
 import { Button } from "@/components/ui/button";
 import { Popup } from "@/components/molecules/popupSkelton/popup";
 import Typography from "@/components/atoms/typography/Typography";
@@ -34,9 +35,11 @@ export const PauseDeliveriesPopup: React.FC<PauseDeliveriesPopupProps> = ({
   const [selectedOption, setSelectedOption] = useState<WeekOption>("1week");
   const today = new Date();
 
+  console.log("Today", today);
+
   const [isWeekSelected, setIsWeekSelected] = useState(true);
   const [dateRange, setDateRange] = useState<DateRange>({
-    from: initialRange?.from || startOfWeek(today, { weekStartsOn: 1 }),
+    from: addDays(today, 1),
     to: initialRange?.to || endOfWeek(addWeeks(today, 1), { weekStartsOn: 1 }),
   });
   const [dateRangeFromCalender, setDateRangeFromCalender] = useState<{ from: Date; to: Date } | null>(null);
@@ -53,16 +56,46 @@ export const PauseDeliveriesPopup: React.FC<PauseDeliveriesPopupProps> = ({
     }
   };
 
+  // const handleWeekOptionChange = (value: WeekOption) => {
+  //   setSelectedOption(value);
+  //   setIsWeekSelected(true);
+
+  //   if (value !== "custom") {
+  //     const weekCount = parseInt(value.replace("week", ""), 7);
+
+  //     setDateRange({
+  //       from: startOfWeek(today, { weekStartsOn: 1 }),
+  //       to: endOfWeek(addWeeks(today, weekCount), { weekStartsOn: 1 }),
+  //     });
+  //   }
+  // };
+
   const handleWeekOptionChange = (value: WeekOption) => {
     setSelectedOption(value);
     setIsWeekSelected(true);
 
     if (value !== "custom") {
-      const weekCount = parseInt(value.replace("week", ""), 10);
+      let daysToAdd = 0;
+      switch (value) {
+        case "1week":
+          daysToAdd = 7;
+          break;
+        case "2weeks":
+          daysToAdd = 14;
+          break;
+        case "3weeks":
+          daysToAdd = 21;
+          break;
+        case "4weeks":
+          daysToAdd = 28;
+          break;
+        default:
+          break;
+      }
 
       setDateRange({
-        from: startOfWeek(today, { weekStartsOn: 1 }),
-        to: endOfWeek(addWeeks(today, weekCount), { weekStartsOn: 1 }),
+        from: addDays(today, 1), // Always set from date to tomorrow
+        to: addDays(today, 1 + daysToAdd), // Add days to get end date
       });
     }
   };

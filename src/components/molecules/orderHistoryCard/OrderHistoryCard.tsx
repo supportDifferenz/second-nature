@@ -253,7 +253,7 @@ const OrderHistoryCard: React.FC<
   }
 
   const handleRestart = () => {
-    alert(`SubId: ${subId}, PetId: ${petId}, UserId: ${userId}`);  
+    // alert(`SubId: ${subId}, PetId: ${petId}, UserId: ${userId}`);  
     if (subId && petId && userId) {
       // alert("Clicked restart plan");
       restartPlan(
