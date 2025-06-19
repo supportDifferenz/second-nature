@@ -21,7 +21,7 @@ const Footer = () => {
         {/* logo wrapper */}
         <div className="flex-1 pb-(--space-27-34) pt-(--space-40-60) lg:pt-0 border-t lg:border-0 border-contrast-button">
           <div 
-            className="w-(--space-200-240) mb-(--space-16-24)"
+            className="w-(--space-200-240) mb-(--space-16-24) cursor-pointer"
             onClick={(e) => {
               e.preventDefault();
               startTransition(() => {
@@ -295,7 +295,7 @@ const Footer = () => {
               </div>
             </div>
 
-            <div className="  flex sm:max-w-[38%] items-center gap-5">
+            <div className="flex sm:max-w-[38%] items-center gap-5">
               <div className="min-w-(--space-102-102)">
                 <Image
                   src="/images/fediaf.webp"
