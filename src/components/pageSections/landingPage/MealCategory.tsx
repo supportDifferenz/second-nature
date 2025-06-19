@@ -21,8 +21,8 @@ export default function MealCategory() {
             "Premium Protein Source",
           ],
           buttons: [
-            { label: "Get Started", route: "/get-started", variant: "primary" },
-            { label: "Know More", route: "/know-more", variant: "secondary" },
+            { label: "Get Started", route: "/location", variant: "primary" },
+            { label: "Know More", route: "/meals?protein=beef", variant: "secondary" },
           ],
         },
         {
@@ -36,8 +36,8 @@ export default function MealCategory() {
             "Herbal Wellness",
           ],
           buttons: [
-            { label: "Get Started", route: "/get-started", variant: "primary" },
-            { label: "Know More", route: "/know-more", variant: "secondary" },
+            { label: "Get Started", route: "/location", variant: "primary" },
+            { label: "Know More", route: "/meals?protein=lamb", variant: "secondary" },
           ],
         },
         {
@@ -51,8 +51,8 @@ export default function MealCategory() {
             "Micro-Minerals",
           ],
           buttons: [
-            { label: "Get Started", route: "/get-started", variant: "primary" },
-            { label: "Know More", route: "/know-more", variant: "secondary" },
+            { label: "Get Started", route: "/location", variant: "primary" },
+            { label: "Know More", route: "/meals?protein=chicken", variant: "secondary" },
           ],
         },
       ],
@@ -71,8 +71,8 @@ export default function MealCategory() {
             "Antioxidant-Rich Vegetables",
           ],
           buttons: [
-            { label: "Get Started", route: "/get-started", variant: "primary" },
-            { label: "Know More", route: "/know-more", variant: "secondary" },
+            { label: "Get Started", route: "/location", variant: "primary" },
+            { label: "Know More", route: "/meals?protein=beef", variant: "secondary" },
           ],
         },
         {
@@ -86,8 +86,8 @@ export default function MealCategory() {
             "Balanced Macronutrients",
           ],
           buttons: [
-            { label: "Get Started", route: "/get-started", variant: "primary" },
-            { label: "Know More", route: "/know-more", variant: "secondary" },
+            { label: "Get Started", route: "/location", variant: "primary" },
+            { label: "Know More", route: "/meals?protein=lamb", variant: "secondary" },
           ],
         },
         {
@@ -101,8 +101,8 @@ export default function MealCategory() {
             "Organ Meat Benefits",
           ],
           buttons: [
-            { label: "Get Started", route: "/get-started", variant: "primary" },
-            { label: "Know More", route: "/know-more", variant: "secondary" },
+            { label: "Get Started", route: "/location", variant: "primary" },
+            { label: "Know More", route: "/meals?protein=chicken", variant: "secondary" },
           ],
         },
       ],
