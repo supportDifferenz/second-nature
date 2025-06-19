@@ -106,7 +106,7 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
                     {[
                       { name: "Subscription", href: "/subscription"},
                       { name: "Behind The Scenes", href: "/behind-the-scenes"},
-                      { name: "How to Feed", href: ""},
+                      { name: "How to Feed", href: "/how-to-feed"},
                       { name: "Transition Diet", href: "/transition-diet"},
                     ].map((item, index) => (
                       <DropdownMenuItem
@@ -147,9 +147,36 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
             </div>
 
             <div className="items-center justify-end  flex flex-2  gap-[4.5%]">
-              <span className=" hidden xl:block">Blogs</span>
-              <span className=" hidden xl:block">Reviews</span>
-              <span className=" hidden xl:block">FAQs</span>
+              <span 
+                className=" hidden xl:block"
+                onClick={() => {
+                  startTransition(() => {
+                    router.push("/blogs");
+                  })
+                }}
+              >
+                Blogs
+              </span>
+              <span 
+                className=" hidden xl:block"
+                onClick={() => {
+                  startTransition(() => {
+                    router.push("/reviews");
+                  })
+                }}
+              >
+                Reviews
+              </span>
+              <span 
+                className="hidden xl:block"
+                onClick={() => {
+                  startTransition(() => {
+                    router.push("/faqs");
+                  })
+                }}
+              >
+                FAQs
+              </span>
               <Button
                 variant={"outlinePrimaryBtn"}
                 size={"md"}
