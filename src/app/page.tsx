@@ -23,7 +23,7 @@ export default function Home() {
       </div>
 
       <div className="-mt-(--space-30-60) relative z-[6]">
-        <Marquee speed={23} />
+        <Marquee speed={125} />
       </div>
 
       <div className=" pt-(--space-50-99) pb-(--space-120-180)">

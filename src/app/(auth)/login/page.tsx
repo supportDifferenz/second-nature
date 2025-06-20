@@ -264,7 +264,7 @@ export default function Page() {
   
   return (
     <AuthLayout>
-      <div className="flex flex-col justify-between bg-[#F3F5E8] h-full lg:w-[31.25vw] rounded-2xl  p-12">
+      <div className="flex flex-col justify-between bg-[#F3F5E8] h-full lg:w-[31.25vw] rounded-2xl p-12 cursor-default">
         <div className="flex flex-col text-center sm:text-start border-b border-[#A1A1A1] pb-[var(--space-20-57)]">
           <div className=" pb-[var(--space-16-24)]">
             <Typography
@@ -337,11 +337,13 @@ export default function Page() {
             text="Don’t have an account?"
             className="!font-medium text-primary-dark"
           />
-          <Typography
-            tag="h6"
-            text="Build your plan"
-            className="underline text-primary-dark"
-          />
+          <div onClick={() => startTransition(() => router.push("/location"))}>
+            <Typography
+              tag="h6"
+              text="Build your plan"
+              className="underline text-primary-dark cursor-pointer"
+            />
+          </div>
         </div>
       </div>
     </AuthLayout>

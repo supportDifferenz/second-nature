@@ -1,8 +1,11 @@
+"use client";
+
 // BlogListCard.tsx
 import Typography from "@/components/atoms/typography/Typography";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import React from "react";
+import React, { startTransition } from "react";
+import { useRouter } from "next/navigation";
 
 type BlogCardProps = {
   title: string;
@@ -11,8 +14,15 @@ type BlogCardProps = {
 };
 
 export default function BlogListCard({ title, description, image }: BlogCardProps) {
+
+  const router = useRouter();
+
   return (
-    <div>
+    <div onClick={() => {
+      startTransition(() => {
+        router.push("/blogs/blog-detail");
+      })
+    }}>
       <div className="lg:w-full relative">
         <Image
           src={image}

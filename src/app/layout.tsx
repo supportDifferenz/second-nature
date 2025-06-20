@@ -21,7 +21,7 @@ export default function RootLayout({
   const [queryClient] = useState(() => new QueryClient());
 
   return (
-    <html lang="en" className="dark">
+    <html lang="en" className="dark cursor-default">
       <head>
         <title>Second Nature</title>
         <meta name="description" content="Crafted with Care for Healthier, Happier Pets" />
