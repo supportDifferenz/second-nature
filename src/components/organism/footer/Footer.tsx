@@ -44,7 +44,7 @@ const Footer = () => {
             ultricies nullam. Condimentum est lacinia gravida cursus nulla.
           </p>
 
-          <div className="max-lg:mt-(--space-34-130) lg:mb-6 flex  gap-3">
+          <div className="max-lg:mt-(--space-34-130) flex  gap-3">
             <Button size={"md"} variant={"primaryBtn"} className="text-white">
               Get Started
             </Button>
@@ -228,7 +228,7 @@ const Footer = () => {
             </div>
           </div>
           <div className="flex justify-between flex-col sm:flex-row gap-4 pt-11 border-t border-contrast-button">
-            <div className="min-w-[20.5%] hidden sm:block">
+            <div className="lg:flex lg:flex-col lg:justify-between  min-w-[20.5%] hidden sm:block">
               <Typography
                 tag="h5"
                 text="Need Help"
@@ -259,7 +259,7 @@ const Footer = () => {
                 </li>
               </ul>
             </div>
-            <div className="mb-7 sm:mb-0">
+            <div className="lg:flex lg:flex-col lg:justify-between  mb-7 sm:mb-0">
               <Typography
                 tag="h5"
                 text="Follow Us"
@@ -305,9 +305,9 @@ const Footer = () => {
                 />
               </div>
               <Typography
-                tag="p"
+                tag="span"
                 text="European Pet Food Industry Federation guidelines to ensure complete and balanced nutrition"
-                className="text-left"
+                className="text-left subtitle3 font-bold"
               />
             </div>
           </div>

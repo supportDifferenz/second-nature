@@ -43,7 +43,7 @@ const Marquee = ({ speed = 50 }) => {
                   </div>
                   <Typography
                     tag="span"
-                    className="text-primary-dark font-bold max-w-[53%] lg:max-w-[51%]"
+                    className="text-primary-dark font-bold"
                     text={feature.text}
                     role="caption"
                     ariaLabel={feature.text}
