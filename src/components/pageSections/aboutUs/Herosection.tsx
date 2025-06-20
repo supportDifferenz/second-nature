@@ -53,18 +53,18 @@ export default function HeroSection() {
         </div>
 
         {/* Content */}
-        <div className="relative flex pt-[--space-46-95] sm:pt-0 sm:items-center w-full min-h-[500px] h-[90dvh] sm:min-h-[400px] s m:h-[d50vh] lg:min-h-[520px] sm:h-[70dvh] lg:max-h-[1200px] bg-cover bg-center transition-all container sm:justify-end sm:text-left text-center justify-center items-center">
+        <div className="relative flex pt-[--space-46-95] sm:pt-0 sm:items-center w-full min-h-[500px] h-[90dvh] sm:min-h-[400px] s m:h-[d50vh] lg:min-h-[520px] sm:h-[90dvh] lg:h-[80dvh] lg:max-h-[1200px] bg-cover bg-center transition-all container sm:justify-end sm:text-left text-center justify-center items-center">
           <div className="flex flex-col items-center lg:items-start text-center lg:text-left mt-auto pb-9 lg:pb-0 lg:mt-0 lg:w-[43%]">
 
             <Typography
               tag="h1"
-              className="capitalize highlight mb-[--space-10-20] w-[82%]"
+              className="capitalize highlight mb-[--space-10-20] w-[82%] lg:w-auto"
               text={banner.title}
               role="heading"
               ariaLabel={banner.title}
               ariaLabelledBy="title"
             >
-              <span className="h2 block capitalize normalize whitespace-nowrap text-center sm:max-w-[50%] lg:max-w-[65%]">
+              <span className="h2 block capitalize normalize whitespace-nowrap text-center  lg:max-w-[65%]">
                 {banner.halfTitle}
               </span>
             </Typography>
@@ -72,7 +72,7 @@ export default function HeroSection() {
             <Typography
               tag="h6"
               text={banner.paragraph}
-              className="first-letter:capitalize mb-[--space-20-30] mt-4 max-w-[47%] sm:max-w-[45%] lg:max-w-full mr-0"
+              className="first-letter:capitalize mb-[--space-20-30] mt-4 lg:whitespace-nowrap max-w-[47%] sm:max-w-[45%] lg:max-w-full mr-0"
               style={{ color: banner.paragraphColor }}
               role="paragraph"
               ariaLabel={banner.paragraph}
