@@ -87,11 +87,11 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
                   // router.push("/about-us");
                 }}
               >
-                <span className="block">About Us</span>
+                <span className="block font-extrabold">About Us</span>
               </nav>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <button className="outline-none cursor-pointer flex items-center gap-1.5  font-normal ">
+                  <button className="outline-none cursor-pointer flex items-center gap-1.5 font-extrabold">
                     How it works
                     <div className="w-2.5 h-fit">
                       <Image
@@ -150,7 +150,7 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
 
             <div className="items-center justify-end flex flex-2 gap-[4.5%]">
               <span 
-                className="hidden xl:block"
+                className="hidden xl:block font-extrabold"
                 onClick={() => {
                   startTransition(() => {
                     router.push("/blogs");
@@ -160,7 +160,7 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
                 Blogs
               </span>
               <span 
-                className=" hidden xl:block"
+                className="hidden xl:block font-extrabold"
                 onClick={() => {
                   startTransition(() => {
                     router.push("/reviews");
@@ -170,7 +170,7 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
                 Reviews
               </span>
               <span 
-                className="hidden xl:block"
+                className="hidden xl:block font-extrabold"
                 onClick={() => {
                   startTransition(() => {
                     router.push("/faqs");
@@ -181,7 +181,7 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
               </span>
               <Button
                 variant={"outlinePrimaryBtn"}
-                size={"md"}
+                size={"small"}
                 className="text-secondary-1 hidden sm:block"
                 onClick={() => {
                   startTransition(() => {
@@ -194,7 +194,7 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
               </Button>
               { isAuthenticated
                 ? <Button 
-                    size={"md"} 
+                    size={"small"} 
                     className=""
                     onClick={() => {
                       startTransition(() => {
@@ -206,7 +206,7 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
                     Account
                   </Button>
                 : <Button 
-                    size={"md"} 
+                    size={"small"} 
                     className=""
                     onClick={() => {
                       startTransition(() => {

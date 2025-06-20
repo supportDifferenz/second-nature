@@ -48,7 +48,7 @@ const MealDropdownMenu = ({
               className="!static"
             />
           </div>
-          <Typography tag="span" text={label} className="text-primary-dark" />
+          <Typography tag="span" text={label} className="text-primary-dark font-extrabold" />
           <div className="w-2.5 h-fit">
             <Image
               src="/icons/black-chevron-down.svg"
