@@ -12,12 +12,14 @@ import { startTransition } from "react";
 
 interface NavDropdownProps {
   label: string;
+  icon: string;
   dropDownContentTitle: string;
   items: { name: string; image: string; url: string }[];
 }
 
 const MealDropdownMenu = ({
   label,
+  icon,
   items,
   dropDownContentTitle,
 }: NavDropdownProps) => {
@@ -40,7 +42,7 @@ const MealDropdownMenu = ({
         <button className="outline-none cursor-pointer flex items-center gap-1.5 lg:gap-1 2xl:gap-1.5 lg:py-2  lg:px-2.5 border border-[#DADBD2] rounded-full font-normal ">
           <div className="w-5 xl-7">
             <Image
-              src="/icons/dog-icon.svg"
+              src={icon}
               alt="icon"
               fill
               className="!static"

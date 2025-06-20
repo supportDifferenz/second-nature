@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
+import Image from "next/image";
 
 interface MobileMenuProps {
   className?: string;
@@ -10,6 +11,7 @@ interface MobileMenuProps {
 
 const MobileMenu = ({ className }: MobileMenuProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isHowItWorksOpen, setIsHowItWorksOpen] = useState(false);
 
   // Prevent body scroll when menu is open
   useEffect(() => {
@@ -42,12 +44,43 @@ const MobileMenu = ({ className }: MobileMenuProps) => {
           isOpen ? "translate-y-0" : "-translate-y-[130%]"
         }`}
       >
-        <div className="flex flex-col px-6 py-8 space-y-6 text-lg">
+        <div className="flex flex-col px-6 py-8 space-y-3 text-lg">
           <a href="/about-us" onClick={() => setIsOpen(false)}>About Us</a>
-          <a href="#" onClick={() => setIsOpen(false)}>How it works</a>
-          <a href="#" onClick={() => setIsOpen(false)}>Blogs</a>
-          <a href="#" onClick={() => setIsOpen(false)}>Reviews</a>
-          <a href="#" onClick={() => setIsOpen(false)}>FAQs</a>
+          <a
+            href="#"
+            className="flex items-center"
+            onClick={() => {
+              setIsHowItWorksOpen(!isHowItWorksOpen);
+            }}
+          >
+            How it works
+            <div
+              className="w-2.5 ml-1 h-fit"
+              style={{
+                transform: isHowItWorksOpen ? "rotate(180deg)" : "",
+              }}
+            >
+              <Image
+                src="/icons/black-chevron-down.svg"
+                alt="icon"
+                fill
+                className="!static"
+              />
+            </div>
+          </a>
+          {
+            isHowItWorksOpen && (
+              <div className="flex flex-col space-y-2 pl-4">
+                <a href="/subscription" onClick={() => setIsOpen(false)}>Subscription</a>
+                <a href="/behind-the-scenes" onClick={() => setIsOpen(false)}>Behind The Scenes</a>
+                <a href="/how-to-feed" onClick={() => setIsOpen(false)}>How to Feed</a>
+                <a href="/transition-diet" onClick={() => setIsOpen(false)}>Transition Diet</a>
+              </div>
+            )
+          }
+          <a href="/blogs" onClick={() => setIsOpen(false)}>Blogs</a>
+          <a href="/reviews" onClick={() => setIsOpen(false)}>Reviews</a>
+          <a href="/faqs" onClick={() => setIsOpen(false)}>FAQs</a>
         </div>
       </div>
     </>

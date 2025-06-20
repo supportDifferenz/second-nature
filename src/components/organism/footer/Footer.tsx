@@ -19,9 +19,9 @@ const Footer = () => {
     <footer className=" text-primary-dark  lg:pt-(--space-40-60)">
       <div className="container flex flex-col lg:flex-row lg:gap-[5%] text-center md:text-left pb-(--space-27-34)">
         {/* logo wrapper */}
-        <div className="flex-1 pb-(--space-27-34) pt-(--space-40-60) lg:pt-0 border-t lg:border-0 border-contrast-button">
+        <div className="flex-1 lg:flex lg:flex-col lg:justify-between max-lg:pb-(--space-27-34) pt-(--space-40-60) lg:pt-0 border-t lg:border-0 border-contrast-button">
           <div 
-            className="w-(--space-200-240) mb-(--space-16-24)"
+            className="w-(--space-200-240) max-lg:mb-(--space-16-24) cursor-pointer"
             onClick={(e) => {
               e.preventDefault();
               startTransition(() => {
@@ -44,7 +44,7 @@ const Footer = () => {
             ultricies nullam. Condimentum est lacinia gravida cursus nulla.
           </p>
 
-          <div className="mt-(--space-34-130) flex  gap-3">
+          <div className="max-lg:mt-(--space-34-130) lg:mb-6 flex  gap-3">
             <Button size={"md"} variant={"primaryBtn"} className="text-white">
               Get Started
             </Button>
@@ -93,15 +93,15 @@ const Footer = () => {
                   <li>
                     <BadgeTitle label="DOG" color="#00683D" />
                   </li>
-                  <li>Meals</li>
-                  <li>Treats</li>
-                  <li>Ingredients</li>
+                  <li className="cursor-pointer">Meals</li>
+                  <li className="cursor-pointer">Treats</li>
+                  <li className="cursor-pointer">Ingredients</li>
                 </ul>
                 <ul className="flex flex-col gap-2.5">
                   <BadgeTitle label="CAT" color="#00683D" />
-                  <li>Meals</li>
-                  <li>Treats</li>
-                  <li>Ingredients</li>
+                  <li className="cursor-pointer">Meals</li>
+                  <li className="cursor-pointer">Treats</li>
+                  <li className="cursor-pointer">Ingredients</li>
                 </ul>
               </div>
             </div>
@@ -113,10 +113,46 @@ const Footer = () => {
               />
 
               <ul className="flex flex-col gap-2.5">
-                <li>Subscription</li>
-                <li>Behind The Scenes</li>
-                <li>How to Feed</li>
-                <li>Transition Diet</li>
+                <li
+                  className="cursor-pointer"
+                  onClick={() => {
+                    startTransition(() => {
+                      router.push("/subscription");
+                    })
+                  }}
+                >
+                  Subscription
+                </li>
+                <li
+                  className="cursor-pointer"
+                  onClick={() => {
+                    startTransition(() => {
+                      router.push("/behind-the-scenes");
+                    })
+                  }}
+                >
+                  Behind The Scenes
+                </li>
+                <li
+                  className="cursor-pointer"
+                  onClick={() => {
+                    startTransition(() => {
+                      router.push("/how-to-feed");
+                    })
+                  }}
+                >
+                  How to Feed
+                </li>
+                <li
+                  className="cursor-pointer"
+                  onClick={() => {
+                    startTransition(() => {
+                      router.push("/transition-diet");
+                    })
+                  }}
+                >
+                  Transition Diet
+                </li>
               </ul>
             </div>
             <div className="flex-1 whitespace-nowrap  sm:flex-auto">
@@ -126,8 +162,8 @@ const Footer = () => {
                 className="text-primary-dark mb-(--space-20-45)"
               />
               <ul className="flex flex-col gap-2.5">
-                <li>Our Story</li>
-                <li>Our Mission</li>
+                <li className="cursor-pointer">Our Story</li>
+                <li className="cursor-pointer">Our Mission</li>
               </ul>
             </div>
             <div className="flex-1 whitespace-nowrap  sm:flex-auto">
@@ -137,8 +173,26 @@ const Footer = () => {
                 className="text-primary-dark mb-(--space-20-45)"
               />
               <ul className="flex flex-col gap-2.5">
-                <li>Reviews</li>
-                <li>FAQs</li>
+                <li
+                  className="cursor-pointer"
+                  onClick={() => {
+                    startTransition(() => {
+                      router.push("/reviews");
+                    })
+                  }}
+                >
+                  Reviews
+                </li>
+                <li
+                  className="cursor-pointer"
+                  onClick={() => {
+                    startTransition(() => {
+                      router.push("/faqs");
+                    })
+                  }}
+                >
+                  FAQs
+                </li>
               </ul>
             </div>
             <div className="flex-1 whitespace-nowrap  sm:hidden sm:flex-auto">
@@ -148,7 +202,7 @@ const Footer = () => {
                 className="text-primary-dark mb-4"
               />
               <ul className="flex flex-col gap-2.5">
-                <li className="gap-2.5 flex items-center whitespace-nowrap">
+                <li className="gap-2.5 flex items-center whitespace-nowrap cursor-pointer">
                   <div className="w-(--space-16-24)">
                     <Image
                       src="/icons/number.svg"
@@ -159,7 +213,7 @@ const Footer = () => {
                   </div>
                   +974-555-556-16
                 </li>
-                <li className="gap-2.5 flex items-center whitespace-nowrap">
+                <li className="gap-2.5 flex items-center whitespace-nowrap cursor-pointer">
                   <div className="w-(--space-16-24)">
                     <Image
                       src="/icons/email.svg"
@@ -181,18 +235,18 @@ const Footer = () => {
                 className="text-primary-dark mb-4"
               />
               <ul className="flex flex-col gap-2.5">
-                <li className="gap-2.5 flex items-center whitespace-nowrap">
+                <li className="gap-2.5 flex items-center whitespace-nowrap cursor-pointer">
                   <div className="w-(--space-16-24)">
                     <Image
                       src="/icons/number.svg"
                       alt="phone number"
                       fill
-                      className="!static "
+                      className="!static"
                     />
                   </div>
                   +974-555-556-16
                 </li>
-                <li className="gap-2.5 flex items-center whitespace-nowrap">
+                <li className="gap-2.5 flex items-center whitespace-nowrap cursor-pointer">
                   <div className="w-(--space-16-24)">
                     <Image
                       src="/icons/email.svg"
@@ -213,7 +267,7 @@ const Footer = () => {
               />
               <div className="flex">
                 <ul className="flex  gap-8">
-                  <li className="w-(--space-27-34)">
+                  <li className="w-(--space-27-34) cursor-pointer">
                     <Image
                       src="/icons/fb.svg"
                       alt="facebook"
@@ -221,7 +275,7 @@ const Footer = () => {
                       className="!static"
                     />
                   </li>
-                  <li className="w-(--space-27-34)">
+                  <li className="w-(--space-27-34) cursor-pointer">
                     <Image
                       src="/icons/instagram.svg"
                       alt="instagram"
@@ -229,7 +283,7 @@ const Footer = () => {
                       className="!static"
                     />
                   </li>
-                  <li className="w-(--space-27-34)">
+                  <li className="w-(--space-27-34) cursor-pointer">
                     <Image
                       src="/icons/linkdln.svg"
                       alt="linkdln"
@@ -241,7 +295,7 @@ const Footer = () => {
               </div>
             </div>
 
-            <div className="  flex sm:max-w-[38%] items-center gap-5">
+            <div className="flex sm:max-w-[38%] items-center gap-5">
               <div className="min-w-(--space-102-102)">
                 <Image
                   src="/images/fediaf.webp"

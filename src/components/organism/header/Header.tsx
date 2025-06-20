@@ -36,6 +36,7 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
             <div className=" items-center   hidden xl:flex flex-2  gap-[2.5%] 2xl:gap-[4.5%]">
               <MealDropdownMenu
                 label="For Dogs"
+                icon="/icons/dog-icon.svg"
                 dropDownContentTitle="Dog Meals"
                 items={[
                   {
@@ -57,6 +58,7 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
               />
               <MealDropdownMenu
                 label="For Cats"
+                icon="/icons/cat-icon.svg"
                 dropDownContentTitle="Cat Meals"
                 items={[
                   {
@@ -106,7 +108,7 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
                     {[
                       { name: "Subscription", href: "/subscription"},
                       { name: "Behind The Scenes", href: "/behind-the-scenes"},
-                      { name: "How to Feed", href: ""},
+                      { name: "How to Feed", href: "/how-to-feed"},
                       { name: "Transition Diet", href: "/transition-diet"},
                     ].map((item, index) => (
                       <DropdownMenuItem
@@ -130,7 +132,7 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
 
             {/* logo */}
             <div 
-              className="w-[14%] mx-[1%]"
+              className="w-[14%] mx-[1%] cursor-pointer"
               onClick={() => {
                 startTransition(() => {
                   router.push("/");
@@ -146,10 +148,37 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
               />
             </div>
 
-            <div className="items-center justify-end  flex flex-2  gap-[4.5%]">
-              <span className=" hidden xl:block">Blogs</span>
-              <span className=" hidden xl:block">Reviews</span>
-              <span className=" hidden xl:block">FAQs</span>
+            <div className="items-center justify-end flex flex-2 gap-[4.5%]">
+              <span 
+                className="hidden xl:block"
+                onClick={() => {
+                  startTransition(() => {
+                    router.push("/blogs");
+                  })
+                }}
+              >
+                Blogs
+              </span>
+              <span 
+                className=" hidden xl:block"
+                onClick={() => {
+                  startTransition(() => {
+                    router.push("/reviews");
+                  })
+                }}
+              >
+                Reviews
+              </span>
+              <span 
+                className="hidden xl:block"
+                onClick={() => {
+                  startTransition(() => {
+                    router.push("/faqs");
+                  })
+                }}
+              >
+                FAQs
+              </span>
               <Button
                 variant={"outlinePrimaryBtn"}
                 size={"md"}

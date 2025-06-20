@@ -1,9 +1,13 @@
+"use client";
+
 // MealCard.tsx
 import { MealCardPropsType } from "@/components/types/type";
 import { Button } from "@/components/ui/button";
 import BadgeTitle from "@/components/atoms/badgeTitle/BadgeTitle";
 import Typography from "@/components/atoms/typography/Typography";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { startTransition } from "react";
 
 export const MealCard: React.FC<MealCardPropsType> = ({
   tag,
@@ -13,6 +17,7 @@ export const MealCard: React.FC<MealCardPropsType> = ({
   buttons,
 }) => {
   //   const navigate = useNavigate();
+  const router = useRouter();
 
   return (
     <div className=" border-primary p-6 rounded-xl bg-cream flex flex-col items-center sm:flex-row gap-(--space-24-45) border bg-primary-light">
@@ -70,7 +75,11 @@ export const MealCard: React.FC<MealCardPropsType> = ({
           {buttons.map((button, index) => (
             <Button
               key={index}
-              // onClick={() => navigate(button.route)}
+              onClick={() => {
+                startTransition(() => {
+                  router.push(button.route);
+                })
+              }}
               variant={index === 0 ? "primaryBtn" : "linkSecondary"}
               size={index === 0 ? "md" : "regular"}
               className={index === 0 ? "text-white" : "outlinePrimaryBtn"}
