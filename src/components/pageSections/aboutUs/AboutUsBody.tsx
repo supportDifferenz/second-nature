@@ -73,13 +73,12 @@ AboutUsBodyProps) {
           textAlign="text-center w-auto"
           textColor="#944446"
         />
-        <div className="absolute left-[-11%] sm:left-[22%] w-[104.2vw] sm:w-[37.86vw]">
+        <div className="absolute left-[-11%] sm:left-[21%] w-[104.2vw] sm:w-[39.86vw]">
           <Image
             src="/images/dog.webp"
             alt=""
             className="!static inset-0 w-full !h-full object-cover object-center"
             fill
-            priority
           />
         </div>
       </div>
@@ -118,8 +117,8 @@ AboutUsBodyProps) {
             text="As pet owners, we noticed a lack of natural, high-quality food options tailored to the unique needs of pets in our region. Determined to make a difference, we set out to create Qatar's first-ever natural pet food company."
           />
           <CardTitle
-            imageSrc="/images/chef.webp"
-            imageAlt="chef cooking "
+            imageSrc="/images/boy-with-cat.webp"
+            imageAlt="boy with cat"
             text="Every recipe we craft is rooted in our passion for providing pets with wholesome, nutritious, and locally sourced ingredients, ensuring they thrive and live their happiest lives. "
           />
         </div>
@@ -143,7 +142,7 @@ AboutUsBodyProps) {
       </div>
 
       <div className="mt-[33vw] sm:mt-[17.70vw]">
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center mb-[var(--space-30-52)]">
           <Typography
             tag="h5"
             text="our Mission"
@@ -172,9 +171,10 @@ AboutUsBodyProps) {
                   priority
                 />
               </div>
-              <p className="sm:border-r-1 sm:border-[#79D2A7]  sm:pr-[var(--space-23-70)] text-center">
-                100% natural
-              </p>
+              <div className="sm:border-r-1 sm:border-[#79D2A7]  sm:pr-[var(--space-23-70)] text-center">
+                <Typography tag="h6" text="100% natural" 
+                className="text-secondary-1 capitalize"/>
+              </div>
             </div>
             <div className="flex flex-col sm:flex-row gap-[var(--space-10-20)] px-[var(--space-23-70)] sm:pr-0 border border-[#79D2A7] border-y-0 sm:border-0 items-center">
               <div className="w-[11.44vw] sm:w-[3.12vw]">
@@ -186,23 +186,25 @@ AboutUsBodyProps) {
                   priority
                 />
               </div>
-              <p className="sm:border-r-1 sm:border-[#79D2A7] sm:pr-[var(--space-23-70)] text-center">
-                high-quality
-              </p>
+              <div className="sm:border-r-1 sm:border-[#79D2A7] sm:pr-[var(--space-23-70)] text-center">
+                <Typography tag="h6" text="high-quality" 
+                className="text-secondary-1 capitalize"/>
+              </div>
             </div>
             <div className="flex flex-col sm:flex-row gap-[var(--space-10-20)] px-[var(--space-23-70)] sm:pr-0 items-center">
               <div className="w-[11.44vw] sm:w-[3.12vw]">
                 <Image
-                  src="/icons/natural-food.svg"
+                  src="/icons/maps-location.svg"
                   alt="mission"
                   className="!static inset-0 w-full !h-full object-cover object-center"
                   fill
                   priority
                 />
               </div>
-              <p className=" sm:pr-[var(--space-23-70)] text-center">
-                locally crafted
-              </p>
+              <div className=" sm:pr-[var(--space-23-70)] text-center">
+                <Typography tag="h6" text="locally crafted" 
+                className="text-secondary-1 capitalize"/>
+              </div>
             </div>
           </div>
           <div>
