@@ -33,8 +33,7 @@ const bannerVariants = cva(
   }
 );
 
-export default function HeroSection() {
-  const banners = [
+const banners = [
     {
       id: "1",
       image: {
@@ -73,6 +72,8 @@ export default function HeroSection() {
       bannerThemeColor: "blue",
     },
   ];
+
+export default function HeroSection() {
 
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
 
