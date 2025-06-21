@@ -102,7 +102,7 @@ const FooterBannerCTA: React.FC<
           {buttonText && buttonLink && (
             <Button
               // href={buttonLink}
-              variant={"secondaryBtnTextSecondary1"}
+              variant={"whiteBtnSecondary2BorderAndText"}
               size={"md"}
               className="mt-(--space-24-45)"
             >

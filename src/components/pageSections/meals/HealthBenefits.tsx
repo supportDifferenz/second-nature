@@ -29,7 +29,7 @@ export default function HealthBenefits({
             key={index}
             className={`flex flex-col items-center sm:flex-row gap-[var(--space-8-30)] 
             ${index % 2 === 0 ? "pr-[var(--space-22-43)] border-r" : "pl-[var(--space-22-43)]"} 
-            ${index < 2 ? "pb-[var(--space-22-43)] border-b" : "pt-[var(--space-22-43)]"} 
+            ${index < 2 ? "pt-[var(--space-8-17)] pb-[var(--space-22-43)] border-b" : "pt-[var(--space-22-43)] pb-[var(--space-8-13)]"} 
             w-[50%] border-secondary-2`}
           >
             <div className="w-[22vw] sm:w-[12.25vw]">
@@ -43,7 +43,7 @@ export default function HealthBenefits({
             </div>
             <Typography
               tag="h6"
-              className="capitalize font-bold text-center w-[85%] sm:w-auto"
+              className="capitalize font-bold text-center sm:text-start w-[85%] sm:w-auto"
               text={benefit.title}
               role="title"
               ariaLabel={benefit.title}
