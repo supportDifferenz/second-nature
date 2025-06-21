@@ -41,8 +41,8 @@ const standardsData = [
       "Products must comply with strict European Union regulations regarding food safety, including manufacturing under hygienic conditions.",
   },
   {
-    image: "icons/life-stage.svg",
-    title: "Life Stage Support",
+    image: "icons/drop-filler.svg",
+    title: "No Harmful Additives",
     description:
       "Only approved additives that enhance nutritional value, safety, or palatability are permitted, with no harmful substances allowed.",
   },
@@ -58,7 +58,7 @@ export default function NutritionalGuidelines() {
   return (
     <div className="relative">
         <div className="relative h-[var(--space-511-846)] overflow-x-clip">
-          <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-[40%] flex flex-col items-center justify-center w-[var(--space-460-500)] h-[var(--space-460-500)]">
+          <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-[40%] flex flex-col items-center justify-center w-[460px] h-[460px]">
             {/* White Blurred Circle Behind */}
             <div className="absolute inset-0 rounded-full bg-white border border-primary z-0" />
 
@@ -76,7 +76,7 @@ export default function NutritionalGuidelines() {
             <div className="absolute inset-0 bg-white opacity-100 blur-[36px] z-0 ">
               {" "}
             </div>
-            <div className="relative z-10 flex flex-col items-center justify-center gap-2 text-center px-4 ">
+            <div className="relative z-10 flex flex-col items-center justify-center gap-2 text-center px-4 lg:mt-10">
               <Typography
                 tag="h1"
                 text="Exceptional Nutrition."
