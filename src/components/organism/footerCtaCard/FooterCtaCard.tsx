@@ -79,7 +79,7 @@ export default function FooterCtaCard({
             Learn More
           </Button>
         </div>
-        <div className="absolute top-[38%] sm:top-[10%] left-[-5%] sm:left-[48%] inset-0 w-[99.5vw] sm:w-[26.3vw] h-[124vw] sm:h-[32.8vw]">
+        <div className="absolute top-[38%] sm:top-[10%] left-[-5%] sm:left-[42%] inset-0 w-[99.5vw] sm:w-[26.3vw] lg:w-max h-[124vw] sm:h-[32.8vw]">
           <Image
             alt=""
             src={petFood.imageSrc}

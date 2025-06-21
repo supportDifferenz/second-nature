@@ -19,19 +19,19 @@ export default function GuidelinesCard() {
           <Typography
             tag="h3"
             text="Guided By Science"
-            className=" text-white "
+            className=" text-white whitespace-nowrap"
           />
           <Typography
-            tag="h2"
+            tag="h1"
             text="Driven By Love"
-            className="highlight  text-white "
+            className="highlight  text-white whitespace-nowrap"
           />
         </div>
       </div>
 
       <div className="w-full relative lg:w-[50%] gap-[var(--space-30-40)] p-16 flex flex-col ">
         <div className="flex flex-col items-center mt-[-100px] sm:mt-0 lg:items-start sm:flex-row gap-7">
-          <div className="w-[15.6vw] sm:w-[6.6vw]">
+          <div className="w-[15.6vw] sm:w-[8.6vw] lg:w-[128px]">
             <Image
               src="/images/fediaf.webp"
               alt="mission"
@@ -79,7 +79,7 @@ export default function GuidelinesCard() {
           </Typography>
         </div>
 
-        <div className="flex flex-wrap whitespace-nowrap">
+        <div className="flex flex-wrap justify-center gap-y-7 sm:gap-y-0">
 
           <div className="flex items-center gap-2.5 pr-[var(--space-8-17)]">
             <div className="w-10 h-10">
