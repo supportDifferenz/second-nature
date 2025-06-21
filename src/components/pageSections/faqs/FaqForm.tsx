@@ -24,7 +24,7 @@ export default function FaqForm() {
       <Typography
         tag="p"
         text="Have questions about our natural pet food? Explore our FAQ section for quick and helpful answers to common queries about ingredients, feeding, storage, and more"
-        className="font-bold text-text-color text-center px-3.5 sm:px-0"
+        className="font-bold text-text-color text-center lg:text-left px-3.5 sm:px-0"
       />
 
       <form
@@ -85,7 +85,7 @@ export default function FaqForm() {
       )}{" "} */}
           </div>
         </div>
-        <div className="flex flex-col mt-4 lg:mt-3.5 mb-[var(--space-26-36)]">
+        <div className="flex flex-col mt-4 sm:mt-4.5 lg:mt-4.5 mb-[var(--space-26-36)]">
           <Label className="!mb-1.5 text-mob-16 sm:text-tab-18 lg:text-web-22 text-primary-dark !font-bold">
             Message
           </Label>
