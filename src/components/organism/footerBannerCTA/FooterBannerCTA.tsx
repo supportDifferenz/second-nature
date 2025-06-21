@@ -23,8 +23,8 @@ const footerCTAVariants = cva(
   }
 );
 
-const getResponsiveImage = (image: { web: string; mobile: string }) => {
-  return window.innerWidth < 768 ? image.mobile : image.web;
+const getResponsiveImage = (image: { web: string; tablet: string; mobile: string }) => {
+  return window.innerWidth < 576 ? image.mobile : window.innerWidth < 992 ? image.tablet : image.web;
 };
 
 const FooterBannerCTA: React.FC<
