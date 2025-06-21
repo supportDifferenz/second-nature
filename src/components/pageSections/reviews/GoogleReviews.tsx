@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Typography from "@/components/atoms/typography/Typography";
 import { Button } from "@/components/ui/button";
 import { Star, ChevronLeft, ChevronRight } from "lucide-react";
+import Image from "next/image";
 
 const reviews = [
   {
@@ -133,7 +134,7 @@ export default function GoogleReviews() {
 
             {/* Rating Row */}
             <div className="flex flex-col sm:flex-row items-center gap-[var(--space-10-20)]">
-              <div className="flex items-center gap-1">
+              <div className="flex items-center gap-1 mt-2 lg:mt-3">
                 {[...Array(5)].map((_, i) => (
                   <Star
                     key={i}
@@ -197,9 +198,11 @@ export default function GoogleReviews() {
                   className="flex flex-col justify-between text-center w-[81.3vw] sm:w-[32vw] lg:w-[25.5vw] min-h-[94.4vw] sm:min-h-[48vw] lg:min-h-[26.04vw] rounded-xl border border-[#E6E6E6] pt-9 px-[var(--space-24-36)] pb-[var(--space-34-38)] shadow-sm flex-shrink-0"
                 >
                   <div>
-                    <img
+                    <Image
                       src={r.image}
                       alt={r.name}
+                      width={100}
+                      height={100}
                       className="w-[var(--space-80-100)] h-[var(--space-80-100)] rounded-full mx-auto mb-2 object-cover"
                     />
                     <Typography tag="h5" text={r.name} className="text-text-color "/>
@@ -217,10 +220,12 @@ export default function GoogleReviews() {
                     <Typography tag="p" text={r.review} className="text-secondary-1 mt-3"/>
                   </div>
 
-                  <div className="mt-1">
-                    <img
+                  <div className="mt-1 lg:mt-6">
+                    <Image
                       src="/images/google-logo.svg"
                       alt="Google"
+                      width={100}
+                      height={100}
                       className="w-10 h-10 mx-auto"
                     />
                   </div>

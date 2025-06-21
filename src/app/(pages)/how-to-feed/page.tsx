@@ -34,9 +34,9 @@ export default function Subscription() {
         <FooterBannerCTA
           id="footer-banner"
           image={{
-            web: "/images/subscription-footer-CTA-banner-web.webp",
-            tablet: "/images/subscription-footer-CTA-banner-mob.webp",
-            mobile: "/images/subscription-footer-CTA-banner-mob.webp",
+            web: "/images/WebHowToFeedCTABanner.webp",
+            tablet: "/images/WebHowToFeedCTABanner.webp",
+            mobile: "/images/MobHowToFeedCTABanner.webp",
           }}
           caption="get started with us"
           captionColor="#fff"
