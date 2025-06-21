@@ -71,7 +71,7 @@ const FooterBannerCTA: React.FC<
         })}`}
       >
         <div
-          className={`max-w-[95%] sm:max-w-[70%] lg:max-w-[55%] ${footerCTAVariants(
+          className={`max-w-[95%] sm:max-w-[70%] lg:max-w-[70%] ${footerCTAVariants(
             { align }
           )}`}
         >
@@ -94,7 +94,7 @@ const FooterBannerCTA: React.FC<
             />
           )}
           {paragraph && (
-            <Typography tag="h6" text={paragraph} className="" style={{ color: paragraphColor }} />
+            <Typography tag="h6" text={paragraph} className="mt-3.5 lg:mt-2.5" style={{ color: paragraphColor }} />
             // <p className="" style={{ color: paragraphColor }}>
             //   {paragraph}
             // </p>
