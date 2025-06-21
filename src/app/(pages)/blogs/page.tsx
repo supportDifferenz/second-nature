@@ -60,7 +60,7 @@ function Page() {
       }}>
         <div className="container pt-14 sm:pt-12 mb-[var(--space-80-85)] flex flex-col items-center">
           <Typography
-            tag="h2"
+            tag="h3"
             text="The curated home"
             className="capitalize text-primary-dark text-center"
           />
@@ -72,7 +72,7 @@ function Page() {
           <Typography
             tag="h6"
             text="Find insights, guides and tips and tricks — all aiming to help your pup live longer."
-            className="text-secondary-1 text-center w-[80%] lg:w-[35vw]"
+            className="text-secondary-1 text-center w-[80%] lg:w-[35vw] mt-6 sm:mt-5 lg:mt-4"
           />
         </div>
 
