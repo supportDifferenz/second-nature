@@ -11,7 +11,7 @@ interface DayPlanProps {
 
 export default function DayPlan({ image, days, text }: DayPlanProps) {
   return (
-    <div className="flex flex-col gap-6 w-[79.43vw] sm:w-[35vw] lg:w-[17.7vw] lg:min-h-max p-9 rounded-xl bg-primary-light">
+    <div className="flex flex-col gap-6 w-[79.43vw] sm:w-[35vw] lg:w-[17vw] lg:min-h-max p-9 rounded-xl bg-primary-light">
       <div className="w-[37.3vw] sm:w-[20.3vw] lg:w-[8.33vw] relative "> {/* You need to specify a height when using next/image with fill */}
         <Image
           src={image}
