@@ -17,7 +17,7 @@ function Page() {
       <div className="mt-[var(--space-40-90)]">
         <FaqSection onAskUsClick={scrollToForm} />
       </div>
-      <div ref={formRef} className="container pb-12">
+      <div ref={formRef} className="container pb-12 lg:hidden">
         <FaqForm />
       </div>
     </MainLayout>
