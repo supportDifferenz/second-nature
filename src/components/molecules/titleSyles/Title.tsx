@@ -1,7 +1,10 @@
+"use client";
+
 import Typography from "@/components/atoms/typography/Typography";
 import React from "react";
 import { TitlePropsType } from "@/components/types/type";
 import { cn } from "@/lib/utils";
+// import { useSearchParams } from "next/navigation";
 
 export const PrimaryInlineTitle: React.FC<TitlePropsType> = ({
   title = "no text",
@@ -197,7 +200,8 @@ export const SecondaryInlineTitle: React.FC<TitlePropsType> = ({
   );
 };
 
-export const SecondaryBlockTitle: React.FC<TitlePropsType> = ({
+export const SecondaryBlockTitle: React.FC<TitlePropsType & { dogOrCat?: string }> = ({
+  dogOrCat,
   title = "no text",
   highlight,
   paragraph,
@@ -208,6 +212,10 @@ export const SecondaryBlockTitle: React.FC<TitlePropsType> = ({
   order = "accenting",
   paragraphColor,
 }) => {
+
+  // const searchParams = useSearchParams();
+  // const pet = searchParams.get("pet");
+
   return (
     <div className={`${textAlign}  ${className}`}>
       {caption && (
@@ -229,7 +237,8 @@ export const SecondaryBlockTitle: React.FC<TitlePropsType> = ({
           style={{ color: `${textColor}` }}
         >
           {" "}
-          <span className="highlight block">{highlight}</span>
+          {/* <span className="highlight block">{highlight}</span> */}
+          <span className={`highlight ${dogOrCat === "cat" ? "max-sm:block" : "block"}`}>{highlight}</span>
         </Typography>
       ) : (
         <Typography

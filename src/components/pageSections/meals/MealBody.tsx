@@ -428,11 +428,14 @@ export default function MealBody() {
       </div>
 
       {/* Typography Section */}
-      <SecondaryBlockTitle
-        title={currentMeal.title1}
-        highlight={currentMeal.title2}
-        paragraph={currentMeal.description}
-      />
+      {/* <Suspense fallback={<div>Loading...</div>}> */}
+        <SecondaryBlockTitle
+          dogOrCat={pet as "dog" | "cat"}
+          title={currentMeal.title1}
+          highlight={currentMeal.title2}
+          paragraph={currentMeal.description}
+        />
+      {/* </Suspense> */}
 
       {/* Ingredient Table */}
       <IngredientTable ingredients={currentMeal.ingredients} />
