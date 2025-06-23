@@ -352,7 +352,7 @@ export default function MealBody() {
   // Function to handle tab switching
   const handleMealSwitch = (meal: "beef" | "chicken" | "lamb") => {
     setSelectedMeal(meal);
-    window.history.pushState({}, "", `?protein=${meal}`);
+    window.history.pushState({}, "", `?pet=${pet}&protein=${meal}`);
   };
 
   // Get the current meal's content
