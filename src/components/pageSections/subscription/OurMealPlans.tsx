@@ -34,21 +34,20 @@ const mealsData: MealCardPropsType[] = [
       { label: "Get Started", route: "/get-started", variant: "primary" },
     ],
   },
- 
 ];
 
 export default function OurMealPlans() {
   return (
     <section>
-      <div className="container flex">
-        <div className="flex-[42%]  relative ">
+      <div className="container flex flex-col lg:flex-row">
+        <div className="flex-[42%] order-2 lg:order-1 relative ">
           <div className="sticky top-[13%] tall-screen  h-fit">
             <SecondaryInlineTitle
               title="Our"
               highlight="Meal Plans "
               textAlign="text-center sm:text-center  lg:text-left"
               textColor="#00683D"
-              className="mb-10 sm:mx-auto lg:ml-0"
+              className="mb-10 sm:mx-auto lg:ml-0 hidden lg:block"
             />
             <div className="ml-[-30%] ">
               <Image
@@ -60,8 +59,22 @@ export default function OurMealPlans() {
             </div>
           </div>
         </div>
-        <div className="flex-[58%] ">
-          <ul className="flex items-center justify-center flex-wrap gap-6 gap-y-4">
+        <div className="flex-[58%] order-1 lg:order-2">
+          <div className="flex flex-col items-center justify-center mb-10 lg:hidden">
+            <Typography
+              tag="h2"
+              text="Our"
+              className="text-primary-dark"
+              ariaLabel=""
+            />
+            <Typography
+              tag="h2"
+              text="Subscription Plans"
+              className="text-primary-dark highlight whitespace-nowrap"
+              ariaLabel=""
+            />
+          </div>
+          <ul className="hidden lg:flex items-center justify-center flex-wrap gap-6 gap-y-4">
             <li className="flex gap-2.5 items-center">
               <div className="w-7">
                 <Image
@@ -102,7 +115,7 @@ export default function OurMealPlans() {
               </span>
             </li>
           </ul>
-          <div className="my-15 flex flex-col items-center justify-center">
+          <div className="my-15 hidden lg:flex flex-col items-center justify-center">
             <div className="flex">
               <div className="">
                 <div className="pr-11 border-r border-primary">
