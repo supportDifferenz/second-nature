@@ -5,6 +5,7 @@ import FAQS from "@/components/organism/faq/FAQS";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import React, { useRef } from "react";
+import FaqForm from "./FaqForm";
 
 const faqsData = [
   {
@@ -59,7 +60,7 @@ export default function FaqSection({ onAskUsClick }: FaqSectionProps) {
     <section>
       <div className="container flex flex-col sm:flex-row gap-[var(--space-30-60)] lg:justify-between">
         <div className="relative">
-          <div className="sm:-ml-[16%] lg:-ml-[2%] xl:-ml-[16%] h-fit sm:sticky top-[5%]">
+          <div className="lg:-ml-[2%] xl:-ml-[16%] h-fit sm:sticky top-[5%]">
             <SecondaryBlockTitle
               title="frequently asked"
               highlight="questions "
@@ -139,6 +140,9 @@ export default function FaqSection({ onAskUsClick }: FaqSectionProps) {
         </div>
         <div className="lg:w-[49.2vw]">
           <FAQS faqs={faqsData} defaultOpenIndex={0} />
+          <div className="max-lg:hidden">
+            <FaqForm />
+          </div>
         </div>
       </div>
     </section>
