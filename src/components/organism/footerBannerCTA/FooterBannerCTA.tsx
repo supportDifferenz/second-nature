@@ -77,7 +77,7 @@ const FooterBannerCTA: React.FC<
         >
           {caption && (
             <Typography
-              tag="h5"
+              tag="h6"
               text={caption}
               className="mb-2.5 uppercase subtitle !font-normal"
               style={{ color: captionColor }}
