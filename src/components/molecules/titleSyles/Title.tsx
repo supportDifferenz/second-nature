@@ -221,7 +221,7 @@ export const SecondaryBlockTitle: React.FC<TitlePropsType> = ({
       {order === "accenting" ? (
         <Typography
           tag="h2"
-          className={`capitalize   `}
+          className={`capitalize max-sm:mx-5`}
           text={title}
           role="title"
           ariaLabel={title + highlight}
@@ -234,7 +234,7 @@ export const SecondaryBlockTitle: React.FC<TitlePropsType> = ({
       ) : (
         <Typography
           tag="h2"
-          className={`capitalize   `}
+          className={`capitalize max-sm:mx-5`}
           text={highlight || ""}
           role="title"
           ariaLabel={title + highlight}
@@ -254,7 +254,7 @@ export const SecondaryBlockTitle: React.FC<TitlePropsType> = ({
             ${textAlign === "text-left" ? "ml-0 sm:max-w-[80%]  lg:max-w-[60%]" : ""}
             ${textAlign === "text-center" ? "mx-auto sm:max-w-[70%]  lg:max-w-[50%]" : ""}
             ${textAlign === "text-right" ? "mr-0 sm:max-w-[80%]  lg:max-w-[60%]" : ""}
-            mt-[var(--space-20-30)]
+            mt-[var(--space-20-30)] max-sm:mx-5
           `}
           style={{
             color: `${paragraphColor ? paragraphColor : "var(--text-color)"}`,
