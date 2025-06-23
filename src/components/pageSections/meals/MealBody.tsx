@@ -352,7 +352,7 @@ export default function MealBody() {
   // Function to handle tab switching
   const handleMealSwitch = (meal: "beef" | "chicken" | "lamb") => {
     setSelectedMeal(meal);
-    window.history.pushState({}, "", `?protein=${meal}`);
+    window.history.pushState({}, "", `?pet=${pet}&protein=${meal}`);
   };
 
   // Get the current meal's content
@@ -361,7 +361,7 @@ export default function MealBody() {
   return (
     <div className="w-full mt-[-3%] sm:mt-[-1.4%]">
       {/* Tab Buttons */}
-      <div className="flex gap-[var(--space-8-13)] mb-[var(--space-97-130)] w-fit mx-auto relative z-20">
+      {/* <div className="flex gap-[var(--space-8-13)] mb-[var(--space-97-130)] w-fit mx-auto relative z-20">
         <Button
           variant={selectedMeal === "beef" ? "primaryBtn" : "secondaryBtn"}
           onClick={() => handleMealSwitch("beef")}
@@ -380,6 +380,33 @@ export default function MealBody() {
           onClick={() => handleMealSwitch("lamb")}
         >
           Lamb Bowl
+        </Button>
+      </div> */}
+
+      <div className="flex gap-2 sm:gap-[var(--space-8-13)] mb-[var(--space-97-130)] w-fit mx-auto z-20 sticky top-5 max-sm:px-5">
+        <Button
+          variant={selectedMeal === "beef" ? "primaryBtn" : "secondaryBtn"}
+          className="max-sm:!px-3"
+          onClick={() => handleMealSwitch("beef")}
+        >
+          {/* Beef Bowl */}
+          <span className="max-sm:text-sm">Beef Bowl</span>
+        </Button>
+        <Button
+          variant={selectedMeal === "chicken" ? "primaryBtn" : "secondaryBtn"}
+          className="max-sm:!px-3"
+          onClick={() => handleMealSwitch("chicken")}
+        >
+          {/* Chicken Bowl */}
+          <span className="max-sm:text-sm">Chicken Bowl</span>
+        </Button>
+        <Button
+          variant={selectedMeal === "lamb" ? "primaryBtn" : "secondaryBtn"}
+          className="max-sm:!px-3"
+          onClick={() => handleMealSwitch("lamb")}
+        >
+          {/* Lamb Bowl */}
+          <span className="max-sm:text-sm">Lamb Bowl</span>
         </Button>
       </div>
 
@@ -401,11 +428,14 @@ export default function MealBody() {
       </div>
 
       {/* Typography Section */}
-      <SecondaryBlockTitle
-        title={currentMeal.title1}
-        highlight={currentMeal.title2}
-        paragraph={currentMeal.description}
-      />
+      {/* <Suspense fallback={<div>Loading...</div>}> */}
+        <SecondaryBlockTitle
+          dogOrCat={pet as "dog" | "cat"}
+          title={currentMeal.title1}
+          highlight={currentMeal.title2}
+          paragraph={currentMeal.description}
+        />
+      {/* </Suspense> */}
 
       {/* Ingredient Table */}
       <IngredientTable ingredients={currentMeal.ingredients} />

@@ -49,7 +49,7 @@ AboutUsBodyProps) {
     <div>
       <div className="flex flex-col items-center mt-[var(--space-95-195)] w-fit mx-auto">
         <Typography
-          tag="h5"
+          tag="h6"
           text="Our Story"
           className="uppercase text-secondary-1 mx-auto"
         />
