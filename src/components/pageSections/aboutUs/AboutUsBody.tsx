@@ -32,7 +32,7 @@ const footerCtaData = {
     highlight: "Transition",
     paragraph:
       "Gradually introduce our fresh meals to ensure a smooth adjustment and lasting benefits for your furry child",
-    imageSrc: "/images/meal-transition.webp",
+    imageSrc: "/images/meal-transition-red.webp",
   },
   petFood: {
     title: "Begin Your Pet’s",
