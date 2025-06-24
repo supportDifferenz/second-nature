@@ -34,11 +34,11 @@ const footerCtaData = {
     imageSrc: "/images/meal-transition.webp",
   },
   petFood: {
-    title: "Looking for",
-    highlight: "Cat Food?",
+    title: "Begin Your Pet’s",
+    highlight: "Meal Journey",
     paragraph:
       "Check out our nutrient-rich and irresistibly delicious Cat Bowls for optimal feline health and wellness!",
-    imageSrc: "/images/cat.webp",
+    imageSrc: "/images/multiple-pet.webp",
   },
 };
 
