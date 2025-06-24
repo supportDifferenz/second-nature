@@ -1,11 +1,12 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, startTransition } from "react";
 import { cva, VariantProps } from "class-variance-authority";
 import { FooterBannerCTAPropsType } from "@/components/types/type";
 import Image from "next/image";
 import Typography from "@/components/atoms/typography/Typography";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 
 const footerCTAVariants = cva(
   "relative flex flex-col w-full bg-cover bg-center transition-all",
@@ -27,8 +28,12 @@ const getResponsiveImage = (image: { web: string; tablet: string; mobile: string
   return window.innerWidth < 576 ? image.mobile : window.innerWidth < 992 ? image.tablet : image.web;
 };
 
+type FooterBannerCTAPropsWithSubParagraph = FooterBannerCTAPropsType & {
+  subParagraph?: string;
+};
+
 const FooterBannerCTA: React.FC<
-  FooterBannerCTAPropsType & VariantProps<typeof footerCTAVariants>
+  FooterBannerCTAPropsWithSubParagraph & VariantProps<typeof footerCTAVariants>
 > = ({
   id,
   image,
@@ -36,6 +41,7 @@ const FooterBannerCTA: React.FC<
   captionColor,
   title,
   paragraph,
+  subParagraph,
   paragraphColor,
   subTitle,
   buttonText,
@@ -43,6 +49,9 @@ const FooterBannerCTA: React.FC<
   buttonLink,
   align,
 }) => {
+
+  const router = useRouter();
+
   const [activeImage, setActiveImage] = useState(image.web);
 
   useEffect(() => {
@@ -77,14 +86,14 @@ const FooterBannerCTA: React.FC<
         >
           {caption && (
             <Typography
-              tag="h5"
+              tag="h6"
               text={caption}
-              className="mb-2.5 uppercase subtitle !font-normal"
+              className="uppercase subtitle !font-normal"
               style={{ color: captionColor }}
             />
           )}
 
-          {title && <Typography tag="h1" text={title} className="highlight" />}
+          {title && <Typography tag="h1" text={title} className="highlight capitalize" />}
 
           {subTitle && (
             <Typography
@@ -94,17 +103,22 @@ const FooterBannerCTA: React.FC<
             />
           )}
           {paragraph && (
-            <Typography tag="h6" text={paragraph} className="mt-3.5 lg:mt-2.5" style={{ color: paragraphColor }} />
-            // <p className="" style={{ color: paragraphColor }}>
-            //   {paragraph}
-            // </p>
+            <Typography tag="h6" text={paragraph} style={{ color: paragraphColor }} />
+          )}
+          {subParagraph && (
+            <Typography tag="p" text={subParagraph} className="!text-sm mt-(--space-24-45)" style={{ color: paragraphColor }} />
           )}
           {buttonText && buttonLink && (
             <Button
-              // href={buttonLink}
               variant={"whiteBtnSecondary2BorderAndText"}
               size={"md"}
-              className="mt-(--space-24-45)"
+              // className="mt-(--space-24-45)"
+              className="mt-3.5 lg:mt-2.5 bg-primary-light"
+              onClick={() => {
+                startTransition(() => {
+                  router.push(buttonLink);
+                })
+              }}
             >
               {buttonText}
             </Button>

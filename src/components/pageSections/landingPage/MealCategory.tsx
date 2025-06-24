@@ -22,7 +22,7 @@ export default function MealCategory() {
           ],
           buttons: [
             { label: "Get Started", route: "/location", variant: "primary" },
-            { label: "Know More", route: "/meals?protein=beef", variant: "secondary" },
+            { label: "Know More", route: "/meals?pet=dog&protein=beef", variant: "secondary" },
           ],
         },
         {
@@ -37,7 +37,7 @@ export default function MealCategory() {
           ],
           buttons: [
             { label: "Get Started", route: "/location", variant: "primary" },
-            { label: "Know More", route: "/meals?protein=lamb", variant: "secondary" },
+            { label: "Know More", route: "/meals?pet=dog&protein=lamb", variant: "secondary" },
           ],
         },
         {
@@ -52,7 +52,7 @@ export default function MealCategory() {
           ],
           buttons: [
             { label: "Get Started", route: "/location", variant: "primary" },
-            { label: "Know More", route: "/meals?protein=chicken", variant: "secondary" },
+            { label: "Know More", route: "/meals?pet=dog&protein=chicken", variant: "secondary" },
           ],
         },
       ],
@@ -72,7 +72,7 @@ export default function MealCategory() {
           ],
           buttons: [
             { label: "Get Started", route: "/location", variant: "primary" },
-            { label: "Know More", route: "/meals?protein=beef", variant: "secondary" },
+            { label: "Know More", route: "/meals?pet=cat&protein=beef", variant: "secondary" },
           ],
         },
         {
@@ -87,7 +87,7 @@ export default function MealCategory() {
           ],
           buttons: [
             { label: "Get Started", route: "/location", variant: "primary" },
-            { label: "Know More", route: "/meals?protein=lamb", variant: "secondary" },
+            { label: "Know More", route: "/meals?pet=cat&protein=lamb", variant: "secondary" },
           ],
         },
         {
@@ -102,7 +102,7 @@ export default function MealCategory() {
           ],
           buttons: [
             { label: "Get Started", route: "/location", variant: "primary" },
-            { label: "Know More", route: "/meals?protein=chicken", variant: "secondary" },
+            { label: "Know More", route: "/meals?pet=cat&protein=chicken", variant: "secondary" },
           ],
         },
       ],
