@@ -10,6 +10,7 @@ import {
 import FooterCtaCard from "@/components/organism/footerCtaCard/FooterCtaCard";
 import Image from "next/image";
 import React from "react";
+import FooterBannerCTA from "@/components/organism/footerBannerCTA/FooterBannerCTA";
 
 interface AboutUsBodyProps {
   cardTitleData?: {
@@ -259,7 +260,28 @@ AboutUsBodyProps) {
         </div>
       </div>
 
-      <div className="pb-[var(--space-120-180)]">
+      <div className="mt-[var(--space-120-180)]">
+        <FooterBannerCTA
+          id="footer-banner"
+          image={{
+            web: "/images/about-us-footer-cta.webp",
+            tablet: "/images/about-us-footer-cta-mob.webp",
+            mobile: "/images/about-us-footer-cta-mob.webp",
+          }}
+          caption="get started with us"
+          captionColor="#fff"
+          title="Give Your Fur Baby"
+          subTitle="the Gift of Real Food Today!"
+          paragraph="Pets deserve better than processed kibble or canned food. Second Nature believes in nourishing your fur baby with fresh meals made from real, human-grade ingredients."
+          paragraphColor="#FFFFFF"
+          buttonText="Build your plan"
+          buttonLink="/signup"
+          bannerThemeColor="#fff"
+          align="center"
+        />
+      </div>
+
+      <div className="py-[var(--space-120-180)]">
         <FooterCtaCard
           mealTransition={footerCtaData.mealTransition}
           petFood={footerCtaData.petFood}

@@ -30,8 +30,8 @@ export default function FooterCtaCard({
   return (
     <div className="flex flex-col sm:flex-row gap-[var(--space-30-60)] w-fit mx-auto">
       {/* Meal Transition Card */}
-      <div className="flex items-center justify-center h-[93.45vw] sm:h-[31.2vw] w-[90vw] sm:w-[38.5vw] relative">
-        <div className=" absolute h-[93.45vw] sm:h-auto top-0 z-[-1]">
+      <div className="flex items-center justify-center h-[93.45vw] sm:h-[55vw] lg:h-[31.2vw] w-[90vw] sm:w-[38.5vw] relative">
+        <div className=" absolute h-[93.45vw] sm:h-[55vw] lg:h-auto top-0 z-[-1]">
           <Image
             src={mealTransition.imageSrc}
             alt="Meal Transition"
@@ -57,7 +57,7 @@ export default function FooterCtaCard({
       </div>
 
       {/* Pet Food Card */}
-      <div className="flex flex-col items-center justify-center  h-[175vw] sm:h-[31.2vw] w-[90vw] sm:w-[38.5vw] relative">
+      <div className="flex flex-col items-center justify-center  h-[175vw] sm:h-[55vw] lg:h-[31.2vw] w-[90vw] sm:w-[38.5vw] relative">
         <div className="bg-[#FBE5C7] sm:px-[3.12vw] py-[var(--space-52-86)] lg:py-10 w-full rounded-t-2xl h-[70%] sm:h-[80%]">
           <PetFoodLookingTitle
             className="text-secondary-1 px-12 sm:pl-0 sm:pr-[35%]"
@@ -79,7 +79,7 @@ export default function FooterCtaCard({
             Learn More
           </Button>
         </div>
-        <div className="absolute top-[40%] sm:top-[10%] lg:top-[16%] left-[-5%] sm:left-[42%] inset-0 w-[99.5vw] sm:w-[26.3vw] lg:w-max h-auto sm:h-[28vw]">
+        <div className="absolute top-[40%] sm:top-[35%] lg:top-[16%] left-[-5%] sm:left-[42%] inset-0 w-[99.5vw] sm:w-[26.3vw] lg:w-max h-auto sm:h-[28vw]">
           <Image
             alt=""
             src={petFood.imageSrc}
