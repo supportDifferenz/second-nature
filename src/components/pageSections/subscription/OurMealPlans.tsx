@@ -34,6 +34,34 @@ const mealsData: MealCardPropsType[] = [
       { label: "Get Started", route: "/get-started", variant: "primary" },
     ],
   },
+  {
+    tag: "MEALS",
+    title: "Beef Bowl",
+    image: "/images/beef-bowl-cat.webp",
+    features: [
+      "High Protein Content",
+      "Healthy Fats for Energy",
+      "Iron & Zinc for Immunity",
+      "Essential Amino Acids",
+    ],
+    buttons: [
+      { label: "Get Started", route: "/get-started", variant: "primary" },
+    ],
+  },
+  {
+    tag: "MEALS",
+    title: "Beef Bowl",
+    image: "/images/beef-bowl-cat.webp",
+    features: [
+      "High Protein Content",
+      "Healthy Fats for Energy",
+      "Iron & Zinc for Immunity",
+      "Essential Amino Acids",
+    ],
+    buttons: [
+      { label: "Get Started", route: "/get-started", variant: "primary" },
+    ],
+  },
 ];
 
 export default function OurMealPlans() {

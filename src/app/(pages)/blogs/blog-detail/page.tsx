@@ -3,8 +3,32 @@ import React from "react";
 import Typography from "@/components/atoms/typography/Typography";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import BlogListCard from "@/components/pageSections/blogs/BlogListCard";
+
+const blogData = [
+  {
+    title:
+      "9 common dog skin conditions: how to spot & treat them (vet approved)",
+    description:
+      "There’s nothing like a good scratch. But if your dog is scratching more than usual, it could be a sign of a skin...",
+    image: "/images/blog-1.webp",
+  },
+  {
+    title:
+      "several uncommon dog urinary conditions: how to spot & treat them (vet approved)",
+    description:
+      "Choosing the right treats can help reinforce good behavior and support your pup’s wellbeing...",
+    image: "/images/blog-2.webp",
+  },
+];
 
 function page() {
+  const socialIcons = [
+    { src: "/icons/facebook-icon.svg", alt: "Facebook", href: "#" },
+    { src: "/icons/linkedIn-icon.svg", alt: "LinkedIn", href: "#" },
+    { src: "/icons/instagram-icon.svg", alt: "Instagram", href: "#" },
+    { src: "/icons/twitter-icon.svg", alt: "Twitter", href: "#" },
+  ];
   return (
     <MainLayout>
       <div
@@ -84,6 +108,90 @@ function page() {
                     />
                   </li>
                 </ul>
+              </div>
+              <div className="mt-12 lg:hidden">
+                <div className="lg:w-[75%] lg:ml-auto bg-[#FDFFF4] border border-[#E4E7D3] px-5 sm:px-6 pt-[var(--space-20-40)] pb-[var(--space-24-45)] rounded-2xl">
+                  <div className="flex flex-col gap-[var(--space-16-21)]">
+                    <Typography
+                      tag="p"
+                      text="Jump into section"
+                      className="uppercase font-bold"
+                    />
+
+                    <ul className="list-disc flex flex-col gap-0.5 ml-4 marker:text-[10px] marker:text-gray-700">
+                      <li>
+                        <Typography
+                          tag="p"
+                          text="Top takeaways"
+                          className=" "
+                        />
+                      </li>
+                      <li>
+                        <Typography
+                          tag="p"
+                          text="Why is my dog vomiting?"
+                          className=" "
+                        />
+                      </li>
+                      <li>
+                        <Typography
+                          tag="p"
+                          text="When to worry"
+                          className=" "
+                        />
+                      </li>
+                      <li>
+                        <Typography
+                          tag="p"
+                          text="Understanding colour hues and clues"
+                          className=" "
+                        />
+                      </li>
+                      <li>
+                        <Typography
+                          tag="p"
+                          text="Understanding consistency and telltale textures"
+                          className=" "
+                        />
+                      </li>
+                      <li>
+                        <Typography
+                          tag="p"
+                          text="Preventing vomiting in dogs"
+                          className=" "
+                        />
+                      </li>
+                      <li>
+                        <Typography
+                          tag="p"
+                          text="How veterinarians diagnose the cause of vomiting"
+                          className=" "
+                        />
+                      </li>
+                      <li>
+                        <Typography
+                          tag="p"
+                          text="How can I settle my dog’s tummy?"
+                          className=" "
+                        />
+                      </li>
+                      <li>
+                        <Typography
+                          tag="p"
+                          text="How a fresh food diet can help with vomiting and gut issues"
+                          className=" "
+                        />
+                      </li>
+                      <li>
+                        <Typography
+                          tag="p"
+                          text="Have another question?"
+                          className=" "
+                        />
+                      </li>
+                    </ul>
+                  </div>
+                </div>
               </div>
               <div className="mt-14">
                 <div>
@@ -181,7 +289,7 @@ function page() {
                   </li>
                 </ul>
               </div>
-              <div className="my-16">
+              <div className="py-14 border-b border-[#EBEDE0]">
                 <Typography
                   tag="h5"
                   text="Why is my dog vomiting?"
@@ -230,8 +338,31 @@ function page() {
                   </li>
                 </ul>
               </div>
+              <div className="flex items-center gap-4 my-8">
+                <span className="text-sm font-semibold text-gray-700 uppercase">
+                  Share
+                </span>
+                <div className="flex items-center gap-2.5 sm:gap-4">
+                  {socialIcons.map(({ src, alt, href }, index) => (
+                    <a
+                      key={index}
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex relative w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-200 transition"
+                    >
+                      <Image
+                        src={src}
+                        alt={alt}
+                        fill
+                        className="object-contain " // padding optional, keeps nice breathing room
+                      />
+                    </a>
+                  ))}
+                </div>
+              </div>
             </div>
-            <div className="basis-[40%] relative">
+            <div className="basis-[40%] relative hidden lg:block">
               <div className="sticky top-6 mb-8 lg:mb-0">
                 <div className="lg:w-[75%] lg:ml-auto bg-[#FDFFF4] border border-[#E4E7D3] px-5 sm:px-6 pt-[var(--space-20-40)] pb-[var(--space-24-45)] rounded-2xl">
                   <div className="flex flex-col gap-[var(--space-16-21)]">
@@ -282,6 +413,67 @@ function page() {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+        <div className="flex flex-col sm:flex-row justify-between container pt-11 sm:pt-0 bg-[#EBEDE0] rounded-2xl !my-[var(--space-80-120)]">
+          <div className="flex flex-col justify-center gap-[var(--space-17-43)] pl-[var(--space-40-130)]">
+            <div className="flex flex-col">
+              <Typography
+                tag="h2"
+                text="Real Food."
+                className="capitalize text-primary-dark "
+              />
+              <Typography
+                tag="h2"
+                text="Made Fresh."
+                className="capitalize highlight text-primary-dark "
+              />
+              <Typography
+                tag="h2"
+                text="Delivered. "
+                className="capitalize highlight text-primary-dark "
+              />
+            </div>
+            <Button
+              size={"md"}
+              variant={"primaryBtn"}
+              className="w-fit text-white"
+            >
+              Get Started
+            </Button>
+          </div>
+          <div className="lg:w-[62%] relative">
+            <Image
+              src="/images/pet-food-packed.webp"
+              fill
+              alt="pet food packed"
+              className="block sm:hidden !static w-full h-full object-cover object-center"
+            />
+            <Image
+              src="/images/pet-food-packed.webp"
+              fill
+              alt="pet food packed"
+              className="hidden sm:block !static w-full h-full object-cover object-center"
+            />
+          </div>
+        </div>
+        <div className="container">
+          <Typography
+            tag="h2"
+            text="Related "
+            className="text-primary-dark text-center"
+          >
+            <Typography tag="span" text="Stories" className="highlight" />
+          </Typography>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-[var(--space-60-100)] pt-10 pb-[var(--space-105-136)]">
+            {blogData.map((blog, index) => (
+              <BlogListCard
+                key={index}
+                title={blog.title}
+                description={blog.description}
+                image={blog.image}
+              />
+            ))}
           </div>
         </div>
       </div>
