@@ -17,7 +17,7 @@ export default function CardCaption({
   subText,
 }: CardCaptionProps) {
   return (
-    <div className="flex flex-col items-center  w-[90vw] sm:w-[30.93vw] gap-[var(--space-20-30)]">
+    <div className="flex flex-col items-center w-[90vw] sm:w-[30.93vw] gap-[var(--space-20-30)]">
       <div className="w-full">
         <Image
           src={imageSrc}
@@ -29,13 +29,13 @@ export default function CardCaption({
       </div>
       <div className="flex flex-col gap-2.5">
         <Typography
-          className="text-start text-primary-dark"
+          className="text-start text-primary-dark !font-normal"
           tag="h5"
           text={heading}
         />
         <Typography
           className="text-start font-bold"
-          tag="h6"
+          tag="text"
           text={subText}
         />
       </div>

@@ -10,6 +10,7 @@ import {
 import FooterCtaCard from "@/components/organism/footerCtaCard/FooterCtaCard";
 import Image from "next/image";
 import React from "react";
+import FooterBannerCTA from "@/components/organism/footerBannerCTA/FooterBannerCTA";
 
 interface AboutUsBodyProps {
   cardTitleData?: {
@@ -31,14 +32,14 @@ const footerCtaData = {
     highlight: "Transition",
     paragraph:
       "Gradually introduce our fresh meals to ensure a smooth adjustment and lasting benefits for your furry child",
-    imageSrc: "/images/meal-transition.webp",
+    imageSrc: "/images/meal-transition-red.webp",
   },
   petFood: {
-    title: "Looking for",
-    highlight: "Cat Food?",
+    title: "Begin Your Pet’s",
+    highlight: "Meal Journey",
     paragraph:
       "Check out our nutrient-rich and irresistibly delicious Cat Bowls for optimal feline health and wellness!",
-    imageSrc: "/images/cat.webp",
+    imageSrc: "/images/multiple-pet.webp",
   },
 };
 
@@ -97,7 +98,7 @@ AboutUsBodyProps) {
 
           <div className="absolute top-[20%] sm:top-[30%] left-[13%] sm:left-[40%]">
             <Typography
-              tag="h4"
+              tag="h2"
               text="Proudly Made In"
               className="text-primary-dark whitespace-nowrap"
               ariaLabel=""
@@ -105,7 +106,7 @@ AboutUsBodyProps) {
             <Typography
               tag="h1"
               text="Qatar"
-              className="text-[#9C1F48] highlight"
+              className="text-[#9C1F48] highlight max-sm:text-center"
               ariaLabel=""
             />
           </div>
@@ -259,7 +260,28 @@ AboutUsBodyProps) {
         </div>
       </div>
 
-      <div className="pb-[var(--space-120-180)]">
+      <div className="mt-[var(--space-120-180)]">
+        <FooterBannerCTA
+          id="footer-banner"
+          image={{
+            web: "/images/about-us-footer-cta.webp",
+            tablet: "/images/about-us-footer-cta-mob.webp",
+            mobile: "/images/about-us-footer-cta-mob.webp",
+          }}
+          caption="get started with us"
+          captionColor="#fff"
+          title="Give Your Fur Baby"
+          subTitle="the Gift of Real Food Today!"
+          paragraph="Pets deserve better than processed kibble or canned food. Second Nature believes in nourishing your fur baby with fresh meals made from real, human-grade ingredients."
+          paragraphColor="#FFFFFF"
+          buttonText="Build your plan"
+          buttonLink="/signup"
+          bannerThemeColor="#fff"
+          align="center"
+        />
+      </div>
+
+      <div className="py-[var(--space-120-180)]">
         <FooterCtaCard
           mealTransition={footerCtaData.mealTransition}
           petFood={footerCtaData.petFood}

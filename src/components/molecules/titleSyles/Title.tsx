@@ -348,10 +348,10 @@ export const MealTransitionTitle: React.FC<TitlePropsType> = ({
 
       {paragraph && (
         <Typography
-          tag="h6"
+          tag="p"
           text={paragraph}
           className={`
-            text-lg
+            text-lg text-semibold
             ${textAlign === "text-left" ? "ml-0 sm:max-w-[80%]  lg:max-w-[60%]" : ""}
             ${textAlign === "text-center" ? "mx-auto sm:max-w-[70%]  lg:max-w-[50%]" : ""}
             ${textAlign === "text-right" ? "mr-0 sm:max-w-[80%]  lg:max-w-[60%]" : ""}
@@ -383,7 +383,7 @@ export const PetFoodLookingTitle: React.FC<TitlePropsType> = ({
     >
       <Typography
         tag="h2"
-        className="capitalize text-secondary-1 "
+        className="capitalize text-secondary-1 sm:w-[220%] lg:w-[110%]"
         text={title}
         role="title"
         ariaLabel={title + highlight}
@@ -401,14 +401,14 @@ export const PetFoodLookingTitle: React.FC<TitlePropsType> = ({
 
       {paragraph && (
         <Typography
-          tag="h6"
+          tag="p"
           text={paragraph}
           className={`
-            text-lg 
+            text-lg font-semibold
             ${textAlign === "text-left" ? "ml-0 sm:max-w-[80%]  lg:max-w-[60%]" : ""}
             ${textAlign === "text-center" ? "mx-auto sm:max-w-[70%]  lg:max-w-[50%]" : ""}
             ${textAlign === "text-right" ? "mr-0 sm:max-w-[80%]  lg:max-w-[60%]" : ""}
-            mb-[var(--space-20-30)]
+            mt-[var(--space-8-17)] mb-[var(--space-20-30)]
           `}
           style={{
             color: `${paragraphColor ? paragraphColor : "var(--text-color)"}`,
