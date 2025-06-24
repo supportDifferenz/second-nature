@@ -52,7 +52,7 @@ export default function HeroSection() {
 
         {/* Content */}
         <div className="relative flex pt-[--space-46-95] sm:pt-0 lg::items-center w-full min-h-[500px] h-[90dvh] sm:min-h-[400px] lg:min-h-[520px] sm:h-[70dvh] lg:max-h-[1200px] bg-cover bg-center transition-all container sm:justify-end sm:text-left text-center justify-center ">
-          <div className="flex flex-col items-center sm:items-start mt-[85%] sm:mt-[20%] lg::mt-0 lg:w-[50%]">
+          <div className="flex flex-col items-center sm:items-start lg:justify-center mt-[85%] sm:mt-[20%] lg:mt-0 lg:w-[50%]">
             <Typography
               tag="h1"
               className="text-primary-dark capitalize highlight mb-[--space-4-10]"
