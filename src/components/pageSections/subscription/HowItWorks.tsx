@@ -55,11 +55,11 @@ export default function HowItWorks() {
             ariaLabel=""
           />
         </div>
-        <div className="flex justify-between ">
+        <div className="flex flex-col lg:flex-row gap-32 sm:gap-36 lg:gap-0 justify-between ">
           {HowItWorkHowItWork.map((step, index) => (
             <div
               key={step.id}
-              className="relative flex flex-col items-center text-center border border-secondary-2 rounded-lg p-6 w-[calc(100%/3.5)] "
+              className="relative !overflow-visible  flex flex-col items-center text-center border border-secondary-2 rounded-lg p-6 lg:w-[calc(100%/3.5)] "
             >
               <Typography
                 tag="span"
@@ -69,13 +69,36 @@ export default function HowItWorks() {
               <div className="w-(--space-60-90) mt-8">
                 <Image src={step.icon} alt="icon" fill className="!static" />
               </div>
-              <Typography tag="h5" text={step.title} className="mt-3  text-secondary-1"/>
-                
-              <Typography tag="h6" text={step.description} className="mt-3 !font-normal"/>
+              <Typography
+                tag="h5"
+                text={step.title}
+                className="mt-3  text-secondary-1"
+              />
+
+              <Typography
+                tag="h6"
+                text={step.description}
+                className="mt-3 !font-normal"
+              />
               {index !== HowItWorkHowItWork.length - 1 && (
-                <div className="absolute top-1/2 left-[113%] w-[26%] transform -translate-x-1/2 -translate-y-1/2 hidden lg:block z-[1]">
-                 <Image src="/icons/long-arrow-right-secondary-2.svg" alt="arrow-left" fill className="!static"/>
-                </div>
+                <>
+                  <div className="absolute top-1/2 left-[113%] w-[26%] transform -translate-x-1/2 -translate-y-1/2 hidden lg:block z-[1]">
+                    <Image
+                      src="/icons/long-arrow-right-secondary-2.svg"
+                      alt="arrow-left"
+                      fill
+                      className="!static"
+                    />
+                  </div>
+                  <div className="absolute top-full mt-7 left-1/2 w-[22%] sm:w-[15%] transform -translate-x-1/2  lg:hidden z-[1]">
+                    <Image
+                      src="/icons/long-arrow-right-secondary-2.svg"
+                      alt="arrow-left"
+                      fill
+                      className="!static rotate-90"
+                    />
+                  </div>
+                </>
               )}
             </div>
           ))}

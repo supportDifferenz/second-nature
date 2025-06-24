@@ -25,13 +25,13 @@ const features = [
 const FeaturesItems = () => {
   return (
     <section>
-      <div className="flex justify-center gap-8  container">
+      <div className="flex flex-col lg:flex-row justify-center gap-16 lg:gap-8  container">
         {features.map((feature, index) => (
           <div
             key={index}
             className="  flex-1 text-center px-8 2xl:px-15 py-10 pt-[5%]  border border-secondary-1 rounded-lg shadow-sm "
           >
-            <div  className="flex flex-col items-center mt-[-35%] ">
+            <div  className="flex flex-col items-center mt-[-14%] sm:mt-[-11%] lg:mt-[-35%] ">
               <div className="w-(--space-50-99)  bg-white rounded-full relative z-[1]">
                 <Image
                   src={feature.icon}
@@ -41,7 +41,7 @@ const FeaturesItems = () => {
                 />
               </div>
 
-              <p className="mt-3.5  ">{feature.description}</p>
+              <p className="mt-3.5  font-bold">{feature.description}</p>
             </div>
           </div>
         ))}
