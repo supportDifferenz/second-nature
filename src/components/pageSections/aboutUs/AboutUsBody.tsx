@@ -97,7 +97,7 @@ AboutUsBodyProps) {
 
           <div className="absolute top-[20%] sm:top-[30%] left-[13%] sm:left-[40%]">
             <Typography
-              tag="h4"
+              tag="h2"
               text="Proudly Made In"
               className="text-primary-dark whitespace-nowrap"
               ariaLabel=""
@@ -105,7 +105,7 @@ AboutUsBodyProps) {
             <Typography
               tag="h1"
               text="Qatar"
-              className="text-[#9C1F48] highlight"
+              className="text-[#9C1F48] highlight max-sm:text-center"
               ariaLabel=""
             />
           </div>

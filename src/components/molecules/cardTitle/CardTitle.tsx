@@ -25,7 +25,7 @@ export default function CardTitle({
             priority
           />
         </div>
-        <Typography className='text-center sm:text-start font-bold' tag='h6' text={text} />
+        <Typography className='text-center sm:text-start font-bold lg:text-md' tag='text' text={text} />
     </div>
   )
 }
