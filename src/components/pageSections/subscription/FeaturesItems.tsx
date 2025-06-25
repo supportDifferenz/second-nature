@@ -1,5 +1,6 @@
 import Image from "next/image";
 import React from "react";
+import Typography from "@/components/atoms/typography/Typography";
 
 const features = [
   {
@@ -41,7 +42,7 @@ const FeaturesItems = () => {
                 />
               </div>
 
-              <p className="mt-3.5  font-bold">{feature.description}</p>
+              <Typography tag="p" className="mt-3.5  font-bold" text={feature.description} role="paragraph" ariaLabel={feature.description}/>
             </div>
           </div>
         ))}
