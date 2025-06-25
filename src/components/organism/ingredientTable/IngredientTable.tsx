@@ -15,7 +15,7 @@ interface IngredientTableProps {
 
 export default function IngredientTable({ ingredients }: IngredientTableProps) {
   return (
-    <div className="mt-[var(--space-110-114)]">
+    <div className="mt-[var(--space-110-114)] lg:mt-0 lg:pt-[var(--space-97-130)] lg:bg-[url('/images/MealsBackground.webp')] lg:bg-cover lg:bg-center lg:bg-no-repeat">
       <div className="mx-auto text-center bg-primary-dark py-1 rounded-[2.33vw] sm:rounded-[0.52vw] w-[90vw] sm:w-[40vw] mb-4">
         <Typography
           tag="h5"
