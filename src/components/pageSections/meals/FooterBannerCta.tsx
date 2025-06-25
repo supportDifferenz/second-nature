@@ -74,9 +74,9 @@ export default function FooterBannerCta() {
       beef: {
         id:"footer-banner",
         image:{
-          web: "/images/MealsFooterDogBeef.webp",
-          tablet: "/images/meals-footer-cta-mob.webp",
-          mobile: "/images/meals-footer-cta-mob.webp",
+          web: "/images/MealsCatCTAWeb.webp",
+          tablet: "/images/MealsCatCTAMob.webp",
+          mobile: "/images/MealsCatCTAMob.webp",
         },
         caption: "get started with us",
         captionColor: "#fff",
@@ -93,9 +93,9 @@ export default function FooterBannerCta() {
       chicken: {
         id: "footer-banner",
         image: {
-          web: "/images/MealsFooterDogBeef.webp",
-          tablet: "/images/meals-footer-cta-mob.webp",
-          mobile: "/images/meals-footer-cta-mob.webp",
+          web: "/images/MealsCatCTAWeb.webp",
+          tablet: "/images/MealsCatCTAMob.webp",
+          mobile: "/images/MealsCatCTAMob.webp",
         },
         caption: "get started with us",
         captionColor: "#fff",
@@ -112,9 +112,9 @@ export default function FooterBannerCta() {
       lamb: {
         id: "footer-banner",
         image: {
-          web: "/images/MealsFooterDogBeef.webp",
-          tablet: "/images/meals-footer-cta-mob.webp",
-          mobile: "/images/meals-footer-cta-mob.webp",
+          web: "/images/MealsCatCTAWeb.webp",
+          tablet: "/images/MealsCatCTAMob.webp",
+          mobile: "/images/MealsCatCTAMob.webp",
         },
         caption: "get started with us",
         captionColor: "#fff",

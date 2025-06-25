@@ -208,7 +208,7 @@ AboutUsBodyProps) {
               </div>
             </div>
           </div>
-          <div>
+          <div className="lg:bg-[url('/images/AboutUsBackground.webp')] lg:bg-contain lg:bg-no-repeat">
             <div className="relative bg-[#FDFEFA]  w-[90vw] sm:w-[66.25vw] mx-auto mt-[var(--space-32-52)] pb-36 border border-secondary-1 rounded-2xl px-[var(--space-20-190)] py-[var(--space-50-67)]">
               <div>
                 <Typography
@@ -238,7 +238,7 @@ AboutUsBodyProps) {
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row w-fit mx-auto gap-[15.88vw] sm:gap-[14.06vw] my-[43.45vw] sm:my-[14.06vw]">
+            <div className="flex flex-col sm:flex-row lg:bg-[url('/images/AboutUsBackgroundBottom.webp')] lg:bg-contain lg:bg-center lg:bg-no-repeat w-fit mx-auto gap-[15.88vw] sm:gap-[14.06vw] my-[43.45vw] sm:my-[14.06vw]">
               <div>
                 <CardCaption
                   imageSrc="/images/pet-caring-1.webp"
