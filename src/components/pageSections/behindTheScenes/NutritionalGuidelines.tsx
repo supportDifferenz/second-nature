@@ -73,7 +73,7 @@ export default function NutritionalGuidelines() {
             </div>
 
             {/* Typography Content on Top of Blur */}
-            <div className="absolute inset-0 bg-white opacity-100 blur-[36px] z-0 ">
+            <div className="absolute inset-0 bg-white opacity-100 blur-[25px] z-0 w-full lg:w-[50vw] h-[25vh] lg:h-[23vh] top-2/6 lg:top-2/6 lg:-translate-x-1/6 lg:rounded-3xl">
               {" "}
             </div>
             <div className="relative z-10 flex flex-col items-center justify-center gap-2 text-center px-4 lg:mt-10">
