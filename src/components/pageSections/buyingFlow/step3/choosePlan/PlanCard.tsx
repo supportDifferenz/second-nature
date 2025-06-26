@@ -125,7 +125,7 @@ export default function PlanCard({
           /> */}
         </div>
       </div>
-      <div className="flex flex-col pt-[var(--space-30-40)]">
+      <div className="flex flex-col pt-[var(--space-30-40)]" onClick={() => startTransition(() => router.push("/terms-and-conditions"))}>
         <Typography
           tag="h6"
           text="Step 1: Choose Protein"
