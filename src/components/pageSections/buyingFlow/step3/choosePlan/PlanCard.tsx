@@ -67,7 +67,7 @@ export default function PlanCard({
         />
         {
           isPriceLoading 
-          ? <Typography tag="span" text="Loading..." className="text-center text-secondary-1" /> 
+          ? <Typography tag="h5" text="Loading..." className="text-center text-secondary-1" /> 
           : <>
               <Typography
                 tag="h5"

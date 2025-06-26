@@ -113,12 +113,12 @@ AboutUsBodyProps) {
         </div>
         <div className="flex flex-col absolute sm:static top-[73vw] sm:flex-row gap-[var(--space-52-86)]">
           <CardTitle
-            imageSrc="/images/cat-person.webp"
+            imageSrc="/images/boy-with-cat.webp"
             imageAlt="Pet owner with cat"
             text="As pet owners, we noticed a lack of natural, high-quality food options tailored to the unique needs of pets in our region. Determined to make a difference, we set out to create Qatar's first-ever natural pet food company."
           />
           <CardTitle
-            imageSrc="/images/boy-with-cat.webp"
+            imageSrc="/images/chef.webp"
             imageAlt="boy with cat"
             text="Every recipe we craft is rooted in our passion for providing pets with wholesome, nutritious, and locally sourced ingredients, ensuring they thrive and live their happiest lives. "
           />
