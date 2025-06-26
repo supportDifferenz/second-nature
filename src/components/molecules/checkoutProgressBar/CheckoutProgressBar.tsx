@@ -1,4 +1,5 @@
 import React from "react";
+import Typography from "../../atoms/typography/Typography";
 
 type Step = {
   number: number;
@@ -34,15 +35,15 @@ export default function CheckoutProgressBar({
             STEP {step.number}
           </div>
           {/* Step Label */}
-          <span
+          <Typography
+            tag="p"
             className={` ${
               step.number <= currentStep
-                ? "text-primary-dark font-medium"
+                ? "text-primary-dark font-bold"
                 : "text-[#818181]"
             }`}
-          >
-            {step.label}
-          </span>
+            text={step.label}
+          />
         </div>
       ))}
     </div>

@@ -4,6 +4,7 @@ import { ReactNode } from "react";
 import Header from "../organism/header/Header";
 import CheckoutProgressBar from "../molecules/checkoutProgressBar/CheckoutProgressBar";
 import { usePetStore } from "@/zustand/store/petDataStore";
+import Typography from "../atoms/typography/Typography";
 
 export default function BuyingFlowLayout({
   children,
@@ -28,15 +29,25 @@ export default function BuyingFlowLayout({
           <ul className="flex items-center gap-5 pt-[5dvh] pb-[3dvh]">
             {petNames.length > 0 ? (
               petNames.map((name, index) => (
-                <li 
+                // <li 
+                //   key={index} 
+                //   className={`font-bold text-[15px] sm:text-[20px] ${ index === selectedPetIndex ? "text-[#944446] underline underline-[#944446]" : ""}`}
+                // >
+                //   {name}
+                // </li>
+                <Typography 
                   key={index} 
-                  className={`font-bold underline ${ index === selectedPetIndex ? "text-[#944446] underline-[#944446]" : ""}`}
-                >
-                  {name}
-                </li>
+                  tag="p"
+                  text={name}
+                  className={`font-bold text-[15px] sm:text-[20px] ${ index === selectedPetIndex ? "text-[#944446] underline underline-[#944446]" : ""}`}
+                />
               ))
             ) : (
-              <li className="font-bold">No pets added yet</li>
+              <Typography 
+                tag="p"
+                text="No pets added yet"
+                className="font-bold"
+              />
             )}     
           </ul>
           <div className="container  grow  flex flex-col">{children}</div>
