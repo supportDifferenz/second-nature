@@ -29,12 +29,6 @@ export default function BuyingFlowLayout({
           <ul className="flex items-center gap-5 pt-[5dvh] pb-[3dvh]">
             {petNames.length > 0 ? (
               petNames.map((name, index) => (
-                // <li 
-                //   key={index} 
-                //   className={`font-bold text-[15px] sm:text-[20px] ${ index === selectedPetIndex ? "text-[#944446] underline underline-[#944446]" : ""}`}
-                // >
-                //   {name}
-                // </li>
                 <Typography 
                   key={index} 
                   tag="p"
