@@ -39,7 +39,7 @@ export default function BuyingFlowLayout({
                   <Button
                     type="button"
                     size={"icon"}
-                    aria-label={`Remove ${name}`}
+                    aria-label={`Remove ${pet.name}`}
                     className="absolute -top-4 -right-1 px-1 py-0.5 text-[8px] rounded-full hover:text-[#944446] hover:bg-gray-200 transition"
                     onClick={() => removePet(pet.id)}
                   >
