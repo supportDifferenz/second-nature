@@ -232,10 +232,11 @@ export default function Breed() {
             }
 
             {/* Unknown breed */}
-            <Button
+            <div className="flex flex-col lg:flex-row gap-2">
+              <Button
               type="button"
               variant={"outlineSecondaryBtn"}
-              className="mx-auto portrait:mt-[10dvh] landscape:mt-[6dvh]"
+              className="mx-auto portrait:mt-[3dvh] landscape:mt-[6dvh]"
               onClick={handleIdontKnowBreed}
             >
               I don’t know the breed
@@ -246,13 +247,14 @@ export default function Breed() {
                 <Button
                   type="button"
                   variant={"outlineSecondaryBtn"}
-                  className="mx-auto portrait:mt-[10dvh] landscape:mt-[2dvh]"
+                  className="mx-auto lg:portrait:mt-[2dvh] landscape:mt-[6dvh]"
                   onClick={handleRemoveCrossBreed}
                 >
                   Remove cross-breed
                 </Button>
               )
             }
+            </div>
           </div>
         </div>
 
