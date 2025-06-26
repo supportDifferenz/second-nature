@@ -161,14 +161,20 @@ export default function DogOrCat() {
               )}
             </div>
 
-            <div className="mt-[-5%] relative bg-white w-full">
+            <div 
+              className="mt-[-5%] relative bg-white w-full"
+              onClick={(e) => {
+                e.preventDefault();
+                handlePetSelection("dog");
+              }}
+            >
               <Input
                 type="text"
                 value={petType === "dog" ? petName : ""}
                 onChange={handleNameChange}
-                disabled={petType !== "dog"}
+                // disabled={petType !== "dog"}
                 variant={"roundedEdgeInputLg"}
-                className="w-full border border-gray-300 rounded-full text-center"
+                className={`${petType === "dog" ? "border-secondary-1" : "border-gray-300"} w-full border rounded-full text-center`}
                 placeholder="Type Your Dogs’s Name"
               />
             </div>
@@ -210,15 +216,21 @@ export default function DogOrCat() {
               )}
             </div>
 
-            <div className="mt-[-5%] w-full relative bg-white">
+            <div 
+              className="mt-[-5%] w-full relative bg-white"
+              onClick={(e) => {
+                e.preventDefault();
+                handlePetSelection("cat");
+              }}
+            >
               <Input
                 type="text"
                 value={petType === "cat" ? petName : ""}
                 onChange={handleNameChange}
-                disabled={petType !== "cat"}
+                // disabled={petType !== "cat"}
                 placeholder="Type Your Cat's Name"
                 variant={"roundedEdgeInputLg"}
-                className="w-full border border-gray-300 rounded-full text-center"
+                className={`${petType === "cat" ? "border-secondary-1" : "border-gray-300"} w-full border rounded-full text-center`}
               />
             </div>
           </div>
