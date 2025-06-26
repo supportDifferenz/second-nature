@@ -146,6 +146,13 @@ export default function PlanCard({
           
         </div>
       </div>
+      <div>
+        <Typography
+          tag="p"
+          text="Terms and conditions >"
+          className="text-center font-bold text-secondary-1 pt-[var(--space-30-40)]"
+        />
+      </div>
     </div>
   );
 }
