@@ -159,12 +159,12 @@ export default function Breed() {
     <BuyingFlowLayout step={1}>
       <form className="flex-1 flex flex-col">
         {/* Content Section */}
-        <div className="h-full  flex-1 flex flex-col justify-center items-center">
+        <div className="h-full  flex-1 flex flex-col justify-center lg:justify-start lg:mt-2 items-center">
           <Typography
             tag="h2"
             // text="Jackey’s Breed"
             text={`${selectedPetName}'s Breed`}
-            className="text-primary-dark portrait:mb-[5dvh] landscape:mb-[3dvh] text-center"
+            className="text-primary-dark portrait:mb-[5dvh] landscape:mb-[4dvh] text-center"
           />
 
           <div className="max-w-[800px] w-[90%] sm:w-[50%] lg:w-[40%]">
@@ -246,7 +246,7 @@ export default function Breed() {
                 <Button
                   type="button"
                   variant={"outlineSecondaryBtn"}
-                  className="mx-auto portrait:mt-[10dvh] landscape:mt-[6dvh]"
+                  className="mx-auto portrait:mt-[10dvh] landscape:mt-[2dvh]"
                   onClick={handleRemoveCrossBreed}
                 >
                   Remove cross-breed

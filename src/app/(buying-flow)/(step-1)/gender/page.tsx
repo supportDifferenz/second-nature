@@ -57,7 +57,7 @@ const GenderPage = () => {
     <BuyingFlowLayout step={1}>
       <form className="flex-1 flex flex-col">
         {/* Content Section */}
-        <div className="h-full  flex-1 flex flex-col justify-center items-center">
+        <div className="h-full  flex-1 flex flex-col justify-center lg:justify-start lg:mt-2 items-center">
           <Typography
             tag="h2"
             text={`${selectedPetName}'s Gender`}
