@@ -14,9 +14,11 @@ import {
 import { HeaderPropsTypes } from "@/components/types/type";
 import { useRouter } from "next/navigation";
 import useAuthStore from "@/zustand/store/authDataStore";
-import { startTransition } from "react";
+import { startTransition, useState } from "react";
+
 
 const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
+const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
 
   const router = useRouter();
 
@@ -29,11 +31,11 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
           <TopHeader />
           <div className="container py-5  flex items-center gap-2 ">
             {/* mobile menu */}
-            <div className="xl:hidden sm:flex-2">
-              <MobileMenu />
+            <div className="xl:hidden shrink-0">
+              <MobileMenu isOpen={isMobileMenuOpen} setIsOpen={setIsMobileMenuOpen}/>
             </div>
 
-            <div className=" items-center   hidden xl:flex flex-2  gap-[2.5%] 2xl:gap-[4.5%]">
+            <div className=" items-center    hidden xl:flex flex-1   gap-[2.5%] 2xl:gap-[4.5%]">
               <MealDropdownMenu
                 label="For Dogs"
                 icon="/icons/dog-icon.svg"
@@ -132,7 +134,7 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
 
             {/* logo */}
             <div 
-              className="w-[14%] mx-[1%] cursor-pointer"
+              className="min-w-[130px] w-[14%] mx-[1%] cursor-pointer "
               onClick={() => {
                 startTransition(() => {
                   router.push("/");
@@ -148,7 +150,7 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
               />
             </div>
 
-            <div className="items-center justify-end flex flex-2 gap-[4.5%]">
+            <div className="items-center justify-end flex flex-1  gap-[4.5%] ">
               <span 
                 className="hidden xl:block font-extrabold"
                 onClick={() => {

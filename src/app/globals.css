@@ -44,28 +44,20 @@
   --fw-bold: 700;
 
   /* container */
-  --container: clamp(
-    280px,
-    100% - 2 * (clamp(20px, 10.625vw - 14px, 190.33px)),
-    1600px
-  );
-  --container-lg: clamp(
-    280px,
-    calc(100% - 2 * clamp(20px, 10.625vw - 14px, 85px)),
-    1748px
-  );
+  --container: clamp(280px,
+      100% - 2 * (clamp(20px, 10.625vw - 14px, 190.33px)),
+      1600px);
+  --container-lg: clamp(280px,
+      calc(100% - 2 * clamp(20px, 10.625vw - 14px, 85px)),
+      1748px);
 
-  --container-one-side: clamp(
-    280px,
-    100% - 1 * (clamp(20px, 10.625vw - 14px, 190.33px)),
-    1600px
-  );
+  --container-one-side: clamp(280px,
+      100% - 1 * (clamp(20px, 10.625vw - 14px, 190.33px)),
+      1600px);
 
-  --container-lg-one-side: clamp(
-    280px,
-    calc(100% - 1 * clamp(20px, 10.625vw - 14px, 85px)),
-    1748px
-  );
+  --container-lg-one-side: clamp(280px,
+      calc(100% - 1 * clamp(20px, 10.625vw - 14px, 85px)),
+      1748px);
   --max-w: 1920px;
 
   /* spacing */
@@ -216,38 +208,47 @@ h1 {
   font-size: var(--fs-h1);
   font-weight: var(--fw-regular);
 }
+
 h2 {
   font-size: var(--fs-h2);
   font-weight: var(--fw-regular);
 }
+
 h2.supporting {
   font-size: var(--fs-h2-supporting);
   font-weight: var(--fw-regular);
 }
+
 h3 {
   font-size: var(--fs-h3);
   font-weight: var(--fw-regular);
 }
+
 h4 {
   font-size: var(--fs-h4);
   font-weight: var(--fw-regular);
 }
+
 h5 {
   font-size: var(--fs-h5);
   font-weight: var(--fw-bold);
 }
+
 h5.subtitle {
   font-size: var(--fs-h5-subtitle);
   font-weight: var(--fw-bold);
 }
+
 h6 {
   font-size: var(--fs-h6-caption);
   font-weight: var(--fw-bold);
 }
+
 span.subtitle {
   font-size: var(--fs-subtitle);
   font-weight: var(--fw-bold);
 }
+
 span.subtitle2 {
   font-size: var(--fs-subtitle-2);
   font-weight: var(--fw-bold);
@@ -257,45 +258,56 @@ span.subtitle2 {
   font-size: var(--fs-h1);
   font-weight: var(--fw-regular);
 }
+
 .h2 {
   font-size: var(--fs-h2);
   font-weight: var(--fw-regular);
 }
+
 .h2.supporting {
   font-size: var(--fs-h2-supporting);
   font-weight: var(--fw-regular);
 }
+
 .h3 {
   font-size: var(--fs-h3);
   font-weight: var(--fw-regular);
 }
+
 .h4 {
   font-size: var(--fs-h4);
   font-weight: var(--fw-regular);
 }
+
 .h5 {
   font-size: var(--fs-h5);
   font-weight: var(--fw-bold);
 }
+
 .h5.subtitle {
   font-size: var(--fs-h5-subtitle);
   font-weight: var(--fw-bold);
 }
+
 .h6 {
   font-size: var(--fs-h6-caption);
   font-weight: var(--fw-bold);
 }
+
 .subtitle {
   font-size: var(--fs-subtitle);
   font-weight: var(--fw-bold);
 }
+
 .subtitle2 {
   font-size: var(--fs-subtitle-2);
   font-weight: var(--fw-bold);
 }
+
 .subtitle3 {
   font-size: var(--fs-subtitle-3);
 }
+
 .bodyBtnText {
   font-size: var(--fs-body-button-text);
   font-weight: var(--fw-bold);
@@ -305,6 +317,7 @@ button {
   font-family: var(--font-bellota-text);
   line-height: 120%;
 }
+
 p {
   font-size: var(--fs-body-text);
   line-height: 1.4;
@@ -320,11 +333,13 @@ p {
 .container {
   max-width: var(--container);
 }
+
 @media (max-width: 1367px) {
   .container {
     max-width: var(--container-lg);
   }
 }
+
 @media (max-width: 991.98px) {
   .container {
     max-width: var(--container);
@@ -335,21 +350,27 @@ p {
 .container.right {
   max-width: var(--container-one-side);
 }
+
 .container.left {
   margin-right: auto !important;
   margin-left: 0;
 }
+
 .container.right {
   margin-left: auto !important;
   margin-right: 0;
 }
+
 @media (max-width: 1367px) {
+
   .container.left,
   .container.right {
     max-width: var(--container-lg-one-side);
   }
 }
+
 @media (max-width: 991.98px) {
+
   .container.left,
   .container.right {
     max-width: var(--container-one-side);
@@ -359,6 +380,7 @@ p {
 .container-fluid {
   max-width: var(--max-w);
 }
+
 .container-lg {
   max-width: var(--container-lg);
 }
@@ -372,6 +394,7 @@ p {
 .highlight {
   font-family: var(--font-dm-serif-display);
 }
+
 .normalize {
   font-family: var(--font-bellota-text);
 }
@@ -388,6 +411,7 @@ p {
     from {
       height: 0;
     }
+
     to {
       height: var(--radix-accordion-content-height);
     }
@@ -397,10 +421,46 @@ p {
     from {
       height: var(--radix-accordion-content-height);
     }
+
     to {
       height: 0;
     }
   }
+
+  @keyframes gradientMove {
+    0% {
+      background-position: 0% 100%;
+    }
+
+    50% {
+      background-position: 100% 0%;
+    }
+
+    100% {
+      background-position: 0% 100%;
+    }
+  }
+
+  .animated-gradient {
+background: linear-gradient(163deg, rgba(43, 182, 115, 0.00) 55.33%, rgba(43, 182, 115, 0.40) 100%), #FFF;    background-size: 120% 120%;
+    animation: gradient-animation 12s ease infinite;
+  }
+
+  @keyframes gradient-animation {
+    0% {
+      background-position: 0% 50%;
+    }
+
+    50% {
+      background-position: 100% 50%;
+    }
+
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+
 
   .animate-accordion-down {
     animation: accordion-down 0.3s ease-out forwards;
@@ -410,8 +470,9 @@ p {
     animation: accordion-up 0.3s ease-out forwards;
   }
 }
+
 @media (min-height: 930px) {
-  .tall-screen{
+  .tall-screen {
     @apply top-[100%];
   }
 }
