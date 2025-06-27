@@ -441,11 +441,6 @@ p {
     }
   }
 
-  .animated-gradient {
-background: linear-gradient(163deg, rgba(43, 182, 115, 0.00) 55.33%, rgba(43, 182, 115, 0.40) 100%), #FFF;    background-size: 120% 120%;
-    animation: gradient-animation 12s ease infinite;
-  }
-
   @keyframes gradient-animation {
     0% {
       background-position: 0% 50%;
@@ -461,6 +456,12 @@ background: linear-gradient(163deg, rgba(43, 182, 115, 0.00) 55.33%, rgba(43, 18
   }
 
 
+
+  .animated-gradient {
+    background: linear-gradient(163deg, rgba(43, 182, 115, 0.00) 55.33%, rgba(43, 182, 115, 0.40) 100%), #FFF;
+    background-size: 120% 120%;
+    animation: gradient-animation 12s ease infinite;
+  }
 
   .animate-accordion-down {
     animation: accordion-down 0.3s ease-out forwards;

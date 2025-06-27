@@ -1,56 +1,85 @@
 "use client";
-import Typography from "@/components/atoms/typography/Typography";
+import { Separator } from "@/components/ui/separator";
 import { motion } from "framer-motion";
 import Image from "next/image";
-
-const features = [
-  { icon: "/icons/marquee-1.svg", text: "Human-Grade Ingredients" },
-  { icon: "/icons/marquee-2.svg", text: "Rich in Essential Nutrients" },
-  { icon: "/icons/marquee-3.svg", text: "Gently Cooked" },
-  { icon: "/icons/marquee-4.svg", text: "Tailored Nutrition Plans" },
-  { icon: "/icons/marquee-5.svg", text: "Backed by Science" },
-  { icon: "/icons/marquee-6.svg", text: "Allergy-Friendly Options" },
-  { icon: "/icons/marquee-7.svg", text: "Convenient Delivery" },
-  { icon: "/icons/marquee-8.svg", text: "Boosts Energy and Vitality" },
-];
 
 const Marquee = ({ speed = 50 }) => {
   return (
     <div className="container-lg">
       <div className="relative overflow-hidden bg-white border border-[#C7FCE3] w-full rounded-full shadow-2xl p-(--space-18-32)">
         <div className="flex w-max">
-          {/* Duplicated content to create seamless effect */}
           {[...Array(2)].map((_, i) => (
             <motion.div
               key={i}
-              className="flex items-center  "
+              className="flex items-center"
               initial={{ x: "0%" }}
               animate={{ x: "-100%" }}
               transition={{ repeat: Infinity, ease: "linear", duration: speed }}
             >
-              {features.map((feature, index) => (
-                <div
-                  key={index}
-                  className="flex lg:justify-center items-center gap-(--space-8-13) px-(--space-15-30) relative after:content-[''] after:absolute after:w-[1px] after:h-[80%] after:bg-[#79D2A7] after:right-0 after:top-1/2 after:transform after:-translate-y-1/2 "
-                >
-                  <div className="w-(--space-34-42) h-(--space-34-42) flex items-center justify-center">
-                    <Image
-                      src={feature.icon}
-                      alt="marquee-icons"
-                      fill
-                      className="!static w-full !h-full object-contain"
-                    />
-                  </div>
-                  <Typography
-                    tag="span"
-                    className="text-primary-dark font-bold"
-                    text={feature.text}
-                    role="caption"
-                    ariaLabel={feature.text}
-                    ariaLabelledBy="marquee title"
-                  />
+              <div className="flex lg:justify-center items-center gap-(--space-8-13) relative">
+                <div className="w-(--space-34-42) h-(--space-34-42) flex items-center justify-center">
+                  <Image src="/icons/marquee-1.svg" alt="icon" fill className="!static w-full !h-full object-contain" />
                 </div>
-              ))}
+                <span className="text-primary-dark font-bold">Human-Grade <br /> Ingredients</span>
+              </div>
+              <Separator orientation="vertical" className="bg-[#79D2A7] w-[1px] shrink-0 ml-[15px] mr-[14px] sm:mx-[30px]  sm:mr-[29px] max-h-[32px]" />
+
+              <div className="flex lg:justify-center items-center gap-(--space-8-13) relative">
+                <div className="w-(--space-34-42) h-(--space-34-42) flex items-center justify-center">
+                  <Image src="/icons/marquee-2.svg" alt="icon" fill className="!static w-full !h-full object-contain" />
+                </div>
+                <span className="text-primary-dark font-bold">Rich in Essential <br /> Nutrients</span>
+              </div>
+              <Separator orientation="vertical" className="bg-[#79D2A7] w-[1px] shrink-0 ml-[15px] mr-[14px] sm:mx-[30px]  sm:mr-[29px] max-h-[32px]" />
+
+              <div className="flex lg:justify-center items-center gap-(--space-8-13) relative">
+                <div className="w-(--space-34-42) h-(--space-34-42) flex items-center justify-center">
+                  <Image src="/icons/marquee-3.svg" alt="icon" fill className="!static w-full !h-full object-contain" />
+                </div>
+                <span className="text-primary-dark font-bold">Gently <br /> Cooked</span>
+              </div>
+              <Separator orientation="vertical" className="bg-[#79D2A7] w-[1px] shrink-0 ml-[15px] mr-[14px] sm:mx-[30px]  sm:mr-[29px] max-h-[32px]" />
+
+              <div className="flex lg:justify-center items-center gap-(--space-8-13) relative">
+                <div className="w-(--space-34-42) h-(--space-34-42) flex items-center justify-center">
+                  <Image src="/icons/marquee-4.svg" alt="icon" fill className="!static w-full !h-full object-contain" />
+                </div>
+                <span className="text-primary-dark font-bold">Tailored <br /> Nutrition Plans</span>
+              </div>
+              <Separator orientation="vertical" className="bg-[#79D2A7] w-[1px] shrink-0 ml-[15px] mr-[14px] sm:mx-[30px]  sm:mr-[29px] max-h-[32px]" />
+
+              <div className="flex lg:justify-center items-center gap-(--space-8-13) relative">
+                <div className="w-(--space-34-42) h-(--space-34-42) flex items-center justify-center">
+                  <Image src="/icons/marquee-5.svg" alt="icon" fill className="!static w-full !h-full object-contain" />
+                </div>
+                <span className="text-primary-dark font-bold">Backed <br /> by Science</span>
+              </div>
+              <Separator orientation="vertical" className="bg-[#79D2A7] w-[1px] shrink-0 ml-[15px] mr-[14px] sm:mx-[30px]  sm:mr-[29px] max-h-[32px]" />
+
+              <div className="flex lg:justify-center items-center gap-(--space-8-13) relative">
+                <div className="w-(--space-34-42) h-(--space-34-42) flex items-center justify-center">
+                  <Image src="/icons/marquee-6.svg" alt="icon" fill className="!static w-full !h-full object-contain" />
+                </div>
+                <span className="text-primary-dark font-bold">Allergy-Friendly <br /> Options</span>
+              </div>
+              <Separator orientation="vertical" className="bg-[#79D2A7] w-[1px] shrink-0 ml-[15px] mr-[14px] sm:mx-[30px]  sm:mr-[29px] max-h-[32px]" />
+
+              <div className="flex lg:justify-center items-center gap-(--space-8-13) relative">
+                <div className="w-(--space-34-42) h-(--space-34-42) flex items-center justify-center">
+                  <Image src="/icons/marquee-7.svg" alt="icon" fill className="!static w-full !h-full object-contain" />
+                </div>
+                <span className="text-primary-dark font-bold">Convenient <br /> Delivery</span>
+              </div>
+              <Separator orientation="vertical" className="bg-[#79D2A7] w-[1px] shrink-0 ml-[15px] mr-[14px] sm:mx-[30px]  sm:mr-[29px] max-h-[32px]" />
+
+              <div className="flex lg:justify-center items-center gap-(--space-8-13) relative">
+                <div className="w-(--space-34-42) h-(--space-34-42) flex items-center justify-center">
+                  <Image src="/icons/marquee-8.svg" alt="icon" fill className="!static w-full !h-full object-contain" />
+                </div>
+                <span className="text-primary-dark font-bold">Boosts Energy <br /> and Vitality</span>
+              </div>
+              <Separator orientation="vertical" className="bg-[#79D2A7] w-[1px] shrink-0 ml-[15px] mr-[14px] sm:mx-[30px]  sm:mr-[29px] max-h-[32px]" />
+
             </motion.div>
           ))}
         </div>
