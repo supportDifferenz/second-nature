@@ -5,11 +5,11 @@ import { cn } from "@/lib/utils";
 export default function PlanCardSkeleton() {
   return (
     <div className={cn(
-      "flex flex-col relative border rounded-2xl w-fit px-5 py-10 lg:p-14 border-slate-300",
+      "flex flex-col relative border rounded-2xl w-full sm:w-fit lg:w-[48.5%] px-5 py-10 lg:p-14 border-slate-300",
       "animate-pulse bg-gray-100" // Skeleton styles
     )}>
       {/* Offer Badge Skeleton */}
-      <div className="absolute top-4 right-4 h-6 w-32 bg-gray-300 rounded-full"></div>
+      <div className="max-sm:hidden absolute top-4 right-4 h-6 w-32 bg-gray-300 rounded-full"></div>
       
       {/* Header Section */}
       <div className="w-full border-b border-gray-300 pb-8 flex flex-col">

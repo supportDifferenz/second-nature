@@ -101,7 +101,8 @@ export default function Page() {
             }
           }}
         >
-          Checkout
+          {/* Checkout */}
+          <Typography tag="h6" text="Checkout" className="text-center" />
           <div className="w-5 relative">
             <Image
               src="/icons/arrow-next-long.svg"
