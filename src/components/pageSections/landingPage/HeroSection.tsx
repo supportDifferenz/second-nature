@@ -2,7 +2,9 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import useEmblaCarousel from "embla-carousel-react";
+import useEmblaCarousel from 'embla-carousel-react'
+import Autoplay from 'embla-carousel-autoplay'
+import Fade  from 'embla-carousel-fade';
 import { cn } from "@/lib/utils";
 import { cva } from "class-variance-authority";
 // import "./heroBanner.css";
@@ -56,27 +58,28 @@ const banners = [
     {
       id: "2",
       image: {
-        web: "/images/hero-carousel-banner-web.webp",
+        web: "/images/hero-carousel-banner-2-web.webp",
         tablet: "/images/hero-carousel-banner-mob.webp",
         mobile: "/images/hero-carousel-banner-mob.webp",
       },
-      caption: "new arrivals",
-      captionColor: "#1A1A1A",
-      title: "healthy treats,",
-      halfTitle: "crafted with love",
-      paragraph:
-        "wholesome ingredients for a delicious and nutritious experience for your furry friends",
-      paragraphColor: "#333333",
-      buttonText: "shop now",
+      caption: "new Offer",
+      captionColor: "#FFFFFF",
+      title: "Get 10% off,",
+      halfTitle: "On your first Subscription",
+      paragraph: "Freshly prepared and delivered to your door that fuels a life full of happy tails",
+      paragraphColor: "#ffff",
+      buttonText: "Get Started",
       buttonLink: "#",
-      bannerThemeColor: "blue",
+      bannerThemeColor: "#ffff",
+      buttonTextColor:"#ffff"
     },
   ];
 
 export default function HeroSection() {
 
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
+  const [emblaRef] = useEmblaCarousel({ loop: true, duration:50 }, [Autoplay(), Fade()])
 
+  
   const getResponsiveImage = (banner: (typeof banners)[0]): string => {
     if (typeof window !== "undefined") {
       if (window.innerWidth <= 574) return banner.image.mobile;
@@ -85,11 +88,9 @@ export default function HeroSection() {
     }
     return banner.image.mobile; // SSR fallback
   };
-
   const [activeImages, setActiveImages] = useState<string[]>(
     banners.map((b) => b.image.mobile)
   );
-
   useEffect(() => {
     const updateImages = () => {
       setActiveImages(banners.map(getResponsiveImage));
@@ -99,18 +100,11 @@ export default function HeroSection() {
     return () => window.removeEventListener("resize", updateImages);
   }, [banners]);
 
-  // Optional autoplay
-  useEffect(() => {
-    const interval = setInterval(() => {
-      emblaApi?.scrollNext();
-    }, 4000);
-    return () => clearInterval(interval);
-  }, [emblaApi]);
 
   return (
     <section className="relative w-full overflow-hidden">
       <div className="embla w-full overflow-hidden" ref={emblaRef}>
-        <div className="embla__container flex">
+        <div className="embla__container flex ">
           {banners.map((banner, index) => (
             <div
               key={banner.id}
