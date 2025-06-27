@@ -23,9 +23,9 @@ const bannerVariants = cva(
       },
       bannerHeight: {
         mainHero:
-          "min-h-[500px] h-[90dvh] sm:min-h-[400px] sm:h-[d50vh] lg:min-h-[520px] sm:h-[70dvh] lg:max-h-[1200px]",
+          "min-h-[500px] h-[780px] sm:min-h-[300px] sm:h-[50dvh] lg:min-h-[520px]  lg:max-h-[1200px]",
         subHero:
-          "min-h-[500px] h-[90dvh] sm:min-h-[400px] sm:h-[d50vh] lg:min-h-[520px] sm:h-[70dvh] lg:max-h-[1200px]",
+          "min-h-[500px] h-[90dvh] sm:min-h-[400px] sm:h-[50dvh] lg:min-h-[520px] sm:h-[70dvh] lg:max-h-[1200px]",
       },
     },
     defaultVariants: {
@@ -40,7 +40,7 @@ const banners = [
       id: "1",
       image: {
         web: "/images/hero-carousel-banner-web.webp",
-        tablet: "/images/hero-carousel-banner-mob.webp",
+        tablet: "/images/hero-carousel-banner-web.webp",
         mobile: "/images/hero-carousel-banner-mob.webp",
       },
       caption: "introducing",
@@ -59,8 +59,8 @@ const banners = [
       id: "2",
       image: {
         web: "/images/hero-carousel-banner-2-web.webp",
-        tablet: "/images/hero-carousel-banner-mob.webp",
-        mobile: "/images/hero-carousel-banner-mob.webp",
+        tablet: "/images/hero-carousel-banner-2-web.webp",
+        mobile: "/images/hero-carousel-banner-2-mob.webp",
       },
       caption: "new Offer",
       captionColor: "#FFFFFF",
