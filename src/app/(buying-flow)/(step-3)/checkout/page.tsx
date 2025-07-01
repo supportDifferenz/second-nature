@@ -11,7 +11,9 @@ export default function PaymentFinal() {
           <FormSection />
         </div>
         <div className="order-1 lg:order-2 flex-1">
-          <CartSummary />
+          <div className="lg:sticky lg:top-6 lg:mb-3">
+            <CartSummary />
+          </div>
         </div>
       </div>
     </BuyingFlowLayout>

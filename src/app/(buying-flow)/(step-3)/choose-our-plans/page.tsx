@@ -251,7 +251,7 @@ export default function Page() {
           text="Choose Our Plan"
           className="text-center text-primary-dark"
         />
-        <div className="">
+        <div>
           
 
           {
@@ -320,7 +320,9 @@ export default function Page() {
           className="text-center text-primary-dark"
         />
 
-        <FAQS faqs={faqsData} defaultOpenIndex={0} />
+        <div className="lg:mx-48">
+          <FAQS faqs={faqsData} defaultOpenIndex={0} />
+        </div>
 
       </div>
 

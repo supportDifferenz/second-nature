@@ -20,7 +20,7 @@ export default function CartSummary() {
     const [ productPrice, setProductPrice ] = useState<number>(totalPrice);
 
   return (
-    <div className='bg-[#F1F5DB] py-[var(--space-30-60)] rounded-2xl border border-[#C5C5C5]'>
+    <div className='bg-[#F1F5DB] lg:max-h-[95vh] py-[var(--space-30-60)] rounded-2xl border border-[#C5C5C5]'>
         <div>
             <Typography tag='h5' text='Cart Summary' className='uppercase text-primary-dark px-[var(--space-30-60)] text-center sm:text-start '/>
         </div>
