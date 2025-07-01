@@ -10,6 +10,7 @@ type PetDetails = {
   ageYear?: number | string;
   dateOfBirth?: string | null;
   currentWeight?: string | number;
+  type?: string;
 };
 
 type PetInfoCardProps = {
@@ -22,6 +23,8 @@ export default function PetInfoCard({ petDetails, setIsEditPetInfo, setPetData }
 
   const [ ageHeading, setAgeHeading ] = useState("");
   const [ ageContent, setAgeContent ] = useState("");
+
+  console.log("Pet type", petDetails?.type);
 
   useEffect(() => {
     if(petDetails?.ageYear !== 0 && petDetails?.ageYear !== 0 && petDetails?.ageYear !== ""){
@@ -44,12 +47,23 @@ export default function PetInfoCard({ petDetails, setIsEditPetInfo, setPetData }
       <div className="flex justify-between border-b p-5 border-[#E4E7D3]">
         <div className="flex items-center gap-2">
           <div className="">
-            <Image
-              src="/icons/pet-info-id1.svg"
-              alt="dog"
-              fill
-              className="!static w-full !h-full object-cover"
-            />
+            {
+              petDetails?.type === "dog" ? (
+                <Image
+                  src="/icons/dog-icon.svg"
+                  alt="dog"
+                  fill
+                  className="!static w-full !h-full object-cover"
+                />   
+              ) : (
+                <Image
+                  src="/icons/cat-icon.svg"
+                  alt="dog"
+                  fill
+                  className="!static w-full !h-full object-cover"
+                />              
+              )
+            }
           </div>
           <Typography 
             tag="h5" 
