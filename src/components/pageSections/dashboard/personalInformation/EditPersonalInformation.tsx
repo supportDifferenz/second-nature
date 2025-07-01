@@ -4,6 +4,8 @@ import { z } from "zod";
 import { InputLabeled } from "@/components/molecules/inputLabeled/InputLabeled";
 import { Button } from "@/components/ui/button";
 import { useUpdateUserHook } from "@/hooks/userHooks/getUserDetailsHook";
+import { useGetUserDetails} from "@/hooks/userHooks/getUserDetailsHook";
+import { useUserStore} from "@/zustand/store/userDataStore";
 
 const userSchema = z.object({
   firstName: z.string()
@@ -43,6 +45,10 @@ export default function EditPersonalInformation({
   setIsEditing,
   defaultValues 
 }: EditPersonalInformationProps) {
+
+  const { userDetails } = useUserStore();
+  const { data: getUserDetails } = useGetUserDetails(userDetails.userId);
+  console.log("User details from get customer by ID API in EditPersonalInformation component", getUserDetails);
   
   const {
     register,
@@ -54,12 +60,12 @@ export default function EditPersonalInformation({
     mode: "onTouched", // Validate on blur after first touch
     reValidateMode: "onChange", // Re-validate on change after first blur
     defaultValues: defaultValues || {
-      firstName: "",
-      lastName: "",
-      email: "",
-      altEmail: "",
-      mobile: "",
-      altMobile: ""
+      firstName: getUserDetails?.result?.firstname || "",
+      lastName: getUserDetails?.result?.lastname || "",
+      email: getUserDetails?.result?.emailId || "",
+      altEmail: getUserDetails?.result?.alternativeEmail || "",
+      mobile: getUserDetails?.result?.contactNo || "",
+      altMobile: getUserDetails?.result?.alternativeMobile || "",
     }
   });
 

@@ -357,7 +357,7 @@ export default function Payment({ shippingFormData, billingFormData }: PaymentPr
               targetWeight: pet.targetWeight || 0,
               plan: {
                 type: pet.planType || "",
-                duration: pet.planType === "regular" ? "28" : "7",
+                duration: pet.planType === "Regular" ? "28" : "7",
                 price: pet.planPrice || 0,
                 protein: pet.protein || "",
                 bowlSize: pet.bowlSize || "",
