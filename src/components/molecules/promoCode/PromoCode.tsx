@@ -60,8 +60,11 @@ export default function PromoCode({ totalPrice, productPrice, setProductPrice }:
           className="flex-1"
           variant="dottedInput"
           value={promoCode}
-          onChange={(e) => setPromoCode(e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && handleApply()}
+          onChange={(e) => {
+            setPromoCode(e.target.value);
+            setPromoMessage("");
+          }}
+          // onKeyDown={(e) => e.key === "Enter" && handleApply()}
           disabled={isApplied}
         />
         {isApplied ? (
