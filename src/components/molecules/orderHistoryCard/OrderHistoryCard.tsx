@@ -155,7 +155,7 @@ const OrderHistoryCard: React.FC<
           setCurrentProtein(protein);
           setIsProteinPopupOpen(false);
           setChangeProteinError("");
-          window.location.reload();
+          // window.location.reload();
         },
         onError: (error) => {
           setCurrentProtein(protein);
@@ -181,7 +181,7 @@ const OrderHistoryCard: React.FC<
           onSuccess: () => {
             setIsDowngradePopupOpen(false);
             setPlanChangeError("");
-            window.location.reload();
+            // window.location.reload();
           },
           onError: (error) => {
             if (error instanceof Error) {
@@ -209,7 +209,7 @@ const OrderHistoryCard: React.FC<
           onSuccess: () => {
             setIsDowngradePopupOpen(false);
             setPlanChangeError("");
-            window.location.reload();
+            // window.location.reload();
           },
           onError: (error) => {
             if (error instanceof Error) {
@@ -237,7 +237,7 @@ const OrderHistoryCard: React.FC<
         {
           onSuccess: () => {
             setIsCancelPopupOpen(false);
-            window.location.reload();
+            // window.location.reload();
           },
           onError: (error: unknown) => {
             if (error instanceof Error) {
@@ -266,7 +266,7 @@ const OrderHistoryCard: React.FC<
           onSuccess: () => {
             // setIsCancelPopupOpen(false);
             setRestartPlanError("");
-            window.location.reload();
+            // window.location.reload();
           },
           onError: (error: unknown) => {
             if (error instanceof Error) {
@@ -312,7 +312,7 @@ const OrderHistoryCard: React.FC<
         onSuccess: (data) => {
           console.log("Re order success",data);
           setReOrderPlanError("");
-          window.location.reload();
+          // window.location.reload();
         },
         onError: (error: unknown) => {
           if (error instanceof Error) {
@@ -340,7 +340,7 @@ const OrderHistoryCard: React.FC<
         {
           onSuccess: () => {
             // setPausePlanError("");
-            window.location.reload();
+            // window.location.reload();
           },
           onError: (error: unknown) => {
             // if (error instanceof Error) {
