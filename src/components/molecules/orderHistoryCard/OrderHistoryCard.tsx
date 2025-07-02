@@ -81,7 +81,7 @@ const OrderHistoryCard: React.FC<
   const accountFromAPI = subscriptionDetails?.result?.account ?? "";
   const shippingDetailsFromAPI = subscriptionDetails?.result?.shippingDetails ?? "";
   const billingDetailsFromAPI = subscriptionDetails?.result?.billingDetails ?? "";
-  const subscriptionDateFromAPI = subscriptionDetails?.result?.subscriptiondate ?? "";
+  // const subscriptionDateFromAPI = subscriptionDetails?.result?.subscriptiondate ?? "";
   const promoCodeFromAPI = subscriptionDetails?.result?.promocode ?? "";
   const subscribeToOffersFromAPI = subscriptionDetails?.result?.subscribeToOffers ?? true;
   const petsFromAPI = subscriptionDetails?.result?.pets ?? [];
@@ -288,7 +288,8 @@ const OrderHistoryCard: React.FC<
         account: accountFromAPI,
         shippingDetails: shippingDetailsFromAPI,
         billingDetails: billingDetailsFromAPI,
-        subscriptiondate: subscriptionDateFromAPI,
+        // subscriptiondate: subscriptionDateFromAPI,
+        subscriptiondate: new Date().toISOString().split("T")[0],
         promoCode: promoCodeFromAPI,
         subscribeToOffers: subscribeToOffersFromAPI,
         // pets: petsFromAPI,

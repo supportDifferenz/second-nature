@@ -14,7 +14,7 @@ export default function DateOfBirthPicker({ dateOfBirth, setDateOfBirth, colorCl
 
   const handleSelect = (selectedDate: Date | undefined) => {
     if (selectedDate) {
-      setDateOfBirth(format(selectedDate, "yyyy-MM-dd"));
+      setDateOfBirth(format(selectedDate, "dd-MM-yyyy"));
       setOpen(false); // Close popover
     }
   };
