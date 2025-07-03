@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { format } from "date-fns";
+import { format, parse } from "date-fns";
 import { cn } from "@/lib/utils";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
@@ -29,7 +29,7 @@ export default function DateOfBirthPicker({ dateOfBirth, setDateOfBirth, colorCl
             !dateOfBirth && "text-muted-foreground"
           )}
         >
-          {dateOfBirth ? format(dateOfBirth, "dd-MM-yyyy") : "DD-MM-YYYY"}
+          {dateOfBirth ? format(parse(dateOfBirth, "dd-MM-yyyy", new Date()), "dd-MM-yyyy") : "DD-MM-YYYY"}
           <div className="relative w-6">
             <Image src="icons/calendar.svg" alt="icon" fill className="!static w-full"/>
           </div>
@@ -38,7 +38,8 @@ export default function DateOfBirthPicker({ dateOfBirth, setDateOfBirth, colorCl
       <PopoverContent className="w-auto p-0 mt-2">
         <Calendar
           mode="single"
-          selected={dateOfBirth ? new Date(dateOfBirth) : undefined}
+          selected={dateOfBirth ? parse(dateOfBirth, "dd-MM-yyyy", new Date()) as Date : undefined}
+          // selected={dateOfBirth ? new Date(dateOfBirth) : undefined}
           onSelect={handleSelect}
           initialFocus
           className="rounded-md border"
