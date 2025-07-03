@@ -21,7 +21,7 @@
   --foreground: #424242;
 
   /* font size */
-  --fs-h1: clamp(60px, 3.125vw + 30px, 121px);
+  --fs-h1: clamp(55px, 3.125vw + 30px, 121px);
   --fs-h2: clamp(35px, 2.083vw + 15px, 70px);
   --fs-h2-supporting: clamp(35px, 2.083vw + 15px, 70px);
   --fs-h3: clamp(27px, 1.563vw + 12px, 54px);
@@ -45,11 +45,14 @@
 
   /* container */
   --container: clamp(280px,
-      100% - 2 * (clamp(20px, 10.625vw - 14px, 190.33px)),
+      100% - 2 * (clamp(20px, 10.625vw - 14px, 100.33px)),
       1600px);
+
+
   --container-lg: clamp(280px,
       calc(100% - 2 * clamp(20px, 10.625vw - 14px, 85px)),
       1748px);
+
 
   --container-one-side: clamp(280px,
       100% - 1 * (clamp(20px, 10.625vw - 14px, 190.33px)),

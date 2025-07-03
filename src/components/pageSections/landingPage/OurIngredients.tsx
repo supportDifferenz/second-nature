@@ -77,12 +77,10 @@ export default function OurIngredients() {
           title="Our"
           paragraph="Pure, Clean Ingredients You Can Recognize and Trust"
           textColor="#00683D"
+          className="max-w-[80%] sm:max-w-max mx-auto"
         />
       </motion.div>
-      <section className=" mt-[-70%] sm:mt-[-12%] lg:mt-[-50px]">
-
-
-
+      <section className=" mt-[-50%] sm:mt-[-12%] lg:mt-[-50px]">
         {/* ingredients circle section */}
         <div className=" overflow-hidden sm:overflow-visible sm:transform sm:scale-[.7]  lg:scale-100 relative z-[3]  after:content-[''] after:absolute after:w-full after:h-1/2 after:left-0 after:top-0  after:bg-gradient-to-b after:from-white after:via-white/75 after:to-transparent after-z-[1]">
           <div className="h-(--space-527-690) w-[95vw] mx-auto">
@@ -90,97 +88,96 @@ export default function OurIngredients() {
               initial={{ opacity: 0, scale: 0.5 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 1.3, delay: 0.01, type: 'spring', bounce: 0.6, velocity: 2 }}
+              transition={{ duration: 1.3, delay: 0.01, }}
               className="w-(--space-527-690) h-(--space-527-690) border rounded-full border-primary absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2">
               <div className="w-[70%] sm:w-(--space-300-526) h-[70%] sm:h-(--space-300-526) border rounded-full border-primary absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2"></div>
               <div className="w-(--space-256-406) h-(--space-256-406) border rounded-full border-primary absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2"></div>
               <div className="w-(--space-191-290) h-(--space-191-290) border rounded-full border-primary absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2"></div>
             </motion.div>
           </div>
-          <div className=" sm:absolute z-[2] top-1/2 left-1/2 sm:transform sm:-translate-y-1/2 sm:-translate-x-1/2 flex justify-start flex-row-reverse sm:flex-row sm:justify-center gap-[22px] sm:gap-0  sm:items-center overflow-x-auto sm:overflow-visible">
-            {/* Circular Items */}
-            {features.map(([img, text, align], index) => {
-              // const angle = (index / features.length) * (1.5 * Math.PI) - 0.45;
-              const angle = (index / features.length) * (1.5 * Math.PI) - 0.45;
-              const x = Math.cos(angle) * radius;
-              const y = Math.sin(angle) * radius;
-              return (
-                <motion.div
-                  initial={{ transform: `translate(0px, 0px)` }}
-                  whileInView={{ transform: `translate(${x}px, ${y}px)` }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.8 }}
-                  key={uuidv4()}
-                  className={`relative sm:absolute  flex flex-col sm:items-center sm:justify-center  text-center  sm:origin-center  `}
-                  style={
-                    isWeb ? { transform: `translate(${x}px, ${y}px)` } : {}
-                  }
-
-                >
-                  {/* Image */}
+          <div className="sm:absolute z-[2] sm:top-1/2 sm:left-1/2 sm:transform sm:-translate-y-1/2 sm:-translate-x-1/2 overflow-x-auto sm:overflow-visible">
+            <div className="flex flex-row-reverse justify-end sm:flex-row sm:justify-center gap-[22px] sm:gap-0  sm:items-center ">
+              {/* Circular Items */}
+              {features.map(([img, text, align], index) => {
+                // const angle = (index / features.length) * (1.5 * Math.PI) - 0.45;
+                const angle = (index / features.length) * (1.5 * Math.PI) - 0.45;
+                const x = Math.cos(angle) * radius;
+                const y = Math.sin(angle) * radius;
+                return (
                   <motion.div
-                    initial={{ scale: 0 }}
-                    whileInView={{ scale: 1, }}
+                    initial={{ transform: `translate(0px, 0px)` }}
+                    whileInView={isWeb ? { transform: `translate(${x}px, ${y}px)` } : { transform: "translate(0)" }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.8, delay: 0.6 }}
-                    className="w-(--space-105-136) h-(--space-105-136)">
-                    <Image
-                      src={img}
-                      alt="Feature"
-                      fill
-                      priority
-                      className="rounded-full !static object-contain"
-                    />
-                  </motion.div>
-                  {/* Dynamically positioned text */}
+                    transition={{ duration: 0.5, delay: 0.8 }}
+                    key={uuidv4()}
+                    className={`relative sm:absolute  flex flex-col items-center sm:justify-center  text-center  sm:origin-center  `}
+                    style={
+                      isWeb ? { transform: `translate(${x}px, ${y}px)` } : {}
+                    }
 
-                  <motion.div
-                    initial={{ opacity: 0, }}
-                    whileInView={{ opacity: 1 }}
-                    transition={{ duration: 1.2, delay: 1.4, ease: 'linear' }}
-                    viewport={{ once: true }}
-                    className={`
-                      sm:absolute w-(--space-156-160)   ${align === "left"
-                        ? "sm:-left-[130%] sm:text-right"
-                        : align === "right"
-                          ? "sm:-right-[130%] sm:text-left"
-                          : align === "bottom"
-                            ? "sm:top-[100%]"
-                            : "sm:flex-col"
-                      }`}
                   >
-                    <Typography
-                      tag="span"
-                      text={text}
-                      className={` text-primary-dark `}
-                    />
-                  </motion.div>
-                </motion.div>
-              );
-            })}
+                    {/* Image */}
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: .8, delay: 0.6, ease: "circInOut" }}
+                      className="w-(--space-105-136) h-(--space-105-136)">
+                      <Image
+                        src={img}
+                        alt="Feature"
+                        fill
+                        priority
+                        className="rounded-full !static object-contain"
+                      />
+                    </motion.div>
+                    {/* Dynamically positioned text */}
 
-            {/* Main Thumbnail */}
-            <motion.div
-              initial={{ scale: 0 }}
-              whileInView={{ scale: 1, }}
-              viewport={{ once: true }}
-              transition={{ duration: 1.6, delay: 0.4, type: 'spring', bounce: 0.2, velocity: 6 }}
-              className="w-(--space-280-560) absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
-              <Image
-                src="/images/ingredients-main-thump.webp"
-                alt="Feature Thump"
-                fill
-                className="!static object-contain"
-              />
-            </motion.div>
+                    <motion.div
+                      initial={{ opacity: 0, }}
+                      whileInView={{ opacity: 1 }}
+                      transition={{ duration: 1.4, delay: 1.4, ease: 'circIn' }}
+                      viewport={{ once: true }}
+                      className={`
+                      sm:absolute w-(--space-156-160)   ${align === "left"
+                          ? "sm:-left-[130%] sm:text-right"
+                          : align === "right"
+                            ? "sm:-right-[130%] sm:text-left"
+                            : align === "bottom"
+                              ? "sm:top-[100%]"
+                              : "sm:flex-col"
+                        }`}
+                    >
+                      <Typography
+                        tag="span"
+                        text={text}
+                        className={` text-primary-dark `}
+                      />
+                    </motion.div>
+                  </motion.div>
+                );
+              })}
+
+              {/* Main Thumbnail */}
+              <motion.div
+                initial={{ scale: 0 }}
+                whileInView={{ scale: 1, }}
+                viewport={{ once: true }}
+                transition={{ duration: .6, delay: 0.4, ease: "easeOut" }}
+                className="w-(--space-280-560) absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                <Image
+                  src="/images/ingredients-main-thump.webp"
+                  alt="Feature Thump"
+                  fill
+                  className="!static object-contain"
+                />
+              </motion.div>
+            </div>
           </div>
         </div>
 
 
-
         {/* Real Ingredients vs. Fillers */}
-
-
         <div className=" mt-[15%] lg:mt-[18%]">
           {/* <IngredientsCarousel /> */}   <div
 
