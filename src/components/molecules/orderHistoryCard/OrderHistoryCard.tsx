@@ -123,7 +123,7 @@ const OrderHistoryCard: React.FC<
   const [changeProteinError, setChangeProteinError] = useState("");
   const [planChangeError, setPlanChangeError] = useState("");
   const [planChangeReason, setPlanChangeReason] = useState("");
-  const [cancelReason, setCancelReason] = useState("");
+  // const [cancelReason, setCancelReason] = useState("");
   const [restartPlanError, setRestartPlanError] = useState("");
   const [reOrderPlanError, setReOrderPlanError] = useState("");
   const [pauseStartDate, setPauseStartDate] = useState("");
@@ -133,14 +133,20 @@ const OrderHistoryCard: React.FC<
   // const [userIdFromProp, setUserIdFromProp] = useState("");
 
   const { mutate: changeProtein, isPending: isChangeProteinPending } = useChangeProtein();
-  const { mutate: downgradePlan } = useDowngradePlan();
+  const { mutate: downgradePlan, isPending: isDowngradeLoading } = useDowngradePlan();
   const { mutate: upgradePlan } = useUpgradePlan();
   const { mutate: cancelPlan } = useCancelPlan();
   const { mutate: restartPlan } = useRestartPlan();
   const { mutate: createSubscription } = useCreateSubscriptionHook();
   const { mutate: pausePlan } = usePausePlan();
   const { data: invoiceDataFromAPI } = useGetInvoiceBySubIdAndPetId(subIdFromStore, petIdFromStore);
-  
+
+  const [ successUpgradeMessage, setSuccessUpgradeMessage ] = useState("");
+  const [ errorUpgradeMessage, setErrorUpgradeMessage ] = useState("");
+  const [ successDowngradeMessage, setSuccessDowngradeMessage ] = useState("");
+  const [ errorDowngradeMessage, setErrorDowngradeMessage ] = useState("");
+  const [ successCancelMessage, setSuccessCancelMessage ] = useState("");
+  const [ errorCancelMessage, setErrorCancelMessage ] = useState("");
 
   const handleChangeProtein = (subId: string, petId: string, userId: string, proteinType: string) => {
     changeProtein(
@@ -178,14 +184,21 @@ const OrderHistoryCard: React.FC<
           downgradeReason: planChangeReason,
         },
         {
-          onSuccess: () => {
+          onSuccess: (data) => {
             setIsDowngradePopupOpen(false);
             setPlanChangeError("");
+            if(data.statusCode === 200) {
+              setSuccessDowngradeMessage(data.message);
+              window.location.reload();
+            }else{
+              setErrorDowngradeMessage(data.message);
+            }
             // window.location.reload();
           },
           onError: (error) => {
             if (error instanceof Error) {
               setPlanChangeError(error.message || "Error in downgrade plan");
+              setErrorDowngradeMessage(error.message || "Error in downgrade plan");
             }
           }
         }
@@ -206,14 +219,22 @@ const OrderHistoryCard: React.FC<
           upgradeReason: planChangeReason,
         },
         {
-          onSuccess: () => {
+          onSuccess: (data) => {
             setIsDowngradePopupOpen(false);
             setPlanChangeError("");
+            console.log("Upgrade plan response:", data);
+            if(data.statusCode === 200) {
+              setSuccessUpgradeMessage(data.message);
+              window.location.reload();
+            }else{
+              setErrorUpgradeMessage(data.message);
+            }
             // window.location.reload();
           },
           onError: (error) => {
             if (error instanceof Error) {
               setPlanChangeError(error.message || "Error in upgrade plan");
+              setErrorUpgradeMessage(error.message || "Error in upgrade plan");
             }
           }
         }
@@ -223,7 +244,7 @@ const OrderHistoryCard: React.FC<
     }
   }
 
-  const handleCancel = () => {
+  const handleCancel = (reason: string) => {
     if (subId && petId && userId) {
       cancelPlan(
         {
@@ -231,17 +252,25 @@ const OrderHistoryCard: React.FC<
           petId,
           userId,
           formData: {
-            cancelReason: cancelReason
+            // cancelReason: cancelReason
+            cancelReason: reason
           }
         },
         {
-          onSuccess: () => {
+          onSuccess: (data) => {
             setIsCancelPopupOpen(false);
+            if(data.statusCode === 200) {
+              setSuccessCancelMessage(data.message);
+              window.location.reload();
+            }else{
+              setErrorCancelMessage(data.message);
+            }
             // window.location.reload();
           },
           onError: (error: unknown) => {
             if (error instanceof Error) {
               setPlanChangeError(error.message || "Error in cancel plan");
+              setErrorCancelMessage(error.message || "Error in cancel plan");
             }
           }
         }
@@ -263,9 +292,12 @@ const OrderHistoryCard: React.FC<
           userId,
         },
         {
-          onSuccess: () => {
+          onSuccess: (data) => {
             // setIsCancelPopupOpen(false);
             setRestartPlanError("");
+            if(data.statusCode === 200) {
+              window.location.reload();
+            }
             // window.location.reload();
           },
           onError: (error: unknown) => {
@@ -568,22 +600,36 @@ const OrderHistoryCard: React.FC<
               {
                 bowlSize === "half"
                 ? (
-                  <Button 
-                    className="w-full"
-                    size="md"
-                    onClick={() => setIsDowngradePopupOpen(true)}
-                  >
-                    Upgrade to Full-Bowl
-                  </Button>
+                  <>
+                    <Button 
+                      className="w-full"
+                      size="md"
+                      disabled={petsFromAPI[0]?.plan?.isUpgrade}
+                      onClick={() => setIsDowngradePopupOpen(true)}
+                    >
+                      { petsFromAPI[0]?.plan?.isUpgrade ? "Upgraded to Full-Bowl" : "Upgrade to Full-Bowl" }
+                    </Button>
+                    <Typography tag="span" className="text-sm text-green-500" text={successUpgradeMessage} />
+                    <Typography tag="span" className="text-sm text-red-500" text={errorUpgradeMessage} />
+                    {/* <span className="text-green-500">{successUpgradeMessage}</span> */}
+                    {/* <span className="text-red-500">{errorUpgradeMessage}</span> */}
+                  </>
                 )
                 : (
-                  <Button 
-                    className="w-full"
-                    size="md"
-                    onClick={() => setIsDowngradePopupOpen(true)}
-                  >
-                    Downgrade to Half-Bowl
-                  </Button>
+                  <>
+                    <Button 
+                      className="w-full"
+                      size="md"
+                      disabled={petsFromAPI[0]?.plan?.isDowngrade}
+                      onClick={() => setIsDowngradePopupOpen(true)}
+                    >
+                      { petsFromAPI[0]?.plan?.isDowngrade ? "Downgraded to Half-Bowl" : "Downgrade to Half-Bowl" }
+                    </Button>
+                    <Typography tag="span" className="text-sm text-green-500" text={successDowngradeMessage} />
+                    <Typography tag="span" className="text-sm text-red-500" text={errorDowngradeMessage} />
+                    {/* <span className="text-green-500">{successDowngradeMessage}</span> */}
+                    {/* <span className="text-red-500">{errorDowngradeMessage}</span> */}
+                  </>
                 )
               }
               
@@ -605,6 +651,10 @@ const OrderHistoryCard: React.FC<
               >
                 {buttons[2]} {/* Cancel */}
               </Button>
+              <Typography tag="span" className="text-sm text-green-500" text={successCancelMessage} />
+              <Typography tag="span" className="text-sm text-red-500" text={errorCancelMessage} />
+              {/* <span className="text-green-500">{successCancelMessage}</span> */}
+              {/* <span className="text-red-500">{errorCancelMessage}</span> */}
             </div>
           </div>
         ) : (
@@ -696,6 +746,7 @@ const OrderHistoryCard: React.FC<
         setPlanChangeReason={setPlanChangeReason}
         handleDowngrade={handleDowngrade}
         handleUpgrade={handleUpgrade}
+        isDowngradeLoading={isDowngradeLoading}
       />
       
       <CancelSubscriptionPopup
@@ -703,8 +754,8 @@ const OrderHistoryCard: React.FC<
         onClose={() => setIsCancelPopupOpen(false)}
         onCancel={(reason) => {
           // API call to cancel with reason
-          setCancelReason(reason);
-          handleCancel();
+          // setCancelReason(reason);
+          handleCancel(reason);
           console.log(`Cancellation reason: ${reason}`);
         }}
       />
