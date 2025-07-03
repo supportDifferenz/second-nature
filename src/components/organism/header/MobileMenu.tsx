@@ -21,10 +21,10 @@ const containerVariants = {
   },
 };
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: 'easeOut' } },
-};
+// const itemVariants = {
+//   hidden: { opacity: 0, y: 20 },
+//   show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: 'easeOut' } },
+// };
 
 
 
@@ -119,7 +119,7 @@ const MobileMenu = ({ className, isOpen, setIsOpen }: MobileMenuProps) => {
             animate="show"
             key={isOpen ? 'menu-items-anim' : 'menu-items-idle'}
           >
-            <motion.div variants={itemVariants}>
+            <motion.div >
               <MealDropdownMenu
                 label="For Dogs"
                 icon="/icons/dog-icon.svg"
@@ -132,7 +132,7 @@ const MobileMenu = ({ className, isOpen, setIsOpen }: MobileMenuProps) => {
               />
             </motion.div>
 
-            <motion.div variants={itemVariants}>
+            <motion.div >
               <MealDropdownMenu
                 label="For Cats"
                 icon="/icons/cat-icon.svg"
@@ -145,7 +145,7 @@ const MobileMenu = ({ className, isOpen, setIsOpen }: MobileMenuProps) => {
               />
             </motion.div>
 
-            <motion.div className="space-y-6 mt-4 sm:mt-0 lg:ml-12" variants={itemVariants}>
+            <motion.div className="space-y-6 mt-4 sm:mt-0 lg:ml-12" >
               <motion.a
                 whileHover={{
                   scale: 1.03,
@@ -174,7 +174,7 @@ const MobileMenu = ({ className, isOpen, setIsOpen }: MobileMenuProps) => {
                 </div>
               </motion.a>
               {isHowItWorksOpen && (
-                <motion.div className="flex flex-col space-y-5 pl-4" variants={itemVariants}>
+                <motion.div className="flex flex-col space-y-5 pl-4">
                   <motion.a
                     whileHover={{
                       scale: 1.03,

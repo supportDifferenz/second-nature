@@ -6,8 +6,6 @@ import { PrimaryInlineTitle } from "@/components/molecules/titleSyles/Title";
 import Typography from "@/components/atoms/typography/Typography";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-
-
 export default function OurIngredients() {
   const features = [
     [
@@ -77,7 +75,7 @@ export default function OurIngredients() {
           title="Our"
           paragraph="Pure, Clean Ingredients You Can Recognize and Trust"
           textColor="#00683D"
-          className="max-w-[80%] sm:max-w-max mx-auto"
+          className="max-w-[80%] sm:max-w-[100%] mx-auto"
         />
       </motion.div>
       <section className=" mt-[-50%] sm:mt-[-12%] lg:mt-[-50px]">
@@ -178,7 +176,7 @@ export default function OurIngredients() {
 
 
         {/* Real Ingredients vs. Fillers */}
-        <div className=" mt-[15%] lg:mt-[18%]">
+        <div className=" mt-[15%] ">
           {/* <IngredientsCarousel /> */}   <div
 
             className="container">
