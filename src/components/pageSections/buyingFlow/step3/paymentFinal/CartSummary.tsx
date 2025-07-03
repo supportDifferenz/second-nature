@@ -24,7 +24,7 @@ export default function CartSummary() {
         <div>
             <Typography tag='h5' text='Cart Summary' className='uppercase text-primary-dark px-[var(--space-30-60)] text-center sm:text-start '/>
         </div>
-        <div className='flex flex-col gap-12 sm:gap-0 pr-[var(--space-30-60)] my-12 lg:mt-5'>
+        <div className='flex flex-col gap-12 sm:gap-0 pr-[var(--space-30-60)] my-12 lg:mt-5 overflow-y-auto lg:max-h-[25vh] my-scrollbar'>
 
             {
                 pets.map((petDetails) => (
