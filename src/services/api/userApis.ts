@@ -133,7 +133,7 @@ export const forgotPassword = async (
 
 try {
     const response = await userAxiosInstance.post(
-      `/api/user/forgotPassword`,
+      `/api/user/forgotPassword/${formData.userId}`,
       formData
   );
     return response.data;

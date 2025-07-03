@@ -81,7 +81,7 @@ const OrderHistoryCard: React.FC<
   const accountFromAPI = subscriptionDetails?.result?.account ?? "";
   const shippingDetailsFromAPI = subscriptionDetails?.result?.shippingDetails ?? "";
   const billingDetailsFromAPI = subscriptionDetails?.result?.billingDetails ?? "";
-  const subscriptionDateFromAPI = subscriptionDetails?.result?.subscriptiondate ?? "";
+  // const subscriptionDateFromAPI = subscriptionDetails?.result?.subscriptiondate ?? "";
   const promoCodeFromAPI = subscriptionDetails?.result?.promocode ?? "";
   const subscribeToOffersFromAPI = subscriptionDetails?.result?.subscribeToOffers ?? true;
   const petsFromAPI = subscriptionDetails?.result?.pets ?? [];
@@ -155,7 +155,7 @@ const OrderHistoryCard: React.FC<
           setCurrentProtein(protein);
           setIsProteinPopupOpen(false);
           setChangeProteinError("");
-          window.location.reload();
+          // window.location.reload();
         },
         onError: (error) => {
           setCurrentProtein(protein);
@@ -181,7 +181,7 @@ const OrderHistoryCard: React.FC<
           onSuccess: () => {
             setIsDowngradePopupOpen(false);
             setPlanChangeError("");
-            window.location.reload();
+            // window.location.reload();
           },
           onError: (error) => {
             if (error instanceof Error) {
@@ -209,7 +209,7 @@ const OrderHistoryCard: React.FC<
           onSuccess: () => {
             setIsDowngradePopupOpen(false);
             setPlanChangeError("");
-            window.location.reload();
+            // window.location.reload();
           },
           onError: (error) => {
             if (error instanceof Error) {
@@ -237,7 +237,7 @@ const OrderHistoryCard: React.FC<
         {
           onSuccess: () => {
             setIsCancelPopupOpen(false);
-            window.location.reload();
+            // window.location.reload();
           },
           onError: (error: unknown) => {
             if (error instanceof Error) {
@@ -266,7 +266,7 @@ const OrderHistoryCard: React.FC<
           onSuccess: () => {
             // setIsCancelPopupOpen(false);
             setRestartPlanError("");
-            window.location.reload();
+            // window.location.reload();
           },
           onError: (error: unknown) => {
             if (error instanceof Error) {
@@ -288,7 +288,8 @@ const OrderHistoryCard: React.FC<
         account: accountFromAPI,
         shippingDetails: shippingDetailsFromAPI,
         billingDetails: billingDetailsFromAPI,
-        subscriptiondate: subscriptionDateFromAPI,
+        // subscriptiondate: subscriptionDateFromAPI,
+        subscriptiondate: new Date().toISOString().split("T")[0],
         promoCode: promoCodeFromAPI,
         subscribeToOffers: subscribeToOffersFromAPI,
         // pets: petsFromAPI,
@@ -311,7 +312,7 @@ const OrderHistoryCard: React.FC<
         onSuccess: (data) => {
           console.log("Re order success",data);
           setReOrderPlanError("");
-          window.location.reload();
+          // window.location.reload();
         },
         onError: (error: unknown) => {
           if (error instanceof Error) {
@@ -339,7 +340,7 @@ const OrderHistoryCard: React.FC<
         {
           onSuccess: () => {
             // setPausePlanError("");
-            window.location.reload();
+            // window.location.reload();
           },
           onError: (error: unknown) => {
             // if (error instanceof Error) {

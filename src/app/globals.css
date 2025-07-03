@@ -480,3 +480,23 @@ p {
     @apply top-[100%];
   }
 }
+
+/* global.css */
+.my-scrollbar {
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: #c5c5c5 transparent;
+}
+
+.my-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.my-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.my-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #c5c5c5;
+  border-radius: 4px;
+}
+

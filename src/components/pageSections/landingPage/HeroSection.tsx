@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useCallback } from "react";
+import { motion, easeInOut } from "framer-motion";
 import Image from "next/image";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
@@ -9,7 +10,7 @@ import { cn } from "@/lib/utils";
 import { cva } from "class-variance-authority";
 import Typography from "@/components/atoms/typography/Typography";
 import { Button } from "@/components/ui/button";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 
 const bannerVariants = cva(
   "relative flex pt-8 sm:pt-0 sm:items-center w-full bg-cover bg-center transition-all",
@@ -81,12 +82,12 @@ const fadeUp = (delay = 0, y = 30, duration = 0.6) => ({
   animate: {
     opacity: 1,
     y: 0,
-    transition: { delay, duration, ease: "easeInOut" },
+    transition: { delay, duration, ease: easeInOut },
   },
   exit: {
     opacity: 0,
     y,
-    transition: { duration: 0.4, ease: "easeInOut" },
+    transition: { duration: 0.4, ease: easeInOut },
   },
 });
 

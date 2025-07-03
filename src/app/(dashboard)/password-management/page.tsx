@@ -11,7 +11,7 @@ import { useUpdatePasswordHook } from "@/hooks/userHooks/changePasswordHook";
 export default function PasswordManagement() {
   const { userDetails } = useUserStore();
   const userId = userDetails.userId;
-  const { mutate: updatePassword, isPending, isError, error } = useUpdatePasswordHook();
+  const { mutate: updatePassword, isPending, isError } = useUpdatePasswordHook();
 
   const [formData, setFormData] = useState({
     currentPassword: "",
@@ -32,6 +32,7 @@ export default function PasswordManagement() {
   });
 
   const [ successMessage, setSuccessMessage ] = useState("");
+  const [ errorMessage, setErrorMessage ] = useState("");
 
   const validateField = (name: string, value: string) => {
     switch (name) {
@@ -52,6 +53,8 @@ export default function PasswordManagement() {
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSuccessMessage("");
+    setErrorMessage("");
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
@@ -126,8 +129,17 @@ export default function PasswordManagement() {
 
             setSuccessMessage("Password updated successfully");
           },
-          onError: (error) => {
-            console.error("Password update failed", error);
+          onError: (error: unknown) => {
+            if (error instanceof Error) {
+              // If error is a custom error with a 'response' property
+              const apiError = error as { response?: { data?: { message?: string } } };
+              const message = apiError.response?.data?.message || error.message || "Password update failed";
+              console.error("Password update failed", message);
+              setErrorMessage(message);
+            } else {
+              console.error("Password update failed", error);
+              setErrorMessage("Password update failed");
+            }
             // Handle API specific errors
           },
         }
@@ -204,7 +216,7 @@ export default function PasswordManagement() {
 
             {isError && (
               <div className="mt-4 text-red-500">
-                {error?.message || "Failed to update password"}
+                {errorMessage}
               </div>
             )}
 
