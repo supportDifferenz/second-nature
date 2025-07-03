@@ -34,9 +34,8 @@ export default function DogOrCat() {
 
   const [petType, setPetType] = useState<"dog" | "cat" | "">("");
   const [petName, setPetName] = useState("");
-
-  console.log("###Pet Type is", petType);
-  console.log("###Pet Name is", petName);
+  const [catName, setCatName] = useState("");
+  const [dogName, setDogName] = useState("");
 
   // Get the current pet's details
   // const currentPetDetails = currentPetId ? pets[currentPetId] : null;
@@ -47,15 +46,22 @@ export default function DogOrCat() {
 
 
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPetName(e.target.value);
+    setPetName(e.target.value)
+    if(petType === "dog"){
+      setDogName(e.target.value)
+    }else if(petType === "cat"){
+      setCatName(e.target.value)
+    }
   };
 
   const handleAddMorePets = () => {
     if (petType && petName.trim() !== "") {
-      const newPetId = addNewPet({ catOrDog: petType, name: petName });
+      const newPetId = addNewPet({ catOrDog: petType, name: petType === "dog" ? dogName : catName });
       setCurrentPet(newPetId);
       setPetType("");
       setPetName("");
+      setDogName("");
+      setCatName("");
     }
   };
 
@@ -63,10 +69,10 @@ export default function DogOrCat() {
     e.preventDefault();
 
     if (petType && petName.trim() !== "") {
-      const newPetId = addNewPet({ catOrDog: petType, name: petName });
+      const newPetId = addNewPet({ catOrDog: petType, name: petType === "dog" ? dogName : catName });
       setCurrentPet(newPetId);
       if(newPetId) {
-        setPetDetails(newPetId, { catOrDog: petType, name: petName });
+        setPetDetails(newPetId, { catOrDog: petType, name: petType === "dog" ? dogName : catName });
         // setPetType("");
         // setPetName("");
       }
@@ -104,6 +110,8 @@ export default function DogOrCat() {
 
     setPetType("");
     setPetName("");
+    setDogName("");
+    setCatName("");
     // if (petType && petName.trim() !== "") {
     //   const newPetId = addNewPet({ catOrDog: petType, name: petName });
     //   setCurrentPet(newPetId);
@@ -170,11 +178,11 @@ export default function DogOrCat() {
             >
               <Input
                 type="text"
-                value={petType === "dog" ? petName : ""}
+                value={petType === "dog" ? dogName : ""}
                 onChange={handleNameChange}
                 // disabled={petType !== "dog"}
                 variant={"roundedEdgeInputLg"}
-                className={`${petType === "dog" ? "border-secondary-1" : "border-gray-300"} w-full border rounded-full text-center`}
+                className={`${petType === "dog" ? "border-secondary-1" : "border-gray-300"} w-full border rounded-full text-center focus:placeholder-slate-300`}
                 placeholder="Type Your Dogs’s Name"
               />
             </div>
@@ -225,12 +233,12 @@ export default function DogOrCat() {
             >
               <Input
                 type="text"
-                value={petType === "cat" ? petName : ""}
+                value={petType === "cat" ? catName : ""}
                 onChange={handleNameChange}
                 // disabled={petType !== "cat"}
                 placeholder="Type Your Cat's Name"
                 variant={"roundedEdgeInputLg"}
-                className={`${petType === "cat" ? "border-secondary-1" : "border-gray-300"} w-full border rounded-full text-center`}
+                className={`${petType === "cat" ? "border-secondary-1" : "border-gray-300"} w-full border rounded-full text-center focus:placeholder-slate-300`}
               />
             </div>
           </div>

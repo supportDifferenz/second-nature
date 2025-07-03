@@ -509,7 +509,7 @@ export default function OrderHistory() {
                     subId={selectedPet?.subId}
                     petId={selectedPet?.petId}
                     userId={userId}
-                    protein={dataFromAPI?.pets[0]?.plan.protein}
+                    protein={dataFromAPI?.pets[0]?.plan?.protein}
                   />
                 )}
                 {planDataFromAPI?.type === "Regular" && planDataFromAPI?.planStatus === "paused" && (
@@ -522,6 +522,7 @@ export default function OrderHistory() {
                     subId={selectedPet?.subId}
                     petId={selectedPet?.petId}
                     userId={userId}
+                    protein={dataFromAPI?.pets[0]?.plan?.protein}
                   />
                 )}
                 {planDataFromAPI?.type === "Regular" && planDataFromAPI?.planStatus === "cancel" && (
@@ -534,6 +535,7 @@ export default function OrderHistory() {
                     subId={selectedPet?.subId}
                     petId={selectedPet?.petId}
                     userId={userId}
+                    protein={dataFromAPI?.pets[0]?.plan?.protein}
                   />
                 )}
                 {planDataFromAPI?.type === "Regular" && planDataFromAPI?.planStatus === "paymentfailed" && (
@@ -546,6 +548,7 @@ export default function OrderHistory() {
                     subId={selectedPet?.subId}
                     petId={selectedPet?.petId}
                     userId={userId}
+                    protein={dataFromAPI?.pets[0]?.plan?.protein}
                   />
                 )}
                 {planDataFromAPI?.type === "Trial" && planDataFromAPI?.planStatus === "active" && (
@@ -558,6 +561,7 @@ export default function OrderHistory() {
                     subId={selectedPet?.subId}
                     petId={selectedPet?.petId}
                     userId={userId}
+                    protein={dataFromAPI?.pets[0]?.plan?.protein}
                   />
                 )}
                 {planDataFromAPI?.type === "Trial" && planDataFromAPI?.planStatus === "endingsoon" && (
@@ -570,6 +574,7 @@ export default function OrderHistory() {
                     subId={selectedPet?.subId}
                     petId={selectedPet?.petId}
                     userId={userId}
+                    protein={dataFromAPI?.pets[0]?.plan?.protein}
                   />
                 )}
                 {planDataFromAPI?.type === "Trial" && planDataFromAPI?.planStatus === "expired" && (
@@ -582,6 +587,7 @@ export default function OrderHistory() {
                     subId={selectedPet?.subId}
                     petId={selectedPet?.petId}
                     userId={userId}
+                    protein={dataFromAPI?.pets[0]?.plan?.protein}
                   />
                 )}
               </>

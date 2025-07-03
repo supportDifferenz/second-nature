@@ -15,7 +15,7 @@ export default function BuyingFlowLayout({
   step: number;
 }) {
 
-  const { pets, selectedPetIndex, removePet } = usePetStore();
+  const { pets, selectedPetIndex, setSelectedPetIndex, removePet } = usePetStore();
   // const petNames = Object.values(pets).map((pet) => pet.name);
 
   return (
@@ -41,7 +41,10 @@ export default function BuyingFlowLayout({
                     size={"icon"}
                     aria-label={`Remove ${pet.name}`}
                     className="absolute -top-4 -right-1 px-1 py-0.5 text-[8px] rounded-full hover:text-[#944446] hover:bg-gray-200 transition"
-                    onClick={() => removePet(pet.id)}
+                    onClick={() => {
+                      removePet(pet.id)
+                      setSelectedPetIndex(0)
+                    }}
                   >
                     X
                   </Button>

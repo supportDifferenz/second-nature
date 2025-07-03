@@ -52,7 +52,7 @@ export default function PlanCard({
   return (
     <div
       className={cn(
-        `flex flex-col relative border rounded-2xl w-fit px-5 py-10 lg:p-14`,
+        `flex flex-col relative border rounded-2xl w-full sm:w-ful lg:w-[40%] px-5 py-10 lg:p-14`,
         bgColour,
         isSelected ? "border-primary-dark shadow-md" : "border-slate-300"
       )}
@@ -125,7 +125,7 @@ export default function PlanCard({
           /> */}
         </div>
       </div>
-      <div className="flex flex-col pt-[var(--space-30-40)]" onClick={() => startTransition(() => router.push("/terms-and-conditions"))}>
+      <div className="flex flex-col pt-[var(--space-30-40)]">
         <Typography
           tag="h6"
           text="Step 1: Choose Protein"
@@ -160,7 +160,9 @@ export default function PlanCard({
           /> */}
         </div>
       </div>
-      <div onClick={() => startTransition(() => router.push("/terms-and-conditions"))}>
+      <div 
+        onClick={() => startTransition(() => router.push("/terms-and-conditions"))}
+      >
         <Typography
           tag="p"
           text="Terms and conditions >"
