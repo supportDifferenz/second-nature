@@ -22,6 +22,8 @@ import { PauseDeliveriesPopup } from "@/components/pageSections/dashboard/orderH
 import { format } from "date-fns";
 import { usePausePlan } from "@/hooks/subscriptionHooks/pausePlanHook";
 
+type PetInfo = { name: string; petId: string; subId: string };
+
 const OrderHistoryCard: React.FC<
   OrderHistoryCardPropsType & {
     statusLabel: string;
@@ -39,6 +41,12 @@ const OrderHistoryCard: React.FC<
     petId?: string;
     userId?: string;
     protein?: string;
+    petName?: string;
+    petInfoList?: PetInfo[];
+    setselectedPetIndex?: (index: number) => void;
+    setSelectedPetIndexFromOrderHistory?: (index: number) => void;
+    setSelectedPet?: (pet: PetInfo) => void;
+    setSelectedPetFromOrderHistory?: (pet: PetInfo) => void;
   }
 > = ({
   title,
@@ -69,6 +77,12 @@ const OrderHistoryCard: React.FC<
   subId,
   petId,
   userId,
+  // petName,
+  petInfoList,
+  setselectedPetIndex,
+  setSelectedPetIndexFromOrderHistory,
+  setSelectedPet,
+  setSelectedPetFromOrderHistory
 }) => {
 
   const { userDetails } = useUserStore();
@@ -123,7 +137,7 @@ const OrderHistoryCard: React.FC<
   const [changeProteinError, setChangeProteinError] = useState("");
   const [planChangeError, setPlanChangeError] = useState("");
   const [planChangeReason, setPlanChangeReason] = useState("");
-  const [cancelReason, setCancelReason] = useState("");
+  // const [cancelReason, setCancelReason] = useState("");
   const [restartPlanError, setRestartPlanError] = useState("");
   const [reOrderPlanError, setReOrderPlanError] = useState("");
   const [pauseStartDate, setPauseStartDate] = useState("");
@@ -133,14 +147,24 @@ const OrderHistoryCard: React.FC<
   // const [userIdFromProp, setUserIdFromProp] = useState("");
 
   const { mutate: changeProtein, isPending: isChangeProteinPending } = useChangeProtein();
-  const { mutate: downgradePlan } = useDowngradePlan();
+  const { mutate: downgradePlan, isPending: isDowngradeLoading } = useDowngradePlan();
   const { mutate: upgradePlan } = useUpgradePlan();
   const { mutate: cancelPlan } = useCancelPlan();
   const { mutate: restartPlan } = useRestartPlan();
   const { mutate: createSubscription } = useCreateSubscriptionHook();
   const { mutate: pausePlan } = usePausePlan();
   const { data: invoiceDataFromAPI } = useGetInvoiceBySubIdAndPetId(subIdFromStore, petIdFromStore);
-  
+
+  const [ successUpgradeMessage, setSuccessUpgradeMessage ] = useState("");
+  const [ errorUpgradeMessage, setErrorUpgradeMessage ] = useState("");
+  const [ successDowngradeMessage, setSuccessDowngradeMessage ] = useState("");
+  const [ errorDowngradeMessage, setErrorDowngradeMessage ] = useState("");
+  const [ successCancelMessage, setSuccessCancelMessage ] = useState("");
+  const [ errorCancelMessage, setErrorCancelMessage ] = useState("");
+  const [ successRestartMessage, setSuccessRestartMessage ] = useState("");
+  const [ errorRestartMessage, setErrorRestartMessage ] = useState("");
+  const [ successReOrderMessage, setSuccessReOrderMessage ] = useState("");
+  const [ errorReOrderMessage, setErrorReOrderMessage ] = useState("");
 
   const handleChangeProtein = (subId: string, petId: string, userId: string, proteinType: string) => {
     changeProtein(
@@ -178,14 +202,21 @@ const OrderHistoryCard: React.FC<
           downgradeReason: planChangeReason,
         },
         {
-          onSuccess: () => {
+          onSuccess: (data) => {
             setIsDowngradePopupOpen(false);
             setPlanChangeError("");
+            if(data.statusCode === 200) {
+              setSuccessDowngradeMessage(data.message);
+              window.location.reload();
+            }else{
+              setErrorDowngradeMessage(data.message);
+            }
             // window.location.reload();
           },
           onError: (error) => {
             if (error instanceof Error) {
               setPlanChangeError(error.message || "Error in downgrade plan");
+              setErrorDowngradeMessage(error.message || "Error in downgrade plan");
             }
           }
         }
@@ -206,14 +237,22 @@ const OrderHistoryCard: React.FC<
           upgradeReason: planChangeReason,
         },
         {
-          onSuccess: () => {
+          onSuccess: (data) => {
             setIsDowngradePopupOpen(false);
             setPlanChangeError("");
+            console.log("Upgrade plan response:", data);
+            if(data.statusCode === 200) {
+              setSuccessUpgradeMessage(data.message);
+              window.location.reload();
+            }else{
+              setErrorUpgradeMessage(data.message);
+            }
             // window.location.reload();
           },
           onError: (error) => {
             if (error instanceof Error) {
               setPlanChangeError(error.message || "Error in upgrade plan");
+              setErrorUpgradeMessage(error.message || "Error in upgrade plan");
             }
           }
         }
@@ -223,7 +262,7 @@ const OrderHistoryCard: React.FC<
     }
   }
 
-  const handleCancel = () => {
+  const handleCancel = (reason: string) => {
     if (subId && petId && userId) {
       cancelPlan(
         {
@@ -231,17 +270,25 @@ const OrderHistoryCard: React.FC<
           petId,
           userId,
           formData: {
-            cancelReason: cancelReason
+            // cancelReason: cancelReason
+            cancelReason: reason
           }
         },
         {
-          onSuccess: () => {
+          onSuccess: (data) => {
             setIsCancelPopupOpen(false);
+            if(data.statusCode === 200) {
+              setSuccessCancelMessage(data.message);
+              window.location.reload();
+            }else{
+              setErrorCancelMessage(data.message);
+            }
             // window.location.reload();
           },
           onError: (error: unknown) => {
             if (error instanceof Error) {
               setPlanChangeError(error.message || "Error in cancel plan");
+              setErrorCancelMessage(error.message || "Error in cancel plan");
             }
           }
         }
@@ -253,9 +300,7 @@ const OrderHistoryCard: React.FC<
   }
 
   const handleRestart = () => {
-    // alert(`SubId: ${subId}, PetId: ${petId}, UserId: ${userId}`);  
     if (subId && petId && userId) {
-      // alert("Clicked restart plan");
       restartPlan(
         {
           subId,
@@ -263,14 +308,27 @@ const OrderHistoryCard: React.FC<
           userId,
         },
         {
-          onSuccess: () => {
-            // setIsCancelPopupOpen(false);
+          onSuccess: (data) => {
             setRestartPlanError("");
-            // window.location.reload();
+            if (data.statusCode === 200) {
+              setSuccessRestartMessage(data.message);
+              const noOfPets = petInfoList?.length;
+              if (typeof noOfPets === "number" && noOfPets > 0 && petInfoList) {
+                const lastPet = petInfoList[noOfPets - 1];
+                if (setselectedPetIndex) setselectedPetIndex(noOfPets - 1);
+                if (setSelectedPetIndexFromOrderHistory) setSelectedPetIndexFromOrderHistory(noOfPets - 1);
+                if (setSelectedPet) setSelectedPet(lastPet);
+                if (setSelectedPetFromOrderHistory) setSelectedPetFromOrderHistory(lastPet);
+              }
+              window.location.reload();
+            }else{
+              setErrorRestartMessage(data.message);
+            }
           },
           onError: (error: unknown) => {
             if (error instanceof Error) {
               setRestartPlanError(error.message || "Error in restart plan");
+              setErrorRestartMessage(error.message || "Error in restart plan");
             }
           }
         }
@@ -312,11 +370,26 @@ const OrderHistoryCard: React.FC<
         onSuccess: (data) => {
           console.log("Re order success",data);
           setReOrderPlanError("");
+          if(data.statusCode === 200) {
+            setSuccessReOrderMessage(data.message);
+            const noOfPets = petInfoList?.length;
+            if (typeof noOfPets === "number" && noOfPets > 0 && petInfoList) {
+              const lastPet = petInfoList[noOfPets - 1];
+              if (setselectedPetIndex) setselectedPetIndex(noOfPets - 1);
+              if (setSelectedPetIndexFromOrderHistory) setSelectedPetIndexFromOrderHistory(noOfPets - 1);
+              if (setSelectedPet) setSelectedPet(lastPet);
+              if (setSelectedPetFromOrderHistory) setSelectedPetFromOrderHistory(lastPet);
+            }
+            window.location.reload();
+          }else{
+            setErrorReOrderMessage(data.message);
+          }
           // window.location.reload();
         },
         onError: (error: unknown) => {
           if (error instanceof Error) {
             setReOrderPlanError(error.message || "Error in re order");
+            setErrorReOrderMessage(error.message || "Error in re order");
           }
         }
       }
@@ -568,22 +641,36 @@ const OrderHistoryCard: React.FC<
               {
                 bowlSize === "half"
                 ? (
-                  <Button 
-                    className="w-full"
-                    size="md"
-                    onClick={() => setIsDowngradePopupOpen(true)}
-                  >
-                    Upgrade to Full-Bowl
-                  </Button>
+                  <>
+                    <Button 
+                      className="w-full"
+                      size="md"
+                      disabled={petsFromAPI[0]?.plan?.isUpgrade}
+                      onClick={() => setIsDowngradePopupOpen(true)}
+                    >
+                      { petsFromAPI[0]?.plan?.isUpgrade ? "Upgraded to Full-Bowl" : "Upgrade to Full-Bowl" }
+                    </Button>
+                    <Typography tag="span" className="text-sm text-green-500" text={successUpgradeMessage} />
+                    <Typography tag="span" className="text-sm text-red-500" text={errorUpgradeMessage} />
+                    {/* <span className="text-green-500">{successUpgradeMessage}</span> */}
+                    {/* <span className="text-red-500">{errorUpgradeMessage}</span> */}
+                  </>
                 )
                 : (
-                  <Button 
-                    className="w-full"
-                    size="md"
-                    onClick={() => setIsDowngradePopupOpen(true)}
-                  >
-                    Downgrade to Half-Bowl
-                  </Button>
+                  <>
+                    <Button 
+                      className="w-full"
+                      size="md"
+                      disabled={petsFromAPI[0]?.plan?.isDowngrade}
+                      onClick={() => setIsDowngradePopupOpen(true)}
+                    >
+                      { petsFromAPI[0]?.plan?.isDowngrade ? "Downgraded to Half-Bowl" : "Downgrade to Half-Bowl" }
+                    </Button>
+                    <Typography tag="span" className="text-sm text-green-500" text={successDowngradeMessage} />
+                    <Typography tag="span" className="text-sm text-red-500" text={errorDowngradeMessage} />
+                    {/* <span className="text-green-500">{successDowngradeMessage}</span> */}
+                    {/* <span className="text-red-500">{errorDowngradeMessage}</span> */}
+                  </>
                 )
               }
               
@@ -605,6 +692,10 @@ const OrderHistoryCard: React.FC<
               >
                 {buttons[2]} {/* Cancel */}
               </Button>
+              <Typography tag="span" className="text-sm text-green-500" text={successCancelMessage} />
+              <Typography tag="span" className="text-sm text-red-500" text={errorCancelMessage} />
+              {/* <span className="text-green-500">{successCancelMessage}</span> */}
+              {/* <span className="text-red-500">{errorCancelMessage}</span> */}
             </div>
           </div>
         ) : (
@@ -644,6 +735,21 @@ const OrderHistoryCard: React.FC<
                     : btn
                 }
               </Button>
+              {
+                btn === "Restart Plan"
+                ? (
+                  <>
+                    <Typography tag="span" className="text-sm text-green-500" text={successRestartMessage} />
+                    <Typography tag="span" className="text-sm text-red-500" text={errorRestartMessage} />
+                  </>
+                )
+                : (
+                  <>
+                    <Typography tag="span" className="text-sm text-green-500" text={successReOrderMessage} />
+                    <Typography tag="span" className="text-sm text-red-500" text={errorReOrderMessage} />
+                  </>
+                )
+              }
               <Typography
                 tag="p"
                 text={restartPlanError}
@@ -696,6 +802,7 @@ const OrderHistoryCard: React.FC<
         setPlanChangeReason={setPlanChangeReason}
         handleDowngrade={handleDowngrade}
         handleUpgrade={handleUpgrade}
+        isDowngradeLoading={isDowngradeLoading}
       />
       
       <CancelSubscriptionPopup
@@ -703,8 +810,8 @@ const OrderHistoryCard: React.FC<
         onClose={() => setIsCancelPopupOpen(false)}
         onCancel={(reason) => {
           // API call to cancel with reason
-          setCancelReason(reason);
-          handleCancel();
+          // setCancelReason(reason);
+          handleCancel(reason);
           console.log(`Cancellation reason: ${reason}`);
         }}
       />
