@@ -2,10 +2,15 @@ import Typography from "@/components/atoms/typography/Typography";
 import { SecondaryInlineTitle } from "@/components/molecules/titleSyles/Title";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 export default function BehindTheScenes() {
   return (
-    <section className="bg-secondary-1 text-white  ">
+    <motion.section
+      initial={{ backgroundColor: "#2A1616" }}
+      whileInView={{ backgroundColor: "#944446" }}
+      transition={{ duration: 1.2, ease: "easeInOut" }}
+      viewport={{ once: true }}>
       <div className="container py-20 2xl:py-25 ">
         <div className="mb-12 text-center lg:text-left">
           <SecondaryInlineTitle
@@ -33,7 +38,7 @@ export default function BehindTheScenes() {
             <Typography
               tag="h4"
               text="Certified By Veterinary Medical Doctors Based On FEDIAF Guidelines"
-              className="text-center lg:text-left sm:max-w-[70%] lg:max-w-[85%] font-normal  mx-auto lg:ml-0 "
+              className="text-center lg:text-left sm:max-w-[70%] lg:max-w-[85%] font-normal text-primary-light  mx-auto lg:ml-0 "
             />
             <Button
               variant="secondaryBtnTextSecondary1"
@@ -45,6 +50,6 @@ export default function BehindTheScenes() {
           </div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }

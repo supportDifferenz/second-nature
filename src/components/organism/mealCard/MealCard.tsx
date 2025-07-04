@@ -20,7 +20,7 @@ export const MealCard: React.FC<MealCardPropsType> = ({
   const router = useRouter();
 
   return (
-    <div className=" border-primary p-6 rounded-xl bg-cream flex flex-col items-center sm:flex-row gap-(--space-24-45) border bg-primary-light">
+    <div className="border-primary p-6 rounded-xl bg-cream flex flex-col items-center sm:flex-row gap-(--space-24-45) border bg-primary-light">
       <div className="flex flex-col items-center">
         {tag && (
           <BadgeTitle
@@ -43,13 +43,7 @@ export const MealCard: React.FC<MealCardPropsType> = ({
       </div>
       <div className="flex flex-col items-center sm:items-start sm:justify-center ">
         {/* Features List */}
-        <ul
-          className="flex flex-col sm:grid gap-y-4 gap-x-7  max-w-fit"
-          style={{
-            gridTemplateColumns: `repeat(auto-fill, minmax(150px, 1fr))`, // Dynamic columns
-            gridAutoRows: "1fr", // Ensure equal row height
-          }}
-        >
+        <ul className="flex flex-col sm:flex-row sm:flex-wrap max-w-fit gap-6">
           {features.map((feature, index) => (
             <li
               key={index}
