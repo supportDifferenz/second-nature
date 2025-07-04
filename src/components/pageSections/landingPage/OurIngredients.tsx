@@ -4,8 +4,8 @@ import { v4 as uuidv4 } from "uuid";
 import { useEffect, useState } from "react";
 import { PrimaryInlineTitle } from "@/components/molecules/titleSyles/Title";
 import Typography from "@/components/atoms/typography/Typography";
-import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import IngredientsCarousel from "./IngredientsCarousel";
 export default function OurIngredients() {
   const features = [
     [
@@ -106,7 +106,7 @@ export default function OurIngredients() {
                     initial={{ transform: `translate(0px, 0px)` }}
                     whileInView={isWeb ? { transform: `translate(${x}px, ${y}px)` } : { transform: "translate(0)" }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.8 }}
+                    transition={{ duration: 0.8, delay: 0.8 }}
                     key={uuidv4()}
                     className={`relative sm:absolute  flex flex-col items-center sm:justify-center  text-center  sm:origin-center  `}
                     style={
@@ -134,7 +134,7 @@ export default function OurIngredients() {
                     <motion.div
                       initial={{ opacity: 0, }}
                       whileInView={{ opacity: 1 }}
-                      transition={{ duration: 1.4, delay: 1.4, ease: 'circIn' }}
+                      transition={{ duration: 1.7, delay: 1.4, ease: 'circIn' }}
                       viewport={{ once: true }}
                       className={`
                       sm:absolute w-(--space-156-160)   ${align === "left"
@@ -176,9 +176,14 @@ export default function OurIngredients() {
 
 
         {/* Real Ingredients vs. Fillers */}
-        <div className=" mt-[15%] ">
-          {/* <IngredientsCarousel /> */}   <div
-
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className=" mt-[15%] sm:mt-[12%] lg:mt-[15%] ">
+          <IngredientsCarousel />
+          {/* <div
             className="container">
             <div className="  shadow-[inset_6px_6px_16px_0px_rgba(0,0,0,0.55)] bg-primary-dark rounded-full p-(--space-20-45) pb-[130px] sm:pb-(--space-20-45) flex flex-col sm:flex-row gap-[50px] sm:gap-[3%] items-stretch lg:items-center">
               <div className="sm:basis-[50%] h-[450px] sm:h-auto">
@@ -217,8 +222,8 @@ export default function OurIngredients() {
                 </Button>
               </div>
             </div>
-          </div>
-        </div>
+          </div> */}
+        </motion.div>
       </section>
     </>
   );
