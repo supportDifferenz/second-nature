@@ -35,35 +35,36 @@ export default function OrderHistory() {
   const dataFromAPI = subscriptionDetailsBySubIdAndPetId?.result;
   const planDataFromAPI = subscriptionDetailsBySubIdAndPetId?.result?.pets[0]?.plan;
   const planStartDateFromAPI = dataFromAPI?.subscriptiondate;
+  const planEndDateFromAPI = dataFromAPI?.subscriptionEndDate;
   let formattedStartDate = "DD MM YY";
   let formattedEndDate = "DD MM YY";
-  if (planStartDateFromAPI) {
-
-    const [year, month, day] = planStartDateFromAPI.split("-"); 
-    const startDate = new Date(year, month - 1, day);
+  if (typeof planStartDateFromAPI === "string") {
+    const [startYear, startMonth, startDay] = planStartDateFromAPI.split("-");
+    const startDate = new Date(
+      Number(startYear),
+      Number(startMonth) - 1,
+      Number(startDay)
+    );
     formattedStartDate = startDate.toLocaleDateString('en-GB', {
       day: 'numeric',
       month: 'short',
       year: 'numeric'
     });
 
-    // Calculate end date (28 days later)
-    const endDate = new Date(startDate);
-    if (planDataFromAPI?.type === "Trial") {
-      endDate.setDate(startDate.getDate() + 7);
-    } else {
-      endDate.setDate(startDate.getDate() + 28);
+    if (typeof planEndDateFromAPI === "string") {
+      const [endYear, endMonth, endDay] = planEndDateFromAPI.split("-");
+      const endDate = new Date(
+        Number(endYear),
+        Number(endMonth) - 1,
+        Number(endDay)
+      );
+      formattedEndDate = endDate.toLocaleDateString('en-GB', {
+        day: 'numeric',
+        month: 'short',
+        year: 'numeric'
+      });
     }
-    // endDate.setDate(startDate.getDate() + 28);
-    formattedEndDate = endDate.toLocaleDateString('en-GB', {
-      day: 'numeric',
-      month: 'short',
-      year: 'numeric'
-    });
-
   } else {
-    // handle the case where planStartDateFromAPI is undefined
-    // for example, you can set a default value for formattedDate
     formattedStartDate = 'Unknown';
     formattedEndDate = 'Unknown';
   }
