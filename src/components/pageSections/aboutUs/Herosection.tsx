@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import Typography from "@/components/atoms/typography/Typography";
 
 export default function HeroSection() {
@@ -15,7 +16,7 @@ export default function HeroSection() {
     caption: "ABOUT US",
     captionColor: "#00683D",
     title: "Helping fur babies thrive",
-    halfTitle: "One Bowl at a Time",
+    halfTitle: "One Bite at a Time",
     paragraph: "Crafted with Care for Healthier, Happier Pets",
     paragraphColor: "#944446",
     bannerThemeColor: "#00683D",
@@ -56,28 +57,53 @@ export default function HeroSection() {
         <div className="relative flex pt-[--space-46-95] lg:pt-0 sm:items-center w-full min-h-[200px] max-sm:max-h-[750px] h-[100vh] sm:min-h-[400px] sm:h-[120dvh] lg:min-h-[520px] lg:h-[80dvh] lg:max-h-[1200px] bg-cover bg-center transition-all container sm:justify-end sm:text-left text-center justify-center items-center">
           <div className="flex flex-col items-center lg:items-start text-center lg:text-left mt-auto pb-9 lg:pb-0 lg:mt-0 lg:w-[43%]">
 
-            <Typography
-              tag="h1"
-              className="capitalize highlight mb-[--space-10-20] w-[95%] sm:w-[82%] lg:w-auto"
-              text={banner.title}
-              role="heading"
-              ariaLabel={banner.title}
-              ariaLabelledBy="title"
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4 }}
+              viewport={{ once: true }}
             >
-              <span className="h3 sm:h2 block capitalize normalize whitespace-nowrap text-center  lg:max-w-[65%]">
+              <Typography
+                tag="h1"
+                className="capitalize highlight mb-[--space-10-20] w-[95%] sm:w-[82%] lg:w-auto"
+                text={banner.title}
+                role="heading"
+                ariaLabel={banner.title}
+                ariaLabelledBy="title"
+              />
+            </motion.div>
+            {/* <span className="h3 sm:h2 block ">
                 {banner.halfTitle}
-              </span>
-            </Typography>
+              </span> */}
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            >
 
-            <Typography
-              tag="h6"
-              text={banner.paragraph}
-              className="first-letter:capitalize mb-[--space-20-30] mt-4 lg:whitespace-nowrap max-w-[52%] sm:max-w-[45%] lg:max-w-full mr-0"
-              style={{ color: banner.paragraphColor }}
-              role="paragraph"
-              ariaLabel={banner.paragraph}
-              ariaLabelledBy="sub paragraph"
-            />
+              <Typography tag="h3" text={banner.halfTitle} className="capitalize normalize whitespace-nowrap  lg:max-w-[65%]" />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="flex flex-col items-center lg:items-start"
+            >
+
+              <Typography
+                tag="h6"
+                text={banner.paragraph}
+                className="first-letter:capitalize mb-[--space-20-30] mt-4 lg:whitespace-nowrap max-w-[52%] sm:max-w-[45%] lg:max-w-full mr-0"
+                style={{ color: banner.paragraphColor }}
+                role="paragraph"
+                ariaLabel={banner.paragraph}
+                ariaLabelledBy="sub paragraph"
+              />
+            </motion.div>
+
+
           </div>
         </div>
       </div>

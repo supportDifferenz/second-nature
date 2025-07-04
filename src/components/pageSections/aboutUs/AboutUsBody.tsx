@@ -1,7 +1,11 @@
 // AboutUsBody.tsx
+"use client";
+
 import Typography from "@/components/atoms/typography/Typography";
 import CardCaption from "@/components/molecules/cardTitle/CardCaption";
 import CardTitle from "@/components/molecules/cardTitle/CardTitle";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 import {
   // PrimaryBlockTitle,
   // SecondaryBlockTitle,
@@ -43,28 +47,37 @@ const footerCtaData = {
   },
 };
 
-export default function AboutUsBody({}: // cardTitleData,
-// cardCaptionData,
-AboutUsBodyProps) {
+export default function AboutUsBody({ }: // cardTitleData,
+  // cardCaptionData,
+  AboutUsBodyProps) {
+    const ribbonRef = useRef(null);
+  const isRibbonInView = useInView(ribbonRef, { once: true, margin: "0px 0px -100px 0px" });
   return (
     <div>
-      <div className="flex flex-col items-center mt-[var(--space-95-195)] w-fit mx-auto">
-        <Typography
-          tag="h6"
-          text="Our Story"
-          className="uppercase text-secondary-1 mx-auto"
-        />
-        <Typography
-          tag="h2"
-          text="Inspired By Love:"
-          className="highlight text-primary-dark"
-        />
-        <Typography
-          tag="h2"
-          text="Redefining Pet Nutrition Naturally"
-          className="normalize text-center text-primary-dark"
-        />
-      </div>
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true }}
+      >
+        <div className="flex flex-col items-center mt-[var(--space-95-195)] w-fit mx-auto">
+          <Typography
+            tag="h6"
+            text="Our Story"
+            className="uppercase text-secondary-1 mx-auto"
+          />
+          <Typography
+            tag="h2"
+            text="Inspired By Love:"
+            className="highlight text-primary-dark"
+          />
+          <Typography
+            tag="h2"
+            text="Redefining Pet Nutrition Naturally"
+            className="normalize text-center text-primary-dark"
+          />
+        </div>
+      </motion.div>
 
       <div className="relative bg-[#FDFEFA] h-[83.64vw] sm:h-[23.43vw] w-[90vw] sm:w-[66.25vw] mx-auto mt-[var(--space-32-52)] border border-secondary-1 rounded-2xl px-[var(--space-20-190)] py-[var(--space-40-60)]">
         <SecondaryInlineTitle
@@ -112,54 +125,94 @@ AboutUsBodyProps) {
           </div>
         </div>
         <div className="flex flex-col absolute sm:static top-[73vw] sm:flex-row gap-[var(--space-52-86)]">
-          <CardTitle
-            imageSrc="/images/boy-with-cat.webp"
-            imageAlt="Pet owner with cat"
-            text="As pet owners, we noticed a lack of natural, high-quality food options tailored to the unique needs of pets in our region. Determined to make a difference, we set out to create Qatar's first-ever natural pet food company."
-          />
-          <CardTitle
-            imageSrc="/images/chef.webp"
-            imageAlt="boy with cat"
-            text="Every recipe we craft is rooted in our passion for providing pets with wholesome, nutritious, and locally sourced ingredients, ensuring they thrive and live their happiest lives. "
-          />
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3 }}
+            viewport={{ once: true }}
+          >
+            <CardTitle
+              imageSrc="/images/boy-with-cat.webp"
+              imageAlt="Pet owner with cat"
+              text="As pet owners, we noticed a lack of natural, high-quality food options tailored to the unique needs of pets in our region. Determined to make a difference, we set out to create Qatar's first-ever natural pet food company."
+            />
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9 }}
+            viewport={{ once: true }}
+          >
+            <CardTitle
+              imageSrc="/images/chef.webp"
+              imageAlt="boy with cat"
+              text="Every recipe we craft is rooted in our passion for providing pets with wholesome, nutritious, and locally sourced ingredients, ensuring they thrive and live their happiest lives. "
+            />
+          </motion.div>
         </div>
 
-        <div className="absolute top-[253vw] sm:top-[33vw] w-full sm:w-full">
-          <Image
-            src="/images/qatar-ribbon-mob.webp"
-            alt="Qatar Ribbon Mobile"
-            className="block sm:hidden !static inset-0 w-full !h-full object-cover object-center"
-            fill
-            priority
-          />
-          <Image
-            src="/images/qatar-ribbon.webp"
-            alt="Qatar Ribbon"
-            className="hidden sm:block !static inset-0 w-full !h-full object-cover object-center"
-            fill
-            priority
-          />
+        <div ref={ribbonRef} className="absolute top-[253vw] sm:top-[33vw] w-full sm:w-full">
+          {/* Mobile Ribbon */}
+          <motion.div
+            initial={{ clipPath: "inset(0% 100% 0% 0%)", opacity: 0 }}
+            animate={isRibbonInView ? { clipPath: "inset(0% 0% 0% 0%)", opacity: 1 } : {}}
+            transition={{ duration: 2, ease: "easeInOut" }}
+            className="block sm:hidden !static inset-0 w-full !h-full"
+          >
+            <Image
+              src="/images/qatar-ribbon-mob.webp"
+              alt="Qatar Ribbon Mobile"
+              fill
+              priority
+              className="!static w-full !h-full object-cover object-center"
+            />
+          </motion.div>
+
+
+          {/* Desktop Ribbon */}
+          <motion.div
+            initial={{ clipPath: "inset(0% 100% 0% 0%)", opacity: 0 }}
+            animate={isRibbonInView ? { clipPath: "inset(0% 0% 0% 0%)", opacity: 1 } : {}}
+            transition={{ duration: 2, ease: "easeInOut" }}
+            className="hidden sm:block !static inset-0 w-full !h-full"
+          >
+            <Image
+              src="/images/qatar-ribbon.webp"
+              alt="Qatar Ribbon"
+              fill
+              priority
+              className="!static w-full !h-full object-cover object-center"
+            />
+          </motion.div>
+
         </div>
       </div>
 
       <div className="mt-[33vw] sm:mt-[17.70vw]">
-        <div className="flex flex-col items-center mb-[var(--space-30-52)]">
-          <Typography
-            tag="h5"
-            text="our Mission"
-            className="uppercase text-secondary-1"
-          />
-          <Typography
-            tag="h1"
-            text="To nurture"
-            className="capitalize text-primary-dark highlight"
-          />
-          <Typography
-            tag="h2"
-            text="the health & happiness of pets"
-            className="text-primary-dark text-center"
-          />
-        </div>
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+          viewport={{ once: true }}
+        >
+          <div className="flex flex-col items-center mb-[var(--space-30-52)]">
+            <Typography
+              tag="h5"
+              text="our Mission"
+              className="uppercase text-secondary-1"
+            />
+            <Typography
+              tag="h1"
+              text="To nurture"
+              className="capitalize text-primary-dark highlight"
+            />
+            <Typography
+              tag="h2"
+              text="the health & happiness of pets"
+              className="text-primary-dark text-center"
+            />
+          </div>
+        </motion.div>
         <div>
           <div className="flex justify-center">
             <div className="flex flex-col sm:flex-row gap-[var(--space-10-20)] px-[var(--space-23-70)] sm:pr-0 items-center">
@@ -173,8 +226,8 @@ AboutUsBodyProps) {
                 />
               </div>
               <div className="sm:border-r-1 sm:border-[#79D2A7]  sm:pr-[var(--space-23-70)] text-center">
-                <Typography tag="h6" text="100% natural" 
-                className="text-secondary-1 capitalize"/>
+                <Typography tag="h6" text="100% natural"
+                  className="text-secondary-1 capitalize" />
               </div>
             </div>
             <div className="flex flex-col sm:flex-row gap-[var(--space-10-20)] px-[var(--space-23-70)] sm:pr-0 border border-[#79D2A7] border-y-0 sm:border-0 items-center">
@@ -188,8 +241,8 @@ AboutUsBodyProps) {
                 />
               </div>
               <div className="sm:border-r-1 sm:border-[#79D2A7] sm:pr-[var(--space-23-70)] text-center">
-                <Typography tag="h6" text="high-quality" 
-                className="text-secondary-1 capitalize"/>
+                <Typography tag="h6" text="high-quality"
+                  className="text-secondary-1 capitalize" />
               </div>
             </div>
             <div className="flex flex-col sm:flex-row gap-[var(--space-10-20)] px-[var(--space-23-70)] sm:pr-0 items-center">
@@ -203,8 +256,8 @@ AboutUsBodyProps) {
                 />
               </div>
               <div className=" sm:pr-[var(--space-23-70)] text-center">
-                <Typography tag="h6" text="locally crafted" 
-                className="text-secondary-1 capitalize"/>
+                <Typography tag="h6" text="locally crafted"
+                  className="text-secondary-1 capitalize" />
               </div>
             </div>
           </div>
@@ -239,22 +292,33 @@ AboutUsBodyProps) {
             </div>
 
             <div className="flex flex-col sm:flex-row lg:bg-[url('/images/AboutUsBackgroundBottom.webp')] lg:bg-contain lg:bg-center lg:bg-no-repeat w-fit mx-auto gap-[15.88vw] sm:gap-[14.06vw] my-[43.45vw] sm:my-[14.06vw]">
-              <div>
+              <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3 }}
+                viewport={{ once: true }}
+              >
                 <CardCaption
                   imageSrc="/images/pet-caring-1.webp"
                   imageAlt="pet-caring"
                   heading="At Second Nature, our mission is to revolutionize pet care."
                   subText="Our line of natural pet food prioritizes health, quality, and trust. We believe that pets are more than companions—they're family."
                 />
-              </div>
-              <div className="sm:mt-[7.39vw]">
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+                className="sm:mt-[7.39vw]"
+              >
                 <CardCaption
                   imageSrc="/images/pet-caring-2.webp"
                   imageAlt="pet-caring"
                   heading="Our focus extends beyond nutrition."
                   subText="we aim to foster stronger bonds between pets and their families by promoting a lifestyle of care and wellness. By sourcing locally, we also strive to support local community and environment. With Second Nature, you can trust that every bite is a step toward a happier, healthier life for your beloved pet"
                 />
-              </div>
+              </motion.div>
             </div>
           </div>
         </div>
