@@ -16,6 +16,7 @@ interface DowngradePlanPopupProps {
   planStartDate?: string;
   planChangeError?: string;
   planChangeReason?: string;
+  isDowngradeLoading?: boolean;
   setPlanChangeReason?: (reason: string) => void;
   handleDowngrade?: () => void;
   handleUpgrade?: () => void;
@@ -33,6 +34,7 @@ export const DowngradePlanPopup: React.FC<DowngradePlanPopupProps> = ({
   planStartDate,
   planChangeError,
   planChangeReason,
+  isDowngradeLoading,
   setPlanChangeReason,
   handleDowngrade,
   handleUpgrade,
@@ -78,7 +80,7 @@ export const DowngradePlanPopup: React.FC<DowngradePlanPopupProps> = ({
             className="w-full" size={"md"}
             disabled={planChangeReason === ""}
           >
-            Submit
+            {isDowngradeLoading ? "Submitting..." : "Submit"}
           </Button>
           {
             planChangeError && 

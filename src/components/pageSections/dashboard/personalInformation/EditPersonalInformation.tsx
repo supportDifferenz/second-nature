@@ -117,6 +117,7 @@ export default function EditPersonalInformation({
         <InputLabeled
           label="First Name*"
           type="text"
+          inputClassName="!text-[16px] lg:!text-[18px]"
           placeholder="Enter First Name"
           error={shouldShowError('firstName') ? errors.firstName?.message : undefined}
           {...register("firstName", {
@@ -128,6 +129,7 @@ export default function EditPersonalInformation({
         <InputLabeled
           label="Last Name*"
           type="text"
+          inputClassName="!text-[16px] lg:!text-[18px]"
           placeholder="Enter Last Name"
           error={shouldShowError('lastName') ? errors.lastName?.message : undefined}
           {...register("lastName", {
@@ -139,6 +141,7 @@ export default function EditPersonalInformation({
         <InputLabeled
           label="Email*"
           type="email"
+          inputClassName="!text-[16px] lg:!text-[18px]"
           placeholder="Enter Email Address"
           error={shouldShowError('email') ? errors.email?.message : undefined}
           {...register("email", {
@@ -150,6 +153,7 @@ export default function EditPersonalInformation({
         <InputLabeled
           label="Alternative Email"
           type="email"
+          inputClassName="!text-[16px] lg:!text-[18px]"
           placeholder="Enter Alternative Email"
           error={shouldShowError('altEmail') ? errors.altEmail?.message : undefined}
           {...register("altEmail", {
@@ -161,6 +165,7 @@ export default function EditPersonalInformation({
         <InputLabeled
           label="Mobile Number*"
           type="tel"
+          inputClassName="!text-[16px] lg:!text-[18px]"
           placeholder="Enter Phone Number"
           error={shouldShowError('mobile') ? errors.mobile?.message : undefined}
           {...register("mobile", {
@@ -176,6 +181,7 @@ export default function EditPersonalInformation({
         <InputLabeled
           label="Alternative Phone"
           type="tel"
+          inputClassName="!text-[16px] lg:!text-[18px]"
           placeholder="Enter Alternative Phone Number"
           error={shouldShowError('altMobile') ? errors.altMobile?.message : undefined}
           {...register("altMobile", {
@@ -188,7 +194,7 @@ export default function EditPersonalInformation({
         />
       </div>
 
-      <div className="flex gap-4 mt-6">
+      <div className="flex gap-4 mt-10">
         <Button 
           type="submit" 
           variant="whiteBtnSecondary2BorderAndText"
@@ -199,7 +205,8 @@ export default function EditPersonalInformation({
         
         <Button 
           type="button" 
-          variant="outlineSecondaryBtn"
+          variant="outlinePrimaryBtn"
+          className="!text-secondary-1"
           onClick={() => setIsEditing(false)}
         >
           Cancel

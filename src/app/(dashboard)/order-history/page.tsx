@@ -2,13 +2,9 @@
 
 import React, { useState, useEffect } from "react";
 import Typography from "@/components/atoms/typography/Typography";
-// import Masonry from "react-masonry-css";
-// import { orderHistoryConfig } from "@/components/config/orderHistoryConfig";
 import OrderHistoryCard from "@/components/molecules/orderHistoryCard/OrderHistoryCard";
 import DashboardLayout from "@/components/templates/DashboardLayout";
-// import { OrderHistoryCardPropsType } from "@/components/types/type";
 import { MealPlanStatus } from "@/components/types/type";
-// import { Button } from "@/components/ui/button";
 import { ProteinChangePopup } from "@/components/pageSections/dashboard/orderHistory/ProteinChangePopup";
 import { DowngradePlanPopup } from "@/components/pageSections/dashboard/orderHistory/DowngradePlanPopup";
 import { CancelSubscriptionPopup } from "@/components/pageSections/dashboard/orderHistory/CancelSubscriptionPopup";
@@ -19,130 +15,6 @@ import { useGetInvoiceBySubIdAndPetId } from "@/hooks/subscriptionHooks/getInvoi
 import OrderHistoryCardSkelton from "@/components/skeltons/OrderHistoryCardSkelton";
 import { useOrderHistoryStore } from "@/zustand/store/orderHistoryDataStore";
 
-// const orderHistoryData: OrderHistoryCardPropsType[] = [
-//   {
-//     title: "Jackie's Meal",
-//     subtitle: "FOUR WEEKS PLAN - FULL BOWL",
-//     planDuration: "4 weeks",
-//     itemName: "Chicken Bowl",
-//     note: "Change protein for my next order",
-//     noteDetails: "Order today get new protein from: 24 Apr 2025",
-//     processingNote: "(We need 5 days to process your request)",
-//     planStartDate: "01 Mar 2025",
-//     planEndDate: "29 Mar 2025",
-//     orderDate: "29 Mar 2025",
-//     price: 300,
-//     status: "active",
-//     hasInvoice: true,
-//   },
-//   {
-//     title: "Jackie's Meal",
-//     subtitle: "FOUR WEEKS PLAN - FULL BOWL",
-//     planDuration: "4 weeks",
-//     itemName: "Chicken Bowl",
-//     planStartDate: "01 Mar 2025",
-//     planEndDate: "29 Mar 2025",
-//     orderDate: "29 Mar 2025",
-//     price: 300,
-//     status: "paused",
-//     hasInvoice: true,
-//     pausedDuration: "PAUSED DURATION",
-//     pausedPeriod: "13 Mar 2025 to 20 Mar 2025",
-//   },
-//   {
-//     title: "Jackie's Meal",
-//     subtitle: "FOUR WEEKS PLAN - FULL BOWL",
-//     planDuration: "4 weeks",
-//     itemName: "Chicken Bowl",
-//     planStartDate: "01 Mar 2025",
-//     planEndDate: "29 Mar 2025",
-//     orderDate: "29 Mar 2025",
-//     price: 300,
-//     status: "cancel",
-//     hasInvoice: true,
-//     cancellationTitle: "CANCELLATION DATE",
-//     cancellationDate: "13 Mar 2025",
-//   },
-//   {
-//     title: "Jackie's Meal",
-//     subtitle: "FOUR WEEKS PLAN - FULL BOWL",
-//     planDuration: "4 weeks",
-//     itemName: "Chicken Bowl",
-//     note: "Change protein for my next order",
-//     noteDetails: "Order today get new protein from: 24 Apr 2025",
-//     processingNote: "(We need 5 days to process your request)",
-//     planStartDate: "01 Mar 2025",
-//     planEndDate: "29 Mar 2025",
-//     orderDate: "29 Mar 2025",
-//     price: 300,
-//     status: "paymentfailed",
-//     hasInvoice: true,
-//   },
-//   {
-//     title: "Jackie's Meal",
-//     subtitle: "ONE WEEK PLAN - FULL BOWL",
-//     planDuration: "1 week",
-//     itemName: "Chicken Bowl",
-//     planStartDate: "01 Mar 2025",
-//     planEndDate: "08 Mar 2025",
-//     orderDate: "08 Mar 2025",
-//     price: 100,
-//     status: "active",
-//     hasInvoice: true,
-//   },
-//   {
-//     title: "Jackie's Meal",
-//     subtitle: "ONE WEEK PLAN - FULL BOWL",
-//     planDuration: "1 week",
-//     itemName: "Chicken Bowl",
-//     planStartDate: "01 Mar 2025",
-//     planEndDate: "08 Mar 2025",
-//     orderDate: "08 Mar 2025",
-//     price: 100,
-//     status: "endingsoon",
-//     hasInvoice: true,
-//   },
-//   {
-//     title: "Jackie's Meal",
-//     subtitle: "ONE WEEK PLAN - FULL BOWL",
-//     planDuration: "1 week",
-//     itemName: "Chicken Bowl",
-//     planStartDate: "01 Mar 2025",
-//     planEndDate: "08 Mar 2025",
-//     orderDate: "08 Mar 2025",
-//     price: 100,
-//     status: "expired",
-//     hasInvoice: true,
-//   },
-// ];
-
-// const currentMealPlan: OrderHistoryCardPropsType = {
-//   title: "Jackie's Meal",
-//   subtitle: "FOUR WEEKS PLAN - FULL BOWL",
-//   planDuration: "4 weeks",
-//   itemName: "Chicken Bowl",
-//   note: "Change protein for my next order",
-//   noteDetails: "Order today get new protein from: 24 Apr 2025",
-//   processingNote: "(We need 5 days to process your request)",
-//   planStartDate: "01 Mar 2025",
-//   planEndDate: "29 Mar 2025",
-//   orderDate: "29 Mar 2025",
-//   price: 300,
-//   status: "current",
-//   hasInvoice: true,
-// }
-
-// const currentMealConfig = {
-//   label: "CURRENT MEAL PLAN",
-//   tagColor: "#2ECC71",
-//   buttons: ["Downgrade to Half-Bowl", "Pause Plan", "Cancel"],
-// }
-
-// const breakpointColumnsObj = {
-//   default: 2,
-//   1150: 1,
-// };
-
 export default function OrderHistory() {
 
   const { selectedPetFromOrderHistory, selectedPetIndexFromOrderHistory, setSelectedPetIndexFromOrderHistory, setSelectedPetFromOrderHistory } = useOrderHistoryStore();
@@ -150,17 +22,8 @@ export default function OrderHistory() {
   const [isProteinPopupOpen, setIsProteinPopupOpen] = useState(false);
   const [isDowngradePlanOpen, setIsDowngradePlanOpen] = useState(false);
   const [isCancelPopupOpen, setIsCancelPopupOpen] = useState(false);
-  
-  // const [isProteinPopupOpen, setIsProteinPopupOpen] = useState(false);
-  // const [isDowngradePlanOpen, setIsDowngradePlanOpen] = useState(false);
-  // const [isCancelPopupOpen, setIsCancelPopupOpen] = useState(false);
-  // const [, setIsPausePopupOpen] = useState(false);
   const [currentProtein, setCurrentProtein] = useState("chicken");
   const [selectedPetIndex, setselectedPetIndex] = useState(0);
-  // const [cancelReason, setCancelReason] = useState("");
-
-  // const [subId, setSubId] = useState<string>("");
-  // const [petId, setPetId] = useState<string>("");
   const [selectedPet, setSelectedPet] = useState<PetInfo | null>(null);
 
   const { userDetails } = useUserStore();
@@ -172,35 +35,36 @@ export default function OrderHistory() {
   const dataFromAPI = subscriptionDetailsBySubIdAndPetId?.result;
   const planDataFromAPI = subscriptionDetailsBySubIdAndPetId?.result?.pets[0]?.plan;
   const planStartDateFromAPI = dataFromAPI?.subscriptiondate;
+  const planEndDateFromAPI = dataFromAPI?.subscriptionEndDate;
   let formattedStartDate = "DD MM YY";
   let formattedEndDate = "DD MM YY";
-  if (planStartDateFromAPI) {
-
-    const [year, month, day] = planStartDateFromAPI.split("-"); 
-    const startDate = new Date(year, month - 1, day);
+  if (typeof planStartDateFromAPI === "string") {
+    const [startYear, startMonth, startDay] = planStartDateFromAPI.split("-");
+    const startDate = new Date(
+      Number(startYear),
+      Number(startMonth) - 1,
+      Number(startDay)
+    );
     formattedStartDate = startDate.toLocaleDateString('en-GB', {
       day: 'numeric',
       month: 'short',
       year: 'numeric'
     });
 
-    // Calculate end date (28 days later)
-    const endDate = new Date(startDate);
-    if (planDataFromAPI?.type === "Trial") {
-      endDate.setDate(startDate.getDate() + 7);
-    } else {
-      endDate.setDate(startDate.getDate() + 28);
+    if (typeof planEndDateFromAPI === "string") {
+      const [endYear, endMonth, endDay] = planEndDateFromAPI.split("-");
+      const endDate = new Date(
+        Number(endYear),
+        Number(endMonth) - 1,
+        Number(endDay)
+      );
+      formattedEndDate = endDate.toLocaleDateString('en-GB', {
+        day: 'numeric',
+        month: 'short',
+        year: 'numeric'
+      });
     }
-    // endDate.setDate(startDate.getDate() + 28);
-    formattedEndDate = endDate.toLocaleDateString('en-GB', {
-      day: 'numeric',
-      month: 'short',
-      year: 'numeric'
-    });
-
   } else {
-    // handle the case where planStartDateFromAPI is undefined
-    // for example, you can set a default value for formattedDate
     formattedStartDate = 'Unknown';
     formattedEndDate = 'Unknown';
   }
@@ -212,7 +76,8 @@ export default function OrderHistory() {
       activePlan: {
         title: `${dataFromAPI?.pets[0]?.name}'s Meal`,
         // title: "Jackie's Meal",
-        subtitle: "FOUR WEEKS PLAN - FULL BOWL",
+        subtitle: dataFromAPI?.pets[0]?.plan.bowlSize === "full" ? "FOUR WEEKS PLAN - FULL BOWL" : "FOUR WEEKS PLAN - HALF BOWL",
+        // subtitle: "FOUR WEEKS PLAN - FULL BOWL",
         planDuration: "4 weeks",
         itemName: `${dataFromAPI?.pets[0]?.plan.protein} Bowl`,
         // itemName: "Chicken Bowl",
@@ -231,7 +96,8 @@ export default function OrderHistory() {
       pausedPlan: {
         title: `${dataFromAPI?.pets[0]?.name}'s Meal`,
         // title: "Jackie's Meal",
-        subtitle: "FOUR WEEKS PLAN - FULL BOWL",
+        subtitle: dataFromAPI?.pets[0]?.plan.bowlSize === "full" ? "FOUR WEEKS PLAN - FULL BOWL" : "FOUR WEEKS PLAN - HALF BOWL",
+        // subtitle: "FOUR WEEKS PLAN - FULL BOWL",
         planDuration: "4 weeks",
         itemName: `${dataFromAPI?.pets[0]?.plan.protein} Bowl`,
         // itemName: "Chicken Bowl",
@@ -250,7 +116,8 @@ export default function OrderHistory() {
       cancelledPlan: {
         title: `${dataFromAPI?.pets[0]?.name}'s Meal`,
         // title: "Jackie's Meal",
-        subtitle: "FOUR WEEKS PLAN - FULL BOWL",
+        subtitle: dataFromAPI?.pets[0]?.plan.bowlSize === "full" ? "FOUR WEEKS PLAN - FULL BOWL" : "FOUR WEEKS PLAN - HALF BOWL",
+        // subtitle: "FOUR WEEKS PLAN - FULL BOWL",
         planDuration: "4 weeks",
         itemName: `${dataFromAPI?.pets[0]?.plan.protein} Bowl`,
         // itemName: "Chicken Bowl",
@@ -269,7 +136,8 @@ export default function OrderHistory() {
       paymentFailedPlan: {
         title: `${dataFromAPI?.pets[0]?.name}'s Meal`,
         // title: "Jackie's Meal",
-        subtitle: "FOUR WEEKS PLAN - FULL BOWL",
+        subtitle: dataFromAPI?.pets[0]?.plan.bowlSize === "full" ? "FOUR WEEKS PLAN - FULL BOWL" : "FOUR WEEKS PLAN - HALF BOWL",
+        // subtitle: "FOUR WEEKS PLAN - FULL BOWL",
         planDuration: "4 weeks",
         itemName: `${dataFromAPI?.pets[0]?.plan.protein} Bowl`,
         // itemName: "Chicken Bowl",
@@ -291,7 +159,8 @@ export default function OrderHistory() {
       activePlan: {
         title: `${dataFromAPI?.pets[0]?.name}'s Meal`,
         // title: "Jackie's Meal",
-        subtitle: "ONE WEEK PLAN - FULL BOWL",
+        subtitle: dataFromAPI?.pets[0]?.plan.bowlSize === "full" ? "ONE WEEK PLAN - FULL BOWL" : "ONE WEEK PLAN - HALF BOWL",
+        // subtitle: "ONE WEEK PLAN - FULL BOWL",
         planDuration: "1 week",
         itemName: `${dataFromAPI?.pets[0]?.plan.protein} Bowl`,
         // itemName: "Chicken Bowl",
@@ -308,7 +177,8 @@ export default function OrderHistory() {
       endingSoonPlan: {
         title: `${dataFromAPI?.pets[0]?.name}'s Meal`,
         // title: "Jackie's Meal",
-        subtitle: "ONE WEEK PLAN - FULL BOWL",
+        subtitle: dataFromAPI?.pets[0]?.plan.bowlSize === "full" ? "ONE WEEK PLAN - FULL BOWL" : "ONE WEEK PLAN - HALF BOWL",
+        // subtitle: "ONE WEEK PLAN - FULL BOWL",
         planDuration: "1 week",
         itemName: `${dataFromAPI?.pets[0]?.plan.protein} Bowl`,
         // itemName: "Chicken Bowl",
@@ -325,7 +195,8 @@ export default function OrderHistory() {
       expiredPlan: {
         title: `${dataFromAPI?.pets[0]?.name}'s Meal`,
         // title: "Jackie's Meal",
-        subtitle: "ONE WEEK PLAN - FULL BOWL",
+        subtitle: dataFromAPI?.pets[0]?.plan.bowlSize === "full" ? "ONE WEEK PLAN - FULL BOWL" : "ONE WEEK PLAN - HALF BOWL",
+        // subtitle: "ONE WEEK PLAN - FULL BOWL",
         planDuration: "1 week",
         itemName: `${dataFromAPI?.pets[0]?.plan.protein} Bowl`,
         // itemName: "Chicken Bowl",
@@ -430,12 +301,20 @@ export default function OrderHistory() {
 
   // const selectedPetIndex = 0;
 
+  const [prevPetListLength, setPrevPetListLength] = useState(petInfoList.length);
+
   useEffect(() => {
-    if (petInfoList.length > 0 && !selectedPet) {
-      setSelectedPet(petInfoList[0]);
-      setSelectedPetFromOrderHistory(petInfoList[0]);
+    if (petInfoList.length > prevPetListLength) {
+      // New pet added, select the last one
+      const lastIndex = petInfoList.length - 1;
+      const lastPet = petInfoList[lastIndex];
+      setselectedPetIndex(lastIndex);
+      setSelectedPetIndexFromOrderHistory(lastIndex);
+      setSelectedPet(lastPet);
+      setSelectedPetFromOrderHistory(lastPet);
     }
-  }, [petInfoList, selectedPet]);
+    setPrevPetListLength(petInfoList.length);
+  }, [petInfoList.length]);
 
   useEffect(() => {
     if (selectedPetIndexFromOrderHistory) {
@@ -510,6 +389,12 @@ export default function OrderHistory() {
                     petId={selectedPet?.petId}
                     userId={userId}
                     protein={dataFromAPI?.pets[0]?.plan?.protein}
+                    petName={dataFromAPI?.pets[0]?.name}
+                    petInfoList={petInfoList}
+                    setselectedPetIndex={setselectedPetIndex}
+                    setSelectedPetIndexFromOrderHistory={setSelectedPetIndexFromOrderHistory}
+                    setSelectedPet={setSelectedPet}
+                    setSelectedPetFromOrderHistory={setSelectedPetFromOrderHistory}
                   />
                 )}
                 {planDataFromAPI?.type === "Regular" && planDataFromAPI?.planStatus === "paused" && (
@@ -523,6 +408,12 @@ export default function OrderHistory() {
                     petId={selectedPet?.petId}
                     userId={userId}
                     protein={dataFromAPI?.pets[0]?.plan?.protein}
+                    petName={dataFromAPI?.pets[0]?.name}
+                    petInfoList={petInfoList}
+                    setselectedPetIndex={setselectedPetIndex}
+                    setSelectedPetIndexFromOrderHistory={setSelectedPetIndexFromOrderHistory}
+                    setSelectedPet={setSelectedPet}
+                    setSelectedPetFromOrderHistory={setSelectedPetFromOrderHistory}
                   />
                 )}
                 {planDataFromAPI?.type === "Regular" && planDataFromAPI?.planStatus === "cancel" && (
@@ -536,6 +427,12 @@ export default function OrderHistory() {
                     petId={selectedPet?.petId}
                     userId={userId}
                     protein={dataFromAPI?.pets[0]?.plan?.protein}
+                    petName={dataFromAPI?.pets[0]?.name}
+                    petInfoList={petInfoList}
+                    setselectedPetIndex={setselectedPetIndex}
+                    setSelectedPetIndexFromOrderHistory={setSelectedPetIndexFromOrderHistory}
+                    setSelectedPet={setSelectedPet}
+                    setSelectedPetFromOrderHistory={setSelectedPetFromOrderHistory}
                   />
                 )}
                 {planDataFromAPI?.type === "Regular" && planDataFromAPI?.planStatus === "paymentfailed" && (
@@ -549,6 +446,12 @@ export default function OrderHistory() {
                     petId={selectedPet?.petId}
                     userId={userId}
                     protein={dataFromAPI?.pets[0]?.plan?.protein}
+                    petName={dataFromAPI?.pets[0]?.name}
+                    petInfoList={petInfoList}
+                    setselectedPetIndex={setselectedPetIndex}
+                    setSelectedPetIndexFromOrderHistory={setSelectedPetIndexFromOrderHistory}
+                    setSelectedPet={setSelectedPet}
+                    setSelectedPetFromOrderHistory={setSelectedPetFromOrderHistory}
                   />
                 )}
                 {planDataFromAPI?.type === "Trial" && planDataFromAPI?.planStatus === "active" && (
@@ -562,6 +465,12 @@ export default function OrderHistory() {
                     petId={selectedPet?.petId}
                     userId={userId}
                     protein={dataFromAPI?.pets[0]?.plan?.protein}
+                    petName={dataFromAPI?.pets[0]?.name}
+                    petInfoList={petInfoList}
+                    setselectedPetIndex={setselectedPetIndex}
+                    setSelectedPetIndexFromOrderHistory={setSelectedPetIndexFromOrderHistory}
+                    setSelectedPet={setSelectedPet}
+                    setSelectedPetFromOrderHistory={setSelectedPetFromOrderHistory}
                   />
                 )}
                 {planDataFromAPI?.type === "Trial" && planDataFromAPI?.planStatus === "endingsoon" && (
@@ -575,6 +484,12 @@ export default function OrderHistory() {
                     petId={selectedPet?.petId}
                     userId={userId}
                     protein={dataFromAPI?.pets[0]?.plan?.protein}
+                    petName={dataFromAPI?.pets[0]?.name}
+                    petInfoList={petInfoList}
+                    setselectedPetIndex={setselectedPetIndex}
+                    setSelectedPetIndexFromOrderHistory={setSelectedPetIndexFromOrderHistory}
+                    setSelectedPet={setSelectedPet}
+                    setSelectedPetFromOrderHistory={setSelectedPetFromOrderHistory}
                   />
                 )}
                 {planDataFromAPI?.type === "Trial" && planDataFromAPI?.planStatus === "expired" && (
@@ -588,6 +503,12 @@ export default function OrderHistory() {
                     petId={selectedPet?.petId}
                     userId={userId}
                     protein={dataFromAPI?.pets[0]?.plan?.protein}
+                    petName={dataFromAPI?.pets[0]?.name}
+                    petInfoList={petInfoList}
+                    setselectedPetIndex={setselectedPetIndex}
+                    setSelectedPetIndexFromOrderHistory={setSelectedPetIndexFromOrderHistory}
+                    setSelectedPet={setSelectedPet}
+                    setSelectedPetFromOrderHistory={setSelectedPetFromOrderHistory}
                   />
                 )}
               </>

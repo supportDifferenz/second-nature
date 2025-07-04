@@ -189,7 +189,7 @@ export default function EditPetInfo({ setIsEditPetInfo, petData }: EditPetInfoPr
           <DateOfBirthPicker 
             dateOfBirth={formData.dateOfBirth} 
             setDateOfBirth={handleDateChange} 
-            colorClass="!text-black" 
+            colorClass="!text-text-color" 
             className="!w-full !h-14 !rounded-xl" 
           />
         </div>
@@ -203,7 +203,7 @@ export default function EditPetInfo({ setIsEditPetInfo, petData }: EditPetInfoPr
               max={12} 
               value={formData.ageMonth} 
               setValue={handleAgeMonthChange} 
-              colorClass="!text-black"
+              colorClass="!text-text-color !font-normal"
               className1="!rounded-xl !h-14 !px-3" 
               className2="!gap-1" 
               className3="!w-7" 
@@ -214,7 +214,7 @@ export default function EditPetInfo({ setIsEditPetInfo, petData }: EditPetInfoPr
               max={100} 
               value={formData.ageYear} 
               setValue={handleAgeYearChange} 
-              colorClass="!text-black"
+              colorClass="!text-text-color !font-normal"
               className1="!rounded-xl !h-14 !px-3"
               className2="!gap-1" className3="!w-7"
             />
@@ -231,9 +231,9 @@ export default function EditPetInfo({ setIsEditPetInfo, petData }: EditPetInfoPr
             { updatePetLoading ? "Updating..." : "Update Pet Information" }
           </Button>
           <Button 
-            variant={"outlineSecondaryBtn"} 
+            variant={"outlinePrimaryBtn"} 
             size={"md"}
-            className="w-fit mt-6"
+            className="w-fit mt-6 text-secondary-1"
             onClick={() => setIsEditPetInfo(false)}
           >
             Cancel

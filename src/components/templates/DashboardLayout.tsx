@@ -8,7 +8,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
   return (
     <>
       <Header />
-      <main>
+      <main className="mt-6 lg:mt-10">
         <div className="container flex flex-col lg:flex-row gap-(--space-20-60) min-h-screen ">
           {/* Sidebar */}
           <div className="overflow-x-auto lg:overflow-visible  ">

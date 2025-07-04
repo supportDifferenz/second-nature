@@ -31,8 +31,8 @@ export default function PasswordManagement() {
     confirmNewPassword: false,
   });
 
-  const [ successMessage, setSuccessMessage ] = useState("");
-  const [ errorMessage, setErrorMessage ] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const validateField = (name: string, value: string) => {
     switch (name) {
@@ -84,7 +84,7 @@ export default function PasswordManagement() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Mark all fields as touched on submit
     setTouched({
       currentPassword: true,
@@ -98,12 +98,12 @@ export default function PasswordManagement() {
       newPassword: validateField("newPassword", formData.newPassword),
       confirmNewPassword: validateField("confirmNewPassword", formData.confirmNewPassword),
     };
-    
+
     setErrors(newErrors);
 
     // Check if form is valid
     const isValid = !Object.values(newErrors).some(error => error);
-    
+
     if (isValid) {
       updatePassword(
         {
@@ -165,6 +165,7 @@ export default function PasswordManagement() {
                 label="Current Password"
                 placeholder="Enter your current password"
                 type="password"
+                inputClassName="!rounded-xl"
                 variant="roundedEdgeInput"
                 className="max-w-[400px]"
                 value={formData.currentPassword}
@@ -173,13 +174,14 @@ export default function PasswordManagement() {
                 error={errors.currentPassword}
                 required
               />
-              
+
               {/* New Password */}
               <InputLabeled
                 name="newPassword"
                 label="New Password"
                 placeholder="Enter your new password"
                 type="password"
+                inputClassName="!rounded-xl"
                 variant="roundedEdgeInput"
                 className="max-w-[400px]"
                 value={formData.newPassword}
@@ -188,13 +190,14 @@ export default function PasswordManagement() {
                 error={errors.newPassword}
                 required
               />
-              
+
               {/* Confirm New Password */}
               <InputLabeled
                 name="confirmNewPassword"
                 label="Confirm New Password"
                 placeholder="Repeat your new password"
                 type="password"
+                inputClassName="!rounded-xl"
                 variant="roundedEdgeInput"
                 className="max-w-[400px]"
                 value={formData.confirmNewPassword}
@@ -204,7 +207,7 @@ export default function PasswordManagement() {
                 required
               />
             </div>
-            
+
             <Button
               type="submit"
               variant={"whiteBtnSecondary2BorderAndText"}
