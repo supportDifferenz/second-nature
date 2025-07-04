@@ -114,6 +114,7 @@ export type TitlePropsType = {
 export type InputLabeledPropsType = {
   label?: string;
   className?: string; 
+  inputClassName?: string;
   error?: string; 
   variant?: "default" | "roundedEdgeInput" | "dottedInput"; 
 } & InputHTMLAttributes<HTMLInputElement>;

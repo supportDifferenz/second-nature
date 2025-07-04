@@ -444,7 +444,7 @@ const OrderHistoryCard: React.FC<
       )}
 
       {/* meal item details */}
-      <div className="rounded-lg border border-secondary-1 p-4 px-3 text-center relative ">
+      <div className="flex flex-col items-center rounded-lg border border-secondary-1 p-4 px-3 text-center relative ">
         <Typography
           tag="p"
           text={subtitle}
