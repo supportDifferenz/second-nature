@@ -4,8 +4,8 @@ import { ReactNode } from "react";
 import Header from "../organism/header/Header";
 import CheckoutProgressBar from "../molecules/checkoutProgressBar/CheckoutProgressBar";
 import { usePetStore } from "@/zustand/store/petDataStore";
-import { Button } from "@/components/ui/button";
 import Typography from "../atoms/typography/Typography";
+import { X } from "lucide-react";
 
 export default function BuyingFlowLayout({
   children,
@@ -30,25 +30,40 @@ export default function BuyingFlowLayout({
           <ul className="flex items-center gap-5 pt-[5dvh] pb-[3dvh]">
             {pets.length > 0 ? (
               pets.map((pet, index) => (
-                <Typography 
-                  key={index} 
-                  tag="p"
-                  text={pet.name}
-                  className={`relative px-2 font-bold text-[15px] sm:text-[20px] ${index === selectedPetIndex ? "text-[#944446] underline underline-[#944446]" : ""}`}
+                <div
+                  key={index}
+                  className="relative group px-2 font-bold text-[15px] sm:text-[20px] cursor-pointer"
                 >
-                  <Button
+                  <Typography
+                    tag="p"
+                    text={pet.name}
+                    className={`${index === selectedPetIndex ? "text-[#944446] underline underline-[#944446]" : ""}`}
+                  />
+
+                  {/* <Button
                     type="button"
-                    size={"icon"}
+                    size="icon"
                     aria-label={`Remove ${pet.name}`}
-                    className="absolute -top-4 -right-1 px-1 py-0.5 text-[8px] rounded-full hover:text-[#944446] hover:bg-gray-200 transition"
+                    className="absolute -top-4 -right-1 px-1 py-0.3 text-[8px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
                     onClick={() => {
                       removePet(pet.id)
                       setSelectedPetIndex(0)
                     }}
                   >
                     X
-                  </Button>
-                </Typography>
+                  </Button> */}
+                  <button
+                    aria-label={`Remove ${pet.name}`}
+                    className="absolute -top-1.5 -right-1 cursor-pointer text-primary-dark font-bold rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                    onClick={() => {
+                      removePet(pet.id)
+                      setSelectedPetIndex(0)
+                    }}
+                  >
+                    <X size={12} />
+                  </button>
+                </div>
+
                 // <li 
                 //   key={index} 
                 //   className={`relative px-2 font-bold underline ${ index === selectedPetIndex ? "text-[#944446] underline-[#944446]" : ""}`}
@@ -66,12 +81,12 @@ export default function BuyingFlowLayout({
                 // </li>
               ))
             ) : (
-              <Typography 
+              <Typography
                 tag="p"
                 text="No pets added yet"
                 className="font-bold"
               />
-            )}     
+            )}
           </ul>
           <div className="container  grow  flex flex-col">{children}</div>
         </div>

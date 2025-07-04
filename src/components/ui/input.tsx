@@ -32,8 +32,8 @@ function Input({ className, type, variant = "default", ...props }: React.Compone
       onClick={() => setShowPassword((prev) => !prev)}
     >
       <Image
-        src={showPassword ? "icons/password-icon.svg" : "icons/password-icon.svg"}
-        alt="Toggle password visibility"
+        src={showPassword ? "icons/password-icon-hide.svg" : "icons/password-icon.svg"}
+        alt={showPassword ? "Hide password" : "Show password"}
         width={20}
         height={20}
       />

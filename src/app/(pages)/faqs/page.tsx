@@ -3,6 +3,7 @@
 import FaqForm from "@/components/pageSections/faqs/FaqForm";
 import FaqSection from "@/components/pageSections/faqs/FaqSection";
 import MainLayout from "@/components/templates/MainLayout";
+import { Toaster } from "@/components/ui/sonner";
 import React, { useRef } from "react";
 
 function Page() {
@@ -20,6 +21,7 @@ function Page() {
       <div ref={formRef} className="container pb-12 lg:hidden">
         <FaqForm />
       </div>
+      <Toaster position="top-right" />
     </MainLayout>
   );
 }
