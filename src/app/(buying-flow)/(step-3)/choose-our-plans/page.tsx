@@ -15,7 +15,7 @@ import { useGetAllBowl } from "@/hooks/subscriptionHooks/getAllBowlHook";
 import { useGetPriceHook } from "@/hooks/subscriptionHooks/getPriceHook";
 import PlanCardSkeleton from "@/components/skeltons/PlanCardSkelton";
 import { startTransition } from "react";
-import NextPet from "@/components/organism/popUp/NextPet";
+// import NextPet from "@/components/organism/popUp/NextPet";
 
 const faqsData = [
   {
@@ -367,7 +367,7 @@ export default function Page() {
           </div>
         </Button>
       </div>
-      <NextPet/>
+      {/* <NextPet/> */}
     </BuyingFlowLayout>
   );
 }
