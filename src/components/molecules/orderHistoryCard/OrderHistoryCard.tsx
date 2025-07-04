@@ -24,6 +24,12 @@ import { usePausePlan } from "@/hooks/subscriptionHooks/pausePlanHook";
 
 type PetInfo = { name: string; petId: string; subId: string };
 
+type PauseDateRange = {
+  from?: Date;
+  to?: Date;
+  weeks?: number;
+};
+
 const OrderHistoryCard: React.FC<
   OrderHistoryCardPropsType & {
     statusLabel: string;
@@ -827,11 +833,17 @@ const OrderHistoryCard: React.FC<
       <PauseDeliveriesPopup
         isOpen={isPausePopupOpen}
         onClose={() => setIsPausePopupOpen(false)}
-        onConfirm={(dateRange) => {
-          setPauseStartDate(format(dateRange.from, "dd MMM yyyy"));
-          setPauseEndDate(format(dateRange.to, "dd MMM yyyy"));
-          console.log(`Paused from ${format(dateRange.from, "dd MMM yyyy")} to ${format(dateRange.to, "dd MMM yyyy")}`);
-          console.log(`Paused from ${dateRange.from} to ${dateRange.to}`);
+        onConfirm={(dateRange: PauseDateRange) => {
+          if (dateRange.from && dateRange.to) {
+            setPauseStartDate(format(dateRange.from, "dd MMM yyyy"));
+            setPauseEndDate(format(dateRange.to, "dd MMM yyyy"));
+            console.log(`Paused from ${format(dateRange.from, "dd MMM yyyy")} to ${format(dateRange.to, "dd MMM yyyy")}`);
+            console.log(`Paused from ${dateRange.from} to ${dateRange.to}`);
+          } else if (dateRange.weeks) {
+            setPauseStartDate("");
+            setPauseEndDate("");
+            console.log(`Paused for ${dateRange.weeks} week(s)`);
+          }
           handlePausePlan();
           setIsPausePopupOpen(false);
         }}
