@@ -13,7 +13,7 @@ import { Button } from "@/components/ui/button";
 import { AnimatePresence } from "framer-motion";
 
 const bannerVariants = cva(
-  "relative flex pt-(--space-46-95) sm:pt-0 sm:items-center w-full bg-cover bg-center transition-all",
+  "relative flex pt-8 sm:pt-0 sm:items-center w-full bg-cover bg-center transition-all",
   {
     variants: {
       align: {
@@ -23,7 +23,7 @@ const bannerVariants = cva(
       },
       bannerHeight: {
         mainHero:
-          "min-h-[500px] h-[780px] sm:min-h-[300px] sm:h-[50dvh] lg:min-h-[520px]  lg:max-h-[1200px]",
+          "min-h-[400px] h-[600px] sm:min-h-[300px] sm:h-[50dvh] lg:min-h-[480px] 2xl:min-h-[720px] lg:h-[75dvh]  lg:max-h-[1000px]",
         subHero:
           "min-h-[500px] h-[90dvh] sm:min-h-[400px] sm:h-[50dvh] lg:min-h-[520px] sm:h-[70dvh] lg:max-h-[1200px]",
       },
@@ -191,7 +191,7 @@ export default function HeroSection() {
                               >
                                 {banner.halfTitle && (
                                   <motion.span
-                                    className="block h2 font-bellota-text capitalize sm:max-w-[50%] lg:max-w-[65%] mb-(--space-10-20)"
+                                    className="block h2 max-[587px]:!text-[26px] font-bellota-text capitalize sm:max-w-[50%] lg:max-w-[65%] mb-(--space-10-20)"
                                     {...fadeUp(0.4, 40)}
                                   >
                                     {banner.halfTitle}
