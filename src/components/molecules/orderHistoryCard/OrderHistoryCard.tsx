@@ -182,7 +182,7 @@ const OrderHistoryCard: React.FC<
           setIsProteinPopupOpen(false);
           setChangeProteinError("");
           setSuccessChangeProteinMessage(data.message);
-          // window.location.reload();
+          window.location.reload();
         },
         onError: (error) => {
           setCurrentProtein(protein);
