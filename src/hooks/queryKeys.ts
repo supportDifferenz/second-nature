@@ -29,4 +29,5 @@ export const QUERY_KEYS = {
     FORGOT_PASSWORD: "forgotPassword",
     RESTART_PLAN: "restartPlan",
     PAUSE_PLAN: "pausePlan",
+    CREATE_FAQ: "createFaq",
 }   
