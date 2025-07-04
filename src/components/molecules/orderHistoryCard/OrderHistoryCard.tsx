@@ -22,6 +22,8 @@ import { PauseDeliveriesPopup } from "@/components/pageSections/dashboard/orderH
 import { format } from "date-fns";
 import { usePausePlan } from "@/hooks/subscriptionHooks/pausePlanHook";
 
+type PetInfo = { name: string; petId: string; subId: string };
+
 const OrderHistoryCard: React.FC<
   OrderHistoryCardPropsType & {
     statusLabel: string;
@@ -39,6 +41,12 @@ const OrderHistoryCard: React.FC<
     petId?: string;
     userId?: string;
     protein?: string;
+    petName?: string;
+    petInfoList?: PetInfo[];
+    setselectedPetIndex?: (index: number) => void;
+    setSelectedPetIndexFromOrderHistory?: (index: number) => void;
+    setSelectedPet?: (pet: PetInfo) => void;
+    setSelectedPetFromOrderHistory?: (pet: PetInfo) => void;
   }
 > = ({
   title,
@@ -69,6 +77,12 @@ const OrderHistoryCard: React.FC<
   subId,
   petId,
   userId,
+  // petName,
+  petInfoList,
+  setselectedPetIndex,
+  setSelectedPetIndexFromOrderHistory,
+  setSelectedPet,
+  setSelectedPetFromOrderHistory
 }) => {
 
   const { userDetails } = useUserStore();
@@ -147,6 +161,10 @@ const OrderHistoryCard: React.FC<
   const [ errorDowngradeMessage, setErrorDowngradeMessage ] = useState("");
   const [ successCancelMessage, setSuccessCancelMessage ] = useState("");
   const [ errorCancelMessage, setErrorCancelMessage ] = useState("");
+  const [ successRestartMessage, setSuccessRestartMessage ] = useState("");
+  const [ errorRestartMessage, setErrorRestartMessage ] = useState("");
+  const [ successReOrderMessage, setSuccessReOrderMessage ] = useState("");
+  const [ errorReOrderMessage, setErrorReOrderMessage ] = useState("");
 
   const handleChangeProtein = (subId: string, petId: string, userId: string, proteinType: string) => {
     changeProtein(
@@ -282,9 +300,7 @@ const OrderHistoryCard: React.FC<
   }
 
   const handleRestart = () => {
-    // alert(`SubId: ${subId}, PetId: ${petId}, UserId: ${userId}`);  
     if (subId && petId && userId) {
-      // alert("Clicked restart plan");
       restartPlan(
         {
           subId,
@@ -293,16 +309,26 @@ const OrderHistoryCard: React.FC<
         },
         {
           onSuccess: (data) => {
-            // setIsCancelPopupOpen(false);
             setRestartPlanError("");
-            if(data.statusCode === 200) {
+            if (data.statusCode === 200) {
+              setSuccessRestartMessage(data.message);
+              const noOfPets = petInfoList?.length;
+              if (typeof noOfPets === "number" && noOfPets > 0 && petInfoList) {
+                const lastPet = petInfoList[noOfPets - 1];
+                if (setselectedPetIndex) setselectedPetIndex(noOfPets - 1);
+                if (setSelectedPetIndexFromOrderHistory) setSelectedPetIndexFromOrderHistory(noOfPets - 1);
+                if (setSelectedPet) setSelectedPet(lastPet);
+                if (setSelectedPetFromOrderHistory) setSelectedPetFromOrderHistory(lastPet);
+              }
               window.location.reload();
+            }else{
+              setErrorRestartMessage(data.message);
             }
-            // window.location.reload();
           },
           onError: (error: unknown) => {
             if (error instanceof Error) {
               setRestartPlanError(error.message || "Error in restart plan");
+              setErrorRestartMessage(error.message || "Error in restart plan");
             }
           }
         }
@@ -344,11 +370,26 @@ const OrderHistoryCard: React.FC<
         onSuccess: (data) => {
           console.log("Re order success",data);
           setReOrderPlanError("");
+          if(data.statusCode === 200) {
+            setSuccessReOrderMessage(data.message);
+            const noOfPets = petInfoList?.length;
+            if (typeof noOfPets === "number" && noOfPets > 0 && petInfoList) {
+              const lastPet = petInfoList[noOfPets - 1];
+              if (setselectedPetIndex) setselectedPetIndex(noOfPets - 1);
+              if (setSelectedPetIndexFromOrderHistory) setSelectedPetIndexFromOrderHistory(noOfPets - 1);
+              if (setSelectedPet) setSelectedPet(lastPet);
+              if (setSelectedPetFromOrderHistory) setSelectedPetFromOrderHistory(lastPet);
+            }
+            window.location.reload();
+          }else{
+            setErrorReOrderMessage(data.message);
+          }
           // window.location.reload();
         },
         onError: (error: unknown) => {
           if (error instanceof Error) {
             setReOrderPlanError(error.message || "Error in re order");
+            setErrorReOrderMessage(error.message || "Error in re order");
           }
         }
       }
@@ -694,6 +735,21 @@ const OrderHistoryCard: React.FC<
                     : btn
                 }
               </Button>
+              {
+                btn === "Restart Plan"
+                ? (
+                  <>
+                    <Typography tag="span" className="text-sm text-green-500" text={successRestartMessage} />
+                    <Typography tag="span" className="text-sm text-red-500" text={errorRestartMessage} />
+                  </>
+                )
+                : (
+                  <>
+                    <Typography tag="span" className="text-sm text-green-500" text={successReOrderMessage} />
+                    <Typography tag="span" className="text-sm text-red-500" text={errorReOrderMessage} />
+                  </>
+                )
+              }
               <Typography
                 tag="p"
                 text={restartPlanError}

@@ -300,14 +300,20 @@ export default function OrderHistory() {
 
   // const selectedPetIndex = 0;
 
+  const [prevPetListLength, setPrevPetListLength] = useState(petInfoList.length);
+
   useEffect(() => {
-    if (petInfoList.length > 0 && !selectedPet) {
-      setSelectedPet(petInfoList[0]);
-      setSelectedPetFromOrderHistory(petInfoList[0]);
-    } else if (petInfoList.length > 0 && selectedPet) {
-      setSelectedPet(petInfoList[selectedPetIndexFromOrderHistory]);
+    if (petInfoList.length > prevPetListLength) {
+      // New pet added, select the last one
+      const lastIndex = petInfoList.length - 1;
+      const lastPet = petInfoList[lastIndex];
+      setselectedPetIndex(lastIndex);
+      setSelectedPetIndexFromOrderHistory(lastIndex);
+      setSelectedPet(lastPet);
+      setSelectedPetFromOrderHistory(lastPet);
     }
-  }, []);
+    setPrevPetListLength(petInfoList.length);
+  }, [petInfoList.length]);
 
   useEffect(() => {
     if (selectedPetIndexFromOrderHistory) {
@@ -382,6 +388,12 @@ export default function OrderHistory() {
                     petId={selectedPet?.petId}
                     userId={userId}
                     protein={dataFromAPI?.pets[0]?.plan?.protein}
+                    petName={dataFromAPI?.pets[0]?.name}
+                    petInfoList={petInfoList}
+                    setselectedPetIndex={setselectedPetIndex}
+                    setSelectedPetIndexFromOrderHistory={setSelectedPetIndexFromOrderHistory}
+                    setSelectedPet={setSelectedPet}
+                    setSelectedPetFromOrderHistory={setSelectedPetFromOrderHistory}
                   />
                 )}
                 {planDataFromAPI?.type === "Regular" && planDataFromAPI?.planStatus === "paused" && (
@@ -395,6 +407,12 @@ export default function OrderHistory() {
                     petId={selectedPet?.petId}
                     userId={userId}
                     protein={dataFromAPI?.pets[0]?.plan?.protein}
+                    petName={dataFromAPI?.pets[0]?.name}
+                    petInfoList={petInfoList}
+                    setselectedPetIndex={setselectedPetIndex}
+                    setSelectedPetIndexFromOrderHistory={setSelectedPetIndexFromOrderHistory}
+                    setSelectedPet={setSelectedPet}
+                    setSelectedPetFromOrderHistory={setSelectedPetFromOrderHistory}
                   />
                 )}
                 {planDataFromAPI?.type === "Regular" && planDataFromAPI?.planStatus === "cancel" && (
@@ -408,6 +426,12 @@ export default function OrderHistory() {
                     petId={selectedPet?.petId}
                     userId={userId}
                     protein={dataFromAPI?.pets[0]?.plan?.protein}
+                    petName={dataFromAPI?.pets[0]?.name}
+                    petInfoList={petInfoList}
+                    setselectedPetIndex={setselectedPetIndex}
+                    setSelectedPetIndexFromOrderHistory={setSelectedPetIndexFromOrderHistory}
+                    setSelectedPet={setSelectedPet}
+                    setSelectedPetFromOrderHistory={setSelectedPetFromOrderHistory}
                   />
                 )}
                 {planDataFromAPI?.type === "Regular" && planDataFromAPI?.planStatus === "paymentfailed" && (
@@ -421,6 +445,12 @@ export default function OrderHistory() {
                     petId={selectedPet?.petId}
                     userId={userId}
                     protein={dataFromAPI?.pets[0]?.plan?.protein}
+                    petName={dataFromAPI?.pets[0]?.name}
+                    petInfoList={petInfoList}
+                    setselectedPetIndex={setselectedPetIndex}
+                    setSelectedPetIndexFromOrderHistory={setSelectedPetIndexFromOrderHistory}
+                    setSelectedPet={setSelectedPet}
+                    setSelectedPetFromOrderHistory={setSelectedPetFromOrderHistory}
                   />
                 )}
                 {planDataFromAPI?.type === "Trial" && planDataFromAPI?.planStatus === "active" && (
@@ -434,6 +464,12 @@ export default function OrderHistory() {
                     petId={selectedPet?.petId}
                     userId={userId}
                     protein={dataFromAPI?.pets[0]?.plan?.protein}
+                    petName={dataFromAPI?.pets[0]?.name}
+                    petInfoList={petInfoList}
+                    setselectedPetIndex={setselectedPetIndex}
+                    setSelectedPetIndexFromOrderHistory={setSelectedPetIndexFromOrderHistory}
+                    setSelectedPet={setSelectedPet}
+                    setSelectedPetFromOrderHistory={setSelectedPetFromOrderHistory}
                   />
                 )}
                 {planDataFromAPI?.type === "Trial" && planDataFromAPI?.planStatus === "endingsoon" && (
@@ -447,6 +483,12 @@ export default function OrderHistory() {
                     petId={selectedPet?.petId}
                     userId={userId}
                     protein={dataFromAPI?.pets[0]?.plan?.protein}
+                    petName={dataFromAPI?.pets[0]?.name}
+                    petInfoList={petInfoList}
+                    setselectedPetIndex={setselectedPetIndex}
+                    setSelectedPetIndexFromOrderHistory={setSelectedPetIndexFromOrderHistory}
+                    setSelectedPet={setSelectedPet}
+                    setSelectedPetFromOrderHistory={setSelectedPetFromOrderHistory}
                   />
                 )}
                 {planDataFromAPI?.type === "Trial" && planDataFromAPI?.planStatus === "expired" && (
@@ -460,6 +502,12 @@ export default function OrderHistory() {
                     petId={selectedPet?.petId}
                     userId={userId}
                     protein={dataFromAPI?.pets[0]?.plan?.protein}
+                    petName={dataFromAPI?.pets[0]?.name}
+                    petInfoList={petInfoList}
+                    setselectedPetIndex={setselectedPetIndex}
+                    setSelectedPetIndexFromOrderHistory={setSelectedPetIndexFromOrderHistory}
+                    setSelectedPet={setSelectedPet}
+                    setSelectedPetFromOrderHistory={setSelectedPetFromOrderHistory}
                   />
                 )}
               </>
