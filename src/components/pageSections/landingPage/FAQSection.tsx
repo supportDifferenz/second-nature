@@ -3,6 +3,7 @@ import FAQS from "@/components/organism/faq/FAQS";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import React from "react";
+import { motion } from "framer-motion";
 
 const faqsData = [
   {
@@ -29,7 +30,13 @@ const faqsData = [
 
 export default function FAQSection() {
   return (
-    <section>
+    < motion.section
+      initial={{ opacity: 0, y: 40 }
+      }
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+      viewport={{ once: true }}
+   >
       <div className="container flex flex-col-reverse sm:flex-row gap-(--space-30-60)">
         <div className="flex-1 relative">
           <div className="sm:-ml-[16%] lg:-ml-[2%] xl:-ml-[16%] h-fit sm:sticky top-[5%]">
@@ -61,6 +68,6 @@ export default function FAQSection() {
           <FAQS faqs={faqsData} defaultOpenIndex={0} />
         </div>
       </div>
-    </section>
+    </motion.section >
   );
 }
