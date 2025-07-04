@@ -1,11 +1,12 @@
 "use client";
 
-import { ReactNode } from "react";
+import { ReactNode, startTransition } from "react";
 import Header from "../organism/header/Header";
 import CheckoutProgressBar from "../molecules/checkoutProgressBar/CheckoutProgressBar";
 import { usePetStore } from "@/zustand/store/petDataStore";
 import Typography from "../atoms/typography/Typography";
 import { X } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export default function BuyingFlowLayout({
   children,
@@ -15,6 +16,7 @@ export default function BuyingFlowLayout({
   step: number;
 }) {
 
+  const router = useRouter();
   const { pets, selectedPetIndex, setSelectedPetIndex, removePet } = usePetStore();
   // const petNames = Object.values(pets).map((pet) => pet.name);
 
@@ -58,6 +60,9 @@ export default function BuyingFlowLayout({
                     onClick={() => {
                       removePet(pet.id)
                       setSelectedPetIndex(0)
+                      startTransition(() => {
+                        router.push("/dog-or-cat")
+                      })
                     }}
                   >
                     <X size={12} />
