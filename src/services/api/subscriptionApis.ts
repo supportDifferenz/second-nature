@@ -568,3 +568,33 @@ try {
       throw error;
   }
 };
+
+export const createFaq = async (
+  {
+    formData
+  } : {
+    formData: {
+      firstName: string;
+      lastName: string;
+      emailId: string;
+      contactNo: string;
+      message: string;
+      isActive: boolean;
+      isDeleted: boolean;
+      createdOn: string;
+      modifiedOn: string;
+    };
+  }
+) => {
+
+try {
+    const response = await subscriptionAxiosInstance.post(
+      `/api/subscription/faq/createfaq`,
+      formData
+  );
+    return response.data;
+  } catch (error) {
+      console.error("Error in faq", error);
+      throw error;
+  }
+};

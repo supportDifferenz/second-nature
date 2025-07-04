@@ -53,6 +53,7 @@ const OrderHistoryCard: React.FC<
     setSelectedPetIndexFromOrderHistory?: (index: number) => void;
     setSelectedPet?: (pet: PetInfo) => void;
     setSelectedPetFromOrderHistory?: (pet: PetInfo) => void;
+    refetchSubscriptionDetails?: () => void;
   }
 > = ({
   title,
@@ -88,7 +89,8 @@ const OrderHistoryCard: React.FC<
   setselectedPetIndex,
   setSelectedPetIndexFromOrderHistory,
   setSelectedPet,
-  setSelectedPetFromOrderHistory
+  setSelectedPetFromOrderHistory,
+  refetchSubscriptionDetails,
 }) => {
 
   const { userDetails } = useUserStore();
@@ -188,7 +190,8 @@ const OrderHistoryCard: React.FC<
           setIsProteinPopupOpen(false);
           setChangeProteinError("");
           setSuccessChangeProteinMessage(data.message);
-          window.location.reload();
+          refetchSubscriptionDetails?.();
+          // window.location.reload();
         },
         onError: (error) => {
           setCurrentProtein(protein);
@@ -217,7 +220,8 @@ const OrderHistoryCard: React.FC<
             setPlanChangeError("");
             if(data.statusCode === 200) {
               setSuccessDowngradeMessage(data.message);
-              window.location.reload();
+              refetchSubscriptionDetails?.();
+              // window.location.reload();
             }else{
               setErrorDowngradeMessage(data.message);
             }
@@ -253,7 +257,8 @@ const OrderHistoryCard: React.FC<
             console.log("Upgrade plan response:", data);
             if(data.statusCode === 200) {
               setSuccessUpgradeMessage(data.message);
-              window.location.reload();
+              refetchSubscriptionDetails?.();
+              // window.location.reload();
             }else{
               setErrorUpgradeMessage(data.message);
             }
@@ -287,10 +292,11 @@ const OrderHistoryCard: React.FC<
         {
           onSuccess: (data) => {
             setIsCancelPopupOpen(false);
-            if(data.statusCode === 200) {
+            if (data.statusCode === 200) {
               setSuccessCancelMessage(data.message);
-              window.location.reload();
-            }else{
+              refetchSubscriptionDetails?.();
+              // window.location.reload();
+            } else {
               setErrorCancelMessage(data.message);
             }
             // window.location.reload();
@@ -422,6 +428,7 @@ const OrderHistoryCard: React.FC<
         },
         {
           onSuccess: () => {
+            refetchSubscriptionDetails?.();
             // setPausePlanError("");
             // window.location.reload();
           },
