@@ -165,6 +165,8 @@ const OrderHistoryCard: React.FC<
   const [ errorRestartMessage, setErrorRestartMessage ] = useState("");
   const [ successReOrderMessage, setSuccessReOrderMessage ] = useState("");
   const [ errorReOrderMessage, setErrorReOrderMessage ] = useState("");
+  const [ successChangeProteinMessage, setSuccessChangeProteinMessage ] = useState("");
+  const [ errorChangeProteinMessage, setErrorChangeProteinMessage ] = useState("");
 
   const handleChangeProtein = (subId: string, petId: string, userId: string, proteinType: string) => {
     changeProtein(
@@ -175,16 +177,18 @@ const OrderHistoryCard: React.FC<
         proteinType
       },
       {
-        onSuccess: () => {
+        onSuccess: (data) => {
           setCurrentProtein(protein);
           setIsProteinPopupOpen(false);
           setChangeProteinError("");
+          setSuccessChangeProteinMessage(data.message);
           // window.location.reload();
         },
         onError: (error) => {
           setCurrentProtein(protein);
           if (error instanceof Error) {
             setChangeProteinError(error.message || "Error in protein change");
+            setErrorChangeProteinMessage(error.message || "Error in protein change");
           }
         }
       }
@@ -552,13 +556,17 @@ const OrderHistoryCard: React.FC<
                   />
                 )
               : (
-                <Button
-                  variant={"linkSecondary"}
-                  className="underline mt-2 whitespace-normal"
-                  onClick={() => setIsProteinPopupOpen(true)}
-                >
-                  Change protein for my next order
-                </Button>
+                <>
+                  <Button
+                    variant={"linkSecondary"}
+                    className="underline mt-2 whitespace-normal"
+                    onClick={() => setIsProteinPopupOpen(true)}
+                  >
+                    Change protein for my next order
+                  </Button>
+                  <Typography tag="span" className="text-sm text-green-500" text={successChangeProteinMessage} />
+                  <Typography tag="span" className="text-sm text-red-500" text={errorChangeProteinMessage} />
+                </>
               )
             }
             
