@@ -146,8 +146,8 @@ const OrderHistoryCard: React.FC<
   const [planChangeError, setPlanChangeError] = useState("");
   const [planChangeReason, setPlanChangeReason] = useState("");
   // const [cancelReason, setCancelReason] = useState("");
-  const [restartPlanError, setRestartPlanError] = useState("");
-  const [reOrderPlanError, setReOrderPlanError] = useState("");
+  // const [restartPlanError, setRestartPlanError] = useState("");
+  // const [reOrderPlanError, setReOrderPlanError] = useState("");
   const [pauseStartDate, setPauseStartDate] = useState("");
   const [pauseEndDate, setPauseEndDate] = useState("");
   // const [subIdFromProp, setSubIdFromProp] = useState("");
@@ -325,7 +325,7 @@ const OrderHistoryCard: React.FC<
         },
         {
           onSuccess: (data) => {
-            setRestartPlanError("");
+            // setRestartPlanError("");
             if (data.statusCode === 200) {
               setSuccessRestartMessage(data.message);
               const noOfPets = petInfoList?.length;
@@ -343,7 +343,7 @@ const OrderHistoryCard: React.FC<
           },
           onError: (error: unknown) => {
             if (error instanceof Error) {
-              setRestartPlanError(error.message || "Error in restart plan");
+              // setRestartPlanError(error.message || "Error in restart plan");
               setErrorRestartMessage(error.message || "Error in restart plan");
             }
           }
@@ -351,7 +351,8 @@ const OrderHistoryCard: React.FC<
       );
     } else {
       console.error("subId, petId, or userId is undefined");
-      setRestartPlanError("subId, petId, or userId is undefined");
+      setErrorRestartMessage("subId, petId, or userId is undefined");
+      // setRestartPlanError("subId, petId, or userId is undefined");
     }
   }
 
@@ -385,7 +386,7 @@ const OrderHistoryCard: React.FC<
       {
         onSuccess: (data) => {
           console.log("Re order success",data);
-          setReOrderPlanError("");
+          // setReOrderPlanError("");
           if(data.statusCode === 200) {
             setSuccessReOrderMessage(data.message);
             const noOfPets = petInfoList?.length;
@@ -404,7 +405,7 @@ const OrderHistoryCard: React.FC<
         },
         onError: (error: unknown) => {
           if (error instanceof Error) {
-            setReOrderPlanError(error.message || "Error in re order");
+            // setReOrderPlanError(error.message || "Error in re order");
             setErrorReOrderMessage(error.message || "Error in re order");
           }
         }
@@ -759,30 +760,30 @@ const OrderHistoryCard: React.FC<
               {
                 btn === "Restart Plan"
                 ? (
-                  <>
+                  <div className="flex justify-center">
                     <Typography tag="span" className="text-sm text-green-500" text={successRestartMessage} />
                     <Typography tag="span" className="text-sm text-red-500" text={errorRestartMessage} />
-                  </>
+                  </div>
                 )
                 : (
-                  <>
-                    <Typography tag="span" className="text-sm text-green-500" text={successReOrderMessage} />
-                    <Typography tag="span" className="text-sm text-red-500" text={errorReOrderMessage} />
-                  </>
+                  <div className="flex justify-center">
+                    <Typography tag="span" className="text-sm text-green-500 text-center" text={successReOrderMessage} />
+                    <Typography tag="span" className="text-sm text-red-500 text-center" text={errorReOrderMessage} />
+                  </div>
                 )
               }
-              <Typography
+              {/* <Typography
                 tag="p"
                 text={restartPlanError}
                 // text="Restart plan error"
                 className="text-red-600 text-center"
-              />
-              <Typography
+              /> */}
+              {/* <Typography
                 tag="p"
                 text={reOrderPlanError}
                 // text="Restart plan error"
                 className="text-red-600 text-center"
-              />
+              /> */}
             </> 
           ))}
         </div>
