@@ -1,6 +1,9 @@
+"use client";
+
 import Typography from "@/components/atoms/typography/Typography";
 import Image from "next/image";
 import React from "react";
+import { motion } from "framer-motion";
 import StandardListing from "./StandardListing";
 
 const standardsData = [
@@ -54,56 +57,85 @@ const standardsData = [
   },
 ];
 
+const durations = [0.4, 0.8, 0.6, 0.7, 0.5, 0.9, 0.6, 0.8];
+
 export default function NutritionalGuidelines() {
   return (
     <div className="relative">
-        <div className="relative h-[var(--space-511-846)] overflow-x-clip">
-          <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-[40%] flex flex-col items-center justify-center w-[460px] h-[460px]">
-            {/* White Blurred Circle Behind */}
-            <div className="absolute inset-0 rounded-full bg-white border border-primary z-0" />
+      <div className="relative h-[var(--space-511-846)] overflow-x-clip">
+        <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-[40%] flex flex-col items-center justify-center w-[460px] h-[460px]">
+          {/* White Blurred Circle Behind */}
+          <div className="absolute inset-0 rounded-full bg-white border border-primary z-0" />
 
-            {/* Logo */}
-            <div className="relative z-10 mt-[-100px] w-[15.6vw] sm:w-[6.6vw]">
-              <Image
-                src="/images/fediaf.webp"
-                alt="mission"
-                className="!static w-full inset-0 h-full object-contain object-center"
-                fill
-              />
-            </div>
+          {/* Logo */}
+          <div className="relative z-10 mt-[-100px] w-[15.6vw] sm:w-[6.6vw]">
+            <Image
+              src="/images/fediaf.webp"
+              alt="mission"
+              className="!static w-full inset-0 h-full object-contain object-center"
+              fill
+            />
+          </div>
 
-            {/* Typography Content on Top of Blur */}
-            <div className="absolute inset-0 bg-white opacity-100 blur-[25px] z-0 w-full lg:w-[50vw] h-[25vh] lg:h-[23vh] top-2/6 lg:top-2/6 lg:-translate-x-1/6 lg:rounded-3xl">
-              {" "}
-            </div>
-            <div className="relative z-10 flex flex-col items-center justify-center gap-2 text-center px-4 lg:mt-10">
+          {/* Typography Content on Top of Blur */}
+          <div className="absolute inset-0 bg-white opacity-100 blur-[25px] z-0 w-full lg:w-[50vw] h-[25vh] lg:h-[23vh] top-2/6 lg:top-2/6 lg:-translate-x-1/6 lg:rounded-3xl">
+            {" "}
+          </div>
+          <div className="relative z-10 flex flex-col items-center justify-center gap-2 text-center px-4 lg:mt-10">
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            >
               <Typography
                 tag="h1"
                 text="Exceptional Nutrition."
                 className="highlight lg:whitespace-nowrap text-primary-dark"
               />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+            >
               <Typography
                 tag="h2"
                 text="Built on FEDIAF Guidelines."
                 className="text-primary-dark text-center px-2"
               />
-            </div>
+            </motion.div>
           </div>
         </div>
+      </div>
 
       {/* standard section */}
       <div className="relative flex w-full justify-center bg-[linear-gradient(to_bottom,_#F7F9EB_0%,_#FFFFFF_100%)] ">
         <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-[40%] w-[73%]">
-          <Image
-            src="/images/nutritional-guidelines.webp"
-            alt="doctor and pet owner"
-            className="!static inset-0 !h-full object-cover object-center"
-            fill
-          />
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <Image
+              src="/images/nutritional-guidelines.webp"
+              alt="doctor and pet owner"
+              className="!static inset-0 !h-full object-cover object-center"
+              fill
+            />
+          </motion.div>
         </div>
 
         <div className="flex flex-col gap-14 items-center">
-          <div className="flex flex-col  items-center gap-[var(--space-26-32)] w-[72%] sm:w-[50%] mt-[33%]">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="flex flex-col  items-center gap-[var(--space-26-32)] w-[72%] sm:w-[50%] mt-[33%]"
+          >
             <div className="flex gap-2">
               <Typography tag="h3" text="Our" className="text-primary-dark" />
               <Typography
@@ -123,9 +155,9 @@ export default function NutritionalGuidelines() {
                 text=" proudly adheres to the FEDIAF Nutritional Guidelines, ensuring every meal we create is safe, balanced, and tailored to meet your pet's unique needs."
               />
             </Typography>
-          </div>
+          </motion.div>
 
-          {/* standard list section */}
+          {/* standards list section */}
           <div className="flex flex-wrap justify-center gap-y-12 sm:gap-y-24 sm:gap-x-28">
             {standardsData.map((item, index) => (
               <StandardListing
@@ -133,6 +165,9 @@ export default function NutritionalGuidelines() {
                 image={item.image}
                 title={item.title}
                 description={item.description}
+                motionProps={{
+                  transition: { duration: durations[index] ?? 0.6 },
+                }}
               />
             ))}
           </div>
