@@ -29,7 +29,7 @@ export default function OrderHistory() {
   const { userDetails } = useUserStore();
   const userId = userDetails?.userId;
   const { data: subscriptionDetails } = useGetSubscriptionDetailsByUserId(userId);
-  const { data: subscriptionDetailsBySubIdAndPetId } = useGetSubscriptionDetailsByUserIdAndPetId(userId ?? "", selectedPet?.petId ?? "");
+  const { data: subscriptionDetailsBySubIdAndPetId, refetch: refetchSubscriptionDetails } = useGetSubscriptionDetailsByUserIdAndPetId(userId ?? "", selectedPet?.petId ?? "");
   const { data: invoiceData } = useGetInvoiceBySubIdAndPetId(selectedPet?.subId ?? "", selectedPet?.petId ?? "");
 
   const dataFromAPI = subscriptionDetailsBySubIdAndPetId?.result;
@@ -395,6 +395,7 @@ export default function OrderHistory() {
                     setSelectedPetIndexFromOrderHistory={setSelectedPetIndexFromOrderHistory}
                     setSelectedPet={setSelectedPet}
                     setSelectedPetFromOrderHistory={setSelectedPetFromOrderHistory}
+                    refetchSubscriptionDetails={refetchSubscriptionDetails}
                   />
                 )}
                 {planDataFromAPI?.type === "Regular" && planDataFromAPI?.planStatus === "paused" && (
@@ -414,6 +415,7 @@ export default function OrderHistory() {
                     setSelectedPetIndexFromOrderHistory={setSelectedPetIndexFromOrderHistory}
                     setSelectedPet={setSelectedPet}
                     setSelectedPetFromOrderHistory={setSelectedPetFromOrderHistory}
+                    refetchSubscriptionDetails={refetchSubscriptionDetails}
                   />
                 )}
                 {planDataFromAPI?.type === "Regular" && planDataFromAPI?.planStatus === "cancel" && (
@@ -433,6 +435,7 @@ export default function OrderHistory() {
                     setSelectedPetIndexFromOrderHistory={setSelectedPetIndexFromOrderHistory}
                     setSelectedPet={setSelectedPet}
                     setSelectedPetFromOrderHistory={setSelectedPetFromOrderHistory}
+                    refetchSubscriptionDetails={refetchSubscriptionDetails}
                   />
                 )}
                 {planDataFromAPI?.type === "Regular" && planDataFromAPI?.planStatus === "paymentfailed" && (
@@ -452,6 +455,7 @@ export default function OrderHistory() {
                     setSelectedPetIndexFromOrderHistory={setSelectedPetIndexFromOrderHistory}
                     setSelectedPet={setSelectedPet}
                     setSelectedPetFromOrderHistory={setSelectedPetFromOrderHistory}
+                    refetchSubscriptionDetails={refetchSubscriptionDetails}
                   />
                 )}
                 {planDataFromAPI?.type === "Trial" && planDataFromAPI?.planStatus === "active" && (
@@ -471,6 +475,7 @@ export default function OrderHistory() {
                     setSelectedPetIndexFromOrderHistory={setSelectedPetIndexFromOrderHistory}
                     setSelectedPet={setSelectedPet}
                     setSelectedPetFromOrderHistory={setSelectedPetFromOrderHistory}
+                    refetchSubscriptionDetails={refetchSubscriptionDetails}
                   />
                 )}
                 {planDataFromAPI?.type === "Trial" && planDataFromAPI?.planStatus === "endingsoon" && (
@@ -490,6 +495,7 @@ export default function OrderHistory() {
                     setSelectedPetIndexFromOrderHistory={setSelectedPetIndexFromOrderHistory}
                     setSelectedPet={setSelectedPet}
                     setSelectedPetFromOrderHistory={setSelectedPetFromOrderHistory}
+                    refetchSubscriptionDetails={refetchSubscriptionDetails}
                   />
                 )}
                 {planDataFromAPI?.type === "Trial" && planDataFromAPI?.planStatus === "expired" && (
@@ -509,6 +515,7 @@ export default function OrderHistory() {
                     setSelectedPetIndexFromOrderHistory={setSelectedPetIndexFromOrderHistory}
                     setSelectedPet={setSelectedPet}
                     setSelectedPetFromOrderHistory={setSelectedPetFromOrderHistory}
+                    refetchSubscriptionDetails={refetchSubscriptionDetails}
                   />
                 )}
               </>

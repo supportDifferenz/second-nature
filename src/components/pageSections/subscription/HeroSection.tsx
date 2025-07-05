@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import Typography from "@/components/atoms/typography/Typography";
 import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
 
 export default function HeroSection() {
   const banner = {
@@ -54,30 +55,56 @@ export default function HeroSection() {
         <div className="relative flex pt-[var(--space-46-95)] sm:pt-0 lg::items-center w-full min-h-[500px] h-[90dvh] sm:min-h-[400px] lg:min-h-[520px] sm:h-[70dvh] lg:max-h-[1200px] bg-cover bg-center transition-all container sm:justify-end sm:text-left text-center justify-center ">
           <div className="flex flex-col items-center sm:items-start lg:justify-center mt-[85%] sm:mt-[20%] lg:mt-0 lg:w-[50%]">
             <div>
-              <Typography
-                tag="h1"
-                className="text-primary-dark capitalize highlight mb-[--space-4-10]"
-                text={banner.titlePart1}
-                role="heading"
-                ariaLabel={banner.titlePart1}
-              />
-              <Typography
-                tag="h1"
-                className="text-primary-dark capitalize highlight mb-[--space-10-20]"
-                text={banner.titlePart2}
-                role="heading"
-                ariaLabel={banner.titlePart2}
-              />
+              <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4 }}
+                viewport={{ once: true }}
+              >
+                <Typography
+                  tag="h1"
+                  className="text-primary-dark capitalize highlight mb-[--space-4-10]"
+                  text={banner.titlePart1}
+                  role="heading"
+                  ariaLabel={banner.titlePart1}
+                />
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+              >
+                <Typography
+                  tag="h1"
+                  className="text-primary-dark capitalize highlight mb-[--space-10-20]"
+                  text={banner.titlePart2}
+                  role="heading"
+                  ariaLabel={banner.titlePart2}
+                />
+              </motion.div>
             </div>
 
-            <Typography
-              tag="h3"
-              className="capitalize block max-w-[80%] sm:max-w-[50%] lg:max-w-[65%] sm:mt-3 sm:mb-[var(--space-20-40)]"
-              text={banner.subtitle}
-              role="heading"
-              ariaLabel={banner.subtitle}
-            />
-
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+            >
+              <Typography
+                tag="h3"
+                className="capitalize block max-w-[80%] sm:max-w-[50%] lg:max-w-[65%] sm:mt-3 sm:mb-[var(--space-20-40)]"
+                text={banner.subtitle}
+                role="heading"
+                ariaLabel={banner.subtitle}
+              />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1 }}
+              viewport={{ once: true }}
+            >
             <Button
               variant="primaryBtn"
               className="mx-auto mt-2 sm:m-0 "
@@ -85,6 +112,7 @@ export default function HeroSection() {
             >
               {banner.buttonText}
             </Button>
+            </motion.div>
           </div>
         </div>
       </div>

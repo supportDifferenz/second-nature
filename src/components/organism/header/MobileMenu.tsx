@@ -3,7 +3,8 @@
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import MealDropdownMenu from './MealDropdownMenu';
-import { motion } from 'framer-motion';
+import {  motion } from 'framer-motion';
+import { usePathname } from 'next/navigation';
 
 interface MobileMenuProps {
   className?: string;
@@ -87,6 +88,9 @@ const AnimatedMenuIcon = ({ isOpen }: { isOpen: boolean }) => (
 );
 
 const MobileMenu = ({ className, isOpen, setIsOpen }: MobileMenuProps) => {
+
+  const pathName = usePathname();
+
   const [isHowItWorksOpen, setIsHowItWorksOpen] = useState(false);
 
   useEffect(() => {
@@ -170,7 +174,7 @@ const MobileMenu = ({ className, isOpen, setIsOpen }: MobileMenuProps) => {
                 whileHover={hoverMotion}
                 transition={{ type: 'spring', stiffness: 300, damping: 20 }}
                 href="#"
-                className="flex items-center font-bold"
+                className={`${pathName === '/subscription' || pathName === '/behind-the-scenes' || pathName === '/how-to-feed' || pathName === '/transition-diet' ? 'text-primary' : ''} flex items-center font-bold`}
                 onClick={() => setIsHowItWorksOpen(!isHowItWorksOpen)}
               >
                 How it works
@@ -183,45 +187,77 @@ const MobileMenu = ({ className, isOpen, setIsOpen }: MobileMenuProps) => {
               </motion.a>
 
               {isHowItWorksOpen && (
-                <motion.div variants={itemVariants} className="flex flex-col space-y-5 pl-4">
-                  {[
-                    { href: '/subscription', text: 'Subscription' },
-                    { href: '/behind-the-scenes', text: 'Behind The Scenes' },
-                    { href: '/how-to-feed', text: 'How to Feed' },
-                    { href: '/transition-diet', text: 'Transition Diet' },
-                  ].map((item) => (
-                    <motion.a
-                      key={item.href}
-                      variants={itemVariants}
-                      whileHover={hoverMotion}
-                      transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                      href={item.href}
-                      onClick={() => setIsOpen(false)}
-                      className="font-bold block"
-                    >
-                      {item.text}
-                    </motion.a>
-                  ))}
+                <motion.div className="flex flex-col space-y-5 pl-4">
+                  <motion.a
+                    whileHover={{
+                      scale: 1.03,
+                    }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 300,
+                      damping: 20,
+                    }}
+                    href="/subscription" onClick={() => setIsOpen(false)} className={`${pathName === '/subscription' ? 'text-primary' : ''} font-bold block`}>Subscription</motion.a>
+                  <motion.a
+                    whileHover={{
+                      scale: 1.03,
+                    }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 300,
+                      damping: 20,
+                    }}
+                    href="/behind-the-scenes" onClick={() => setIsOpen(false)} className={`${pathName === '/behind-the-scenes' ? 'text-primary' : ''} font-bold block`}>Behind The Scenes</motion.a>
+                  <motion.a
+                    whileHover={{
+                      scale: 1.03,
+                    }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 300,
+                      damping: 20,
+                    }}
+                    href="/how-to-feed" onClick={() => setIsOpen(false)} className={`${pathName === '/how-to-feed' ? 'text-primary' : ''} font-bold block`}>How to Feed</motion.a>
+                  <motion.a
+                    whileHover={{
+                      scale: 1.03,
+                    }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 300,
+                      damping: 20,
+                    }}
+                    href="/transition-diet" onClick={() => setIsOpen(false)} className={`${pathName === '/transition-diet' ? 'text-primary' : ''} font-bold block`}>Transition Diet</motion.a>
                 </motion.div>
               )}
-
-              {[
-                { href: '/blogs', text: 'Blogs' },
-                { href: '/reviews', text: 'Reviews' },
-                { href: '/faqs', text: 'FAQs' },
-              ].map((item) => (
-                <motion.a
-                  key={item.href}
-                  variants={itemVariants}
-                  whileHover={hoverMotion}
-                  transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                  href={item.href}
-                  onClick={() => setIsOpen(false)}
-                  className="font-bold block"
-                >
-                  {item.text}
-                </motion.a>
-              ))}
+              <motion.a
+                whileHover={{
+                  scale: 1.03,
+                }}
+                transition={{
+                  type: "spring",
+                  stiffness: 300,
+                  damping: 20,
+                }}
+                href="/blogs" onClick={() => setIsOpen(false)} className={`${pathName === '/blogs' ? 'text-primary' : ''} font-bold block`}>Blogs</motion.a>
+              <motion.a
+                whileHover={{
+                  scale: 1.03,
+                }}
+                transition={{
+                  type: "spring",
+                  stiffness: 300,
+                  damping: 20,
+                }} href="/reviews" onClick={() => setIsOpen(false)} className={`${pathName === '/reviews' ? 'text-primary' : ''} font-bold block`}>Reviews</motion.a>
+              <motion.a
+                whileHover={{
+                  scale: 1.03,
+                }}
+                transition={{
+                  type: "spring",
+                  stiffness: 300,
+                  damping: 20,
+                }} href="/faqs" onClick={() => setIsOpen(false)} className={`${pathName === '/faqs' ? 'text-primary' : ''} font-bold block`}>FAQs</motion.a>
             </motion.div>
           </motion.div>
         </div>

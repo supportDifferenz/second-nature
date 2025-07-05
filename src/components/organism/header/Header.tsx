@@ -16,12 +16,14 @@ import { useRouter } from "next/navigation";
 import useAuthStore from "@/zustand/store/authDataStore";
 import { startTransition, useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { usePathname } from "next/navigation";
 
 const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
   const [isMobile, setIsMobile] = useState<boolean>(false);
 
   const router = useRouter();
+  const pathName = usePathname();
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
   useEffect(() => {
@@ -102,14 +104,17 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
                     });
                   }}
                 >
-                  <span className="block font-extrabold cursor-pointer">
+                  <span className={`${pathName === "/about-us" ? "text-primary" : ""} block font-extrabold cursor-pointer`}>
                     About Us
                   </span>
                 </nav>
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <button className="outline-none cursor-pointer flex items-center gap-1.5 font-extrabold">
-                      How it works
+                      <span className={`${pathName === "/subscription" || pathName === "/behind-the-scenes" || pathName === "/how-to-feed" || pathName === "/transition-diet" ? "text-primary" : ""}`}>
+                        How it works
+                      </span>
+                      {/* How it works */}
                       <div className="w-2.5 h-fit">
                         <Image
                           src="/icons/black-chevron-down.svg"
@@ -130,7 +135,7 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
                       ].map((item, index) => (
                         <DropdownMenuItem
                           key={index}
-                          className="flex items-center gap-3 cursor-pointer"
+                          className={`${pathName === item.href ? "text-primary" : ""} flex items-center gap-3 cursor-pointer`}
                           onClick={(e) => {
                             e.preventDefault();
                             startTransition(() => {
@@ -165,7 +170,7 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
 
               <div className="items-center justify-end flex flex-1 gap-[4.5%]">
                 <span
-                  className="hidden xl:block font-extrabold cursor-pointer"
+                  className={`${pathName === "/blogs" ? "text-primary" : ""} hidden xl:block font-extrabold cursor-pointer`}
                   onClick={() => {
                     startTransition(() => {
                       router.push("/blogs");
@@ -175,7 +180,7 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
                   Blogs
                 </span>
                 <span
-                  className="hidden xl:block font-extrabold cursor-pointer"
+                  className={`${pathName === "/reviews" ? "text-primary" : ""} hidden xl:block font-extrabold cursor-pointer`}
                   onClick={() => {
                     startTransition(() => {
                       router.push("/reviews");
@@ -185,7 +190,7 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
                   Reviews
                 </span>
                 <span
-                  className="hidden xl:block font-extrabold cursor-pointer"
+                  className={`${pathName === "/faqs" ? "text-primary" : ""} hidden xl:block font-extrabold cursor-pointer`}
                   onClick={() => {
                     startTransition(() => {
                       router.push("/faqs");

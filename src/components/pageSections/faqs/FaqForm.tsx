@@ -5,19 +5,168 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/sonner";
 import Image from "next/image";
-import React from "react";
+import React, { useState, useRef } from "react";
+import { z } from "zod";
+import { useCreateFaq } from "@/hooks/subscriptionHooks/createFaqHook";
+
+// Type definitions
+type FormValues = {
+  firstName: string;
+  lastName: string;
+  emailId: string;
+  contactNo: string;
+  message: string;
+  isActive: boolean;
+  isDeleted: boolean;
+  createdOn: string;
+  modifiedOn: string;
+  additionalProp1: Record<string, unknown>;
+};
+
+type FormFields = keyof Omit<FormValues, 'isActive' | 'isDeleted' | 'createdOn' | 'modifiedOn' | 'additionalProp1'>;
+type FormErrors = Partial<Record<FormFields, string>>;
+type TouchedFields = Partial<Record<FormFields, boolean>>;
+
+// Zod schema
+const formSchema = z.object({
+  firstName: z.string().min(1, "First name is required"),
+  lastName: z.string().optional(),
+  emailId: z.string().min(1, "Email is required").email("Please enter a valid email"),
+  contactNo: z.string().min(1, "Mobile number is required"),
+  message: z.string().min(1, "Message is required"),
+  isActive: z.boolean().default(true),
+  isDeleted: z.boolean().default(false),
+  createdOn: z.string().default(new Date().toISOString()),
+  modifiedOn: z.string().default(new Date().toISOString()),
+  additionalProp1: z.record(z.unknown()).default({})
+});
 
 export default function FaqForm() {
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const [errors, setErrors] = useState<FormErrors>({});
+  const [touched, setTouched] = useState<TouchedFields>({});
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
+
+  const { mutate: createFaq } = useCreateFaq();
+
+  const handleBlur = (field: FormFields) => {
+    if (!touched[field]) {
+      setTouched(prev => ({ ...prev, [field]: true }));
+      validateField(field);
+    }
+  };
+
+  const getFormValues = (form: HTMLFormElement): FormValues => {
+    const formData = new FormData(form);
+    
+    return {
+      firstName: formData.get('firstName') as string,
+      lastName: formData.get('lastName') as string,
+      emailId: formData.get('email') as string,
+      contactNo: formData.get('mobileNumber') as string,
+      message: formData.get('message') as string,
+      isActive: true,
+      isDeleted: false,
+      createdOn: new Date().toISOString(),
+      modifiedOn: new Date().toISOString(),
+      additionalProp1: {}
+    };
+  };
+
+  const validateField = (field: FormFields) => {
+    if (!formRef.current) return;
+    
+    const formValues = getFormValues(formRef.current);
+    const fieldValue = formValues[field];
+
+    try {
+      const fieldSchema = z.object({
+        [field]: formSchema.shape[field]
+      });
+      
+      fieldSchema.parse({ [field]: fieldValue });
+      setErrors(prev => ({ ...prev, [field]: '' }));
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        setErrors(prev => ({ ...prev, [field]: error.errors[0].message }));
+      }
+    }
+  };
+
+  const validateForm = (formValues: FormValues): boolean => {
+    try {
+      formSchema.parse(formValues);
+      setErrors({});
+      return true;
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        const newErrors: FormErrors = {};
+        error.errors.forEach(err => {
+          const field = err.path[0] as FormFields;
+          if (field in formValues) {
+            newErrors[field] = err.message;
+          }
+        });
+        setErrors(newErrors);
+      }
+      return false;
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsSubmitted(true);
+    setIsSubmitting(true);
 
-    // ✅ Show Sonner toast
-    toast.success("Message sent successfully 🎉", {
-      description: "We’ll get back to you ASAP. Meanwhile, go vibe with your pet.",
-    });
+    const formValues = getFormValues(e.currentTarget);
 
-    // ✅ Optionally reset form
-    e.currentTarget.reset();
+    // Mark all fields as touched
+    const allFieldsTouched: TouchedFields = {
+      firstName: true,
+      lastName: true,
+      emailId: true,
+      contactNo: true,
+      message: true
+    };
+    setTouched(allFieldsTouched);
+
+    if (!validateForm(formValues)) {
+      toast.error("Form validation failed", {
+        description: "Please check all required fields.",
+      });
+      setIsSubmitting(false);
+      return;
+    }
+
+    createFaq(
+      { formData: formValues },
+      {
+        onSuccess: () => {
+          toast.success("Message sent successfully 🎉", {
+            description: "We'll get back to you ASAP. Meanwhile, go vibe with your pet.",
+          });
+          // Clear the form
+          if (formRef.current) {
+            formRef.current.reset();
+          }
+          setTouched({});
+          setIsSubmitted(false);
+        },
+        onError: (error) => {
+          toast.error("Failed to send message", {
+            description: error instanceof Error ? error.message : "Please try again later.",
+          });
+        },
+        onSettled: () => {
+          setIsSubmitting(false);
+        }
+      }
+    );
+  };
+
+  const shouldShowError = (field: FormFields): boolean => {
+    return (touched[field] || isSubmitted) && Boolean(errors[field]);
   };
 
   return (
@@ -33,44 +182,99 @@ export default function FaqForm() {
       />
 
       <form
+        ref={formRef}
         onSubmit={handleSubmit}
         className="pb-[var(--space-40-48)] pt-[var(--space-26-36)] border-b border-[#A1A1A1]"
+        noValidate
       >
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-[var(--space-16-24)]">
           <div className="flex flex-col w-full">
             <Label className="!mb-1.5 text-mob-16 sm:text-tab-18 lg:text-web-22 text-primary-dark !font-bold">
               First Name
             </Label>
-            <Input placeholder="Enter your first name*" className="bg-white" variant="roundedEdgeInput" />
+            <Input 
+              name="firstName"
+              placeholder="Enter your first name*" 
+              className="bg-white" 
+              variant="roundedEdgeInput"
+              onBlur={() => handleBlur('firstName')}
+              disabled={isSubmitting}
+            />
+            {shouldShowError('firstName') && (
+              <span className="text-red-500 text-sm mt-1">{errors.firstName}</span>
+            )}
           </div>
           <div className="flex flex-col w-full">
             <Label className="!mb-1.5 text-mob-16 sm:text-tab-18 lg:text-web-22 text-primary-dark !font-bold">
               Last Name
             </Label>
-            <Input placeholder="Enter your last name" className="bg-white" variant="roundedEdgeInput" />
+            <Input 
+              name="lastName"
+              placeholder="Enter your last name" 
+              className="bg-white" 
+              variant="roundedEdgeInput"
+              onBlur={() => handleBlur('lastName')}
+              disabled={isSubmitting}
+            />
           </div>
           <div className="flex flex-col w-full">
             <Label className="!mb-1.5 text-mob-16 sm:text-tab-18 lg:text-web-22 text-primary-dark !font-bold">
               Email Address
             </Label>
-            <Input placeholder="Enter your email address*" className="bg-white" variant="roundedEdgeInput" />
+            <Input 
+              name="email"
+              type="email"
+              placeholder="Enter your email address*" 
+              className="bg-white" 
+              variant="roundedEdgeInput"
+              onBlur={() => handleBlur('emailId')}
+              disabled={isSubmitting}
+            />
+            {shouldShowError('emailId') && (
+              <span className="text-red-500 text-sm mt-1">{errors.emailId}</span>
+            )}
           </div>
           <div className="flex flex-col w-full">
             <Label className="!mb-1.5 text-mob-16 sm:text-tab-18 lg:text-web-22 text-primary-dark !font-bold">
               Mobile Number
             </Label>
-            <Input placeholder="Enter your mobile number*" className="bg-white" variant="roundedEdgeInput" />
+            <Input 
+              name="mobileNumber"
+              placeholder="Enter your mobile number*" 
+              className="bg-white" 
+              variant="roundedEdgeInput"
+              onBlur={() => handleBlur('contactNo')}
+              disabled={isSubmitting}
+            />
+            {shouldShowError('contactNo') && (
+              <span className="text-red-500 text-sm mt-1">{errors.contactNo}</span>
+            )}
           </div>
         </div>
         <div className="flex flex-col mt-4 sm:mt-4.5 lg:mt-4.5 mb-[var(--space-26-36)]">
           <Label className="!mb-1.5 text-mob-16 sm:text-tab-18 lg:text-web-22 text-primary-dark !font-bold">
             Message
           </Label>
-          <Textarea placeholder="Enter your message" className="bg-white rounded-3xl border border-[#A1A1A1] outline-none px-4 py-2 sm:h-36" />
+          <Textarea 
+            name="message"
+            placeholder="Enter your message*" 
+            className="bg-white rounded-3xl border border-[#A1A1A1] outline-none px-4 py-2 sm:h-36"
+            onBlur={() => handleBlur('message')}
+            disabled={isSubmitting}
+          />
+          {shouldShowError('message') && (
+            <span className="text-red-500 text-sm mt-1">{errors.message}</span>
+          )}
         </div>
 
-        <Button type="submit" size={"md"} variant={"primaryBtn"} className="w-fit text-white">
-          Send
+        <Button 
+          type="submit" 
+          size={"md"} 
+          variant={"primaryBtn"} 
+          className="w-fit text-white"
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? "Sending..." : "Send"}
         </Button>
       </form>
 

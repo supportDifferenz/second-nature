@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import React from "react";
+import { motion } from "framer-motion";
 import Typography from "@/components/atoms/typography/Typography";
 
 const features = [
@@ -24,16 +27,23 @@ const features = [
 ];
 
 const FeaturesItems = () => {
+  // Define durations for each feature
+  const durations = [0.4, 0.8, 1];
+
   return (
     <section>
-      <div className="flex flex-col lg:flex-row justify-center gap-16 lg:gap-8  container">
+      <div className="flex flex-col lg:flex-row justify-center gap-16 lg:gap-8 container">
         {features.map((feature, index) => (
-          <div
+          <motion.div
             key={index}
-            className="  flex-1 text-center px-8 2xl:px-15 py-10 pt-[5%]  border border-secondary-1 rounded-lg shadow-sm "
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: durations[index] }}
+            viewport={{ once: true }}
+            className="flex-1 text-center px-8 2xl:px-15 py-10 pt-[5%] border border-secondary-1 rounded-lg shadow-sm"
           >
-            <div  className="flex flex-col items-center mt-[-14%] sm:mt-[-11%] lg:mt-[-35%] ">
-              <div className="w-(--space-50-99)  bg-white rounded-full relative z-[1]">
+            <div className="flex flex-col items-center mt-[-14%] sm:mt-[-11%] lg:mt-[-35%]">
+              <div className="w-(--space-50-99) bg-white rounded-full relative z-[1]">
                 <Image
                   src={feature.icon}
                   alt="icon"
@@ -41,10 +51,15 @@ const FeaturesItems = () => {
                   className="!static w-full object-contain"
                 />
               </div>
-
-              <Typography tag="p" className="mt-3.5  font-bold" text={feature.description} role="paragraph" ariaLabel={feature.description}/>
+              <Typography
+                tag="p"
+                className="mt-3.5 font-bold"
+                text={feature.description}
+                role="paragraph"
+                ariaLabel={feature.description}
+              />
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </section>
