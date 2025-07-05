@@ -74,8 +74,6 @@ export default function IngredientsCarousel() {
 
   return (
     <div className="container relative">
-
-
       {/* Green Card */}
       <div
         className="w-full shadow-[inset_6px_6px_16px_0px_rgba(0,0,0,0.55)] bg-primary-dark rounded-full p-6 pb-[130px] sm:pb-[70px] lg:pb-6 flex flex-col lg:flex-row gap-[50px] lg:gap-[3%] items-stretch lg:items-center sm:max-w-[400px] mx-auto lg:max-w-max"
@@ -90,10 +88,10 @@ export default function IngredientsCarousel() {
           <AnimatePresence mode="wait">
             <motion.div
               key={currentSlide.image + currentIndex}
-              initial={{ opacity: 0, scale: 0.98 }}
+              initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 1.02 }}
-              transition={{ duration: 0.5, ease: "easeInOut" }}
+              exit={{ opacity: 0, scale: 1.01 }}
+              transition={{ duration: 0.6, ease: [0.42, 0, 0.58, 1] }}
               className="w-full h-full flex-shrink-0"
             >
               <Image
@@ -102,7 +100,7 @@ export default function IngredientsCarousel() {
                 width={500}
                 height={500}
                 priority
-                className="rounded-full  lg:rounded-full w-full h-full object-cover"
+                className="rounded-full w-full h-full object-cover"
               />
             </motion.div>
           </AnimatePresence>
@@ -113,10 +111,10 @@ export default function IngredientsCarousel() {
           <AnimatePresence mode="wait">
             <motion.div
               key={currentSlide.title + currentIndex}
-              initial={{ opacity: 0, y: 10 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.5, ease: "easeInOut" }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.6, ease: [0.42, 0, 0.58, 1] }}
             >
               <Typography
                 tag="h2"
@@ -149,9 +147,13 @@ export default function IngredientsCarousel() {
               }}
               className="rounded-full text-white hover:bg-white/30 relative h-[38px] w-[38px] p-0 border-none bg-transparent"
             >
-              <Image src={'./icons/prev-left-light-primary.svg'} alt="nav" fill className="w-full h-full" />
+              <Image
+                src="./icons/prev-left-light-primary.svg"
+                alt="nav"
+                fill
+                className="w-full h-full"
+              />
             </Button>
-
 
             <div className="relative w-full h-[2.5px] bg-contrast-button max-w-9 overflow-hidden ">
               <motion.div
@@ -169,12 +171,16 @@ export default function IngredientsCarousel() {
               }}
               className="rounded-full text-white hover:bg-white/30 relative h-[38px] w-[38px] p-0 border-none bg-transparent"
             >
-              <Image src={'./icons/prev-right-light-primary.svg'} alt="nav" fill className="w-full h-full" />
+              <Image
+                src="./icons/prev-right-light-primary.svg"
+                alt="nav"
+                fill
+                className="w-full h-full"
+              />
             </Button>
           </div>
         </div>
       </div>
-
     </div>
   );
 }
