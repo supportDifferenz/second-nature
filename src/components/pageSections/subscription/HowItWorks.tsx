@@ -1,6 +1,9 @@
+"use client";
+
 import Typography from "@/components/atoms/typography/Typography";
 import Image from "next/image";
-import React from "react";
+import React, { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 
 const HowItWorkHowItWork = [
   {
@@ -25,56 +28,50 @@ const HowItWorkHowItWork = [
       "Skip a delivery, pause, or cancel your subscription anytime—it’s completely flexible to suit you and your pet!",
   },
 ];
+
 export default function HowItWorks() {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
   return (
-    <section>
+    <section ref={ref}>
       <div className="container 2xl:py-30">
-        {/* <SecondaryBlockTitle
-          caption="How it Works"
-          title="Your subscription in"
-          highlight="3 easy HowItWorkSteps"
-          className="mb-(--space-44-120)"
-        /> */}
-        <div className="flex flex-col justify-center items-center mb-(--space-44-120)">
+        <div className="flex flex-col justify-center items-center mb-20">
           <Typography
             tag="h6"
             text="How it Works"
             className="text-secondary-1 uppercase whitespace-nowrap"
-            ariaLabel=""
           />
           <Typography
             tag="h2"
             text="Your subscription in"
             className="text-primary-dark"
-            ariaLabel=""
           />
           <Typography
             tag="h2"
             text="3 Easy Steps"
             className="text-primary-dark highlight whitespace-nowrap"
-            ariaLabel=""
           />
         </div>
-        <div className="flex flex-col lg:flex-row gap-32 sm:gap-36 lg:gap-0 justify-between ">
+        <div className="flex flex-col lg:flex-row gap-32 sm:gap-36 lg:gap-0 justify-between">
           {HowItWorkHowItWork.map((step, index) => (
             <div
               key={step.id}
-              className="relative !overflow-visible  flex flex-col items-center text-center border border-secondary-2 rounded-lg p-6 lg:w-[calc(100%/3.5)] "
+              className="relative !overflow-visible flex flex-col items-center text-center border border-secondary-2 rounded-lg p-6 lg:w-[calc(100%/3.5)]"
             >
               <Typography
                 tag="span"
                 text={`STEP ${step.id}`}
-                className="absolute -top-3.5 bg-secondary-2 text-white px-4 py-1 rounded-full  font-semibold"
+                className="absolute -top-3.5 bg-secondary-2 text-white px-4 py-1 rounded-full font-semibold"
               />
-              <div className="w-(--space-60-90) mt-8">
+              <div className="w-20 mt-8 relative h-20">
                 <Image src={step.icon} alt="icon" fill className="!static" />
               </div>
               <Typography
                 tag="h5"
                 text={step.title}
-                className="mt-3  text-secondary-1"
+                className="mt-3 text-secondary-1"
               />
-
               <Typography
                 tag="h6"
                 text={step.description}
@@ -82,22 +79,40 @@ export default function HowItWorks() {
               />
               {index !== HowItWorkHowItWork.length - 1 && (
                 <>
-                  <div className="absolute top-1/2 left-[113%] w-[26%] transform -translate-x-1/2 -translate-y-1/2 hidden lg:block z-[1]">
-                    <Image
-                      src="/icons/long-arrow-right-secondary-2.svg"
-                      alt="arrow-left"
-                      fill
-                      className="!static"
-                    />
+                  {/* Desktop arrow */}
+                  <div className="absolute top-1/2 left-[113%] w-[26%] transform -translate-x-1/2 -translate-y-1/2 hidden lg:block z-[1] overflow-hidden">
+                    <motion.div
+                      initial={{ width: "0%" }}
+                      animate={{ width: isInView ? "100%" : "0%" }}
+                      transition={{ duration: 1, ease: "easeInOut" }}
+                      className="h-full relative"
+                    >
+                      <Image
+                        src="/icons/long-arrow-right-secondary-2.svg"
+                        alt="arrow-desktop"
+                        fill
+                        className="!static"
+                      />
+                    </motion.div>
                   </div>
-                  <div className="absolute top-full mt-7 left-1/2 w-[22%] sm:w-[15%] transform -translate-x-1/2  lg:hidden z-[1]">
-                    <Image
-                      src="/icons/long-arrow-right-secondary-2.svg"
-                      alt="arrow-left"
-                      fill
-                      className="!static rotate-90"
-                    />
+
+                  {/* Mobile arrow */}
+                  <div className="absolute top-[93%] mt-7 left-1/2 w-[12%] sm:w-[6%] transform -translate-x-1/2 lg:hidden z-[1] overflow-hidden">
+                    <motion.div
+                      initial={{ height: "0%" }}
+                      animate={{ height: isInView ? "100%" : "0%" }}
+                      transition={{ duration: 1, ease: "easeInOut" }}
+                      className="w-full relative"
+                    >
+                      <Image
+                        src="/icons/long-arrow-down-secondary-2.svg"
+                        alt="arrow-mobile"
+                        fill
+                        className="!static"
+                      />
+                    </motion.div>
                   </div>
+
                 </>
               )}
             </div>

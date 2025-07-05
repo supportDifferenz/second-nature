@@ -1,6 +1,9 @@
+"use client";
+
 import { SecondaryBlockTitle } from '@/components/molecules/titleSyles/Title'
 import FAQS from '@/components/organism/faq/FAQS'
 import { Button } from '@/components/ui/button'
+import { motion } from 'framer-motion'
 import Image from 'next/image'
 import React from 'react'
 
@@ -39,8 +42,14 @@ const faqsData = [
 
 export default function FaqSection() {
   return (
-      <section className="container flex flex-col-reverse sm:flex-row gap-(--space-30-60)">
-        <div className="flex-1 relative">
+    <section className="container flex flex-col-reverse sm:flex-row gap-(--space-30-60)">
+      <div className="flex-1 relative">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+        >
           <div className="sm:-ml-[17%] h-fit sm:sticky top-[5%]">
             <Image
               src="/images/faqs-section-boxer.svg"
@@ -49,8 +58,15 @@ export default function FaqSection() {
               className="!static"
             />
           </div>
-        </div>
-        <div className="flex-2">
+        </motion.div>
+      </div>
+      <div className="flex-2">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          viewport={{ once: true }}
+        >
           <div className="flex flex-col sm:flex-row sm:justify-between sm:items-end mb-(--space-27-34)">
             <SecondaryBlockTitle
               title="frequently asked"
@@ -68,7 +84,8 @@ export default function FaqSection() {
             </Button>
           </div>
           <FAQS faqs={faqsData} defaultOpenIndex={0} />
-        </div>
-      </section>
+        </motion.div>
+      </div>
+    </section>
   )
 }
