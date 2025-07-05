@@ -1,9 +1,12 @@
+"use client";
+
 import { SecondaryInlineTitle } from "@/components/molecules/titleSyles/Title";
 import Image from "next/image";
 import React from "react";
 import { MealCard } from "@/components/organism/mealCard/MealCard";
 import { MealCardPropsType } from "@/components/types/type";
 import Typography from "@/components/atoms/typography/Typography";
+import { motion } from "framer-motion";
 
 const mealsData: MealCardPropsType[] = [
   {
@@ -70,6 +73,12 @@ export default function OurMealPlans() {
       <div className="container flex flex-col lg:flex-row">
         <div className="flex-[42%] order-2 lg:order-1 relative ">
           <div className="sticky top-[13%] tall-screen  h-fit">
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true }}
+            >
             <SecondaryInlineTitle
               title="Our"
               highlight="Meal Plans "
@@ -85,9 +94,16 @@ export default function OurMealPlans() {
                 className="!static"
               />
             </div>
+            </motion.div>
           </div>
         </div>
         <div className="flex-[58%] order-1 lg:order-2">
+          <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1 }}
+              viewport={{ once: true }}
+            >
           <div className="flex flex-col items-center justify-center mb-10 lg:hidden">
             <Typography
               tag="h2"
@@ -191,6 +207,7 @@ export default function OurMealPlans() {
               <MealCard key={`${meal.title}-${index}`} {...meal} />
             ))}
           </div>
+          </motion.div>
         </div>
       </div>
     </section>
