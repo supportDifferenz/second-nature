@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import MealDropdownMenu from './MealDropdownMenu';
 import {  motion } from 'framer-motion';
+import { usePathname } from 'next/navigation';
 
 interface MobileMenuProps {
   className?: string;
@@ -78,6 +79,9 @@ const AnimatedMenuIcon = ({ isOpen }: { isOpen: boolean }) => (
 
 
 const MobileMenu = ({ className, isOpen, setIsOpen }: MobileMenuProps) => {
+
+  const pathName = usePathname();
+
   const [isHowItWorksOpen, setIsHowItWorksOpen] = useState(false);
 
   useEffect(() => {
@@ -154,7 +158,7 @@ const MobileMenu = ({ className, isOpen, setIsOpen }: MobileMenuProps) => {
                   type: "spring",
                   stiffness: 300,
                   damping: 20,
-                }} href="/about-us" onClick={() => setIsOpen(false)} className="font-bold block">About Us</motion.a>
+                }} href="/about-us" onClick={() => setIsOpen(false)} className={`${pathName === '/about-us' ? 'text-primary' : ''} font-bold block`}>About Us</motion.a>
               <motion.a
                 whileHover={{
                   scale: 1.03,
@@ -165,7 +169,7 @@ const MobileMenu = ({ className, isOpen, setIsOpen }: MobileMenuProps) => {
                   damping: 20,
                 }}
                 href="#"
-                className="flex items-center font-bold"
+                className={`${pathName === '/subscription' || pathName === '/behind-the-scenes' || pathName === '/how-to-feed' || pathName === '/transition-diet' ? 'text-primary' : ''} flex items-center font-bold`}
                 onClick={() => setIsHowItWorksOpen(!isHowItWorksOpen)}
               >
                 How it works
@@ -184,7 +188,7 @@ const MobileMenu = ({ className, isOpen, setIsOpen }: MobileMenuProps) => {
                       stiffness: 300,
                       damping: 20,
                     }}
-                    href="/subscription" onClick={() => setIsOpen(false)} className="font-bold block">Subscription</motion.a>
+                    href="/subscription" onClick={() => setIsOpen(false)} className={`${pathName === '/subscription' ? 'text-primary' : ''} font-bold block`}>Subscription</motion.a>
                   <motion.a
                     whileHover={{
                       scale: 1.03,
@@ -194,7 +198,7 @@ const MobileMenu = ({ className, isOpen, setIsOpen }: MobileMenuProps) => {
                       stiffness: 300,
                       damping: 20,
                     }}
-                    href="/behind-the-scenes" onClick={() => setIsOpen(false)} className="font-bold block">Behind The Scenes</motion.a>
+                    href="/behind-the-scenes" onClick={() => setIsOpen(false)} className={`${pathName === '/behind-the-scenes' ? 'text-primary' : ''} font-bold block`}>Behind The Scenes</motion.a>
                   <motion.a
                     whileHover={{
                       scale: 1.03,
@@ -204,7 +208,7 @@ const MobileMenu = ({ className, isOpen, setIsOpen }: MobileMenuProps) => {
                       stiffness: 300,
                       damping: 20,
                     }}
-                    href="/how-to-feed" onClick={() => setIsOpen(false)} className="font-bold block">How to Feed</motion.a>
+                    href="/how-to-feed" onClick={() => setIsOpen(false)} className={`${pathName === '/how-to-feed' ? 'text-primary' : ''} font-bold block`}>How to Feed</motion.a>
                   <motion.a
                     whileHover={{
                       scale: 1.03,
@@ -214,7 +218,7 @@ const MobileMenu = ({ className, isOpen, setIsOpen }: MobileMenuProps) => {
                       stiffness: 300,
                       damping: 20,
                     }}
-                    href="/transition-diet" onClick={() => setIsOpen(false)} className="font-bold block">Transition Diet</motion.a>
+                    href="/transition-diet" onClick={() => setIsOpen(false)} className={`${pathName === '/transition-diet' ? 'text-primary' : ''} font-bold block`}>Transition Diet</motion.a>
                 </motion.div>
               )}
               <motion.a
@@ -226,7 +230,7 @@ const MobileMenu = ({ className, isOpen, setIsOpen }: MobileMenuProps) => {
                   stiffness: 300,
                   damping: 20,
                 }}
-                href="/blogs" onClick={() => setIsOpen(false)} className="font-bold block">Blogs</motion.a>
+                href="/blogs" onClick={() => setIsOpen(false)} className={`${pathName === '/blogs' ? 'text-primary' : ''} font-bold block`}>Blogs</motion.a>
               <motion.a
                 whileHover={{
                   scale: 1.03,
@@ -235,7 +239,7 @@ const MobileMenu = ({ className, isOpen, setIsOpen }: MobileMenuProps) => {
                   type: "spring",
                   stiffness: 300,
                   damping: 20,
-                }} href="/reviews" onClick={() => setIsOpen(false)} className="font-bold block">Reviews</motion.a>
+                }} href="/reviews" onClick={() => setIsOpen(false)} className={`${pathName === '/reviews' ? 'text-primary' : ''} font-bold block`}>Reviews</motion.a>
               <motion.a
                 whileHover={{
                   scale: 1.03,
@@ -244,7 +248,7 @@ const MobileMenu = ({ className, isOpen, setIsOpen }: MobileMenuProps) => {
                   type: "spring",
                   stiffness: 300,
                   damping: 20,
-                }} href="/faqs" onClick={() => setIsOpen(false)} className="font-bold block">FAQs</motion.a>
+                }} href="/faqs" onClick={() => setIsOpen(false)} className={`${pathName === '/faqs' ? 'text-primary' : ''} font-bold block`}>FAQs</motion.a>
             </motion.div>
           </motion.div>
           
