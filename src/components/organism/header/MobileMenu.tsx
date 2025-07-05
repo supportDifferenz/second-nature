@@ -22,12 +22,22 @@ const containerVariants = {
   },
 };
 
-// const itemVariants = {
-//   hidden: { opacity: 0, y: 20 },
-//   show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: 'easeOut' } },
-// };
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.4,
+      ease: 'easeOut' as const,
+    },
+  },
+};
 
-
+const hoverMotion = {
+  scale: 1.05,
+  color: '#944446',
+};
 
 const AnimatedMenuIcon = ({ isOpen }: { isOpen: boolean }) => (
   <motion.svg
@@ -77,7 +87,6 @@ const AnimatedMenuIcon = ({ isOpen }: { isOpen: boolean }) => (
   </motion.svg>
 );
 
-
 const MobileMenu = ({ className, isOpen, setIsOpen }: MobileMenuProps) => {
 
   const pathName = usePathname();
@@ -86,7 +95,6 @@ const MobileMenu = ({ className, isOpen, setIsOpen }: MobileMenuProps) => {
 
   useEffect(() => {
     const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
-
     if (isOpen) {
       document.body.classList.add('overflow-hidden');
       document.body.style.paddingRight = `${scrollbarWidth}px`;
@@ -94,36 +102,36 @@ const MobileMenu = ({ className, isOpen, setIsOpen }: MobileMenuProps) => {
       document.body.classList.remove('overflow-hidden');
       document.body.style.paddingRight = '';
     }
-
     return () => {
       document.body.classList.remove('overflow-hidden');
       document.body.style.paddingRight = '';
     };
   }, [isOpen]);
 
-
   return (
     <>
       <Button
         size="icon"
         onClick={() => setIsOpen(!isOpen)}
-        className={`${className} z-50 border-none bg-transparent hover:bg-transparent h-8 w-8 `}
+        className={`${className} z-50 border-none bg-transparent hover:bg-transparent h-8 w-8`}
       >
         <AnimatedMenuIcon isOpen={isOpen} />
       </Button>
 
-      <div className={`fixed top-0  left-0 w-full z-[-1] transition-opacity duration-300 ease-in-out ${isOpen ? 'translate-y-0 opacity-100' : '-translate-y-[170%] opacity-0'}`}>
-  
-
+      <div
+        className={`fixed top-0 left-0 w-full z-[-1] transition-opacity duration-300 ease-in-out ${
+          isOpen ? 'translate-y-0 opacity-100' : '-translate-y-[170%] opacity-0'
+        }`}
+      >
         <div className="animated-gradient min-h-[600px] h-[100dvh] overflow-y-auto pt-[150px] pb-[50px]">
           <motion.div
-            className="flex  flex-col lg:flex-row gap-6 sm:gap-[40px] lg:gap-[90px] container py-8 text-lg"
+            className="flex flex-col lg:flex-row gap-6 sm:gap-[40px] lg:gap-[90px] container py-8 text-lg"
             variants={containerVariants}
             initial="hidden"
             animate="show"
             key={isOpen ? 'menu-items-anim' : 'menu-items-idle'}
           >
-            <motion.div >
+            <motion.div variants={itemVariants}>
               <MealDropdownMenu
                 label="For Dogs"
                 icon="/icons/dog-icon.svg"
@@ -136,7 +144,7 @@ const MobileMenu = ({ className, isOpen, setIsOpen }: MobileMenuProps) => {
               />
             </motion.div>
 
-            <motion.div >
+            <motion.div variants={itemVariants}>
               <MealDropdownMenu
                 label="For Cats"
                 icon="/icons/cat-icon.svg"
@@ -149,34 +157,35 @@ const MobileMenu = ({ className, isOpen, setIsOpen }: MobileMenuProps) => {
               />
             </motion.div>
 
-            <motion.div className="space-y-6 mt-4 sm:mt-0 lg:ml-12" >
+            <motion.div className="space-y-6 mt-4 sm:mt-0 lg:ml-12">
               <motion.a
-                whileHover={{
-                  scale: 1.03,
-                }}
-                transition={{
-                  type: "spring",
-                  stiffness: 300,
-                  damping: 20,
-                }} href="/about-us" onClick={() => setIsOpen(false)} className={`${pathName === '/about-us' ? 'text-primary' : ''} font-bold block`}>About Us</motion.a>
+                variants={itemVariants}
+                whileHover={hoverMotion}
+                transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                href="/about-us"
+                onClick={() => setIsOpen(false)}
+                className="font-bold block"
+              >
+                About Us
+              </motion.a>
+
               <motion.a
-                whileHover={{
-                  scale: 1.03,
-                }}
-                transition={{
-                  type: "spring",
-                  stiffness: 300,
-                  damping: 20,
-                }}
+                variants={itemVariants}
+                whileHover={hoverMotion}
+                transition={{ type: 'spring', stiffness: 300, damping: 20 }}
                 href="#"
                 className={`${pathName === '/subscription' || pathName === '/behind-the-scenes' || pathName === '/how-to-feed' || pathName === '/transition-diet' ? 'text-primary' : ''} flex items-center font-bold`}
                 onClick={() => setIsHowItWorksOpen(!isHowItWorksOpen)}
               >
                 How it works
-                <div className="w-2.5 ml-1 sm:ml-3 xl:ml-1 h-fit" style={{ transform: isHowItWorksOpen ? 'rotate(180deg)' : '' }}>
+                <div
+                  className="w-2.5 ml-1 sm:ml-3 xl:ml-1 h-fit"
+                  style={{ transform: isHowItWorksOpen ? 'rotate(180deg)' : '' }}
+                >
                   <img src="/icons/black-chevron-down.svg" alt="icon" className="w-full h-full" />
                 </div>
               </motion.a>
+
               {isHowItWorksOpen && (
                 <motion.div className="flex flex-col space-y-5 pl-4">
                   <motion.a
@@ -251,7 +260,6 @@ const MobileMenu = ({ className, isOpen, setIsOpen }: MobileMenuProps) => {
                 }} href="/faqs" onClick={() => setIsOpen(false)} className={`${pathName === '/faqs' ? 'text-primary' : ''} font-bold block`}>FAQs</motion.a>
             </motion.div>
           </motion.div>
-          
         </div>
       </div>
     </>

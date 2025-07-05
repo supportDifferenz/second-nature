@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 export default function MealsAndTreats() {
   return (
     <section>
-      <div className=" min-[1291px]:max-w-(--container) mx-auto">
+      <div className=" min-[1260px]:max-w-(--container) mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}

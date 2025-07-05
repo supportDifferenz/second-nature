@@ -1,14 +1,20 @@
+"use client";
+
 import Typography from "@/components/atoms/typography/Typography";
 import { MealCard } from "@/components/organism/mealCard/MealCard";
 import { MealCardPropsType } from "@/components/types/type";
 import Image from "next/image";
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 export default function MealCategory() {
   const [mealCategory, setMealCategory] = useState("For Dogs");
 
-  const mealsData: { category: string; categoryImg: string; meals: MealCardPropsType[] }[] = [
+  const mealsData: {
+    category: string;
+    categoryImg: string;
+    meals: MealCardPropsType[];
+  }[] = [
     {
       category: "For Dogs",
       categoryImg: "/images/dogs-cutout.webp",
@@ -25,7 +31,11 @@ export default function MealCategory() {
           ],
           buttons: [
             { label: "Get Started", route: "/location", variant: "primary" },
-            { label: "Know More", route: "/meals?pet=dog&protein=beef", variant: "secondary" },
+            {
+              label: "Know More",
+              route: "/meals?pet=dog&protein=beef",
+              variant: "secondary",
+            },
           ],
         },
         {
@@ -40,7 +50,11 @@ export default function MealCategory() {
           ],
           buttons: [
             { label: "Get Started", route: "/location", variant: "primary" },
-            { label: "Know More", route: "/meals?pet=dog&protein=lamb", variant: "secondary" },
+            {
+              label: "Know More",
+              route: "/meals?pet=dog&protein=lamb",
+              variant: "secondary",
+            },
           ],
         },
         {
@@ -55,7 +69,11 @@ export default function MealCategory() {
           ],
           buttons: [
             { label: "Get Started", route: "/location", variant: "primary" },
-            { label: "Know More", route: "/meals?pet=dog&protein=chicken", variant: "secondary" },
+            {
+              label: "Know More",
+              route: "/meals?pet=dog&protein=chicken",
+              variant: "secondary",
+            },
           ],
         },
       ],
@@ -76,7 +94,11 @@ export default function MealCategory() {
           ],
           buttons: [
             { label: "Get Started", route: "/location", variant: "primary" },
-            { label: "Know More", route: "/meals?pet=cat&protein=beef", variant: "secondary" },
+            {
+              label: "Know More",
+              route: "/meals?pet=cat&protein=beef",
+              variant: "secondary",
+            },
           ],
         },
         {
@@ -91,7 +113,11 @@ export default function MealCategory() {
           ],
           buttons: [
             { label: "Get Started", route: "/location", variant: "primary" },
-            { label: "Know More", route: "/meals?pet=cat&protein=lamb", variant: "secondary" },
+            {
+              label: "Know More",
+              route: "/meals?pet=cat&protein=lamb",
+              variant: "secondary",
+            },
           ],
         },
         {
@@ -106,7 +132,11 @@ export default function MealCategory() {
           ],
           buttons: [
             { label: "Get Started", route: "/location", variant: "primary" },
-            { label: "Know More", route: "/meals?pet=cat&protein=chicken", variant: "secondary" },
+            {
+              label: "Know More",
+              route: "/meals?pet=cat&protein=chicken",
+              variant: "secondary",
+            },
           ],
         },
       ],
@@ -118,29 +148,37 @@ export default function MealCategory() {
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
-      viewport={{ once: true }} 
-      className="sm:space-y-10">
-
+      viewport={{ once: true }}
+      className="sm:space-y-10"
+    >
       {/* Mobile Category Selector */}
-      <div className="flex justify-center  gap-4 min-[1291px]:hidden container ">
+      <div className="flex justify-center gap-4 min-[1260px]:hidden container">
         {mealsData.map((categoryData) => (
           <div
             key={categoryData.category}
             onClick={() => setMealCategory(categoryData.category)}
             className="basis-[50%] sm:basis-[40%]"
           >
-            <div className={`shrink-0 uppercase font-normal  h-[40px]  min-[400px]:h-[60px]  flex items-end justify-center text-white text-center  rounded-xl cursor-pointer ${mealCategory === categoryData.category
-              ? "bg-primary-dark"
-              : "bg-text-color"
-              }`}>
+            <div
+              className={`shrink-0 uppercase font-normal h-[40px] min-[400px]:h-[60px] flex items-end justify-center text-white text-center rounded-xl cursor-pointer ${
+                mealCategory === categoryData.category
+                  ? "bg-primary-dark"
+                  : "bg-text-color"
+              }`}
+            >
               <div className="flex items-end">
                 <div className="relative w-[50px] h-[40px] min-[400px]:w-[80px] min-[400px]:h-[70px] overflow-hidden">
-                  <Image src={categoryData.categoryImg} alt="dogs" fill className="object-contain " />
+                  <Image
+                    src={categoryData.categoryImg}
+                    alt="pet"
+                    fill
+                    className="object-contain"
+                  />
                 </div>
                 <Typography
                   tag="h5"
                   text={categoryData.category}
-                  className={`uppercase font-normal text-white max-[400px]:!text-sm text-center pb-2 min-[400px]:pb-4`}
+                  className="uppercase font-normal text-white max-[400px]:!text-sm text-center pb-2 min-[400px]:pb-4"
                 />
               </div>
             </div>
@@ -148,32 +186,51 @@ export default function MealCategory() {
         ))}
       </div>
 
-      {/* Mobile: Show only selected category */}
-      <div className=" min-[1291px]:hidden  sm:max-(--container)">
-        {mealsData
-          .filter((categoryData) => categoryData.category === mealCategory)
-          .map((categoryData) => (
-            <div key={categoryData.category}>
-              <div className="flex sm:flex-wrap gap-6 mt-4 lg:mt-8 overflow-x-auto px-9 sm:px-0">
-                {categoryData.meals.map((meal, mealIndex) => (
-                  <div key={mealIndex} className="sm:w-[85%] sm:max-w-[650px] lg:max-w-[760px] mx-auto">
-                    <MealCard key={mealIndex} {...meal} />
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
+      {/* Mobile: Show only selected category with animation */}
+      <div className="min-[1260px]:hidden sm:max-(--container)">
+        <AnimatePresence mode="wait">
+          {mealsData
+            .filter((categoryData) => categoryData.category === mealCategory)
+            .map((categoryData) => (
+              <motion.div
+                key={categoryData.category}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -30 }}
+                transition={{ duration: 0.4, ease: "easeInOut" }}
+              >
+                <div className="flex sm:flex-wrap gap-6 mt-4 lg:mt-8 overflow-x-auto px-9 sm:px-0">
+                  {categoryData.meals.map((meal, mealIndex) => (
+                    <div
+                      key={mealIndex}
+                      className="sm:w-[85%] sm:max-w-[650px] lg:max-w-[760px] mx-auto"
+                    >
+                      <MealCard {...meal} />
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            ))}
+        </AnimatePresence>
       </div>
 
       {/* Web: Show all categories */}
-      <div className="hidden min-[1291px]:flex gap-7 xl:gap-12 ">
+      <div className="hidden min-[1260px]:flex gap-7 xl:gap-12">
         {mealsData.map((categoryData) => (
-          <div key={categoryData.category} className="mb-15 last:mb-0 sm:mb-0 sm:flex-1 ">
+          <div
+            key={categoryData.category}
+            className="mb-15 last:mb-0 sm:mb-0 sm:flex-1"
+          >
             {/* Category Header */}
-            <div className="bg-primary-dark  h-[60px]  rounded-xl flex justify-center items-end ">
+            <div className="bg-primary-dark h-[60px] rounded-xl flex justify-center items-end">
               <div className="flex items-end justify-center mb-[-1px]">
-                <div className="relative w-[110px] h-[99px] ">
-                  <Image src={categoryData.categoryImg} alt="dogs" fill className="object-contain" />
+                <div className="relative w-[110px] h-[99px]">
+                  <Image
+                    src={categoryData.categoryImg}
+                    alt="pet"
+                    fill
+                    className="object-contain"
+                  />
                 </div>
                 <Typography
                   tag="h5"
