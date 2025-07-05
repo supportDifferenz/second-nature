@@ -1,6 +1,9 @@
+"use client";
+
 import Typography from "@/components/atoms/typography/Typography";
 import Image from "next/image";
 import React from "react";
+import { motion } from "framer-motion";
 
 interface ReadyToServeProps {
   image: string;
@@ -31,17 +34,25 @@ export default function ReadyToServe() {
     <div className="flex flex-col gap-[var(--space-30-115)]">
       <div className="relative flex flex-col justify-center items-center bg-[#FDFEFA] border border-secondary-1 rounded-2xl pt-[var(--space-68-110)] pb-[107vw] sm:pb-[24.06vw] lg:pb-[14.06vw]">
         <div className="flex flex-col items-center mb-16 sm:mb-11 lg:mb-9 w-[79%] sm:w-auto text-center">
-          <Typography
-            tag="h5"
-            text="From Our Kitchen to Yours:"
-            className="text-primary-dark"
-          />
-          <Typography
-            tag="h2"
-            className="highlight text-primary-dark"
-            text="Ready-to-Serve Meals"
-          />
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <Typography
+              tag="h5"
+              text="From Our Kitchen to Yours:"
+              className="text-primary-dark"
+            />
+            <Typography
+              tag="h2"
+              className="highlight text-primary-dark"
+              text="Ready-to-Serve Meals"
+            />
+          </motion.div>
         </div>
+        {/* cold serve section */}
         <div className="flex gap-[var(--space-20-45)] mb-[var(--space-50-60)] items-center">
           {readyToServeData.map((item: ReadyToServeProps, index) => (
             <>
@@ -78,6 +89,7 @@ export default function ReadyToServe() {
             </>
           ))}
         </div>
+        {/* cold serve section */}
         <Typography
           tag="h6"
           className="text-center w-[82%] sm:w-[65%] lg:w-[54%]"
