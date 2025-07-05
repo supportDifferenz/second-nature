@@ -15,7 +15,7 @@ import { useGetAllBowl } from "@/hooks/subscriptionHooks/getAllBowlHook";
 import { useGetPriceHook } from "@/hooks/subscriptionHooks/getPriceHook";
 import PlanCardSkeleton from "@/components/skeltons/PlanCardSkelton";
 import { startTransition } from "react";
-// import NextPet from "@/components/organism/popUp/NextPet";
+import NextPet from "@/components/organism/popUp/NextPet";
 
 const faqsData = [
   {
@@ -84,6 +84,7 @@ export default function Page() {
   const [ trialPrice, setTrialPrice ] = useState<number>(0);
   const [ isRegularPriceLoading, setIsRegularPriceLoading ] = useState<boolean>(false);
   const [ isTrialPriceLoading, setIsTrialPriceLoading ] = useState<boolean>(false);
+  const [ isNextPetPopUpOpen, setIsNextPetPopUpOpen ] = useState<boolean>(false);
 
   // const plans = [
   //   {
@@ -124,8 +125,10 @@ export default function Page() {
     }
   },[planType, protein, bowlSize])
 
-  const handleNext = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
+  const handleNext = (e?: React.MouseEvent<HTMLButtonElement>) => {
+    if (e) {
+      e.preventDefault();
+    }
 
     if(selectedPlan === "Regular" && regularProtein && regularBowlSize && currentPetId) {
       // setSelectedProtein(regularProtein || "");
@@ -135,11 +138,13 @@ export default function Page() {
         setSelectedPetIndex((selectedPetIndex ?? 0) + 1);
         startTransition(() => {
           router.push("/gender")
+          setIsNextPetPopUpOpen(false);
         })
         // router.push("/gender")
       } else {
         startTransition(() => {
           router.push("/add-more-pets")
+          setIsNextPetPopUpOpen(false);
         })
         // router.push("/add-more-pets");
       }
@@ -152,11 +157,13 @@ export default function Page() {
         setSelectedPetIndex((selectedPetIndex ?? 0) + 1);
         startTransition(() => {
           router.push("/gender")
+          setIsNextPetPopUpOpen(false);
         })
         // router.push("/gender")
       } else {
         startTransition(() => {
-          router.push("/add-more-pets")
+          router.push("/add-more-pets");
+          setIsNextPetPopUpOpen(false);
         })
         // router.push("/add-more-pets");
       }
@@ -354,7 +361,8 @@ export default function Page() {
           className="gap-2.5 lg:ml-auto lg:mr-[-55px]" 
           disabled={ !( (regularProtein && regularBowlSize) || (trialProtein && trialBowlSize)) }
           // disabled={ !(selectedProtein && selectedBowlSize) }
-          onClick={handleNext}
+          // onClick={handleNext}
+          onClick={() => setIsNextPetPopUpOpen(true)}
         >
           { (selectedPetIndex ?? 0) < noOfPets - 1 ? "Next" : "Checkout"}
           <div className="w-5 relative">
@@ -367,6 +375,7 @@ export default function Page() {
           </div>
         </Button>
       </div>
+      { isNextPetPopUpOpen && <NextPet setIsNextPetPopupOpen={setIsNextPetPopUpOpen} handleNext={handleNext} /> }
       {/* <NextPet/> */}
     </BuyingFlowLayout>
   );
