@@ -6,6 +6,7 @@ import { PrimaryInlineTitle } from "@/components/molecules/titleSyles/Title";
 import Typography from "@/components/atoms/typography/Typography";
 import { motion } from "framer-motion";
 import IngredientsCarousel from "./IngredientsCarousel";
+
 export default function OurIngredients() {
   const features = [
     [
@@ -29,28 +30,24 @@ export default function OurIngredients() {
       "bottom",
     ],
     ["/images/ingredients-5.webp", "Locally sourced ingredients.", "right"],
-    [
-      "/images/ingredients-6.webp",
-      "Low in sodium for optimal health.",
-      "right",
-    ],
+    ["/images/ingredients-6.webp", "Low in sodium for optimal health.", "right"],
     [
       "/images/ingredients-7.webp",
       "Fresh herbs like parsley and rosemary for added flavor.",
       "right",
     ],
-  ].reverse(); // Reverse the order
+  ].reverse();
 
   const [radius, setRadius] = useState(0);
-
   const [isWeb, setIsWeb] = useState(false);
 
   useEffect(() => {
     const checkScreenSize = () => setIsWeb(window.innerWidth >= 640);
-    checkScreenSize(); // Initial check
+    checkScreenSize();
     window.addEventListener("resize", checkScreenSize);
     return () => window.removeEventListener("resize", checkScreenSize);
   }, []);
+
   useEffect(() => {
     const updateRadius = () => {
       setRadius(Math.min(window.innerWidth * 0.4, 310));
@@ -60,16 +57,17 @@ export default function OurIngredients() {
     return () => window.removeEventListener("resize", updateRadius);
   }, []);
 
-
+const softEase = [0.33, 1, 0.68, 1] as [number, number, number, number];
 
   return (
     <>
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
+        transition={{ duration: 1, ease: softEase }}
         viewport={{ once: true }}
-        className="relative z-[5]">
+        className="relative z-[5]"
+      >
         <PrimaryInlineTitle
           highlight="Ingredients"
           title="Our"
@@ -78,49 +76,59 @@ export default function OurIngredients() {
           className="max-w-[80%] sm:max-w-[100%] mx-auto"
         />
       </motion.div>
+
       <section className=" mt-[-50%] sm:mt-[-12%] lg:mt-[-50px]">
-        {/* ingredients circle section */}
-        <div className=" overflow-hidden sm:overflow-visible sm:transform sm:scale-[.7]  lg:scale-100 relative z-[3]  after:content-[''] after:absolute after:w-full after:h-1/2 after:left-0 after:top-0  after:bg-gradient-to-b after:from-white after:via-white/75 after:to-transparent after-z-[1]">
+        <div className="overflow-hidden sm:overflow-visible sm:transform sm:scale-[.7] lg:scale-100 relative z-[3] after:content-[''] after:absolute after:w-full after:h-1/2 after:left-0 after:top-0 after:bg-gradient-to-b after:from-white after:via-white/75 after:to-transparent after-z-[1]">
           <div className="h-(--space-527-690) w-[95vw] mx-auto">
             <motion.div
               initial={{ opacity: 0, scale: 0.5 }}
               whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1.5, ease: softEase }}
               viewport={{ once: true }}
-              transition={{ duration: 1.3, delay: 0.01, }}
-              className="w-(--space-527-690) h-(--space-527-690) border rounded-full border-primary absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2">
+              className="w-(--space-527-690) h-(--space-527-690) border rounded-full border-primary absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2"
+            >
               <div className="w-[70%] sm:w-(--space-300-526) h-[70%] sm:h-(--space-300-526) border rounded-full border-primary absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2"></div>
               <div className="w-(--space-256-406) h-(--space-256-406) border rounded-full border-primary absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2"></div>
               <div className="w-(--space-191-290) h-(--space-191-290) border rounded-full border-primary absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2"></div>
             </motion.div>
           </div>
+
           <div className="sm:absolute z-[2] sm:top-1/2 sm:left-1/2 sm:transform sm:-translate-y-1/2 sm:-translate-x-1/2 overflow-x-auto sm:overflow-visible">
-            <div className="flex flex-row-reverse justify-end sm:flex-row sm:justify-center gap-[22px] sm:gap-0  sm:items-center ">
-              {/* Circular Items */}
+            <div className="flex flex-row-reverse justify-end sm:flex-row sm:justify-center gap-[22px] sm:gap-0 sm:items-center">
               {features.map(([img, text, align], index) => {
-                // const angle = (index / features.length) * (1.5 * Math.PI) - 0.45;
                 const angle = (index / features.length) * (1.5 * Math.PI) - 0.45;
                 const x = Math.cos(angle) * radius;
                 const y = Math.sin(angle) * radius;
+
                 return (
                   <motion.div
-                    initial={{ transform: `translate(0px, 0px)` }}
-                    whileInView={isWeb ? { transform: `translate(${x}px, ${y}px)` } : { transform: "translate(0)" }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8, delay: 0.8 }}
                     key={uuidv4()}
-                    className={`relative sm:absolute  flex flex-col items-center sm:justify-center  text-center  sm:origin-center  `}
-                    style={
-                      isWeb ? { transform: `translate(${x}px, ${y}px)` } : {}
+                    initial={{ transform: `translate(0px, 0px)` }}
+                    whileInView={
+                      isWeb
+                        ? { transform: `translate(${x}px, ${y}px)` }
+                        : { transform: "translate(0)" }
                     }
-
+                    transition={{
+                      duration: 1.2,
+                      delay: 0.4 + index * 0.05,
+                      ease: softEase,
+                    }}
+                    viewport={{ once: true }}
+                    className="relative sm:absolute flex flex-col items-center sm:justify-center text-center sm:origin-center"
+                    style={isWeb ? { transform: `translate(${x}px, ${y}px)` } : {}}
                   >
-                    {/* Image */}
                     <motion.div
                       initial={{ opacity: 0, scale: 0 }}
                       whileInView={{ opacity: 1, scale: 1 }}
+                      transition={{
+                        duration: 1.1,
+                        delay: 0.6 + index * 0.05,
+                        ease: softEase,
+                      }}
                       viewport={{ once: true }}
-                      transition={{ duration: .8, delay: 0.6, ease: "circInOut" }}
-                      className="w-(--space-105-136) h-(--space-105-136)">
+                      className="w-(--space-105-136) h-(--space-105-136)"
+                    >
                       <Image
                         src={img}
                         alt="Feature"
@@ -129,40 +137,43 @@ export default function OurIngredients() {
                         className="rounded-full !static object-contain"
                       />
                     </motion.div>
-                    {/* Dynamically positioned text */}
 
                     <motion.div
-                      initial={{ opacity: 0, }}
+                      initial={{ opacity: 0 }}
                       whileInView={{ opacity: 1 }}
-                      transition={{ duration: 1.7, delay: 1.4, ease: 'circIn' }}
+                      transition={{
+                        duration: 1.4,
+                        delay: 1.1 + index * 0.05,
+                        ease: softEase,
+                      }}
                       viewport={{ once: true }}
-                      className={`
-                      sm:absolute w-(--space-156-160)   ${align === "left"
+                      className={`sm:absolute w-(--space-156-160) ${
+                        align === "left"
                           ? "sm:-left-[130%] sm:text-right"
                           : align === "right"
-                            ? "sm:-right-[130%] sm:text-left"
-                            : align === "bottom"
-                              ? "sm:top-[100%]"
-                              : "sm:flex-col"
-                        }`}
+                          ? "sm:-right-[130%] sm:text-left"
+                          : align === "bottom"
+                          ? "sm:top-[100%]"
+                          : "sm:flex-col"
+                      }`}
                     >
-                      <Typography
-                        tag="span"
-                        text={text}
-                        className={` text-primary-dark `}
-                      />
+                      <Typography tag="span" text={text} className="text-primary-dark" />
                     </motion.div>
                   </motion.div>
                 );
               })}
 
-              {/* Main Thumbnail */}
               <motion.div
                 initial={{ scale: 0 }}
-                whileInView={{ scale: 1, }}
+                whileInView={{ scale: 1 }}
+                transition={{
+                  duration: 1.1,
+                  delay: 0.4,
+                  ease: softEase,
+                }}
                 viewport={{ once: true }}
-                transition={{ duration: .6, delay: 0.4, ease: "easeOut" }}
-                className="w-(--space-280-560) absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                className="w-(--space-280-560) absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"
+              >
                 <Image
                   src="/images/ingredients-main-thump.webp"
                   alt="Feature Thump"
@@ -174,55 +185,14 @@ export default function OurIngredients() {
           </div>
         </div>
 
-
-        {/* Real Ingredients vs. Fillers */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 1, ease: softEase }}
           viewport={{ once: true }}
-          className=" mt-[15%] sm:mt-[12%] lg:mt-[15%] ">
+          className="mt-[15%] sm:mt-[12%] lg:mt-[15%]"
+        >
           <IngredientsCarousel />
-          {/* <div
-            className="container">
-            <div className="  shadow-[inset_6px_6px_16px_0px_rgba(0,0,0,0.55)] bg-primary-dark rounded-full p-(--space-20-45) pb-[130px] sm:pb-(--space-20-45) flex flex-col sm:flex-row gap-[50px] sm:gap-[3%] items-stretch lg:items-center">
-              <div className="sm:basis-[50%] h-[450px] sm:h-auto">
-                <Image
-                  src="/images/ingredients-section-2-thumb.webp"
-                  alt="Real Ingredients vs. Fillers"
-                  fill
-                  className="!static rounded-full sm:rounded-[50%] lg:rounded-full !h-full object-cover"
-                />
-              </div>
-              <div className="sm:basis-[40%] lg:basis-[35%] text-white text-center sm:text-left">
-                <Typography
-                  tag="h2"
-                  text="Real Ingredients vs. Fillers"
-                  className="supporting mb-4"
-                  role="heading"
-                  ariaLabel="Real Ingredients vs. Fillers"
-                  ariaLabelledBy="card title"
-                />
-                <Typography
-                  tag="h6"
-                  text="Your food uses fresh, human-grade ingredients, while kibble often contains fillers like corn, wheat, and soy."
-                  role="paragraph"
-                  ariaLabel="Your food uses fresh, human-grade ingredients, while kibble often contains fillers like corn, wheat, and soy."
-                  ariaLabelledBy="card paragraph"
-                  className="!font-normal mb-9 max-w-[90%] mx-auto sm:max-w-max sm:mx-0 "
-                />
-                <Button variant={"linkContrastBtn"} className="mx-auto sm:mx-0">
-                  Explore Ingredients
-                  <Image
-                    src="/icons/contrast-button-chevron-right.svg"
-                    alt="icon"
-                    fill
-                    className="!static"
-                  />
-                </Button>
-              </div>
-            </div>
-          </div> */}
         </motion.div>
       </section>
     </>
