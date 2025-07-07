@@ -277,7 +277,7 @@ const Footer = () => {
                   </li>
                   <li className="w-(--space-27-34) cursor-pointer">
                     <Image
-                      src="/icons/instagram.svg"
+                      src="/icons/Instagram.svg"
                       alt="instagram"
                       fill
                       className="!static"
