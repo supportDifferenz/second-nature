@@ -152,7 +152,7 @@ export default function FooterBannerCta() {
       subParagraph={selectedData?.subParagraph || "Subscribe to a meal plan today and give your dog the nutrition they need to thrive!"}
       paragraphColor={selectedData?.paragraphColor || "#FFFFFF"}
       buttonText={selectedData?.buttonText || "Build your plan"}
-      buttonLink={selectedData?.buttonLink || "/signup"}
+      buttonLink={selectedData?.buttonLink || "/location"}
       bannerThemeColor={selectedData?.bannerThemeColor || "#fff"}
       align={selectedData?.align || "center"}
     />
@@ -171,7 +171,7 @@ export default function FooterBannerCta() {
     //   paragraph="Pets deserve better than processed kibble or canned food. Second Nature believes in nourishing your fur baby with fresh meals made from real, human-grade ingredients."
     //   paragraphColor="#FFFFFF"
     //   buttonText="Build your plan"
-    //   buttonLink="/signup"
+    //   buttonLink="/location"
     //   bannerThemeColor="#fff"
     //   align="center" // Can be "left", "center", or "right"
     // />

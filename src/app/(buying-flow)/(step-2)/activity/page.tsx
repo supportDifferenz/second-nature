@@ -18,6 +18,7 @@ export default function Page() {
   const currentPetId = selectedPet ? selectedPet.id : null;
   const selectedPetName = selectedPet ? selectedPet.name : null;
   const activityLevel = selectedPet ? selectedPet.activityLevel : "";
+  const dogOrCat = selectedPet?.catOrDog;
 
   const [selectedActivity, setSelectedActivity] = useState("");
 
@@ -52,19 +53,22 @@ export default function Page() {
         />
         <div className="w-full mx-auto items-center justify-center flex flex-wrap lg:gap-[var(--space-20-60)] ">
           <PetActiveCard
-            image="/images/sedentary.webp"
+            image={dogOrCat === "dog" ? "/images/sedentary.webp" : "/images/catSedentary.webp"}
+            // image="/images/sedentary.webp"
             text="SEDENTARY"
             selectedPet={selectedActivity === "sedentary"}
             setSelectedCharacter={() => setSelectedActivity("sedentary")}
           />
           <PetActiveCard
-            image="/images/less-acive.webp"
+            image={dogOrCat === "dog" ? "/images/less-acive.webp" : "/images/catLessActive.webp"}
+            // image="/images/less-acive.webp"
             text="LESS-ACTIVE"
             selectedPet={selectedActivity === "lessActive"}
             setSelectedCharacter={() => setSelectedActivity("lessActive")}
           />
           <PetActiveCard
-            image="/images/active-pet.webp"
+            image={dogOrCat === "dog" ? "/images/active-pet.webp" : "/images/catActive.webp"} 
+            // image="/images/active-pet.webp"
             text="ACTIVE"
             selectedPet={selectedActivity === "active"}
             setSelectedCharacter={() => setSelectedActivity("active")}
