@@ -50,12 +50,12 @@ const footerCtaData = {
 export default function AboutUsBody({ }: // cardTitleData,
   // cardCaptionData,
   AboutUsBodyProps) {
-    const ribbonRef = useRef(null);
+  const ribbonRef = useRef(null);
   const isRibbonInView = useInView(ribbonRef, { once: true, margin: "0px 0px -100px 0px" });
   return (
     <div>
       <motion.div
-        initial={{ opacity: 0, y: 40 }}
+        initial={{ opacity: 0, y: 60 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         viewport={{ once: true }}
@@ -79,23 +79,30 @@ export default function AboutUsBody({ }: // cardTitleData,
         </div>
       </motion.div>
 
-      <div className="relative bg-[#FDFEFA] h-[83.64vw] sm:h-[23.43vw] w-[90vw] sm:w-[66.25vw] mx-auto mt-[var(--space-32-52)] border border-secondary-1 rounded-2xl px-[var(--space-20-190)] py-[var(--space-40-60)]">
-        <SecondaryInlineTitle
-          highlight="Nature,"
-          title="At Second"
-          paragraph="we believe pets are family, and they deserve the best care possible. Our journey began in Qatar, inspired by our love for animals and a deep commitment to their health and happiness."
-          textAlign="text-center w-auto"
-          textColor="#944446"
-        />
-        <div className="absolute left-[-11%] sm:left-[21%] w-[104.2vw] sm:w-[39.86vw]">
-          <Image
-            src="/images/dog.webp"
-            alt=""
-            className="!static inset-0 w-full !h-full object-cover object-center"
-            fill
+      <motion.div
+        initial={{ opacity: 0, y: 80 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true }}
+      >
+        <div className="relative bg-[#FDFEFA] h-[83.64vw] sm:h-[23.43vw] w-[90vw] sm:w-[66.25vw] mx-auto mt-[var(--space-32-52)] border border-secondary-1 rounded-2xl px-[var(--space-20-190)] py-[var(--space-40-60)]">
+          <SecondaryInlineTitle
+            highlight="Nature,"
+            title="At Second"
+            paragraph="we believe pets are family, and they deserve the best care possible. Our journey began in Qatar, inspired by our love for animals and a deep commitment to their health and happiness."
+            textAlign="text-center w-auto"
+            textColor="#944446"
           />
+          <div className="absolute left-[-11%] sm:left-[21%] w-[104.2vw] sm:w-[39.86vw]">
+            <Image
+              src="/images/dog.webp"
+              alt=""
+              className="!static inset-0 w-full !h-full object-cover object-center"
+              fill
+            />
+          </div>
         </div>
-      </div>
+      </motion.div>
 
       <div className="flex flex-col h-[282vw] sm:h-auto sm:flex-row sm:gap-[10.4vw] mt-[32.4vw] sm:mt-[5vw] items-center relative">
         <div className="w-fit relative">
@@ -126,9 +133,9 @@ export default function AboutUsBody({ }: // cardTitleData,
         </div>
         <div className="flex flex-col absolute sm:static top-[73vw] sm:flex-row gap-[var(--space-52-86)]">
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 60 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
             <CardTitle
@@ -138,7 +145,7 @@ export default function AboutUsBody({ }: // cardTitleData,
             />
           </motion.div>
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 80 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9 }}
             viewport={{ once: true }}
@@ -156,7 +163,7 @@ export default function AboutUsBody({ }: // cardTitleData,
           <motion.div
             initial={{ clipPath: "inset(0% 100% 0% 0%)", opacity: 0 }}
             animate={isRibbonInView ? { clipPath: "inset(0% 0% 0% 0%)", opacity: 1 } : {}}
-            transition={{ duration: 2, ease: "easeInOut" }}
+            transition={{ duration: 1, ease: "easeInOut" }}
             className="block sm:hidden !static inset-0 w-full !h-full"
           >
             <Image

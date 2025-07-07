@@ -48,7 +48,7 @@ export default function Page() {
         <Typography tag="h3" text="Add more pets?" className="text-center text-primary-dark" />
         <div className="flex gap-3">
           <div 
-            className="mx-auto items-center justify-center flex flex-wrap border border-[#A1A1A1] rounded-full px-[var(--space-80-100)] py-[var( --space-10-15)] gap-2.5 lg:gap-3.5 cursor-pointer"
+            className={`${checkout ? "bg-primary-light text-primary-dark border-primary-dark" : ""} mx-auto items-center justify-center flex flex-wrap border border-[#A1A1A1] rounded-full px-[var(--space-80-100)] py-[var( --space-10-15)] gap-2.5 lg:gap-3.5 cursor-pointer`}
             onClick={(e) => {
               e.preventDefault();
               setCheckout(true);
