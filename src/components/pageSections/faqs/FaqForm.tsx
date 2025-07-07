@@ -256,9 +256,6 @@ export default function FaqForm() {
                 const numericValue = e.target.value.replace(/[^0-9]/g, '');
                 const limitedValue = numericValue.slice(0, 15);
                 e.target.value = limitedValue;
-                
-                // Format with spaces every 3 digits (optional)
-                // e.target.value = limitedValue.replace(/(\d{3})(?=\d)/g, '$1 ');
               }}
             />
             {shouldShowError('contactNo') && (
