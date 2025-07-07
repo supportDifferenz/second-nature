@@ -48,7 +48,7 @@ export default function Age() {
         console.log("Please select a valid date of birth");
       }
     } else if (mode === "approx") {
-      if (month && year && currentPetId) {
+      if ((month || year) && currentPetId) {
         setPetDetails(currentPetId, { dateOfBirth: "", ageMonth: month, ageYear: year });
         startTransition(() => {
           router.push("/weight");
@@ -143,7 +143,7 @@ export default function Age() {
           </Button>
           <Button 
             className="gap-2.5 lg:ml-auto lg:mr-[-55px]" 
-          disabled={ !( month || year || dateOfBirth ) }
+            disabled={ !( month || year || dateOfBirth ) }
             onClick={handleNext}
           >
             Next
