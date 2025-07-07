@@ -42,6 +42,7 @@ export default function StaticHeroBanner() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
+            className="flex justify-center lg:justify-start w-full"
           >
             <Typography
               tag="h4"
@@ -56,6 +57,7 @@ export default function StaticHeroBanner() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
+            className="flex justify-center lg:justify-start w-full"
           >
             <Typography
               tag="h1"
