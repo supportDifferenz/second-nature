@@ -113,7 +113,7 @@ const MobileMenu = ({ className, isOpen, setIsOpen }: MobileMenuProps) => {
       <Button
         size="icon"
         onClick={() => setIsOpen(!isOpen)}
-        className={`${className} z-50 border-none bg-transparent hover:bg-transparent h-8 w-8`}
+        className={`${className} z-[12] border-none bg-transparent hover:bg-transparent h-8 w-8`}
       >
         <AnimatedMenuIcon isOpen={isOpen} />
       </Button>
