@@ -1,3 +1,5 @@
+"use client";
+
 import Typography from "@/components/atoms/typography/Typography";
 import FooterCTASection from "@/components/pageSections/transitionDiet/FooterCTASection";
 import HeroSection from "@/components/pageSections/transitionDiet/HeroSection";
@@ -6,6 +8,7 @@ import MainLayout from "@/components/templates/MainLayout";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import React from "react";
+import { motion } from "framer-motion";
 
 const footerCtaData = {
   mealTransition: {
@@ -34,6 +37,12 @@ export default function TransitionDiet() {
         <TransitionPlan />
         <FooterCTASection />
       </div>
+      <motion.div
+        initial={{ opacity: 0, y: 80 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true }}
+      >
         <div className="pb-0 pt-[var(--space-110-140)] sm:py-(--space-120-180) lg:overflow-x-hidden">
           <div className="flex flex-col items-center justify-center  h-[175vw] sm:h-[28.2vw] lg:h-[18.38vw] w-[90vw] sm:w-full lg:max-w-[80.2vw] mx-auto relative">
             <div className="bg-[#FBE5C7] sm:px-[3.12vw] pb-[70vw] sm:py-[var(--space-52-86)] lg:py-0  w-full rounded-t-2xl h-[110%] sm:h-[80%] flex flex-col justify-center">
@@ -45,29 +54,29 @@ export default function TransitionDiet() {
                 textColor="text-secondary-1"
                 textAlign="left"
               /> */}
-                  <div className=" w-fit flex flex-col sm:flex-row sm:gap-10 lg:gap-16 px-[] items-center sm:items-start  text-center sm:text-left mx-auto sm:mr-auto">
-                    <Typography
-                      tag="h2"
-                      className="capitalize text-secondary-1 lg:w-[35%]"
-                      text="Begin Your Pet’s"
-                      role="title"
-                      ariaLabelledBy="title"
-                    >
-                      <span
-                        className="highlight block"
-                        role="title"
-                        aria-labelledby="title"
-                      >
-                        Meal Journey
-                      </span>
-                    </Typography>
+              <div className=" w-fit flex flex-col sm:flex-row sm:gap-10 lg:gap-16 px-[] items-center sm:items-start  text-center sm:text-left mx-auto sm:mr-auto">
+                <Typography
+                  tag="h2"
+                  className="capitalize text-secondary-1 lg:w-[35%]"
+                  text="Begin Your Pet’s"
+                  role="title"
+                  ariaLabelledBy="title"
+                >
+                  <span
+                    className="highlight block"
+                    role="title"
+                    aria-labelledby="title"
+                  >
+                    Meal Journey
+                  </span>
+                </Typography>
 
-                    <Typography
-                      tag="h6"
-                      text="Lorem ipsum dolor sit amet consectetur. Diam pharetra id aliquet ultricies nullam. Condimentum est lacinia gravida cursus nulla. Lorem ipsum dolor sit amet consectetur. "
-                      className="w-[72%] max-sm:mt-5 sm:w-[35%] lg:w-[38%]"
-                    />
-                  </div>
+                <Typography
+                  tag="h6"
+                  text="Lorem ipsum dolor sit amet consectetur. Diam pharetra id aliquet ultricies nullam. Condimentum est lacinia gravida cursus nulla. Lorem ipsum dolor sit amet consectetur. "
+                  className="w-[72%] max-sm:mt-5 sm:w-[35%] lg:w-[38%]"
+                />
+              </div>
               <Button
                 variant={"primaryBtn"}
                 className="mx-auto max-sm:mt-7 mt-[8.4vw] sm:hidden"
@@ -96,6 +105,7 @@ export default function TransitionDiet() {
             </div>
           </div>
         </div>
+      </motion.div>
     </MainLayout>
   );
 }

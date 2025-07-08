@@ -24,7 +24,7 @@ export default function AlertBar({ text, selectedCheckBox, setSelectedCheckBox }
                 className="w-[5.6vw] sm:w-[1.45vw]"
                 onClick={() => setSelectedCheckBox && setSelectedCheckBox(!selectedCheckBox)}
               >
-                <Image src="/icons/unchecked.svg" alt="tick" fill className="!static" />
+                <Image src="/icons/unChecked.svg" alt="tick" fill className="!static" />
               </div>
           }
         <div>

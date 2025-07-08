@@ -236,8 +236,9 @@ export default function Breed() {
               <Button
               type="button"
               variant={"outlineSecondaryBtn"}
-              className="mx-auto portrait:mt-[3dvh] landscape:mt-[6dvh]"
+              className={`${iDontKnowBreed && "bg-primary-light text-primary-dark"} mx-auto portrait:mt-[3dvh] landscape:mt-[6dvh]`}
               onClick={handleIdontKnowBreed}
+
             >
               I don’t know the breed
             </Button>

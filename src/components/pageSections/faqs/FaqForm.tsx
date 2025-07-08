@@ -32,7 +32,11 @@ const formSchema = z.object({
   firstName: z.string().min(1, "First name is required"),
   lastName: z.string().optional(),
   emailId: z.string().min(1, "Email is required").email("Please enter a valid email"),
-  contactNo: z.string().min(1, "Mobile number is required"),
+  contactNo: z.string()
+              .min(1, "Mobile number is required")
+              .regex(/^[0-9]+$/, "Must contain only numbers")
+              .min(10, "Must be at least 10 digits")
+              .max(15, "Must be at most 15 digits"),
   message: z.string().min(1, "Message is required"),
   isActive: z.boolean().default(true),
   isDeleted: z.boolean().default(false),
@@ -245,6 +249,14 @@ export default function FaqForm() {
               variant="roundedEdgeInput"
               onBlur={() => handleBlur('contactNo')}
               disabled={isSubmitting}
+              type="tel"
+              inputMode="numeric"
+              pattern="[0-9]*"
+              onChange={(e) => {
+                const numericValue = e.target.value.replace(/[^0-9]/g, '');
+                const limitedValue = numericValue.slice(0, 15);
+                e.target.value = limitedValue;
+              }}
             />
             {shouldShowError('contactNo') && (
               <span className="text-red-500 text-sm mt-1">{errors.contactNo}</span>

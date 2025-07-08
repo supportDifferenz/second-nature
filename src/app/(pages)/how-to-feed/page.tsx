@@ -1,9 +1,12 @@
+"use client";
+
 import FooterBannerCTA from "@/components/organism/footerBannerCTA/FooterBannerCTA";
 import FooterCtaCard from "@/components/organism/footerCtaCard/FooterCtaCard";
 import HeroSection from "@/components/pageSections/howToFeed/HeroSection";
 import ReadyToServe from "@/components/pageSections/howToFeed/ReadyToServe";
 import MainLayout from "@/components/templates/MainLayout";
 import React from "react";
+import { motion } from "framer-motion";
 
 export default function Subscription() {
   const footerCtaData = {
@@ -27,7 +30,14 @@ export default function Subscription() {
     <MainLayout>
       <HeroSection />
       <div className="py-(--space-50-99) max-w-[90.65vw] lg:max-w-[80.2vw] mx-auto">
+        <motion.div
+            initial={{ opacity: 0, y: 60 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
         <ReadyToServe />
+        </motion.div>
       </div>
 
       <div className="mt-[var(--space-120-180)]">
@@ -45,7 +55,7 @@ export default function Subscription() {
           paragraph="Click below to explore our range and start your journey toward better pet nutrition today."
           paragraphColor="#FFFFFF"
           buttonText="Build your plan"
-          buttonLink="/signup"
+          buttonLink="/location"
           bannerThemeColor="#fff"
           align="center"
         />

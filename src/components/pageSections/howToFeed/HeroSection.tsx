@@ -1,5 +1,6 @@
 "use client";
 import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
 import Typography from "@/components/atoms/typography/Typography";
 
 const bannerBaseClass = cn(
@@ -11,8 +12,8 @@ export default function StaticHeroBanner() {
   return (
     <div className={bannerBaseClass} style={{ color: "#ffffff" }}>
       {/* Background Image */}
-        <div className="h-full w-full left-1/2 transform -translate-x-1/2 absolute top-0 z-[-1]">
-          <picture className="w-full h-full block">
+      <div className="h-full w-full left-1/2 transform -translate-x-1/2 absolute top-0 z-[-1]">
+        <picture className="w-full h-full block">
           <source
             media="(max-width: 575px)"
             srcSet="/images/how-to-feed-banner-mob.webp"
@@ -31,25 +32,41 @@ export default function StaticHeroBanner() {
             className="w-full h-full object-cover object-center"
           />
         </picture>
-        </div>
+      </div>
 
       {/* Content */}
       <div className="w-full mt-auto lg:mt-0 lg:ml-auto">
         <div className="flex flex-col items-center lg:items-start lg:w-[50%] lg:ml-auto">
-          <Typography
-            tag="h4"
-            className="text-center lg:text-left text-primary-dark w-[90%] lg:w-auto"
-            text="Feeding Your Pet"
-            role="caption"
-            ariaLabel="Feeding Your Pet"
-          />
-          <Typography
-            tag="h1"
-            className="capitalize highlight mb-20 lg:mb-0 text-center lg:text-left text-primary-dark w-[82%] lg:w-auto"
-            text="the Natural Way"
-            role="heading"
-            ariaLabel="the Natural Way"
-          />
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="flex justify-center lg:justify-start w-full"
+          >
+            <Typography
+              tag="h4"
+              className="text-center lg:text-left text-primary-dark w-[90%] lg:w-auto"
+              text="Feeding Your Pet"
+              role="caption"
+              ariaLabel="Feeding Your Pet"
+            />
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="flex justify-center lg:justify-start w-full"
+          >
+            <Typography
+              tag="h1"
+              className="capitalize highlight mb-20 lg:mb-0 text-center lg:text-left text-primary-dark w-[82%] lg:w-auto"
+              text="the Natural Way"
+              role="heading"
+              ariaLabel="the Natural Way"
+            />
+          </motion.div>
         </div>
       </div>
     </div>

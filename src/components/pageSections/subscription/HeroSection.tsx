@@ -90,6 +90,7 @@ export default function HeroSection() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
+              className="flex justify-center lg:justify-start items-center"
             >
               <Typography
                 tag="h3"
