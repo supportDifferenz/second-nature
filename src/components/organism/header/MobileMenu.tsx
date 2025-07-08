@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import MealDropdownMenu from './MealDropdownMenu';
-import {  motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 
 interface MobileMenuProps {
@@ -119,9 +119,8 @@ const MobileMenu = ({ className, isOpen, setIsOpen }: MobileMenuProps) => {
       </Button>
 
       <div
-        className={`fixed top-0 left-0 w-full z-[-1] transition-opacity duration-300 ease-in-out ${
-          isOpen ? 'translate-y-0 opacity-100' : '-translate-y-[170%] opacity-0'
-        }`}
+        className={`fixed top-0 left-0 w-full z-[-1] transition-opacity duration-300 ease-in-out ${isOpen ? 'translate-y-0 opacity-100' : '-translate-y-[170%] opacity-0'
+          }`}
       >
         <div className="animated-gradient min-h-[600px] h-[100dvh] overflow-y-auto pt-[150px] pb-[50px]">
           <motion.div
@@ -187,7 +186,10 @@ const MobileMenu = ({ className, isOpen, setIsOpen }: MobileMenuProps) => {
               </motion.a>
 
               {isHowItWorksOpen && (
-                <motion.div className="flex flex-col space-y-5 pl-4">
+                <motion.div
+                  variants={itemVariants}
+                  transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                  className="flex flex-col space-y-5 pl-4">
                   <motion.a
                     whileHover={{
                       scale: 1.03,
@@ -231,33 +233,20 @@ const MobileMenu = ({ className, isOpen, setIsOpen }: MobileMenuProps) => {
                 </motion.div>
               )}
               <motion.a
-                whileHover={{
-                  scale: 1.03,
-                }}
-                transition={{
-                  type: "spring",
-                  stiffness: 300,
-                  damping: 20,
-                }}
+                variants={itemVariants}
+                whileHover={hoverMotion}
+                transition={{ type: 'spring', stiffness: 300, damping: 20 }}
                 href="/blogs" onClick={() => setIsOpen(false)} className={`${pathName === '/blogs' ? 'text-primary' : ''} font-bold block`}>Blogs</motion.a>
               <motion.a
-                whileHover={{
-                  scale: 1.03,
-                }}
-                transition={{
-                  type: "spring",
-                  stiffness: 300,
-                  damping: 20,
-                }} href="/reviews" onClick={() => setIsOpen(false)} className={`${pathName === '/reviews' ? 'text-primary' : ''} font-bold block`}>Reviews</motion.a>
+                variants={itemVariants}
+                whileHover={hoverMotion}
+                transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                href="/reviews" onClick={() => setIsOpen(false)} className={`${pathName === '/reviews' ? 'text-primary' : ''} font-bold block`}>Reviews</motion.a>
               <motion.a
-                whileHover={{
-                  scale: 1.03,
-                }}
-                transition={{
-                  type: "spring",
-                  stiffness: 300,
-                  damping: 20,
-                }} href="/faqs" onClick={() => setIsOpen(false)} className={`${pathName === '/faqs' ? 'text-primary' : ''} font-bold block`}>FAQs</motion.a>
+                variants={itemVariants}
+                whileHover={hoverMotion}
+                transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                href="/faqs" onClick={() => setIsOpen(false)} className={`${pathName === '/faqs' ? 'text-primary' : ''} font-bold block`}>FAQs</motion.a>
             </motion.div>
           </motion.div>
         </div>

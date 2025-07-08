@@ -41,6 +41,15 @@ const testimonials = [
 ];
 
 export default function Testimonial() {
+  const [autoplayEnabled, setAutoplayEnabled] = useState(true);
+  
+  // Conditionally create autoplay plugin
+  const plugins = autoplayEnabled ? [Autoplay({ 
+    delay: 4000, 
+    stopOnInteraction: true,
+    stopOnMouseEnter: true
+  })] : [];
+
   const [emblaRef, emblaApi] = useEmblaCarousel(
     {
       loop: true,
@@ -50,7 +59,7 @@ export default function Testimonial() {
       dragFree: false,
       containScroll: "trimSnaps",
     },
-    [Autoplay({ delay: 4000, stopOnInteraction: false })]
+    plugins
   );
 
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -88,6 +97,8 @@ export default function Testimonial() {
   const scrollPrev = () => {
     if (emblaApi) {
       setIsTransitioning(true);
+      // Disable autoplay permanently when user manually navigates
+      setAutoplayEnabled(false);
       emblaApi.scrollPrev();
     }
   };
@@ -95,6 +106,8 @@ export default function Testimonial() {
   const scrollNext = () => {
     if (emblaApi) {
       setIsTransitioning(true);
+      // Disable autoplay permanently when user manually navigates
+      setAutoplayEnabled(false);
       emblaApi.scrollNext();
     }
   };
@@ -154,7 +167,7 @@ export default function Testimonial() {
                 // Enhanced 3D effect calculations
                 const isActive = distance === 0;
                 const rotateY = isActive ? "0deg" : distance > 0 ? "-25deg" : "25deg";
-                const translateZ = isActive ? "0px" : "-100px";
+                const translateZ = isActive ? "0px" : "-30px";
                 const opacity = isActive ? 1 : 0.7;
                 const zIndex = isActive ? 10 : Math.max(5 - Math.abs(distance), 1);
 

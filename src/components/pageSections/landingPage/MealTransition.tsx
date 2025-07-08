@@ -7,10 +7,12 @@ import { motion } from "framer-motion";
 export default function MealTransition() {
   return (
     <motion.section
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true }}>
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+      viewport={{ once: true }}>
+
+
       <div className="container  flex flex-col lg:flex-row  gap-(--space-33-42)">
         <SecondaryInlineTitle
           highlight="Transition"
@@ -46,7 +48,7 @@ export default function MealTransition() {
               className="mb-6 mt-4"
             />
 
-           
+
             <ul>
               <li className="flex items-center gap-(--space-16-24) ">
                 <span className="h4 text-center text-secondary-2 font-bold py-(--space-13-19) border-b border-primary px-1.5 ">

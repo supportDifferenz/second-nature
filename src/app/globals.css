@@ -205,6 +205,8 @@ body {
   font-weight: var(--fw-regular);
   line-height: var(--default-leading);
   color: var(--text-color);
+  overflow-x: hidden;
+  
 }
 
 h1 {
