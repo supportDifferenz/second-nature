@@ -84,7 +84,7 @@ export default function IngredientsCarousel() {
         onTouchEnd={handleRelease}
       >
         {/* Image with smooth fade and height-safe layout */}
-        <div className="lg:basis-[50%] h-[300px] sm:h-[400px] lg:h-fit flex items-center justify-center overflow-hidden ">
+        <div className="lg:basis-[50%] h-[300px] sm:h-[400px] lg:h-[30vw] flex items-center justify-center overflow-hidden ">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentSlide.image + currentIndex}
