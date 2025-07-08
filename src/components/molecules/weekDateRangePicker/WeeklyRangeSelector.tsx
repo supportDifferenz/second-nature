@@ -224,12 +224,176 @@
 //   );
 // }
 
-'use client'
 
-import { useState } from "react"
-import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover"
-import { Calendar } from "@/components/ui/calendar"
-import { format, isBefore, isToday, isAfter, isSameDay } from "date-fns"
+// old code
+// ---------------------------------------------------------------------------------
+
+// 'use client'
+
+// import { useState } from "react"
+// import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover"
+// import { Calendar } from "@/components/ui/calendar"
+// import { format, isBefore, isToday, isAfter, isSameDay } from "date-fns"
+
+// export default function DayRangeSelector({
+//   setDateRangeFromCalender,
+//   setIsWeekSelected,
+// }: {
+//   setDateRangeFromCalender: (range: { from: Date; to: Date }) => void;
+//   setIsWeekSelected: (selected: boolean) => void;
+// }) {
+//   const [selectionMode, setSelectionMode] = useState<'from' | 'to'>('from')
+//   const [dateRange, setDateRange] = useState<{ from: Date; to: Date } | null>(null)
+//   const [open, setOpen] = useState(false);
+
+//   console.log("Date range weekly range selector:", dateRange)
+
+//   const handleDateSelect = (date: Date | undefined) => {
+//     setIsWeekSelected(false);
+//     if (!date) return
+
+//     // Prevent selecting past dates (except today)
+//     if (isBefore(date, new Date()) && !isToday(date)) {
+//       return
+//     }
+
+//     if (selectionMode === 'from') {
+//       const newFrom = date
+//       const newTo = dateRange?.to && !isBefore(date, dateRange.to) 
+//         ? date
+//         : dateRange?.to || date
+      
+//       setDateRange({
+//         from: newFrom,
+//         to: newTo
+//       })
+//       setDateRangeFromCalender({ 
+//         from: newFrom, 
+//         to: newTo 
+//       })
+//       setSelectionMode('to')
+//     } else {
+//       const newTo = date
+//       const newFrom = dateRange?.from && isAfter(dateRange.from, date)
+//         ? date
+//         : dateRange?.from || date
+      
+//       setDateRange({
+//         from: newFrom,
+//         to: newTo
+//       })
+//       setDateRangeFromCalender({
+//         from: newFrom,
+//         to: newTo
+//       })
+//       setOpen(false)
+//     }
+//   }
+
+//   const renderDateBox = (date: Date | null, part: "day" | "month" | "year") => {
+//     if (!date) return <div className="border border-r-0 w-full last:border-r-[1px] border-[#944446] px-3 py-2 text-center">--</div>
+//     const value = {
+//       day: format(date, "dd"),
+//       month: format(date, "MM"),
+//       year: format(date, "yyyy")
+//     }[part]
+//     return <div className="border border-r-0 last:border-r-[1px] border-[#944446] px-3 py-2 w-full text-center">{value}</div>
+//   }
+
+//   return (
+//     <div className="flex items-start gap-4">
+//       <Popover open={open} onOpenChange={setOpen}>
+//         <PopoverTrigger asChild>
+//           <div className="flex flex-col sm:flex-row cursor-pointer gap-4 sm:gap-8 select-none w-full">
+//             {/* FROM */}
+//             <div 
+//               className="flex flex-col items-start grow"
+//               onClick={() => setSelectionMode('from')}
+//             >
+//               <label className="mb-1 text-sm">From</label>
+//               <div className="flex w-full grow">
+//                 {renderDateBox(dateRange?.from ?? null, "day")}
+//                 {renderDateBox(dateRange?.from ?? null, "month")}
+//                 {renderDateBox(dateRange?.from ?? null, "year")}
+//               </div>
+//             </div>
+
+//             {/* TO */}
+//             <div 
+//               className="flex flex-col items-start grow"
+//               onClick={() => setSelectionMode('to')}
+//             >
+//               <label className="mb-1 text-sm">To</label>
+//               <div className="flex w-full">
+//                 {renderDateBox(dateRange?.to ?? null, "day")}
+//                 {renderDateBox(dateRange?.to ?? null, "month")}
+//                 {renderDateBox(dateRange?.to ?? null, "year")}
+//               </div>
+//             </div>
+//           </div>
+//         </PopoverTrigger>
+
+//         <PopoverContent className="w-auto p-0 mt-2">
+//           <div className="p-2 text-sm font-medium text-center">
+//             {selectionMode === 'from' ? 'Select start date' : 'Select end date'}
+//           </div>
+//           <Calendar
+//             mode="single"
+//             selected={selectionMode === 'from' ? dateRange?.from : dateRange?.to}
+//             onSelect={handleDateSelect}
+//             disabled={(date) => {
+//               // Disable past dates except today
+//               const isPastDate = isBefore(date, new Date()) && !isToday(date)
+              
+//               // For 'to' date selection, disable dates before from date
+//               if (selectionMode === 'to' && dateRange?.from) {
+//                 return isPastDate || isBefore(date, dateRange.from)
+//               }
+              
+//               return isPastDate
+//             }}
+//             modifiers={{
+//               rangeStart: (date) => dateRange ? isSameDay(date, dateRange.from) : false,
+//               rangeEnd: (date) => dateRange ? isSameDay(date, dateRange.to) : false,
+//               inRange: (date) => {
+//                 if (!dateRange) return false
+//                 return date > dateRange.from && date < dateRange.to
+//               },
+//               today: isToday
+//             }}
+//             modifiersClassNames={{
+//               rangeStart: "bg-blue-500 text-white",
+//               rangeEnd: "bg-green-600 text-white",
+//               inRange: "bg-green-600 text-white",
+//               today: "border border-green-500"
+//             }}
+//             modifiersStyles={{
+//               rangeStart: { borderRadius: '6px 0 0 6px' },
+//               rangeEnd: { borderRadius: '0 6px 6px 0' },
+//               inRange: { borderRadius: '0' }
+//             }}
+//           />
+//         </PopoverContent>
+//       </Popover>
+//     </div>
+//   )
+// }
+
+"use client";
+
+import { useEffect, useState } from "react";
+import { DateRange } from "react-date-range";
+import { format } from "date-fns";
+import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover";
+import "react-date-range/dist/styles.css";
+import "react-date-range/dist/theme/default.css";
+
+// ✅ Local type for the selection range
+type DateRangeItem = {
+  startDate: Date;
+  endDate: Date;
+  key: string;
+};
 
 export default function DayRangeSelector({
   setDateRangeFromCalender,
@@ -238,139 +402,79 @@ export default function DayRangeSelector({
   setDateRangeFromCalender: (range: { from: Date; to: Date }) => void;
   setIsWeekSelected: (selected: boolean) => void;
 }) {
-  const [selectionMode, setSelectionMode] = useState<'from' | 'to'>('from')
-  const [dateRange, setDateRange] = useState<{ from: Date; to: Date } | null>(null)
   const [open, setOpen] = useState(false);
 
-  console.log("Date range weekly range selector:", dateRange)
+  const [range, setRange] = useState<DateRangeItem[]>([
+    {
+      startDate: new Date(),
+      endDate: new Date(),
+      key: "selection",
+    },
+  ]);
 
-  const handleDateSelect = (date: Date | undefined) => {
+  useEffect(() => {
+    setDateRangeFromCalender({
+      from: range[0].startDate,
+      to: range[0].endDate,
+    });
     setIsWeekSelected(false);
-    if (!date) return
 
-    // Prevent selecting past dates (except today)
-    if (isBefore(date, new Date()) && !isToday(date)) {
-      return
+    // ✅ DOM MutationObserver to override calendar styles
+    const overrideColor = () => {
+      const selected = document.querySelectorAll(
+        ".rdrDaySelected, .rdrDayStartPreview, .rdrDayEndPreview, .rdrDayInPreview"
+      );
+      selected.forEach((el) => {
+        (el as HTMLElement).style.backgroundColor = "#2BB673";
+        (el as HTMLElement).style.color = "white";
+      });
+    };
+
+    overrideColor();
+
+    const calendarEl = document.querySelector(".rdrCalendarWrapper");
+    const observer = new MutationObserver(overrideColor);
+    if (calendarEl) {
+      observer.observe(calendarEl, { childList: true, subtree: true });
     }
 
-    if (selectionMode === 'from') {
-      const newFrom = date
-      const newTo = dateRange?.to && !isBefore(date, dateRange.to) 
-        ? date
-        : dateRange?.to || date
-      
-      setDateRange({
-        from: newFrom,
-        to: newTo
-      })
-      setDateRangeFromCalender({ 
-        from: newFrom, 
-        to: newTo 
-      })
-      setSelectionMode('to')
-    } else {
-      const newTo = date
-      const newFrom = dateRange?.from && isAfter(dateRange.from, date)
-        ? date
-        : dateRange?.from || date
-      
-      setDateRange({
-        from: newFrom,
-        to: newTo
-      })
-      setDateRangeFromCalender({
-        from: newFrom,
-        to: newTo
-      })
-      setOpen(false)
-    }
-  }
+    return () => observer.disconnect();
+  }, [range, setDateRangeFromCalender, setIsWeekSelected]); // ✅ Added safe dependencies
 
-  const renderDateBox = (date: Date | null, part: "day" | "month" | "year") => {
-    if (!date) return <div className="border border-r-0 w-full last:border-r-[1px] border-[#944446] px-3 py-2 text-center">--</div>
-    const value = {
-      day: format(date, "dd"),
-      month: format(date, "MM"),
-      year: format(date, "yyyy")
-    }[part]
-    return <div className="border border-r-0 last:border-r-[1px] border-[#944446] px-3 py-2 w-full text-center">{value}</div>
-  }
+  const handleSelect = (item: { selection: DateRangeItem }) => {
+    setRange([item.selection]);
+    setOpen(false);
+  };
 
   return (
     <div className="flex items-start gap-4">
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
-          <div className="flex flex-col sm:flex-row cursor-pointer gap-4 sm:gap-8 select-none w-full">
-            {/* FROM */}
-            <div 
-              className="flex flex-col items-start grow"
-              onClick={() => setSelectionMode('from')}
-            >
-              <label className="mb-1 text-sm">From</label>
-              <div className="flex w-full grow">
-                {renderDateBox(dateRange?.from ?? null, "day")}
-                {renderDateBox(dateRange?.from ?? null, "month")}
-                {renderDateBox(dateRange?.from ?? null, "year")}
-              </div>
-            </div>
-
-            {/* TO */}
-            <div 
-              className="flex flex-col items-start grow"
-              onClick={() => setSelectionMode('to')}
-            >
-              <label className="mb-1 text-sm">To</label>
-              <div className="flex w-full">
-                {renderDateBox(dateRange?.to ?? null, "day")}
-                {renderDateBox(dateRange?.to ?? null, "month")}
-                {renderDateBox(dateRange?.to ?? null, "year")}
-              </div>
+          <div
+            className="flex flex-col gap-1 p-3 border rounded cursor-pointer w-[280px]"
+            onClick={() => setOpen(!open)}
+          >
+            <div className="text-sm text-gray-500">Selected Range</div>
+            <div className="text-base font-medium">
+              {format(range[0].startDate, "MMM d, yyyy")} -{" "}
+              {format(range[0].endDate, "MMM d, yyyy")}
             </div>
           </div>
         </PopoverTrigger>
 
         <PopoverContent className="w-auto p-0 mt-2">
-          <div className="p-2 text-sm font-medium text-center">
-            {selectionMode === 'from' ? 'Select start date' : 'Select end date'}
-          </div>
-          <Calendar
-            mode="single"
-            selected={selectionMode === 'from' ? dateRange?.from : dateRange?.to}
-            onSelect={handleDateSelect}
-            disabled={(date) => {
-              // Disable past dates except today
-              const isPastDate = isBefore(date, new Date()) && !isToday(date)
-              
-              // For 'to' date selection, disable dates before from date
-              if (selectionMode === 'to' && dateRange?.from) {
-                return isPastDate || isBefore(date, dateRange.from)
-              }
-              
-              return isPastDate
-            }}
-            modifiers={{
-              rangeStart: (date) => dateRange ? isSameDay(date, dateRange.from) : false,
-              rangeEnd: (date) => dateRange ? isSameDay(date, dateRange.to) : false,
-              inRange: (date) => {
-                if (!dateRange) return false
-                return date > dateRange.from && date < dateRange.to
-              },
-              today: isToday
-            }}
-            modifiersClassNames={{
-              rangeStart: "bg-blue-500 text-white",
-              rangeEnd: "bg-green-600 text-white",
-              inRange: "bg-green-600 text-white",
-              today: "border border-green-500"
-            }}
-            modifiersStyles={{
-              rangeStart: { borderRadius: '6px 0 0 6px' },
-              rangeEnd: { borderRadius: '0 6px 6px 0' },
-              inRange: { borderRadius: '0' }
-            }}
+          <DateRange
+            editableDateInputs={false}
+            onChange={handleSelect}
+            moveRangeOnFirstSelection={false}
+            ranges={range}
+            months={1}
+            direction="vertical"
+            showDateDisplay={false}
+            minDate={new Date()} // disable past dates
           />
         </PopoverContent>
       </Popover>
     </div>
-  )
+  );
 }

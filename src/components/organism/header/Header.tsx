@@ -69,7 +69,7 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
 
 
   return (
-    <header className="bg-[#ffff] relative z-[200]">
+    <header className="bg-[#ffff] relative z-[15]">
       {!isOnlyBrandHeader ? (
         <div>
           <TopHeader />
@@ -164,7 +164,7 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
                     </button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent className="max-w-fit" align="start">
-                    <div className="grid grid-cols-1 gap-5 relative z-[170]">
+                    <div className="grid grid-cols-1 gap-5 relative z-[11]">
                       {[
                         { name: "Subscription", href: "/subscription" },
                         { name: "Behind The Scenes", href: "/behind-the-scenes" },

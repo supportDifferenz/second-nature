@@ -1,0 +1,31 @@
+/* === react-date-range theme override === */
+
+/* Selected day background color */
+.rdrCalendarWrapper .rdrDaySelected,
+.rdrCalendarWrapper .rdrDayStartPreview,
+.rdrCalendarWrapper .rdrDayEndPreview,
+.rdrCalendarWrapper .rdrDayInPreview {
+    background-color: #2BB673 !important;
+    color: white !important;
+}
+
+/* Hovered day border */
+.rdrCalendarWrapper .rdrDayHovered {
+    border-color: #2BB673 !important;
+}
+
+/* Today’s circle border */
+.rdrCalendarWrapper .rdrDayToday .rdrDayNumber span {
+    border-color: #2BB673 !important;
+}
+
+.rdrDayActive {
+    border-color: #2BB673 !important;
+    color: #2BB673 !important;
+}
+
+.rdrDayToday .rdrDayNumber span:after{
+    border-color: #2BB673 !important;
+    background: #2BB673 !important;
+
+}
