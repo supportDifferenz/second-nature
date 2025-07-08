@@ -32,7 +32,27 @@ export default function Home() {
 
       <TrustedByVets />
 
-      <div className="pt-(--space-120-180)">
+      <div className="pt-(--space-120-180)  relative">
+        <div className="absolute left-0 top-0 z-[-1] w-full h-[30%]">
+          <picture className="h-full w-full">
+            <source
+              srcSet="/images/bg-landing-2-mob.webp"
+              type="image/webp"
+              media="(max-width: 575px)"
+            />
+            <source
+              srcSet="/images/bg-landing-2.webp"
+              type="image/webp"
+              media="(min-width: 575px)"
+            />
+            <img
+              src="/images/bg-landing-2.webp"
+              alt="Ingredients Background"
+              className="h-full w-full object-contain"
+            />
+          </picture>
+
+        </div>
         <MealsAndTreats />
       </div>
 
@@ -40,7 +60,9 @@ export default function Home() {
         <MealTransition />
       </div>
 
-      <BehindTheScenes />
+      <div className="overflow-hidden">
+        <BehindTheScenes />
+      </div>
 
       <div className="py-(--space-120-180)">
         <Testimonial />

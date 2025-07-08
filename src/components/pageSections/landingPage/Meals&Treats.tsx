@@ -7,7 +7,8 @@ import { motion } from "framer-motion";
 
 export default function MealsAndTreats() {
   return (
-    <section>
+    <section className="relative">
+ 
       <div className=" min-[1260px]:max-w-(--container) mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -24,9 +25,9 @@ export default function MealsAndTreats() {
             className="sm:mx-auto lg:ml-0"
             paragraphColor=""
           />
-      </motion.div>
-      <MealCategory />
-    </div>
+        </motion.div>
+        <MealCategory />
+      </div>
     </section >
   );
 }
