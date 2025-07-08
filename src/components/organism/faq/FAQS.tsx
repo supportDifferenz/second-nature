@@ -1,14 +1,16 @@
-
 "use client";
 import { useState } from "react";
 import { Accordion, AccordionItem } from "@/components/ui/accordion";
 import { ChevronDown } from "lucide-react";
 import Typography from "@/components/atoms/typography/Typography";
 import { FAQSPropsTypes } from "@/components/types/type";
+import { motion, AnimatePresence } from "framer-motion";
 
-
-
-const FAQS: React.FC<FAQSPropsTypes> = ({ faqs, defaultOpenIndex = 0, className = "" }) => {
+const FAQS: React.FC<FAQSPropsTypes> = ({
+  faqs,
+  defaultOpenIndex = 0,
+  className = "",
+}) => {
   const [openIndex, setOpenIndex] = useState<number | null>(defaultOpenIndex);
 
   const toggleAccordion = (index: number) => {
@@ -16,32 +18,51 @@ const FAQS: React.FC<FAQSPropsTypes> = ({ faqs, defaultOpenIndex = 0, className 
   };
 
   return (
-    <div className={`w-full  mx-auto ${className}`}>
+    <div className={`w-full mx-auto ${className}`}>
       <Accordion type="single" collapsible className="text-secondary-1">
-        {faqs.map((faq, index) => (
-          <AccordionItem
-            key={index}
-            value={index.toString()}
-            className={`border border-secondary-1 data-[state=open]:bg-[#F9FFFD] overflow-hidden ${
-              openIndex === index ? "bg-[#F9FFFD]" : ""
-            } rounded-xl`}
-          >
-            <button
-              onClick={() => toggleAccordion(index)}
-              className={`w-full flex justify-between items-center  text-left px-6  py-4 cursor-pointer`}
+        {faqs.map((faq, index) => {
+          const isOpen = openIndex === index;
+          return (
+            <AccordionItem
+              key={index}
+              value={index.toString()}
+              className={`border border-secondary-1 data-[state=open]:bg-[#F9FFFD] overflow-hidden ${
+                isOpen ? "bg-[#F9FFFD]" : ""
+              } rounded-xl`}
             >
-              <Typography tag="h6" text={faq.question} className="w-[95%] "/>
-              <ChevronDown
-                className={`h-5 w-5 transition-transform ${
-                  openIndex === index ? "rotate-180" : ""
-                }`}
-              />
-            </button>
-            {openIndex === index && (
-              <Typography tag="p" text={faq.answer} className=" p-6 pb-5 pt-0 bg-[#F9FFFD] lg:w-[80%]"/>
-            )}
-          </AccordionItem>
-        ))}
+              <button
+                onClick={() => toggleAccordion(index)}
+                className="w-full flex justify-between items-center text-left px-6 py-4 cursor-pointer"
+              >
+                <Typography tag="h6" text={faq.question} className="w-[95%]" />
+                <ChevronDown
+                  className={`h-5 w-5 transition-transform ${
+                    isOpen ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
+
+              <AnimatePresence initial={false}>
+                {isOpen && (
+                  <motion.div
+                    key="content"
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                    className="overflow-hidden"
+                  >
+                    <Typography
+                      tag="p"
+                      text={faq.answer}
+                      className="p-6 pt-0 pb-5 bg-[#F9FFFD] lg:w-[80%]"
+                    />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </AccordionItem>
+          );
+        })}
       </Accordion>
     </div>
   );

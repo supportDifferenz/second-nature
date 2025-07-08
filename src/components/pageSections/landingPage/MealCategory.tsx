@@ -178,7 +178,7 @@ export default function MealCategory() {
                 <Typography
                   tag="h5"
                   text={categoryData.category}
-                  className="uppercase font-normal text-white max-[400px]:!text-sm text-center pb-2 min-[400px]:pb-4"
+                  className="uppercase font-normal text-white max-[575px]:!text-[16px] text-center pb-2 min-[400px]:pb-4"
                 />
               </div>
             </div>
