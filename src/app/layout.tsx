@@ -4,7 +4,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useState } from "react";
 import "./globals.css";
 import { dmSerifDisplay, bellotaText } from "@/components/config/font";
-import SmoothScrollWrapper from "@/components/molecules/smoothScroll/SmoothScrollWrapper";
+// import SmoothScrollWrapper from "@/components/molecules/smoothScroll/SmoothScrollWrapper";
 
 export default function RootLayout({
   children,
@@ -21,9 +21,9 @@ export default function RootLayout({
       </head>
       <body className={`${dmSerifDisplay.variable} ${bellotaText.variable} antialiased dark`}>
         <QueryClientProvider client={queryClient}>
-          <SmoothScrollWrapper>
+          {/* <SmoothScrollWrapper> */}
             {children}
-          </SmoothScrollWrapper>
+          {/* </SmoothScrollWrapper> */}
         </QueryClientProvider>
       </body>
     </html>

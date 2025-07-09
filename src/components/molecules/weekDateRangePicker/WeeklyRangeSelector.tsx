@@ -379,102 +379,173 @@
 //   )
 // }
 
+// "use client";
+
+// import { useEffect, useState } from "react";
+// import { DateRange } from "react-date-range";
+// import { format } from "date-fns";
+// import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover";
+// import "react-date-range/dist/styles.css";
+// import "react-date-range/dist/theme/default.css";
+
+// // ✅ Local type for the selection range
+// type DateRangeItem = {
+//   startDate: Date;
+//   endDate: Date;
+//   key: string;
+// };
+
+// export default function DayRangeSelector({
+//   setDateRangeFromCalender,
+//   setIsWeekSelected,
+// }: {
+//   setDateRangeFromCalender: (range: { from: Date; to: Date }) => void;
+//   setIsWeekSelected: (selected: boolean) => void;
+// }) {
+//   const [open, setOpen] = useState(false);
+
+//   const [range, setRange] = useState<DateRangeItem[]>([
+//     {
+//       startDate: new Date(),
+//       endDate: new Date(),
+//       key: "selection",
+//     },
+//   ]);
+
+//   useEffect(() => {
+//     setDateRangeFromCalender({
+//       from: range[0].startDate,
+//       to: range[0].endDate,
+//     });
+//     setIsWeekSelected(false);
+
+//     // ✅ DOM MutationObserver to override calendar styles
+//     const overrideColor = () => {
+//       const selected = document.querySelectorAll(
+//         ".rdrDaySelected, .rdrDayStartPreview, .rdrDayEndPreview, .rdrDayInPreview"
+//       );
+//       selected.forEach((el) => {
+//         (el as HTMLElement).style.backgroundColor = "#2BB673";
+//         (el as HTMLElement).style.color = "white";
+//       });
+//     };
+
+//     overrideColor();
+
+//     const calendarEl = document.querySelector(".rdrCalendarWrapper");
+//     const observer = new MutationObserver(overrideColor);
+//     if (calendarEl) {
+//       observer.observe(calendarEl, { childList: true, subtree: true });
+//     }
+
+//     return () => observer.disconnect();
+//   }, [range, setDateRangeFromCalender, setIsWeekSelected]); // ✅ Added safe dependencies
+
+//   const handleSelect = (item: { selection: DateRangeItem }) => {
+//     setRange([item.selection]);
+//     setOpen(false);
+//   };
+
+//   return (
+//     <div className="flex items-start gap-4">
+//       <Popover open={open} onOpenChange={setOpen}>
+//         <PopoverTrigger asChild>
+//           <div
+//             className="flex flex-col gap-1 p-3 border rounded cursor-pointer w-[280px]"
+//             onClick={() => setOpen(!open)}
+//           >
+//             <div className="text-sm text-gray-500">Selected Range</div>
+//             <div className="text-base font-medium">
+//               {format(range[0].startDate, "MMM d, yyyy")} -{" "}
+//               {format(range[0].endDate, "MMM d, yyyy")}
+//             </div>
+//           </div>
+//         </PopoverTrigger>
+
+//         <PopoverContent className="w-auto p-0 mt-2">
+//           <DateRange
+//             editableDateInputs={false}
+//             onChange={handleSelect}
+//             moveRangeOnFirstSelection={false}
+//             ranges={range}
+//             months={1}
+//             direction="vertical"
+//             showDateDisplay={false}
+//             minDate={new Date()} // disable past dates
+//           />
+//         </PopoverContent>
+//       </Popover>
+//     </div>
+//   );
+// }
+
+
 "use client";
 
-import { useEffect, useState } from "react";
-import { DateRange } from "react-date-range";
+import { useState } from "react";
 import { format } from "date-fns";
-import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover";
-import "react-date-range/dist/styles.css";
-import "react-date-range/dist/theme/default.css";
+import { cn } from "@/lib/utils";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Calendar } from "@/components/ui/calendar";
+import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
-// ✅ Local type for the selection range
-type DateRangeItem = {
-  startDate: Date;
-  endDate: Date;
-  key: string;
+type DateRange = {
+  from: Date | undefined;
+  to?: Date | undefined;
 };
 
-export default function DayRangeSelector({
-  setDateRangeFromCalender,
-  setIsWeekSelected,
+export default function RangeDatePicker({
+  selectedRange,
+  setSelectedRange,
+  colorClass,
+  className,
 }: {
-  setDateRangeFromCalender: (range: { from: Date; to: Date }) => void;
-  setIsWeekSelected: (selected: boolean) => void;
+  selectedRange: DateRange;
+  setSelectedRange: (range: DateRange) => void;
+  colorClass?: string;
+  className?: string;
 }) {
   const [open, setOpen] = useState(false);
 
-  const [range, setRange] = useState<DateRangeItem[]>([
-    {
-      startDate: new Date(),
-      endDate: new Date(),
-      key: "selection",
-    },
-  ]);
-
-  useEffect(() => {
-    setDateRangeFromCalender({
-      from: range[0].startDate,
-      to: range[0].endDate,
-    });
-    setIsWeekSelected(false);
-
-    // ✅ DOM MutationObserver to override calendar styles
-    const overrideColor = () => {
-      const selected = document.querySelectorAll(
-        ".rdrDaySelected, .rdrDayStartPreview, .rdrDayEndPreview, .rdrDayInPreview"
-      );
-      selected.forEach((el) => {
-        (el as HTMLElement).style.backgroundColor = "#2BB673";
-        (el as HTMLElement).style.color = "white";
-      });
-    };
-
-    overrideColor();
-
-    const calendarEl = document.querySelector(".rdrCalendarWrapper");
-    const observer = new MutationObserver(overrideColor);
-    if (calendarEl) {
-      observer.observe(calendarEl, { childList: true, subtree: true });
+  const handleSelect = (range: DateRange | undefined) => {
+    if (range?.from) {
+      setSelectedRange(range);
     }
+  };
 
-    return () => observer.disconnect();
-  }, [range, setDateRangeFromCalender, setIsWeekSelected]); // ✅ Added safe dependencies
-
-  const handleSelect = (item: { selection: DateRangeItem }) => {
-    setRange([item.selection]);
-    setOpen(false);
+  const getFormattedRange = () => {
+    const { from, to } = selectedRange;
+    if (from && to) return `${format(from, "dd-MM-yyyy")} → ${format(to, "dd-MM-yyyy")}`;
+    if (from) return `${format(from, "dd-MM-yyyy")} → ...`;
+    return "DD-MM-YYYY → DD-MM-YYYY";
   };
 
   return (
-    <div className="flex items-start gap-4">
-      <Popover open={open} onOpenChange={setOpen}>
-        <PopoverTrigger asChild>
-          <div
-            className="flex flex-col gap-1 p-3 border rounded cursor-pointer w-[280px]"
-            onClick={() => setOpen(!open)}
-          >
-            <div className="text-sm text-gray-500">Selected Range</div>
-            <div className="text-base font-medium">
-              {format(range[0].startDate, "MMM d, yyyy")} -{" "}
-              {format(range[0].endDate, "MMM d, yyyy")}
-            </div>
+    <Popover open={open} onOpenChange={setOpen}>
+      <PopoverTrigger asChild>
+        <Button
+          onClick={() => setOpen(!open)}
+          className={cn(
+            `${className} ${colorClass} text-primary-dark justify-between bg-white hover:bg-white w-[90%] sm:w-[40%] lg:w-[30%] hover:border-[#A1A1A1] data-[placeholder]:text-[#9B9B9B] h-13 sm:h-15 rounded-full border border-[#A1A1A1] outline-none data-[state=open]:border-secondary-1 px-4 py-2`,
+            !selectedRange.from && "text-muted-foreground"
+          )}
+        >
+          {getFormattedRange()}
+          <div className="relative w-6">
+            <Image src="icons/calendar.svg" alt="calendar icon" fill className="!static w-full" />
           </div>
-        </PopoverTrigger>
-
-        <PopoverContent className="w-auto p-0 mt-2">
-          <DateRange
-            editableDateInputs={false}
-            onChange={handleSelect}
-            moveRangeOnFirstSelection={false}
-            ranges={range}
-            months={1}
-            direction="vertical"
-            showDateDisplay={false}
-            minDate={new Date()} // disable past dates
-          />
-        </PopoverContent>
-      </Popover>
-    </div>
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent className="w-auto p-0 mt-2 bg-white">
+        <Calendar
+          mode="range"
+          selected={selectedRange}
+          onSelect={handleSelect}
+          className="rounded-md"
+        />
+      </PopoverContent>
+    </Popover>
   );
 }
+
