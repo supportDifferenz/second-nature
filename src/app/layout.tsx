@@ -4,7 +4,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useState } from "react";
 import "./globals.css";
 import { dmSerifDisplay, bellotaText } from "@/components/config/font";
-// import SmoothScrollWrapper from "@/components/molecules/smoothScroll/SmoothScrollWrapper";
 
 export default function RootLayout({
   children,
