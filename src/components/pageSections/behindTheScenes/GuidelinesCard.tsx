@@ -40,12 +40,12 @@ export default function GuidelinesCard() {
         </motion.div>
       </div>
 
-      <div className="w-full relative lg:w-[50%] gap-[var(--space-30-40)] p-16 flex flex-col ">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
+          className="w-full relative lg:w-[50%] gap-[var(--space-30-40)] p-16 flex flex-col "
         >
           <div className="flex flex-col items-center mt-[-100px] sm:mt-0 lg:items-start sm:flex-row gap-7">
             <div className="w-[15.6vw] sm:w-[8.6vw] lg:w-[128px]">
@@ -135,7 +135,6 @@ export default function GuidelinesCard() {
             </div>
           </div>
         </motion.div>
-      </div>
     </div>
   );
 }
