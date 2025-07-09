@@ -108,17 +108,17 @@ const FooterBannerCTA: React.FC<
               />
             )}
             {paragraph && (
-              <Typography tag="h6" text={paragraph} style={{ color: paragraphColor }} />
+              <Typography tag="h6" text={paragraph} style={{ color: paragraphColor }} className="xl:max-w-[70%]" />
             )}
             {subParagraph && (
-              <Typography tag="p" text={subParagraph} className="!text-sm mt-(--space-24-45)" style={{ color: paragraphColor }} />
+              <Typography tag="p" text={subParagraph} className="!text-sm mt-(--space-24-45) " style={{ color: paragraphColor }} />
             )}
             {buttonText && buttonLink && (
               <Button
                 variant={"whiteBtnSecondary2BorderAndText"}
                 size={"md"}
                 // className="mt-(--space-24-45)"
-                className="mt-3.5 lg:mt-2.5 bg-primary-light"
+                className="mt-3.5 lg:mt-5 bg-primary-light"
                 onClick={() => {
                   startTransition(() => {
                     router.push(buttonLink);

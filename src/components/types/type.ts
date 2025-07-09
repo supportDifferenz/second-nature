@@ -86,6 +86,13 @@ export type FAQSPropsTypes = {
   className?: string;
 };
 
+// MealsFAQSProp type
+export type MealsFAQSPropsTypes = {
+  // faqs: FAQSItemsPropsTypes[];
+  defaultOpenIndex?: number | null;
+  className?: string;
+};
+
 // TitlePropsType type
 export type TitlePropsType = {
   title?: string; // Mandatory

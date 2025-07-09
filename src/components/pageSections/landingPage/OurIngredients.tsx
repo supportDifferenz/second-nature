@@ -57,7 +57,7 @@ export default function OurIngredients() {
     return () => window.removeEventListener("resize", updateRadius);
   }, []);
 
-const softEase = [0.33, 1, 0.68, 1] as [number, number, number, number];
+  const softEase = [0.33, 1, 0.68, 1] as [number, number, number, number];
 
   return (
     <>
@@ -94,77 +94,93 @@ const softEase = [0.33, 1, 0.68, 1] as [number, number, number, number];
           </div>
 
           <div className="sm:absolute z-[2] sm:top-1/2 sm:left-1/2 sm:transform sm:-translate-y-1/2 sm:-translate-x-1/2 overflow-x-auto sm:overflow-visible">
-            <div className="flex flex-row-reverse justify-end sm:flex-row sm:justify-center gap-[22px] sm:gap-0 sm:items-center">
+            <div className="flex flex-row-reverse justify-end sm:flex-row sm:justify-center gap-[22px] sm:gap-0 sm:items-center px-5 sm:px-0">
               {features.map(([img, text, align], index) => {
                 const angle = (index / features.length) * (1.5 * Math.PI) - 0.45;
                 const x = Math.cos(angle) * radius;
                 const y = Math.sin(angle) * radius;
 
                 return (
-                  <motion.div
+                  <div
                     key={uuidv4()}
-                    initial={{ transform: `translate(0px, 0px)` }}
-                    whileInView={
-                      isWeb
-                        ? { transform: `translate(${x}px, ${y}px)` }
-                        : { transform: "translate(0)" }
-                    }
-                    transition={{
-                      duration: 1.2,
-                      delay: 0.4 + index * 0.05,
-                      ease: softEase,
-                    }}
-                    viewport={{ once: true }}
                     className="relative sm:absolute flex flex-col items-center sm:justify-center text-center sm:origin-center"
                     style={isWeb ? { transform: `translate(${x}px, ${y}px)` } : {}}
                   >
-                    <motion.div
-                      initial={{ opacity: 0, scale: 0 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      transition={{
-                        duration: 1.1,
-                        delay: 0.6 + index * 0.05,
-                        ease: softEase,
-                      }}
-                      viewport={{ once: true }}
-                      className="w-(--space-105-136) h-(--space-105-136)"
-                    >
-                      <Image
-                        src={img}
-                        alt="Feature"
-                        fill
-                        priority
-                        className="rounded-full !static object-contain"
-                      />
-                    </motion.div>
+                    {isWeb ? (
+                      <motion.div
+                        initial={{ opacity: 0, scale: 0 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        transition={{
+                          duration: 1.1,
+                          delay: 0.6 + index * 0.05,
+                          ease: softEase,
+                        }}
+                        viewport={{ once: true }}
+                        className="w-(--space-105-136) h-(--space-105-136) "
+                      >
+                        <Image
+                          src={img}
+                          alt="Feature"
+                          fill
+                          priority
+                          className="rounded-full !static object-contain"
+                        />
+                      </motion.div>
+                    ) : (
+                      <div className="w-(--space-105-136) h-(--space-105-136)">
+                        <Image
+                          src={img}
+                          alt="Feature"
+                          fill
+                          priority
+                          className="rounded-full !static object-contain"
+                        />
+                      </div>
+                    )}
 
-                    <motion.div
-                      initial={{ opacity: 0 }}
-                      whileInView={{ opacity: 1 }}
-                      transition={{
-                        duration: 1.4,
-                        delay: 1.1 + index * 0.05,
-                        ease: softEase,
-                      }}
-                      viewport={{ once: true }}
-                      className={`sm:absolute w-(--space-156-160) ${
-                        align === "left"
-                          ? "sm:-left-[130%] sm:text-right"
-                          : align === "right"
-                          ? "sm:-right-[130%] sm:text-left"
-                          : align === "bottom"
-                          ? "sm:top-[100%]"
-                          : "sm:flex-col"
-                      }`}
-                    >
-                      <Typography tag="span" text={text} className="text-primary-dark" />
-                    </motion.div>
-                  </motion.div>
+                    {isWeb ? (
+                      <motion.div
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        transition={{
+                          duration: 1.4,
+                          delay: 1.1 + index * 0.05,
+                          ease: softEase,
+                        }}
+                        viewport={{ once: true }}
+                        className={`sm:absolute w-(--space-156-160) ${
+                          align === "left"
+                            ? "sm:-left-[130%] sm:text-right"
+                            : align === "right"
+                            ? "sm:-right-[130%] sm:text-left"
+                            : align === "bottom"
+                            ? "sm:top-[100%]"
+                            : "sm:flex-col"
+                        }`}
+                      >
+                        <Typography tag="span" text={text} className="text-primary-dark" />
+                      </motion.div>
+                    ) : (
+                      <div
+                        className={`sm:absolute w-(--space-156-160) ${
+                          align === "left"
+                            ? "sm:-left-[130%] sm:text-right"
+                            : align === "right"
+                            ? "sm:-right-[130%] sm:text-left"
+                            : align === "bottom"
+                            ? "sm:top-[100%]"
+                            : "sm:flex-col"
+                        }`}
+                      >
+                        <Typography tag="span" text={text} className="text-primary-dark" />
+                      </div>
+                    )}
+                  </div>
                 );
               })}
 
               <motion.div
-                initial={{ scale: 0 }}
+                initial={{ scale: 0.6 }}
                 whileInView={{ scale: 1 }}
                 transition={{
                   duration: 1.1,

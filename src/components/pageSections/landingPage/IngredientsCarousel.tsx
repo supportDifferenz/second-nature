@@ -76,7 +76,7 @@ export default function IngredientsCarousel() {
     <div className="container relative">
       {/* Green Card */}
       <div
-        className="w-full shadow-[inset_6px_6px_16px_0px_rgba(0,0,0,0.55)] bg-primary-dark rounded-full p-6 pb-[130px] sm:pb-[70px] lg:pb-6 flex flex-col lg:flex-row gap-[50px] lg:gap-[3%] items-stretch lg:items-center sm:max-w-[400px] mx-auto lg:max-w-max"
+        className="w-full shadow-[inset_6px_6px_16px_0px_rgba(0,0,0,0.55)] bg-primary-dark rounded-full p-6 pb-[60px] sm:pb-[70px] lg:pb-6 flex flex-col lg:flex-row gap-[50px] lg:gap-[3%] items-stretch lg:place-items-stretch sm:max-w-[400px] mx-auto lg:max-w-max h-[830px] sm:h-auto"
         onMouseDown={handleHold}
         onMouseUp={handleRelease}
         onMouseLeave={handleRelease}
@@ -84,7 +84,7 @@ export default function IngredientsCarousel() {
         onTouchEnd={handleRelease}
       >
         {/* Image with smooth fade and height-safe layout */}
-        <div className="lg:basis-[50%] h-[450px] sm:h-[400px] lg:h-auto flex items-center justify-center overflow-hidden">
+        <div className="lg:basis-[50%] h-[300px] sm:h-[400px] lg:h-[30vw] flex items-center justify-center overflow-hidden ">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentSlide.image + currentIndex}
@@ -92,7 +92,7 @@ export default function IngredientsCarousel() {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 1.01 }}
               transition={{ duration: 0.6, ease: [0.42, 0, 0.58, 1] }}
-              className="w-full h-full flex-shrink-0"
+              className="w-full h-full flex-shrink-0 "
             >
               <Image
                 src={currentSlide.image}
@@ -107,7 +107,7 @@ export default function IngredientsCarousel() {
         </div>
 
         {/* Text with smooth transition */}
-        <div className="lg:basis-[40%] text-white text-center lg:text-left min-h-[200px]">
+        <div className="grow lg:basis-[40%]  text-white text-center lg:text-left  relative  lg:flex lg:items-center">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentSlide.title + currentIndex}
@@ -139,7 +139,7 @@ export default function IngredientsCarousel() {
           </AnimatePresence>
 
           {/* Navigation Buttons */}
-          <div className="flex justify-center lg:justify-start gap-3 mt-12 lg:mt-6 items-center">
+          <div className="flex justify-center lg:justify-start gap-3 mt-12 lg:mt-6 items-center absolute max-[575px]:bottom-[0px] bottom-[20px] max-[575px]:left-1/2 max-[575]:transform max-[575px]:-translate-x-1/2  ">
             <Button
               onClick={() => {
                 prevSlide();
@@ -155,7 +155,7 @@ export default function IngredientsCarousel() {
               />
             </Button>
 
-            <div className="relative w-full h-[2.5px] bg-contrast-button max-w-9 overflow-hidden ">
+            <div className="relative w-full h-[2.5px] bg-contrast-button max-w-9 overflow-hidden flex-shrink-0">
               <motion.div
                 className="absolute h-full bg-primary"
                 initial={{ width: 0 }}
