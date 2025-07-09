@@ -20,7 +20,7 @@ const mealContent = {
       description:
         "Our Beef Bowl is made up of 85% lean ground beef and nutrient-rich beef liver, is a protein-packed feast designed to fuel your dog's lifestyle enhanced with fresh carrots and spinach for fiber and antioxidants supporting healthy muscles, digestion, and a shiny coat.",
       ingredients: [
-        { image: "/images/LeanGroundBeefMeal.webp", name: "85% Lean Ground Beef" },
+        { image: "/images/NewLeanGroundBeefMeal.webp", name: "85% Lean Ground Beef" },
         { image: "/images/BeefLiverMeal.webp", name: "Beef Liver" },
         { image: "/images/CarrotMeal.webp", name: "Carrots" },
         { image: "/images/SpinachMeal.webp", name: "Spinach" },
@@ -28,7 +28,7 @@ const mealContent = {
         { image: "/images/CodLiverOilMeal.webp", name: "Cod Liver Oil" },
         { image: "/images/IonizedSaltMeal.webp", name: "Iodine" },
         { image: "/images/DriedKelpMeal.webp", name: "Kelp" },
-        { image: "/images/VitaminsMeal.webp", name: "Vitamins and Minerals" },
+        { image: "/images/VitaminsMeal.webp", name: "Vitamins & Minerals" },
       ],
       healthBenefits: {
         paragraph:
@@ -75,7 +75,7 @@ const mealContent = {
         { image: "/images/CodLiverOilMeal.webp", name: "Cod Liver Oil" },
         { image: "/images/YeastMeal.webp", name: "Yeast" },
         { image: "/images/DriedKelpMeal.webp", name: "Kelp" },
-        { image: "/images/Vitamins.webp", name: "Vitamins and Minerals" },
+        { image: "/images/VitaminsMeal.webp", name: "Vitamins & Minerals" },
       ],
       healthBenefits: {
         paragraph:
@@ -122,7 +122,7 @@ const mealContent = {
         { image: "/images/HempSeedMeal.webp", name: "Hempseed" },
         { image: "/images/CodLiverOilMeal.webp", name: "Cod Liver" },
         { image: "/images/YeastMeal.webp", name: "Yeast" },
-        { image: "/images/VitaminsMeal.webp", name: "Vitamins and Minerals" },
+        { image: "/images/VitaminsMeal.webp", name: "Vitamins & Minerals" },
       ],
       healthBenefits: {
         paragraph:
@@ -163,7 +163,7 @@ const mealContent = {
       description:
         "Crafted with 85 % lean ground beef, taurine-rich beef heart, and nutrient-dense beef liver, our Beef Bowl for Cats delivers the species-appropriate protein and heme iron your carnivore craves. Perfectly balanced minerals and calcium from eggshell powder",
       ingredients: [
-        { image: "/images/LeanGroundBeefMeal.webp", name: "85% Lean Ground Beef" },
+        { image: "/images/NewLeanGroundBeefMeal.webp", name: "85% Lean Ground Beef" },
         { image: "/images/BeefLiverMeal.webp", name: "Beef Liver" },
         { image: "/images/BeefHeartMeal.webp", name: "Beef Heart" },
         // { image: "/images/SpinachMeal.webp", name: "Spinach" },
@@ -171,7 +171,7 @@ const mealContent = {
         { image: "/images/SweetRedPepperMeal.webp", name: "Sweet Peppers" },
         { image: "/images/CarrotMeal.webp", name: "Carrots" },
         { image: "/images/HempSeedMeal.webp", name: "Hempseed" },
-        { image: "/images/VitaminsMeal.webp", name: "Vitamins and Minerals" },
+        { image: "/images/VitaminsMeal.webp", name: "Vitamins & Minerals" },
         { image: "/images/SeasoningMeal.webp", name: "Seasoning" },
       ],
       healthBenefits: {
@@ -214,12 +214,12 @@ const mealContent = {
         { image: "/images/ChickenBreastMeal.webp", name: "Dark Chicken" },
         { image: "/images/BeefLiverMeal.webp", name: "Chicken Liver" },
         { image: "/images/ChickenHeartMeal.webp", name: "Chicken Heart" },
-        { image: "/images/BrococcoliMeal.webp", name: "Broccoli" },
+        { image: "/images/BroccoliMeal.webp", name: "Broccoli" },
         { image: "/images/EggYolkMeal.webp", name: "Whole Egg" },
         { image: "/images/SweetRedPepperMeal.webp", name: "Sweet Peppers" },
-        { image: "/images/VitaminsMeal.webp", name: "Vitamins and Minerals" },
+        { image: "/images/VitaminsMeal.webp", name: "Vitamins & Minerals" },
         { image: "/images/SeasoningMeal.webp", name: "Seasoning" },
-        { image: "/images/SeasoningMeal.webp", name: "Thyme" },
+        { image: "/images/ThymeMeal.webp", name: "Thyme" },
       ],
       healthBenefits: {
         paragraph:
@@ -261,12 +261,12 @@ const mealContent = {
         { image: "/images/LeanGroundLambMeal.webp", name: "85% Lean Ground Lamb" },
         { image: "/images/BeefLiverMeal.webp", name: "Lamb Liver" },
         { image: "/images/ButternutSquashMeal.webp", name: "Squash" },
-        { image: "/images/BrococcoliMeal.webp", name: "Broccoli" },
+        { image: "/images/BroccoliMeal.webp", name: "Broccoli" },
         { image: "/images/HempSeedMeal.webp", name: "Hempseed" },
         { image: "/images/HempSeedMeal.webp", name: "Whole Egg" },
-        { image: "/images/SeasoningMeal.webp", name: "Vitamins and Minerals" },
+        { image: "/images/SeasoningMeal.webp", name: "Vitamins & Minerals" },
         { image: "/images/SeasoningMeal.webp", name: "Seasoning" },
-        { image: "/images/BroccoliMeal.webp", name: "Thyme" },
+        { image: "/images/ThymeMeal.webp", name: "Thyme" },
       ],
       healthBenefits: {
         paragraph:
