@@ -4,6 +4,7 @@ import FaqForm from "@/components/pageSections/faqs/FaqForm";
 import FaqSection from "@/components/pageSections/faqs/FaqSection";
 import MainLayout from "@/components/templates/MainLayout";
 import { Toaster } from "@/components/ui/sonner";
+import { motion } from "framer-motion";
 import React, { useRef } from "react";
 
 function Page() {
@@ -19,7 +20,14 @@ function Page() {
         <FaqSection onAskUsClick={scrollToForm} />
       </div>
       <div ref={formRef} className="container pb-12 lg:hidden">
-        <FaqForm />
+        <motion.div
+          initial={{ opacity: 0, y: 60 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+        >
+          <FaqForm />
+        </motion.div>
       </div>
       <Toaster position="top-right" />
     </MainLayout>

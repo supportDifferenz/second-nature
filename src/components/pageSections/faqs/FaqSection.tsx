@@ -3,6 +3,7 @@ import Typography from "@/components/atoms/typography/Typography";
 import { SecondaryBlockTitle } from "@/components/molecules/titleSyles/Title";
 import FAQS from "@/components/organism/faq/FAQS";
 import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import React, { useRef } from "react";
 import FaqForm from "./FaqForm";
@@ -61,88 +62,106 @@ export default function FaqSection({ onAskUsClick }: FaqSectionProps) {
       <div className="container flex flex-col sm:flex-row gap-[var(--space-30-60)] lg:justify-between">
         <div className="relative">
           <div className="lg:-ml-[2%] xl:-ml-[16%] h-fit sm:sticky top-[5%]">
-            <SecondaryBlockTitle
-              title="frequently asked"
-              highlight="questions "
-              textAlign="text-center sm:text-left lg:text-left"
-              className="whitespace-nowrap"
-            />
+            <motion.div
+              initial={{ opacity: 0, y: 60 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            >
+              <SecondaryBlockTitle
+                title="frequently asked"
+                highlight="questions "
+                textAlign="text-center sm:text-left lg:text-left"
+                className="whitespace-nowrap"
+              />
 
-            <div className="relative">
-              {/* Scrollable container */}
-              <div
-                ref={scrollContainerRef}
-                className="flex flex-row sm:flex-col gap-[var(--space-10-15)] mt-[var(--space-34-42)] pr-11 sm:pr-0 overflow-x-auto scrollbar-hide"
-              >
-                <Button
-                  size={"md"}
-                  variant={"primaryBtn"}
-                  className="w-fit text-white"
+              <div className="relative">
+                {/* Scrollable container */}
+                <div
+                  ref={scrollContainerRef}
+                  className="flex flex-row sm:flex-col gap-[var(--space-10-15)] mt-[var(--space-34-42)] pr-11 sm:pr-0 overflow-x-auto scrollbar-hide"
                 >
-                  Our Food
-                </Button>
-                <Button
-                  size={"md"}
-                  variant={"primaryBtnGrey"}
-                  className="w-fit  text-white"
-                >
-                  Creating Your Plan
-                </Button>
-                <Button
-                  size={"md"}
-                  variant={"primaryBtnGrey"}
-                  className="w-fit text-white"
-                >
-                  Subscription
-                </Button>
-                <Button
-                  size={"md"}
-                  variant={"primaryBtnGrey"}
-                  className="w-fit text-white"
-                >
-                  Packaging and Shipping
-                </Button>
+                  <Button
+                    size={"md"}
+                    variant={"primaryBtn"}
+                    className="w-fit text-white"
+                  >
+                    Our Food
+                  </Button>
+                  <Button
+                    size={"md"}
+                    variant={"primaryBtnGrey"}
+                    className="w-fit  text-white"
+                  >
+                    Creating Your Plan
+                  </Button>
+                  <Button
+                    size={"md"}
+                    variant={"primaryBtnGrey"}
+                    className="w-fit text-white"
+                  >
+                    Subscription
+                  </Button>
+                  <Button
+                    size={"md"}
+                    variant={"primaryBtnGrey"}
+                    className="w-fit text-white"
+                  >
+                    Packaging and Shipping
+                  </Button>
+                </div>
+
+                {/* Gradient overlay and scroll button - hidden on small screens */}
+                <div className="absolute top-0 right-[-2px] h-full w-20 sm:hidden pointer-events-none">
+                  {/* Gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-l from-white via-white/80 to-transparent"></div>
+
+                  {/* Scroll button */}
+                  <button
+                    onClick={scrollRight}
+                    className="absolute top-1/2 right-2 -translate-y-1/2 w-8 h-8 transition-shadow pointer-events-auto flex items-center justify-center"
+                    aria-label="Scroll right"
+                  >
+                    <Image
+                      src="/icons/push-right.svg"
+                      alt="Scroll right"
+                      width={32}
+                      height={32}
+                    />
+                  </button>
+                </div>
               </div>
 
-              {/* Gradient overlay and scroll button - hidden on small screens */}
-              <div className="absolute top-0 right-[-2px] h-full w-20 sm:hidden pointer-events-none">
-                {/* Gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-l from-white via-white/80 to-transparent"></div>
-
-                {/* Scroll button */}
-                <button
-                  onClick={scrollRight}
-                  className="absolute top-1/2 right-2 -translate-y-1/2 w-8 h-8 transition-shadow pointer-events-auto flex items-center justify-center"
-                  aria-label="Scroll right"
+              <div className="mt-6 lg:mt-7 lg:w-[16vw]">
+                <Typography
+                  tag="h6"
+                  text="Got a question we haven't answered,"
+                  className="text-secondary-1"
                 >
-                  <Image
-                    src="/icons/push-right.svg"
-                    alt="Scroll right"
-                    width={32}
-                    height={32}
-                  />
-                </button>
+                  <span onClick={onAskUsClick} className="cursor-pointer">
+                    <Typography
+                      tag="span"
+                      text="Ask us"
+                      className="underline"
+                    />
+                  </span>
+                </Typography>
               </div>
-            </div>
-
-            <div className="mt-6 lg:mt-7 lg:w-[16vw]">
-              <Typography
-                tag="h6"
-                text="Got a question we haven't answered,"
-                className="text-secondary-1"
-              >
-                <span onClick={onAskUsClick} className="cursor-pointer">
-                  <Typography tag="span" text="Ask us" className="underline" />
-                </span>
-              </Typography>
-            </div>
+            </motion.div>
           </div>
         </div>
         <div className="lg:w-[49.2vw]">
-          <FAQS faqs={faqsData} defaultOpenIndex={0} />
-          <div className="max-lg:hidden">
-            <FaqForm />
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 60 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <FAQS faqs={faqsData} defaultOpenIndex={0} />
+            <div className="max-lg:hidden">
+              <FaqForm />
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>
