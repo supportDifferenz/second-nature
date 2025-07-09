@@ -8,7 +8,8 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
-import WeeklyRangeSelector from "@/components/molecules/weekDateRangePicker/WeeklyRangeSelector";
+// import WeeklyRangeSelector from "@/components/molecules/weekDateRangePicker/WeeklyRangeSelector";
+import RangeDatePicker from "@/components/molecules/weekDateRangePicker/WeeklyRangeSelector";
 
 // Types
 type WeekOption = "1week" | "2weeks" | "3weeks" | "4weeks" | "custom";
@@ -42,19 +43,27 @@ export const PauseDeliveriesPopup: React.FC<PauseDeliveriesPopupProps> = ({
     from: addDays(today, 1),
     to: initialRange?.to || endOfWeek(addWeeks(today, 1), { weekStartsOn: 1 }),
   });
-  const [dateRangeFromCalender, setDateRangeFromCalender] = useState<{ from: Date; to: Date } | null>(null);
+  // const [dateRangeFromCalender, setDateRangeFromCalender] = useState<{ from: Date; to: Date } | null>(null);
+  const [dateRangeFromCalender] = useState<{ from: Date; to: Date } | null>(null);
+  const [range, setRange] = useState<{ from: Date | undefined; to?: Date | undefined }>({
+    from: undefined,
+    to: undefined,
+  });
+
 
   console.log("Date range in pop up:", dateRange);
 
-  const [reason, ] = useState<string>("");
+  const [reason,] = useState<string>("");
 
   const handleSubmit = () => {
-    if(isWeekSelected === true){
+    if (isWeekSelected === true) {
       onConfirm(dateRange, reason)
-    } else if(isWeekSelected === false){
+    } else if (isWeekSelected === false) {
       onConfirm(dateRangeFromCalender!, reason)
     }
   };
+
+
 
   // const handleWeekOptionChange = (value: WeekOption) => {
   //   setSelectedOption(value);
@@ -196,7 +205,8 @@ export const PauseDeliveriesPopup: React.FC<PauseDeliveriesPopupProps> = ({
             </Label>
           </div>
         </RadioGroup>
-        <WeeklyRangeSelector setDateRangeFromCalender={setDateRangeFromCalender} setIsWeekSelected={setIsWeekSelected} />
+        {/* <WeeklyRangeSelector setDateRangeFromCalender={setDateRangeFromCalender} setIsWeekSelected={setIsWeekSelected} /> */}
+        <RangeDatePicker selectedRange={range} setSelectedRange={setRange} />
 
       </div>
     </Popup>
