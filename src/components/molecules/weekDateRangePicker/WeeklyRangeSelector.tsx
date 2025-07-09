@@ -262,7 +262,7 @@
 //       const newTo = dateRange?.to && !isBefore(date, dateRange.to) 
 //         ? date
 //         : dateRange?.to || date
-      
+
 //       setDateRange({
 //         from: newFrom,
 //         to: newTo
@@ -277,7 +277,7 @@
 //       const newFrom = dateRange?.from && isAfter(dateRange.from, date)
 //         ? date
 //         : dateRange?.from || date
-      
+
 //       setDateRange({
 //         from: newFrom,
 //         to: newTo
@@ -344,12 +344,12 @@
 //             disabled={(date) => {
 //               // Disable past dates except today
 //               const isPastDate = isBefore(date, new Date()) && !isToday(date)
-              
+
 //               // For 'to' date selection, disable dates before from date
 //               if (selectionMode === 'to' && dateRange?.from) {
 //                 return isPastDate || isBefore(date, dateRange.from)
 //               }
-              
+
 //               return isPastDate
 //             }}
 //             modifiers={{
@@ -514,17 +514,19 @@ export default function RangeDatePicker({
     }
   };
 
-  const getFormattedRange = () => {
-    const { from, to } = selectedRange;
-    if (from && to) return `${format(from, "dd-MM-yyyy")} → ${format(to, "dd-MM-yyyy")}`;
-    if (from) return `${format(from, "dd-MM-yyyy")} → ...`;
-    return "DD-MM-YYYY → DD-MM-YYYY";
-  };
+  // const getFormattedRange = () => {
+  //   const { from, to } = selectedRange;
+  //   if (from && to) return `${format(from, "dd-MM-yyyy")} → ${format(to, "dd-MM-yyyy")}`;
+  //   if (from) return `${format(from, "dd-MM-yyyy")} → ...`;
+  //   return "DD-MM-YYYY → DD-MM-YYYY";
+  // };
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
-        <Button
+
+
+        {/* <Button
           onClick={() => setOpen(!open)}
           className={cn(
             `${className} ${colorClass} text-primary-dark justify-between bg-white hover:bg-white w-[90%] sm:w-[40%] lg:w-[30%] hover:border-[#A1A1A1] data-[placeholder]:text-[#9B9B9B] h-13 sm:h-15 rounded-full border border-[#A1A1A1] outline-none data-[state=open]:border-secondary-1 px-4 py-2`,
@@ -535,7 +537,43 @@ export default function RangeDatePicker({
           <div className="relative w-6">
             <Image src="icons/calendar.svg" alt="calendar icon" fill className="!static w-full" />
           </div>
+        </Button> */}
+
+        <Button
+          onClick={() => setOpen(!open)}
+          className={cn(
+            `flex items-center justify-between gap-2 px-2.5 py-2 w-full 
+     h-9  rounded-none border border-[#8B3B3B] bg-[#FAFAF0]
+     text-[#8B3B3B] hover:bg-[#FAFAF0] outline-none 
+     data-[state=open]:border-[#8B3B3B] data-[placeholder]:text-[#9B9B9B]`,
+            !selectedRange.from && "text-muted-foreground",
+            className,
+            colorClass
+          )}
+        >
+          <div className="flex items-center w-full justify-between">
+            <div className="flex items-center gap-2 w-1/2">
+              <Image
+                src="/icons/calendar-secondary.svg"
+                alt="calendar icon"
+                width={32}
+                height={32}
+                className="shrink-0 !w-4 !h-4"
+              />
+              <span className="text-sm">
+                {selectedRange?.from ? format(selectedRange.from, "dd MMM yyyy") : "From"}
+              </span>
+            </div>
+            <div className="border-l border-[#8B3B3B] h-5 mx-2.5" />
+            <div className="w-1/2 text-left">
+              <span className="text-sm">
+                {selectedRange?.to ? format(selectedRange.to, "dd MMM yyyy") : "To"}
+              </span>
+            </div>
+          </div>
         </Button>
+
+
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0 mt-2 bg-white">
         <Calendar
