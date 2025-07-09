@@ -21,9 +21,7 @@ export default function RootLayout({
       </head>
       <body className={`${dmSerifDisplay.variable} ${bellotaText.variable} antialiased dark`}>
         <QueryClientProvider client={queryClient}>
-          {/* <SmoothScrollWrapper> */}
             {children}
-          {/* </SmoothScrollWrapper> */}
         </QueryClientProvider>
       </body>
     </html>
