@@ -1,5 +1,8 @@
+"use client";
+
 import MainLayout from "@/components/templates/MainLayout";
 import React from "react";
+import { motion } from "framer-motion";
 import HeroSection from "@/components/pageSections/reviews/HeroSection";
 import Testimonials from "@/components/pageSections/reviews/Testimonials";
 import GoogleReviews from "@/components/pageSections/reviews/GoogleReviews";
@@ -24,7 +27,7 @@ function page() {
     },
   };
 
-    return (
+  return (
     <MainLayout>
       <HeroSection />
       <div
@@ -43,9 +46,15 @@ function page() {
         <Testimonials />
       </div>
 
-      <div className="">
+      <motion.div
+        initial={{ opacity: 0, y: 60 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+      >
         <GoogleReviews />
-      </div>
+      </motion.div>
+
       <div className="mt-[var(--space-120-180)]">
         <FooterBannerCTA
           id="footer-banner"
