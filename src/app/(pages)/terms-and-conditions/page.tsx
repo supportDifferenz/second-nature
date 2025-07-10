@@ -35,33 +35,30 @@ function page() {
         <div className="">
           <Typography
             tag="h3"
-            text="Lyka Pet Food Privacy Policy"
+            text="Privacy Policy"
             className="text-secondary-1 !font-bold"
           />
           <div className="flex flex-col gap-[var(--space-10-20)] mt-[var(--space-14-24)]">
             <Typography
               tag="p"
-              text="In this Privacy Policy, ‘us’ ‘we’ or ‘our’ means Lyka Pet Food Pty Ltd and our registered office is at 290-294 Botany Road, Alexandria NSW 2015"
+              text='In this Privacy Policy, "Second Nature," "we," "us," or "our" refers to Second Nature Trading W.L.L., a company established and operating in the State of Qatar. Our registered office is located at Office Address, Doha, Qatar.'
+            />
+
+            <Typography
+              tag="p"
+              text="We are committed to protecting your personal information in accordance with the laws of the State of Qatar, including Law No. 13 of 2016 Concerning Personal Data Privacy Protection (Qatar Data Privacy Law)."
             />
             <Typography
               tag="p"
-              text="We are committed to respecting your privacy. Our Privacy Policy sets out how we collect, use, store and disclose your personal information."
+              text="You may contact us at any time by emailing us at: [insert@email.com]"
             />
             <Typography
               tag="p"
-              text="You may contact us at any time by writing to us at info@lyka.com.au"
+              text="By using our website and services and providing your personal information, you agree to the terms outlined in this Privacy Policy and any other applicable agreements between you and Second Nature."
             />
             <Typography
               tag="p"
-              text="By providing personal information to us, you consent to our collection, use and disclosure of your personal information in accordance with this Privacy Policy and any other arrangements that apply between us."
-            />
-            <Typography
-              tag="p"
-              text="We may change our Privacy Policy from time to time by publishing changes to it on our website. We encourage you to check our website periodically to ensure that you are aware of our current Privacy Policy."
-            />
-            <Typography
-              tag="p"
-              text="Personal information includes information or an opinion about an individual that is reasonably identifiable. For example, this may include your name, age, gender, postcode and contact details. It may also include financial information, including your credit card information."
+              text="We may update this Privacy Policy from time to time by publishing the updated version on our website. We encourage you to review this page periodically."
             />
           </div>
         </div>
@@ -95,12 +92,13 @@ function page() {
               <Typography tag="p" className="ml-2" text="2. Pet Information" />
               <Typography tag="p" text="">
                 <ul className="list-disc flex flex-col gap-0.5 ml-10 lg:ml-12 marker:text-[10px] marker:text-gray-700">
-                  <li>Your pets name(s)</li>
-                  <li>Your pets breed(s)</li>
-                  <li>Your pets age(s)</li>
-                  <li>Your pets weight(s)</li>
-                  <li>Your pets activity level(s)</li>
-                  <li>Your pets allergies and/or intolerances</li>
+                  <li>Your pet&apos;s name</li>
+                  <li>Breed</li>
+                  <li>Age</li>
+                  <li>Weight</li>
+                  <li>Activity level</li>
+                  <li>Allergies or intolerances</li>
+                  <li>Eating preferences</li>
                 </ul>
               </Typography>
             </div>
@@ -113,9 +111,9 @@ function page() {
               />
               <Typography tag="p" text="">
                 <ul className="list-disc flex flex-col gap-0.5 ml-10 lg:ml-12 marker:text-[10px] marker:text-gray-700">
-                  <li>Mailing or street address</li>
-                  <li>Telephone number</li>
-                  <li>Credit card information</li>
+                  <li>Mailing address</li>
+                  <li>Phone number</li>
+                  <li>Credit card or payment details</li>
                 </ul>
               </Typography>
             </div>
@@ -129,26 +127,17 @@ function page() {
               <Typography tag="p" text="">
                 <ul className="list-disc flex flex-col gap-0.5 ml-10 lg:ml-12 marker:text-[10px] marker:text-gray-700">
                   <li>
-                    Your device ID, device type, geo-location information,
-                    computer and connection information, statistics on page
-                    views, traffic to and from the sites, ad data, IP address
-                    and standard web log information
+                    IP address, device ID, browser type, and usage analytics
                   </li>
                   <li>
-                    Details of the products and services we have provided to you
-                    or that you have enquired about, including any additional
-                    information necessary to deliver those products and services
-                    and respond to your enquiries
+                    Your interactions with our site, including pages viewed,
+                    preferences, and traffic data
                   </li>
                   <li>
-                    Any additional information relating to you that you provide
-                    to us directly through our or indirectly through your use of
-                    our website or online presence or through other websites or
-                    accounts from which you permit us to collect information
+                    Information you provide through surveys, feedback forms,
+                    contests, or events
                   </li>
-                  <li>
-                    Information you provide to us through customer surveys
-                  </li>
+                  <li>Marketing and communication preferences</li>
                   <li>
                     Any other personal information that may be required in order
                     to facilitate your dealings with us
@@ -156,124 +145,262 @@ function page() {
                 </ul>
               </Typography>
             </div>
+            <div>
+              <Typography
+                tag="p"
+                className="ml-2"
+                text="5. Employment Applications"
+              />
+              <Typography tag="p" text="">
+                <ul className="list-disc flex flex-col gap-0.5 ml-10 lg:ml-12 marker:text-[10px] marker:text-gray-700">
+                  <li>
+                    When applying for a role with us, we may collect your CV,
+                    contact details, work history, and background check details
+                    from recruiters or prior employers. This policy does not
+                    cover information processed in the context of employment
+                    records of current or former employees.
+                  </li>
+                </ul>
+              </Typography>
+            </div>
           </div>
         </div>
-        <div className="flex flex-col gap-[var(--space-15-30)] mb-[var(--space-40-100)]">
+        <div className="flex flex-col gap-[var(--space-15-30)] mb-[var(--space-40-60)]">
           <Typography
             tag="h5"
-            text="What personal information do we collect?"
+            text="Sensitive Information"
             className="text-secondary-1"
           />
           <div className="flex flex-col">
             <Typography
               tag="p"
-              text="We may collect, hold, use and disclose your personal information for the following purposes:"
+              text="We may collect sensitive personal data, such as health-related or biometric information, only where necessary and with your explicit consent or as permitted by Qatari law."
             />
-            <ul className="list-disc flex flex-col gap-0.5 ml-6 marker:text-[10px] marker:text-gray-700">
-              <li>To enable you to access and use our website and services;</li>
-              <li>
-                To operate, protect, improve and optimise our website and
-                services, business and our user experience, such as to perform
-                analytics, conduct research for advertising and marketing
-                purposes;
-              </li>
-              <li>
-                To send you service, support and administrative messages,
-                reminders, technical notices, updates, security alerts, and
-                information requested by you;
-              </li>
-              <li>
-                To send you marketing and promotional messages and other
-                information that may be of interest to you, including
-                information sent by, or on behalf of, our business partners that
-                we think you may find interesting;
-              </li>
-              <li>
-                To administer rewards, surveys, contests, or other promotional
-                activities or events sponsored or managed by us or our business
-                partners;
-              </li>
-              <li>
-                To comply with our legal obligations, resolve any disputes that
-                we may have with any of our users, and enforce our agreements
-                with third parties; and
-              </li>
-              <li>To consider your employment application</li>
-            </ul>
-            <Typography
-              tag="p"
-              text="We may also disclose your personal information to a trusted third party who also holds other information about you. This third party may combine that information in order to enable it and us to develop anonymised consumer insights so that we can better understand your preferences and interests, personalise your experience and enhance the products and services that you receive."
-            />
-            <Typography
-              tag="p"
-              text="Do we use your personal information for marketing?"
-            />
-            <Typography
-              tag="p"
-              text="We and/or our carefully selected business partners may send you direct marketing communications and information about our products and services. This may take the form of emails, SMS, mail or other forms of communication, in accordance with the Spam Act and the Privacy Act."
-            />
-            <Typography tag="p" text="You may opt-out of r" />
           </div>
         </div>
-        <div className="flex flex-col gap-[var(--space-15-30)] mb-[var(--space-40-100)]">
+        <div className="flex flex-col gap-[var(--space-15-30)] mb-[var(--space-40-60)]">
           <Typography
-            tag="h3"
-            text="Lyka Pet Food Terms"
+            tag="h5"
+            text="How We Collect Information"
             className="text-secondary-1 !font-bold"
           />
           <div className="flex flex-col">
             <Typography
               tag="p"
-              text="We may collect, hold, use and disclose your personal information for the following purposes:"
+              text="We collect personal information directly from you or via:"
             />
             <ul className="list-disc flex flex-col gap-0.5 ml-6 marker:text-[10px] marker:text-gray-700">
-              <li>To enable you to access and use our website and services;</li>
+              <li>Our website or subscription forms</li>
               <li>
-                To operate, protect, improve and optimise our website and
-                services, business and our user experience, such as to perform
-                analytics, conduct research for advertising and marketing
-                purposes;
+                Your communication with us by email, phone, or social media
+              </li>
+              <li>Surveys, promotions, or events</li>
+              <li>
+                Analytics tools, such as cookies or website tracking
+                technologies
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div className="flex flex-col gap-[var(--space-15-30)] mb-[var(--space-40-60)]">
+          <Typography
+            tag="h5"
+            text="Why We Collect, Use, and Share Your Data"
+            className="text-secondary-1 !font-bold"
+          />
+          <div className="flex flex-col">
+            <Typography
+              tag="p"
+              text="We collect, hold, and use your personal information for purposes including:"
+            />
+            <ul className="list-disc flex flex-col gap-0.5 ml-6 marker:text-[10px] marker:text-gray-700">
+              <li>Fulfilling orders and personalizing your pet&apos;s meal plan</li>
+              <li>
+                Providing, maintaining, and improving our website and services
               </li>
               <li>
-                To send you service, support and administrative messages,
-                reminders, technical notices, updates, security alerts, and
-                information requested by you;
+                Sending updates, service alerts, and customer support responses
               </li>
-              <li>
-                To send you marketing and promotional messages and other
-                information that may be of interest to you, including
-                information sent by, or on behalf of, our business partners that
-                we think you may find interesting;
-              </li>
-              <li>
-                To administer rewards, surveys, contests, or other promotional
-                activities or events sponsored or managed by us or our business
-                partners;
-              </li>
-              <li>
-                To comply with our legal obligations, resolve any disputes that
-                we may have with any of our users, and enforce our agreements
-                with third parties; and
-              </li>
-              <li>To consider your employment application</li>
+              <li>Marketing and promotional messages (with your consent)</li>
+              <li>Managing competitions, offers, or loyalty programs</li>
+              <li>Complying with Qatari laws and regulations</li>
+              <li>Evaluating job applications</li>
             </ul>
             <Typography
               tag="p"
-              text="We may also disclose your personal information to a trusted third party who also holds other information about you. This third party may combine that information in order to enable it and us to develop anonymised consumer insights so that we can better understand your preferences and interests, personalise your experience and enhance the products and services that you receive."
+              text="We may share your data with third parties (e.g. IT providers, delivery partners, cloud services) only where necessary and under confidentiality agreements."
+            />
+          </div>
+        </div>
+        <div className="flex flex-col gap-[var(--space-15-30)] mb-[var(--space-40-60)]">
+          <Typography
+            tag="h5"
+            text="Marketing and Communication"
+            className="text-secondary-1 !font-bold"
+          />
+          <div className="flex flex-col">
+            <Typography
+              tag="p"
+              text="We may send you promotional emails, SMS, or updates about products and services. You may opt out at any time by:"
+            />
+            <ul className="list-disc flex flex-col gap-0.5 ml-6 marker:text-[10px] marker:text-gray-700">
+              <li>Clicking the unsubscribe link in emails</li>
+              <li>Replying &quot;STOP&quot; to marketing SMS</li>
+              <li>Contacting us directly</li>
+            </ul>
+            <Typography
+              tag="p"
+              text="We may share your data with third parties (e.g. IT providers, delivery partners, cloud services) only where necessary and under confidentiality agreements."
+            />
+          </div>
+        </div>
+        <div className="flex flex-col gap-[var(--space-15-30)] mb-[var(--space-40-60)]">
+          <Typography
+            tag="h5"
+            text="Disclosure to Third Parties"
+            className="text-secondary-1 !font-bold"
+          />
+          <div className="flex flex-col">
+            <Typography tag="p" text="We may share your personal data with:" />
+            <ul className="list-disc flex flex-col gap-0.5 ml-6 marker:text-[10px] marker:text-gray-700">
+              <li>Our employees and contractors</li>
+              <li>Payment processors and logistics providers</li>
+              <li>Marketing and analytics partners</li>
+              <li>Legal or regulatory bodies when required</li>
+              <li>
+                Any entity involved in a potential business merger or
+                acquisition
+              </li>
+              <li>Any third party with your explicit consent</li>
+            </ul>
+          </div>
+        </div>
+        <div className="flex flex-col gap-[var(--space-15-30)] mb-[var(--space-40-60)]">
+          <Typography
+            tag="h5"
+            text="International Transfers"
+            className="text-secondary-1 !font-bold"
+          />
+          <div className="flex flex-col">
+            <Typography
+              tag="p"
+              text="If your data is transferred outside of Qatar (e.g. for storage or processing on global cloud platforms), we will ensure that adequate data protection measures are in place, consistent with Qatari privacy laws."
+            />
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-[var(--space-15-30)] mb-[var(--space-40-60)]">
+          <Typography
+            tag="h5"
+            text="Cookies and Analytics"
+            className="text-secondary-1 !font-bold"
+          />
+          <div className="flex flex-col">
+            <Typography
+              tag="p"
+              text="We use cookies and similar technologies to:"
+            />
+            <ul className="list-disc flex flex-col gap-0.5 ml-6 marker:text-[10px] marker:text-gray-700">
+              <li>Enhance user experience</li>
+              <li>Remember preferences</li>
+              <li>Analyze website usage</li>
+              <li>
+                Serve tailored ads through platforms like Google Analytics and
+                Meta Pixel
+              </li>
+            </ul>
+            <Typography
+              tag="p"
+              text="You may disable cookies via your browser, though some site features may not work as intended."
             />
             <Typography
               tag="p"
-              text="Do we use your personal information for marketing?"
+              text="For opting out of Google Analytics tracking, you can install their browser add-on. Meta's privacy tools can be accessed through your Facebook/Instagram account settings."
+            />
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-[var(--space-15-30)] mb-[var(--space-40-60)]">
+          <Typography
+            tag="h5"
+            text="Use of Artificial Intelligence (AI)"
+            className="text-secondary-1 !font-bold"
+          />
+          <div className="flex flex-col">
+            <Typography
+              tag="p"
+              text="We may use AI or machine learning tools to personalize your experience, improve services, and support customer service. When using AI tools, we will:"
+            />
+            <ul className="list-disc flex flex-col gap-0.5 ml-6 marker:text-[10px] marker:text-gray-700">
+              <li>
+                Ensure transparency and human oversight for significant
+                decisions
+              </li>
+              <li>Maintain data security and restrict misuse</li>
+              <li>Evaluate risks and monitor AI performance</li>
+            </ul>
+            <Typography
+              tag="p"
+              text="We treat AI-generated inferences as personal information where relevant and protect them accordingly."
+            />
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-[var(--space-15-30)] mb-[var(--space-40-60)]">
+          <Typography
+            tag="h5"
+            text="How We Secure Your Data"
+            className="text-secondary-1 !font-bold"
+          />
+          <div className="flex flex-col">
+            <Typography
+              tag="p"
+              text="We implement physical, technical, and organizational measures to safeguard your information, including encryption, secure storage, staff training, and internal access controls. However, no online platform can guarantee absolute security."
+            />
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-[var(--space-15-30)] mb-[var(--space-40-60)]">
+          <Typography
+            tag="h5"
+            text="Access, Correction & Complaints"
+            className="text-secondary-1 !font-bold"
+          />
+          <div className="flex flex-col">
+            <Typography tag="p" text="You may:" />
+            <ul className="list-disc flex flex-col gap-0.5 ml-6 marker:text-[10px] marker:text-gray-700">
+              <li>Request access to your personal data</li>
+              <li>Request corrections if your data is inaccurate</li>
+              <li>Withdraw your consent at any time</li>
+              <li>
+                Submit a complaint if you believe we have mishandled your data
+              </li>
+            </ul>
+            <Typography
+              tag="p"
+              text="To do so, contact us at: [insert@email.com]"
             />
             <Typography
               tag="p"
-              text="We and/or our carefully selected business partners may send you direct marketing communications and information about our products and services. This may take the form of emails, SMS, mail or other forms of communication, in accordance with the Spam Act and the Privacy Act."
+              text="We will acknowledge your request and respond within a reasonable period."
             />
-            <Typography tag="p" text="You may opt-out of r" />
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-[var(--space-15-30)] mb-[var(--space-40-60)]">
+          <Typography
+            tag="h5"
+            text="External Links"
+            className="text-secondary-1 !font-bold"
+          />
+          <div className="flex flex-col">
+            <Typography
+              tag="p"
+              text="Our website may contain links to third-party websites. We are not responsible for their privacy practices. Please review their policies before sharing your data."
+            />
           </div>
         </div>
       </div>
-
 
       <div className="pb-[var(--space-120-180)]">
         <FooterCtaCard

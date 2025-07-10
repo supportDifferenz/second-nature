@@ -38,74 +38,76 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section className="relative w-full overflow-hidden">
-      <div className="relative" style={{ color: banner.bannerThemeColor }}>
-        {/* BG image */}
-        <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-full h-full max-w-[var(--max-w)] z-[-1]">
+    <section className="w-full overflow-hidden">
+      {/* BG image */}
+
+      {/* Content */}
+      <div className="relative w-full min-h-[450px] h-[90dvh] sm:min-h-[400px] lg:min-h-[520px] sm:h-[70dvh] lg:max-h-[1200px] bg-cover bg-center transition-all ">
+        <div className="w-full h-full max-w-[var(--max-w)] z-[-1]">
           <Image
             src={activeImage}
             alt="Healthy Ready-to-Serve"
-            className="!static inset-0 w-full !h-full object-cover object-center"
+            className="!static !inset-0 object-cover object-center"
             fill
             priority
           />
         </div>
-
-        {/* Content */}
-        <div className="relative flex pt-[var(--space-46-95)] sm:pt-0 lg::items-center w-full min-h-[500px] h-[90dvh] sm:min-h-[400px] lg:min-h-[520px] sm:h-[70dvh] lg:max-h-[1200px] bg-cover bg-center transition-all container sm:justify-end sm:text-left text-center justify-center ">
-          <div className="flex flex-col items-center sm:items-start lg:justify-center mt-[85%] sm:mt-[20%] lg:mt-0 lg:w-[50%]">
-            <div>
-              <motion.div
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4 }}
-                viewport={{ once: true }}
-              >
-                <Typography
-                  tag="h1"
-                  className="text-primary-dark capitalize highlight mb-[--space-4-10]"
-                  text={banner.titlePart1}
-                  role="heading"
-                  ariaLabel={banner.titlePart1}
-                />
-              </motion.div>
-              <motion.div
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                viewport={{ once: true }}
-              >
-                <Typography
-                  tag="h1"
-                  className="text-primary-dark capitalize highlight mb-[--space-10-20]"
-                  text={banner.titlePart2}
-                  role="heading"
-                  ariaLabel={banner.titlePart2}
-                />
-              </motion.div>
-            </div>
-
+        <div
+          className="absolute  top-[60%] lg:top-[45%] left-1/2 lg:left-[80%] transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center sm:items-start lg:justify-center text-center lg:text-start h-fit sm:mt-[20%] lg:mt-0 w-full lg:w-[50%]"
+          style={{ color: banner.bannerThemeColor }}
+        >
+          <div>
             <motion.div
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
+              transition={{ duration: 0.4 }}
               viewport={{ once: true }}
-              className="flex justify-center lg:justify-start items-center"
             >
               <Typography
-                tag="h3"
-                className="capitalize block max-w-[80%] sm:max-w-[50%] lg:max-w-[65%] sm:mt-3 sm:mb-[var(--space-20-40)]"
-                text={banner.subtitle}
+                tag="h1"
+                className="text-primary-dark capitalize highlight mb-[--space-4-10]"
+                text={banner.titlePart1}
                 role="heading"
-                ariaLabel={banner.subtitle}
+                ariaLabel={banner.titlePart1}
               />
             </motion.div>
             <motion.div
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1 }}
+              transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
+              <Typography
+                tag="h1"
+                className="text-primary-dark capitalize highlight mb-[--space-10-20]"
+                text={banner.titlePart2}
+                role="heading"
+                ariaLabel={banner.titlePart2}
+              />
+            </motion.div>
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="flex justify-center lg:justify-start items-center"
+          >
+            <Typography
+              tag="h3"
+              className="capitalize block max-w-[80%] sm:max-w-[50%] lg:max-w-[65%] sm:mt-3 sm:mb-[var(--space-20-40)]"
+              text={banner.subtitle}
+              role="heading"
+              ariaLabel={banner.subtitle}
+            />
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+            viewport={{ once: true }}
+          >
             <Button
               variant="primaryBtn"
               className="mx-auto mt-2 sm:m-0 "
@@ -113,8 +115,7 @@ export default function HeroSection() {
             >
               {banner.buttonText}
             </Button>
-            </motion.div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

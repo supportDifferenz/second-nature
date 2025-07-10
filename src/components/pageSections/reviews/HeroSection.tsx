@@ -69,6 +69,7 @@ export default function StaticHeroBanner() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
+            className="flex justify-center lg:justify-start"
           >
             <Typography
               tag="h6"
