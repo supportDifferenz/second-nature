@@ -10,7 +10,6 @@ import { useRouter } from "next/navigation";
 import { startTransition } from "react";
 
 const Footer = () => {
-
   const router = useRouter();
 
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
@@ -20,7 +19,7 @@ const Footer = () => {
       <div className="container flex flex-col lg:flex-row lg:gap-[5%] text-center md:text-left pb-(--space-27-34)">
         {/* logo wrapper */}
         <div className="flex-1 lg:flex lg:flex-col lg:gap-[30px] max-lg:pb-(--space-27-34) pt-(--space-40-60) lg:pt-0 border-t lg:border-0 border-contrast-button">
-          <div 
+          <div
             className="w-(--space-200-240) max-lg:mb-(--space-16-24) cursor-pointer"
             onClick={(e) => {
               e.preventDefault();
@@ -38,44 +37,47 @@ const Footer = () => {
             />
           </div>
           <p className=" max-w-[100%] text-left">
-            Lorem ipsum dolor sit amet consectetur. Diam pharetra id aliquet
-            ultricies nullam. Condimentum est lacinia gravida cursus nulla.
-            Lorem ipsum dolor sit amet consectetur. Diam pharetra id aliquet
-            ultricies nullam. Condimentum est lacinia gravida cursus nulla.
+            Gently Cooked Fresh Meals <br />
+            for Healthy, Happy Pets.
+            <br />
+            Vet-reviewed. Human-grade.
+            <br />
+            Delivered to your door 
           </p>
 
           <div className="max-lg:mt-(--space-34-130) flex  gap-3 lg:mt-auto">
             <Button size={"md"} variant={"primaryBtn"} className="text-white">
               Get Started
             </Button>
-            { isAuthenticated
-              ? <Button
-                  size={"md"}
-                  variant={"outlinePrimaryBtn"}
-                  className="text-secondary-1"
-                  onClick={() => {
-                    startTransition(() => {
-                      router.push("/personal-information");
-                    })
-                    // router.push("/personal-information");
-                  }}
-                >
-                  Account
-                </Button>
-              : <Button
-                  size={"md"}
-                  variant={"outlinePrimaryBtn"}
-                  className="text-secondary-1"
-                  onClick={() => {
-                    startTransition(() => {
-                      router.push("/login");
-                    })
-                    // router.push("/login");
-                  }}
-                >
-                  Log In
-                </Button>
-            }
+            {isAuthenticated ? (
+              <Button
+                size={"md"}
+                variant={"outlinePrimaryBtn"}
+                className="text-secondary-1"
+                onClick={() => {
+                  startTransition(() => {
+                    router.push("/personal-information");
+                  });
+                  // router.push("/personal-information");
+                }}
+              >
+                Account
+              </Button>
+            ) : (
+              <Button
+                size={"md"}
+                variant={"outlinePrimaryBtn"}
+                className="text-secondary-1"
+                onClick={() => {
+                  startTransition(() => {
+                    router.push("/login");
+                  });
+                  // router.push("/login");
+                }}
+              >
+                Log In
+              </Button>
+            )}
           </div>
         </div>
 
@@ -118,7 +120,7 @@ const Footer = () => {
                   onClick={() => {
                     startTransition(() => {
                       router.push("/subscription");
-                    })
+                    });
                   }}
                 >
                   Subscription
@@ -128,7 +130,7 @@ const Footer = () => {
                   onClick={() => {
                     startTransition(() => {
                       router.push("/behind-the-scenes");
-                    })
+                    });
                   }}
                 >
                   Behind The Scenes
@@ -138,7 +140,7 @@ const Footer = () => {
                   onClick={() => {
                     startTransition(() => {
                       router.push("/how-to-feed");
-                    })
+                    });
                   }}
                 >
                   How to Feed
@@ -148,7 +150,7 @@ const Footer = () => {
                   onClick={() => {
                     startTransition(() => {
                       router.push("/transition-diet");
-                    })
+                    });
                   }}
                 >
                   Transition Diet
@@ -178,7 +180,7 @@ const Footer = () => {
                   onClick={() => {
                     startTransition(() => {
                       router.push("/reviews");
-                    })
+                    });
                   }}
                 >
                   Reviews
@@ -188,7 +190,7 @@ const Footer = () => {
                   onClick={() => {
                     startTransition(() => {
                       router.push("/faqs");
-                    })
+                    });
                   }}
                 >
                   FAQs

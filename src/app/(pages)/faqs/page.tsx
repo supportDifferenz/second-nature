@@ -16,10 +16,10 @@ function Page() {
 
   return (
     <MainLayout>
-      <div className="mt-[var(--space-40-90)]">
+      <div className="mt-[var(--space-40-90)] pb-[var(--space-120-180)]">
         <FaqSection onAskUsClick={scrollToForm} />
       </div>
-      <div ref={formRef} className="container pb-12 lg:hidden">
+      <div ref={formRef} className="container pb-12 lg:hidden ">
         <motion.div
           initial={{ opacity: 0, y: 60 }}
           whileInView={{ opacity: 1, y: 0 }}
