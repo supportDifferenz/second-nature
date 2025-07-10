@@ -20,15 +20,15 @@ const mealContent = {
       description:
         "Our Beef Bowl is made up of 85% lean ground beef and nutrient-rich beef liver, is a protein-packed feast designed to fuel your dog's lifestyle enhanced with fresh carrots and spinach for fiber and antioxidants supporting healthy muscles, digestion, and a shiny coat.",
       ingredients: [
-        { image: "/images/LeanGroundBeefMeal.webp", name: "Lean Ground Beef" },
+        { image: "/images/NewLeanGroundBeefMeal.webp", name: "85% Lean Ground Beef" },
         { image: "/images/BeefLiverMeal.webp", name: "Beef Liver" },
-        { image: "/images/CarrotMeal.webp", name: "Carrot" },
+        { image: "/images/CarrotMeal.webp", name: "Carrots" },
         { image: "/images/SpinachMeal.webp", name: "Spinach" },
-        { image: "/images/EggYolkMeal.webp", name: "Egg Yolk" },
-        { image: "/images/IonizedSaltMeal.webp", name: "Ionized Salt" },
-        { image: "/images/HempSeedMeal.webp", name: "Hemp Seed" },
-        { image: "/images/EggShellPowderMeal.webp", name: "Egg Shell Powder" },
-        { image: "/images/SeasoningMeal.webp", name: "Seasoning" },
+        { image: "/images/EggYolkMeal.webp", name: "Whole Egg" },
+        { image: "/images/CodLiverOilMeal.webp", name: "Cod Liver Oil" },
+        { image: "/images/IonizedSaltMeal.webp", name: "Iodine" },
+        { image: "/images/DriedKelpMeal.webp", name: "Kelp" },
+        { image: "/images/VitaminsMeal.webp", name: "Vitamins & Minerals" },
       ],
       healthBenefits: {
         paragraph:
@@ -67,15 +67,15 @@ const mealContent = {
       description:
         "Our Chicken Bowl combines gently cooked chicken, nutrient-rich liver, and wholesome vegetables for a balanced, flavorful meal. Packed with essential vitamins, omega-3s, and natural calcium, it supports strong bones, digestion, and a healthy coat. Perfect nutrition to keep your dog thriving",
       ingredients: [
-        { image: "/images/ChickenBreastMeal.webp", name: "Chicken Breast" },
+        { image: "/images/ChickenBreastMeal.webp", name: "Light & Dark Chicken" },
         { image: "/images/BeefLiverMeal.webp", name: "Chicken Liver" },
-        { image: "/images/CauliFlowerMeal.webp", name: "CauliFlower" },
-        { image: "/images/ButternutSquashMeal.webp", name: "Butternut Squash" },
-        { image: "/images/EggYolkMeal.webp", name: "Egg Yolk" },
-        { image: "/images/ClovesPowderMeal.webp", name: "Cloves Powder" },
-        { image: "/images/DriedKelpMeal.webp", name: "Dried Kelp" },
-        { image: "/images/EggShellPowderMeal.webp", name: "Egg Shell Powder" },
-        { image: "/images/SeasoningMeal.webp", name: "Seasoning" },
+        { image: "/images/CauliFlowerMeal.webp", name: "Cauliflower" },
+        { image: "/images/ButternutSquashMeal.webp", name: "Squash" },
+        { image: "/images/EggYolkMeal.webp", name: "Whole Egg" },
+        { image: "/images/CodLiverOilMeal.webp", name: "Cod Liver Oil" },
+        { image: "/images/YeastMeal.webp", name: "Yeast" },
+        { image: "/images/DriedKelpMeal.webp", name: "Kelp" },
+        { image: "/images/VitaminsMeal.webp", name: "Vitamins & Minerals" },
       ],
       healthBenefits: {
         paragraph:
@@ -114,15 +114,15 @@ const mealContent = {
       description:
         "Our Lamb Bowl is a delicious blend of lean lamb and liver, with sweet potatoes and broccoli to add fiber, antioxidants, and natural sweetness to every bite. This recipe offers a nutrient-dense and flavorful experience for your dog. With every bowl, your dog gets hearty, satisfying nutrition designed to keep them thriving.",
       ingredients: [
-        { image: "/images/GrassFedLambMeal.webp", name: "Grass-Fed Lamb" },
+        { image: "/images/LeanGroundLambMeal.webp", name: "85% Lean Ground Lamb" },
         { image: "/images/BeefLiverMeal.webp", name: "Lamb Liver" },
         { image: "/images/SweetPotatoMeal.webp", name: "Sweet Potato" },
         { image: "/images/BroccoliMeal.webp", name: "Broccoli" },
-        { image: "/images/EggYolkMeal.webp", name: "Egg Yolk" },
-        { image: "/images/HempSeedMeal.webp", name: "Hemp Seed" },
-        { image: "/images/ClovesPowderMeal.webp", name: "Cloves Powder" },
-        { image: "/images/IonizedSaltMeal.webp", name: "Ionized Salt" },
-        { image: "/images/SeasoningMeal.webp", name: "Seasoning" },
+        { image: "/images/EggYolkMeal.webp", name: "Whole Egg" },
+        { image: "/images/HempSeedMeal.webp", name: "Hempseed" },
+        { image: "/images/CodLiverOilMeal.webp", name: "Cod Liver" },
+        { image: "/images/YeastMeal.webp", name: "Yeast" },
+        { image: "/images/VitaminsMeal.webp", name: "Vitamins & Minerals" },
       ],
       healthBenefits: {
         paragraph:
@@ -163,14 +163,15 @@ const mealContent = {
       description:
         "Crafted with 85 % lean ground beef, taurine-rich beef heart, and nutrient-dense beef liver, our Beef Bowl for Cats delivers the species-appropriate protein and heme iron your carnivore craves. Perfectly balanced minerals and calcium from eggshell powder",
       ingredients: [
-        { image: "/images/LeanGroundBeefMeal.webp", name: "Lean Ground Beef" },
-        { image: "/images/BeefHeartMeal.webp", name: "Beef Heart" },
+        { image: "/images/NewLeanGroundBeefMeal.webp", name: "85% Lean Ground Beef" },
         { image: "/images/BeefLiverMeal.webp", name: "Beef Liver" },
-        { image: "/images/SpinachMeal.webp", name: "Spinach" },
-        { image: "/images/EggYolkMeal.webp", name: "Whole Raw Egg" },
-        { image: "/images/SweetRedPepperMeal.webp", name: "Sweet Red Pepper" },
-        { image: "/images/IonizedSaltMeal.webp", name: "Ionized Salt" },
-        { image: "/images/EggShellPowderMeal.webp", name: "Egg Shell Powder" },
+        { image: "/images/BeefHeartMeal.webp", name: "Beef Heart" },
+        // { image: "/images/SpinachMeal.webp", name: "Spinach" },
+        { image: "/images/EggYolkMeal.webp", name: "Whole Egg" },
+        { image: "/images/SweetRedPepperMeal.webp", name: "Sweet Peppers" },
+        { image: "/images/CarrotMeal.webp", name: "Carrots" },
+        { image: "/images/HempSeedMeal.webp", name: "Hempseed" },
+        { image: "/images/VitaminsMeal.webp", name: "Vitamins & Minerals" },
         { image: "/images/SeasoningMeal.webp", name: "Seasoning" },
       ],
       healthBenefits: {
@@ -210,15 +211,15 @@ const mealContent = {
       description:
         "Juicy dark-meat chicken and hearts—chicken liver adds vitamin A and iron, while an egg adds choline. We fold in tiny flecks of sweet pepper and broccoli for fiber and antioxidant, then lace the mix with hempseed for a purr-worthy omega-6 glow.",
       ingredients: [
-        { image: "/images/ChickenBreastMeal.webp", name: "Chicken Breast" },
+        { image: "/images/ChickenBreastMeal.webp", name: "Dark Chicken" },
+        { image: "/images/BeefLiverMeal.webp", name: "Chicken Liver" },
         { image: "/images/ChickenHeartMeal.webp", name: "Chicken Heart" },
         { image: "/images/BroccoliMeal.webp", name: "Broccoli" },
-        { image: "/images/BeefLiverMeal.webp", name: "Chicken Liver" },
-        { image: "/images/EggYolkMeal.webp", name: "Egg Yolk" },
-        { image: "/images/HempSeedMeal.webp", name: "Hemp Seed" },
-        { image: "/images/EggShellPowderMeal.webp", name: "Egg Shell Powder" },
-        { image: "/images/IonizedSaltMeal.webp", name: "Ionized Salt" },
+        { image: "/images/EggYolkMeal.webp", name: "Whole Egg" },
+        { image: "/images/SweetRedPepperMeal.webp", name: "Sweet Peppers" },
+        { image: "/images/VitaminsMeal.webp", name: "Vitamins & Minerals" },
         { image: "/images/SeasoningMeal.webp", name: "Seasoning" },
+        { image: "/images/ThymeMeal.webp", name: "Thyme" },
       ],
       healthBenefits: {
         paragraph:
@@ -257,15 +258,15 @@ const mealContent = {
       description:
         "Succulent ground lamb with liver to supply iron and B-vitamins—ideal for cats who need a break from poultry. With zucchini ribbons and broccoli to aid digestion. A spoonful of cod-liver oil delivers sea-sourced EPA/DHA and vitamin D.Dual calcium sources ",
       ingredients: [
-        { image: "/images/GrassFedLambMeal.webp", name: "Grass-Fed Lamb" },
+        { image: "/images/LeanGroundLambMeal.webp", name: "85% Lean Ground Lamb" },
         { image: "/images/BeefLiverMeal.webp", name: "Lamb Liver" },
-        { image: "/images/ButternutSquashMeal.webp", name: "Summer Squash" },
-        { image: "/images/ZucchiniMeal.webp", name: "Zucchini" },
+        { image: "/images/ButternutSquashMeal.webp", name: "Squash" },
         { image: "/images/BroccoliMeal.webp", name: "Broccoli" },
-        { image: "/images/EggShellPowderMeal.webp", name: "Egg Shell Powder" },
-        { image: "/images/IonizedSaltMeal.webp", name: "Ionized Salt" },
-        { image: "/images/HempSeedMeal.webp", name: "Hemp Seed" },
+        { image: "/images/HempSeedMeal.webp", name: "Hempseed" },
+        { image: "/images/EggYolkMeal.webp", name: "Whole Egg" },
+        { image: "/images/VitaminsMeal.webp", name: "Vitamins & Minerals" },
         { image: "/images/SeasoningMeal.webp", name: "Seasoning" },
+        { image: "/images/ThymeMeal.webp", name: "Thyme" },
       ],
       healthBenefits: {
         paragraph:

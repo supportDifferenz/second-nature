@@ -8,7 +8,8 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
-import WeeklyRangeSelector from "@/components/molecules/weekDateRangePicker/WeeklyRangeSelector";
+// import WeeklyRangeSelector from "@/components/molecules/weekDateRangePicker/WeeklyRangeSelector";
+import RangeDatePicker from "@/components/molecules/weekDateRangePicker/WeeklyRangeSelector";
 
 // Types
 type WeekOption = "1week" | "2weeks" | "3weeks" | "4weeks" | "custom";
@@ -42,19 +43,27 @@ export const PauseDeliveriesPopup: React.FC<PauseDeliveriesPopupProps> = ({
     from: addDays(today, 1),
     to: initialRange?.to || endOfWeek(addWeeks(today, 1), { weekStartsOn: 1 }),
   });
-  const [dateRangeFromCalender, setDateRangeFromCalender] = useState<{ from: Date; to: Date } | null>(null);
+  // const [dateRangeFromCalender, setDateRangeFromCalender] = useState<{ from: Date; to: Date } | null>(null);
+  const [dateRangeFromCalender] = useState<{ from: Date; to: Date } | null>(null);
+  const [range, setRange] = useState<{ from: Date | undefined; to?: Date | undefined }>({
+    from: undefined,
+    to: undefined,
+  });
+
 
   console.log("Date range in pop up:", dateRange);
 
-  const [reason, ] = useState<string>("");
+  const [reason,] = useState<string>("");
 
   const handleSubmit = () => {
-    if(isWeekSelected === true){
+    if (isWeekSelected === true) {
       onConfirm(dateRange, reason)
-    } else if(isWeekSelected === false){
+    } else if (isWeekSelected === false) {
       onConfirm(dateRangeFromCalender!, reason)
     }
   };
+
+
 
   // const handleWeekOptionChange = (value: WeekOption) => {
   //   setSelectedOption(value);
@@ -143,10 +152,10 @@ export const PauseDeliveriesPopup: React.FC<PauseDeliveriesPopupProps> = ({
             { value: "3weeks", label: "Next 3 weeks" },
             { value: "4weeks", label: "Next 4 weeks" },
           ].map(({ value, label }) => (
-            <div key={value} className="flex items-center space-x-2 w-[47%] lg:w-[45%] relative">
+            <div key={value} className="flex items-center max-[575px]:space-x-1 space-x-2 w-[45%] lg:w-[45%] relative ">
               <RadioGroupItem value={value} id={`option-${value}`} className="sr-only" />
               <div
-                className="w-8 h-8 sm:w-7 sm:h-7 rounded-full p-1 cursor-pointer"
+                className="w-7 h-7 sm:w-7 sm:h-7 rounded-full p-1 cursor-pointer"
                 onClick={() => handleWeekOptionChange(value as WeekOption)}
               >
                 <Image
@@ -160,7 +169,7 @@ export const PauseDeliveriesPopup: React.FC<PauseDeliveriesPopupProps> = ({
                   className="!static w-fit h-full"
                 />
               </div>
-              <Label htmlFor={`option-${value}`} className="cursor-pointer mb-0">
+              <Label htmlFor={`option-${value}`} className="cursor-pointer mb-0 max-[575px]:!text-[13px]">
                 {label}
               </Label>
             </div>
@@ -174,10 +183,10 @@ export const PauseDeliveriesPopup: React.FC<PauseDeliveriesPopupProps> = ({
           </div>
 
           {/* Custom Week Selector */}
-          <div className="flex items-center space-x-2 w-full relative">
+          <div className="flex items-center max-[575px]:space-x-1 space-x-2 w-full relative">
             <RadioGroupItem value="custom" id="option-custom" className="sr-only" />
             <div
-              className="w-8 h-8 sm:w-7 sm:h-7 rounded-full p-1 cursor-pointer"
+              className="w-7 h-7 sm:w-7 sm:h-7 rounded-full p-1 cursor-pointer"
               onClick={() => handleWeekOptionChange("custom")}
             >
               <Image
@@ -191,12 +200,15 @@ export const PauseDeliveriesPopup: React.FC<PauseDeliveriesPopupProps> = ({
                 className="!static w-fit h-full"
               />
             </div>
-            <Label htmlFor="option-custom" className="cursor-pointer mb-0">
+            <Label htmlFor="option-custom" className="cursor-pointer mb-0 max-[575px]:!text-[13px]">
               Select Week(s)
             </Label>
           </div>
         </RadioGroup>
-        <WeeklyRangeSelector setDateRangeFromCalender={setDateRangeFromCalender} setIsWeekSelected={setIsWeekSelected} />
+
+        
+        {/* <WeeklyRangeSelector setDateRangeFromCalender={setDateRangeFromCalender} setIsWeekSelected={setIsWeekSelected} /> */}
+        <RangeDatePicker selectedRange={range} setSelectedRange={setRange} />
 
       </div>
     </Popup>
