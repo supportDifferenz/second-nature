@@ -3,7 +3,7 @@
 import Typography from "@/components/atoms/typography/Typography";
 import PlanCard from "@/components/pageSections/buyingFlow/step3/choosePlan/PlanCard";
 import BuyingFlowLayout from "@/components/templates/BuyingFlowLayout";
-import React,{ useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -51,7 +51,6 @@ const faqsData = [
 ];
 
 export default function Page() {
-
   const router = useRouter();
 
   const { data: planData, isLoading: isPlanLoading } = useGetAllPlan();
@@ -65,26 +64,34 @@ export default function Page() {
 
   const isLoading = isPlanLoading || isProteinLoading || isBowlLoading;
 
-  const { pets, selectedPetIndex, noOfPets, setPetDetails, setSelectedPetIndex } = usePetStore();
+  const {
+    pets,
+    selectedPetIndex,
+    noOfPets,
+    setPetDetails,
+    setSelectedPetIndex,
+  } = usePetStore();
   const selectedPet = selectedPetIndex !== null ? pets[selectedPetIndex] : null; // Handle null case for selectedPetIndex
   const currentPetId = selectedPet ? selectedPet.id : null;
   // const selectedPetName = selectedPet ? selectedPet.name : null;
   const planType = selectedPet ? selectedPet.planType : "Regular";
   const protein = selectedPet ? selectedPet.protein : "chicken";
   const bowlSize = selectedPet ? selectedPet.bowlSize : "full";
-  const [ selectedPlan, setSelectedPlan ] = useState<string>("Regular");
+  const [selectedPlan, setSelectedPlan] = useState<string>("Regular");
   // const [ selectedPrice, setSelectedPrice ] = useState<number>(0);
   // const [ selectedProtein, setSelectedProtein ] = useState<string>("");
   // const [ selectedBowlSize, setSelectedBowlSize ] = useState<string>("");
-  const [ regularProtein, setRegularProtein ] = useState<string>("chicken");
-  const [ regularBowlSize, setRegularBowlSize ] = useState<string>("full");
-  const [ trialProtein, setTrialProtein ] = useState<string>("");
-  const [ trialBowlSize, setTrialBowlSize ] = useState<string>("");
-  const [ regularPrice, setRegularPrice ] = useState<number>(0);
-  const [ trialPrice, setTrialPrice ] = useState<number>(0);
-  const [ isRegularPriceLoading, setIsRegularPriceLoading ] = useState<boolean>(false);
-  const [ isTrialPriceLoading, setIsTrialPriceLoading ] = useState<boolean>(false);
-  const [ isNextPetPopUpOpen, setIsNextPetPopUpOpen ] = useState<boolean>(false);
+  const [regularProtein, setRegularProtein] = useState<string>("chicken");
+  const [regularBowlSize, setRegularBowlSize] = useState<string>("full");
+  const [trialProtein, setTrialProtein] = useState<string>("");
+  const [trialBowlSize, setTrialBowlSize] = useState<string>("");
+  const [regularPrice, setRegularPrice] = useState<number>(0);
+  const [trialPrice, setTrialPrice] = useState<number>(0);
+  const [isRegularPriceLoading, setIsRegularPriceLoading] =
+    useState<boolean>(false);
+  const [isTrialPriceLoading, setIsTrialPriceLoading] =
+    useState<boolean>(false);
+  const [isNextPetPopUpOpen, setIsNextPetPopUpOpen] = useState<boolean>(false);
 
   // const plans = [
   //   {
@@ -110,61 +117,81 @@ export default function Page() {
   // },[selectedPlan])
 
   useEffect(() => {
-    if(planType === "Regular") {
+    if (planType === "Regular") {
       setSelectedPlan("Regular");
       setRegularProtein(protein || "");
       setTrialProtein("");
       setRegularBowlSize(bowlSize || "");
       setTrialBowlSize("");
-    } else if(planType === "Trial") {
+    } else if (planType === "Trial") {
       setSelectedPlan("Trial");
       setRegularProtein("");
       setTrialProtein(protein || "");
       setRegularBowlSize("");
       setTrialBowlSize(bowlSize || "");
     }
-  },[planType, protein, bowlSize])
+  }, [planType, protein, bowlSize]);
 
   const handleNext = (e?: React.MouseEvent<HTMLButtonElement>) => {
     if (e) {
       e.preventDefault();
     }
 
-    if(selectedPlan === "Regular" && regularProtein && regularBowlSize && currentPetId) {
+    if (
+      selectedPlan === "Regular" &&
+      regularProtein &&
+      regularBowlSize &&
+      currentPetId
+    ) {
       // setSelectedProtein(regularProtein || "");
       // setSelectedBowlSize(regularBowlSize);
-      setPetDetails(currentPetId, { planType: selectedPlan, planPrice: regularPrice, protein: regularProtein, bowlSize: regularBowlSize });
-      if((selectedPetIndex ?? 0) < noOfPets - 1){
+      setPetDetails(currentPetId, {
+        planType: selectedPlan,
+        planPrice: regularPrice,
+        protein: regularProtein,
+        bowlSize: regularBowlSize,
+      });
+      if ((selectedPetIndex ?? 0) < noOfPets - 1) {
         setSelectedPetIndex((selectedPetIndex ?? 0) + 1);
         startTransition(() => {
-          router.push("/gender")
+          router.push("/gender");
           setIsNextPetPopUpOpen(false);
-        })
-        // router.push("/gender")
-      } else {
-        startTransition(() => {
-          router.push("/add-more-pets")
-          setIsNextPetPopUpOpen(false);
-        })
-        // router.push("/add-more-pets");
-      }
-      // router.push("/add-more-pets");
-    } else if(selectedPlan === "Trial" && trialProtein && trialBowlSize && currentPetId) {
-      // setSelectedProtein(trialProtein || "");
-      // setSelectedBowlSize(trialBowlSize);
-      setPetDetails(currentPetId, { planType: selectedPlan, planPrice: trialPrice, protein: trialProtein, bowlSize: trialBowlSize });
-      if((selectedPetIndex ?? 0) < noOfPets - 1){
-        setSelectedPetIndex((selectedPetIndex ?? 0) + 1);
-        startTransition(() => {
-          router.push("/gender")
-          setIsNextPetPopUpOpen(false);
-        })
+        });
         // router.push("/gender")
       } else {
         startTransition(() => {
           router.push("/add-more-pets");
           setIsNextPetPopUpOpen(false);
-        })
+        });
+        // router.push("/add-more-pets");
+      }
+      // router.push("/add-more-pets");
+    } else if (
+      selectedPlan === "Trial" &&
+      trialProtein &&
+      trialBowlSize &&
+      currentPetId
+    ) {
+      // setSelectedProtein(trialProtein || "");
+      // setSelectedBowlSize(trialBowlSize);
+      setPetDetails(currentPetId, {
+        planType: selectedPlan,
+        planPrice: trialPrice,
+        protein: trialProtein,
+        bowlSize: trialBowlSize,
+      });
+      if ((selectedPetIndex ?? 0) < noOfPets - 1) {
+        setSelectedPetIndex((selectedPetIndex ?? 0) + 1);
+        startTransition(() => {
+          router.push("/gender");
+          setIsNextPetPopUpOpen(false);
+        });
+        // router.push("/gender")
+      } else {
+        startTransition(() => {
+          router.push("/add-more-pets");
+          setIsNextPetPopUpOpen(false);
+        });
         // router.push("/add-more-pets");
       }
       // router.push("/add-more-pets");
@@ -186,23 +213,23 @@ export default function Page() {
     //   setPetDetails(currentPetId, { planType: selectedPlan, protein: selectedProtein, bowlSize: selectedBowlSize });
     //   router.push("/add-more-pets");
     // }
-
-  }
+  };
 
   useEffect(() => {
-
-    if(selectedPlan === "Regular") {
-        setTrialPrice(0);
-    } else if(selectedPlan === "Trial") {
-        setRegularPrice(0);
+    if (selectedPlan === "Regular") {
+      setTrialPrice(0);
+    } else if (selectedPlan === "Trial") {
+      setRegularPrice(0);
     }
-    
-    if(selectedPlan && ( (regularProtein && regularBowlSize) || (trialProtein && trialBowlSize) )) {
 
-      if(selectedPlan === "Regular") {
+    if (
+      selectedPlan &&
+      ((regularProtein && regularBowlSize) || (trialProtein && trialBowlSize))
+    ) {
+      if (selectedPlan === "Regular") {
         setTrialPrice(0);
         setIsRegularPriceLoading(true);
-      } else if(selectedPlan === "Trial") {
+      } else if (selectedPlan === "Trial") {
         setRegularPrice(0);
         setIsTrialPriceLoading(true);
       }
@@ -210,17 +237,19 @@ export default function Page() {
       mutate(
         {
           weight: selectedPet?.currentWeight || 0,
-          proteinType: selectedPlan === "Regular" ? regularProtein : trialProtein,
+          proteinType:
+            selectedPlan === "Regular" ? regularProtein : trialProtein,
           activityLevel: selectedPet?.activityLevel || "",
-          bowlSize: selectedPlan === "Regular" ? regularBowlSize : trialBowlSize,
+          bowlSize:
+            selectedPlan === "Regular" ? regularBowlSize : trialBowlSize,
           planType: selectedPlan,
         },
         {
           onSuccess: (data) => {
             console.log("Get price successful", data);
-            if(selectedPlan === "Regular") {
+            if (selectedPlan === "Regular") {
               setRegularPrice(data?.result?.price);
-            } else if(selectedPlan === "Trial") {
+            } else if (selectedPlan === "Trial") {
               setTrialPrice(data?.result?.price);
             }
             setIsRegularPriceLoading(false);
@@ -229,17 +258,22 @@ export default function Page() {
           onError: (error) => {
             console.error("Get price failed", error);
             setIsRegularPriceLoading(false);
-            setIsTrialPriceLoading(false);          
+            setIsTrialPriceLoading(false);
           },
           onSettled: () => {
             setIsRegularPriceLoading(false);
-            setIsTrialPriceLoading(false);          
+            setIsTrialPriceLoading(false);
           },
         }
       );
     }
-
-  },[ selectedPlan, regularProtein, regularBowlSize, trialProtein, trialBowlSize ]);
+  }, [
+    selectedPlan,
+    regularProtein,
+    regularBowlSize,
+    trialProtein,
+    trialBowlSize,
+  ]);
 
   console.log("Selected pet in choose our plans page is", selectedPet);
   console.log("Current pet id in choose our plans page is", currentPetId);
@@ -250,7 +284,7 @@ export default function Page() {
   console.log("Regular Bowl Size", regularBowlSize);
   console.log("Trial Protein", trialProtein);
   console.log("Trial Bowl Size", trialBowlSize);
-  
+
   return (
     <BuyingFlowLayout step={3}>
       <div className="flex flex-col gap-16">
@@ -260,67 +294,94 @@ export default function Page() {
           className="text-center text-primary-dark"
         />
         <div>
-          
-
-          {
-            isLoading ? (
-              <div className="flex flex-col lg:flex-row justify-center gap-16 lg:gap-[var(--space-20-30)]">
-                <PlanCardSkeleton />
-                <PlanCardSkeleton />
-              </div>
-            ) : (
-                  <div className="flex flex-col lg:flex-row justify-center gap-16 lg:gap-[var(--space-20-30)]">
-                    {
-                      planData?.result?.map((plan: { _id: string; plan_type: string; price: number }) => (
-                        <PlanCard
-                          key={plan._id}
-                          heading={`${plan.plan_type} Plan`}
-                          description={plan.plan_type === "Regular" ? "Auto-Renews Every 28 Days" : "One-Time Purchase for 7 Days"}
-                          price={plan.plan_type === "Regular" ? regularPrice : trialPrice}
-                          setPrice={(price) => {
-                            if (plan.plan_type === "Regular") {
-                              setRegularPrice(price);
-                              setTrialPrice(0);
-                              // setSelectedPrice(price);
-                            } else {
-                              setRegularPrice(0);
-                              setTrialPrice(price);
-                              // setSelectedPrice(price);
-                            }
-                          }}
-                          bgColour={plan.plan_type === "Regular" ? "bg-[#FDFFF0]" : "bg-white"}
-                          offerBadge={plan.plan_type === "Regular" ? "Enjoy 25% Off Your First Month!" : ""}
-                          isSelected={selectedPlan === plan.plan_type}
-                          protein={plan.plan_type === "Regular" ? regularProtein : trialProtein}
-                          setProtein={plan.plan_type === "Regular" ? setRegularProtein : setTrialProtein}
-                          bowlSize={plan.plan_type === "Regular" ? regularBowlSize : trialBowlSize}
-                          setBowlSize={plan.plan_type === "Regular" ? setRegularBowlSize : setTrialBowlSize}
-                          isPriceLoading={plan.plan_type === "Regular" ? isRegularPriceLoading : isTrialPriceLoading}
-                          onClick={() => {
-                            if (plan.plan_type !== selectedPlan) {
-                              if (plan.plan_type === "Regular"){
-                                setTrialProtein("");
-                                setTrialBowlSize("");
-                              } else if(plan.plan_type === "Trial"){
-                                setRegularProtein("");
-                                setRegularBowlSize("");
-                              }
-                            }
-                            setSelectedPlan(plan.plan_type);
-                            // setSelectedPrice(plan.price);
-                          }}
-                          // onClick={() => {
-                          //   setSelectedPlan(plan.plan_type);
-                          //   setTrialProtein("");
-                          //   setTrialBowlSize("");
-                          // }}              
-                        />
-                      ))
+          {isLoading ? (
+            <div className="flex flex-col lg:flex-row justify-center gap-16 lg:gap-[var(--space-20-30)]">
+              <PlanCardSkeleton />
+              <PlanCardSkeleton />
+            </div>
+          ) : (
+            <div className="flex flex-col lg:flex-row justify-center gap-16 lg:gap-[var(--space-20-30)]">
+              {planData?.result?.map(
+                (plan: { _id: string; plan_type: string; price: number }) => (
+                  <PlanCard
+                    key={plan._id}
+                    heading={`${plan.plan_type} Plan`}
+                    description={
+                      plan.plan_type === "Regular"
+                        ? "Auto-Renews Every 28 Days"
+                        : "One-Time Purchase for 7 Days"
                     }
-                  </div>
+                    price={
+                      plan.plan_type === "Regular" ? regularPrice : trialPrice
+                    }
+                    setPrice={(price) => {
+                      if (plan.plan_type === "Regular") {
+                        setRegularPrice(price);
+                        setTrialPrice(0);
+                        // setSelectedPrice(price);
+                      } else {
+                        setRegularPrice(0);
+                        setTrialPrice(price);
+                        // setSelectedPrice(price);
+                      }
+                    }}
+                    bgColour={
+                      plan.plan_type === "Regular" ? "bg-[#FDFFF0]" : "bg-white"
+                    }
+                    offerBadge={
+                      plan.plan_type === "Regular"
+                        ? "Enjoy 25% Off Your First Month!"
+                        : ""
+                    }
+                    isSelected={selectedPlan === plan.plan_type}
+                    protein={
+                      plan.plan_type === "Regular"
+                        ? regularProtein
+                        : trialProtein
+                    }
+                    setProtein={
+                      plan.plan_type === "Regular"
+                        ? setRegularProtein
+                        : setTrialProtein
+                    }
+                    bowlSize={
+                      plan.plan_type === "Regular"
+                        ? regularBowlSize
+                        : trialBowlSize
+                    }
+                    setBowlSize={
+                      plan.plan_type === "Regular"
+                        ? setRegularBowlSize
+                        : setTrialBowlSize
+                    }
+                    isPriceLoading={
+                      plan.plan_type === "Regular"
+                        ? isRegularPriceLoading
+                        : isTrialPriceLoading
+                    }
+                    onClick={() => {
+                      if (plan.plan_type !== selectedPlan) {
+                        if (plan.plan_type === "Regular") {
+                          setTrialProtein("");
+                          setTrialBowlSize("");
+                        } else if (plan.plan_type === "Trial") {
+                          setRegularProtein("");
+                          setRegularBowlSize("");
+                        }
+                      }
+                      setSelectedPlan(plan.plan_type);
+                      // setSelectedPrice(plan.price);
+                    }}
+                    // onClick={() => {
+                    //   setSelectedPlan(plan.plan_type);
+                    //   setTrialProtein("");
+                    //   setTrialBowlSize("");
+                    // }}
+                  />
                 )
-      }
-
+              )}
+            </div>
+          )}
         </div>
         <Typography
           tag="h3"
@@ -331,7 +392,6 @@ export default function Page() {
         <div className="lg:mx-48">
           <FAQS faqs={faqsData} defaultOpenIndex={0} />
         </div>
-
       </div>
 
       {/* Navigation */}
@@ -343,7 +403,7 @@ export default function Page() {
             e.preventDefault();
             startTransition(() => {
               router.push("/activity");
-            })
+            });
             // router.push("/activity");
           }}
         >
@@ -357,14 +417,19 @@ export default function Page() {
           </div>
           Back
         </Button>
-        <Button 
-          className="gap-2.5 lg:ml-auto lg:mr-[-55px]" 
-          disabled={ !( (regularProtein && regularBowlSize) || (trialProtein && trialBowlSize)) }
+        <Button
+          className="gap-2.5 lg:ml-auto lg:mr-[-55px]"
+          disabled={
+            !(
+              (regularProtein && regularBowlSize) ||
+              (trialProtein && trialBowlSize)
+            )
+          }
           // disabled={ !(selectedProtein && selectedBowlSize) }
           // onClick={handleNext}
           onClick={() => setIsNextPetPopUpOpen(true)}
         >
-          { (selectedPetIndex ?? 0) < noOfPets - 1 ? "Next" : "Checkout"}
+          {(selectedPetIndex ?? 0) < noOfPets - 1 ? "Next" : "Checkout"}
           <div className="w-5 relative">
             <Image
               src="/icons/arrow-next-long.svg"
@@ -375,20 +440,16 @@ export default function Page() {
           </div>
         </Button>
       </div>
-      { isNextPetPopUpOpen && <NextPet setIsNextPetPopupOpen={setIsNextPetPopUpOpen} handleNext={handleNext} /> }
+      {isNextPetPopUpOpen && (
+        <NextPet
+          setIsNextPetPopupOpen={setIsNextPetPopUpOpen}
+          handleNext={handleNext}
+        />
+      )}
       {/* <NextPet/> */}
     </BuyingFlowLayout>
   );
 }
-
-
-
-
-
-
-
-
-
 
 // import Typography from "@/components/atoms/typography/Typography";
 // import PlanCard from "@/components/pageSections/buyingFlow/step3/choosePlan/PlanCard";
@@ -412,7 +473,7 @@ export default function Page() {
 //             bgColour="bg-[#FDFFF0]"
 //             offerBadge="Enjoy 25% Off Your First Month!"
 //           />
-//           <PlanCard bgColour="bg-white" 
+//           <PlanCard bgColour="bg-white"
 //           heading="Trail Plan"
 //           description="One-Time Purchase for 7 Days"
 //           price={100}
