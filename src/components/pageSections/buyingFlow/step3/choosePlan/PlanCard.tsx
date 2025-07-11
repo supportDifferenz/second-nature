@@ -1,4 +1,4 @@
-import React, { startTransition } from "react";
+import React from "react";
 import Typography from "@/components/atoms/typography/Typography";
 // import PetSelectCard from "@/components/molecules/petSelectCard/PetSelectCard";
 import PetProteinCard from "@/components/molecules/petProteinCard/PetProteinCard";
@@ -7,7 +7,6 @@ import { cn } from "@/lib/utils";
 import OfferBadge from "@/components/atoms/offerBadge/OfferBadge";
 import { useGetAllProtein } from "@/hooks/subscriptionHooks/getAllProteinHook";
 import { useGetAllBowl } from "@/hooks/subscriptionHooks/getAllBowlHook";
-import { useRouter } from "next/navigation";
 
 interface PlanCardProps {
   bgColour: "bg-white" | "bg-[#FDFFF0]";
@@ -44,7 +43,7 @@ export default function PlanCard({
     useGetAllProtein();
   const { data: bowlData } = useGetAllBowl();
 
-  const router = useRouter();
+  // const router = useRouter();
 
   console.log("Protein in plan card", protein);
   console.log("Protein data in plan card", proteinData?.result);
@@ -128,7 +127,7 @@ export default function PlanCard({
       <div className="flex flex-col pt-[var(--space-30-40)]">
         <Typography
           tag="h6"
-          text="Step 1: Choose Protein"
+          text="Step 2: Choose Size"
           className="text-center pb-[var(--space-10-20)]"
         />
         <div className="flex justify-center gap-[var(--space-10-20)]">
@@ -161,12 +160,13 @@ export default function PlanCard({
         </div>
       </div>
       <div 
-        onClick={() => startTransition(() => router.push("/terms-and-conditions"))}
+        onClick={() => window.open("/terms-and-conditions", "_blank")} 
+        className="mx-auto"
       >
         <Typography
           tag="p"
           text="Terms and conditions >"
-          className="text-center cursor-pointer font-bold text-secondary-1 pt-[var(--space-30-40)]"
+          className="text-center cursor-pointer font-bold text-secondary-1 mt-[var(--space-30-40)]"
         />
       </div>
     </div>

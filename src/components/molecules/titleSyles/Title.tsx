@@ -408,7 +408,7 @@ export const PetFoodLookingTitle: React.FC<TitlePropsType> = ({
             ${textAlign === "text-left" ? "ml-0 sm:max-w-[80%]  lg:max-w-[60%]" : ""}
             ${textAlign === "text-center" ? "mx-auto sm:max-w-[70%]  lg:max-w-[50%]" : ""}
             ${textAlign === "text-right" ? "mr-0 sm:max-w-[80%]  lg:max-w-[60%]" : ""}
-            mt-[var(--space-8-17)] mb-[var(--space-20-30)]
+            mt-[var(--space-15-30)] mb-[var(--space-20-30)]
           `}
           style={{
             color: `${paragraphColor ? paragraphColor : "var(--text-color)"}`,

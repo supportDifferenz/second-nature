@@ -39,6 +39,7 @@ export default function PetInfoCard({ petDetails, setIsEditPetInfo, setPetData }
   const handleEdit = () => {
     setIsEditPetInfo(true);
     setPetData(petDetails);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
   return (
