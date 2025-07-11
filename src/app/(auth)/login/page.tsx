@@ -264,7 +264,7 @@ export default function Page() {
   
   return (
     <AuthLayout>
-      <div className="flex flex-col justify-between bg-[#F3F5E8] h-full lg:w-[31.25vw] rounded-2xl p-7 sm:p-12 cursor-default">
+      <div className="flex flex-col justify-between bg-[#F3F5E8] h-full lg:w-[31.25vw] rounded-2xl p-7 sm:p-12 lg:px-10 lg:py-15 cursor-default">
         <div className="flex flex-col text-center sm:text-start border-b border-[#A1A1A1] pb-[var(--space-20-57)]">
           <div className=" pb-[var(--space-16-24)]">
             <Typography
