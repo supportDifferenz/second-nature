@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { format, endOfWeek, addWeeks, addDays } from "date-fns";
+import React, { useEffect, useState } from "react";
+// import { format } from "date-fns";
+// import { format, endOfWeek, addWeeks, addDays } from "date-fns";
 // import { format, startOfWeek, endOfWeek, addWeeks, addDays } from "date-fns";
 import { Button } from "@/components/ui/button";
 import { Popup } from "@/components/molecules/popupSkelton/popup";
@@ -17,12 +18,13 @@ type WeekOption = "1week" | "2weeks" | "3weeks" | "4weeks" | "custom";
 interface DateRange {
   from: Date;
   to: Date;
+  weeks?: number;
 }
 
 interface PauseDeliveriesPopupProps {
   isOpen: boolean;
   onClose: () => void;
-  onConfirm: (dateRange: DateRange, reason: string) => void;
+  onConfirm: (dateRange: { from: string; to: string }, weeks: number, reason: string) => void;
   initialRange?: DateRange;
   nextDeliveryDate?: string;
 }
@@ -31,7 +33,7 @@ export const PauseDeliveriesPopup: React.FC<PauseDeliveriesPopupProps> = ({
   isOpen,
   onClose,
   onConfirm,
-  initialRange,
+  // initialRange,
 }) => {
   const [selectedOption, setSelectedOption] = useState<WeekOption>("1week");
   const today = new Date();
@@ -39,27 +41,25 @@ export const PauseDeliveriesPopup: React.FC<PauseDeliveriesPopupProps> = ({
   console.log("Today", today);
 
   const [isWeekSelected, setIsWeekSelected] = useState(true);
-  const [dateRange, setDateRange] = useState<DateRange>({
-    from: addDays(today, 1),
-    to: initialRange?.to || endOfWeek(addWeeks(today, 1), { weekStartsOn: 1 }),
+  const [dateRange, setDateRange] = useState<{ from: string; to: string }>({
+    from: "",
+    to: "",
   });
   // const [dateRangeFromCalender, setDateRangeFromCalender] = useState<{ from: Date; to: Date } | null>(null);
-  const [dateRangeFromCalender] = useState<{ from: Date; to: Date } | null>(null);
+  // const [dateRangeFromCalender] = useState<{ from: Date; to: Date } | null>(null);
   const [range, setRange] = useState<{ from: Date | undefined; to?: Date | undefined }>({
     from: undefined,
     to: undefined,
   });
-
-
-  console.log("Date range in pop up:", dateRange);
+  const [weeks, setWeeks] = useState<number>(1);
 
   const [reason,] = useState<string>("");
 
   const handleSubmit = () => {
     if (isWeekSelected === true) {
-      onConfirm(dateRange, reason)
+      onConfirm({from: "", to: ""}, weeks, reason)
     } else if (isWeekSelected === false) {
-      onConfirm(dateRangeFromCalender!, reason)
+      onConfirm(dateRange, 0, reason)
     }
   };
 
@@ -84,34 +84,46 @@ export const PauseDeliveriesPopup: React.FC<PauseDeliveriesPopupProps> = ({
     setIsWeekSelected(true);
 
     if (value !== "custom") {
-      let daysToAdd = 0;
+      // let daysToAdd = 0;
       switch (value) {
         case "1week":
-          daysToAdd = 7;
+          setWeeks(1);
+          // daysToAdd = 7;
           break;
         case "2weeks":
-          daysToAdd = 14;
+          setWeeks(2);
+          // daysToAdd = 14;
           break;
         case "3weeks":
-          daysToAdd = 21;
+          setWeeks(3);
+          // daysToAdd = 21;
           break;
         case "4weeks":
-          daysToAdd = 28;
+          setWeeks(4);
+          // daysToAdd = 28;
           break;
         default:
           break;
       }
 
       setDateRange({
-        from: addDays(today, 1), // Always set from date to tomorrow
-        to: addDays(today, 1 + daysToAdd), // Add days to get end date
+        from: "",
+        to: "",
       });
+
+      setRange({
+        from: undefined,
+        to: undefined
+      })
+
     }
   };
 
-  console.log("Is week selected", isWeekSelected);
+  useEffect(() => {
+    console.log("Calender range and weeks", dateRange, weeks);
+  }, [dateRange,weeks]);
 
-  const formatDisplayDate = (date: Date): string => format(date, "dd.MMM.yyyy");
+  console.log("Is week selected", isWeekSelected);
 
   return (
     <Popup
@@ -136,7 +148,8 @@ export const PauseDeliveriesPopup: React.FC<PauseDeliveriesPopupProps> = ({
             className="font-normal uppercase absolute bg-[#FDFFF4] subtitle2 text-secondary-1 -top-[7px] left-1/2 transform -translate-x-1/2 px-1 text-[#9C3A3A]"
           />
           <div className="text-center text-[#00683D] font-medium h6">
-            {formatDisplayDate(dateRange.from)} to {formatDisplayDate(dateRange.to)}
+            {/* {formatDisplayDate(dateRange.from)} to {formatDisplayDate(dateRange.to)} */}
+            { dateRange.from !== "" && dateRange.to !== "" ? `${dateRange.from} to ${dateRange.to}` : ""}
           </div>
         </div>
 
@@ -208,7 +221,7 @@ export const PauseDeliveriesPopup: React.FC<PauseDeliveriesPopupProps> = ({
 
         
         {/* <WeeklyRangeSelector setDateRangeFromCalender={setDateRangeFromCalender} setIsWeekSelected={setIsWeekSelected} /> */}
-        <RangeDatePicker selectedRange={range} setSelectedRange={setRange} />
+        <RangeDatePicker selectedRange={range} setSelectedRange={setRange} setWeeks={setWeeks} setDateRange={setDateRange} setIsWeekSelected={setIsWeekSelected} />
 
       </div>
     </Popup>

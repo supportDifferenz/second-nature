@@ -19,16 +19,18 @@ import { useCreateSubscriptionHook } from "@/hooks/subscriptionHooks/createSubsc
 import { useGetInvoiceBySubIdAndPetId } from "@/hooks/subscriptionHooks/getInvoiceDetailsBySubIdAndPetId";
 import { useUserStore } from "@/zustand/store/userDataStore";
 import { PauseDeliveriesPopup } from "@/components/pageSections/dashboard/orderHistory/PauseDeliveriesPopup";
-import { format } from "date-fns";
+// import { format } from "date-fns";
 import { usePausePlan } from "@/hooks/subscriptionHooks/pausePlanHook";
+// import { date } from "zod";
+// import { date } from "zod";
 
 type PetInfo = { name: string; petId: string; subId: string };
 
-type PauseDateRange = {
-  from?: Date;
-  to?: Date;
-  weeks?: number;
-};
+// type PauseDateRange = {
+//   from?: Date;
+//   to?: Date;
+//   weeks?: number;
+// };
 
 const OrderHistoryCard: React.FC<
   OrderHistoryCardPropsType & {
@@ -148,8 +150,8 @@ const OrderHistoryCard: React.FC<
   // const [cancelReason, setCancelReason] = useState("");
   // const [restartPlanError, setRestartPlanError] = useState("");
   // const [reOrderPlanError, setReOrderPlanError] = useState("");
-  const [pauseStartDate, setPauseStartDate] = useState("");
-  const [pauseEndDate, setPauseEndDate] = useState("");
+  // const [pauseStartDate, setPauseStartDate] = useState("");
+  // const [pauseEndDate, setPauseEndDate] = useState("");
   // const [subIdFromProp, setSubIdFromProp] = useState("");
   // const [petIdFromProp, setPetIdFromProp] = useState("");
   // const [userIdFromProp, setUserIdFromProp] = useState("");
@@ -175,6 +177,8 @@ const OrderHistoryCard: React.FC<
   const [ errorReOrderMessage, setErrorReOrderMessage ] = useState("");
   const [ successChangeProteinMessage, setSuccessChangeProteinMessage ] = useState("");
   const [ errorChangeProteinMessage, setErrorChangeProteinMessage ] = useState("");
+  const [ successPauseMessage, setSuccessPauseMessage ] = useState("");
+  const [ errorPauseMessage, setErrorPauseMessage ] = useState("");
 
   const handleChangeProtein = (subId: string, petId: string, userId: string, proteinType: string) => {
     changeProtein(
@@ -413,23 +417,35 @@ const OrderHistoryCard: React.FC<
     )
   }
 
-  const handlePausePlan = () => {
+  const handlePausePlan = (dateRange: { from: string; to: string },weeks: number,reason: string) => {
     if (subId && petId && userId) {
+      console.log("Date range new1:", dateRange);
       pausePlan(
         {
           subId,
           petId,
           userId,
           formData: {
-            pauseReason: "User requested pause",
-            weeks: 0,
-            startDate: pauseStartDate,
-            endDate: pauseEndDate
+            pauseReason: reason || "User requested pause",
+            weeks: weeks,
+            startDate: dateRange.from,
+            endDate: dateRange.to,
+            // pauseReason: "User requested pause",
+            // weeks: 0,
+            // startDate: pauseStartDate,
+            // endDate: pauseEndDate
           }
         },
         {
-          onSuccess: () => {
+          onSuccess: (data) => {
             refetchSubscriptionDetails?.();
+            if (data.statusCode === 200) {
+              setSuccessPauseMessage("Plan paused successfully");
+              setErrorPauseMessage("")
+            }else{
+              setSuccessPauseMessage("");
+              setErrorPauseMessage(data.message);
+            }
             // setPausePlanError("");
             // window.location.reload();
           },
@@ -437,6 +453,8 @@ const OrderHistoryCard: React.FC<
             // if (error instanceof Error) {
             //   setPausePlanError(error.message || "Error in pause plan");
             // }
+            setSuccessPauseMessage("");
+            setErrorPauseMessage(error instanceof Error ? error.message || "Error in pause plan" : "Error in pause plan");
             console.log("Error in pause plan", error);
           }
         }
@@ -705,6 +723,8 @@ const OrderHistoryCard: React.FC<
               >
                 {buttons[1]} {/* Pause Plan */}
               </Button>
+              {/* <Typography tag="span" className="text-sm text-green-500" text={successPauseMessage} />
+              <Typography tag="span" className="text-sm text-red-500" text={errorPauseMessage} /> */}
             </div>
             <div className="col-span-1">
               <Button 
@@ -714,8 +734,6 @@ const OrderHistoryCard: React.FC<
               >
                 {buttons[2]} {/* Cancel */}
               </Button>
-              <Typography tag="span" className="text-sm text-green-500" text={successCancelMessage} />
-              <Typography tag="span" className="text-sm text-red-500" text={errorCancelMessage} />
               {/* <span className="text-green-500">{successCancelMessage}</span> */}
               {/* <span className="text-red-500">{errorCancelMessage}</span> */}
             </div>
@@ -789,6 +807,11 @@ const OrderHistoryCard: React.FC<
         </div>
       )}
 
+      <Typography tag="span" className="text-sm text-green-500" text={successCancelMessage} />
+      <Typography tag="span" className="text-sm text-red-500" text={errorCancelMessage} />
+      <Typography tag="span" className="text-sm text-green-500" text={successPauseMessage} />
+      <Typography tag="span" className="text-sm text-red-500" text={errorPauseMessage} />
+
       <ProteinChangePopup
         key={currentProtein}
         isOpen={isProteinPopupOpen}
@@ -841,18 +864,20 @@ const OrderHistoryCard: React.FC<
       <PauseDeliveriesPopup
         isOpen={isPausePopupOpen}
         onClose={() => setIsPausePopupOpen(false)}
-        onConfirm={(dateRange: PauseDateRange) => {
-          if (dateRange.from && dateRange.to) {
-            setPauseStartDate(format(dateRange.from, "dd MMM yyyy"));
-            setPauseEndDate(format(dateRange.to, "dd MMM yyyy"));
-            console.log(`Paused from ${format(dateRange.from, "dd MMM yyyy")} to ${format(dateRange.to, "dd MMM yyyy")}`);
-            console.log(`Paused from ${dateRange.from} to ${dateRange.to}`);
-          } else if (dateRange.weeks) {
-            setPauseStartDate("");
-            setPauseEndDate("");
-            console.log(`Paused for ${dateRange.weeks} week(s)`);
-          }
-          handlePausePlan();
+        onConfirm={(dateRange: { from: string; to: string }, weeks: number, reason) => {
+
+          // if (dateRange.from && dateRange.to) {
+          //   setPauseStartDate(format(dateRange.from, "dd MMM yyyy"));
+          //   setPauseEndDate(format(dateRange.to, "dd MMM yyyy"));
+          //   console.log(`Paused from ${format(dateRange.from, "dd MMM yyyy")} to ${format(dateRange.to, "dd MMM yyyy")}`);
+          //   console.log(`Paused from ${dateRange.from} to ${dateRange.to}`);
+          // } else if (dateRange.weeks) {
+          //   setPauseStartDate("");
+          //   setPauseEndDate("");
+          //   console.log(`Paused for ${dateRange.weeks} week(s)`);
+          // }
+          console.log(`Date range new Paused from ${dateRange.from} to ${dateRange.to}`);
+          handlePausePlan(dateRange, weeks, reason);
           setIsPausePopupOpen(false);
         }}
       />

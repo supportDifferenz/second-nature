@@ -498,11 +498,17 @@ type DateRange = {
 export default function RangeDatePicker({
   selectedRange,
   setSelectedRange,
+  setWeeks,
+  setDateRange,
+  setIsWeekSelected,
   colorClass,
   className,
 }: {
   selectedRange: DateRange;
   setSelectedRange: (range: DateRange) => void;
+  setWeeks: (weeks: number) => void;
+  setDateRange: (dateRange: { from: string; to: string }) => void;
+  setIsWeekSelected: (selected: boolean) => void;
   colorClass?: string;
   className?: string;
 }) {
@@ -511,6 +517,12 @@ export default function RangeDatePicker({
   const handleSelect = (range: DateRange | undefined) => {
     if (range?.from) {
       setSelectedRange(range);
+      setDateRange({
+        from: format(range.from, "yyyy-MM-dd"),
+        to: format(range.to || range.from, "yyyy-MM-dd"),
+      })
+      setWeeks(0);
+      setIsWeekSelected(false);
     }
   };
 
