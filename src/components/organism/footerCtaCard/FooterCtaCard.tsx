@@ -8,6 +8,7 @@ import {
 } from "@/components/molecules/titleSyles/Title";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 // Define the prop types for the component
 interface FooterCtaCardProps {
@@ -30,6 +31,8 @@ export default function FooterCtaCard({
   mealTransition,
   petFood,
 }: FooterCtaCardProps) {
+  const router = useRouter();
+
   return (
     <div className="flex flex-col sm:flex-row gap-[var(--space-30-60)] w-fit mx-auto">
       {/* Meal Transition Card */}
@@ -59,7 +62,11 @@ export default function FooterCtaCard({
               textAlign="text-center jj"
               textColor="#fff"
             />
-            <Button size={"md"} variant={"secondaryGreenBtn"}>
+            <Button
+              size={"md"}
+              variant={"secondaryGreenBtn"}
+              onClick={() => router.push("/transition-diet")}
+            >
               Learn more about transitioning
             </Button>
           </div>
