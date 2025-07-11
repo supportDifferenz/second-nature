@@ -723,8 +723,8 @@ const OrderHistoryCard: React.FC<
               >
                 {buttons[1]} {/* Pause Plan */}
               </Button>
-              <Typography tag="span" className="text-sm text-green-500" text={successPauseMessage} />
-              <Typography tag="span" className="text-sm text-red-500" text={errorPauseMessage} />
+              {/* <Typography tag="span" className="text-sm text-green-500" text={successPauseMessage} />
+              <Typography tag="span" className="text-sm text-red-500" text={errorPauseMessage} /> */}
             </div>
             <div className="col-span-1">
               <Button 
@@ -734,8 +734,6 @@ const OrderHistoryCard: React.FC<
               >
                 {buttons[2]} {/* Cancel */}
               </Button>
-              <Typography tag="span" className="text-sm text-green-500" text={successCancelMessage} />
-              <Typography tag="span" className="text-sm text-red-500" text={errorCancelMessage} />
               {/* <span className="text-green-500">{successCancelMessage}</span> */}
               {/* <span className="text-red-500">{errorCancelMessage}</span> */}
             </div>
@@ -808,6 +806,11 @@ const OrderHistoryCard: React.FC<
           ))}
         </div>
       )}
+
+      <Typography tag="span" className="text-sm text-green-500" text={successCancelMessage} />
+      <Typography tag="span" className="text-sm text-red-500" text={errorCancelMessage} />
+      <Typography tag="span" className="text-sm text-green-500" text={successPauseMessage} />
+      <Typography tag="span" className="text-sm text-red-500" text={errorPauseMessage} />
 
       <ProteinChangePopup
         key={currentProtein}
