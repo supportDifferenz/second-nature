@@ -326,7 +326,7 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
       ) : (
         <div className="container py-5 flex relative">
           <div
-            className="w-[14%] mx-auto cursor-pointer"
+            className="max-[575px]:h-[9dvh] max-[575px]:w-auto sm:w-[14%] mx-auto cursor-pointer"
             onClick={(e) => {
               e.preventDefault();
               startTransition(() => {
@@ -338,7 +338,7 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
               src="/icons/logo-primary.svg"
               alt="logo"
               fill
-              className="!static"
+              className="!static max-[575px]:h-full"
             />
           </div>
         </div>

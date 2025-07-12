@@ -23,13 +23,13 @@ export default function BuyingFlowLayout({
   return (
     <>
       <Header isOnlyBrandHeader={true} />
-      <main className="mt-3">
-        <div className="portrait:min-h-[500px] portrait:h-[98dvh] landscape:min-h-[450px] landscape:h-[calc(95dvh-110px)] landscape:max-h-[800px] flex flex-col items-center justify-start ">
-          <div className="container mb-4 text-center  w-full ">
+      <main className="sm:mt-[1dvh] ">
+        <div className="portrait:min-h-[400px] portrait:h-[calc(100dvh-110px)] landscape:min-h-[430px] landscape:h-[calc(100dvh-140px)] landscape:max-h-[800px] flex flex-col items-center justify-start ">
+          <div className="container  mb-4 text-center  w-full ">
             <CheckoutProgressBar currentStep={step} />
           </div>
           {/* pets name */}
-          <ul className="flex items-center gap-5 pt-[5dvh] pb-[3dvh]">
+          <ul className="flex items-center gap-5 pt-[5dvh] pb-[2dvh] sm:pb-[3dvh] ">
             {pets.length > 0 ? (
               pets.map((pet, index) => (
                 <div
@@ -39,7 +39,7 @@ export default function BuyingFlowLayout({
                   <Typography
                     tag="p"
                     text={pet.name}
-                    className={`${index === selectedPetIndex ? "text-[#944446] underline underline-[#944446]" : ""}`}
+                    className={`${index === selectedPetIndex ? "text-[#944446] underline capitalize underline-[#944446]" : ""}`}
                   />
 
                   {/* <Button
@@ -93,7 +93,7 @@ export default function BuyingFlowLayout({
               />
             )}
           </ul>
-          <div className="container  grow  flex flex-col">{children}</div>
+          <div className="container  grow  flex flex-col   relative">{children}</div>
         </div>
       </main>
     </>

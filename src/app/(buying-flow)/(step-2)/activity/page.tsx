@@ -8,6 +8,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { usePetStore } from "@/zustand/store/petDataStore";
 import { startTransition } from "react";
+import { motion } from 'framer-motion';
 
 export default function Page() {
 
@@ -40,18 +41,22 @@ export default function Page() {
   },[activityLevel])
 
   console.log("Selected pet in activity page is", selectedPet);
+  const softEase = [0.33, 1, 0.68, 1] as [number, number, number, number];
 
   return (
     <BuyingFlowLayout step={2}>
 
-      <div className="flex flex-col items-center gap-8 bg-white">
+       <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: softEase }} className="flex flex-col flex-1 items-center lg:justify-center gap-8 bg-white">
         <Typography
           tag="h3"
           // text="How active is Jackey?"
           text={`How active is ${selectedPetName}?`}
-          className="text-center text-primary-dark"
+          className="text-center text-primary-dark capitalize"
         />
-        <div className="w-full mx-auto items-center justify-center flex flex-wrap lg:gap-[var(--space-20-60)] ">
+        <div className="w-full mx-auto items-center justify-center flex flex-wrap gap-3 lg:gap-[var(--space-20-60)] ">
           <PetActiveCard
             image={dogOrCat === "dog" ? "/images/sedentary.webp" : "/images/catSedentary.webp"}
             // image="/images/sedentary.webp"
@@ -74,13 +79,13 @@ export default function Page() {
             setSelectedCharacter={() => setSelectedActivity("active")}
           />
         </div>
-      </div>
+      </motion.div>
 
       {/* Navigation */}
-      <div className="pb-[3dvh] flex justify-between items-center gap-4 lg:gap-0 lg:items-end pt-[3dvh]">
+      <div className="pb-[3dvh] flex justify-between items-center gap-4 lg:gap-0 lg:items-end pt-[3dvh] ">
         <Button
           variant={"outlineSecondaryBtn"}
-          className="gap-2.5  lg:ml-[-55px]"
+          className="gap-2.5  lg:absolute lg:left-[-55px]  hover:scale-105 transition-transform duration-300 ease-in-out"
           onClick={(e) => {
             e.preventDefault();
             startTransition(() => {
@@ -100,7 +105,7 @@ export default function Page() {
           Back
         </Button>
         <Button 
-          className="gap-2.5 lg:ml-auto lg:mr-[-55px]" 
+          className="gap-2.5 lg:absolute lg:right-[-55px] hover:scale-105 transition-transform duration-300 ease-in-out" 
           disabled={!selectedActivity}
           onClick={handleNext}
         >

@@ -17,13 +17,15 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { startTransition } from "react";
+import { motion } from 'framer-motion';
 
 export default function Location() {
 
   const router = useRouter();
   const { location, setLocation } = usePetStore();
-  const [ error, setError ] = useState("");
-  const [ selectedMunicipality, setSelectedMunicipality ] = useState<string>("");
+  const [error, setError] = useState("");
+  const [selectedMunicipality, setSelectedMunicipality] = useState<string>("");
+  const softEase = [0.33, 1, 0.68, 1] as [number, number, number, number];
 
   const qatarMunicipalities = [
     "Al Shamal",
@@ -47,12 +49,12 @@ export default function Location() {
     //   return; // Block navigation
     // }
 
-    if(!selectedMunicipality) {
+    if (!selectedMunicipality) {
       setError("Please select a location"); // Show error if empty
       return; // Block navigation
     }
 
-    if(selectedMunicipality){
+    if (selectedMunicipality) {
       setLocation(selectedMunicipality);
       startTransition(() => {
         router.push("/dog-or-cat");
@@ -70,7 +72,7 @@ export default function Location() {
       setSelectedMunicipality(location);
       return;
     }
-  }, [location,selectedMunicipality]);
+  }, [location, selectedMunicipality]);
 
   return (
     <BuyingFlowLayout step={1}>
@@ -80,11 +82,15 @@ export default function Location() {
         className="flex-1 flex flex-col"
       >
         {/* title,content */}
-        <div className="h-full flex-1 flex flex-col justify-center items-center ">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease: softEase }}
+          className="h-full flex-1 flex flex-col justify-center items-center ">
           <Typography
             tag="h2"
             text="Your Pet’s Location"
-            className="text-primary-dark mb-4 text-center"
+            className="text-primary-dark mb-[2.5dvh] text-center"
           />
           {/* <Input
             type="text"
@@ -97,19 +103,21 @@ export default function Location() {
               setError(""); // Clear error when typing
             }}
           /> */}
-          <div className="max-w-[800px] w-[90%] sm:w-[50%] lg:w-[40%] block mx-auto bg-white">
-            <Select 
-              value={selectedMunicipality} 
+          <div
+            
+            className="max-w-[800px] w-[90%] sm:w-[50%] lg:w-[40%] block mx-auto bg-white ">
+            <Select
+              value={selectedMunicipality}
               onValueChange={setSelectedMunicipality}
             >
               <SelectTrigger
                 variant="roundedEdgeInputLgSecondary"
-                className="text-primary-dark data-[placeholder]:text-[#9B9B9B]"
+                className="text-primary-dark data-[placeholder]:text-[#9B9B9B] "
               >
                 <SelectValue placeholder="Select a location" />
               </SelectTrigger>
               <SelectContent
-                className="bg-white border-secondary-1 rounded-2xl text-primary-dark"
+                className="bg-white border-secondary-1 rounded-2xl text-primary-dark "
               >
                 {qatarMunicipalities.map((municipality: string) => (
                   <SelectItem
@@ -128,10 +136,12 @@ export default function Location() {
               {error}
             </p>
           )}
-        </div>
+        </motion.div>
+
+
         {/* navigation */}
-        <div className="pb-[3dvh] flex flex-col lg:flex-row items-center gap-4 lg:gap-0  lg:items-end landscape:pt-[3dvh]">
-          <div className="max-w-[900px] w-[95%] sm:w-[60%] lg:w-[50%] text-center mb-0.5 p-4 pt-3 border border-[#A1A1A1] rounded-2xl lg:mx-auto lg:mr-[-90px]">
+        <div className="pb-[3dvh] flex flex-col lg:flex-row items-center gap-4 lg:gap-0   landscape:pt-[3dvh] ">
+          <div className="max-w-[900px] w-[95%] sm:w-[60%] lg:w-[50%] text-center mb-0.5 p-4 pt-3 border border-[#A1A1A1] rounded-2xl lg:mx-auto ">
             <Typography
               tag="span"
               text="Disclaimer:"
@@ -144,13 +154,14 @@ export default function Location() {
             />
           </div>
           <Button
-            type="submit" 
-            className="gap-2.5 lg:ml-auto lg:mr-[-55px]"
+
+            type="submit"
+            className="gap-2.5  lg:absolute lg:right-[-55px] bottom-4 hover:scale-105 transition-transform duration-300 ease-in-out"
             disabled={!selectedMunicipality}
-            // onClick={(e) => {
-            //   e.preventDefault();
-            //   router.push("/dog-or-cat");
-            // }}
+          // onClick={(e) => {
+          //   e.preventDefault();
+          //   router.push("/dog-or-cat");
+          // }}
           >
             Next
             <div className="w-5">

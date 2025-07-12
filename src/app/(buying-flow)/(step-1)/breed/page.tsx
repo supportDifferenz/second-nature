@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import BuyingFlowLayout from "@/components/templates/BuyingFlowLayout";
 import Typography from "@/components/atoms/typography/Typography";
-import {  Plus } from "lucide-react";
+import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import {
@@ -18,6 +18,7 @@ import { usePetStore } from "@/zustand/store/petDataStore";
 import { useGetBreedDetails } from "@/hooks/subscriptionHooks/getBreedDetailsHook";
 import { useGetCrossBreedDetails } from "@/hooks/subscriptionHooks/getCrossBreedDetailsHook";
 import { startTransition } from "react";
+import { motion } from 'framer-motion';
 
 export default function Breed() {
 
@@ -40,13 +41,14 @@ export default function Breed() {
   const getCrossBreed = catOrDog === "cat" ? "getCatCrossBreed" : "getDogCrossBreed";
   const { data: breedData } = useGetBreedDetails(getBreed);
   const { data: crossBreedData } = useGetCrossBreedDetails(getCrossBreed);
+  const softEase = [0.33, 1, 0.68, 1] as [number, number, number, number];
 
   useEffect(() => {
-    console.log("Breed is",breed,"Cross Breed is",crossBreed);
-    if(selectedCrossBreed){
+    console.log("Breed is", breed, "Cross Breed is", crossBreed);
+    if (selectedCrossBreed) {
       setShowCrossBreed(true);
     }
-  },[])
+  }, [])
   //   if (breedData?.result && selectedPet?.breed) {
   //     // Find the exact match (case-insensitive)
   //     const matchedBreed = breedData.result.find(
@@ -68,11 +70,11 @@ export default function Breed() {
     if (breedData?.result && selectedPet?.breed) {
       // Normalize both the stored value and options for comparison
       const storedBreed = selectedPet?.breed;
-      console.log("Stored breed:", storedBreed,breedData.result);
-      const matchedBreed = breedData.result.find((opt: string) => 
+      console.log("Stored breed:", storedBreed, breedData.result);
+      const matchedBreed = breedData.result.find((opt: string) =>
         opt.trim() === storedBreed
       );
-      
+
       if (matchedBreed) {
         setSelectedBreed(matchedBreed);
         console.log("Matched breed:", matchedBreed);
@@ -118,7 +120,7 @@ export default function Breed() {
       return;
     }
 
-    console.log("Selected Breed is", selectedBreed,"Selected Cross Breed is", selectedCrossBreed,"Selected pet ID is", currentPetId);
+    console.log("Selected Breed is", selectedBreed, "Selected Cross Breed is", selectedCrossBreed, "Selected pet ID is", currentPetId);
     if (selectedBreed && selectedCrossBreed && currentPetId) {
       setPetDetails(currentPetId, { breed: selectedBreed, crossBreed: selectedCrossBreed });
       startTransition(() => {
@@ -153,18 +155,21 @@ export default function Breed() {
     setShowCrossBreed(false);
   }
 
-  console.log("I don't know breed is",iDontKnowBreed);
+  console.log("I don't know breed is", iDontKnowBreed);
 
   return (
     <BuyingFlowLayout step={1}>
       <form className="flex-1 flex flex-col">
         {/* Content Section */}
-        <div className="h-full  flex-1 flex flex-col justify-center lg:justify-start lg:mt-2 items-center">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease: softEase }} className="h-full   flex-1 flex flex-col justify-center lg:justify-center lg:mt-2 items-center">
           <Typography
             tag="h2"
             // text="Jackey’s Breed"
             text={`${selectedPetName}'s Breed`}
-            className="text-primary-dark portrait:mb-[5dvh] landscape:mb-[4dvh] text-center"
+            className="text-primary-dark portrait:mb-[5dvh] landscape:mb-[4dvh] capitalize text-center"
           />
 
           <div className="max-w-[800px] w-[90%] sm:w-[50%] lg:w-[40%]">
@@ -194,9 +199,9 @@ export default function Breed() {
             {/* Add a cross-breed */}
             {
               !showCrossBreed && selectedBreed && (
-                <Button 
-                  variant={"secondaryBtn"} 
-                  type="button" 
+                <Button
+                  variant={"secondaryBtn"}
+                  type="button"
                   className="w-full mt-3 text-primary-dark"
                   onClick={handleCrossBreed}
                 >
@@ -234,36 +239,36 @@ export default function Breed() {
             {/* Unknown breed */}
             <div className="flex flex-col lg:flex-row gap-2">
               <Button
-              type="button"
-              variant={"outlineSecondaryBtn"}
-              className={`${iDontKnowBreed && "bg-primary-light text-primary-dark"} mx-auto portrait:mt-[3dvh] landscape:mt-[6dvh]`}
-              onClick={handleIdontKnowBreed}
+                type="button"
+                variant={"outlineSecondaryBtn"}
+                className={`${iDontKnowBreed && "bg-primary-light text-primary-dark"} mx-auto portrait:mt-[3dvh] landscape:mt-[6dvh]`}
+                onClick={handleIdontKnowBreed}
 
-            >
-              I don’t know the breed
-            </Button>
+              >
+                I don’t know the breed
+              </Button>
 
-            {
-              selectedCrossBreed && (
-                <Button
-                  type="button"
-                  variant={"outlineSecondaryBtn"}
-                  className="mx-auto lg:portrait:mt-[2dvh] landscape:mt-[6dvh]"
-                  onClick={handleRemoveCrossBreed}
-                >
-                  Remove cross-breed
-                </Button>
-              )
-            }
+              {
+                selectedCrossBreed && (
+                  <Button
+                    type="button"
+                    variant={"outlineSecondaryBtn"}
+                    className="mx-auto lg:portrait:mt-[2dvh] landscape:mt-[6dvh]"
+                    onClick={handleRemoveCrossBreed}
+                  >
+                    Remove cross-breed
+                  </Button>
+                )
+              }
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Navigation */}
         <div className="pb-[3dvh] flex  justify-between items-center gap-4 lg:gap-0 lg:items-end pt-[3dvh]">
           <Button
             variant={"outlineSecondaryBtn"}
-            className="gap-2.5 lg:ml-[-55px]"
+            className="gap-2.5 lg:ml-[-55px] hover:scale-105 transition-transform duration-300 ease-in-out"
             onClick={(e) => {
               e.preventDefault();
               startTransition(() => {
@@ -282,8 +287,8 @@ export default function Breed() {
             </div>
             Back
           </Button>
-          <Button 
-            className="gap-2.5 lg:ml-auto lg:mr-[-55px]" 
+          <Button
+            className="gap-2.5 lg:ml-auto lg:mr-[-55px] hover:scale-105 transition-transform duration-300 ease-in-out"
             disabled={!iDontKnowBreed && !(selectedBreed && selectedCrossBreed)}
             onClick={handleNext}
           >
@@ -300,5 +305,5 @@ export default function Breed() {
         </div>
       </form>
     </BuyingFlowLayout>
-  );
+  );
 }
