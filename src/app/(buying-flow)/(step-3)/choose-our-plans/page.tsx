@@ -291,7 +291,7 @@ export default function Page() {
         <Typography
           tag="h3"
           text="Choose Our Plan"
-          className="text-center text-primary-dark"
+          className="text-center text-primary-dark capitalize"
         />
         <div>
           {isLoading ? (
@@ -398,7 +398,7 @@ export default function Page() {
       <div className="pb-[3dvh] flex justify-between items-center gap-4 lg:gap-0 lg:items-end pt-[3dvh]">
         <Button
           variant={"outlineSecondaryBtn"}
-          className="gap-2.5  lg:ml-[-55px]"
+          className="gap-2.5  lg:ml-[-55px] hover:scale-105 transition-transform duration-300 ease-in-out"
           onClick={(e) => {
             e.preventDefault();
             startTransition(() => {
@@ -418,7 +418,7 @@ export default function Page() {
           Back
         </Button>
         <Button
-          className="gap-2.5 lg:ml-auto lg:mr-[-55px]"
+          className="gap-2.5 lg:ml-auto lg:mr-[-55px] hover:scale-105 transition-transform duration-300 ease-in-out"
           disabled={
             !(
               (regularProtein && regularBowlSize) ||

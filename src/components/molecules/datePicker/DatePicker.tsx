@@ -25,13 +25,13 @@ export default function DateOfBirthPicker({ dateOfBirth, setDateOfBirth, colorCl
         <Button
           onClick={() => setOpen(!open)}
           className={cn(
-            `${className} ${colorClass} text-primary-dark justify-between bg-white hover:bg-white w-[90%] sm:w-[40%] lg:w-[30%] hover:border-[#A1A1A1] data-[placeholder]:text-[#9B9B9B] h-13 sm:h-15 rounded-full border border-[#A1A1A1] outline-none data-[state=open]:border-secondary-1 px-4 py-2`,
+            `${className} ${colorClass} text-primary-dark justify-between bg-white hover:bg-white w-[90%] sm:w-[40%] lg:w-[30%] hover:border-[#A1A1A1] data-[placeholder]:text-[#9B9B9B] h-13  rounded-full border border-[#A1A1A1] outline-none data-[state=open]:border-secondary-1 px-4 py-2`,
             !dateOfBirth && "text-muted-foreground"
           )}
         >
           {dateOfBirth ? format(parse(dateOfBirth, "dd-MM-yyyy", new Date()), "dd-MM-yyyy") : "DD-MM-YYYY"}
-          <div className="relative w-6">
-            <Image src="icons/calendar.svg" alt="icon" fill className="!static w-full" />
+          <div className="relative w-[22px]">
+            <Image src="icons/calendar.svg" alt="icon" fill className="!static w-full hover:scale-105 transition-transform duration-300 ease-in-out" />
           </div>
         </Button>
       </PopoverTrigger>

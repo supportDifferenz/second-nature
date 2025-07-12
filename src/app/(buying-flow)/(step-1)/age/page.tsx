@@ -10,6 +10,7 @@ import Counter from "@/components/molecules/counterBuyingFlow/Counter";
 import { useRouter } from "next/navigation";
 import { usePetStore } from "@/zustand/store/petDataStore";
 import { startTransition } from "react";
+import { motion } from 'framer-motion';
 
 export default function Age() {
 
@@ -31,6 +32,7 @@ export default function Age() {
   const [ year, setYear ] = useState(0);
 
   console.log("Selected Pet in age page is", selectedPet);
+  const softEase = [0.33, 1, 0.68, 1] as [number, number, number, number];
 
   const handleNext = (e: React.FormEvent) => {
     e.preventDefault();
@@ -76,12 +78,15 @@ export default function Age() {
     <BuyingFlowLayout step={1}>
       <form action="" className="flex-1 flex flex-col ">
         {/* title,content */}
-        <div className="h-full  flex-1 flex flex-col justify-center items-center ">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease: softEase }} className="h-full  flex-1 flex flex-col justify-center items-center ">
           <Typography
             tag="h2"
             // text="How old is Jackey?"
             text={`How old is ${selectedPetName}?`}
-            className="text-primary-dark mb-4 text-center"
+            className="text-primary-dark mb-4 text-center capitalize"
           />
 
           <div className="flex justify-center mb-4 ">
@@ -117,7 +122,7 @@ export default function Age() {
               <Counter label="Months" min={0} max={12} value={month} setValue={setMonth} />
             </div>
           )}
-        </div>
+        </motion.div>
         {/* Navigation */}
         <div className="pb-[3dvh] flex  justify-between items-center gap-4 lg:gap-0 lg:items-end pt-[3dvh]">
           <Button

@@ -27,7 +27,7 @@ export default function CheckoutProgressBar({
         <div key={step.number} className="flex flex-col items-center ">
           {/* Step Circle */}
           <div
-            className={` flex items-center justify-center py-0.5 px-2.5 sm:py-1 sm:px-3 rounded-full  text-white mb-(--space-6-12) ${
+            className={` flex items-center max-[575px]:text-[13px] text-[14px] justify-center py-0.5 px-2.5 sm:py-1 sm:px-3 rounded-full  text-white mb-(--space-6-12) ${
               step.number <= currentStep ? "bg-primary-dark" : "bg-[#818181]"
             }`}
           >
@@ -35,7 +35,7 @@ export default function CheckoutProgressBar({
           </div>
           {/* Step Label */}
           <span
-            className={` ${
+            className={` max-[575px]:text-[13px] ${
               step.number <= currentStep
                 ? "text-primary-dark font-medium"
                 : "text-[#818181]"

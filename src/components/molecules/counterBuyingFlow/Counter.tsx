@@ -66,7 +66,7 @@ export default function Counter({
   };
 
   return (
-    <div className={`${className1} flex items-center justify-between w-full max-w-80 sm:max-w-96 px-7 h-[var(--space-60-80)] bg-white rounded-full border border-[#A1A1A1]`}>
+    <div className={`${className1} flex items-center justify-between w-full max-w-80 sm:max-w-96 px-7 h-13 bg-white rounded-full border border-[#A1A1A1]`}>
       <div className={`${className2} flex items-center gap-4`}>
         <button
           onClick={handleDecrease}
@@ -88,7 +88,7 @@ export default function Counter({
         </button>
       </div>
       <div>
-        <Typography tag='h6' text={label} className={`${colorClass} text-primary-dark`} />
+        <Typography tag='label' text={label} className={`${colorClass} text-primary-dark h6  `} />
       </div>
     </div>
   );
