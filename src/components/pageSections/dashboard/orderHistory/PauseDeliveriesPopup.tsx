@@ -5,15 +5,15 @@ import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Popup } from "@/components/molecules/popupSkelton/popup";
 import Typography from "@/components/atoms/typography/Typography";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Label } from "@/components/ui/label";
-import { Separator } from "@/components/ui/separator";
-import Image from "next/image";
+// import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+// import { Label } from "@/components/ui/label";
+// import { Separator } from "@/components/ui/separator";
+// import Image from "next/image";
 // import WeeklyRangeSelector from "@/components/molecules/weekDateRangePicker/WeeklyRangeSelector";
 import RangeDatePicker from "@/components/molecules/weekDateRangePicker/WeeklyRangeSelector";
 
 // Types
-type WeekOption = "1week" | "2weeks" | "3weeks" | "4weeks" | "custom";
+// type WeekOption = "1week" | "2weeks" | "3weeks" | "4weeks" | "custom";
 
 interface DateRange {
   from: Date;
@@ -35,7 +35,7 @@ export const PauseDeliveriesPopup: React.FC<PauseDeliveriesPopupProps> = ({
   onConfirm,
   // initialRange,
 }) => {
-  const [selectedOption, setSelectedOption] = useState<WeekOption>("1week");
+  // const [selectedOption, setSelectedOption] = useState<WeekOption>("1week");
   const today = new Date();
 
   console.log("Today", today);
@@ -47,11 +47,11 @@ export const PauseDeliveriesPopup: React.FC<PauseDeliveriesPopupProps> = ({
   });
   // const [dateRangeFromCalender, setDateRangeFromCalender] = useState<{ from: Date; to: Date } | null>(null);
   // const [dateRangeFromCalender] = useState<{ from: Date; to: Date } | null>(null);
-  const [range, setRange] = useState<{ from: Date | undefined; to?: Date | undefined }>({
-    from: undefined,
-    to: undefined,
-  });
-  const [weeks, setWeeks] = useState<number>(1);
+  // const [range, setRange] = useState<{ from: Date | undefined; to?: Date | undefined }>({
+  //   from: undefined,
+  //   to: undefined,
+  // });
+  const [weeks, setWeeks] = useState<number>(0);
 
   const [reason,] = useState<string>("");
 
@@ -79,45 +79,45 @@ export const PauseDeliveriesPopup: React.FC<PauseDeliveriesPopupProps> = ({
   //   }
   // };
 
-  const handleWeekOptionChange = (value: WeekOption) => {
-    setSelectedOption(value);
-    setIsWeekSelected(true);
+  // const handleWeekOptionChange = (value: WeekOption) => {
+  //   setSelectedOption(value);
+  //   setIsWeekSelected(true);
 
-    if (value !== "custom") {
-      // let daysToAdd = 0;
-      switch (value) {
-        case "1week":
-          setWeeks(1);
-          // daysToAdd = 7;
-          break;
-        case "2weeks":
-          setWeeks(2);
-          // daysToAdd = 14;
-          break;
-        case "3weeks":
-          setWeeks(3);
-          // daysToAdd = 21;
-          break;
-        case "4weeks":
-          setWeeks(4);
-          // daysToAdd = 28;
-          break;
-        default:
-          break;
-      }
+  //   if (value !== "custom") {
+  //     // let daysToAdd = 0;
+  //     switch (value) {
+  //       case "1week":
+  //         setWeeks(1);
+  //         // daysToAdd = 7;
+  //         break;
+  //       case "2weeks":
+  //         setWeeks(2);
+  //         // daysToAdd = 14;
+  //         break;
+  //       case "3weeks":
+  //         setWeeks(3);
+  //         // daysToAdd = 21;
+  //         break;
+  //       case "4weeks":
+  //         setWeeks(4);
+  //         // daysToAdd = 28;
+  //         break;
+  //       default:
+  //         break;
+  //     }
 
-      setDateRange({
-        from: "",
-        to: "",
-      });
+  //     setDateRange({
+  //       from: "",
+  //       to: "",
+  //     });
 
-      setRange({
-        from: undefined,
-        to: undefined
-      })
+  //     // setRange({
+  //     //   from: undefined,
+  //     //   to: undefined
+  //     // })
 
-    }
-  };
+  //   }
+  // };
 
   useEffect(() => {
     console.log("Calender range and weeks", dateRange, weeks);
@@ -129,7 +129,7 @@ export const PauseDeliveriesPopup: React.FC<PauseDeliveriesPopupProps> = ({
     <Popup
       isOpen={isOpen}
       onClose={onClose}
-      title="Pause Deliveries For"
+      title="Pause My Deliveries"
       size="md"
       footer={
         <div className="flex justify-center w-full px-7 border-t border-[#d1d3c9] py-7 pt-5 mt-5">
@@ -140,6 +140,23 @@ export const PauseDeliveriesPopup: React.FC<PauseDeliveriesPopupProps> = ({
       }
     >
       <div className="flex flex-col gap-5">
+
+        <Typography
+          tag="p"
+          text="Next possible pause date is 21.Jul.2025"  
+          className="text-lg font-semibold text-[#F15353]"
+        />
+
+        <div>
+          <Typography
+            tag="p"
+            text="Select Delivery Duration"
+            className="text-sm mb-1"
+          />
+          {/* <WeeklyRangeSelector setDateRangeFromCalender={setDateRangeFromCalender} setIsWeekSelected={setIsWeekSelected} /> */}
+          <RangeDatePicker setWeeks={setWeeks} setDateRange={setDateRange} setIsWeekSelected={setIsWeekSelected} />
+        </div>
+
         {/* Duration Display */}
         <div className="border border-[#9C3A3A] rounded-md p-4 mb-2 relative">
           <Typography
@@ -149,17 +166,21 @@ export const PauseDeliveriesPopup: React.FC<PauseDeliveriesPopupProps> = ({
           />
           <div className="text-center text-[#00683D] font-medium h6">
             {/* {formatDisplayDate(dateRange.from)} to {formatDisplayDate(dateRange.to)} */}
-            { dateRange.from !== "" && dateRange.to !== "" ? `${dateRange.from} to ${dateRange.to}` : ""}
+            {/* { dateRange.from !== "" && dateRange.to !== "" ? `${dateRange.from} to ${dateRange.to}` : "DD.MM.YYYY to DD.MM.YYYY" } */}
+            <Typography
+              tag="h6"
+              text={ dateRange.from !== "" && dateRange.to !== "" ? `${dateRange.from} to ${dateRange.to}` : "DD.MM.YYYY to DD.MM.YYYY" }
+            />
           </div>
         </div>
 
         {/* Week Selection */}
-        <RadioGroup
+        {/* <RadioGroup
           value={selectedOption}
           onValueChange={(value) => handleWeekOptionChange(value as WeekOption)}
           className="flex flex-wrap gap-4"
-        >
-          {[
+        > */}
+          {/* {[
             { value: "1week", label: "Next 1 week" },
             { value: "2weeks", label: "Next 2 weeks" },
             { value: "3weeks", label: "Next 3 weeks" },
@@ -186,17 +207,17 @@ export const PauseDeliveriesPopup: React.FC<PauseDeliveriesPopupProps> = ({
                 {label}
               </Label>
             </div>
-          ))}
+          ))} */}
 
           {/* Separator */}
-          <div className="flex items-center my-2 w-full">
+          {/* <div className="flex items-center my-2 w-full">
             <Separator className="flex-1 bg-[#d1d3c9]" />
             <span className="px-4 text-gray-500 text-sm uppercase">OR</span>
             <Separator className="flex-1 bg-[#d1d3c9]" />
-          </div>
+          </div> */}
 
           {/* Custom Week Selector */}
-          <div className="flex items-center max-[575px]:space-x-1 space-x-2 w-full relative">
+          {/* <div className="flex items-center max-[575px]:space-x-1 space-x-2 w-full relative">
             <RadioGroupItem value="custom" id="option-custom" className="sr-only" />
             <div
               className="w-7 h-7 sm:w-7 sm:h-7 rounded-full p-1 cursor-pointer"
@@ -216,12 +237,11 @@ export const PauseDeliveriesPopup: React.FC<PauseDeliveriesPopupProps> = ({
             <Label htmlFor="option-custom" className="cursor-pointer mb-0 max-[575px]:!text-[13px]">
               Select Week(s)
             </Label>
-          </div>
-        </RadioGroup>
+          </div> */}
+        {/* </RadioGroup> */}
 
         
-        {/* <WeeklyRangeSelector setDateRangeFromCalender={setDateRangeFromCalender} setIsWeekSelected={setIsWeekSelected} /> */}
-        <RangeDatePicker selectedRange={range} setSelectedRange={setRange} setWeeks={setWeeks} setDateRange={setDateRange} setIsWeekSelected={setIsWeekSelected} />
+        
 
       </div>
     </Popup>
