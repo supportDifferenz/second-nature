@@ -9,9 +9,9 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
     <>
       <Header />
       <main className="mt-6 lg:mt-10">
-        <div className="container flex flex-col lg:flex-row gap-(--space-20-60) min-h-screen ">
+        <div className="container flex flex-col lg:flex-row gap-(--space-20-60) pb-16 min-h-[60vh] lg:min-h-screen ">
           {/* Sidebar */}
-          <div className="overflow-x-auto lg:overflow-visible  ">
+          <div className="overflow-x-auto lg:overflow-visible ">
             <DashboardMenu />
           </div>
 
