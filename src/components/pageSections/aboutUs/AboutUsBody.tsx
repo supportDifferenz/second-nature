@@ -75,12 +75,13 @@ AboutUsBodyProps) {
   });
   return (
     <div>
+      <div id="our-story">
       <motion.div
         initial={{ opacity: 0, y: 60 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         viewport={{ once: true }}
-      >
+        >
         <div className="flex flex-col items-center mt-[var(--space-95-195)] w-fit mx-auto">
           <Typography
             tag="h6"
@@ -99,6 +100,8 @@ AboutUsBodyProps) {
           />
         </div>
       </motion.div>
+      </div>
+
 
       <motion.div
         initial={{ opacity: 0, y: 80 }}
@@ -225,7 +228,7 @@ AboutUsBodyProps) {
         </div>
       </div>
 
-      <div className="mt-[33vw] sm:mt-[17.70vw]">
+      <div id="our-mission" className="mt-[33vw] sm:mt-[17.70vw]">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
