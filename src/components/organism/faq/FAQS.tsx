@@ -52,11 +52,20 @@ const FAQS: React.FC<FAQSPropsTypes> = ({
                     transition={{ duration: 0.3, ease: "easeInOut" }}
                     className="overflow-hidden"
                   >
-                    <Typography
-                      tag="p"
-                      text={faq.answer}
-                      className="p-6 pt-0 pb-5 bg-[#F9FFFD] lg:w-[80%]"
-                    />
+                    <div className="p-6 pt-0 pb-5 bg-[#F9FFFD] lg:w-[80%]">
+                      {Array.isArray(faq.answer) ? (
+                        faq.answer.map((para, idx) => (
+                          <Typography
+                            key={idx}
+                            tag="p"
+                            text={para}
+                            className="mb-4 last:mb-0"
+                          />
+                        ))
+                      ) : (
+                        <Typography tag="p" text={faq.answer} />
+                      )}
+                    </div>
                   </motion.div>
                 )}
               </AnimatePresence>
