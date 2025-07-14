@@ -93,6 +93,7 @@ export default function FooterCtaCard({
             <Button
               variant={"primaryBtn"}
               className="mx-auto sm:mt-[8.4vw] sm:hidden"
+              onClick={() => router.push("/transition-diet")}
             >
               Know More
             </Button>
@@ -102,6 +103,7 @@ export default function FooterCtaCard({
               size={"md"}
               variant={"secondaryBtnTextSecondary1"}
               className="hidden sm:block"
+              onClick={() => router.push("/transition-diet")}
             >
               Learn More
             </Button>
