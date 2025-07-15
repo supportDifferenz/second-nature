@@ -116,82 +116,103 @@ const OrderHistoryCard: React.FC<
   const pauseEndDateFromAPI = subscriptionDetails?.result?.lastChange?.endDate;
   const nextPausePossibleDeliveryDateFromAPI = subscriptionDetails?.result?.nextPausePossibleDeliveryDate;
 
-  let formattedCancellationDate = "";
-  let formattedPauseStartDate = "";
-  let formattedPauseEndDate = "";
-  let formattedPossiblePauseDate = "";
-
-  if (cancellationDateFromAPI) {
-    // 1. SAFELY PARSE THE DATE (Handles YYYY-MM-DD or ISO formats)
-    const parsedDate = new Date(cancellationDateFromAPI);
-
-    // 2. VALIDATE THE DATE
-    if (!isNaN(parsedDate.getTime())) { // Check if date is valid
-      // 3. FORMAT AS "DD MMM YYYY" (e.g., "13 Mar 2025")
-      formattedCancellationDate = parsedDate.toLocaleDateString('en-GB', {
-        day: 'numeric',
-        month: 'short',
-        year: 'numeric'
-      });
-    } else {
-      console.error("Invalid date format:", cancellationDateFromAPI);
-      formattedCancellationDate = "Invalid date"; // Fallback
+  function formatDate(dateString: string) {
+    if (!dateString) return "";
+    
+    const parsedDate = new Date(dateString);
+    if (isNaN(parsedDate.getTime())) {
+      console.error("Invalid date format:", dateString);
+      return "Invalid date";
     }
+
+    const day = parsedDate.getDate().toString().padStart(2, '0');
+    const month = parsedDate.toLocaleString('en-GB', { month: 'short' });
+    const year = parsedDate.getFullYear();
+
+    return `${day}.${month}.${year}`;
   }
 
-  if (pauseStartDateFromAPI) {
-    // 1. SAFELY PARSE THE DATE (Handles YYYY-MM-DD or ISO formats)
-    const parsedDate = new Date(pauseStartDateFromAPI);
+  const formattedCancellationDate = formatDate(cancellationDateFromAPI);
+  const formattedPauseStartDate = formatDate(pauseStartDateFromAPI);
+  const formattedPauseEndDate = formatDate(pauseEndDateFromAPI);
+  const formattedPossiblePauseDate = formatDate(nextPausePossibleDeliveryDateFromAPI);
 
-    // 2. VALIDATE THE DATE
-    if (!isNaN(parsedDate.getTime())) { // Check if date is valid
-      // 3. FORMAT AS "DD MMM YYYY" (e.g., "13 Mar 2025")
-      formattedPauseStartDate = parsedDate.toLocaleDateString('en-GB', {
-        day: 'numeric',
-        month: 'short',
-        year: 'numeric'
-      });
-    } else {
-      console.error("Invalid date format:", cancellationDateFromAPI);
-      formattedPauseStartDate = "Invalid date"; // Fallback
-    }
-  }
+  // let formattedCancellationDate = "";
+  // let formattedPauseStartDate = "";
+  // let formattedPauseEndDate = "";
+  // let formattedPossiblePauseDate = "";
 
-  if (pauseEndDateFromAPI) {
-    // 1. SAFELY PARSE THE DATE (Handles YYYY-MM-DD or ISO formats)
-    const parsedDate = new Date(pauseEndDateFromAPI);
+  // if (cancellationDateFromAPI) {
+  //   // 1. SAFELY PARSE THE DATE (Handles YYYY-MM-DD or ISO formats)
+  //   const parsedDate = new Date(cancellationDateFromAPI);
 
-    // 2. VALIDATE THE DATE
-    if (!isNaN(parsedDate.getTime())) { // Check if date is valid
-      // 3. FORMAT AS "DD MMM YYYY" (e.g., "13 Mar 2025")
-      formattedPauseEndDate = parsedDate.toLocaleDateString('en-GB', {
-        day: 'numeric',
-        month: 'short',
-        year: 'numeric'
-      });
-    } else {
-      console.error("Invalid date format:", cancellationDateFromAPI);
-      formattedPauseEndDate = "Invalid date"; // Fallback
-    }
-  }
+  //   // 2. VALIDATE THE DATE
+  //   if (!isNaN(parsedDate.getTime())) { // Check if date is valid
+  //     // 3. FORMAT AS "DD MMM YYYY" (e.g., "13 Mar 2025")
+  //     formattedCancellationDate = parsedDate.toLocaleDateString('en-GB', {
+  //       day: 'numeric',
+  //       month: 'short',
+  //       year: 'numeric'
+  //     });
+  //   } else {
+  //     console.error("Invalid date format:", cancellationDateFromAPI);
+  //     formattedCancellationDate = "Invalid date"; // Fallback
+  //   }
+  // }
 
-  if (nextPausePossibleDeliveryDateFromAPI) {
-    // 1. SAFELY PARSE THE DATE (Handles YYYY-MM-DD or ISO formats)
-    const parsedDate = new Date(nextPausePossibleDeliveryDateFromAPI);
+  // if (pauseStartDateFromAPI) {
+  //   // 1. SAFELY PARSE THE DATE (Handles YYYY-MM-DD or ISO formats)
+  //   const parsedDate = new Date(pauseStartDateFromAPI);
 
-    // 2. VALIDATE THE DATE
-    if (!isNaN(parsedDate.getTime())) { // Check if date is valid
-      // 3. FORMAT AS "DD MMM YYYY" (e.g., "13 Mar 2025")
-      formattedPossiblePauseDate = parsedDate.toLocaleDateString('en-GB', {
-        day: 'numeric',
-        month: 'short',
-        year: 'numeric'
-      }).replace(/\s+/g, '.'); // Replace spaces with dots
-    } else {
-      console.error("Invalid date format:", cancellationDateFromAPI);
-      formattedPossiblePauseDate = "Invalid date"; // Fallback
-    }
-  }
+  //   // 2. VALIDATE THE DATE
+  //   if (!isNaN(parsedDate.getTime())) { // Check if date is valid
+  //     // 3. FORMAT AS "DD MMM YYYY" (e.g., "13 Mar 2025")
+  //     formattedPauseStartDate = parsedDate.toLocaleDateString('en-GB', {
+  //       day: 'numeric',
+  //       month: 'short',
+  //       year: 'numeric'
+  //     });
+  //   } else {
+  //     console.error("Invalid date format:", cancellationDateFromAPI);
+  //     formattedPauseStartDate = "Invalid date"; // Fallback
+  //   }
+  // }
+
+  // if (pauseEndDateFromAPI) {
+  //   // 1. SAFELY PARSE THE DATE (Handles YYYY-MM-DD or ISO formats)
+  //   const parsedDate = new Date(pauseEndDateFromAPI);
+
+  //   // 2. VALIDATE THE DATE
+  //   if (!isNaN(parsedDate.getTime())) { // Check if date is valid
+  //     // 3. FORMAT AS "DD MMM YYYY" (e.g., "13 Mar 2025")
+  //     formattedPauseEndDate = parsedDate.toLocaleDateString('en-GB', {
+  //       day: 'numeric',
+  //       month: 'short',
+  //       year: 'numeric'
+  //     });
+  //   } else {
+  //     console.error("Invalid date format:", cancellationDateFromAPI);
+  //     formattedPauseEndDate = "Invalid date"; // Fallback
+  //   }
+  // }
+
+  // if (nextPausePossibleDeliveryDateFromAPI) {
+  //   // 1. SAFELY PARSE THE DATE (Handles YYYY-MM-DD or ISO formats)
+  //   const parsedDate = new Date(nextPausePossibleDeliveryDateFromAPI);
+
+  //   // 2. VALIDATE THE DATE
+  //   if (!isNaN(parsedDate.getTime())) { // Check if date is valid
+  //     // 3. FORMAT AS "DD MMM YYYY" (e.g., "13 Mar 2025")
+  //     formattedPossiblePauseDate = parsedDate.toLocaleDateString('en-GB', {
+  //       day: 'numeric',
+  //       month: 'short',
+  //       year: 'numeric'
+  //     }).replace(/\s+/g, '.'); // Replace spaces with dots
+  //   } else {
+  //     console.error("Invalid date format:", cancellationDateFromAPI);
+  //     formattedPossiblePauseDate = "Invalid date"; // Fallback
+  //   }
+  // }
 
   const proteinImageSrc = protein === "lamb"
     ? "/icons/card-lamb.svg"
