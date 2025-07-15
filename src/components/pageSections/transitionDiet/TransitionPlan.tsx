@@ -43,6 +43,7 @@ export default function TransitionPlan() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
+          className="flex flex-col items-center"
         >
           <Typography
             tag="h3"

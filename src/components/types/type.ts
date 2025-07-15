@@ -29,8 +29,9 @@ export type HeroBannersPropsType = {
 // FAQSItemsProps type
 export type FAQSItemsPropsTypes = {
   question: string;
-  answer: string;
+  answer: string | string[];
 };
+
 
 // FooterBannerCTAProps type
 export type FooterBannerCTAPropsType = {

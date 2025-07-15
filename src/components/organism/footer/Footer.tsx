@@ -164,8 +164,26 @@ const Footer = () => {
                 className="text-primary-dark mb-(--space-20-45)"
               />
               <ul className="flex flex-col gap-2.5">
-                <li className="cursor-pointer">Our Story</li>
-                <li className="cursor-pointer">Our Mission</li>
+                <li
+                  className="cursor-pointer"
+                  onClick={() => {
+                    startTransition(() => {
+                      router.push("/about-us#our-story");
+                    });
+                  }}
+                >
+                  Our Story
+                </li>
+                <li
+                  className="cursor-pointer"
+                  onClick={() => {
+                    startTransition(() => {
+                      router.push("/about-us#our-mission");
+                    });
+                  }}
+                >
+                  Our Mission
+                </li>
               </ul>
             </div>
             <div className="flex-1 whitespace-nowrap  sm:flex-auto">
