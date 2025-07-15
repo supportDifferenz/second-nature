@@ -114,10 +114,12 @@ const OrderHistoryCard: React.FC<
   const cancellationDateFromAPI = subscriptionDetails?.result?.lastChange?.Date;
   const pauseStartDateFromAPI = subscriptionDetails?.result?.lastChange?.startDate;
   const pauseEndDateFromAPI = subscriptionDetails?.result?.lastChange?.endDate;
+  const nextPausePossibleDeliveryDateFromAPI = subscriptionDetails?.result?.nextPausePossibleDeliveryDate;
 
   let formattedCancellationDate = "";
   let formattedPauseStartDate = "";
   let formattedPauseEndDate = "";
+  let formattedPossiblePauseDate = "";
 
   if (cancellationDateFromAPI) {
     // 1. SAFELY PARSE THE DATE (Handles YYYY-MM-DD or ISO formats)
@@ -170,6 +172,24 @@ const OrderHistoryCard: React.FC<
     } else {
       console.error("Invalid date format:", cancellationDateFromAPI);
       formattedPauseEndDate = "Invalid date"; // Fallback
+    }
+  }
+
+  if (nextPausePossibleDeliveryDateFromAPI) {
+    // 1. SAFELY PARSE THE DATE (Handles YYYY-MM-DD or ISO formats)
+    const parsedDate = new Date(nextPausePossibleDeliveryDateFromAPI);
+
+    // 2. VALIDATE THE DATE
+    if (!isNaN(parsedDate.getTime())) { // Check if date is valid
+      // 3. FORMAT AS "DD MMM YYYY" (e.g., "13 Mar 2025")
+      formattedPossiblePauseDate = parsedDate.toLocaleDateString('en-GB', {
+        day: 'numeric',
+        month: 'short',
+        year: 'numeric'
+      }).replace(/\s+/g, '.'); // Replace spaces with dots
+    } else {
+      console.error("Invalid date format:", cancellationDateFromAPI);
+      formattedPossiblePauseDate = "Invalid date"; // Fallback
     }
   }
 
@@ -904,6 +924,8 @@ const OrderHistoryCard: React.FC<
 
       <PauseDeliveriesPopup
         isOpen={isPausePopupOpen}
+        setIsPausePopUpOpen={setIsPausePopupOpen}
+        formattedPossiblePauseDate={formattedPossiblePauseDate}
         onClose={() => setIsPausePopupOpen(false)}
         onConfirm={(dateRange: { from: string; to: string }, weeks: number, reason) => {
 

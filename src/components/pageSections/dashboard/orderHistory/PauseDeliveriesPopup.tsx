@@ -11,6 +11,7 @@ import Typography from "@/components/atoms/typography/Typography";
 // import Image from "next/image";
 // import WeeklyRangeSelector from "@/components/molecules/weekDateRangePicker/WeeklyRangeSelector";
 import RangeDatePicker from "@/components/molecules/weekDateRangePicker/WeeklyRangeSelector";
+import ProceedCheck from "@/components/organism/popUp/ProceedCheck";
 
 // Types
 // type WeekOption = "1week" | "2weeks" | "3weeks" | "4weeks" | "custom";
@@ -23,6 +24,8 @@ interface DateRange {
 
 interface PauseDeliveriesPopupProps {
   isOpen: boolean;
+  formattedPossiblePauseDate?: string; // Optional: if you want to display the next possible pause date
+  setIsPausePopUpOpen?: (open: boolean) => void; // Optional: if you want to control the open state from parent
   onClose: () => void;
   onConfirm: (dateRange: { from: string; to: string }, weeks: number, reason: string) => void;
   initialRange?: DateRange;
@@ -31,6 +34,8 @@ interface PauseDeliveriesPopupProps {
 
 export const PauseDeliveriesPopup: React.FC<PauseDeliveriesPopupProps> = ({
   isOpen,
+  formattedPossiblePauseDate,
+  setIsPausePopUpOpen,
   onClose,
   onConfirm,
   // initialRange,
@@ -54,6 +59,46 @@ export const PauseDeliveriesPopup: React.FC<PauseDeliveriesPopupProps> = ({
   const [weeks, setWeeks] = useState<number>(0);
 
   const [reason,] = useState<string>("");
+  const [showProceedCheck, setShowProceedCheck] = useState<boolean>(false);
+
+  let formattedFromDate = "";
+  let formattedToDate = "";
+
+  if (dateRange.from !== "") {
+    // 1. SAFELY PARSE THE DATE (Handles YYYY-MM-DD or ISO formats)
+    const parsedDate = new Date(dateRange.from);
+
+    // 2. VALIDATE THE DATE
+    if (!isNaN(parsedDate.getTime())) { // Check if date is valid
+      // 3. FORMAT AS "DD MMM YYYY" (e.g., "13 Mar 2025")
+      formattedFromDate = parsedDate.toLocaleDateString('en-GB', {
+        day: 'numeric',
+        month: 'short',
+        year: 'numeric'
+      }).replace(/\s+/g, '.');
+    } else {
+      console.error("Invalid date format:", dateRange.from);
+      formattedFromDate = "Invalid date"; // Fallback
+    }
+  }
+
+  if (dateRange.to !== "") {
+    // 1. SAFELY PARSE THE DATE (Handles YYYY-MM-DD or ISO formats)
+    const parsedDate = new Date(dateRange.to);
+
+    // 2. VALIDATE THE DATE
+    if (!isNaN(parsedDate.getTime())) { // Check if date is valid
+      // 3. FORMAT AS "DD MMM YYYY" (e.g., "13 Mar 2025")
+      formattedToDate = parsedDate.toLocaleDateString('en-GB', {
+        day: 'numeric',
+        month: 'short',
+        year: 'numeric'
+      }).replace(/\s+/g, '.');
+    } else {
+      console.error("Invalid date format:", dateRange.to);
+      formattedToDate = "Invalid date"; // Fallback
+    }
+  }
 
   const handleSubmit = () => {
     onConfirm(dateRange, 0, reason);
@@ -127,124 +172,152 @@ export const PauseDeliveriesPopup: React.FC<PauseDeliveriesPopupProps> = ({
   console.log("Is week selected", isWeekSelected);
 
   return (
-    <Popup
-      isOpen={isOpen}
-      onClose={onClose}
-      title="Pause My Deliveries"
-      size="md"
-      footer={
-        <div className="flex justify-center w-full px-7 border-t border-[#d1d3c9] py-7 pt-5 mt-5">
-          <Button onClick={handleSubmit} className="w-full bg-[#9C3A3A]" size="md">
-            Submit
-          </Button>
-        </div>
-      }
-    >
-      <div className="flex flex-col gap-5">
+    <>
 
-        <Typography
-          tag="p"
-          text="Next possible pause date is 21.Jul.2025"  
-          className="text-lg font-semibold text-[#F15353] text-center"
-        />
+      <Popup
+        isOpen={isOpen}
+        onClose={onClose}
+        title="Pause My Deliveries"
+        size="md"
+        footer={
+          <div className="flex justify-center w-full px-7 border-t border-[#d1d3c9] py-7 pt-5 mt-5">
+            <Button
+              onClick={() => {
+                setShowProceedCheck(true);
+                if (setIsPausePopUpOpen) setIsPausePopUpOpen(false); // Close the popup when proceeding
+              }}
+              // onClick={handleSubmit} 
+              className="w-full bg-[#9C3A3A]" 
+              size="md"
+              disabled={dateRange.from === "" || dateRange.to === ""}
+            >
+              Submit
+            </Button>
+          </div>
+        }
+      >
+        <div className="flex flex-col gap-5">
 
-        <div>
           <Typography
             tag="p"
-            text="Select Delivery Duration"
-            className="text-sm mb-1"
+            text={`Next possible pause date is ${formattedPossiblePauseDate || "not available"}`}  
+            className="text-lg font-semibold text-[#F15353] text-center"
           />
-          {/* <WeeklyRangeSelector setDateRangeFromCalender={setDateRangeFromCalender} setIsWeekSelected={setIsWeekSelected} /> */}
-          <RangeDatePicker setWeeks={setWeeks} setDateRange={setDateRange} setIsWeekSelected={setIsWeekSelected} />
-        </div>
 
-        {/* Duration Display */}
-        <div className="border border-[#9C3A3A] rounded-md p-4 mb-2 relative">
-          <Typography
-            tag="label"
-            text="DURATION"
-            className="font-normal uppercase absolute bg-[#FDFFF4] subtitle2 text-secondary-1 -top-[7px] left-1/2 transform -translate-x-1/2 px-1 text-[#9C3A3A]"
-          />
-          <div className="text-center text-[#00683D] font-medium h6">
-            {/* {formatDisplayDate(dateRange.from)} to {formatDisplayDate(dateRange.to)} */}
-            {/* { dateRange.from !== "" && dateRange.to !== "" ? `${dateRange.from} to ${dateRange.to}` : "DD.MM.YYYY to DD.MM.YYYY" } */}
+          <div>
             <Typography
-              tag="h6"
-              text={ dateRange.from !== "" && dateRange.to !== "" ? `${dateRange.from} to ${dateRange.to}` : "DD.MM.YYYY to DD.MM.YYYY" }
+              tag="p"
+              text="Select Delivery Duration"
+              className="text-sm mb-1"
             />
+            {/* <WeeklyRangeSelector setDateRangeFromCalender={setDateRangeFromCalender} setIsWeekSelected={setIsWeekSelected} /> */}
+            <RangeDatePicker setWeeks={setWeeks} setDateRange={setDateRange} setIsWeekSelected={setIsWeekSelected} />
           </div>
-        </div>
 
-        {/* Week Selection */}
-        {/* <RadioGroup
-          value={selectedOption}
-          onValueChange={(value) => handleWeekOptionChange(value as WeekOption)}
-          className="flex flex-wrap gap-4"
-        > */}
-          {/* {[
-            { value: "1week", label: "Next 1 week" },
-            { value: "2weeks", label: "Next 2 weeks" },
-            { value: "3weeks", label: "Next 3 weeks" },
-            { value: "4weeks", label: "Next 4 weeks" },
-          ].map(({ value, label }) => (
-            <div key={value} className="flex items-center max-[575px]:space-x-1 space-x-2 w-[45%] lg:w-[45%] relative ">
-              <RadioGroupItem value={value} id={`option-${value}`} className="sr-only" />
+          {/* Duration Display */}
+          <div className="border border-[#9C3A3A] rounded-md p-4 mb-2 relative">
+            <Typography
+              tag="label"
+              text="DURATION"
+              className="font-normal uppercase absolute bg-[#FDFFF4] subtitle2 text-secondary-1 -top-[7px] left-1/2 transform -translate-x-1/2 px-1 text-[#9C3A3A]"
+            />
+            <div className="text-center text-[#00683D] font-medium h6">
+              {/* {formatDisplayDate(dateRange.from)} to {formatDisplayDate(dateRange.to)} */}
+              {/* { dateRange.from !== "" && dateRange.to !== "" ? `${dateRange.from} to ${dateRange.to}` : "DD.MM.YYYY to DD.MM.YYYY" } */}
+              <Typography
+                tag="h6"
+                text={ formattedFromDate !== "" && formattedToDate !== "" ? `${formattedFromDate} to ${formattedToDate}` : "DD.MM.YYYY to DD.MM.YYYY" }
+                // text={ dateRange.from !== "" && dateRange.to !== "" ? `${dateRange.from} to ${dateRange.to}` : "DD.MM.YYYY to DD.MM.YYYY" }
+              />
+            </div>
+          </div>
+
+          {/* Week Selection */}
+          {/* <RadioGroup
+            value={selectedOption}
+            onValueChange={(value) => handleWeekOptionChange(value as WeekOption)}
+            className="flex flex-wrap gap-4"
+          > */}
+            {/* {[
+              { value: "1week", label: "Next 1 week" },
+              { value: "2weeks", label: "Next 2 weeks" },
+              { value: "3weeks", label: "Next 3 weeks" },
+              { value: "4weeks", label: "Next 4 weeks" },
+            ].map(({ value, label }) => (
+              <div key={value} className="flex items-center max-[575px]:space-x-1 space-x-2 w-[45%] lg:w-[45%] relative ">
+                <RadioGroupItem value={value} id={`option-${value}`} className="sr-only" />
+                <div
+                  className="w-7 h-7 sm:w-7 sm:h-7 rounded-full p-1 cursor-pointer"
+                  onClick={() => handleWeekOptionChange(value as WeekOption)}
+                >
+                  <Image
+                    src={
+                      selectedOption === value
+                        ? "/icons/checked.svg"
+                        : "/icons/unchecked-default.svg"
+                    }
+                    alt={selectedOption === value ? "checked" : "unchecked"}
+                    fill
+                    className="!static w-fit h-full"
+                  />
+                </div>
+                <Label htmlFor={`option-${value}`} className="cursor-pointer mb-0 max-[575px]:!text-[13px]">
+                  {label}
+                </Label>
+              </div>
+            ))} */}
+
+            {/* Separator */}
+            {/* <div className="flex items-center my-2 w-full">
+              <Separator className="flex-1 bg-[#d1d3c9]" />
+              <span className="px-4 text-gray-500 text-sm uppercase">OR</span>
+              <Separator className="flex-1 bg-[#d1d3c9]" />
+            </div> */}
+
+            {/* Custom Week Selector */}
+            {/* <div className="flex items-center max-[575px]:space-x-1 space-x-2 w-full relative">
+              <RadioGroupItem value="custom" id="option-custom" className="sr-only" />
               <div
                 className="w-7 h-7 sm:w-7 sm:h-7 rounded-full p-1 cursor-pointer"
-                onClick={() => handleWeekOptionChange(value as WeekOption)}
+                onClick={() => handleWeekOptionChange("custom")}
               >
                 <Image
                   src={
-                    selectedOption === value
+                    selectedOption === "custom"
                       ? "/icons/checked.svg"
                       : "/icons/unchecked-default.svg"
                   }
-                  alt={selectedOption === value ? "checked" : "unchecked"}
+                  alt={selectedOption === "custom" ? "checked" : "unchecked"}
                   fill
                   className="!static w-fit h-full"
                 />
               </div>
-              <Label htmlFor={`option-${value}`} className="cursor-pointer mb-0 max-[575px]:!text-[13px]">
-                {label}
+              <Label htmlFor="option-custom" className="cursor-pointer mb-0 max-[575px]:!text-[13px]">
+                Select Week(s)
               </Label>
-            </div>
-          ))} */}
+            </div> */}
+          {/* </RadioGroup> */}
 
-          {/* Separator */}
-          {/* <div className="flex items-center my-2 w-full">
-            <Separator className="flex-1 bg-[#d1d3c9]" />
-            <span className="px-4 text-gray-500 text-sm uppercase">OR</span>
-            <Separator className="flex-1 bg-[#d1d3c9]" />
-          </div> */}
+          
+          
 
-          {/* Custom Week Selector */}
-          {/* <div className="flex items-center max-[575px]:space-x-1 space-x-2 w-full relative">
-            <RadioGroupItem value="custom" id="option-custom" className="sr-only" />
-            <div
-              className="w-7 h-7 sm:w-7 sm:h-7 rounded-full p-1 cursor-pointer"
-              onClick={() => handleWeekOptionChange("custom")}
-            >
-              <Image
-                src={
-                  selectedOption === "custom"
-                    ? "/icons/checked.svg"
-                    : "/icons/unchecked-default.svg"
-                }
-                alt={selectedOption === "custom" ? "checked" : "unchecked"}
-                fill
-                className="!static w-fit h-full"
-              />
-            </div>
-            <Label htmlFor="option-custom" className="cursor-pointer mb-0 max-[575px]:!text-[13px]">
-              Select Week(s)
-            </Label>
-          </div> */}
-        {/* </RadioGroup> */}
+        </div>
+      </Popup>
+      
+      {showProceedCheck && (
+        <ProceedCheck
+          isOpen={showProceedCheck}
+          setIsOpen={setShowProceedCheck}
+          setIsPausePopupOpen={setIsPausePopUpOpen}
+          headingText="Pause Deliveries"
+          subText="Your plan will be paused from,"
+          firstButtonText="Make Changes"
+          secondButtonText="Proceed"
+          dateRangeText={`${formattedFromDate} to ${formattedToDate}`}
+          handleSubmit={handleSubmit}
+        />
 
-        
-        
-
-      </div>
-    </Popup>
+      )}
+    </>
   );
 };
