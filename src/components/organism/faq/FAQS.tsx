@@ -34,7 +34,7 @@ const FAQS: React.FC<FAQSPropsTypes> = ({
                 onClick={() => toggleAccordion(index)}
                 className="w-full flex justify-between items-center text-left px-6 py-4 cursor-pointer"
               >
-                <Typography tag="h6" text={faq.question} className="w-[95%]" />
+                <Typography tag="h6" text={faq.question} className="w-[95%] !leading-[1.4]" />
                 <ChevronDown
                   className={`h-5 w-5 transition-transform ${
                     isOpen ? "rotate-180" : ""
