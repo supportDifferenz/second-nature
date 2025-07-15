@@ -176,7 +176,7 @@ export default function FaqForm() {
   return (
     <div className="rounded-2xl lg:w-[49.2vw] ml-auto bg-primary-light px-[var(--space-20-57)] pt-14 sm:pt-12 lg:pt-10 pb-8 sm:pb-10 lg:pb-12 mt-[var(--space-70-100)]">
       <div className="flex flex-col items-center sm:items-start lg:flex-row mb-3 lg:mb-3.5">
-        <Typography tag="h2" text="Your Questions," className="text-primary-dark" />
+        <Typography tag="h2" text="Your Questions," className="text-primary-dark" />&nbsp;
         <Typography tag="h2" text="Answered" className="highlight text-primary-dark" />
       </div>
       <Typography

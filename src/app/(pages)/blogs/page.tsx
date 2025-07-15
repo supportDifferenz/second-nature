@@ -93,6 +93,7 @@ function Page() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
+            className="flex justify-center"
           >
             <Typography
               tag="h6"

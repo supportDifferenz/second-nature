@@ -10,14 +10,15 @@ import React, { useRef } from "react";
 function Page() {
   const formRef = useRef<HTMLDivElement>(null);
 
-  const scrollToForm = () => {
-    formRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
+  // const scrollToForm = () => {
+  //   formRef.current?.scrollIntoView({ behavior: "smooth" });
+  // };
 
   return (
     <MainLayout>
       <div className="mt-[var(--space-40-90)] pb-[var(--space-120-180)]">
-        <FaqSection onAskUsClick={scrollToForm} />
+        <FaqSection />
+        {/* <FaqSection onAskUsClick={scrollToForm} /> */}
       </div>
       <div ref={formRef} className="container pb-12 lg:hidden ">
         <motion.div
