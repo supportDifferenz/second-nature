@@ -240,6 +240,8 @@ export const PauseDeliveriesPopup: React.FC<PauseDeliveriesPopupProps> = ({
             />
           </div>
 
+          <div className="h-[0.5px] w-full bg-[#D1D3C9]"></div>
+
           {/* Duration Display */}
           <div className="border border-[#9C3A3A] rounded-md p-4 mb-2 relative">
             <Typography
