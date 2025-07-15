@@ -168,7 +168,7 @@ export default function RangeDatePicker({
             selected: isDateInSelectedWeeks,
           }}
           modifiersClassNames={{
-            selected: "bg-[#9C3A3A] text-white", // Brand color for selected weeks
+            selected: "text-white", // Brand color for selected weeks
           }}
           fromDate={minDate}
         />
