@@ -56,11 +56,12 @@ export const PauseDeliveriesPopup: React.FC<PauseDeliveriesPopupProps> = ({
   const [reason,] = useState<string>("");
 
   const handleSubmit = () => {
-    if (isWeekSelected === true) {
-      onConfirm({from: "", to: ""}, weeks, reason)
-    } else if (isWeekSelected === false) {
-      onConfirm(dateRange, 0, reason)
-    }
+    onConfirm(dateRange, 0, reason);
+    // if (isWeekSelected === true) {
+    //   onConfirm({from: "", to: ""}, weeks, reason)
+    // } else if (isWeekSelected === false) {
+    //   onConfirm(dateRange, 0, reason)
+    // }
   };
 
 
@@ -144,7 +145,7 @@ export const PauseDeliveriesPopup: React.FC<PauseDeliveriesPopupProps> = ({
         <Typography
           tag="p"
           text="Next possible pause date is 21.Jul.2025"  
-          className="text-lg font-semibold text-[#F15353]"
+          className="text-lg font-semibold text-[#F15353] text-center"
         />
 
         <div>

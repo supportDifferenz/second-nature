@@ -112,8 +112,12 @@ const OrderHistoryCard: React.FC<
   const paymentFromAPI = subscriptionDetails?.result?.payment ?? "";
   // const isDeletedFromAPI = subscriptionDetails?.result?.isDeleted ?? false;
   const cancellationDateFromAPI = subscriptionDetails?.result?.lastChange?.Date;
+  const pauseStartDateFromAPI = subscriptionDetails?.result?.lastChange?.startDate;
+  const pauseEndDateFromAPI = subscriptionDetails?.result?.lastChange?.endDate;
 
   let formattedCancellationDate = "";
+  let formattedPauseStartDate = "";
+  let formattedPauseEndDate = "";
 
   if (cancellationDateFromAPI) {
     // 1. SAFELY PARSE THE DATE (Handles YYYY-MM-DD or ISO formats)
@@ -130,6 +134,42 @@ const OrderHistoryCard: React.FC<
     } else {
       console.error("Invalid date format:", cancellationDateFromAPI);
       formattedCancellationDate = "Invalid date"; // Fallback
+    }
+  }
+
+  if (pauseStartDateFromAPI) {
+    // 1. SAFELY PARSE THE DATE (Handles YYYY-MM-DD or ISO formats)
+    const parsedDate = new Date(pauseStartDateFromAPI);
+
+    // 2. VALIDATE THE DATE
+    if (!isNaN(parsedDate.getTime())) { // Check if date is valid
+      // 3. FORMAT AS "DD MMM YYYY" (e.g., "13 Mar 2025")
+      formattedPauseStartDate = parsedDate.toLocaleDateString('en-GB', {
+        day: 'numeric',
+        month: 'short',
+        year: 'numeric'
+      });
+    } else {
+      console.error("Invalid date format:", cancellationDateFromAPI);
+      formattedPauseStartDate = "Invalid date"; // Fallback
+    }
+  }
+
+  if (pauseEndDateFromAPI) {
+    // 1. SAFELY PARSE THE DATE (Handles YYYY-MM-DD or ISO formats)
+    const parsedDate = new Date(pauseEndDateFromAPI);
+
+    // 2. VALIDATE THE DATE
+    if (!isNaN(parsedDate.getTime())) { // Check if date is valid
+      // 3. FORMAT AS "DD MMM YYYY" (e.g., "13 Mar 2025")
+      formattedPauseEndDate = parsedDate.toLocaleDateString('en-GB', {
+        day: 'numeric',
+        month: 'short',
+        year: 'numeric'
+      });
+    } else {
+      console.error("Invalid date format:", cancellationDateFromAPI);
+      formattedPauseEndDate = "Invalid date"; // Fallback
     }
   }
 
@@ -427,7 +467,7 @@ const OrderHistoryCard: React.FC<
           userId,
           formData: {
             pauseReason: reason || "User requested pause",
-            weeks: weeks,
+            weeks: 0,
             startDate: dateRange.from,
             endDate: dateRange.to,
             // pauseReason: "User requested pause",
@@ -529,7 +569,8 @@ const OrderHistoryCard: React.FC<
           />
           <Typography
             tag="p"
-            text={pausedPeriod}
+            text={formattedPauseStartDate && formattedPauseEndDate ? `${formattedPauseStartDate} to ${formattedPauseEndDate}` : "DD.MM.YYYY to DD.MM.YYYY"}
+            // text={pausedPeriod}
             className="text-primary-dark font-bold block"
           />
         </div>
