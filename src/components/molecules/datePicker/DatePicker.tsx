@@ -44,7 +44,7 @@ export default function DateOfBirthPicker({ dateOfBirth, setDateOfBirth, colorCl
           initialFocus
           className="rounded-md"
           captionLayout="dropdown"
-
+          disabled={{ after: new Date() }} // Prevent future dates
         />
       </PopoverContent>
     </Popover>
