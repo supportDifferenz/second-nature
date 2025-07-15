@@ -133,12 +133,10 @@ const faqDataByCategory: Record<
   ],
 };
 
-interface FaqSectionProps {
-  onAskUsClick: () => void;
-}
-
-export default function FaqSection({ onAskUsClick }: FaqSectionProps) {
+export default function FaqSection() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const formRef = useRef<HTMLDivElement>(null);
+
   const [activeCategory, setActiveCategory] = useState("Our Food");
 
   const scrollRight = () => {
@@ -147,12 +145,16 @@ export default function FaqSection({ onAskUsClick }: FaqSectionProps) {
     }
   };
 
+  const handleAskUsClick = () => {
+    formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   const categories = Object.keys(faqDataByCategory);
 
   return (
     <section>
       <div className="container flex flex-col sm:flex-row gap-[var(--space-30-60)] lg:justify-between">
-        <div className="relative">
+        <div className="relative lg:left-[4.5%]">
           <div className="lg:-ml-[2%] xl:-ml-[16%] h-fit sm:sticky top-[5%]">
             <motion.div
               initial={{ opacity: 0, y: 60 }}
@@ -212,12 +214,8 @@ export default function FaqSection({ onAskUsClick }: FaqSectionProps) {
                   text="Got a question we haven't answered,"
                   className="text-secondary-1"
                 >
-                  <span onClick={onAskUsClick} className="cursor-pointer">
-                    <Typography
-                      tag="span"
-                      text="Ask us"
-                      className="underline"
-                    />
+                  <span onClick={handleAskUsClick} className="cursor-pointer">
+                    <Typography tag="span" text="Ask us" className="underline" />
                   </span>
                 </Typography>
               </div>
@@ -229,9 +227,9 @@ export default function FaqSection({ onAskUsClick }: FaqSectionProps) {
           <AnimatePresence mode="wait">
             <motion.div
               key={activeCategory}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
               transition={{ duration: 0.4 }}
             >
               <FAQS
@@ -240,9 +238,9 @@ export default function FaqSection({ onAskUsClick }: FaqSectionProps) {
               />
             </motion.div>
           </AnimatePresence>
-              <div className="max-lg:hidden">
-                <FaqForm />
-              </div>
+          <div ref={formRef}>
+            <FaqForm />
+          </div>
         </div>
       </div>
     </section>

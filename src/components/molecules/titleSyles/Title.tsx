@@ -383,7 +383,7 @@ export const PetFoodLookingTitle: React.FC<TitlePropsType> = ({
     >
       <Typography
         tag="h2"
-        className="capitalize text-secondary-1 sm:w-[220%] lg:w-[110%]"
+        className="capitalize whitespace-nowrap text-secondary-1 sm:w-[220%] lg:w-[110%]"
         text={title}
         role="title"
         ariaLabel={title + highlight}
