@@ -19,12 +19,14 @@ export default function RangeDatePicker({
   setIsWeekSelected,
   colorClass,
   className,
+  minDate,
 }: {
   setWeeks: (weeks: number) => void;
   setDateRange: (dateRange: { from: string; to: string }) => void;
   setIsWeekSelected: (selected: boolean) => void;
   colorClass?: string;
   className?: string;
+  minDate?: Date;
 }) {
   const [range, setRange] = useState<DateRange>({ from: undefined, to: undefined });
   const [open, setOpen] = useState(false);
@@ -62,6 +64,7 @@ export default function RangeDatePicker({
   // On day click, handle week range selection
   const handleSelect = (selected: { from: Date } | undefined) => {
     if (!selected?.from) return;
+    if (minDate && isBefore(selected.from, minDate)) return;
     const weekStart = startOfWeek(selected.from, { weekStartsOn: 0 });
     const weekEnd = endOfWeek(selected.from, { weekStartsOn: 0 });
 
@@ -167,6 +170,7 @@ export default function RangeDatePicker({
           modifiersClassNames={{
             selected: "bg-[#9C3A3A] text-white", // Brand color for selected weeks
           }}
+          fromDate={minDate}
         />
       </PopoverContent>
     </Popover>

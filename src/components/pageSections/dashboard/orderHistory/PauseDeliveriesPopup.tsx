@@ -171,6 +171,8 @@ export const PauseDeliveriesPopup: React.FC<PauseDeliveriesPopupProps> = ({
 
   console.log("Is week selected", isWeekSelected);
 
+  const minPauseDate = formattedPossiblePauseDate ? new Date(formattedPossiblePauseDate) : today;
+
   return (
     <>
 
@@ -211,7 +213,12 @@ export const PauseDeliveriesPopup: React.FC<PauseDeliveriesPopupProps> = ({
               className="text-sm mb-1"
             />
             {/* <WeeklyRangeSelector setDateRangeFromCalender={setDateRangeFromCalender} setIsWeekSelected={setIsWeekSelected} /> */}
-            <RangeDatePicker setWeeks={setWeeks} setDateRange={setDateRange} setIsWeekSelected={setIsWeekSelected} />
+            <RangeDatePicker
+              setWeeks={setWeeks}
+              setDateRange={setDateRange}
+              setIsWeekSelected={setIsWeekSelected}
+              minDate={minPauseDate}
+            />
           </div>
 
           {/* Duration Display */}
