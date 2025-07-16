@@ -197,7 +197,14 @@ export const PauseDeliveriesPopup: React.FC<PauseDeliveriesPopupProps> = ({
 
       <Popup
         isOpen={isOpen}
-        onClose={onClose}
+        onClose={() => {
+          setDateRange({
+            from: "",
+            to: "",
+          });
+          onClose();
+        }}
+        // onClose={onClose}
         title="Pause My Deliveries"
         size="md"
         footer={
@@ -237,6 +244,8 @@ export const PauseDeliveriesPopup: React.FC<PauseDeliveriesPopupProps> = ({
               setDateRange={setDateRange}
               setIsWeekSelected={setIsWeekSelected}
               minDate={minPauseDate}
+              range={dateRange}
+              setRange={setDateRange}
             />
           </div>
 
@@ -247,7 +256,7 @@ export const PauseDeliveriesPopup: React.FC<PauseDeliveriesPopupProps> = ({
             <Typography
               tag="label"
               text="DURATION"
-              className="font-normal uppercase absolute bg-[#FDFFF4] subtitle2 text-secondary-1 -top-[7px] left-1/2 transform -translate-x-1/2 px-1 text-[#9C3A3A]"
+              className="font-normal uppercase absolute bg-[#FDFFF4] subtitle2 -top-[7px] left-1/2 transform -translate-x-1/2 px-1 text-[#9C3A3A]"
             />
             <div className="text-center text-[#00683D] font-medium h6">
               {/* {formatDisplayDate(dateRange.from)} to {formatDisplayDate(dateRange.to)} */}
@@ -344,7 +353,6 @@ export const PauseDeliveriesPopup: React.FC<PauseDeliveriesPopupProps> = ({
           dateRangeText={`${formattedFromDate} to ${formattedToDate}`}
           handleSubmit={handleSubmit}
         />
-
       )}
     </>
   );

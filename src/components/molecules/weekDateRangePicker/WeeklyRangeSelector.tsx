@@ -17,6 +17,8 @@ export default function RangeDatePicker({
   setWeeks,
   setDateRange,
   setIsWeekSelected,
+  range,
+  setRange,
   colorClass,
   className,
   minDate,
@@ -24,11 +26,13 @@ export default function RangeDatePicker({
   setWeeks: (weeks: number) => void;
   setDateRange: (dateRange: { from: string; to: string }) => void;
   setIsWeekSelected: (selected: boolean) => void;
+  range: { from: string; to: string };
+  setRange: (range: { from: string; to: string }) => void;
   colorClass?: string;
   className?: string;
   minDate?: Date;
 }) {
-  const [range, setRange] = useState<DateRange>({ from: undefined, to: undefined });
+  // const [range, setRange] = useState<DateRange>({ from: undefined, to: undefined });
   const [open, setOpen] = useState(false);
 
   // Helper: get all week start dates between two dates (inclusive)
@@ -70,7 +74,7 @@ export default function RangeDatePicker({
 
     if (!range.from) {
       // Start new range
-      setRange({ from: weekStart, to: undefined });
+      setRange({ from: format(weekStart, "yyyy-MM-dd"), to: "" });
       setWeeks(1);
       setIsWeekSelected(true);
       setDateRange({
@@ -85,15 +89,15 @@ export default function RangeDatePicker({
           !isAfter(weekStart, startOfWeek(range.to, { weekStartsOn: 0 }))) ||
         (!range.to && isSameDay(weekStart, startOfWeek(range.from, { weekStartsOn: 0 })))
       ) {
-        setRange({ from: undefined, to: undefined });
+        setRange({ from: "", to: "" });
         setWeeks(0);
         setIsWeekSelected(false);
         setDateRange({ from: "", to: "" });
         return;
       }
       // Always extend from the first selected week to the most recent click
-      let newFrom = range.from;
-      let newTo = weekStart;
+      let newFrom: Date = new Date(range.from!);
+      let newTo: Date = weekStart;
       if (isBefore(newTo, newFrom)) {
         [newFrom, newTo] = [newTo, newFrom];
       }
@@ -102,7 +106,7 @@ export default function RangeDatePicker({
         // Optionally, show an alert or feedback here
         return; // Do not allow selecting more than 8 weeks
       }
-      setRange({ from: newFrom, to: newTo });
+      setRange({ from: format(newFrom, "yyyy-MM-dd"), to: format(newTo, "yyyy-MM-dd") });
       setWeeks(allWeeks.length);
       setIsWeekSelected(true);
       setDateRange({
@@ -157,7 +161,7 @@ export default function RangeDatePicker({
       <PopoverContent className="w-auto p-0 mt-2 bg-white">
         <Calendar
           mode="single"
-          selected={range.from || new Date()}
+          selected={range.from ? new Date(range.from) : new Date()}
           onSelect={(date) => {
             if (date) {
               handleSelect({ from: date });
@@ -168,9 +172,9 @@ export default function RangeDatePicker({
             selected: isDateInSelectedWeeks,
           }}
           modifiersClassNames={{
-            selected: "text-white", // Brand color for selected weeks
+            selected: "bg-transparent text-black", // Avoid white text and background for selected weeks
           }}
-          fromDate={minDate}
+          // fromDate={minDate}
         />
       </PopoverContent>
     </Popover>
