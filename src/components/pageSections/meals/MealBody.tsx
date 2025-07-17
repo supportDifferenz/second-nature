@@ -332,8 +332,8 @@ export default function MealBody() {
   );
   // State to manage the current selected meal type
   const [selectedMeal, setSelectedMeal] = useState<"beef" | "chicken" | "lamb">(
-    (protein && ["beef", "chicken", "lamb"].includes(protein) 
-      ? protein as "beef" | "chicken" | "lamb" 
+    (protein && ["beef", "chicken", "lamb"].includes(protein)
+      ? protein as "beef" | "chicken" | "lamb"
       : "beef")
   );
 
@@ -341,7 +341,7 @@ export default function MealBody() {
     if (pet && ["dog", "cat"].includes(pet)) {
       setSelectedPet(pet as "dog" | "cat");
     }
-  },[pet]);
+  }, [pet]);
 
   // Sync URL changes with state
   useEffect(() => {
@@ -388,7 +388,12 @@ export default function MealBody() {
         <Button
           variant={selectedMeal === "beef" ? "primaryBtn" : "secondaryBtn"}
           className="max-sm:!px-3"
-          onClick={() => handleMealSwitch("beef")}
+          onClick={() => {
+            handleMealSwitch("beef")
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+          }}
+
         >
           {/* Beef Bowl */}
           <span className="max-sm:text-sm">Beef Bowl</span>
@@ -396,7 +401,11 @@ export default function MealBody() {
         <Button
           variant={selectedMeal === "chicken" ? "primaryBtn" : "secondaryBtn"}
           className="max-sm:!px-3"
-          onClick={() => handleMealSwitch("chicken")}
+          onClick={() => {
+            handleMealSwitch("chicken")
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+
+          }}
         >
           {/* Chicken Bowl */}
           <span className="max-sm:text-sm">Chicken Bowl</span>
@@ -404,7 +413,11 @@ export default function MealBody() {
         <Button
           variant={selectedMeal === "lamb" ? "primaryBtn" : "secondaryBtn"}
           className="max-sm:!px-3"
-          onClick={() => handleMealSwitch("lamb")}
+          onClick={() => {
+            handleMealSwitch("lamb")
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+
+          }}
         >
           {/* Lamb Bowl */}
           <span className="max-sm:text-sm">Lamb Bowl</span>
@@ -430,12 +443,12 @@ export default function MealBody() {
 
       {/* Typography Section */}
       {/* <Suspense fallback={<div>Loading...</div>}> */}
-        <SecondaryBlockTitle
-          dogOrCat={pet as "dog" | "cat"}
-          title={currentMeal.title1}
-          highlight={currentMeal.title2}
-          paragraph={currentMeal.description}
-        />
+      <SecondaryBlockTitle
+        dogOrCat={pet as "dog" | "cat"}
+        title={currentMeal.title1}
+        highlight={currentMeal.title2}
+        paragraph={currentMeal.description}
+      />
       {/* </Suspense> */}
 
       {/* Ingredient Table */}
@@ -451,7 +464,7 @@ export default function MealBody() {
       </div>
 
       <div>
-        <FaqSection/>
+        <FaqSection />
       </div>
 
       <div className="py-(--space-120-180)">

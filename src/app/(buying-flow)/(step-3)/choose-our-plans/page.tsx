@@ -287,7 +287,7 @@ export default function Page() {
 
   return (
     <BuyingFlowLayout step={3}>
-      <div className="flex flex-col gap-16">
+      <div className="flex flex-col gap-16 pb-[100px]">
         <Typography
           tag="h3"
           text="Choose Our Plan"
@@ -372,11 +372,11 @@ export default function Page() {
                       setSelectedPlan(plan.plan_type);
                       // setSelectedPrice(plan.price);
                     }}
-                    // onClick={() => {
-                    //   setSelectedPlan(plan.plan_type);
-                    //   setTrialProtein("");
-                    //   setTrialBowlSize("");
-                    // }}
+                  // onClick={() => {
+                  //   setSelectedPlan(plan.plan_type);
+                  //   setTrialProtein("");
+                  //   setTrialBowlSize("");
+                  // }}
                   />
                 )
               )}

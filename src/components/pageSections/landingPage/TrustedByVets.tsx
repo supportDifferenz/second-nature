@@ -67,7 +67,7 @@ export default function TrustedByVets() {
 
               className="flex flex-col items-center"
             >
-              <div className="w-[138px] h-[138px] rounded-full border-8 border-secondary-2 overflow-hidden">
+              <div className=" w-[118px] h-[118px] sm:w-[138px] sm:h-[138px] rounded-full border-8 border-secondary-2 overflow-hidden">
                 <Image
                   src={vet.image}
                   alt={vet.name}

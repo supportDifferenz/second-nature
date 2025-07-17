@@ -52,7 +52,7 @@ export default function FaqSection() {
         >
           <div className="sm:-ml-[17%] h-fit sm:sticky top-[5%]">
             <Image
-              src="/images/faqs-section-boxer.svg"
+              src="/images/faqs-section-boxer.webp"
               alt="frequently asked questions "
               fill
               className="!static"

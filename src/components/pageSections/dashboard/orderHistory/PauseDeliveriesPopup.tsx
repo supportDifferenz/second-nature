@@ -261,11 +261,9 @@ export const PauseDeliveriesPopup: React.FC<PauseDeliveriesPopupProps> = ({
             <div className="text-center text-[#00683D] font-medium h6">
               {/* {formatDisplayDate(dateRange.from)} to {formatDisplayDate(dateRange.to)} */}
               {/* { dateRange.from !== "" && dateRange.to !== "" ? `${dateRange.from} to ${dateRange.to}` : "DD.MM.YYYY to DD.MM.YYYY" } */}
-              <Typography
-                tag="h6"
-                text={ formattedFromDate !== "" && formattedToDate !== "" ? `${formattedFromDate} to ${formattedToDate}` : "DD.MM.YYYY to DD.MM.YYYY" }
-                // text={ dateRange.from !== "" && dateRange.to !== "" ? `${dateRange.from} to ${dateRange.to}` : "DD.MM.YYYY to DD.MM.YYYY" }
-              />
+              <h6>
+                { formattedFromDate !== "" && formattedToDate !== "" ? `${formattedFromDate} ${<span className="text-text-color">to</span>} ${formattedToDate}` : "DD.MM.YYYY to DD.MM.YYYY" }
+              </h6>
             </div>
           </div>
 

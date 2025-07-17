@@ -40,7 +40,7 @@ export default function CartSummary() {
 
         </div>
         <div className='flex flex-col gap-[var(--space-20-30)] border-y border-[#CAD585] pt-[var(--space-32-52)] pb-[var(--space-10-20)] mx-[var(--space-30-60)]'>
-            <Typography tag='h5' text='Promo/referal code' className='uppercase text-primary-dark'/>
+            <Typography tag='h6' text='caption Promo/referal code' className='uppercase text-primary-dark'/>
             <PromoCode
                 totalPrice={totalPrice}
                 productPrice={productPrice}
@@ -48,9 +48,9 @@ export default function CartSummary() {
             />    
         </div>
         <div className='flex justify-between pt-[var(--space-33-42)] mx-[var(--space-30-60)]'>
-            <Typography tag='h5' text='Order total' className='uppercase !font-normal text-primary-dark'/>
-            <Typography tag='h5' text={productPrice.toFixed(3)} className='text-primary-dark'>
-                <Typography tag='span' text=' QAR' className='text-primary-dark'/>
+            <Typography tag='h6' text='Order total' className='caption uppercase !font-normal text-primary-dark'/>
+            <Typography tag='h5' text={productPrice.toFixed(3)} className='text-primary-dark !font-bold'>
+                <Typography tag='span' text=' QAR' className='text-primary-dark '/>
             </Typography>
         </div>
         

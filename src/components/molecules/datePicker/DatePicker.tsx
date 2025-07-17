@@ -42,7 +42,7 @@ export default function DateOfBirthPicker({ dateOfBirth, setDateOfBirth, colorCl
           // selected={dateOfBirth ? new Date(dateOfBirth) : undefined}
           onSelect={handleSelect}
           initialFocus
-          className="rounded-md"
+          className="rounded-md min-h-[330px]" 
           captionLayout="dropdown"
           disabled={{ after: new Date() }} // Prevent future dates
         />

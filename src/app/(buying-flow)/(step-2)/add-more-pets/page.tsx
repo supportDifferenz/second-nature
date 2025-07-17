@@ -44,7 +44,7 @@ export default function Page() {
   return (
     <BuyingFlowLayout step={2}>
 
-      <div className="flex flex-col items-center gap-8 bg-white" >
+      <div className="flex flex-1 flex-col items-center justify-center gap-8 bg-white" >
         <Typography tag="h3" text="Add more pets?" className="text-center text-primary-dark" />
         <div className="flex gap-3">
           <div 

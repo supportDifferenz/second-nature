@@ -5,7 +5,7 @@ import { SecondaryBlockTitle } from "@/components/molecules/titleSyles/Title";
 import { Button } from "@/components/ui/button";
 import useEmblaCarousel from "embla-carousel-react";
 import Typography from "@/components/atoms/typography/Typography";
-import Autoplay from "embla-carousel-autoplay";
+// import Autoplay from "embla-carousel-autoplay";
 
 const testimonials = [
   {
@@ -41,14 +41,14 @@ const testimonials = [
 ];
 
 export default function Testimonial() {
-  const [autoplayEnabled, setAutoplayEnabled] = useState(true);
+  const [, setAutoplayEnabled] = useState(true);
   
   // Conditionally create autoplay plugin
-  const plugins = autoplayEnabled ? [Autoplay({ 
-    delay: 4000, 
-    stopOnInteraction: true,
-    stopOnMouseEnter: true
-  })] : [];
+  // const plugins = autoplayEnabled ? [Autoplay({ 
+  //   delay: 4000, 
+  //   stopOnInteraction: true,
+  //   stopOnMouseEnter: true
+  // })] : [];
 
   const [emblaRef, emblaApi] = useEmblaCarousel(
     {
@@ -59,7 +59,6 @@ export default function Testimonial() {
       dragFree: false,
       containScroll: "trimSnaps",
     },
-    plugins
   );
 
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -136,7 +135,7 @@ export default function Testimonial() {
 
           <div className="lg:ml-[-20%] xl:ml-[-34%] mt-auto hidden lg:block">
             <Image
-              src="/images/whats-customers-says-vector.svg"
+              src="/images/whats-customers-says-vector.webp"
               alt="What Customers Say"
               fill
               className="!static w-full"

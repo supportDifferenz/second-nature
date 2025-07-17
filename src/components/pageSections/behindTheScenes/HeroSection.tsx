@@ -14,7 +14,7 @@ export default function HeroSection() {
      },
    ];
    return (
-     <section>
+     <section >
        <HeroBanner banners={banners} align="left" bannerHeight="mainHero"  isCarousel />
      </section>
    );

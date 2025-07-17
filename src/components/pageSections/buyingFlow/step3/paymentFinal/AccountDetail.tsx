@@ -181,7 +181,7 @@ export default function AccountDetail() {
         <Typography
           tag="h5"
           text="Account Details"
-          className="uppercase text-primary-dark"
+          className="uppercase text-primary-dark mb-3"
         />
         <Typography
           tag="h6"
