@@ -25,7 +25,7 @@ export default function BehindTheScenes() {
   };
 
   return (
-    <div>
+    <div className="overflow-hidden">
       <MainLayout>
         <HeroSection />
 
@@ -36,12 +36,12 @@ export default function BehindTheScenes() {
           <FooterBannerCta />
         </div>
         <div className="pb-(--space-120-180) overflow-x-hidden">
-                <FooterCtaCard
-                  mealTransition={footerCtaData.mealTransition}
-                  petFood={footerCtaData.petFood}
-                  ImageWrapperClassName="sm:w-[29.9vw]"
-                />
-              </div>
+          <FooterCtaCard
+            mealTransition={footerCtaData.mealTransition}
+            petFood={footerCtaData.petFood}
+            ImageWrapperClassName="sm:w-[29.9vw]"
+          />
+        </div>
       </MainLayout>
     </div>
   );

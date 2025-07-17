@@ -287,7 +287,7 @@ export default function Page() {
 
   return (
     <BuyingFlowLayout step={3}>
-      <div className="flex flex-col gap-16">
+      <div className="flex flex-col gap-16 pb-[100px]">
         <Typography
           tag="h3"
           text="Choose Our Plan"
@@ -372,17 +372,69 @@ export default function Page() {
                       setSelectedPlan(plan.plan_type);
                       // setSelectedPrice(plan.price);
                     }}
-                    // onClick={() => {
-                    //   setSelectedPlan(plan.plan_type);
-                    //   setTrialProtein("");
-                    //   setTrialBowlSize("");
-                    // }}
+                  // onClick={() => {
+                  //   setSelectedPlan(plan.plan_type);
+                  //   setTrialProtein("");
+                  //   setTrialBowlSize("");
+                  // }}
                   />
                 )
               )}
             </div>
           )}
         </div>
+        {/* Navigation */}
+        <div className="pb-[3dvh] flex justify-between items-center gap-4 lg:gap-0 lg:items-end pt-[3dvh]">
+          <Button
+            variant={"outlineSecondaryBtn"}
+            className="gap-2.5  lg:ml-[-55px] hover:scale-105 transition-transform duration-300 ease-in-out"
+            onClick={(e) => {
+              e.preventDefault();
+              startTransition(() => {
+                router.push("/activity");
+              });
+              // router.push("/activity");
+            }}
+          >
+            <div className="w-5 relative">
+              <Image
+                src="/icons/arrow-prev-long-primary-dark.svg"
+                alt="icon"
+                fill
+                className="!static w-full object-contain"
+              />
+            </div>
+            Back
+          </Button>
+          <Button
+            className="gap-2.5 lg:ml-auto lg:mr-[-55px] hover:scale-105 transition-transform duration-300 ease-in-out"
+            disabled={
+              !(
+                (regularProtein && regularBowlSize) ||
+                (trialProtein && trialBowlSize)
+              )
+            }
+            // disabled={ !(selectedProtein && selectedBowlSize) }
+            // onClick={handleNext}
+            onClick={() => setIsNextPetPopUpOpen(true)}
+          >
+            {(selectedPetIndex ?? 0) < noOfPets - 1 ? "Next" : "Checkout"}
+            <div className="w-5 relative">
+              <Image
+                src="/icons/arrow-next-long.svg"
+                alt="icon"
+                fill
+                className="!static w-full object-contain"
+              />
+            </div>
+          </Button>
+        </div>
+        {isNextPetPopUpOpen && (
+          <NextPet
+            setIsNextPetPopupOpen={setIsNextPetPopUpOpen}
+            handleNext={handleNext}
+          />
+        )}
         <Typography
           tag="h3"
           text="Frequently Asked Questions"
@@ -394,59 +446,7 @@ export default function Page() {
         </div>
       </div>
 
-      {/* Navigation */}
-      <div className="pb-[3dvh] flex justify-between items-center gap-4 lg:gap-0 lg:items-end pt-[3dvh]">
-        <Button
-          variant={"outlineSecondaryBtn"}
-          className="gap-2.5  lg:ml-[-55px] hover:scale-105 transition-transform duration-300 ease-in-out"
-          onClick={(e) => {
-            e.preventDefault();
-            startTransition(() => {
-              router.push("/activity");
-            });
-            // router.push("/activity");
-          }}
-        >
-          <div className="w-5 relative">
-            <Image
-              src="/icons/arrow-prev-long-primary-dark.svg"
-              alt="icon"
-              fill
-              className="!static w-full object-contain"
-            />
-          </div>
-          Back
-        </Button>
-        <Button
-          className="gap-2.5 lg:ml-auto lg:mr-[-55px] hover:scale-105 transition-transform duration-300 ease-in-out"
-          disabled={
-            !(
-              (regularProtein && regularBowlSize) ||
-              (trialProtein && trialBowlSize)
-            )
-          }
-          // disabled={ !(selectedProtein && selectedBowlSize) }
-          // onClick={handleNext}
-          onClick={() => setIsNextPetPopUpOpen(true)}
-        >
-          {(selectedPetIndex ?? 0) < noOfPets - 1 ? "Next" : "Checkout"}
-          <div className="w-5 relative">
-            <Image
-              src="/icons/arrow-next-long.svg"
-              alt="icon"
-              fill
-              className="!static w-full object-contain"
-            />
-          </div>
-        </Button>
-      </div>
-      {isNextPetPopUpOpen && (
-        <NextPet
-          setIsNextPetPopupOpen={setIsNextPetPopUpOpen}
-          handleNext={handleNext}
-        />
-      )}
-      {/* <NextPet/> */}
+
     </BuyingFlowLayout>
   );
 }

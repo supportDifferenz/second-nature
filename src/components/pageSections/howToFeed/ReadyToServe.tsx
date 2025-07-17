@@ -78,7 +78,7 @@ const handlingTips: TipItem[] = [
 ];
 
 function TipsList({ tips }: { tips: TipItem[] }) {
-    return (
+  return (
     <>
       {tips.map((tip, index) => (
         <React.Fragment key={index}>
@@ -176,9 +176,17 @@ export default function ReadyToServe() {
               </motion.div>
 
               {index < readyToServeData.length - 1 && (
-                <div
+                <motion.div
                   className="w-[var(--space-15-30)] relative"
                   key={`arrow-${index}`}
+                  initial={{ opacity: 0, y: 60 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{
+                    duration: 0.6,
+                    delay: index * 0.2,
+                  }}
+                  viewport={{ once: true }}
+
                 >
                   <Image
                     src="/images/rightArrow.svg"
@@ -186,7 +194,7 @@ export default function ReadyToServe() {
                     alt="Arrow"
                     className="!static w-full h-full object-cover object-center"
                   />
-                </div>
+                </motion.div>
               )}
             </React.Fragment>
           ))}

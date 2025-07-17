@@ -23,7 +23,7 @@ export default function StandardListing({
       viewport={{ once: true }}
       transition={{ duration: 0.6 }} // default fallback
       {...motionProps}
-      className="flex flex-col items-center w-[var(--space-310-400)] gap-5 sm:gap-7"
+      className="flex flex-col items-center w-[var(--space-310-400)] lg:w-[25vw] lg:max-w-[400px] gap-5 sm:gap-7"
     >
       <div className="flex flex-col w-fit items-center border-b border-primary">
         <div className="relative w-[var(--space-66-80)] h-[var(--space-66-80)]">

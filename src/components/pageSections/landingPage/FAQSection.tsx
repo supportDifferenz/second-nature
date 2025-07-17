@@ -42,7 +42,7 @@ export default function FAQSection() {
         <div className="flex-1 relative">
           <div className="sm:-ml-[16%] lg:-ml-[2%] xl:-ml-[16%] h-fit sm:sticky top-[5%]">
             <Image
-              src="/images/faqs-section-vector.svg"
+              src="/images/faqs-section-vector.webp"
               alt="frequently asked questions"
               fill
               className="!static"

@@ -11,13 +11,12 @@ import { motion } from "framer-motion";
 const mealsData: MealCardPropsType[] = [
   {
     tag: "MEALS",
-    title: "Chicken Bowl",
+    title: "Full bowl",
     image: "/images/chicken-bowl-cat.webp",
     features: [
-      "Balanced Protein Mix",
-      "Omega-3 Rich Oil",
-      "Calcium & Bone Support",
-      "Organ Meat Benefits",
+      "Free delivery to your doorstep",
+      "No hassle with zero trips to the shops",
+      "Completely balanced",
     ],
     buttons: [
       { label: "Get Started", route: "/get-started", variant: "primary" },
@@ -25,46 +24,18 @@ const mealsData: MealCardPropsType[] = [
   },
   {
     tag: "MEALS",
-    title: "Beef Bowl",
+    title: "Half bowl",
     image: "/images/beef-bowl-cat.webp",
     features: [
-      "High Protein Content",
-      "Healthy Fats for Energy",
-      "Iron & Zinc for Immunity",
-      "Essential Amino Acids",
+      "Free delivery to your door",
+      "Benefits on a budget",
+      "Mix in with existing food",
     ],
     buttons: [
       { label: "Get Started", route: "/get-started", variant: "primary" },
     ],
   },
-  {
-    tag: "MEALS",
-    title: "Beef Bowl",
-    image: "/images/beef-bowl-cat.webp",
-    features: [
-      "High Protein Content",
-      "Healthy Fats for Energy",
-      "Iron & Zinc for Immunity",
-      "Essential Amino Acids",
-    ],
-    buttons: [
-      { label: "Get Started", route: "/get-started", variant: "primary" },
-    ],
-  },
-  {
-    tag: "MEALS",
-    title: "Beef Bowl",
-    image: "/images/beef-bowl-cat.webp",
-    features: [
-      "High Protein Content",
-      "Healthy Fats for Energy",
-      "Iron & Zinc for Immunity",
-      "Essential Amino Acids",
-    ],
-    buttons: [
-      { label: "Get Started", route: "/get-started", variant: "primary" },
-    ],
-  },
+ 
 ];
 
 export default function OurMealPlans() {
@@ -81,7 +52,7 @@ export default function OurMealPlans() {
             >
             <SecondaryInlineTitle
               title="Our"
-              highlight="Meal Plans "
+              highlight="Subscription Plans"
               textAlign="text-center sm:text-center  lg:text-left"
               textColor="#00683D"
               className="mb-10 sm:mx-auto lg:ml-0 hidden lg:block"
@@ -104,7 +75,7 @@ export default function OurMealPlans() {
               transition={{ duration: 1 }}
               viewport={{ once: true }}
             >
-          <div className="flex flex-col items-center justify-center mb-10 lg:hidden">
+          <div className="flex flex-col items-center justify-center mb-7 sm:mb-10 lg:hidden">
             <Typography
               tag="h2"
               text="Our"
@@ -118,7 +89,7 @@ export default function OurMealPlans() {
               ariaLabel=""
             />
           </div>
-          <ul className="hidden lg:flex items-center justify-center flex-wrap gap-6 gap-y-4">
+          <ul className=" flex items-center justify-center flex-wrap gap-6 gap-y-4">
             <li className="flex gap-2.5 items-center">
               <div className="w-7">
                 <Image
@@ -159,19 +130,19 @@ export default function OurMealPlans() {
               </span>
             </li>
           </ul>
-          <div className="my-15 hidden lg:flex flex-col items-center justify-center">
-            <div className="flex">
+          <div className="my-15 flex flex-col items-center justify-center">
+            <div className="flex flex-col gap-[20px] sm:gap-0 sm:flex-row">
               <div className="">
-                <div className="pr-11 border-r border-primary">
+                <div className="sm:pr-11 sm:border-r border-primary ">
                   <Typography
                     tag="h3"
                     text="Regular Plan"
-                    className="text-primary-dark highlight"
+                    className="text-primary-dark highlight text-center"
                   />
                   <Typography
                     tag="text"
                     text="Auto-Renews Every 28 Days"
-                    className="text-black"
+                    className="text-black text-center"
                   />
                 </div>
                 <div
@@ -188,7 +159,7 @@ export default function OurMealPlans() {
                   />
                 </div>
               </div>
-              <div className="pl-11">
+              <div className="sm:pl-11 text-center">
                 <Typography
                   tag="h3"
                   text="Trial Plan"

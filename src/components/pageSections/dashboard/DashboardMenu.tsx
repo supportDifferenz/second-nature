@@ -53,17 +53,17 @@ export default function DashboardMenu() {
   const { clearUserDetails } = useUserStore();
 
   const handleLogout = () => {
-      logout();
-      clearUserDetails();
-      clearPetDetails();
-      startTransition(() => {
-        router.push("/");
-      })
-      // router.push("/")
+    logout();
+    clearUserDetails();
+    clearPetDetails();
+    startTransition(() => {
+      router.push("/");
+    })
+    // router.push("/")
   };
 
   return (
-    <aside className="flex  gap-1.5 items-center justify-center lg:flex-col min-w-min lg:bg-primary-light lg:rounded-2xl   lg:p-6 lg:h-[calc(100dvh-85px)] lg:min-h-min lg:sticky lg:top-10 ">
+    <aside className="flex  gap-1.5 items-center justify-center lg:flex-col min-w-min lg:bg-primary-light lg:rounded-2xl   lg:p-6 lg:h-[calc(100dvh-190px)] lg:min-h-min lg:sticky lg:top-10 ">
       <nav className="flex lg:flex-col gap-1.5 ">
         {menuItems.map((item, index) => {
           const isActive =
@@ -71,16 +71,15 @@ export default function DashboardMenu() {
             (pathname === "/dashboard" && index === 0);
 
           return (
-            <Link 
-              key={item.href} 
+            <Link
+              key={item.href}
               href={item.href}
             >
               <div
-                className={`h6 !font-normal flex items-center text-black whitespace-nowrap p-1.5 lg:p-(--space-8-17)  gap-(--space-8-17)  rounded-lg cursor-pointer transition capitalize  ${
-                  isActive
-                    ? "border lg:border-none border-secondary-1 bg-[#FDFFF4] shadow-lg !font-semibold"
-                    : "bg-[#F3F5E8] lg:bg-transparent lg:hover:bg-[#F3F5E8] hover:shadow-md"
-                }`}
+                className={`h6 !font-normal flex items-center text-black whitespace-nowrap p-1.5 lg:p-(--space-8-17)  gap-(--space-8-17)  rounded-lg cursor-pointer transition capitalize  ${isActive
+                  ? "border lg:border-none border-secondary-1 bg-[#FDFFF4] shadow-lg !font-semibold"
+                  : "bg-[#F3F5E8] lg:bg-transparent lg:hover:bg-[#F3F5E8] hover:shadow-md"
+                  }`}
               >
                 <div className="w-(--space-26-32)">
                   <Image
@@ -95,15 +94,11 @@ export default function DashboardMenu() {
             </Link>
           );
         })}
-      </nav>
-
-      {/* Logout button at the bottom */}
-      <div className="lg:mt-auto">
         <div
           onClick={handleLogout}
           className="h6 !font-normal flex items-center text-black whitespace-nowrap p-1.5 lg:p-(--space-8-17) gap-(--space-8-17) rounded-lg cursor-pointer transition capitalize bg-[#F3F5E8] lg:bg-transparent lg:hover:bg-[#F3F5E8] hover:shadow-md"
         >
-          <div className="w-(--space-26-32)">
+          <div >
             <Image
               src={logoutItem.icon}
               alt={logoutItem.name}
@@ -113,7 +108,10 @@ export default function DashboardMenu() {
           </div>
           {logoutItem.name}
         </div>
-      </div>
+      </nav>
+
+      {/* Logout button at the bottom */}
+
 
     </aside>
   );

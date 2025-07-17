@@ -63,7 +63,7 @@ export default function IngredientsCarousel() {
         }
         return prev + 1;
       });
-    }, 30);
+    }, 30000000);
 
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
@@ -76,7 +76,7 @@ export default function IngredientsCarousel() {
     <div className="container relative">
       {/* Green Card */}
       <div
-        className="w-full shadow-[inset_6px_6px_16px_0px_rgba(0,0,0,0.55)] bg-primary-dark rounded-full p-6 pb-[60px] sm:pb-[70px] lg:pb-6 flex flex-col lg:flex-row gap-[50px] lg:gap-[3%] items-stretch lg:place-items-stretch sm:max-w-[400px] mx-auto lg:max-w-max h-[830px] sm:h-auto"
+        className="w-full shadow-[inset_6px_6px_16px_0px_rgba(0,0,0,0.55)] bg-primary-dark rounded-full p-6 pb-[60px] sm:pb-[150px] lg:pb-6 flex flex-col lg:flex-row gap-[30px] sm:gap-[50px] lg:gap-[3%] items-stretch lg:place-items-stretch sm:max-w-[400px] mx-auto lg:max-w-max h-[715px] sm:h-auto"
         onMouseDown={handleHold}
         onMouseUp={handleRelease}
         onMouseLeave={handleRelease}
@@ -119,7 +119,7 @@ export default function IngredientsCarousel() {
               <Typography
                 tag="h2"
                 text={currentSlide.title}
-                className="supporting mb-4"
+                className="max-[575px]:!text-[30px] supporting mb-4"
               />
               <Typography
                 tag="h6"
@@ -139,7 +139,7 @@ export default function IngredientsCarousel() {
           </AnimatePresence>
 
           {/* Navigation Buttons */}
-          <div className="flex justify-center lg:justify-start gap-3 mt-12 lg:mt-6 items-center absolute max-[575px]:bottom-[0px] bottom-[20px] max-[575px]:left-1/2 max-[575]:transform max-[575px]:-translate-x-1/2  ">
+          <div className="flex justify-center lg:justify-start gap-3 mt-12 lg:mt-6 items-center absolute max-[575px]:bottom-[0px] max-[991px]:bottom-[-70px] bottom-[20px] max-[991px]:left-1/2 max-[991]:transform max-[991px]:-translate-x-1/2  ">
             <Button
               onClick={() => {
                 prevSlide();

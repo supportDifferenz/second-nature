@@ -1,6 +1,5 @@
 "use client";
 
-import Typography from "@/components/atoms/typography/Typography";
 import { SecondaryInlineTitle } from "@/components/molecules/titleSyles/Title";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
@@ -37,6 +36,7 @@ export default function BehindTheScenes() {
   const scrollNext = () => {
     setSelectedIndex((prev) => (prev + 1) % slides.length);
   };
+  const softEase = [0.33, 1, 0.68, 1] as [number, number, number, number];
 
   return (
     <section className="bg-secondary-1 text-white">
@@ -52,32 +52,35 @@ export default function BehindTheScenes() {
           />
         </div>
 
-        <div className="relative overflow-hidden flex justify-center  min-h-[500px] pb-[var(--space-40-80)]">
-            <motion.div
-              key={selectedIndex}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.4 }}
-              className="flex flex-col lg:flex-row lg:items-center gap-[var(--space-30-60)] w-full px-4"
-            >
-              <div className="flex-1 overflow-hidden">
-                <div className="sm:max-w-[70%] lg:max-w-full mx-auto lg:ml-0">
-                  <Image
-                    src={slides[selectedIndex].image}
-                    alt={slides[selectedIndex].alt}
-                    width={600}
-                    height={400}
-                    className="rounded-[var(--space-20-45)] w-full"
-                  />
-                </div>
-              </div>
-              <div className="flex-1 text-center md:text-left">
-                <Typography
-                  tag="h4"
-                  text={slides[selectedIndex].text}
-                  className="text-center lg:text-left sm:max-w-[70%] lg:max-w-[85%] font-normal mx-auto lg:ml-0"
-                />
+        <div className="relative flex justify-center mb-[50px]">
+          <motion.div
+            key={selectedIndex}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.6, ease:"easeInOut" }}
+            className="flex flex-col lg:flex-row lg:items-center gap-[var(--space-30-60)] w-full"
+          >
+            <div className="lg:flex-1 relative h-[60vw] sm:h-[40vw]  lg:h-[24vw] ">
+              <Image
+                src={slides[selectedIndex].image}
+                alt={slides[selectedIndex].alt}
+                fill
+                className="rounded-[var(--space-20-45)] w-full object-cover "
+              />
+            </div>
+            <div className="flex-1 text-center md:text-left">
+              <motion.h4
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, ease: softEase }}
+                className="h4 text-center lg:text-left sm:max-w-[70%] lg:max-w-[85%] font-normal mx-auto lg:ml-0">
+                {slides[selectedIndex].text}
+              </motion.h4>
+              <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, ease: softEase }}>
                 <Button
                   variant="secondaryBtnTextSecondary1"
                   size="md"
@@ -85,15 +88,16 @@ export default function BehindTheScenes() {
                 >
                   Learn More
                 </Button>
-              </div>
-            </motion.div>
+              </motion.div>
+            </div>
+          </motion.div>
         </div>
 
         {/* Controls */}
         <div className="flex justify-center items-center space-x-4">
           <button
             onClick={scrollPrev}
-            className="p-2 bg-primary-light text-secondary-1 font-bold text-3xl !leading-0 rounded-full hover:bg-white transition"
+            className="p-2 bg-primary-light text-secondary-1 font-bold text-3xl !leading-0 rounded-full hover:bg-white transition cursor-pointer hover:scale-110 duration-300"
             aria-label="Previous slide"
           >
             <ChevronLeft className="w-6 h-6 text-secondary-1" />
@@ -113,7 +117,7 @@ export default function BehindTheScenes() {
 
           <button
             onClick={scrollNext}
-            className="p-2 bg-primary-light text-secondary-1 rounded-full hover:bg-white transition"
+            className="p-2 bg-primary-light text-secondary-1 rounded-full hover:bg-white transition cursor-pointer hover:scale-110 duration-300"
             aria-label="Next slide"
           >
             <ChevronRight className="w-6 h-6 text-secondary-1" />

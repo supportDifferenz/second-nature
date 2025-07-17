@@ -167,7 +167,7 @@ export default function RangeDatePicker({
               handleSelect({ from: date });
             }
           }}
-          className="rounded-md"
+          className="rounded-md min-h-[330px]" 
           modifiers={{
             selected: isDateInSelectedWeeks,
           }}

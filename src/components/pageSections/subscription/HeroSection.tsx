@@ -53,7 +53,7 @@ export default function HeroSection() {
           />
         </div>
         <div
-          className="absolute  top-[60%] lg:top-[45%] left-1/2 lg:left-[80%] transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center sm:items-start lg:justify-center text-center lg:text-start h-fit sm:mt-[20%] lg:mt-0 w-full lg:w-[50%]"
+          className="absolute  top-[60%] sm:top-[10%] lg:top-[45%] left-1/2  sm:left-[90%] lg:left-[80%] transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center sm:items-start sm:justify-center text-center sm:text-start h-fit sm:mt-[20%] lg:mt-0 w-full lg:w-[50%]"
           style={{ color: banner.bannerThemeColor }}
         >
           <div>
@@ -92,11 +92,11 @@ export default function HeroSection() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="flex justify-center lg:justify-start items-center"
+            className="flex justify-center sm:justify-start items-center"
           >
             <Typography
               tag="h3"
-              className="capitalize block max-w-[80%] sm:max-w-[50%] lg:max-w-[65%] sm:mt-3 sm:mb-[var(--space-20-40)]"
+              className="capitalize block max-w-[80%] sm:max-w-[65%] sm:mt-3 sm:mb-[var(--space-20-40)]"
               text={banner.subtitle}
               role="heading"
               ariaLabel={banner.subtitle}

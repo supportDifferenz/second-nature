@@ -27,7 +27,7 @@ export default function CardItem({ petName, planType, planPrice, protein }: Card
             tag="h6"
             text={`${petName}'s Plan`}
             // text="Jackey’s Plan"
-            className="text-primary-dark"
+            className="text-primary-dark capitalize"
           />
           <Typography
             tag="sub"

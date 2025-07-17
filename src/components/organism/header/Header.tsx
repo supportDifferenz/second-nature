@@ -173,7 +173,7 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
                       ].map((item, index) => (
                         <DropdownMenuItem
                           key={index}
-                          className={`${isActiveRoute(item.href) ? "text-primary bg-primary/10" : ""} flex items-center gap-3 cursor-pointer hover:text-primary hover:bg-primary/5 transition-colors duration-200`}
+                          className={`${isActiveRoute(item.href) ? "text-primary" : ""} flex items-center gap-3 cursor-pointer hover:text-primary  transition-colors duration-200`}
                           onClick={(e) => {
                             e.preventDefault();
                             startTransition(() => {
