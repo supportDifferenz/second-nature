@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useState } from "react";
 import "./globals.css";
 import { dmSerifDisplay, bellotaText } from "@/components/config/font";
+import { Toaster } from "sonner";
 
 export default function RootLayout({
   children,
@@ -21,6 +22,10 @@ export default function RootLayout({
       <body className={`${dmSerifDisplay.variable} ${bellotaText.variable} antialiased dark`}>
         <QueryClientProvider client={queryClient}>
             {children}
+            <Toaster
+              position="top-right"
+              richColors
+            />
         </QueryClientProvider>
       </body>
     </html>

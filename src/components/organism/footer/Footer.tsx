@@ -335,8 +335,25 @@ const Footer = () => {
       </div>
       <div className="container flex flex-col items-center sm:flex-row sm:justify-between border-t border-contrast-button py-(--space-27-34) text-center sm:text-left">
         <div>
-          <Typography tag="span" text="Privacy Policy" /> {"•"}{" "}
-          <Typography tag="span" text="Terms and Conditions" />
+          <div 
+            onClick={() => {
+              startTransition(() => {
+                router.push("/privacy-policy");
+              });
+            }}
+          >
+            <Typography tag="span" text="Privacy Policy" /> 
+          </div>
+          {"•"}{" "}
+          <div
+            onClick={() => {
+              startTransition(() => {
+                router.push("/terms-and-conditions");
+              });
+            }}
+          >
+            <Typography tag="span" text="Terms and Conditions" />
+          </div>
         </div>
         <div>
           <Typography

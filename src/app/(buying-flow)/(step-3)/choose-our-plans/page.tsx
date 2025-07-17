@@ -427,7 +427,13 @@ export default function Page() {
           }
           // disabled={ !(selectedProtein && selectedBowlSize) }
           // onClick={handleNext}
-          onClick={() => setIsNextPetPopUpOpen(true)}
+          onClick={() => {
+            if ((selectedPetIndex ?? 0) < noOfPets - 1) {
+              setIsNextPetPopUpOpen(true);
+            } else {
+              handleNext();
+            }
+          }}
         >
           {(selectedPetIndex ?? 0) < noOfPets - 1 ? "Next" : "Checkout"}
           <div className="w-5 relative">
