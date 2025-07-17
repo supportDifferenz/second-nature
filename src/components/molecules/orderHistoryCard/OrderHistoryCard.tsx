@@ -4,7 +4,6 @@ import BadgeTitle from "@/components/atoms/badgeTitle/BadgeTitle";
 import Typography from "@/components/atoms/typography/Typography";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-// import Icon from "@/components/atoms/icon/Icon";
 import { ProteinChangePopup } from "@/components/pageSections/dashboard/orderHistory/ProteinChangePopup";
 import { DowngradePlanPopup } from "@/components/pageSections/dashboard/orderHistory/DowngradePlanPopup";
 import { CancelSubscriptionPopup } from "@/components/pageSections/dashboard/orderHistory/CancelSubscriptionPopup";
@@ -19,18 +18,10 @@ import { useCreateSubscriptionHook } from "@/hooks/subscriptionHooks/createSubsc
 import { useGetInvoiceBySubIdAndPetId } from "@/hooks/subscriptionHooks/getInvoiceDetailsBySubIdAndPetId";
 import { useUserStore } from "@/zustand/store/userDataStore";
 import { PauseDeliveriesPopup } from "@/components/pageSections/dashboard/orderHistory/PauseDeliveriesPopup";
-// import { format } from "date-fns";
 import { usePausePlan } from "@/hooks/subscriptionHooks/pausePlanHook";
-// import { date } from "zod";
-// import { date } from "zod";
+import { toast } from "sonner";
 
 type PetInfo = { name: string; petId: string; subId: string };
-
-// type PauseDateRange = {
-//   from?: Date;
-//   to?: Date;
-//   weeks?: number;
-// };
 
 const OrderHistoryCard: React.FC<
   OrderHistoryCardPropsType & {
@@ -137,83 +128,6 @@ const OrderHistoryCard: React.FC<
   const formattedPauseEndDate = formatDate(pauseEndDateFromAPI);
   const formattedPossiblePauseDate = formatDate(nextPausePossibleDeliveryDateFromAPI);
 
-  // let formattedCancellationDate = "";
-  // let formattedPauseStartDate = "";
-  // let formattedPauseEndDate = "";
-  // let formattedPossiblePauseDate = "";
-
-  // if (cancellationDateFromAPI) {
-  //   // 1. SAFELY PARSE THE DATE (Handles YYYY-MM-DD or ISO formats)
-  //   const parsedDate = new Date(cancellationDateFromAPI);
-
-  //   // 2. VALIDATE THE DATE
-  //   if (!isNaN(parsedDate.getTime())) { // Check if date is valid
-  //     // 3. FORMAT AS "DD MMM YYYY" (e.g., "13 Mar 2025")
-  //     formattedCancellationDate = parsedDate.toLocaleDateString('en-GB', {
-  //       day: 'numeric',
-  //       month: 'short',
-  //       year: 'numeric'
-  //     });
-  //   } else {
-  //     console.error("Invalid date format:", cancellationDateFromAPI);
-  //     formattedCancellationDate = "Invalid date"; // Fallback
-  //   }
-  // }
-
-  // if (pauseStartDateFromAPI) {
-  //   // 1. SAFELY PARSE THE DATE (Handles YYYY-MM-DD or ISO formats)
-  //   const parsedDate = new Date(pauseStartDateFromAPI);
-
-  //   // 2. VALIDATE THE DATE
-  //   if (!isNaN(parsedDate.getTime())) { // Check if date is valid
-  //     // 3. FORMAT AS "DD MMM YYYY" (e.g., "13 Mar 2025")
-  //     formattedPauseStartDate = parsedDate.toLocaleDateString('en-GB', {
-  //       day: 'numeric',
-  //       month: 'short',
-  //       year: 'numeric'
-  //     });
-  //   } else {
-  //     console.error("Invalid date format:", cancellationDateFromAPI);
-  //     formattedPauseStartDate = "Invalid date"; // Fallback
-  //   }
-  // }
-
-  // if (pauseEndDateFromAPI) {
-  //   // 1. SAFELY PARSE THE DATE (Handles YYYY-MM-DD or ISO formats)
-  //   const parsedDate = new Date(pauseEndDateFromAPI);
-
-  //   // 2. VALIDATE THE DATE
-  //   if (!isNaN(parsedDate.getTime())) { // Check if date is valid
-  //     // 3. FORMAT AS "DD MMM YYYY" (e.g., "13 Mar 2025")
-  //     formattedPauseEndDate = parsedDate.toLocaleDateString('en-GB', {
-  //       day: 'numeric',
-  //       month: 'short',
-  //       year: 'numeric'
-  //     });
-  //   } else {
-  //     console.error("Invalid date format:", cancellationDateFromAPI);
-  //     formattedPauseEndDate = "Invalid date"; // Fallback
-  //   }
-  // }
-
-  // if (nextPausePossibleDeliveryDateFromAPI) {
-  //   // 1. SAFELY PARSE THE DATE (Handles YYYY-MM-DD or ISO formats)
-  //   const parsedDate = new Date(nextPausePossibleDeliveryDateFromAPI);
-
-  //   // 2. VALIDATE THE DATE
-  //   if (!isNaN(parsedDate.getTime())) { // Check if date is valid
-  //     // 3. FORMAT AS "DD MMM YYYY" (e.g., "13 Mar 2025")
-  //     formattedPossiblePauseDate = parsedDate.toLocaleDateString('en-GB', {
-  //       day: 'numeric',
-  //       month: 'short',
-  //       year: 'numeric'
-  //     }).replace(/\s+/g, '.'); // Replace spaces with dots
-  //   } else {
-  //     console.error("Invalid date format:", cancellationDateFromAPI);
-  //     formattedPossiblePauseDate = "Invalid date"; // Fallback
-  //   }
-  // }
-
   const proteinImageSrc = protein === "lamb"
     ? "/icons/card-lamb.svg"
     : protein === "beef"
@@ -228,14 +142,6 @@ const OrderHistoryCard: React.FC<
   const [changeProteinError, setChangeProteinError] = useState("");
   const [planChangeError, setPlanChangeError] = useState("");
   const [planChangeReason, setPlanChangeReason] = useState("");
-  // const [cancelReason, setCancelReason] = useState("");
-  // const [restartPlanError, setRestartPlanError] = useState("");
-  // const [reOrderPlanError, setReOrderPlanError] = useState("");
-  // const [pauseStartDate, setPauseStartDate] = useState("");
-  // const [pauseEndDate, setPauseEndDate] = useState("");
-  // const [subIdFromProp, setSubIdFromProp] = useState("");
-  // const [petIdFromProp, setPetIdFromProp] = useState("");
-  // const [userIdFromProp, setUserIdFromProp] = useState("");
 
   const { mutate: changeProtein, isPending: isChangeProteinPending } = useChangeProtein();
   const { mutate: downgradePlan, isPending: isDowngradeLoading } = useDowngradePlan();
@@ -245,21 +151,6 @@ const OrderHistoryCard: React.FC<
   const { mutate: createSubscription } = useCreateSubscriptionHook();
   const { mutate: pausePlan } = usePausePlan();
   const { data: invoiceDataFromAPI } = useGetInvoiceBySubIdAndPetId(subIdFromStore, petIdFromStore);
-
-  const [ successUpgradeMessage, setSuccessUpgradeMessage ] = useState("");
-  const [ errorUpgradeMessage, setErrorUpgradeMessage ] = useState("");
-  const [ successDowngradeMessage, setSuccessDowngradeMessage ] = useState("");
-  const [ errorDowngradeMessage, setErrorDowngradeMessage ] = useState("");
-  const [ successCancelMessage, setSuccessCancelMessage ] = useState("");
-  const [ errorCancelMessage, setErrorCancelMessage ] = useState("");
-  const [ successRestartMessage, setSuccessRestartMessage ] = useState("");
-  const [ errorRestartMessage, setErrorRestartMessage ] = useState("");
-  const [ successReOrderMessage, setSuccessReOrderMessage ] = useState("");
-  const [ errorReOrderMessage, setErrorReOrderMessage ] = useState("");
-  const [ successChangeProteinMessage, setSuccessChangeProteinMessage ] = useState("");
-  const [ errorChangeProteinMessage, setErrorChangeProteinMessage ] = useState("");
-  const [ successPauseMessage, setSuccessPauseMessage ] = useState("");
-  const [ errorPauseMessage, setErrorPauseMessage ] = useState("");
 
   const handleChangeProtein = (subId: string, petId: string, userId: string, proteinType: string) => {
     changeProtein(
@@ -274,15 +165,17 @@ const OrderHistoryCard: React.FC<
           setCurrentProtein(protein);
           setIsProteinPopupOpen(false);
           setChangeProteinError("");
-          setSuccessChangeProteinMessage(data.message);
+          if( data.statusCode === 200) { 
+            toast.success(data.message);
+          } else {
+            toast.error(data.message); // Uncomment if you want to show a toast notification
+          }
           refetchSubscriptionDetails?.();
-          // window.location.reload();
         },
         onError: (error) => {
           setCurrentProtein(protein);
           if (error instanceof Error) {
-            setChangeProteinError(error.message || "Error in protein change");
-            setErrorChangeProteinMessage(error.message || "Error in protein change");
+            toast.error(error.message || "Error in protein change");
           }
         }
       }
@@ -290,7 +183,6 @@ const OrderHistoryCard: React.FC<
   }
 
   const handleDowngrade = () => {
-    // const downgradeReason = "User requested downgrade"; // Set your reason here or get from user input
     if (subId && petId && userId) {
       downgradePlan(
         { 
@@ -304,18 +196,15 @@ const OrderHistoryCard: React.FC<
             setIsDowngradePopupOpen(false);
             setPlanChangeError("");
             if(data.statusCode === 200) {
-              setSuccessDowngradeMessage(data.message);
+              toast.success(data.message);
               refetchSubscriptionDetails?.();
-              // window.location.reload();
             }else{
-              setErrorDowngradeMessage(data.message);
+              toast.error(data.message);
             }
-            // window.location.reload();
           },
           onError: (error) => {
             if (error instanceof Error) {
-              setPlanChangeError(error.message || "Error in downgrade plan");
-              setErrorDowngradeMessage(error.message || "Error in downgrade plan");
+              toast.error(error.message || "Error in downgrade plan");
             }
           }
         }
@@ -326,7 +215,6 @@ const OrderHistoryCard: React.FC<
   }
 
   const handleUpgrade = () => {
-    // const upgradeReason = "User requested upgrade"; // Set your reason here or get from user input
     if (subId && petId && userId) {
       upgradePlan(
         { 
@@ -341,24 +229,21 @@ const OrderHistoryCard: React.FC<
             setPlanChangeError("");
             console.log("Upgrade plan response:", data);
             if(data.statusCode === 200) {
-              setSuccessUpgradeMessage(data.message);
+              toast.success(data.message);
               refetchSubscriptionDetails?.();
-              // window.location.reload();
             }else{
-              setErrorUpgradeMessage(data.message);
+              toast.error(data.message);
             }
-            // window.location.reload();
           },
           onError: (error) => {
             if (error instanceof Error) {
-              setPlanChangeError(error.message || "Error in upgrade plan");
-              setErrorUpgradeMessage(error.message || "Error in upgrade plan");
+              toast.error(error.message || "Error in upgrade plan");
             }
           }
         }
       );
     } else {
-      console.error("subId, petId, or userId is undefined");
+      toast.error("subId, petId, or userId is undefined");
     }
   }
 
@@ -378,25 +263,21 @@ const OrderHistoryCard: React.FC<
           onSuccess: (data) => {
             setIsCancelPopupOpen(false);
             if (data.statusCode === 200) {
-              setSuccessCancelMessage(data.message);
+              toast.success(data.message); 
               refetchSubscriptionDetails?.();
-              // window.location.reload();
             } else {
-              setErrorCancelMessage(data.message);
+              toast.error(data.message);
             }
-            // window.location.reload();
           },
           onError: (error: unknown) => {
             if (error instanceof Error) {
-              setPlanChangeError(error.message || "Error in cancel plan");
-              setErrorCancelMessage(error.message || "Error in cancel plan");
+              toast.error(error.message || "Error in cancel plan");
             }
           }
         }
       );
     } else {
-      console.error("subId, petId, or userId is undefined");
-      setPlanChangeError("subId, petId, or userId is undefined");
+      toast.error("subId, petId, or userId is undefined");
     }
   }
 
@@ -410,9 +291,8 @@ const OrderHistoryCard: React.FC<
         },
         {
           onSuccess: (data) => {
-            // setRestartPlanError("");
             if (data.statusCode === 200) {
-              setSuccessRestartMessage(data.message);
+              toast.success(data.message);
               const noOfPets = petInfoList?.length;
               if (typeof noOfPets === "number" && noOfPets > 0 && petInfoList) {
                 const lastPet = petInfoList[noOfPets - 1];
@@ -423,21 +303,18 @@ const OrderHistoryCard: React.FC<
               }
               window.location.reload();
             }else{
-              setErrorRestartMessage(data.message);
+              toast.error(data.message);
             }
           },
           onError: (error: unknown) => {
             if (error instanceof Error) {
-              // setRestartPlanError(error.message || "Error in restart plan");
-              setErrorRestartMessage(error.message || "Error in restart plan");
+              toast.error(error.message || "Error in restart plan");
             }
           }
         }
       );
     } else {
-      console.error("subId, petId, or userId is undefined");
-      setErrorRestartMessage("subId, petId, or userId is undefined");
-      // setRestartPlanError("subId, petId, or userId is undefined");
+      toast.error("subId, petId, or userId is undefined");
     }
   }
 
@@ -473,7 +350,7 @@ const OrderHistoryCard: React.FC<
           console.log("Re order success",data);
           // setReOrderPlanError("");
           if(data.statusCode === 200) {
-            setSuccessReOrderMessage(data.message);
+            toast.success(data.message);
             const noOfPets = petInfoList?.length;
             if (typeof noOfPets === "number" && noOfPets > 0 && petInfoList) {
               const lastPet = petInfoList[noOfPets - 1];
@@ -484,14 +361,12 @@ const OrderHistoryCard: React.FC<
             }
             window.location.reload();
           }else{
-            setErrorReOrderMessage(data.message);
+            toast.error(data.message);
           }
-          // window.location.reload();
         },
         onError: (error: unknown) => {
           if (error instanceof Error) {
-            // setReOrderPlanError(error.message || "Error in re order");
-            setErrorReOrderMessage(error.message || "Error in re order");
+            toast.error(error.message || "Error in re order"); 
           }
         }
       }
@@ -521,50 +396,22 @@ const OrderHistoryCard: React.FC<
           onSuccess: (data) => {
             refetchSubscriptionDetails?.();
             if (data.statusCode === 200) {
-              setSuccessPauseMessage("Plan paused successfully");
-              setErrorPauseMessage("")
+              toast.success(data.message);
             }else{
-              setSuccessPauseMessage("");
-              setErrorPauseMessage(data.message);
+              toast.error(data.message);
             }
-            // setPausePlanError("");
-            // window.location.reload();
           },
           onError: (error: unknown) => {
-            // if (error instanceof Error) {
-            //   setPausePlanError(error.message || "Error in pause plan");
-            // }
-            setSuccessPauseMessage("");
-            setErrorPauseMessage(error instanceof Error ? error.message || "Error in pause plan" : "Error in pause plan");
-            console.log("Error in pause plan", error);
+            if (error instanceof Error) {
+              toast.error(error.message || "Error in pause plan");
+            } else {
+              toast.error("Error in pause plan");
+            }
           }
         }
       );
     }
   }
-
-  // useEffect(() => {
-  //   console.log('Current protein:', currentProtein);
-  // }, [currentProtein]);
-
-  // console.log("Current protein in order history card", currentProtein);
-  // console.log("Protein in order history card", protein);
-  // console.log("Cancel reason in order history page", cancelReason);
-  // console.log("Buttons in order history card", buttons);
-  // console.log(`SubId: ${subId}, PetId: ${petId}, UserId: ${userId}`);
-  // console.log("Selected pet from order history page", selectedPetFromOrderHistory);
-  // console.log("Subscription data from order history page", subscriptionDetails);
-  // console.log("User id from API", userIdFromAPI);
-  // console.log("Account from API", accountFromAPI);
-  // console.log("Shipping details from API", shippingDetailsFromAPI);
-  // console.log("Billing details from API", billingDetailsFromAPI);
-  // console.log("Subscription date from API", subscriptionDateFromAPI);
-  // console.log("Promo code from API", promoCodeFromAPI);
-  // console.log("Subscribe to offers from API", subscribeToOffersFromAPI);
-  // console.log("Pets from API", petsFromAPI);
-  // console.log("Payment from API", paymentFromAPI);
-  // console.log("Invoice file path", invoiceDataFromAPI?.filePath);
-  console.log("Formatted cancellation date", formattedCancellationDate);
 
   return (
     <div className="break-inside-avoid rounded-xl border border-[#E4E7D3] bg-[#FDFFF4] p-4 sm:p-6  h-fit relative space-y-6 max-w-[345px]">
@@ -678,8 +525,6 @@ const OrderHistoryCard: React.FC<
                   >
                     Change protein for my next order
                   </Button>
-                  <Typography tag="span" className="text-sm text-green-500" text={successChangeProteinMessage} />
-                  <Typography tag="span" className="text-sm text-red-500" text={errorChangeProteinMessage} />
                 </>
               )
             }
@@ -772,10 +617,6 @@ const OrderHistoryCard: React.FC<
                     >
                       { petsFromAPI[0]?.plan?.isUpgrade ? "Upgraded to Full-Bowl" : "Upgrade to Full-Bowl" }
                     </Button>
-                    <Typography tag="span" className="text-sm text-green-500" text={successUpgradeMessage} />
-                    <Typography tag="span" className="text-sm text-red-500" text={errorUpgradeMessage} />
-                    {/* <span className="text-green-500">{successUpgradeMessage}</span> */}
-                    {/* <span className="text-red-500">{errorUpgradeMessage}</span> */}
                   </>
                 )
                 : (
@@ -788,10 +629,6 @@ const OrderHistoryCard: React.FC<
                     >
                       { petsFromAPI[0]?.plan?.isDowngrade ? "Downgraded to Half-Bowl" : "Downgrade to Half-Bowl" }
                     </Button>
-                    <Typography tag="span" className="text-sm text-green-500" text={successDowngradeMessage} />
-                    <Typography tag="span" className="text-sm text-red-500" text={errorDowngradeMessage} />
-                    {/* <span className="text-green-500">{successDowngradeMessage}</span> */}
-                    {/* <span className="text-red-500">{errorDowngradeMessage}</span> */}
                   </>
                 )
               }
@@ -805,8 +642,6 @@ const OrderHistoryCard: React.FC<
               >
                 {buttons[1]} {/* Pause Plan */}
               </Button>
-              {/* <Typography tag="span" className="text-sm text-green-500" text={successPauseMessage} />
-              <Typography tag="span" className="text-sm text-red-500" text={errorPauseMessage} /> */}
             </div>
             <div className="col-span-1">
               <Button 
@@ -816,8 +651,6 @@ const OrderHistoryCard: React.FC<
               >
                 {buttons[2]} {/* Cancel */}
               </Button>
-              {/* <span className="text-green-500">{successCancelMessage}</span> */}
-              {/* <span className="text-red-500">{errorCancelMessage}</span> */}
             </div>
           </div>
         ) : (
@@ -857,42 +690,10 @@ const OrderHistoryCard: React.FC<
                     : btn
                 }
               </Button>
-              {
-                btn === "Restart Plan"
-                ? (
-                  <div className="flex justify-center">
-                    <Typography tag="span" className="text-sm text-green-500" text={successRestartMessage} />
-                    <Typography tag="span" className="text-sm text-red-500" text={errorRestartMessage} />
-                  </div>
-                )
-                : (
-                  <div className="flex justify-center">
-                    <Typography tag="span" className="text-sm text-green-500 text-center" text={successReOrderMessage} />
-                    <Typography tag="span" className="text-sm text-red-500 text-center" text={errorReOrderMessage} />
-                  </div>
-                )
-              }
-              {/* <Typography
-                tag="p"
-                text={restartPlanError}
-                // text="Restart plan error"
-                className="text-red-600 text-center"
-              /> */}
-              {/* <Typography
-                tag="p"
-                text={reOrderPlanError}
-                // text="Restart plan error"
-                className="text-red-600 text-center"
-              /> */}
             </> 
           ))}
         </div>
       )}
-
-      <Typography tag="span" className="text-sm text-green-500" text={successCancelMessage} />
-      <Typography tag="span" className="text-sm text-red-500" text={errorCancelMessage} />
-      <Typography tag="span" className="text-sm text-green-500" text={successPauseMessage} />
-      <Typography tag="span" className="text-sm text-red-500" text={errorPauseMessage} />
 
       <ProteinChangePopup
         key={currentProtein}
@@ -949,17 +750,6 @@ const OrderHistoryCard: React.FC<
         formattedPossiblePauseDate={formattedPossiblePauseDate}
         onClose={() => setIsPausePopupOpen(false)}
         onConfirm={(dateRange: { from: string; to: string }, weeks: number, reason) => {
-
-          // if (dateRange.from && dateRange.to) {
-          //   setPauseStartDate(format(dateRange.from, "dd MMM yyyy"));
-          //   setPauseEndDate(format(dateRange.to, "dd MMM yyyy"));
-          //   console.log(`Paused from ${format(dateRange.from, "dd MMM yyyy")} to ${format(dateRange.to, "dd MMM yyyy")}`);
-          //   console.log(`Paused from ${dateRange.from} to ${dateRange.to}`);
-          // } else if (dateRange.weeks) {
-          //   setPauseStartDate("");
-          //   setPauseEndDate("");
-          //   console.log(`Paused for ${dateRange.weeks} week(s)`);
-          // }
           console.log(`Date range new Paused from ${dateRange.from} to ${dateRange.to}`);
           handlePausePlan(dateRange, weeks, reason);
           setIsPausePopupOpen(false);

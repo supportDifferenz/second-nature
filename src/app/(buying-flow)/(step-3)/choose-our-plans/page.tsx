@@ -383,58 +383,6 @@ export default function Page() {
             </div>
           )}
         </div>
-        {/* Navigation */}
-        <div className="pb-[3dvh] flex justify-between items-center gap-4 lg:gap-0 lg:items-end pt-[3dvh]">
-          <Button
-            variant={"outlineSecondaryBtn"}
-            className="gap-2.5  lg:ml-[-55px] hover:scale-105 transition-transform duration-300 ease-in-out"
-            onClick={(e) => {
-              e.preventDefault();
-              startTransition(() => {
-                router.push("/activity");
-              });
-              // router.push("/activity");
-            }}
-          >
-            <div className="w-5 relative">
-              <Image
-                src="/icons/arrow-prev-long-primary-dark.svg"
-                alt="icon"
-                fill
-                className="!static w-full object-contain"
-              />
-            </div>
-            Back
-          </Button>
-          <Button
-            className="gap-2.5 lg:ml-auto lg:mr-[-55px] hover:scale-105 transition-transform duration-300 ease-in-out"
-            disabled={
-              !(
-                (regularProtein && regularBowlSize) ||
-                (trialProtein && trialBowlSize)
-              )
-            }
-            // disabled={ !(selectedProtein && selectedBowlSize) }
-            // onClick={handleNext}
-            onClick={() => setIsNextPetPopUpOpen(true)}
-          >
-            {(selectedPetIndex ?? 0) < noOfPets - 1 ? "Next" : "Checkout"}
-            <div className="w-5 relative">
-              <Image
-                src="/icons/arrow-next-long.svg"
-                alt="icon"
-                fill
-                className="!static w-full object-contain"
-              />
-            </div>
-          </Button>
-        </div>
-        {isNextPetPopUpOpen && (
-          <NextPet
-            setIsNextPetPopupOpen={setIsNextPetPopUpOpen}
-            handleNext={handleNext}
-          />
-        )}
         <Typography
           tag="h3"
           text="Frequently Asked Questions"
@@ -446,7 +394,65 @@ export default function Page() {
         </div>
       </div>
 
-
+      {/* Navigation */}
+      <div className="pb-[3dvh] flex justify-between items-center gap-4 lg:gap-0 lg:items-end pt-[3dvh]">
+        <Button
+          variant={"outlineSecondaryBtn"}
+          className="gap-2.5  lg:ml-[-55px] hover:scale-105 transition-transform duration-300 ease-in-out"
+          onClick={(e) => {
+            e.preventDefault();
+            startTransition(() => {
+              router.push("/activity");
+            });
+            // router.push("/activity");
+          }}
+        >
+          <div className="w-5 relative">
+            <Image
+              src="/icons/arrow-prev-long-primary-dark.svg"
+              alt="icon"
+              fill
+              className="!static w-full object-contain"
+            />
+          </div>
+          Back
+        </Button>
+        <Button
+          className="gap-2.5 lg:ml-auto lg:mr-[-55px] hover:scale-105 transition-transform duration-300 ease-in-out"
+          disabled={
+            !(
+              (regularProtein && regularBowlSize) ||
+              (trialProtein && trialBowlSize)
+            )
+          }
+          // disabled={ !(selectedProtein && selectedBowlSize) }
+          // onClick={handleNext}
+          onClick={() => {
+            if ((selectedPetIndex ?? 0) < noOfPets - 1) {
+              setIsNextPetPopUpOpen(true);
+            } else {
+              handleNext();
+            }
+          }}
+        >
+          {(selectedPetIndex ?? 0) < noOfPets - 1 ? "Next" : "Checkout"}
+          <div className="w-5 relative">
+            <Image
+              src="/icons/arrow-next-long.svg"
+              alt="icon"
+              fill
+              className="!static w-full object-contain"
+            />
+          </div>
+        </Button>
+      </div>
+      {isNextPetPopUpOpen && (
+        <NextPet
+          setIsNextPetPopupOpen={setIsNextPetPopUpOpen}
+          handleNext={handleNext}
+        />
+      )}
+      {/* <NextPet/> */}
     </BuyingFlowLayout>
   );
 }
