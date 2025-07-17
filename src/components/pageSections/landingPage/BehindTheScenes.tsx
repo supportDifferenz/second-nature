@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 const slides = [
@@ -52,8 +52,7 @@ export default function BehindTheScenes() {
           />
         </div>
 
-        <div className="relative overflow-hidden flex justify-center  min-h-[300px]">
-          <AnimatePresence mode="wait">
+        <div className="relative overflow-hidden flex justify-center  min-h-[500px] pb-[var(--space-40-80)]">
             <motion.div
               key={selectedIndex}
               initial={{ opacity: 0 }}
@@ -88,11 +87,10 @@ export default function BehindTheScenes() {
                 </Button>
               </div>
             </motion.div>
-          </AnimatePresence>
         </div>
 
         {/* Controls */}
-        <div className="flex justify-center items-center mt-[var(--space-40-80)] space-x-4">
+        <div className="flex justify-center items-center space-x-4">
           <button
             onClick={scrollPrev}
             className="p-2 bg-primary-light text-secondary-1 font-bold text-3xl !leading-0 rounded-full hover:bg-white transition"
