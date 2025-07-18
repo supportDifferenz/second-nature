@@ -146,7 +146,7 @@ export default function ReadyToServe() {
         </div>
 
         {/* Cold serve section */}
-        <div className="flex gap-[var(--space-20-45)] mb-[var(--space-50-60)] items-center">
+        <div className="flex max-[575px]:gap-2 gap-[var(--space-20-45)] mb-[var(--space-50-60)] items-center">
           {readyToServeData.map((item, index) => (
             <React.Fragment key={index}>
               <motion.div
@@ -159,7 +159,7 @@ export default function ReadyToServe() {
                 viewport={{ once: true }}
               >
                 <div className="flex flex-col sm:flex-row gap-[var(--space-8-17)] items-center">
-                  <div className="w-[var(--space-40-60)] relative">
+                  <div className="max-[575px]:w-[30px] w-[var(--space-40-60)] relative">
                     <Image
                       src={item.image}
                       fill
@@ -170,7 +170,7 @@ export default function ReadyToServe() {
                   <Typography
                     tag="h6"
                     text={item.text}
-                    className="text-secondary-1"
+                    className="text-secondary-1 max-[575px]:text-[12px]"
                   />
                 </div>
               </motion.div>
