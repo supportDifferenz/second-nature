@@ -149,6 +149,34 @@ export default function FaqSection() {
     formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
+  const handleCategorySelect = (category: string) => {
+    setActiveCategory(category);
+    
+    // Scroll to center the selected button
+    setTimeout(() => {
+      if (scrollContainerRef.current) {
+        const buttons = scrollContainerRef.current.querySelectorAll('button');
+        const selectedButton = Array.from(buttons).find(btn => 
+          btn.textContent?.trim() === category
+        );
+      if (selectedButton) {
+          const container = scrollContainerRef.current;
+          const containerWidth = container.clientWidth;
+          const buttonOffset = selectedButton.offsetLeft;
+          const buttonWidth = selectedButton.clientWidth;
+          
+          // Calculate scroll position to center the button
+          const scrollTo = buttonOffset - (containerWidth / 2) + (buttonWidth / 2);
+          
+          container.scrollTo({
+            left: scrollTo,
+            behavior: 'smooth'
+          });
+        }
+      }
+    }, 10);
+  };
+
   const categories = Object.keys(faqDataByCategory);
 
   return (
@@ -172,7 +200,7 @@ export default function FaqSection() {
               <div className="relative">
                 <div
                   ref={scrollContainerRef}
-                  className="flex flex-row sm:flex-col gap-[var(--space-10-15)] mt-[var(--space-34-42)] pr-11 sm:pr-0 overflow-x-auto scrollbar-hide"
+                  className="flex flex-row sm:flex-col gap-[var(--space-10-15)] mt-[var(--space-34-42)] pr-11 sm:pr-0 overflow-x-auto scrollbar-hide snap-x snap-mandatory"
                 >
                   {categories.map((category) => (
                     <Button
@@ -184,7 +212,8 @@ export default function FaqSection() {
                           : "primaryBtnGrey"
                       }
                       className="w-fit text-white"
-                      onClick={() => setActiveCategory(category)}
+                      onClick={() => handleCategorySelect(category)}
+                      // onClick={() => setActiveCategory(category)}
                     >
                       {category}
                     </Button>
