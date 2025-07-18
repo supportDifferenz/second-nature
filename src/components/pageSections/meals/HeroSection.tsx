@@ -3,14 +3,22 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import Typography from "@/components/atoms/typography/Typography";
+import { useSearchParams } from "next/navigation";
 
 export default function HeroSection() {
+  const searchParams = useSearchParams();
+  const pet = searchParams.get("pet");
+  const selectedPet: "dog" | "cat" = (pet && ["dog", "cat"].includes(pet) ? (pet as "dog" | "cat") : "dog");
+
   const banner = {
     id: "1",
     image: {
-      web: "/images/meal-beef-banner.webp",
-      tablet: "/images/meal-beef-banner-mob.webp",
-      mobile: "/images/meal-beef-banner-mob.webp",
+      web: selectedPet === "dog" ? "/images/meal-beef-banner.webp" : "/images/MealsCatWeb.webp",
+      // web: "/images/meal-beef-banner.webp",
+      tablet: selectedPet === "dog" ? "/images/meal-beef-banner-mob.webp" : "/images/MealsCatMob.webp",
+      // tablet: "/images/meal-beef-banner-mob.webp",
+      mobile: selectedPet === "dog" ? "/images/meal-beef-banner-mob.webp" : "/images/MealsCatMob.webp",
+      // mobile: "/images/meal-beef-banner-mob.webp",
     },
     caption: "NEW",
     captionColor: "#424242",
@@ -36,7 +44,7 @@ export default function HeroSection() {
     updateImage();
     window.addEventListener("resize", updateImage);
     return () => window.removeEventListener("resize", updateImage);
-  }, []);
+  }, [banner.image.mobile, banner.image.tablet, banner.image.web]);
 
   return (
     <section className="relative w-full overflow-hidden">

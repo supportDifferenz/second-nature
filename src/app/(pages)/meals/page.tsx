@@ -10,7 +10,9 @@ export default function Meals() {
 
   return (
     <MainLayout>
-      <HeroSection />
+      <Suspense fallback={<div>Loading...</div>}>
+        <HeroSection />
+      </Suspense>
       <Suspense fallback={<div>Loading...</div>}>
         <MealBody />
       </Suspense>
