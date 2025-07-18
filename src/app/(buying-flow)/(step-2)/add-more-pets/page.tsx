@@ -46,9 +46,9 @@ export default function Page() {
 
       <div className="flex flex-1 flex-col items-center justify-center gap-8 bg-white" >
         <Typography tag="h3" text="Add more pets?" className="text-center text-primary-dark" />
-        <div className="flex gap-3">
+        <div className="flex flex-col lg:flex-row gap-3">
           <div 
-            className={`${checkout ? "bg-primary-light text-primary-dark border-primary-dark" : ""} mx-auto items-center justify-center flex flex-wrap border border-[#A1A1A1] rounded-full px-[var(--space-80-100)] py-[var( --space-10-15)] gap-2.5 lg:gap-3.5 cursor-pointer`}
+            className={`${checkout ? "bg-primary-light text-primary-dark border-primary-dark" : ""} mx-auto items-center justify-center flex flex-wrap border border-[#A1A1A1] rounded-full max-[575px]:px-3 max-[575px]:py-4 max-[575px]:w-full px-[var(--space-80-100)] py-[var( --space-10-15)] py-3 gap-2.5 lg:gap-3.5 cursor-pointer`}
             onClick={(e) => {
               e.preventDefault();
               setCheckout(true);
@@ -58,7 +58,7 @@ export default function Page() {
             {/* <Typography tag="h3" text="+" className="text-center text-primary-dark" />   */}
           </div>
           <div 
-            className="mx-auto items-center justify-center flex flex-wrap border border-[#A1A1A1] rounded-full px-[var(--space-80-100)] py-[var( --space-10-15)] py-3 gap-2.5 lg:gap-3.5 cursor-pointer"
+            className="mx-auto items-center justify-center flex flex-wrap border border-[#A1A1A1] rounded-full max-[575px]:px-3 max-[575px]:py-4 max-[575px]:w-full px-[var(--space-80-100)] py-[var( --space-10-15)] py-3 gap-2.5 lg:gap-3.5 cursor-pointer"
             onClick={handleAddAnotherPet}
           >
             <Typography tag="h6" text="Yes, I want to add another pet" className="text-center text-primary-dark" />
