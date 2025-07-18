@@ -334,7 +334,7 @@ const Footer = () => {
         </div>
       </div>
       <div className="container flex flex-col items-center sm:flex-row sm:justify-between border-t border-contrast-button py-(--space-27-34) text-center sm:text-left">
-        <div>
+        <div className="flex flex-row gap-2.5 sm:gap-4">
           <div 
             onClick={() => {
               startTransition(() => {
