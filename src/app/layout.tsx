@@ -19,7 +19,7 @@ export default function RootLayout({
         <title>Second Nature</title>
         <meta name="description" content="Crafted with Care for Healthier, Happier Pets" />
       </head>
-      <body className={`${dmSerifDisplay.variable} ${bellotaText.variable} antialiased dark`}>
+      <body className={`${dmSerifDisplay.variable} ${bellotaText.variable} antialiased dark `}>
         <QueryClientProvider client={queryClient}>
             {children}
             <Toaster

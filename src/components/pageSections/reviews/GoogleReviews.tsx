@@ -172,7 +172,7 @@ export default function GoogleReviews() {
         <div className="relative flex items-center justify-center">
           {/* Left Button */}
           <button 
-            className="absolute left-[-1%] z-10 p-1 bg-white border rounded-full shadow disabled:opacity-50 disabled:cursor-not-allowed"
+            className="absolute cursor-pointer  left-[-15px] z-10 p-1 bg-white border rounded-full shadow disabled:opacity-50 disabled:cursor-not-allowed"
             onClick={goToPrevious}
             disabled={currentIndex === 0}
           >
@@ -236,7 +236,7 @@ export default function GoogleReviews() {
 
           {/* Right Button */}
           <button 
-            className="absolute right-[-1%] z-10 p-1 bg-white border rounded-full shadow disabled:opacity-50 disabled:cursor-not-allowed"
+            className="absolute cursor-pointer right-[3px] sm:right-[-15px] z-10 p-1 bg-white border rounded-full shadow disabled:opacity-50 disabled:cursor-not-allowed"
             onClick={goToNext}
             disabled={currentIndex >= maxIndex}
           >

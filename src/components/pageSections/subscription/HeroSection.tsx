@@ -42,7 +42,7 @@ export default function HeroSection() {
       {/* BG image */}
 
       {/* Content */}
-      <div className="relative w-full min-h-[450px] h-[90dvh] sm:min-h-[400px] lg:min-h-[520px] sm:h-[70dvh] lg:max-h-[1200px] bg-cover bg-center transition-all ">
+      <div className="relative w-full min-h-[650px] h-[90dvh] sm:min-h-[400px] lg:min-h-[520px] sm:h-[70dvh] lg:max-h-[1200px] bg-cover bg-center transition-all ">
         <div className="w-full h-full max-w-[var(--max-w)] z-[-1]">
           <Image
             src={activeImage}
