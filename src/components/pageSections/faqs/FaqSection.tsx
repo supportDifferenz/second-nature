@@ -201,6 +201,10 @@ export default function FaqSection() {
                 <div
                   ref={scrollContainerRef}
                   className="flex flex-row sm:flex-col gap-[var(--space-10-15)] mt-[var(--space-34-42)] pr-11 sm:pr-0 overflow-x-auto scrollbar-hide snap-x snap-mandatory"
+                  style={{ 
+                    scrollBehavior: "smooth",
+                    scrollbarWidth: "none",
+                  }}
                 >
                   {categories.map((category) => (
                     <Button
