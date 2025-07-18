@@ -19,7 +19,7 @@ const mealsData: MealCardPropsType[] = [
       "Completely balanced",
     ],
     buttons: [
-      { label: "Get Started", route: "/get-started", variant: "primary" },
+      { label: "Get Started", route: "/location", variant: "primary" },
     ],
   },
   {
@@ -32,7 +32,7 @@ const mealsData: MealCardPropsType[] = [
       "Mix in with existing food",
     ],
     buttons: [
-      { label: "Get Started", route: "/get-started", variant: "primary" },
+      { label: "Get Started", route: "/location", variant: "primary" },
     ],
   },
  
