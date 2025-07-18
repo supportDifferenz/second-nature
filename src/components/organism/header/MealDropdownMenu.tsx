@@ -12,6 +12,7 @@ interface NavDropdownProps {
   icon: string;
   dropDownContentTitle: string;
   items: { name: string; image: string; url: string }[];
+  setIsMobileMenuOpen?: (open: boolean) => void;
 }
 
 const MealDropdownMenu = ({
@@ -19,6 +20,7 @@ const MealDropdownMenu = ({
   icon,
   items,
   dropDownContentTitle,
+  setIsMobileMenuOpen,
 }: NavDropdownProps) => {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
@@ -27,6 +29,9 @@ const MealDropdownMenu = ({
 
   const handleItemClick = (url: string, e: React.MouseEvent) => {
     e.preventDefault();
+    if (setIsMobileMenuOpen) {
+      setIsMobileMenuOpen(false);
+    }
     setIsOpen(false);
     startTransition(() => {
       router.push(url);

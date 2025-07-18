@@ -135,6 +135,7 @@ const MobileMenu = ({ className, isOpen, setIsOpen }: MobileMenuProps) => {
                 label="For Dogs"
                 icon="/icons/dog-icon.svg"
                 dropDownContentTitle="Dog Meals"
+                setIsMobileMenuOpen={setIsOpen}
                 items={[
                   { name: 'Beef Bowl', image: '/images/beef-bowl-dog-circle.webp', url: '/meals?pet=dog&protein=beef' },
                   { name: 'Chicken Bowl', image: '/images/chicken-bowl-dog-circle.webp', url: '/meals?pet=dog&protein=chicken' },
@@ -148,6 +149,7 @@ const MobileMenu = ({ className, isOpen, setIsOpen }: MobileMenuProps) => {
                 label="For Cats"
                 icon="/icons/cat-icon.svg"
                 dropDownContentTitle="Cat Meals"
+                setIsMobileMenuOpen={setIsOpen}
                 items={[
                   { name: 'Beef Bowl', image: '/images/beef-bowl-dog-circle.webp', url: '/meals?pet=cat&protein=beef' },
                   { name: 'Chicken Bowl', image: '/images/chicken-bowl-dog-circle.webp', url: '/meals?pet=cat&protein=chicken' },
