@@ -140,7 +140,7 @@ AboutUsBodyProps) {
             />
           </div>
 
-          <div className="absolute top-[20%] sm:top-[30%] left-[13%] sm:left-[40%]">
+          <div className="absolute top-[20%] sm:top-[30%] left-[12%] sm:left-[40%]">
             <Typography
               tag="h2"
               text="Proudly Made In"
@@ -184,7 +184,7 @@ AboutUsBodyProps) {
 
         <div
           ref={ribbonRef}
-          className="absolute top-[253vw] sm:top-[33vw] w-full sm:w-full"
+          className="absolute top-[275vw] sm:top-[33vw] w-full sm:w-full"
         >
           {/* Mobile Ribbon */}
           <motion.div
