@@ -6,7 +6,7 @@ import CheckoutProgressBar from "../molecules/checkoutProgressBar/CheckoutProgre
 import { usePetStore } from "@/zustand/store/petDataStore";
 import Typography from "../atoms/typography/Typography";
 import { X } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 
 export default function BuyingFlowLayout({
   children,
@@ -17,6 +17,8 @@ export default function BuyingFlowLayout({
 }) {
 
   const router = useRouter();
+  const pathname = usePathname();
+  const isCheckoutPage = pathname.includes("checkout");
   const { pets, selectedPetIndex, setSelectedPetIndex, removePet } = usePetStore();
   // const petNames = Object.values(pets).map((pet) => pet.name);
 
@@ -29,70 +31,72 @@ export default function BuyingFlowLayout({
             <CheckoutProgressBar currentStep={step} />
           </div>
           {/* pets name */}
-          <ul className="flex items-center gap-5 pt-[5dvh] pb-[2dvh] sm:pb-[3dvh] ">
-            {pets.length > 0 ? (
-              pets.map((pet, index) => (
-                <div
-                  key={index}
-                  className="relative group px-2 font-bold text-[15px] sm:text-[20px] cursor-pointer"
-                >
-                  <Typography
-                    tag="p"
-                    text={pet.name}
-                    className={`${index === selectedPetIndex ? "text-[#944446] underline capitalize underline-[#944446]" : ""}`}
-                  />
-
-                  {/* <Button
-                    type="button"
-                    size="icon"
-                    aria-label={`Remove ${pet.name}`}
-                    className="absolute -top-4 -right-1 px-1 py-0.3 text-[8px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
-                    onClick={() => {
-                      removePet(pet.id)
-                      setSelectedPetIndex(0)
-                    }}
+          { !isCheckoutPage && (
+            <ul className="flex items-center gap-5 pt-[5dvh] pb-[2dvh] sm:pb-[3dvh] ">
+              {pets.length > 0 ? (
+                pets.map((pet, index) => (
+                  <div
+                    key={index}
+                    className="relative group px-2 font-bold text-[15px] sm:text-[20px] cursor-pointer"
                   >
-                    X
-                  </Button> */}
-                  <button
-                    aria-label={`Remove ${pet.name}`}
-                    className="absolute -top-1.5 -right-1 cursor-pointer text-primary-dark font-bold rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
-                    onClick={() => {
-                      removePet(pet.id)
-                      setSelectedPetIndex(0)
-                      startTransition(() => {
-                        router.push("/dog-or-cat")
-                      })
-                    }}
-                  >
-                    <X size={12} />
-                  </button>
-                </div>
+                    <Typography
+                      tag="p"
+                      text={pet.name}
+                      className={`${index === selectedPetIndex ? "text-[#944446] underline capitalize underline-[#944446]" : ""}`}
+                    />
 
-                // <li 
-                //   key={index} 
-                //   className={`relative px-2 font-bold underline ${ index === selectedPetIndex ? "text-[#944446] underline-[#944446]" : ""}`}
-                // >
-                //   {pet.name}
-                //   <Button
-                //     type="button"
-                //     size={"icon"}
-                //     aria-label={`Remove ${name}`}
-                //     className="absolute -top-4 -right-1 px-1 py-0.5 text-[8px] rounded-full hover:text-[#944446] hover:bg-gray-200 transition"
-                //     onClick={() => removePet(pet.id)}
-                //   >
-                //     X
-                //   </Button>
-                // </li>
-              ))
-            ) : (
-              <Typography
-                tag="p"
-                text="No pets added yet"
-                className="font-bold"
-              />
-            )}
-          </ul>
+                    {/* <Button
+                      type="button"
+                      size="icon"
+                      aria-label={`Remove ${pet.name}`}
+                      className="absolute -top-4 -right-1 px-1 py-0.3 text-[8px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                      onClick={() => {
+                        removePet(pet.id)
+                        setSelectedPetIndex(0)
+                      }}
+                    >
+                      X
+                    </Button> */}
+                    <button
+                      aria-label={`Remove ${pet.name}`}
+                      className="absolute -top-1.5 -right-1 cursor-pointer text-primary-dark font-bold rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                      onClick={() => {
+                        removePet(pet.id)
+                        setSelectedPetIndex(0)
+                        startTransition(() => {
+                          router.push("/dog-or-cat")
+                        })
+                      }}
+                    >
+                      <X size={12} />
+                    </button>
+                  </div>
+
+                  // <li 
+                  //   key={index} 
+                  //   className={`relative px-2 font-bold underline ${ index === selectedPetIndex ? "text-[#944446] underline-[#944446]" : ""}`}
+                  // >
+                  //   {pet.name}
+                  //   <Button
+                  //     type="button"
+                  //     size={"icon"}
+                  //     aria-label={`Remove ${name}`}
+                  //     className="absolute -top-4 -right-1 px-1 py-0.5 text-[8px] rounded-full hover:text-[#944446] hover:bg-gray-200 transition"
+                  //     onClick={() => removePet(pet.id)}
+                  //   >
+                  //     X
+                  //   </Button>
+                  // </li>
+                ))
+              ) : (
+                <Typography
+                  tag="p"
+                  text="No pets added yet"
+                  className="font-bold"
+                />
+              )}
+            </ul>
+          )}
           <div className="container  grow  flex flex-col   relative">{children}</div>
         </div>
       </main>
