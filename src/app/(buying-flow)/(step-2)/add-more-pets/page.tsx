@@ -82,9 +82,9 @@ export default function Page() {
       </div>
 
       {/* Navigation */}
-      <div className="pb-[3dvh] flex justify-end items-center gap-4 lg:gap-0 lg:items-end pt-[3dvh]">
+      <div className="pb-[3dvh] flex justify-center items-center gap-4 lg:gap-0 lg:items-end pt-[3dvh]">
         <Button 
-          className="gap-2.5 lg:ml-auto lg:mr-[-55px]" 
+          className="gap-2.5  " 
           disabled={!checkout}
           onClick={(e) => {
             e.preventDefault();
