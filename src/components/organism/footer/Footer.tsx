@@ -231,7 +231,8 @@ const Footer = () => {
                       className="!static "
                     />
                   </div>
-                  +974-555-556-16
+                  {/* +974-555-556-16 */}
+                  <a href="tel:+974-555-556-16">+974-555-556-16</a>
                 </li>
                 <li className="gap-2.5 flex items-center whitespace-nowrap cursor-pointer">
                   <div className="w-(--space-16-24)">
@@ -239,10 +240,10 @@ const Footer = () => {
                       src="/icons/email.svg"
                       alt="phone number"
                       fill
-                      className="!static "
+                      className="!static"
                     />
                   </div>
-                  +974-555-556-16
+                  <a href="mailto:info@secondnature.qa">info@secondnature.qa</a>
                 </li>
               </ul>
             </div>
