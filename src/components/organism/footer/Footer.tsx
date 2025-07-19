@@ -242,7 +242,8 @@ const Footer = () => {
                       className="!static "
                     />
                   </div>
-                  +974-555-556-16
+                  {/* +974-555-556-16 */}
+                  info@secondnature.qa
                 </li>
               </ul>
             </div>
