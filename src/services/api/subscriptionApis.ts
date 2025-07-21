@@ -598,3 +598,15 @@ try {
       throw error;
   }
 };
+
+export const getAllOffers = async () => {
+  try {
+      const response = await subscriptionAxiosInstance.get(
+        `/api/subscription/promocode/getAllOffers`,
+    );
+      return response.data;
+    } catch (error) {
+        console.error("Error in getting all offers", error);
+        throw error;
+    }
+};
