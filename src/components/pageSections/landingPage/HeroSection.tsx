@@ -1,8 +1,6 @@
 "use client";
-
 import React, { useState, useEffect, useCallback } from "react";
 import { motion, easeInOut } from "framer-motion";
-import Image from "next/image";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import Fade from "embla-carousel-fade";
@@ -109,28 +107,6 @@ export default function HeroSection() {
     updateIndex();
   }, [emblaApi, updateIndex]);
 
-  const getResponsiveImage = (banner: (typeof banners)[0]): string => {
-    if (typeof window !== "undefined") {
-      if (window.innerWidth <= 574) return banner.image.mobile;
-      if (window.innerWidth <= 991) return banner.image.tablet;
-      return banner.image.web;
-    }
-    return banner.image.mobile;
-  };
-
-  const [activeImages, setActiveImages] = useState<string[]>(
-    banners.map((b) => b.image.mobile)
-  );
-
-  useEffect(() => {
-    const updateImages = () => {
-      setActiveImages(banners.map(getResponsiveImage));
-    };
-    updateImages();
-    window.addEventListener("resize", updateImages);
-    return () => window.removeEventListener("resize", updateImages);
-  }, []);
-
   return (
     <section className="relative w-full overflow-hidden">
       <div className="embla w-full overflow-hidden" ref={emblaRef}>
@@ -146,13 +122,18 @@ export default function HeroSection() {
               >
                 {/* Background Image */}
                 <div className="h-full w-full max-w-[var(--max-w)] left-1/2 transform -translate-x-1/2 absolute top-0 z-[-1]">
-                  <Image
-                    src={activeImages[index]}
-                    alt={banner.title || "Hero Banner"}
-                    className="!static inset-0 w-full !h-full object-cover object-center"
-                    fill
-                    priority
-                  />
+                  <picture className="absolute inset-0 w-full h-full z-[-1]">
+                    <source media="(max-width: 574px)" srcSet={banner.image.mobile} />
+                    <source media="(max-width: 991px)" srcSet={banner.image.tablet} />
+                    <img
+                      src={banner.image.web}
+                      alt={banner.title || "Hero Banner"}
+                      className="w-full h-full object-cover object-center"
+                      loading="eager"
+                      fetchPriority="high"
+                    />
+                  </picture>
+
                 </div>
 
                 {/* Content */}

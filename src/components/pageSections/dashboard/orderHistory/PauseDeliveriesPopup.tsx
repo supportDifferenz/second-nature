@@ -63,7 +63,7 @@ export const PauseDeliveriesPopup: React.FC<PauseDeliveriesPopupProps> = ({
 
   function formatDate(dateString: string) {
     if (!dateString) return "";
-    
+
     const parsedDate = new Date(dateString);
     if (isNaN(parsedDate.getTime())) {
       console.error("Invalid date format:", dateString);
@@ -186,7 +186,7 @@ export const PauseDeliveriesPopup: React.FC<PauseDeliveriesPopupProps> = ({
 
   useEffect(() => {
     console.log("Calender range and weeks", dateRange, weeks);
-  }, [dateRange,weeks]);
+  }, [dateRange, weeks]);
 
   console.log("Is week selected", isWeekSelected);
 
@@ -215,7 +215,7 @@ export const PauseDeliveriesPopup: React.FC<PauseDeliveriesPopupProps> = ({
                 if (setIsPausePopUpOpen) setIsPausePopUpOpen(false); // Close the popup when proceeding
               }}
               // onClick={handleSubmit} 
-              className="w-full bg-[#9C3A3A]" 
+              className="w-full bg-[#9C3A3A]"
               size="md"
               disabled={dateRange.from === "" || dateRange.to === ""}
             >
@@ -228,7 +228,7 @@ export const PauseDeliveriesPopup: React.FC<PauseDeliveriesPopupProps> = ({
 
           <Typography
             tag="p"
-            text={`Next possible pause date is ${formattedPossiblePauseDate || "not available"}`}  
+            text={`Next possible pause date is ${formattedPossiblePauseDate || "not available"}`}
             className="text-lg font-semibold text-[#F15353] text-center"
           />
 
@@ -262,8 +262,18 @@ export const PauseDeliveriesPopup: React.FC<PauseDeliveriesPopupProps> = ({
               {/* {formatDisplayDate(dateRange.from)} to {formatDisplayDate(dateRange.to)} */}
               {/* { dateRange.from !== "" && dateRange.to !== "" ? `${dateRange.from} to ${dateRange.to}` : "DD.MM.YYYY to DD.MM.YYYY" } */}
               <h6>
-                { formattedFromDate !== "" && formattedToDate !== "" ? `${formattedFromDate} ${<span className="text-text-color">to</span>} ${formattedToDate}` : "DD.MM.YYYY to DD.MM.YYYY" }
+                {formattedFromDate && formattedToDate ? (
+                  <>
+                    {formattedFromDate} <span className="text-text-color">to</span> {formattedToDate}
+                  </>
+                ) : (
+                  <>
+                    DD.MM.YYYY <span className="text-text-color">to</span> DD.MM.YYYY
+                  </>
+                )}
               </h6>
+
+
             </div>
           </div>
 
@@ -273,7 +283,7 @@ export const PauseDeliveriesPopup: React.FC<PauseDeliveriesPopupProps> = ({
             onValueChange={(value) => handleWeekOptionChange(value as WeekOption)}
             className="flex flex-wrap gap-4"
           > */}
-            {/* {[
+          {/* {[
               { value: "1week", label: "Next 1 week" },
               { value: "2weeks", label: "Next 2 weeks" },
               { value: "3weeks", label: "Next 3 weeks" },
@@ -302,15 +312,15 @@ export const PauseDeliveriesPopup: React.FC<PauseDeliveriesPopupProps> = ({
               </div>
             ))} */}
 
-            {/* Separator */}
-            {/* <div className="flex items-center my-2 w-full">
+          {/* Separator */}
+          {/* <div className="flex items-center my-2 w-full">
               <Separator className="flex-1 bg-[#d1d3c9]" />
               <span className="px-4 text-gray-500 text-sm uppercase">OR</span>
               <Separator className="flex-1 bg-[#d1d3c9]" />
             </div> */}
 
-            {/* Custom Week Selector */}
-            {/* <div className="flex items-center max-[575px]:space-x-1 space-x-2 w-full relative">
+          {/* Custom Week Selector */}
+          {/* <div className="flex items-center max-[575px]:space-x-1 space-x-2 w-full relative">
               <RadioGroupItem value="custom" id="option-custom" className="sr-only" />
               <div
                 className="w-7 h-7 sm:w-7 sm:h-7 rounded-full p-1 cursor-pointer"
@@ -333,12 +343,12 @@ export const PauseDeliveriesPopup: React.FC<PauseDeliveriesPopupProps> = ({
             </div> */}
           {/* </RadioGroup> */}
 
-          
-          
+
+
 
         </div>
       </Popup>
-      
+
       {showProceedCheck && (
         <ProceedCheck
           isOpen={showProceedCheck}
