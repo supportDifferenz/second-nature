@@ -232,7 +232,7 @@ const mealContent = {
               "White and dark chicken meat provides amino acids and healthy fats for sustained energy."
           },
           {
-            icon: "/icons/GutFRiendly.webp",
+            icon: "/icons/GutFriendly.webp",
             title: "Gut-Friendly Nutrition",
             description:
               "Butternut squash and cauliflower offer fiber and prebiotics for smooth digestion and gut health.",
