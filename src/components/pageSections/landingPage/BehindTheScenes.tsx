@@ -3,7 +3,7 @@
 import { SecondaryInlineTitle } from "@/components/molecules/titleSyles/Title";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
@@ -36,7 +36,17 @@ export default function BehindTheScenes() {
   const scrollNext = () => {
     setSelectedIndex((prev) => (prev + 1) % slides.length);
   };
+
   const softEase = [0.33, 1, 0.68, 1] as [number, number, number, number];
+
+  // ✅ Autoplay Effect
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSelectedIndex((prev) => (prev + 1) % slides.length);
+    }, 4000); // change slide every 4 seconds
+
+    return () => clearInterval(interval); // cleanup on unmount
+  }, []);
 
   return (
     <section className="bg-secondary-1 text-white">
@@ -58,7 +68,7 @@ export default function BehindTheScenes() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.6, ease:"easeInOut" }}
+            transition={{ duration: 0.6, ease: "easeInOut" }}
             className="flex flex-col lg:flex-row lg:items-center gap-[var(--space-30-60)] w-full"
           >
             <div className="lg:flex-1 relative h-[60vw] sm:h-[40vw]  lg:h-[24vw] ">
@@ -74,13 +84,15 @@ export default function BehindTheScenes() {
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, ease: softEase }}
-                className="h4 text-center lg:text-left sm:max-w-[70%] lg:max-w-[85%] font-normal mx-auto lg:ml-0">
+                className="h4 text-center lg:text-left sm:max-w-[70%] lg:max-w-[85%] font-normal mx-auto lg:ml-0"
+              >
                 {slides[selectedIndex].text}
               </motion.h4>
               <motion.div
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, ease: softEase }}>
+                transition={{ duration: 1, ease: softEase }}
+              >
                 <Button
                   variant="secondaryBtnTextSecondary1"
                   size="md"
