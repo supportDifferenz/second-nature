@@ -73,7 +73,7 @@ export default function StaticHeroBanner() {
           >
             <Typography
               tag="h6"
-              className="text-center lg:text-left text-white !font-normal mt-2 w-[77%] sm:w-[60%] lg:w-[68%]"
+              className="text-center lg:text-left text-white !font-normal mt-4 sm:mt-2 w-[77%] sm:w-[60%] lg:w-[68%]"
               text="Don’t just take our word for it—hear from our happy customers who’ve seen the difference natural nutrition makes for their pets."
               role="paragraph"
               ariaLabel="Don’t just take our word for it—hear from our happy customers who’ve seen the difference natural nutrition makes for their pets."

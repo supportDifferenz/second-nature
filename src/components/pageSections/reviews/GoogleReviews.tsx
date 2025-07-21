@@ -121,7 +121,7 @@ export default function GoogleReviews() {
   };
 
   return (
-    <section className="pt-[var(--space-60-180)] pb-[var(--space-100-200)] ">
+    <section className="pt-[var(--space-60-180)]">
       <div className="container mx-auto">
         {/* Title */}
         <div className="flex flex-col sm:flex-row text-center sm:text-left items-center gap-5 sm:gap-0 sm:justify-between mb-[var(--space-44-66)]">

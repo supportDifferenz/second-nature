@@ -57,7 +57,7 @@ export default function OurMealPlans() {
               textColor="#00683D"
               className="mb-10 sm:mx-auto lg:ml-0 hidden lg:block"
             />
-            <div className="ml-[-30%] ">
+            <div className="ml-[-9%] sm:ml-[-19%]">
               <Image
                 src="/images/our-meal-plan-thumb.webp"
                 alt="Our Meal Plans"

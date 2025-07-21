@@ -34,7 +34,7 @@ export default function FooterCtaCard({
   const router = useRouter();
 
   return (
-    <div className="flex flex-col sm:flex-row gap-[var(--space-30-60)] w-fit mx-auto overflow-hidden">
+    <div className="flex flex-col sm:flex-row gap-[var(--space-30-60)] w-fit mx-auto max-[991px]:overflow-hidden">
       {/* Meal Transition Card */}
       <motion.div
         initial={{ opacity: 0, y: 40 }}
@@ -80,8 +80,8 @@ export default function FooterCtaCard({
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
       >
-        <div className="flex flex-col items-center justify-center  h-[175vw] sm:h-[55vw] lg:h-[31.2vw] w-[90vw] sm:w-[38.5vw] relative">
-          <div className="bg-[#FBE5C7] sm:px-[3.12vw] py-[var(--space-52-86)] lg:py-10 w-full rounded-t-2xl h-[70%] sm:h-[80%]">
+        <div className="flex flex-col items-center justify-center  h-[142vw] sm:h-[55vw] lg:h-[31.2vw] w-[90vw] sm:w-[38.5vw] relative">
+          <div className="bg-[#FBE5C7] sm:px-[3.12vw] max-[575px]:pt-8 py-[var(--space-52-86)] lg:py-10 w-full rounded-t-2xl h-[70%] sm:h-[80%]">
             <PetFoodLookingTitle
               className="text-secondary-1 px-12 sm:pl-0 sm:pr-[35%] xl:pr-[40%]"
               title={petFood.title}
@@ -108,12 +108,12 @@ export default function FooterCtaCard({
               Learn More
             </Button>
           </div>
-          <div className="absolute top-[40%] sm:top-[35%] lg:top-[16%] left-[-5%] sm:left-[48%] inset-0 w-[99.5vw] sm:w-[26.3vw] lg:w-max h-auto sm:h-[28vw]">
+          <div className="absolute top-[58%] sm:top-[35%] lg:top-[16%] left-[17%] sm:left-[48%] inset-0 w-[60.5vw] sm:w-[26.3vw] lg:w-max h-auto sm:h-[28vw]">
             <Image
               alt=""
               src={petFood.imageSrc}
               fill
-              className={"!static inset-0 !h-full"}
+              className={"!static inset-0 !h-full object-contain"}
             />
           </div>
         </div>

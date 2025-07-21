@@ -76,6 +76,7 @@ export default function FaqSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
+          className='h-full relative'
         >
           <div className="sm:-ml-[17%] h-fit sm:sticky top-[5%]">
             <Image

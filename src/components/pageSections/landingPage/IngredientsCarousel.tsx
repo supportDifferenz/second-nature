@@ -76,7 +76,7 @@ export default function IngredientsCarousel() {
     <div className="container relative">
       {/* Green Card */}
       <div
-        className="w-full shadow-[inset_6px_6px_16px_0px_rgba(0,0,0,0.55)] bg-primary-dark rounded-full p-6 pb-[60px] sm:pb-[150px] lg:pb-6 flex flex-col lg:flex-row gap-[30px] sm:gap-[50px] lg:gap-[3%] items-stretch lg:place-items-stretch sm:max-w-[400px] mx-auto lg:max-w-max h-[715px] sm:h-auto"
+        className="w-full shadow-[inset_6px_6px_16px_0px_rgba(0,0,0,0.55)] bg-primary-dark rounded-full p-6 pb-[37px] sm:pb-[150px] lg:pb-6 flex flex-col lg:flex-row gap-[30px] sm:gap-[50px] lg:gap-[3%] items-stretch lg:place-items-stretch sm:max-w-[400px] mx-auto lg:max-w-max h-[730px] sm:h-auto"
         onMouseDown={handleHold}
         onMouseUp={handleRelease}
         onMouseLeave={handleRelease}

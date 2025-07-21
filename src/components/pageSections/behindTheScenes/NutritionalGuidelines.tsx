@@ -116,7 +116,7 @@ export default function NutritionalGuidelines() {
       {/* standard section */}
       <div className="bg-[linear-gradient(to_bottom,_#F7F9EB_0%,_#FFFFFF_100%)] ">
         <div className="relative flex w-full justify-center container">
-          <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-[40%] w-[73%]">
+          <div className="absolute top-0 left-1/2 transform -translate-x-1/2 max-[575px]:-translate-y-[60%] -translate-y-[40%] w-[95%] sm:w-[73%]">
             <motion.div
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}

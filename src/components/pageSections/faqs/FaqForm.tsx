@@ -299,7 +299,7 @@ export default function FaqForm() {
             </div>
             +974-555-556-16
           </Button>
-          <Button size={"small"} variant={"LinkBtnPrimaryText"} className="w-fit text-white">
+          <Button size={"small"} variant={"LinkBtnPrimaryText"} className="w-fit text-white lowercase">
             <div className="relative">
               <Image src="/icons/mail.svg" alt="icon" fill className="!static !w-5" />
             </div>

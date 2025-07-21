@@ -93,7 +93,7 @@ export default function OurIngredients() {
             </motion.div>
           </div>
 
-          <div className="sm:absolute z-[2] sm:top-1/2 sm:left-1/2 sm:transform sm:-translate-y-1/2 sm:-translate-x-1/2 overflow-x-auto sm:overflow-visible">
+          <div className="sm:absolute z-[2] sm:top-1/2 sm:left-1/2 sm:transform sm:-translate-y-1/2 sm:-translate-x-1/2 overflow-x-auto pb-[1rem] sm:overflow-visible">
             <div className="flex flex-row-reverse justify-end sm:flex-row sm:justify-center gap-[22px] sm:gap-0 sm:items-center px-5 sm:px-0">
               {features.map(([img, text, align], index) => {
                 const angle = (index / features.length) * (1.5 * Math.PI) - 0.45;
@@ -112,7 +112,7 @@ export default function OurIngredients() {
                         whileInView={{ opacity: 1, scale: 1 }}
                         transition={{
                           duration: 1.1,
-                          delay: 0.6 + index * 0.05,
+                          delay: 0.6 ,
                           ease: softEase,
                         }}
                         viewport={{ once: true }}
