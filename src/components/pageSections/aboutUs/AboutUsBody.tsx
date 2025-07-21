@@ -74,7 +74,7 @@ AboutUsBodyProps) {
     margin: "0px 0px -100px 0px",
   });
   return (
-    <div>
+    <div className="overflow-x-hidden">
       <div id="our-story">
       <motion.div
         initial={{ opacity: 0, y: 60 }}
@@ -109,7 +109,7 @@ AboutUsBodyProps) {
         transition={{ duration: 0.6 }}
         viewport={{ once: true }}
       >
-        <div className="relative bg-[#FDFEFA] h-[83.64vw] sm:h-[23.43vw] w-[90vw] sm:w-[66.25vw] mx-auto mt-[var(--space-32-52)] border border-secondary-1 rounded-2xl px-[var(--space-20-190)] py-[var(--space-40-60)]">
+        <div className="relative bg-[#FDFEFA] h-[116vw] sm:h-[23.43vw] w-[90vw] sm:w-[66.25vw] mx-auto mt-[var(--space-32-52)] border border-secondary-1 rounded-2xl px-[var(--space-20-190)] py-[var(--space-40-60)]">
           <SecondaryInlineTitle
             highlight="Nature,"
             title="At Second"
@@ -140,7 +140,7 @@ AboutUsBodyProps) {
             />
           </div>
 
-          <div className="absolute top-[20%] sm:top-[30%] left-[12%] sm:left-[40%]">
+          <div className="absolute top-[20%] left-1/2 max-[575px]:transform max-[575px]:translate-x-[-50%] sm:top-[30%]  sm:left-[40%]">
             <Typography
               tag="h2"
               text="Proudly Made In"
@@ -249,7 +249,7 @@ AboutUsBodyProps) {
             <Typography
               tag="h2"
               text="the health & happiness of pets"
-              className="text-primary-dark text-center"
+              className="text-primary-dark text-center max-[575px]:px-4 capitalize"
             />
           </div>
         </motion.div>
@@ -304,7 +304,7 @@ AboutUsBodyProps) {
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <div className="relative bg-[#FDFEFA]  w-[90vw] sm:w-[66.25vw] mx-auto mt-[var(--space-32-52)] pb-36 border border-secondary-1 rounded-2xl px-[var(--space-20-190)] py-[var(--space-50-67)]">
+              <div className="relative bg-[#FDFEFA]  w-[95vw] sm:w-[66.25vw] mx-auto mt-[var(--space-32-52)] max-[587px]:pb-[85px] pb-36 border border-secondary-1 rounded-2xl px-[var(--space-20-190)] py-[var(--space-50-67)]">
                 <div>
                   <Typography
                     tag="h5"
@@ -314,7 +314,7 @@ AboutUsBodyProps) {
                   <Typography
                     tag="h2"
                     text="We Put Pet Wellness First with Nature’s Finest Ingredients"
-                    className="text-secondary-1 text-center highlight mb-4 "
+                    className="text-secondary-1 text-center highlight mb-4 max-[575px]:!text-[9vw]"
                   />
                   <Typography
                     tag="h6"
@@ -322,7 +322,7 @@ AboutUsBodyProps) {
                     className=" text-center"
                   />
                 </div>
-                <div className="absolute top-[76%] sm:top-[75%] left-[-11%] sm:left-[22%] w-[104.2vw] sm:w-[37.86vw]">
+                <div className="absolute top-[82%] sm:top-[75%] left-[50%] max-[575px]:transform max-[575px]:translate-x-[-50%] sm:left-[22%] w-[104.2vw] sm:w-[37.86vw]">
                   <Image
                     src="/images/meat-edition.webp"
                     alt=""
