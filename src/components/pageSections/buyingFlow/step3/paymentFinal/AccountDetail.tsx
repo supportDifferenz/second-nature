@@ -192,7 +192,7 @@ export default function AccountDetail() {
 
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col gap-[var(--space-30-52)] pb-14 border-b border-secondary-2"
+        className={`${isAuthenticated ? "border-b" : ""} flex flex-col gap-[var(--space-30-52)] pb-14 border-secondary-2`}
       >
         <InputLabeled 
           name="firstName"
