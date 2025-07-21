@@ -12,6 +12,7 @@ import { startTransition } from "react";
 export const MealCard: React.FC<MealCardPropsType> = ({
   tag,
   title,
+  subTitle,
   image,
   features = [],
   buttons,
@@ -42,6 +43,15 @@ export const MealCard: React.FC<MealCardPropsType> = ({
         </div>
       </div>
       <div className="flex flex-col items-center sm:items-start sm:justify-center ">
+        {/* sub title */}
+        <Typography
+          tag="h5"
+          text={subTitle ?? ""}
+          className="text-primary-dark mb-6 lg:mb-5 max-w-[90%]"
+          role="title"
+          ariaLabel={subTitle ?? ""}
+          ariaLabelledBy="title"
+        />
         {/* Features List */}
         <ul className="flex flex-col sm:flex-row sm:flex-wrap max-w-fit gap-6">
           {features.map((feature, index) => (
