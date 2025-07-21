@@ -44,8 +44,8 @@ export default function TransitionDiet() {
         viewport={{ once: true }}
       >
         <div className="pb-0 pt-[var(--space-110-140)] sm:py-(--space-120-180) lg:overflow-x-hidden">
-          <div className="flex flex-col items-center justify-center  h-[175vw] sm:h-[28.2vw] lg:h-[18.38vw] w-[90vw] sm:w-full lg:max-w-[80.2vw] mx-auto relative">
-            <div className="bg-[#FBE5C7] sm:px-[3.12vw] pb-[70vw] sm:py-[var(--space-52-86)] lg:py-0  w-full rounded-t-2xl h-[110%] sm:h-[80%] flex flex-col justify-center">
+          <div className="flex flex-col items-center justify-center  h-[142vw] sm:h-[28.2vw] lg:h-[18.38vw] w-[90vw] sm:w-full lg:max-w-[80.2vw] mx-auto relative">
+            <div className="bg-[#FBE5C7] sm:px-[3.12vw] pt-10 sm:py-[var(--space-52-86)] lg:py-0  w-full rounded-t-2xl h-[110%] sm:h-[80%] flex flex-col sm:justify-center">
               {/* <PetFoodLookingTitle
                 className="text-secondary-1 px-12 sm:pl-0 sm:pr-[35%]"
                 title={petFood.title}
@@ -84,7 +84,7 @@ export default function TransitionDiet() {
                 Know More
               </Button>
             </div>
-            <div className="flex items-center px-[3.12vw] sm:sm:px-[3.12vw] w-full h-[20%] rounded-b-2xl bg-secondary-1">
+            <div className="flex items-center px-[3.12vw]  sm:sm:px-[3.12vw] w-full h-[20%] lg:h-[30%] rounded-b-2xl bg-secondary-1">
               <div className="max-sm:hidden lg:w-[35%] lg:mr-16"></div>
               <Button
                 size={"md"}
@@ -95,12 +95,12 @@ export default function TransitionDiet() {
                 Learn More
               </Button>
             </div>
-            <div className="absolute top-[38%] sm:top-auto left-[-5%] sm:left-auto sm:right-[-5%] bottom-[-5%] sm:bottom-[-10%] inset-0 w-[99.5vw] sm:w-[36vw] lg:w-[28.22vw]">
+            <div className="absolute top-[62%] sm:top-auto left-[16%] sm:left-auto sm:right-[-5%] bottom-[-5%] sm:bottom-[-10%] inset-0 w-[60.5vw] sm:w-[36vw] lg:w-[28.22vw]">
               <Image
                 alt=""
                 src={petFood.imageSrc}
                 fill
-                className={"!static inset-0 !h-full"}
+                className={"!static inset-0 !h-full object-contain"}
               />
             </div>
           </div>

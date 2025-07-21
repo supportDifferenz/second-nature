@@ -159,7 +159,7 @@ export default function PlanCard({
           /> */}
         </div>
       </div>
-      <div 
+      {/* <div 
         onClick={() => window.open("/terms-and-conditions", "_blank")} 
         className="mx-auto"
       >
@@ -168,7 +168,7 @@ export default function PlanCard({
           text="Terms and conditions >"
           className="text-center cursor-pointer font-bold text-secondary-1 mt-[var(--space-30-40)]"
         />
-      </div>
+      </div> */}
     </div>
   );
 }

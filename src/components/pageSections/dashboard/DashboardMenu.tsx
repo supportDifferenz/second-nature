@@ -86,7 +86,7 @@ export default function DashboardMenu() {
   };
 
   return (
-    <aside className="flex gap-1.5 items-center justify-center lg:flex-col min-w-min lg:bg-primary-light lg:rounded-2xl lg:p-6 lg:h-[calc(100dvh-190px)] lg:min-h-min lg:sticky lg:top-10 overflow-auto">
+    <aside className="flex gap-1.5 items-center justify-center lg:flex-col lg:justify-start min-w-min lg:bg-primary-light lg:rounded-2xl lg:p-6 lg:h-[calc(100dvh-190px)] lg:min-h-min lg:sticky lg:top-10 overflow-auto">
       <nav className="flex lg:flex-col gap-1.5">
         {menuItems.map((item, index) => {
           const isActive =

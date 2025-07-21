@@ -243,7 +243,7 @@ const Footer = () => {
                       className="!static"
                     />
                   </div>
-                  <a href="mailto:info@secondnature.qa">info@secondnature.qa</a>
+                  <a href="mailto:info@secondnature.qa" className="lowercase">info@secondnature.qa</a>
                 </li>
               </ul>
             </div>
@@ -276,7 +276,7 @@ const Footer = () => {
                       className="!static "
                     />
                   </div>
-                  <a href="mailto:info@secondnature.qa">info@secondnature.qa</a>
+                  <a href="mailto:info@secondnature.qa" className="lowercase">info@secondnature.qa</a>
                 </li>
               </ul>
             </div>

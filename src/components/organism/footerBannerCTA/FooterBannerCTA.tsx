@@ -104,14 +104,14 @@ const FooterBannerCTA: React.FC<
               <Typography
                 tag="h3"
                 text={subTitle}
-                className="supporting capitalize mb-(--space-20-30)"
+                className="supporting capitalize mb-[25px] sm:mb-(--space-20-30) mt-[20px] sm:mt-0"
               />
             )}
             {paragraph && (
               <Typography tag="h6" text={paragraph} style={{ color: paragraphColor }} className="xl:max-w-[70%]" />
             )}
             {subParagraph && (
-              <Typography tag="p" text={subParagraph} className="!text-sm mt-(--space-24-45) " style={{ color: paragraphColor }} />
+              <Typography tag="p" text={subParagraph} className="!text-sm  mt-(--space-24-45) " style={{ color: paragraphColor }} />
             )}
             {buttonText && buttonLink && (
               <Button

@@ -200,7 +200,7 @@ export default function FaqSection() {
               <div className="relative">
                 <div
                   ref={scrollContainerRef}
-                  className="flex flex-row sm:flex-col gap-[var(--space-10-15)] mt-[var(--space-34-42)] pr-11 sm:pr-0 overflow-x-auto scrollbar-hide snap-x snap-mandatory"
+                  className="flex flex-row sm:flex-col gap-[var(--space-10-15)] mt-[var(--space-34-42)] pr-11 sm:pr-0 overflow-x-auto  scrollbar-hide snap-x snap-mandatory"
                   style={{ 
                     scrollBehavior: "smooth",
                     scrollbarWidth: "none",
@@ -241,14 +241,14 @@ export default function FaqSection() {
                 </div>
               </div>
 
-              <div className="mt-6 lg:mt-7 lg:w-[16vw]">
+              <div className="mt-6 lg:mt-7 lg:w-[17vw]">
                 <Typography
                   tag="h6"
                   text="Got a question we haven't answered,"
                   className="text-secondary-1"
                 >
                   <span onClick={handleAskUsClick} className="cursor-pointer">
-                    <Typography tag="span" text="Ask us" className="underline" />
+                    <Typography tag="span" text=" Ask us" className="underline" />
                   </span>
                 </Typography>
               </div>

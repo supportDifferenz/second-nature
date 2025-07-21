@@ -199,7 +199,7 @@ export default function MealCategory() {
                 exit={{ opacity: 0, y: -30 }}
                 transition={{ duration: 0.4, ease: "easeInOut" }}
               >
-                <div className="flex sm:flex-wrap gap-6 mt-4 lg:mt-8 overflow-x-auto px-9 sm:px-0">
+                <div className="flex sm:flex-wrap gap-6 mt-4 lg:mt-8 overflow-x-auto pb-[1rem] px-9 sm:px-0">
                   {categoryData.meals.map((meal, mealIndex) => (
                     <div
                       key={mealIndex}

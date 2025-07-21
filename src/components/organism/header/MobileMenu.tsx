@@ -122,7 +122,7 @@ const MobileMenu = ({ className, isOpen, setIsOpen }: MobileMenuProps) => {
         className={`fixed top-0 left-0 w-full z-[-1] transition-opacity duration-300 ease-in-out ${isOpen ? 'translate-y-0 opacity-100' : '-translate-y-[170%] opacity-0'
           }`}
       >
-        <div className="animated-gradient min-h-[600px] h-[100dvh] overflow-y-auto pt-[150px] pb-[50px] ">
+        <div className="animated-gradient min-h-[600px] h-[100vh] overflow-y-auto pt-[150px] pb-[50px] ">
           <motion.div
             className="flex flex-col lg:flex-row gap-6 sm:gap-[40px] lg:gap-[90px] container py-8 text-lg"
             variants={containerVariants}

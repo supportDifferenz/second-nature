@@ -31,12 +31,12 @@ export default function GuidelinesCard() {
                 <Typography
                   tag="h3"
                   text="Guided By Science"
-                  className=" text-white whitespace-nowrap"
+                  className=" text-white whitespace-nowrap "
                 />
                 <Typography
                   tag="h1"
                   text="Driven By Love"
-                  className="highlight  text-white whitespace-nowrap !text-5xl lg:!text-6xl"
+                  className="highlight  text-white text-center !text-5xl lg:!text-6xl px-4"
                 />
               </div>
 
@@ -48,9 +48,9 @@ export default function GuidelinesCard() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="w-full relative lg:w-[50%] gap-[var(--space-30-40)] p-10 sm:p-16 flex flex-col "
+            className="w-full relative lg:w-[50%] gap-[var(--space-30-40)] p-6 sm:p-16 flex flex-col "
           >
-            <div className="flex flex-col items-center mt-[-100px] sm:mt-0 lg:items-center sm:flex-row gap-7">
+            <div className="flex flex-col items-center max-[575px]:mt-[-75px] mt-[-100px] sm:mt-0 lg:items-center sm:flex-row gap-7">
               <div className="w-[15.6vw] sm:w-[8.6vw] lg:w-[128px]">
                 <Image
                   src="/images/fediaf.webp"
@@ -76,8 +76,8 @@ export default function GuidelinesCard() {
               </Typography>
             </div>
 
-            <div className="flex flex-col gap-[var(--space-10-15)]">
-              <Typography tag="text" text="" className="text-start">
+            <div className="flex flex-col gap-[var(--space-10-15)] ">
+              <Typography tag="text" text="" className="text-start max-[575px]:text-center">
                 These guidelines are developed and regularly updated by,{" "}
                 <Typography
                   tag="span"
@@ -89,7 +89,7 @@ export default function GuidelinesCard() {
                 nutritionists.
               </Typography>
 
-              <Typography tag="text" text="" className="text-start">
+              <Typography tag="text" text="" className="text-start max-[575px]:text-center">
                 They are rooted in rigorous research and incorporate the latest
                 advancements in pet nutrition science. By working closely with
                 professionals across Europe,
@@ -99,10 +99,10 @@ export default function GuidelinesCard() {
               </Typography>
             </div>
 
-            <div className="flex flex-wrap justify-start gap-y-7 sm:gap-y-0">
+            <div className="flex flex-wrap justify-center sm:justify-start gap-y-7 sm:gap-y-0">
 
-              <div className="flex items-center gap-2.5 lg:gap-1 pr-[var(--space-8-30)] sm:pr-[var(--space-8-17)]">
-                <div className="w-10 h-10 lg:w-8 lg:h-8">
+              <div className="flex items-center gap-2 lg:gap-1 pr-[var(--space-8-30)] sm:pr-[var(--space-8-17)]">
+                <div className="w-6 h-6 lg:w-8 lg:h-8">
                   <Image
                     src="/icons/safe.svg"
                     alt="mission"
@@ -110,11 +110,11 @@ export default function GuidelinesCard() {
                     fill
                   />
                 </div>
-                <Typography tag="text" text="Safe" className="uppercase font-bold text-secondary-1 text-start lg:text-sm" />
+                <Typography tag="text" text="Safe" className="uppercase font-bold text-secondary-1 text-start lg:text-sm max-[575px]:text-[14px]" />
               </div>
 
-              <div className="flex items-center border-l lg:border-x border-primary px-[var(--space-8-30)] sm:px-[var(--space-8-17)] gap-2.5 lg:gap-1">
-                <div className="w-10 lg:w-8">
+              <div className="flex items-center sm:border-x border-primary px-[var(--space-8-30)] sm:px-[var(--space-8-17)] gap-2.5 lg:gap-1">
+                <div className="w-6 lg:w-8">
                   <Image
                     src="/icons/balance-scale.svg"
                     alt="mission"
@@ -122,11 +122,11 @@ export default function GuidelinesCard() {
                     fill
                   />
                 </div>
-                <Typography tag="text" text="Balanced" className="uppercase font-bold text-secondary-1 text-start lg:text-sm" />
+                <Typography tag="text" text="Balanced" className="uppercase font-bold text-secondary-1 text-start max-[575px]:text-[14px] lg:text-sm" />
               </div>
 
               <div className="flex items-center pl-[var(--space-8-17)] gap-2.5 lg:gap-1">
-                <div className="w-10 lg:w-8">
+                <div className="w-6 lg:w-8">
                   <Image
                     src="/icons/nutritional-carrot.svg"
                     alt="mission"
@@ -134,7 +134,7 @@ export default function GuidelinesCard() {
                     fill
                   />
                 </div>
-                <Typography tag="text" text="High-Quality" className="uppercase font-bold text-secondary-1 text-start lg:text-sm" />
+                <Typography tag="text" text="High-Quality" className="uppercase font-bold text-secondary-1 text-start lg:text-sm max-[575px]:text-[14px]" />
               </div>
             </div>
           </motion.div>

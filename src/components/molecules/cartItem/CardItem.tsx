@@ -33,7 +33,7 @@ export default function CardItem({ petName, planType, planPrice, protein }: Card
             tag="sub"
             text={`${planType.charAt(0).toUpperCase() + planType.slice(1)} Plan`}
             // text="Regular Plan"
-            className="text-primary-dark "
+            className="text-primary-dark text-[14px]"
           />
         </div>
         <div>
@@ -41,7 +41,7 @@ export default function CardItem({ petName, planType, planPrice, protein }: Card
             tag="sub"
             text={`${protein.charAt(0).toUpperCase() + protein.slice(1)} Bowl`}
             // text="Chicken Bowl"
-            className=""
+            className="text-[14px]"
           />
         </div>
       </div>
