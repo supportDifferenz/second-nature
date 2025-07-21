@@ -27,14 +27,14 @@ export default function Page() {
 
   const { pets, selectedPetIndex } = usePetStore();
   const selectedPet = selectedPetIndex !== null ? pets[selectedPetIndex] : null; // Handle null case for selectedPetIndex
-//   const currentPetId = selectedPet ? selectedPet.id : null;
-//   const selectedPetName = selectedPet ? selectedPet.name : null;
-//   const activityLevel = selectedPet ? selectedPet.activityLevel : "";
+  //   const currentPetId = selectedPet ? selectedPet.id : null;
+  //   const selectedPetName = selectedPet ? selectedPet.name : null;
+  //   const activityLevel = selectedPet ? selectedPet.activityLevel : "";
 
-//   const [selectedActivity, setSelectedActivity] = useState(activityLevel);
+  //   const [selectedActivity, setSelectedActivity] = useState(activityLevel);
 
   const { userDetails, setUserDetails } = useUserStore();
-  
+
   const [formData, setFormData] = useState<FormData>({
     name: userDetails.firstName || "",
     email: userDetails.emailAddress || "",
@@ -67,7 +67,7 @@ export default function Page() {
     const { name } = e.target;
     // Only validate the blurred field
     const fieldError = {
-      [name]: name === "email" 
+      [name]: name === "email"
         ? /^\S+@\S+\.\S+$/.test(formData[name]) ? "" : "Enter a valid email"
         : formData[name as keyof FormData] ? "" : `Name is required`
     };
@@ -86,12 +86,12 @@ export default function Page() {
   const handleNext = (e: React.FormEvent) => {
     e.preventDefault();
     if (!validateForm()) return;
-    
+
     // setIsSubmitting(true);
     // Here you would typically send the data to your API
     // For now, we'll just simulate a short delay
 
-    if(formData.name && formData.email) {
+    if (formData.name && formData.email) {
       setUserDetails({
         firstName: formData.name,
         emailAddress: formData.email
@@ -123,7 +123,7 @@ export default function Page() {
   return (
     <BuyingFlowLayout step={3}>
 
-      <form onSubmit={handleNext} className="flex flex-col items-center gap-8 bg-white">
+      <form onSubmit={handleNext} className="flex flex-1 flex-col items-center gap-8 bg-white">
         <Typography
           tag="h3"
           text="Your Premium Pet Meal Journey a Click Away"
@@ -141,24 +141,45 @@ export default function Page() {
             }}
         /> */}
 
-        <div className="max-w-[800px] w-[90%] sm:w-[50%] lg:w-[40%]">
-          <Input
-            name="name"
-            type="text"
-            variant="roundedEdgeInputLg"
-            className="w-full bg-white"
-            placeholder="Type Your Name"
-            value={formData.name}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            aria-invalid={!!errors.name}
-            aria-describedby="name-error"
-          />
-          {errors.name && (
-            <p id="name-error" className="text-red-500 text-sm mt-1 pl-2">
-              {errors.name}
-            </p>
-          )}
+        <div className="flex flex-col items-center gap-4 lg:gap-6 w-full">
+          <div className="max-w-[800px] w-full sm:w-[50%] lg:w-[40%]">
+            <Input
+              name="name"
+              type="text"
+              variant="roundedEdgeInputLg"
+              className="w-full bg-white"
+              placeholder="Type Your Name"
+              value={formData.name}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              aria-invalid={!!errors.name}
+              aria-describedby="name-error"
+            />
+            {errors.name && (
+              <p id="name-error" className="text-red-500 text-sm mt-1 pl-2">
+                {errors.name}
+              </p>
+            )}
+          </div>
+          <div className="max-w-[800px] w-full sm:w-[50%] lg:w-[40%]">
+            <Input
+              name="email"
+              type="email"
+              variant="roundedEdgeInputLg"
+              className="w-full bg-white"
+              placeholder="Type Your Email"
+              value={formData.email}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              aria-invalid={!!errors.email}
+              aria-describedby="email-error"
+            />
+            {errors.email && (
+              <p id="email-error" className="text-red-500 text-sm mt-1 pl-2">
+                {errors.email}
+              </p>
+            )}
+          </div>
         </div>
 
         {/* <Input
@@ -173,26 +194,11 @@ export default function Page() {
             }}
         /> */}
 
-        <div className="max-w-[800px] w-[90%] sm:w-[50%] lg:w-[40%]">
-          <Input
-            name="email"
-            type="email"
-            variant="roundedEdgeInputLg"
-            className="w-full bg-white"
-            placeholder="Type Your Email"
-            value={formData.email}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            aria-invalid={!!errors.email}
-            aria-describedby="email-error"
-          />
-          {errors.email && (
-            <p id="email-error" className="text-red-500 text-sm mt-1 pl-2">
-              {errors.email}
-            </p>
-          )}
-        </div>
 
+
+
+
+      </form>
       {/* Navigation */}
       <div className="w-full pb-[3dvh] flex justify-between items-center gap-4 lg:gap-0 lg:items-end pt-[3dvh]">
         <Button
@@ -205,7 +211,7 @@ export default function Page() {
             })
             // router.push("/choose-our-plans");
           }}
-          // disabled={isSubmitting}
+        // disabled={isSubmitting}
         >
           <div className="w-5 relative">
             <Image
@@ -219,8 +225,8 @@ export default function Page() {
         </Button>
         <Button
           type="submit"
-          className="gap-2.5 lg:ml-auto lg:mr-[-55px]" 
-          disabled={ !(formData.name && formData.email) }
+          className="gap-2.5 lg:ml-auto lg:mr-[-55px]"
+          disabled={!(formData.name && formData.email)}
           onClick={handleNext}
         >
           Next
@@ -234,9 +240,6 @@ export default function Page() {
           </div>
         </Button>
       </div>
-
-    </form>
-
     </BuyingFlowLayout>
   );
 }
