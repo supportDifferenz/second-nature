@@ -63,7 +63,7 @@ export default function IngredientsCarousel() {
         }
         return prev + 1;
       });
-    }, 30000000);
+    }, 30);
 
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
