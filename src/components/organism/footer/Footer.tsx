@@ -343,7 +343,7 @@ const Footer = () => {
               });
             }}
           >
-            <Typography tag="span" text="Privacy Policy" /> 
+            <Typography tag="span" text="Privacy Policy" className="cursor-pointer"/> 
           </div>
           {"•"}{" "}
           <div
@@ -353,7 +353,7 @@ const Footer = () => {
               });
             }}
           >
-            <Typography tag="span" text="Terms and Conditions" />
+            <Typography tag="span" text="Terms and Conditions" className="cursor-pointer" />
           </div>
         </div>
         <div>

@@ -83,7 +83,7 @@ export default function FooterCtaCard({
         <div className="flex flex-col items-center justify-center  h-[142vw] sm:h-[55vw] lg:h-[31.2vw] w-[90vw] sm:w-[38.5vw] relative">
           <div className="bg-[#FBE5C7] sm:px-[3.12vw] max-[575px]:pt-8 py-[var(--space-52-86)] lg:py-10 w-full rounded-t-2xl h-[70%] sm:h-[80%]">
             <PetFoodLookingTitle
-              className="text-secondary-1 px-12 sm:pl-0 sm:pr-[35%] xl:pr-[40%]"
+              className="text-secondary-1 px-6 sm:px-12 sm:pl-0 sm:pr-[35%] xl:pr-[40%]"
               title={petFood.title}
               highlight={petFood.highlight}
               paragraph={petFood.paragraph}
