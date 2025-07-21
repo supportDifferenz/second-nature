@@ -30,4 +30,5 @@ export const QUERY_KEYS = {
     RESTART_PLAN: "restartPlan",
     PAUSE_PLAN: "pausePlan",
     CREATE_FAQ: "createFaq",
+    GET_ALL_OFFERS: "getAllOffers",
 }   
