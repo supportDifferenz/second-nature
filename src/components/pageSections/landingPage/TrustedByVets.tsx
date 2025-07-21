@@ -76,7 +76,7 @@ export default function TrustedByVets() {
                 />
               </div>
               <Typography
-                tag="h6"
+                tag="h5"
                 text={vet.name}
                 className="mt-2.5 text-lg font-medium"
               />
