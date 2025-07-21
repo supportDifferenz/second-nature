@@ -1,14 +1,14 @@
 // page.tsx
 "use client";
-import FaqForm from "@/components/pageSections/faqs/FaqForm";
+// import FaqForm from "@/components/pageSections/faqs/FaqForm";
 import FaqSection from "@/components/pageSections/faqs/FaqSection";
 import MainLayout from "@/components/templates/MainLayout";
 import { Toaster } from "@/components/ui/sonner";
-import { motion } from "framer-motion";
-import React, { useRef } from "react";
+// import { motion } from "framer-motion";
+// import React, { useRef } from "react";
 
 function Page() {
-  const formRef = useRef<HTMLDivElement>(null);
+  // const formRef = useRef<HTMLDivElement>(null);
 
   // const scrollToForm = () => {
   //   formRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -20,7 +20,7 @@ function Page() {
         <FaqSection />
         {/* <FaqSection onAskUsClick={scrollToForm} /> */}
       </div>
-      <div ref={formRef} className="container pb-12 lg:hidden ">
+      {/* <div ref={formRef} className="container pb-12 lg:hidden ">
         <motion.div
           initial={{ opacity: 0, y: 60 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -29,7 +29,7 @@ function Page() {
         >
           <FaqForm />
         </motion.div>
-      </div>
+      </div> */}
       <Toaster position="top-right" />
     </MainLayout>
   );
