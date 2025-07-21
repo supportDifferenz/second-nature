@@ -12,6 +12,7 @@ const mealsData: MealCardPropsType[] = [
   {
     tag: "MEALS",
     title: "Full bowl",
+    subTitle: "100% of your pet’s daily nutrients",
     image: "/images/chicken-bowl-cat.webp",
     features: [
       "Free delivery to your doorstep",
@@ -25,6 +26,7 @@ const mealsData: MealCardPropsType[] = [
   {
     tag: "MEALS",
     title: "Half bowl",
+    subTitle: "50% of your pet’s daily nutrients",
     image: "/images/beef-bowl-cat.webp",
     features: [
       "Free delivery to your door",
@@ -35,7 +37,7 @@ const mealsData: MealCardPropsType[] = [
       { label: "Get Started", route: "/location", variant: "primary" },
     ],
   },
- 
+
 ];
 
 export default function OurMealPlans() {
@@ -50,134 +52,134 @@ export default function OurMealPlans() {
               transition={{ duration: 0.5 }}
               viewport={{ once: true }}
             >
-            <SecondaryInlineTitle
-              title="Our"
-              highlight="Subscription Plans"
-              textAlign="text-center sm:text-center  lg:text-left"
-              textColor="#00683D"
-              className="mb-10 sm:mx-auto lg:ml-0 hidden lg:block"
-            />
-            <div className="ml-[-9%] sm:ml-[-19%]">
-              <Image
-                src="/images/our-meal-plan-thumb.webp"
-                alt="Our Meal Plans"
-                fill
-                className="!static"
+              <SecondaryInlineTitle
+                title="Our"
+                highlight="Subscription Plans"
+                textAlign="text-center sm:text-center  lg:text-left"
+                textColor="#00683D"
+                className="mb-10 sm:mx-auto lg:ml-0 hidden lg:block"
               />
-            </div>
+              <div className="ml-[-9%] sm:ml-[-19%]">
+                <Image
+                  src="/images/our-meal-plan-thumb.webp"
+                  alt="Our Meal Plans"
+                  fill
+                  className="!static"
+                />
+              </div>
             </motion.div>
           </div>
         </div>
         <div className="flex-[58%] order-1 lg:order-2">
           <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1 }}
-              viewport={{ once: true }}
-            >
-          <div className="flex flex-col items-center justify-center mb-7 sm:mb-10 lg:hidden">
-            <Typography
-              tag="h2"
-              text="Our"
-              className="text-primary-dark"
-              ariaLabel=""
-            />
-            <Typography
-              tag="h2"
-              text="Subscription Plans"
-              className="text-primary-dark highlight whitespace-nowrap"
-              ariaLabel=""
-            />
-          </div>
-          <ul className=" flex items-center justify-center flex-wrap gap-6 gap-y-4">
-            <li className="flex gap-2.5 items-center">
-              <div className="w-7">
-                <Image
-                  src="/icons/our-meal-plan-icon-2.svg"
-                  alt="icon"
-                  fill
-                  className="!static"
-                />
-              </div>
-              <span className="uppercase text-secondary-1 font-semibold">
-                Free delivery to your doorstep
-              </span>
-            </li>
-            <li className="flex gap-2.5 items-center">
-              <div className="w-7">
-                <Image
-                  src="/icons/our-meal-plan-icon-3.svg"
-                  alt="icon"
-                  fill
-                  className="!static"
-                />
-              </div>
-              <span className="uppercase text-secondary-1 font-semibold">
-                Flexible subscriptions
-              </span>
-            </li>
-            <li className="flex gap-2.5 items-center">
-              <div className="w-7">
-                <Image
-                  src="/icons/our-meal-plan-icon-1.svg"
-                  alt="icon"
-                  fill
-                  className="!static"
-                />
-              </div>
-              <span className="uppercase text-secondary-1 font-semibold">
-                Completely balanced meals
-              </span>
-            </li>
-          </ul>
-          <div className="my-15 flex flex-col items-center justify-center">
-            <div className="flex flex-col gap-[20px] sm:gap-0 sm:flex-row">
-              <div className="">
-                <div className="sm:pr-11 sm:border-r border-primary ">
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+            viewport={{ once: true }}
+          >
+            <div className="flex flex-col items-center justify-center mb-7 sm:mb-10 lg:hidden">
+              <Typography
+                tag="h2"
+                text="Our"
+                className="text-primary-dark"
+                ariaLabel=""
+              />
+              <Typography
+                tag="h2"
+                text="Subscription Plans"
+                className="text-primary-dark highlight whitespace-nowrap"
+                ariaLabel=""
+              />
+            </div>
+            <ul className=" flex items-center justify-center flex-wrap gap-6 gap-y-4">
+              <li className="flex gap-2.5 items-center">
+                <div className="w-7">
+                  <Image
+                    src="/icons/our-meal-plan-icon-2.svg"
+                    alt="icon"
+                    fill
+                    className="!static"
+                  />
+                </div>
+                <span className="uppercase text-secondary-1 font-semibold">
+                  Free delivery to your doorstep
+                </span>
+              </li>
+              <li className="flex gap-2.5 items-center">
+                <div className="w-7">
+                  <Image
+                    src="/icons/our-meal-plan-icon-3.svg"
+                    alt="icon"
+                    fill
+                    className="!static"
+                  />
+                </div>
+                <span className="uppercase text-secondary-1 font-semibold">
+                  Flexible subscriptions
+                </span>
+              </li>
+              <li className="flex gap-2.5 items-center">
+                <div className="w-7">
+                  <Image
+                    src="/icons/our-meal-plan-icon-1.svg"
+                    alt="icon"
+                    fill
+                    className="!static"
+                  />
+                </div>
+                <span className="uppercase text-secondary-1 font-semibold">
+                  Completely balanced meals
+                </span>
+              </li>
+            </ul>
+            <div className="my-15 flex flex-col items-center justify-center">
+              <div className="flex flex-col gap-[20px] sm:gap-0 sm:flex-row">
+                <div className="">
+                  <div className="sm:pr-11 sm:border-r border-primary ">
+                    <Typography
+                      tag="h3"
+                      text="Regular Plan"
+                      className="text-primary-dark highlight text-center"
+                    />
+                    <Typography
+                      tag="text"
+                      text="Auto-Renews Every 28 Days"
+                      className="text-black text-center"
+                    />
+                  </div>
+                  <div
+                    className="w-fit ml-[10%] mt-2 text-white px-6 py-1 font-bold rounded-full"
+                    style={{
+                      backgroundImage:
+                        "linear-gradient(to right, #00683D 0%, #09B870 54%, #00683D 100%)",
+                    }}
+                  >
+                    <Typography
+                      tag="text"
+                      text="Recommended"
+                      className="text-white whitespace-nowrap"
+                    />
+                  </div>
+                </div>
+                <div className="sm:pl-11 text-center">
                   <Typography
                     tag="h3"
-                    text="Regular Plan"
-                    className="text-primary-dark highlight text-center"
+                    text="Trial Plan"
+                    className="text-primary-dark highlight"
                   />
                   <Typography
                     tag="text"
-                    text="Auto-Renews Every 28 Days"
-                    className="text-black text-center"
+                    text="One-Time Purchase for 7 Days"
+                    className="text-black"
                   />
                 </div>
-                <div
-                  className="w-fit ml-[10%] mt-2 text-white px-6 py-1 font-bold rounded-full"
-                  style={{
-                    backgroundImage:
-                      "linear-gradient(to right, #00683D 0%, #09B870 54%, #00683D 100%)",
-                  }}
-                >
-                  <Typography
-                    tag="text"
-                    text="Recommended"
-                    className="text-white whitespace-nowrap"
-                  />
-                </div>
-              </div>
-              <div className="sm:pl-11 text-center">
-                <Typography
-                  tag="h3"
-                  text="Trial Plan"
-                  className="text-primary-dark highlight"
-                />
-                <Typography
-                  tag="text"
-                  text="One-Time Purchase for 7 Days"
-                  className="text-black"
-                />
               </div>
             </div>
-          </div>
-          <div className="flex flex-col gap-6 mt-4 pb-25">
-            {mealsData.map((meal, index) => (
-              <MealCard key={`${meal.title}-${index}`} {...meal} />
-            ))}
-          </div>
+            <div className="flex flex-col gap-6 mt-4 pb-25">
+              {mealsData.map((meal, index) => (
+                <MealCard key={`${meal.title}-${index}`} {...meal} />
+              ))}
+            </div>
           </motion.div>
         </div>
       </div>

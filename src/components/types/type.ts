@@ -75,6 +75,7 @@ export type MealsButtonPropsType = {
 export type MealCardPropsType = {
   tag?: string;
   title: string;
+  subTitle?: string;
   image: string;
   features?: string[];
   buttons: MealsButtonPropsType[];

@@ -103,7 +103,7 @@ export default function TransitionPlan() {
               <Typography
                 tag="h6"
                 text="The 10-day transition process gradually increases the portions every few days, ensuring your pet adjusts comfortably and enjoys a seamless dietary change."
-                className="text-center w-[80%] lg:w-[57%]"
+                className="text-center w-[100%] sm:w-[80%] lg:w-[57%]"
               />
             </motion.div>
           </div>
