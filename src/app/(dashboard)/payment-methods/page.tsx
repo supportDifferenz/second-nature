@@ -1,12 +1,11 @@
 import Typography from "@/components/atoms/typography/Typography";
-import DashboardLayout from "@/components/templates/DashboardLayout";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import React from "react";
 
 export default function PaymentMethods() {
   return (
-    <DashboardLayout>
+    <>
       <Typography
         tag="h5"
         text="Payment Methods"
@@ -27,6 +26,6 @@ export default function PaymentMethods() {
           Edit
         </Button>
       </div>
-    </DashboardLayout>
+    </>
   );
 }

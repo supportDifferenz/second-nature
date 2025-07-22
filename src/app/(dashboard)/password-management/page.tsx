@@ -2,7 +2,6 @@
 
 import Typography from "@/components/atoms/typography/Typography";
 import { InputLabeled } from "@/components/molecules/inputLabeled/InputLabeled";
-import DashboardLayout from "@/components/templates/DashboardLayout";
 import { Button } from "@/components/ui/button";
 import React, { useState } from "react";
 import { useUserStore } from "@/zustand/store/userDataStore";
@@ -148,7 +147,7 @@ export default function PasswordManagement() {
   };
 
   return (
-    <DashboardLayout>
+    <>
       <Typography
         tag="h5"
         text="Password Management"
@@ -231,6 +230,6 @@ export default function PasswordManagement() {
           </form>
         </div>
       </div>
-    </DashboardLayout>
+    </>
   );
 }
