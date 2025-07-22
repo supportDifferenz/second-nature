@@ -5,7 +5,7 @@ import Typography from "@/components/atoms/typography/Typography";
 import { motion } from "framer-motion";
 
 const bannerBaseClass = cn(
-  "relative flex  justify-center text-center items-center w-full min-h-[600px] h-[90dvh] sm:min-h-[400px] sm:h-[d50vh] lg:min-h-[520px] sm:h-[70dvh] lg:max-h-[1200px] bg-cover bg-center transition-all"
+  "relative flex  justify-center text-center items-center w-full min-h-[700px] h-[90dvh] sm:min-h-[400px] sm:h-[d50vh] lg:min-h-[520px] sm:h-[70dvh] lg:max-h-[1200px] bg-cover bg-center transition-all"
 );
 
 export default function StaticHeroBanner() {
