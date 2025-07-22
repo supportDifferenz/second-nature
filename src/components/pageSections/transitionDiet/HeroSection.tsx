@@ -5,7 +5,7 @@ import Typography from "@/components/atoms/typography/Typography";
 import { motion } from "framer-motion";
 
 const bannerBaseClass = cn(
-  "relative flex  justify-center text-center items-center w-full min-h-[500px] h-[90dvh] sm:min-h-[400px] sm:h-[d50vh] lg:min-h-[520px] sm:h-[70dvh] lg:max-h-[1200px] bg-cover bg-center transition-all"
+  "relative flex  justify-center text-center items-center w-full min-h-[600px] h-[90dvh] sm:min-h-[400px] sm:h-[d50vh] lg:min-h-[520px] sm:h-[70dvh] lg:max-h-[1200px] bg-cover bg-center transition-all"
 );
 
 export default function StaticHeroBanner() {
@@ -42,11 +42,11 @@ export default function StaticHeroBanner() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
             viewport={{ once: true }}
-           className="flex justify-center w-full"
+            className="flex justify-center w-full"
           >
             <Typography
               tag="h4"
-              className="text-center text-primary-dark w-[53%] lg:w-auto"
+              className="text-center text-primary-dark w-[59%] sm:w-[53%] lg:w-auto"
               text="Switching to Natural Nutrition,"
               role="caption"
               ariaLabel="Switching to Natural Nutrition,"
@@ -57,7 +57,7 @@ export default function StaticHeroBanner() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-             className="flex justify-center w-full"
+            className="flex justify-center w-full"
           >
             <Typography
               tag="h1"
@@ -77,7 +77,10 @@ export default function StaticHeroBanner() {
             <Typography
               tag="h6"
               className="text-center  text-secondary-1 mt-2 w-[65%] sm:w-[60%] lg:w-[68%]"
-              text="Discover how simple it is to nourish your pet with wholesome, natural meals designed for their health and happiness. "
+              text="Nourish your pet with
+simple, natural meals for
+their health and happiness.
+"
               role="paragraph"
               ariaLabel="Discover how simple it is to nourish your pet with wholesome, natural meals designed for their health and happiness."
             />

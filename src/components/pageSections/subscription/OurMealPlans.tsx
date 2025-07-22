@@ -102,7 +102,7 @@ export default function OurMealPlans() {
                   />
                 </div>
                 <span className="uppercase text-secondary-1 font-semibold">
-                  Free delivery to your doorstep
+                  Free delivery to your <br className="sm:hidden"/>doorstep
                 </span>
               </li>
               <li className="flex gap-2.5 items-center">
@@ -127,8 +127,8 @@ export default function OurMealPlans() {
                     className="!static"
                   />
                 </div>
-                <span className="uppercase text-secondary-1 font-semibold">
-                  Completely balanced meals
+                <span className="uppercase text-secondary-1 font-semibold ">
+                  Completely balanced <br className="min-[330px]:hidden"/> meals
                 </span>
               </li>
             </ul>
