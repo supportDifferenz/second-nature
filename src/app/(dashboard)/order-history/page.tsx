@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from "react";
 import Typography from "@/components/atoms/typography/Typography";
 import OrderHistoryCard from "@/components/molecules/orderHistoryCard/OrderHistoryCard";
-import DashboardLayout from "@/components/templates/DashboardLayout";
 import { MealPlanStatus } from "@/components/types/type";
 import { ProteinChangePopup } from "@/components/pageSections/dashboard/orderHistory/ProteinChangePopup";
 import { DowngradePlanPopup } from "@/components/pageSections/dashboard/orderHistory/DowngradePlanPopup";
@@ -337,7 +336,7 @@ export default function OrderHistory() {
 
 
   return (
-    <DashboardLayout>
+    <>
       <Typography
         tag="h5"
         text="Order History"
@@ -618,6 +617,6 @@ export default function OrderHistory() {
         }}
       /> */}
 
-    </DashboardLayout>
+    </>
   );
 }

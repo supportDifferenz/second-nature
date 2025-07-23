@@ -1,7 +1,6 @@
 "use client";
 
 import Typography from "@/components/atoms/typography/Typography";
-import DashboardLayout from "@/components/templates/DashboardLayout";
 import EditPersonalInformation from "@/components/pageSections/dashboard/personalInformation/EditPersonalInformation";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
@@ -18,8 +17,7 @@ export default function PersonalInformation() {
   const [ isEditing, setIsEditing ] = useState(false);
 
   return (
-    <DashboardLayout>
-
+    <>
       <Typography
         tag="h5"
         text="personal information"
@@ -80,6 +78,6 @@ export default function PersonalInformation() {
           </div>
       }
       
-    </DashboardLayout>
+    </>
   );
 }

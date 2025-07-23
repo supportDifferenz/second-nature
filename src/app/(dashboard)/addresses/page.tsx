@@ -1,7 +1,6 @@
 "use client";
 
 import Typography from "@/components/atoms/typography/Typography";
-import DashboardLayout from "@/components/templates/DashboardLayout";
 import EditAddresses from "@/components/pageSections/dashboard/addresses/EditAddresses";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
@@ -54,8 +53,7 @@ export default function Address() {
   }, [isEditing])
 
   return (
-    <DashboardLayout>
-
+    <>
       <Typography
         tag="h5"
         text="addresses"
@@ -222,6 +220,6 @@ export default function Address() {
       {/*if Edit Addresses */}
       {/* <EditAddresses/> */}
 
-    </DashboardLayout>
+    </>
   );
 }

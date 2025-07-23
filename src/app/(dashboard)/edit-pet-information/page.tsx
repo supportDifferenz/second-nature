@@ -3,7 +3,6 @@
 import Typography from "@/components/atoms/typography/Typography";
 import PetInfoCard from "@/components/organism/petInfo/PetInfoCard";
 // import EditPetInfo from "@/components/pages/dashboard/editPetInformation/EditPetInfo";
-import DashboardLayout from "@/components/templates/DashboardLayout";
 import EditPetInfo from "@/components/pageSections/dashboard/editPetInformation/EditPetInfo";
 import React, { useEffect, useState } from "react";
 import { useUserStore } from "@/zustand/store/userDataStore";
@@ -32,8 +31,7 @@ export default function Page() {
   }, [isEditPetInfo]);
 
   return (
-    <DashboardLayout>
-
+    <>
       <Typography
         tag="h5"
         text="Edit Pet Information"
@@ -58,6 +56,6 @@ export default function Page() {
           </div>
       }
           
-    </DashboardLayout>
+    </>
   );
 }
