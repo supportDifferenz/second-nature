@@ -124,7 +124,7 @@ export default function DashboardMenu() {
           onClick={handleLogout}
           className="h6 !font-normal flex items-center text-black whitespace-nowrap p-1.5 lg:p-(--space-8-17) gap-(--space-8-17) rounded-lg cursor-pointer transition capitalize bg-[#F3F5E8] lg:bg-transparent lg:hover:bg-[#F3F5E8] hover:shadow-md"
         >
-          <div >
+          <div className="w-(--space-26-32)">
             <Image
               src={logoutItem.icon}
               alt={logoutItem.name}
