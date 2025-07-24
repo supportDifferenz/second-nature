@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, startTransition } from "react";
 import { motion, easeInOut } from "framer-motion";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
@@ -9,6 +9,7 @@ import { cva } from "class-variance-authority";
 import Typography from "@/components/atoms/typography/Typography";
 import { Button } from "@/components/ui/button";
 import { AnimatePresence } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 const bannerVariants = cva(
   "relative flex pt-8 sm:pt-0 sm:items-center w-full bg-cover bg-center transition-all",
@@ -50,7 +51,7 @@ const banners = [
     paragraphColor: "#424242",
     buttonText: "know more",
     buttonTextColor: "",
-    buttonLink: "#",
+    buttonLink: "/location",
     bannerThemeColor: "#00683D",
   },
   {
@@ -68,7 +69,7 @@ const banners = [
       "Freshly prepared and delivered to your door that fuels a life full of happy tails",
     paragraphColor: "#ffff",
     buttonText: "Get Started",
-    buttonLink: "#",
+    buttonLink: "/location",
     bannerThemeColor: "#ffff",
     buttonTextColor: "#ffff",
   },
@@ -90,6 +91,9 @@ const fadeUp = (delay = 0, y = 30, duration = 0.6) => ({
 });
 
 export default function HeroSection() {
+
+  const router = useRouter();
+
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [
     Autoplay(),
     Fade(),
@@ -199,6 +203,13 @@ export default function HeroSection() {
                                 style={{
                                   borderColor: banner.buttonTextColor,
                                   color: banner.buttonTextColor,
+                                }}
+                                onClick={() => {
+                                  startTransition(() => {
+                                    if (banner.buttonLink) {
+                                      router.push(banner.buttonLink);
+                                    }
+                                  })
                                 }}
                               >
                                 {banner.buttonText}

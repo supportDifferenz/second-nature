@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import { startTransition } from "react";
 
 const Footer = () => {
+  
   const router = useRouter();
 
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
@@ -46,7 +47,16 @@ const Footer = () => {
           </p>
 
           <div className="max-lg:mt-(--space-34-130) flex  gap-3 lg:mt-auto">
-            <Button size={"md"} variant={"primaryBtn"} className="text-white">
+            <Button 
+              size={"md"} 
+              variant={"primaryBtn"} 
+              className="text-white"
+              onClick={() => {
+                startTransition(() => {
+                  router.push("/location");
+                });
+              }}
+            >
               Get Started
             </Button>
             {isAuthenticated ? (
