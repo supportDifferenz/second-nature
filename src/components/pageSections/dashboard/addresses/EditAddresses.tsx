@@ -5,6 +5,7 @@ import React, { useState, useEffect } from "react";
 import { useUserStore } from "@/zustand/store/userDataStore";
 import { useCreateAddressHook } from "@/hooks/subscriptionHooks/createAddressHook";
 import { useUpdateAddressByIdHook } from "@/hooks/subscriptionHooks/updateAddressByIdHook";
+import { toast } from "sonner";
 
 interface EditAddressesProps {
   selectedAddress: string;
@@ -208,11 +209,17 @@ export default function EditAddresses({ selectedAddress, setIsEditing, addressId
           shippingAddress: [shippingFormData],
           billingAddress: [billingFormData],
         }, {
-          onSuccess: () => {
+          onSuccess: (response) => {
             console.log("Address created successfully");
             setIsSubmitting(false);
             setCreateAddressError("");
             setIsEditing(false);
+
+            if (response?.statusCode === 200) {
+              toast.success(response.message || "Address created successfully");
+            } else {
+              toast.error(response.message || "Failed to create address.Try again.");
+            }
             // setShowPaymentDetails(true);
             // setIsSubmittingAddress(false);
             // setIsShippingEditEnabled(false);
@@ -227,6 +234,7 @@ export default function EditAddresses({ selectedAddress, setIsEditing, addressId
             console.error('Error updating address:', error);
             setIsSubmitting(false);
             setCreateAddressError("Error creating address");
+            toast.error("Error creating address");
             // setIsSubmittingAddress(false);
             // setShowPaymentDetails(false);
           },
@@ -247,6 +255,12 @@ export default function EditAddresses({ selectedAddress, setIsEditing, addressId
             setIsSubmitting(false);
             setUpdateAddressError("");
             setIsEditing(false);
+
+            if (response?.statusCode === 200) {
+              toast.success(response.message || "Address updated successfully");
+            } else {
+              toast.error(response.message || "Failed to update address. Try again.");
+            }
             // setShowPaymentDetails(true);
             // setIsSubmittingAddress(false);
             // setIsShippingEditEnabled(false);
@@ -259,6 +273,7 @@ export default function EditAddresses({ selectedAddress, setIsEditing, addressId
             console.error('Error updating shipping address by ID:', error);
             setIsSubmitting(false);
             setUpdateAddressError("Error updating shipping address by ID");
+            toast.error("Error updating shipping address by ID");
             // setIsSubmittingAddress(false);
             // setShowPaymentDetails(false);
           }

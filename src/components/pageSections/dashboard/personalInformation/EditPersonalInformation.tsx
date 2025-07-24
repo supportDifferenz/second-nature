@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { useUpdateUserHook } from "@/hooks/userHooks/getUserDetailsHook";
 import { useGetUserDetails} from "@/hooks/userHooks/getUserDetailsHook";
 import { useUserStore} from "@/zustand/store/userDataStore";
+import { toast } from "sonner";
 
 const userSchema = z.object({
   firstName: z.string()
@@ -99,11 +100,19 @@ export default function EditPersonalInformation({
         onSuccess: (response) => {
           console.log("Update successful:", response);
           // e.g. toast.success("User updated successfully");
+
+          if (response?.statusCode === 200) {
+            toast.success(response.message || "User updated successfully");
+          } else {
+            toast.error(response.message || "Failed to update user. Try again.");
+          }
+
           setIsEditing(false);
           window.location.reload();
         },
         onError: (error) => {
           console.error("Update failed:", error);
+          toast.error(error.message || "Failed to update user. Try again.");
           // e.g. toast.error("Failed to update user. Try again.");
         },
       }

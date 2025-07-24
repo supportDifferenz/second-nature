@@ -6,7 +6,8 @@ import React,{ useState, useEffect } from "react";
 import DateOfBirthPicker from "@/components/molecules/datePicker/DatePicker";
 import Counter from "@/components/molecules/counterBuyingFlow/Counter";
 import { useUpdatePetByPetIdHook } from "@/hooks/subscriptionHooks/updatePetDetailsByPetId";
-import Typography from "@/components/atoms/typography/Typography";
+// import Typography from "@/components/atoms/typography/Typography";
+import { toast } from "sonner";
 
 interface PetData {
   _id?: string;
@@ -51,7 +52,7 @@ export default function EditPetInfo({ setIsEditPetInfo, petData }: EditPetInfoPr
     }
   });
   const [ updatePetLoading, setUpdatePetLoading ] = useState<boolean>(false);
-  const [ updatePetError, setUpdatePetError ] = useState<string>("");
+  // const [ updatePetError, setUpdatePetError ] = useState<string>("");
 
   // Initialize form with petData
   useEffect(() => {
@@ -130,12 +131,19 @@ export default function EditPetInfo({ setIsEditPetInfo, petData }: EditPetInfoPr
       {
         onSuccess: (data) => {
           console.log("Pet updated successfully",data);
+
+          if(data?.statusCode === 200) {
+            toast.success(data.message || "Pet updated successfully");
+          } else {
+            toast.error(data.message || "Failed to update pet.Try again.");
+          }
           setUpdatePetLoading(false);
           setIsEditPetInfo(false);
         },
         onError: (error) => {
           console.error("Pet update failed",error);
-          setUpdatePetError("Error in updating pet");
+          toast.error(error.message || "Failed to update pet.Try again.");
+          // setUpdatePetError("Error in updating pet");
           setUpdatePetLoading(false);
           setIsEditPetInfo(true);
         }
@@ -240,11 +248,11 @@ export default function EditPetInfo({ setIsEditPetInfo, petData }: EditPetInfoPr
           </Button>
         </div>
 
-        <Typography 
+        {/* <Typography 
           tag="p" 
           text={updatePetError}
           className="text-red-500 text-sm mt-2 lg:col-span-2" 
-        />
+        /> */}
 
       </div>
   );
