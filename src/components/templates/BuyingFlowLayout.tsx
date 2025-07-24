@@ -91,7 +91,8 @@ export default function BuyingFlowLayout({
               ) : (
                 <Typography
                   tag="p"
-                  text="No pets added yet"
+                  text=""
+                  // text="No pets added yet"
                   className="font-bold"
                 />
               )}
