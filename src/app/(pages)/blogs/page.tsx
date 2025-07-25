@@ -3,12 +3,13 @@
 // blogs.tsx
 import Typography from "@/components/atoms/typography/Typography";
 import MainLayout from "@/components/templates/MainLayout";
-import React from "react";
+import React, { startTransition } from "react";
 import BlogListCard from "@/components/pageSections/blogs/BlogListCard";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import FooterCtaCard from "@/components/organism/footerCtaCard/FooterCtaCard";
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 const blogData = [
   {
@@ -40,6 +41,9 @@ const blogData = [
 ];
 
 function Page() {
+
+  const router = useRouter();
+
   const footerCtaData = {
     mealTransition: {
       title: "Meal",
@@ -154,6 +158,11 @@ function Page() {
               size={"md"}
               variant={"primaryBtn"}
               className="w-fit text-white"
+              onClick={() => {
+                startTransition(() => {
+                  router.push("/location");
+                });
+              }}
             >
               Get Started
             </Button>

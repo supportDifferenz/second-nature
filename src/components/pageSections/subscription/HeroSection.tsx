@@ -1,12 +1,16 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useState, startTransition } from "react";
 import Typography from "@/components/atoms/typography/Typography";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 export default function HeroSection() {
+
+  const router = useRouter();
+
   const banner = {
     id: "1",
     image: {
@@ -19,6 +23,7 @@ export default function HeroSection() {
     subtitle: "Premium Pet Food Delivered",
     bannerThemeColor: "#00683D",
     buttonText: "Sign Up Today",
+    buttonLink: "/location",
     buttonTextColor: "#00683D",
   };
 
@@ -112,6 +117,11 @@ export default function HeroSection() {
               variant="primaryBtn"
               className="mx-auto mt-2 sm:m-0 "
               size={"md"}
+              onClick={() => {
+                startTransition(() => {
+                  router.push(banner.buttonLink);
+                });
+              }}
             >
               {banner.buttonText}
             </Button>

@@ -6,11 +6,12 @@ import { Button } from "@/components/ui/button";
 import React, { useState } from "react";
 import { useUserStore } from "@/zustand/store/userDataStore";
 import { useUpdatePasswordHook } from "@/hooks/userHooks/changePasswordHook";
+import { toast } from "sonner";
 
 export default function PasswordManagement() {
   const { userDetails } = useUserStore();
   const userId = userDetails.userId;
-  const { mutate: updatePassword, isPending, isError } = useUpdatePasswordHook();
+  const { mutate: updatePassword, isPending } = useUpdatePasswordHook();
 
   const [formData, setFormData] = useState({
     currentPassword: "",
@@ -30,8 +31,8 @@ export default function PasswordManagement() {
     confirmNewPassword: false,
   });
 
-  const [successMessage, setSuccessMessage] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
+  // const [successMessage, setSuccessMessage] = useState("");
+  // const [errorMessage, setErrorMessage] = useState("");
 
   const validateField = (name: string, value: string) => {
     switch (name) {
@@ -52,8 +53,8 @@ export default function PasswordManagement() {
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSuccessMessage("");
-    setErrorMessage("");
+    // setSuccessMessage("");
+    // setErrorMessage("");
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
@@ -114,6 +115,12 @@ export default function PasswordManagement() {
         {
           onSuccess: (response) => {
             console.log("Password update successful", response);
+
+            if (response?.statusCode === 200) {
+              toast.success(response.message || "Password updated successfully");
+            } else {
+              toast.error(response.message || "Failed to update password. Try again.");
+            }
             // Reset form on success
             setFormData({
               currentPassword: "",
@@ -126,7 +133,7 @@ export default function PasswordManagement() {
               confirmNewPassword: false,
             });
 
-            setSuccessMessage("Password updated successfully");
+            // setSuccessMessage("Password updated successfully");
           },
           onError: (error: unknown) => {
             if (error instanceof Error) {
@@ -134,10 +141,12 @@ export default function PasswordManagement() {
               const apiError = error as { response?: { data?: { message?: string } } };
               const message = apiError.response?.data?.message || error.message || "Password update failed";
               console.error("Password update failed", message);
-              setErrorMessage(message);
+              toast.error(message || "Password update failed");
+              // setErrorMessage(message);
             } else {
               console.error("Password update failed", error);
-              setErrorMessage("Password update failed");
+              toast.error("Password update failed");
+              // setErrorMessage("Password update failed");
             }
             // Handle API specific errors
           },
@@ -216,17 +225,18 @@ export default function PasswordManagement() {
               {isPending ? "Updating..." : "Update Password"}
             </Button>
 
-            {isError && (
+            {/* {isError && (
               <div className="mt-4 text-red-500">
                 {errorMessage}
               </div>
-            )}
+            )} */}
 
-            {successMessage && (
+            {/* {successMessage && (
               <div className="mt-4 text-green-500">
                 {successMessage}
               </div>
-            )}
+            )} */}
+
           </form>
         </div>
       </div>

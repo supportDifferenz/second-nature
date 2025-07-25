@@ -1,9 +1,12 @@
+"use client";
+
 import MainLayout from "@/components/templates/MainLayout";
-import React from "react";
+import React, { startTransition } from "react";
 import Typography from "@/components/atoms/typography/Typography";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import BlogListCard from "@/components/pageSections/blogs/BlogListCard";
+import { useRouter } from "next/navigation";
 
 const blogData = [
   {
@@ -22,7 +25,10 @@ const blogData = [
   },
 ];
 
-function page() {
+function Page() {
+
+  const router = useRouter();
+
   const socialIcons = [
     { src: "/icons/facebook-icon.svg", alt: "Facebook", href: "#" },
     { src: "/icons/linkedIn-icon.svg", alt: "LinkedIn", href: "#" },
@@ -54,6 +60,11 @@ function page() {
                 size={"md"}
                 variant={"primaryBtn"}
                 className="w-fit text-white sm:ml-auto"
+                onClick={() => {
+                  startTransition(() => {
+                    router.push("/location");
+                  });
+                }}
               >
                 Get Started
               </Button>
@@ -438,6 +449,11 @@ function page() {
               size={"md"}
               variant={"primaryBtn"}
               className="w-fit text-white"
+              onClick={() => {
+                startTransition(() => {
+                  router.push("/location");
+                })
+              }}
             >
               Get Started
             </Button>
@@ -481,4 +497,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;
