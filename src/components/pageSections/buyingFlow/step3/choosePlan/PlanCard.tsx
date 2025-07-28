@@ -73,7 +73,8 @@ export default function PlanCard({
           <Typography
             tag="h5"
             text="Loading..."
-            className="text-center text-secondary-1"
+            className="text-center text-transparent"
+            // className="text-center text-secondary-1"
           />
         ) : (
           <>
