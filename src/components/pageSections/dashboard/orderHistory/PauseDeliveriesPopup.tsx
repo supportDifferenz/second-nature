@@ -249,18 +249,16 @@ export const PauseDeliveriesPopup: React.FC<PauseDeliveriesPopupProps> = ({
             />
           </div>
 
-          <div className="h-[0.5px] w-full bg-[#D1D3C9]"></div>
+          {/* <div className="h-[0.5px] w-full bg-[#D1D3C9]"></div> */}
 
           {/* Duration Display */}
-          <div className="border border-[#9C3A3A] rounded-md p-4 mb-2 relative">
+          {/* <div className="border border-[#9C3A3A] rounded-md p-4 mb-2 relative">
             <Typography
               tag="label"
               text="DURATION"
               className="font-normal uppercase absolute bg-[#FDFFF4] subtitle2 -top-[7px] left-1/2 transform -translate-x-1/2 px-1 text-[#9C3A3A]"
             />
             <div className="text-center text-[#00683D] font-medium h6">
-              {/* {formatDisplayDate(dateRange.from)} to {formatDisplayDate(dateRange.to)} */}
-              {/* { dateRange.from !== "" && dateRange.to !== "" ? `${dateRange.from} to ${dateRange.to}` : "DD.MM.YYYY to DD.MM.YYYY" } */}
               <h6>
                 {formattedFromDate && formattedToDate ? (
                   <>
@@ -275,7 +273,7 @@ export const PauseDeliveriesPopup: React.FC<PauseDeliveriesPopupProps> = ({
 
 
             </div>
-          </div>
+          </div> */}
 
           {/* Week Selection */}
           {/* <RadioGroup
