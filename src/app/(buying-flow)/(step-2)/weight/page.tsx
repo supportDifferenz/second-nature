@@ -62,8 +62,8 @@ export default function Page() {
             className="text-center text-primary-dark capitalize" 
           />
           <div className="w-full mx-auto items-center justify-center flex flex-col lg:flex-row gap-4">
-          <Counter label="Weight" min={0} max={1000} value={currentWeight} setValue={setCurrentWeight} />
-          <Counter label="Target Weight" min={0} max={1000} value={targetWeight} setValue={setTargetWeight} />
+          <Counter label="Weight (Kg)" min={0} max={1000} value={currentWeight} setValue={setCurrentWeight} />
+          <Counter label="Target Weight (Kg)" min={0} max={1000} value={targetWeight} setValue={setTargetWeight} />
           </div>
         </motion.div>
 
