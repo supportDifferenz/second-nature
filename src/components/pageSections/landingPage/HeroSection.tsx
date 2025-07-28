@@ -95,7 +95,7 @@ export default function HeroSection() {
   const router = useRouter();
 
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [
-    Autoplay(),
+    Autoplay({ delay: 4000 }),
     Fade(),
   ]);
   const [selectedIndex, setSelectedIndex] = useState(0);

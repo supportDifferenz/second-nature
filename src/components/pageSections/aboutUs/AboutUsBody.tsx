@@ -86,12 +86,12 @@ AboutUsBodyProps) {
           <Typography
             tag="h6"
             text="Our Story"
-            className="uppercase text-secondary-1 mx-auto"
+            className="uppercase text-secondary-1 mx-auto "
           />
           <Typography
             tag="h2"
             text="Inspired By Love:"
-            className="highlight text-primary-dark"
+            className="highlight text-primary-dark mt-2"
           />
           <Typography
             tag="h2"
@@ -237,14 +237,14 @@ AboutUsBodyProps) {
         >
           <div className="flex flex-col items-center mb-[var(--space-30-52)]">
             <Typography
-              tag="h5"
+              tag="h6"
               text="our Mission"
               className="uppercase text-secondary-1"
             />
             <Typography
-              tag="h1"
+              tag="h2"
               text="To nurture"
-              className="capitalize text-primary-dark highlight"
+              className="capitalize text-primary-dark highlight mt-2"
             />
             <Typography
               tag="h2"

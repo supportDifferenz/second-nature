@@ -390,7 +390,7 @@ export default function MealBody() {
           className="max-sm:!px-3"
           onClick={() => {
             handleMealSwitch("beef")
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            window.scrollTo({ top: 150, behavior: 'smooth' });
 
           }}
 
@@ -403,7 +403,7 @@ export default function MealBody() {
           className="max-sm:!px-3"
           onClick={() => {
             handleMealSwitch("chicken")
-              window.scrollTo({ top: 0, behavior: 'smooth' });
+              window.scrollTo({ top: 150, behavior: 'smooth' });
 
           }}
         >
@@ -415,7 +415,7 @@ export default function MealBody() {
           className="max-sm:!px-3"
           onClick={() => {
             handleMealSwitch("lamb")
-              window.scrollTo({ top: 0, behavior: 'smooth' });
+              window.scrollTo({ top: 150, behavior: 'smooth' });
 
           }}
         >

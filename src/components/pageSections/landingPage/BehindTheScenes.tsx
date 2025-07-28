@@ -3,8 +3,7 @@
 import { SecondaryInlineTitle } from "@/components/molecules/titleSyles/Title";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { useEffect, useState } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import {  useState } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
@@ -39,17 +38,29 @@ export default function BehindTheScenes() {
 
   const softEase = [0.33, 1, 0.68, 1] as [number, number, number, number];
 
-  // ✅ Autoplay Effect
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setSelectedIndex((prev) => (prev + 1) % slides.length);
-    }, 4000); // change slide every 4 seconds
+  // // ✅ Autoplay Effect
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     setSelectedIndex((prev) => (prev + 1) % slides.length);
+  //   }, 4000); // change slide every 4 seconds
 
-    return () => clearInterval(interval); // cleanup on unmount
-  }, []);
+  //   return () => clearInterval(interval); // cleanup on unmount
+  // }, []);
 
   return (
-    <section className="bg-secondary-1 text-white">
+    <section className="bg-secondary-1 text-white relative">
+      <div className="absolute top-1/2 transform -translate-y-1/2  left-0 w-full   max-w-[1920px]">
+        <picture>
+          <source media="(min-width: 992px)" srcSet="/images/behind-scene-bg.webp" />
+          {/* <source media="(min-width: 640px)" srcSet="/images/hero-tablet.jpg" /> */}
+          <img
+            src="/images/hero-mobile.jpg"
+            alt="Hero Banner"
+            className="w-full h-auto "
+          />
+        </picture>
+
+      </div>
       <div className="container py-20 2xl:py-25">
         <div className="mb-12 text-center lg:text-left">
           <SecondaryInlineTitle
@@ -81,16 +92,16 @@ export default function BehindTheScenes() {
             </div>
             <div className="flex-1 text-center md:text-left">
               <motion.h4
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, }}
+                whileInView={{ opacity: 1 }}
                 transition={{ duration: 1, ease: softEase }}
-                className="h4 text-center lg:text-left sm:max-w-[70%] lg:max-w-[85%] font-normal mx-auto lg:ml-0"
+                className="h4 text-center lg:text-left text-[#EBEDE0] sm:max-w-[70%] lg:max-w-[85%] font-normal mx-auto lg:ml-0"
               >
                 {slides[selectedIndex].text}
               </motion.h4>
               <motion.div
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, }}
+                whileInView={{ opacity: 1 }}
                 transition={{ duration: 1, ease: softEase }}
               >
                 <Button
@@ -107,13 +118,19 @@ export default function BehindTheScenes() {
 
         {/* Controls */}
         <div className="flex justify-center items-center space-x-4">
-          <button
+
+
+          <Button
             onClick={scrollPrev}
-            className="p-2 bg-primary-light text-secondary-1 font-bold text-3xl !leading-0 rounded-full hover:bg-white transition cursor-pointer hover:scale-110 duration-300"
-            aria-label="Previous slide"
+            className="rounded-full text-white hover:bg-white/30 relative h-[38px] w-[38px] p-0 border-none bg-transparent"
           >
-            <ChevronLeft className="w-6 h-6 text-secondary-1" />
-          </button>
+            <Image
+              src="./icons/arrow-left-white.svg"
+              alt="nav"
+              fill
+              className="w-full h-full"
+            />
+          </Button>
 
           {slides.map((_, index) => (
             <button
@@ -126,14 +143,18 @@ export default function BehindTheScenes() {
               aria-label={`Go to slide ${index + 1}`}
             />
           ))}
-
-          <button
+          <Button
             onClick={scrollNext}
-            className="p-2 bg-primary-light text-secondary-1 rounded-full hover:bg-white transition cursor-pointer hover:scale-110 duration-300"
-            aria-label="Next slide"
+            className="rounded-full text-white hover:bg-white/30 relative h-[38px] w-[38px] p-0 border-none bg-transparent"
           >
-            <ChevronRight className="w-6 h-6 text-secondary-1" />
-          </button>
+            <Image
+              src="./icons/arrow-right-white.svg"
+              alt="nav"
+              fill
+              className="w-full h-full"
+            />
+          </Button>
+
         </div>
       </div>
     </section>

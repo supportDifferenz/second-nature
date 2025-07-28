@@ -194,6 +194,16 @@ const Footer = () => {
                 >
                   Our Mission
                 </li>
+                <li
+                  className="cursor-pointer"
+                  onClick={() => {
+                    startTransition(() => {
+                      router.push("/faqs#contact-us");
+                    });
+                  }}
+                >
+                  Contact Us
+                </li>
               </ul>
             </div>
             <div className="flex-1 whitespace-nowrap  sm:flex-auto">
