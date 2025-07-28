@@ -90,9 +90,15 @@ export default function PlanCard({
       <div className="flex flex-col pt-[var(--space-30-40)]">
         <Typography
           tag="h6"
-          text="Step 1: Choose Protein"
+          text="Step 1:"
           className="text-center  pb-[var(--space-10-20)]"
-        />
+        >
+          <Typography
+            tag="span"
+            text=" Choose Protein"
+            className="text-secondary-1"
+          />
+        </Typography>
         <div className="flex justify-center gap-[var(--space-10-20)]">
           {proteinData?.result?.map(
             (proteinDetails: { _id: string; protein_name: string }) => (
@@ -127,9 +133,15 @@ export default function PlanCard({
       <div className="flex flex-col pt-[var(--space-30-40)]">
         <Typography
           tag="h6"
-          text="Step 2: Choose Size"
+          text="Step 2:"
           className="text-center pb-[var(--space-10-20)]"
-        />
+        >
+          <Typography
+            tag="span"
+            text=" Choose Size"
+            className="text-secondary-1"
+          />
+        </Typography>
         <div className="flex justify-center gap-[var(--space-10-20)]">
           {bowlData?.result?.map(
             (bowlDetails: { _id: string; bowl_type: string }) => (
