@@ -229,6 +229,8 @@ export default function AccountDetail() {
           disabled={isAuthenticated}
         />
         <InputLabeled 
+          inputMode="numeric"
+          maxLength={15}
           name="mobile"
           label="Mobile Number" 
           placeholder="Enter your mobile number" 
