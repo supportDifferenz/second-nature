@@ -18,10 +18,9 @@ import { usePetStore } from "@/zustand/store/petDataStore";
 import { useGetBreedDetails } from "@/hooks/subscriptionHooks/getBreedDetailsHook";
 import { useGetCrossBreedDetails } from "@/hooks/subscriptionHooks/getCrossBreedDetailsHook";
 import { startTransition } from "react";
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 
 export default function Breed() {
-
   const [showCrossBreed, setShowCrossBreed] = useState<boolean>(false);
   const [iDontKnowBreed, setIDontKnowBreed] = useState<boolean>(false);
   const router = useRouter();
@@ -38,7 +37,8 @@ export default function Breed() {
   const [selectedCrossBreed, setSelectedCrossBreed] = useState(crossBreed);
 
   const getBreed = catOrDog === "cat" ? "getCatBreed" : "getDogBreed";
-  const getCrossBreed = catOrDog === "cat" ? "getCatCrossBreed" : "getDogCrossBreed";
+  const getCrossBreed =
+    catOrDog === "cat" ? "getCatCrossBreed" : "getDogCrossBreed";
   const { data: breedData } = useGetBreedDetails(getBreed);
   const { data: crossBreedData } = useGetCrossBreedDetails(getCrossBreed);
   const softEase = [0.33, 1, 0.68, 1] as [number, number, number, number];
@@ -48,7 +48,7 @@ export default function Breed() {
     if (selectedCrossBreed) {
       setShowCrossBreed(true);
     }
-  }, [])
+  }, []);
   //   if (breedData?.result && selectedPet?.breed) {
   //     // Find the exact match (case-insensitive)
   //     const matchedBreed = breedData.result.find(
@@ -71,8 +71,8 @@ export default function Breed() {
       // Normalize both the stored value and options for comparison
       const storedBreed = selectedPet?.breed;
       console.log("Stored breed:", storedBreed, breedData.result);
-      const matchedBreed = breedData.result.find((opt: string) =>
-        opt.trim() === storedBreed
+      const matchedBreed = breedData.result.find(
+        (opt: string) => opt.trim() === storedBreed
       );
 
       if (matchedBreed) {
@@ -115,17 +115,27 @@ export default function Breed() {
     if (iDontKnowBreed) {
       startTransition(() => {
         router.push("/age");
-      })
+      });
       // router.push("/age");
       return;
     }
 
-    console.log("Selected Breed is", selectedBreed, "Selected Cross Breed is", selectedCrossBreed, "Selected pet ID is", currentPetId);
+    console.log(
+      "Selected Breed is",
+      selectedBreed,
+      "Selected Cross Breed is",
+      selectedCrossBreed,
+      "Selected pet ID is",
+      currentPetId
+    );
     if (selectedBreed && selectedCrossBreed && currentPetId) {
-      setPetDetails(currentPetId, { breed: selectedBreed, crossBreed: selectedCrossBreed });
+      setPetDetails(currentPetId, {
+        breed: selectedBreed,
+        crossBreed: selectedCrossBreed,
+      });
       startTransition(() => {
         router.push("/age");
-      })
+      });
       // router.push("/age");
     }
   };
@@ -142,18 +152,17 @@ export default function Breed() {
     setIDontKnowBreed(true);
 
     // if (currentPetId) {
-    //   setPetDetails(currentPetId, { 
-    //     breed: "", 
-    //     crossBreed: "" 
+    //   setPetDetails(currentPetId, {
+    //     breed: "",
+    //     crossBreed: ""
     //   });
     // }
-
-  }
+  };
 
   const handleRemoveCrossBreed = () => {
     setSelectedCrossBreed("");
     setShowCrossBreed(false);
-  }
+  };
 
   console.log("I don't know breed is", iDontKnowBreed);
 
@@ -164,7 +173,9 @@ export default function Breed() {
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: softEase }} className="h-full   flex-1 flex flex-col justify-center lg:justify-center lg:mt-2 items-center">
+          transition={{ duration: 1, ease: softEase }}
+          className="h-full   flex-1 flex flex-col justify-center lg:justify-center lg:mt-2 items-center"
+        >
           <Typography
             tag="h2"
             // text="Jackey’s Breed"
@@ -181,9 +192,7 @@ export default function Breed() {
               >
                 <SelectValue placeholder="Select a breed" />
               </SelectTrigger>
-              <SelectContent
-                className="bg-white border-secondary-1 rounded-2xl text-primary-dark"
-              >
+              <SelectContent className="bg-white border-secondary-1 rounded-2xl text-primary-dark">
                 {breedData?.result?.map((breed: string) => (
                   <SelectItem
                     key={breed}
@@ -197,44 +206,41 @@ export default function Breed() {
             </Select>
 
             {/* Add a cross-breed */}
-            {
-              !showCrossBreed && selectedBreed && (
-                <Button
-                  variant={"secondaryBtn"}
-                  type="button"
-                  className="w-full mt-3 text-primary-dark"
-                  onClick={handleCrossBreed}
-                >
-                  Add a cross-breed <Plus className="w-4 h-4" />
-                </Button>
-              )
-            }
+            {!showCrossBreed && selectedBreed && (
+              <Button
+                variant={"secondaryBtn"}
+                type="button"
+                className="w-full mt-3 text-primary-dark"
+                onClick={handleCrossBreed}
+              >
+                Add a cross-breed <Plus className="w-4 h-4" />
+              </Button>
+            )}
 
-            {
-              showCrossBreed && (
-                <Select value={selectedCrossBreed} onValueChange={setSelectedCrossBreed}>
-                  <SelectTrigger
-                    variant="roundedEdgeInputLgSecondary"
-                    className="text-primary-dark data-[placeholder]:text-[#9B9B9B] mt-3"
-                  >
-                    <SelectValue placeholder="Select a breed" />
-                  </SelectTrigger>
-                  <SelectContent
-                    className="bg-white border-secondary-1 rounded-2xl text-primary-dark"
-                  >
-                    {crossBreedData?.result?.map((crossBreed: string) => (
-                      <SelectItem
-                        key={crossBreed}
-                        value={crossBreed}
-                        className="px-4 py-2 text-sm hover:bg-gray-100 focus:bg-gray-100 data-[state=checked]:bg-white"
-                      >
-                        {crossBreed}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              )
-            }
+            {showCrossBreed && (
+              <Select
+                value={selectedCrossBreed}
+                onValueChange={setSelectedCrossBreed}
+              >
+                <SelectTrigger
+                  variant="roundedEdgeInputLgSecondary"
+                  className="text-primary-dark data-[placeholder]:text-[#9B9B9B] mt-3"
+                >
+                  <SelectValue placeholder="Select a breed" />
+                </SelectTrigger>
+                <SelectContent className="bg-white border-secondary-1 rounded-2xl text-primary-dark">
+                  {crossBreedData?.result?.map((crossBreed: string) => (
+                    <SelectItem
+                      key={crossBreed}
+                      value={crossBreed}
+                      className="px-4 py-2 text-sm hover:bg-gray-100 focus:bg-gray-100 data-[state=checked]:bg-white"
+                    >
+                      {crossBreed}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            )}
 
             {/* Unknown breed */}
             <div className="flex flex-col lg:flex-row gap-2">
@@ -261,6 +267,14 @@ export default function Breed() {
                 )
               }
             </div>
+            <div className="flex justify-center gap-2.5 mt-4">
+              <input type="radio" className="accent-primary-dark" />
+              <Typography
+                tag="text"
+                text="I don’t know the breed"
+                className="text-primary-dark text-center"
+              />
+            </div>
           </div>
         </motion.div>
 
@@ -273,7 +287,7 @@ export default function Breed() {
               e.preventDefault();
               startTransition(() => {
                 router.push("/gender");
-              })
+              });
               // router.push("/gender");
             }}
           >
