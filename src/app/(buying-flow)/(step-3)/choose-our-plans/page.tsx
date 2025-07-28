@@ -293,6 +293,16 @@ export default function Page() {
           text="Choose Our Plan"
           className="text-center text-primary-dark capitalize"
         />
+        {/* <div className="flex items-center justify-end">
+          <Typography
+            tag="p"
+            text="View FAQs"
+            className="text-center text-secondary-1"
+          />
+          <ChevronDown
+                  className="h-5 w-5 transition-transform text-secondary-1"
+                />
+        </div> */}
         <div>
           {isLoading ? (
             <div className="flex flex-col lg:flex-row justify-center gap-16 lg:gap-[var(--space-20-30)]">
@@ -372,11 +382,11 @@ export default function Page() {
                       setSelectedPlan(plan.plan_type);
                       // setSelectedPrice(plan.price);
                     }}
-                  // onClick={() => {
-                  //   setSelectedPlan(plan.plan_type);
-                  //   setTrialProtein("");
-                  //   setTrialBowlSize("");
-                  // }}
+                    // onClick={() => {
+                    //   setSelectedPlan(plan.plan_type);
+                    //   setTrialProtein("");
+                    //   setTrialBowlSize("");
+                    // }}
                   />
                 )
               )}
