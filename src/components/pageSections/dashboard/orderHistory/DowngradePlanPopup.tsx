@@ -46,7 +46,12 @@ export const DowngradePlanPopup: React.FC<DowngradePlanPopupProps> = ({
   const is23DaysApart = differenceInDays <= 23;
   const lastValidDate = new Date(planStartedDate);
   // Add 23 days to the start date (since <= 23 is allowed)
-  lastValidDate.setDate(lastValidDate.getDate() + 23);
+  // lastValidDate.setDate(lastValidDate.getDate() + 23);
+  const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  const month = monthNames[lastValidDate.getMonth()];
+  const day = `0${lastValidDate.getDate()}`.slice(-2);
+  const year = lastValidDate.getFullYear();
+  const lastValidDateFormatted = `${month} ${day} ${year}`;
 
   const showSubmitButton = () => {
     if(bowlSize === "half" && !isUpgrade) {
@@ -109,7 +114,8 @@ export const DowngradePlanPopup: React.FC<DowngradePlanPopupProps> = ({
 
         <Typography
           tag="p"
-          text={`${bowlSize === "half" ? "Upgrade to Full - Bowl" : `Downgrade to Half - Bowl effective until ${lastValidDate.toDateString()}`}`}
+          text={`${bowlSize === "half" ? "Upgrade to Full - Bowl" : `Downgrade to Half - Bowl effective until ${lastValidDateFormatted}`}`}
+          // text={`${bowlSize === "half" ? "Upgrade to Full - Bowl" : `Downgrade to Half - Bowl effective until ${lastValidDate.toDateString()}`}`}
           // text={`${bowlSize === "half" ? "Upgrade" : "Downgrade"} to ${bowlSize === "half" ? "Full - Bowl" : "Half - Bowl"} effective until ${lastValidDate.toDateString()}`}
           className="text-warning-meal-red text-center"
         />
