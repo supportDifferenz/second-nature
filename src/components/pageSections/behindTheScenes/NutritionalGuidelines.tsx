@@ -141,9 +141,9 @@ export default function NutritionalGuidelines() {
               className="flex flex-col  items-center gap-[var(--space-26-32)] w-[72%] sm:w-[50%] mt-[33%]"
             >
               <div className="flex gap-2">
-                <Typography tag="h3" text="Our" className="text-primary-dark" />
+                <Typography tag="h2" text="Our" className="text-primary-dark" />
                 <Typography
-                  tag="h3"
+                  tag="h2"
                   text="Standards"
                   className="highlight text-primary-dark"
                 />

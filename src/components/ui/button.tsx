@@ -14,7 +14,7 @@ const buttonVariants = cva(
         primaryBtn:
           "bg-secondary-1 border-secondary-1 hover:border-[#823234] hover:bg-[#823234]  text-white",
         primaryBtnGrey:
-          "bg-[#424242] border-[#424242] hover:border-[#823234] hover:bg-[#823234]  text-white",
+          "bg-[#b5b5b5] border-[#b5b5b5] hover:border-[#823234] hover:bg-[#823234]  text-white",
         LinkBtnPrimaryText:
           "bg-[#F7F9EB] hover:bg-[#FEFFF6] border-0 gap-[10px] !text-primary-dark",
 

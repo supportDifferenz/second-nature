@@ -93,18 +93,18 @@ const FooterBannerCTA: React.FC<
               <Typography
                 tag="h6"
                 text={caption}
-                className="uppercase subtitle !font-normal"
+                className="uppercase subtitle !font-normal mb-4"
                 style={{ color: captionColor }}
               />
             )}
 
-            {title && <Typography tag="h1" text={title} className="highlight capitalize" />}
+            {title && <Typography tag="h2" text={title} className="highlight capitalize" />}
 
             {subTitle && (
               <Typography
-                tag="h3"
+                tag="h2"
                 text={subTitle}
-                className="supporting capitalize mb-[25px] sm:mb-(--space-20-30) mt-[20px] sm:mt-0"
+                className="supporting capitalize mb-[25px] sm:mb-(--space-20-30) mt-[20px] sm:mt-0.5"
               />
             )}
             {paragraph && (
@@ -115,10 +115,10 @@ const FooterBannerCTA: React.FC<
             )}
             {buttonText && buttonLink && (
               <Button
-                variant={"whiteBtnSecondary2BorderAndText"}
+                  variant="secondaryBtnTextSecondary1"
                 size={"md"}
                 // className="mt-(--space-24-45)"
-                className="mt-3.5 lg:mt-5 bg-primary-light"
+                  className="mt-[var(--space-30-60)] mx-auto "
                 onClick={() => {
                   startTransition(() => {
                     router.push(buttonLink);
@@ -127,6 +127,8 @@ const FooterBannerCTA: React.FC<
               >
                 {buttonText}
               </Button>
+
+
             )}
           </div>
         </div>

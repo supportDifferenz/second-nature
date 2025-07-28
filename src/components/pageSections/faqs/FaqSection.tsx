@@ -271,7 +271,7 @@ export default function FaqSection() {
               />
             </motion.div>
           </AnimatePresence>
-          <div ref={formRef}>
+          <div ref={formRef} id="contact-us">
             <FaqForm />
           </div>
         </div>

@@ -29,7 +29,7 @@ const mealsData: MealCardPropsType[] = [
     subTitle: "50% of your pet’s daily nutrients",
     image: "/images/beef-bowl-cat.webp",
     features: [
-      "Free delivery to your door",
+      "Free delivery to your doorstep",
       "Benefits on a budget",
       "Mix in with existing food",
     ],
