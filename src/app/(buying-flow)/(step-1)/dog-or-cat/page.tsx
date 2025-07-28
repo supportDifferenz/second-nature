@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
 import { usePetStore } from "@/zustand/store/petDataStore";
 import { startTransition } from "react";
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 
 export default function DogOrCat() {
   const softEase = [0.33, 1, 0.68, 1] as [number, number, number, number];
@@ -25,7 +25,7 @@ export default function DogOrCat() {
     setCurrentPet,
     setPetDetails,
     addNewPet,
-    setSelectedPetIndex
+    setSelectedPetIndex,
   } = usePetStore();
 
   console.log("Pets after adding new pet ", pets);
@@ -46,19 +46,21 @@ export default function DogOrCat() {
     setPetType(type);
   };
 
-
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPetName(e.target.value)
+    setPetName(e.target.value);
     if (petType === "dog") {
-      setDogName(e.target.value)
+      setDogName(e.target.value);
     } else if (petType === "cat") {
-      setCatName(e.target.value)
+      setCatName(e.target.value);
     }
   };
 
   const handleAddMorePets = () => {
     if (petType && petName.trim() !== "") {
-      const newPetId = addNewPet({ catOrDog: petType, name: petType === "dog" ? dogName : catName });
+      const newPetId = addNewPet({
+        catOrDog: petType,
+        name: petType === "dog" ? dogName : catName,
+      });
       setCurrentPet(newPetId);
       setPetType("");
       setPetName("");
@@ -67,14 +69,22 @@ export default function DogOrCat() {
     }
   };
 
+  console.log(handleAddMorePets)
+
   const handleNext = (e: React.FormEvent) => {
     e.preventDefault();
 
     if (petType && petName.trim() !== "") {
-      const newPetId = addNewPet({ catOrDog: petType, name: petType === "dog" ? dogName : catName });
+      const newPetId = addNewPet({
+        catOrDog: petType,
+        name: petType === "dog" ? dogName : catName,
+      });
       setCurrentPet(newPetId);
       if (newPetId) {
-        setPetDetails(newPetId, { catOrDog: petType, name: petType === "dog" ? dogName : catName });
+        setPetDetails(newPetId, {
+          catOrDog: petType,
+          name: petType === "dog" ? dogName : catName,
+        });
         // setPetType("");
         // setPetName("");
       }
@@ -86,27 +96,27 @@ export default function DogOrCat() {
           setSelectedPetIndex(selectedPetIndex);
           startTransition(() => {
             router.push("/gender");
-          })
+          });
           // router.push("/gender");
         } else {
           setSelectedPetIndex(selectedPetIndex - 1);
           startTransition(() => {
             router.push("/add-more-pets");
-          })
+          });
           // router.push("/add-more-pets");
         }
       } else {
         setSelectedPetIndex(selectedPetIndex);
         startTransition(() => {
           router.push("/gender");
-        })
+        });
         // router.push("/gender");
       }
     } else {
       setSelectedPetIndex(0); // Reset selected pet index
       startTransition(() => {
         router.push("/gender");
-      })
+      });
       // router.push("/gender");
     }
 
@@ -131,7 +141,8 @@ export default function DogOrCat() {
     // setSelectedPetIndex(0); // Reset selected pet index to 0
   };
 
-  const isNextDisable = pets?.length > 0 ? false : !(petType && petName.trim() !== "");
+  const isNextDisable =
+    pets?.length > 0 ? false : !(petType && petName.trim() !== "");
 
   return (
     <BuyingFlowLayout step={1}>
@@ -141,15 +152,12 @@ export default function DogOrCat() {
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: softEase }}
-
-          className="flex-1 h-full flex flex-col sm:flex-row items-center justify-center w-full max-w-3xl mx-auto gap-[1dvh] sm:gap-8">
+          className="flex-1 h-full flex flex-col sm:flex-row items-center justify-center w-full max-w-3xl mx-auto gap-[1dvh] sm:gap-8"
+        >
           {/* Dog Selection */}
           <div className="flex flex-col w-[70%] lg:w-[30%] xl:w-[35%] 2xl:w-full max-w-[381px] ">
             <div
-              className={`relative border rounded-2xl w-[55%] sm:w-[80%] mx-auto   cursor-pointer overflow-hidden ${petType === "dog"
-                  ? "border-secondary-1 border-[1.5px]"
-                  : "border-[#E8E8E8]"
-                }`}
+              className={`relative  rounded-2xl w-[55%] sm:w-[90%] mx-auto   cursor-pointer overflow-hidden `}
               onClick={() => handlePetSelection("dog")}
             >
               <div className="flex justify-center">
@@ -162,17 +170,6 @@ export default function DogOrCat() {
                   />
                 </div>
               </div>
-
-              {petType === "dog" && (
-                <div className="absolute top-1 sm:top-2 sm:right-2 right-1 w-8 h-8  rounded-full p-1">
-                  <Image
-                    src="/icons/checked.svg"
-                    alt="Dog"
-                    fill
-                    className="!static w-fit h-full"
-                  />
-                </div>
-              )}
             </div>
 
             <div
@@ -182,15 +179,31 @@ export default function DogOrCat() {
                 handlePetSelection("dog");
               }}
             >
-              <Input
-                type="text"
-                value={petType === "dog" ? dogName : ""}
-                onChange={handleNameChange}
-                // disabled={petType !== "dog"}
-                variant={"roundedEdgeInputLg"}
-                className={`${petType === "dog" ? "border-secondary-1" : "border-gray-300"} w-full border rounded-full text-center focus:placeholder-slate-300`}
-                placeholder="Type Your Dogs’s Name"
-              />
+              <div
+                className={`${
+                  petType === "dog" ? "border-secondary-1" : "border-gray-300"
+                } flex items-center pr-1.5 lg:pr-3 w-full border rounded-full text-center`}
+              >
+                <Input
+                  type="text"
+                  value={petType === "dog" ? dogName : ""}
+                  onChange={handleNameChange}
+                  // disabled={petType !== "dog"}
+                  variant={"roundedEdgeInputLg"}
+                  className={`w-full border-0 text-start text-primary-dark font-semibold  placeholder-[#7C7C7C] placeholder:font-medium focus:placeholder-slate-300 !pr-0`}
+                  placeholder="Type Your Dogs’s Name"
+                />
+                {petType === "dog" && (
+                  <div className="w-8 h-8  rounded-full p-1">
+                    <Image
+                      src="/icons/checked.svg"
+                      alt="Dog"
+                      fill
+                      className="!static w-fit h-full"
+                    />
+                  </div>
+                )}
+              </div>
             </div>
           </div>
 
@@ -200,10 +213,7 @@ export default function DogOrCat() {
           {/* Cat Selection */}
           <div className="flex flex-col w-[70%] lg:w-[30%] xl:w-[35%] 2xl:w-full max-w-[381px]">
             <div
-              className={`relative border rounded-2xl w-[55%] sm:w-[80%] mx-auto   cursor-pointer overflow-hidden ${petType === "cat"
-                  ? "border-secondary-1 border-[1.5px]"
-                  : "border-[#E8E8E8]"
-                }`}
+              className={`relative rounded-2xl w-[55%] sm:w-[90%] mx-auto   cursor-pointer overflow-hidden `}
               onClick={() => handlePetSelection("cat")}
             >
               <div className="flex justify-center">
@@ -217,16 +227,7 @@ export default function DogOrCat() {
                 </div>
               </div>
 
-              {petType === "cat" && (
-                <div className="absolute top-1 sm:top-2 sm:right-2 right-1 w-8 h-8  rounded-full p-1">
-                  <Image
-                    src="/icons/checked.svg"
-                    alt="Brown dog with white chest"
-                    fill
-                    className="!static w-fit h-full"
-                  />
-                </div>
-              )}
+             
             </div>
 
             <div
@@ -236,42 +237,58 @@ export default function DogOrCat() {
                 handlePetSelection("cat");
               }}
             >
-              <Input
-                type="text"
-                value={petType === "cat" ? catName : ""}
-                onChange={handleNameChange}
-                // disabled={petType !== "cat"}
-                placeholder="Type Your Cat's Name"
-                variant={"roundedEdgeInputLg"}
-                className={`${petType === "cat" ? "border-secondary-1" : "border-gray-300"} w-full border rounded-full text-center focus:placeholder-slate-300`}
-              />
+              <div
+                className={`${
+                  petType === "cat" ? "border-secondary-1" : "border-gray-300"
+                } w-full border rounded-full text-center focus:placeholder-slate-300`}
+              >
+                <Input
+                  type="text"
+                  value={petType === "cat" ? catName : ""}
+                  onChange={handleNameChange}
+                  // disabled={petType !== "cat"}
+                  placeholder="Type Your Cat's Name"
+                  variant={"roundedEdgeInputLg"}
+                  className={`w-full border-0 text-start text-primary-dark font-semibold  placeholder-[#7C7C7C] placeholder:font-medium focus:placeholder-slate-300 !pr-0`}
+                />
+                 {petType === "cat" && (
+                <div className="absolute top-1 sm:top-2 sm:right-2 right-1 w-8 h-8  rounded-full p-1">
+                  <Image
+                    src="/icons/checked.svg"
+                    alt="Brown dog with white chest"
+                    fill
+                    className="!static w-fit h-full"
+                  />
+                </div>
+              )}
+              </div>
             </div>
           </div>
         </motion.div>
 
-        {
-          isNextDisable
-            ? ""
-            : <Button
-              variant={"linkPrimaryDark"}
-              className="justify-start mx-auto mt-[2.5dvh]  disabled:!opacity-100 disabled:!bg-transparent disabled:!text-primary-dark"
-              disabled={!petType || !petName.trim()}
-              onClick={(e) => {
-                e.preventDefault();
-                handleAddMorePets();
-              }}
-            >
-              Add More Pets
-              <div className="w-4">
-                <Image
-                  src="/icons/add-primary-dark.svg"
-                  alt="Add new shipping address"
-                  fill
-                  className="!static w-full object-contain"
-                />
-              </div>
-            </Button>
-        }
+        {/* {isNextDisable ? (
+          ""
+        ) : (
+          <Button
+            variant={"linkPrimaryDark"}
+            className="justify-start mx-auto mt-[2.5dvh]  disabled:!opacity-100 disabled:!bg-transparent disabled:!text-primary-dark"
+            disabled={!petType || !petName.trim()}
+            onClick={(e) => {
+              e.preventDefault();
+              handleAddMorePets();
+            }}
+          >
+            Add More Pets
+            <div className="w-4">
+              <Image
+                src="/icons/add-primary-dark.svg"
+                alt="Add new shipping address"
+                fill
+                className="!static w-full object-contain"
+              />
+            </div>
+          </Button>
+        )} */}
 
         {/* navigation */}
         <div className="pb-[3dvh] flex flex-col lg:flex-row items-center gap-4 lg:gap-0  lg:items-end pt-[3dvh]">

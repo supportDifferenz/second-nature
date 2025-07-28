@@ -16,6 +16,7 @@ import { useGetPriceHook } from "@/hooks/subscriptionHooks/getPriceHook";
 import PlanCardSkeleton from "@/components/skeltons/PlanCardSkelton";
 import { startTransition } from "react";
 import NextPet from "@/components/organism/popUp/NextPet";
+import { ChevronDown } from "lucide-react";
 
 const faqsData = [
   {
@@ -287,22 +288,29 @@ export default function Page() {
 
   return (
     <BuyingFlowLayout step={3}>
-      <div className="flex flex-col gap-16 pb-[100px]">
+      <div className="flex flex-col gap-8 lg:gap-5 pb-[100px]">
         <Typography
           tag="h3"
           text="Choose Your Plan"
           className="text-center text-primary-dark capitalize"
         />
-        {/* <div className="flex items-center justify-end">
+        <div
+          className="flex items-center justify-center lg:justify-end lg:mr-[9%] cursor-pointer"
+          onClick={() => {
+            const element = document.getElementById("faq-section");
+            if (element) {
+              element.scrollIntoView({ behavior: "smooth" });
+            }
+          }}
+        >
           <Typography
             tag="p"
             text="View FAQs"
             className="text-center text-secondary-1"
           />
-          <ChevronDown
-                  className="h-5 w-5 transition-transform text-secondary-1"
-                />
-        </div> */}
+          <ChevronDown className="h-5 w-5 transition-transform text-secondary-1" />
+        </div>
+
         <div>
           {isLoading ? (
             <div className="flex flex-col lg:flex-row justify-center gap-16 lg:gap-[var(--space-20-30)]">
@@ -452,14 +460,22 @@ export default function Page() {
             handleNext={handleNext}
           />
         )}
-        <Typography
-          tag="h3"
-          text="Frequently Asked Questions"
-          className="text-center text-primary-dark"
-        />
+        <div id="faq-section" className="flex flex-col gap-7 lg:gap-8 mt-[100px]">
+          <Typography
+            tag="h3"
+            text="Frequently Asked "
+            className="text-center text-primary-dark"
+          >
+            <br />
+            <Typography
+              tag="span"
+              text="Questions"
+              />
+          </Typography>
 
-        <div className="lg:mx-48">
-          <FAQS faqs={faqsData} defaultOpenIndex={0} />
+          <div className="lg:mx-48">
+            <FAQS faqs={faqsData} defaultOpenIndex={0} />
+          </div>
         </div>
       </div>
 
