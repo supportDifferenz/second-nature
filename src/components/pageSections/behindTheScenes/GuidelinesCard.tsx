@@ -34,9 +34,9 @@ export default function GuidelinesCard() {
                   className=" text-white whitespace-nowrap "
                 />
                 <Typography
-                  tag="h1"
+                  tag="h2"
                   text="Driven By Love"
-                  className="highlight  text-white text-center !text-5xl lg:!text-6xl"
+                  className="highlight  text-white text-center  "
                 />
               </div>
 

@@ -62,7 +62,7 @@ export const MealCard: React.FC<MealCardPropsType> = ({
                 gridRow: `${(index % 3) + 1}`, // Distribute items into 3 fixed rows
               }}
             >
-              <div className="min-w-[8px] w-[8px] relative mt-[3px] ">
+              <div className="min-w-[8px] w-[8px]  mt-[3px]  ">
                 <Image
                   src="/icons/primary-dark-chevron-right.svg"
                   alt="Arrow icon"

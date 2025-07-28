@@ -5,57 +5,43 @@ import TopHeader from "./TopHeader";
 import MobileMenu from "./MobileMenu";
 import Image from "next/image";
 import MealDropdownMenu from "./MealDropdownMenu";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { HeaderPropsTypes } from "@/components/types/type";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import useAuthStore from "@/zustand/store/authDataStore";
 import { startTransition, useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { usePathname } from "next/navigation";
 
 const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const [dogOrCat, setDogOrCat] = useState<"dog" | "cat">("dog");
+  const [howItWorksOpen, setHowItWorksOpen] = useState(false);
 
   const router = useRouter();
   const pathName = usePathname();
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
-  // Helper function to check if a path is active
   const isActiveRoute = (route: string) => pathName === route;
 
-  // Helper function to check if any of the "How it works" dropdown items are active
   const isHowItWorksActive = () => {
     const howItWorksRoutes = ["/subscription", "/behind-the-scenes", "/how-to-feed", "/transition-diet"];
     return howItWorksRoutes.includes(pathName);
   };
 
-  // Helper function to check if meals page is active for dogs or cats
   // const isMealsActive = (petType: string) => {
-  //   return pathName === "/meals" && new URLSearchParams(window.location.search).get("pet") === petType;
+  //   if (typeof window === "undefined") return false;
+  //   return (
+  //     pathName === "/meals" &&
+  //     new URLSearchParams(window.location.search).get("pet") === petType
+  //   );
   // };
-  /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
-  const isMealsActive = (petType: string) => {
-    if (typeof window === "undefined") return false; // 👈 safe SSR guard
-    return (
-      pathName === "/meals" &&
-      new URLSearchParams(window.location.search).get("pet") === petType
-    );
-  };
-
 
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 575);
     };
 
-    handleResize(); // Initial check
+    handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
@@ -66,7 +52,6 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
       setDogOrCat(params.get("pet") as "dog" | "cat");
     }
   }, []);
-
 
   return (
     <header className="bg-[#ffff] relative z-[15]">
@@ -147,46 +132,55 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
                   </span>
                 </nav>
 
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <button className="outline-none cursor-pointer flex items-center gap-1.5 font-extrabold hover:text-primary transition-colors duration-200">
-                      <span className={`${isHowItWorksActive() ? "text-primary" : ""}`}>
-                        How it works
-                      </span>
-                      <div className="w-2.5 h-fit">
-                        <Image
-                          src="/icons/black-chevron-down.svg"
-                          alt="icon"
-                          fill
-                          className="!static"
-                        />
-                      </div>
-                    </button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent className="max-w-fit" align="start">
-                    <div className="grid grid-cols-1 gap-5 relative z-[11]">
-                      {[
-                        { name: "Subscription", href: "/subscription" },
-                        { name: "Behind The Scenes", href: "/behind-the-scenes" },
-                        { name: "How to Feed", href: "/how-to-feed" },
-                        { name: "Transition Diet", href: "/transition-diet" },
-                      ].map((item, index) => (
-                        <DropdownMenuItem
-                          key={index}
-                          className={`${isActiveRoute(item.href) ? "text-primary" : ""} flex items-center gap-3 cursor-pointer hover:text-primary  transition-colors duration-200`}
-                          onClick={(e) => {
-                            e.preventDefault();
-                            startTransition(() => {
-                              router.push(item.href);
-                            });
-                          }}
-                        >
-                          <span className="grow font-bold">{item.name}</span>
-                        </DropdownMenuItem>
-                      ))}
+                {/* HOW IT WORKS - HOVER DROPDOWN */}
+                <div
+                  className="relative"
+                  onMouseEnter={() => setHowItWorksOpen(true)}
+                  onMouseLeave={() => setHowItWorksOpen(false)}
+                >
+                  <button className="outline-none cursor-pointer group flex items-center gap-1.5 font-extrabold hover:text-primary transition-colors duration-200">
+                    <span className={`${isHowItWorksActive() ? "text-primary" : ""}`}>
+                      How it works
+                    </span>
+                    <div className={`w-2.5 h-fit relative transition duration-75 group-hover:rotate-180  ${howItWorksOpen ? 'rotate-180' : '' }`}>
+                      <Image
+                        src="/icons/black-chevron-down.svg"
+                        alt="icon"
+                        fill
+                        className="!static"
+                      />
                     </div>
-                  </DropdownMenuContent>
-                </DropdownMenu>
+                  </button>
+
+                  {howItWorksOpen && (
+                    <div className="pt-2 absolute left-0 top-full  z-50">
+                      <div className=" bg-[#FEFFF5] border border-[#DADBD2] overflow-hidden rounded-2xl shadow-md  min-w-[200px] whitespace-nowrap">
+                        <div className="grid grid-cols-1   ">
+                          {[
+                            { name: "Subscription", href: "/subscription" },
+                            { name: "Behind The Scenes", href: "/behind-the-scenes" },
+                            { name: "How to Feed", href: "/how-to-feed" },
+                            { name: "Transition Diet", href: "/transition-diet" },
+                          ].map((item, index) => (
+                            <span
+                              key={index}
+                              className={`font-bold cursor-pointer hover:text-primary hover:bg-[#EBEDE0] px-6 py-3 transition-colors duration-200 ${isActiveRoute(item.href) ? "text-primary" : ""
+                                }`}
+                              onClick={() => {
+                                startTransition(() => {
+                                  router.push(item.href);
+                                });
+                                setHowItWorksOpen(false);
+                              }}
+                            >
+                              {item.name}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
               </div>
 
               {/* logo */}
@@ -289,7 +283,7 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
                           });
                         }}
                       >
-                        Account
+                        My Account
                       </Button>
                     ) : (
                       <Button
@@ -310,6 +304,7 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
               </div>
             </div>
           </div>
+
           <AnimatePresence mode="wait">
             {isMobileMenuOpen && (
               <motion.div
@@ -342,9 +337,8 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
             />
           </div>
         </div>
-      )
-      }
-    </header >
+      )}
+    </header>
   );
 };
 

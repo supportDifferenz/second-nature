@@ -12,21 +12,21 @@ const reviews = [
     date: "10.02.2024",
     review:
       "Excellent quality and super fresh! Highly recommend this brand to all pet owners.",
-    image: "/images/rohini-google.svg",
+    image: "/images/rohini-google.webp",
   },
   {
     name: "Syam Saran",
     date: "10.02.2024",
     review:
       "The difference in my dog's digestion and energy has been incredible—this food is a game-changer",
-    image: "/images/syam-google.svg",
+    image: "/images/syam-google.webp",
   },
   {
     name: "Ahmadeen Ali",
     date: "10.02.2024",
     review:
       "Finally, a company in Qatar that truly cares about pets and their nutrition!",
-    image: "/images/ali-google.svg",
+    image: "/images/ali-google.webp",
   },
   {
     name: "Sarah Mitchell",
@@ -163,7 +163,7 @@ export default function GoogleReviews() {
               variant={"primaryBtn"}
               className="w-fit text-white"
             >
-              Write a Review
+              Write a Review On Google
             </Button>
           </div>
         </div>

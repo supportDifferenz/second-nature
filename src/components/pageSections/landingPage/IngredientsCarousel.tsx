@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import Typography from "@/components/atoms/typography/Typography";
 import { AnimatePresence, motion } from "framer-motion";
@@ -35,9 +35,6 @@ export const ingredientSlides = [
 
 export default function IngredientsCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [progress, setProgress] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   const nextSlide = () =>
     setCurrentIndex((prev) => (prev + 1) % ingredientSlides.length);
@@ -47,52 +44,32 @@ export default function IngredientsCarousel() {
       prev === 0 ? ingredientSlides.length - 1 : prev - 1
     );
 
-  const handleHold = () => setIsPaused(true);
-  const handleRelease = () => setIsPaused(false);
-
-  useEffect(() => {
-    setProgress(0);
-    if (intervalRef.current) clearInterval(intervalRef.current);
-
-    intervalRef.current = setInterval(() => {
-      setProgress((prev) => {
-        if (isPaused) return prev;
-        if (prev >= 100) {
-          nextSlide();
-          return 0;
-        }
-        return prev + 1;
-      });
-    }, 30);
-
-    return () => {
-      if (intervalRef.current) clearInterval(intervalRef.current);
-    };
-  }, [currentIndex, isPaused]);
-
   const currentSlide = ingredientSlides[currentIndex];
 
   return (
-    <div className="container relative">
+    <div className="container relative ">
       {/* Green Card */}
       <div
-        className="w-full shadow-[inset_6px_6px_16px_0px_rgba(0,0,0,0.55)] bg-primary-dark rounded-full p-6 pb-[37px] sm:pb-[150px] lg:pb-6 flex flex-col lg:flex-row gap-[30px] sm:gap-[50px] lg:gap-[3%] items-stretch lg:place-items-stretch sm:max-w-[400px] mx-auto lg:max-w-max h-[730px] sm:h-auto"
-        onMouseDown={handleHold}
-        onMouseUp={handleRelease}
-        onMouseLeave={handleRelease}
-        onTouchStart={handleHold}
-        onTouchEnd={handleRelease}
+        className="w-full shadow-[inset_6px_6px_16px_0px_rgba(0,0,0,0.55)] bg-primary-dark rounded-full p-6 pb-[37px] sm:pb-[150px] lg:pb-6 flex flex-col lg:flex-row gap-[30px] sm:gap-[50px] lg:gap-[3%] items-stretch lg:place-items-stretch sm:max-w-[400px] mx-auto lg:max-w-max h-[730px] sm:h-auto relative"
       >
-        {/* Image with smooth fade and height-safe layout */}
-        <div className="lg:basis-[50%] h-[300px] sm:h-[400px] lg:h-[30vw] flex items-center justify-center overflow-hidden ">
+        <div className="absolute max-w-[794px] w-[50%] right-[30px] top-[55%] sm:top-1/2 transform -translate-y-1/2">
+          <picture>
+            <source media="(max-width: 991px)" srcSet="/images/ingredients-carousel-mob-bg.webp" />
+            <source media="(min-width: 992px)" srcSet="/images/ingredients-carousel-bg.webp" />
+            <img src="/images/ingredients-carousel-bg.webp" alt="Delicious meal" loading="lazy" className="object-contain w-full h-full" />
+          </picture>
+        </div>
+
+        {/* Image */}
+        <div className="lg:basis-[50%] h-[300px] sm:h-[400px] lg:h-[30vw] flex items-center justify-center overflow-hidden">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentSlide.image + currentIndex}
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 1.01 }}
-              transition={{ duration: 0.6, ease: [0.42, 0, 0.58, 1] }}
-              className="w-full h-full flex-shrink-0 "
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}
+              className="w-full h-full flex-shrink-0"
             >
               <Image
                 src={currentSlide.image}
@@ -106,15 +83,15 @@ export default function IngredientsCarousel() {
           </AnimatePresence>
         </div>
 
-        {/* Text with smooth transition */}
-        <div className="grow lg:basis-[40%]  text-white text-center lg:text-left  relative  lg:flex lg:items-center">
+        {/* Text */}
+        <div className="grow lg:basis-[40%] text-white text-center lg:text-left relative lg:flex lg:items-center">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentSlide.title + currentIndex}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.6, ease: [0.42, 0, 0.58, 1] }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}
             >
               <Typography
                 tag="h2"
@@ -124,7 +101,7 @@ export default function IngredientsCarousel() {
               <Typography
                 tag="h6"
                 text={currentSlide.description}
-                className="!font-normal mb-9 max-w-[90%] mx-auto sm:max-w-max sm:mx-0"
+                className="!font-normal mb-9 max-w-[90%] lg:max-w-[80%] mx-auto sm:max-w-max sm:mx-0"
               />
               <Button variant="linkContrastBtn" className="mx-auto lg:mx-0">
                 {currentSlide.buttonLabel}
@@ -139,12 +116,9 @@ export default function IngredientsCarousel() {
           </AnimatePresence>
 
           {/* Navigation Buttons */}
-          <div className="flex justify-center lg:justify-start gap-3 mt-12 lg:mt-6 items-center absolute max-[575px]:bottom-[0px] max-[991px]:bottom-[-70px] bottom-[20px] max-[991px]:left-1/2 max-[991]:transform max-[991px]:-translate-x-1/2  ">
+          <div className="flex justify-center lg:justify-start gap-3 mt-12 lg:mt-6 items-center absolute max-[575px]:bottom-[0px] max-[991px]:bottom-[-70px] bottom-[20px] max-[991px]:left-1/2 max-[991]:transform max-[991px]:-translate-x-1/2">
             <Button
-              onClick={() => {
-                prevSlide();
-                setProgress(0);
-              }}
+              onClick={prevSlide}
               className="rounded-full text-white hover:bg-white/30 relative h-[38px] w-[38px] p-0 border-none bg-transparent"
             >
               <Image
@@ -155,20 +129,10 @@ export default function IngredientsCarousel() {
               />
             </Button>
 
-            <div className="relative w-full h-[2.5px] bg-contrast-button max-w-9 overflow-hidden flex-shrink-0">
-              <motion.div
-                className="absolute h-full bg-primary"
-                initial={{ width: 0 }}
-                animate={{ width: `${progress}%` }}
-                transition={{ ease: "linear", duration: 0.05 }}
-              />
-            </div>
+            {/* Progress bar removed */}
 
             <Button
-              onClick={() => {
-                nextSlide();
-                setProgress(0);
-              }}
+              onClick={nextSlide}
               className="rounded-full text-white hover:bg-white/30 relative h-[38px] w-[38px] p-0 border-none bg-transparent"
             >
               <Image

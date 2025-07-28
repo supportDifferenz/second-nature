@@ -71,7 +71,7 @@ const Footer = () => {
                   // router.push("/personal-information");
                 }}
               >
-                Account
+                My Account
               </Button>
             ) : (
               <Button
@@ -193,6 +193,16 @@ const Footer = () => {
                   }}
                 >
                   Our Mission
+                </li>
+                <li
+                  className="cursor-pointer"
+                  onClick={() => {
+                    startTransition(() => {
+                      router.push("/faqs#contact-us");
+                    });
+                  }}
+                >
+                  Contact Us
                 </li>
               </ul>
             </div>

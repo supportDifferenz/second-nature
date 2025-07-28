@@ -180,7 +180,7 @@ export default function Testimonial() {
                     }}
                   >
                     <div
-                      className="rounded-2xl overflow-hidden transition-all duration-700 ease-out"
+                      className=" overflow-hidden transition-all duration-700 ease-out"
                       style={{
                         transform: `rotateY(${rotateY}) translateZ(${translateZ})`,
                         opacity: opacity,
@@ -221,14 +221,14 @@ export default function Testimonial() {
               src="/icons/secondary-1-arrow-prev.svg"
               alt="Prev"
               fill
-              className="!static !w-(--space-50-67) contain cursor-pointer hover:opacity-70 transition-opacity"
+              className="!static !h-[38px] !w-[38px] contain cursor-pointer hover:opacity-70 transition-opacity"
               onClick={scrollPrev}
             />
             <Image
               src="/icons/secondary-1-arrow-next.svg"
               alt="Next"
               fill
-              className="!static !w-(--space-50-67) contain cursor-pointer hover:opacity-70 transition-opacity"
+              className="!static !h-[38px] !w-[38px] contain cursor-pointer hover:opacity-70 transition-opacity"
               onClick={scrollNext}
             />
           </div>

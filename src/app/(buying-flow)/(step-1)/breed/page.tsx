@@ -113,9 +113,18 @@ export default function Breed() {
     e.preventDefault();
 
     if (iDontKnowBreed) {
-      startTransition(() => {
-        router.push("/age");
-      });
+
+      if (currentPetId) {
+        setPetDetails(currentPetId, {
+          breed: "",
+          crossBreed: "",
+        });
+        startTransition(() => {
+          router.push("/age");
+        });
+        // router.push("/age");
+      }
+
       // router.push("/age");
       return;
     }
@@ -144,20 +153,27 @@ export default function Breed() {
     setShowCrossBreed(!showCrossBreed);
   };
 
-  const handleIdontKnowBreed = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
+  // const handleIdontKnowBreed = (e: React.MouseEvent<HTMLButtonElement>) => {
+  //   e.preventDefault();
+  //   setSelectedBreed("");
+  //   setSelectedCrossBreed("");
+  //   setShowCrossBreed(false);
+  //   setIDontKnowBreed(true);
+
+  //   // if (currentPetId) {
+  //   //   setPetDetails(currentPetId, {
+  //   //     breed: "",
+  //   //     crossBreed: ""
+  //   //   });
+  //   // }
+  // };
+
+  const handleIDontKnowBreedRadioSelect = () => {
     setSelectedBreed("");
     setSelectedCrossBreed("");
     setShowCrossBreed(false);
-    setIDontKnowBreed(true);
-
-    // if (currentPetId) {
-    //   setPetDetails(currentPetId, {
-    //     breed: "",
-    //     crossBreed: ""
-    //   });
-    // }
-  };
+    setIDontKnowBreed(!iDontKnowBreed);
+  }
 
   const handleRemoveCrossBreed = () => {
     setSelectedCrossBreed("");
@@ -244,7 +260,7 @@ export default function Breed() {
 
             {/* Unknown breed */}
             <div className="flex flex-col lg:flex-row gap-2">
-              <Button
+              {/* <Button
                 type="button"
                 variant={"outlineSecondaryBtn"}
                 className={`${iDontKnowBreed && "bg-primary-light text-primary-dark"} mx-auto portrait:mt-[3dvh] landscape:mt-[6dvh]`}
@@ -252,14 +268,15 @@ export default function Breed() {
 
               >
                 I don’t know the breed
-              </Button>
+              </Button> */}
 
               {
                 selectedCrossBreed && (
                   <Button
                     type="button"
                     variant={"outlineSecondaryBtn"}
-                    className="mx-auto lg:portrait:mt-[2dvh] landscape:mt-[6dvh]"
+                    className="mx-auto portrait:mt-[3dvh] landscape:mt-[3dvh]"
+                    // className="mx-auto lg:portrait:mt-[2dvh] landscape:mt-[6dvh]"
                     onClick={handleRemoveCrossBreed}
                   >
                     Remove cross-breed
@@ -267,13 +284,25 @@ export default function Breed() {
                 )
               }
             </div>
-            <div className="flex justify-center gap-2.5 mt-4">
-              <input type="radio" className="accent-primary-dark" />
-              <Typography
-                tag="text"
-                text="I don’t know the breed"
-                className="text-primary-dark text-center"
+            <div 
+              className="flex justify-center gap-2.5 mt-4"
+            >
+              <input
+                type="radio"
+                className="accent-primary-dark"
+                checked={iDontKnowBreed}
+                onChange={() => setIDontKnowBreed(!iDontKnowBreed)}
+                onClick={handleIDontKnowBreedRadioSelect}
               />
+              <div 
+                className="cursor-pointer"
+                onClick={handleIDontKnowBreedRadioSelect}>
+                <Typography
+                  tag="text"
+                  text="I don’t know the breed"
+                  className="text-primary-dark text-center"
+                />
+              </div>
             </div>
           </div>
         </motion.div>

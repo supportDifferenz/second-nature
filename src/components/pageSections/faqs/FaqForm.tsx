@@ -176,139 +176,142 @@ export default function FaqForm() {
   return (
     <div className=" pt-[50px] lg:mt-[50px]">
       <div className="rounded-2xl lg:w-[49.2vw] ml-auto bg-primary-light px-[var(--space-20-57)] pt-14 sm:pt-12 lg:pt-10 pb-8 sm:pb-10  lg:pb-12 ">
-        <div className="flex flex-col items-center sm:items-start lg:flex-row mb-3 lg:mb-3.5">
-          <Typography tag="h2" text="Your Questions," className="text-primary-dark" />&nbsp;
-          <Typography tag="h2" text="Answered" className="highlight text-primary-dark" />
-        </div>
-        <Typography
-          tag="p"
-          text="Have questions about our natural pet food? Explore our FAQ section for quick and helpful answers to common queries about ingredients, feeding, storage, and more."
-          className="font-bold text-text-color text-center lg:text-left px-3.5 sm:px-0"
-        />
+        <div className="flex flex-col items-center sm:items-start  mb-3 lg:mb-3.5">
+          <h2 className="text-primary-dark highlight" >
+          Contact Us,
 
-        <form
-          ref={formRef}
-          onSubmit={handleSubmit}
-          className="pb-[var(--space-40-48)] pt-[var(--space-26-36)] border-b border-[#A1A1A1]"
-          noValidate
-        >
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-[var(--space-16-24)]">
-            <div className="flex flex-col w-full">
-              <Label className="!mb-1.5 text-mob-16 sm:text-tab-18 lg:text-web-22 text-primary-dark !font-bold">
-                First Name
-              </Label>
-              <Input
-                name="firstName"
-                placeholder="Enter your first name*"
-                className="bg-white"
-                variant="roundedEdgeInput"
-                onBlur={() => handleBlur('firstName')}
-                disabled={isSubmitting}
-              />
-              {shouldShowError('firstName') && (
-                <span className="text-red-500 text-sm mt-1">{errors.firstName}</span>
-              )}
-            </div>
-            <div className="flex flex-col w-full">
-              <Label className="!mb-1.5 text-mob-16 sm:text-tab-18 lg:text-web-22 text-primary-dark !font-bold">
-                Last Name
-              </Label>
-              <Input
-                name="lastName"
-                placeholder="Enter your last name"
-                className="bg-white"
-                variant="roundedEdgeInput"
-                onBlur={() => handleBlur('lastName')}
-                disabled={isSubmitting}
-              />
-            </div>
-            <div className="flex flex-col w-full">
-              <Label className="!mb-1.5 text-mob-16 sm:text-tab-18 lg:text-web-22 text-primary-dark !font-bold">
-                Email Address
-              </Label>
-              <Input
-                name="email"
-                type="email"
-                placeholder="Enter your email address*"
-                className="bg-white"
-                variant="roundedEdgeInput"
-                onBlur={() => handleBlur('emailId')}
-                disabled={isSubmitting}
-              />
-              {shouldShowError('emailId') && (
-                <span className="text-red-500 text-sm mt-1">{errors.emailId}</span>
-              )}
-            </div>
-            <div className="flex flex-col w-full">
-              <Label className="!mb-1.5 text-mob-16 sm:text-tab-18 lg:text-web-22 text-primary-dark !font-bold">
-                Mobile Number
-              </Label>
-              <Input
-                name="mobileNumber"
-                placeholder="Enter your mobile number*"
-                className="bg-white"
-                variant="roundedEdgeInput"
-                onBlur={() => handleBlur('contactNo')}
-                disabled={isSubmitting}
-                type="tel"
-                inputMode="numeric"
-                pattern="[0-9]*"
-                onChange={(e) => {
-                  const numericValue = e.target.value.replace(/[^0-9]/g, '');
-                  const limitedValue = numericValue.slice(0, 15);
-                  e.target.value = limitedValue;
-                }}
-              />
-              {shouldShowError('contactNo') && (
-                <span className="text-red-500 text-sm mt-1">{errors.contactNo}</span>
-              )}
-            </div>
-          </div>
-          <div className="flex flex-col mt-4 sm:mt-4.5 lg:mt-4.5 mb-[var(--space-26-36)]">
+        </h2>
+          <h2 className=" text-primary-dark" >To Your Questions Answered</h2>
+      </div>
+      <Typography
+        tag="p"
+        text="Have questions about our natural pet food? Explore our FAQ section for quick and helpful answers to common queries about ingredients, feeding, storage, and more."
+        className="font-bold text-text-color text-center lg:text-left px-3.5 sm:px-0"
+      />
+
+      <form
+        ref={formRef}
+        onSubmit={handleSubmit}
+        className="pb-[var(--space-40-48)] pt-[var(--space-26-36)] border-b border-[#A1A1A1]"
+        noValidate
+      >
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-[var(--space-16-24)]">
+          <div className="flex flex-col w-full">
             <Label className="!mb-1.5 text-mob-16 sm:text-tab-18 lg:text-web-22 text-primary-dark !font-bold">
-              Message
+              First Name
             </Label>
-            <Textarea
-              name="message"
-              placeholder="Enter your message*"
-              className="bg-white rounded-3xl border border-[#A1A1A1] outline-none px-4 py-2 sm:h-36"
-              onBlur={() => handleBlur('message')}
+            <Input
+              name="firstName"
+              placeholder="Enter your first name*"
+              className="bg-white"
+              variant="roundedEdgeInput"
+              onBlur={() => handleBlur('firstName')}
               disabled={isSubmitting}
             />
-            {shouldShowError('message') && (
-              <span className="text-red-500 text-sm mt-1">{errors.message}</span>
+            {shouldShowError('firstName') && (
+              <span className="text-red-500 text-sm mt-1">{errors.firstName}</span>
             )}
           </div>
-
-          <Button
-            type="submit"
-            size={"md"}
-            variant={"primaryBtn"}
-            className="w-fit text-white"
-            disabled={isSubmitting}
-          >
-            {isSubmitting ? "Sending..." : "Send"}
-          </Button>
-        </form>
-
-        <div className="flex flex-col sm:flex-row gap-2 mt-10 sm:items-center">
-          <Typography tag="h6" text="Need Help" className="text-primary-dark" />
-          <div className="flex flex-col sm:flex-row sm:items-center gap-2">
-            <Button size={"small"} variant={"LinkBtnPrimaryText"} className="w-fit text-white">
-              <div className="relative">
-                <Image src="/icons/phone.svg" alt="icon" fill className="!static !w-5" />
-              </div>
-              +974-555-556-16
-            </Button>
-            <Button size={"small"} variant={"LinkBtnPrimaryText"} className="w-fit text-white lowercase">
-              <div className="relative">
-                <Image src="/icons/mail.svg" alt="icon" fill className="!static !w-5" />
-              </div>
-              info@secondnature.qa
-            </Button>
+          <div className="flex flex-col w-full">
+            <Label className="!mb-1.5 text-mob-16 sm:text-tab-18 lg:text-web-22 text-primary-dark !font-bold">
+              Last Name
+            </Label>
+            <Input
+              name="lastName"
+              placeholder="Enter your last name"
+              className="bg-white"
+              variant="roundedEdgeInput"
+              onBlur={() => handleBlur('lastName')}
+              disabled={isSubmitting}
+            />
           </div>
+          <div className="flex flex-col w-full">
+            <Label className="!mb-1.5 text-mob-16 sm:text-tab-18 lg:text-web-22 text-primary-dark !font-bold">
+              Email Address
+            </Label>
+            <Input
+              name="email"
+              type="email"
+              placeholder="Enter your email address*"
+              className="bg-white"
+              variant="roundedEdgeInput"
+              onBlur={() => handleBlur('emailId')}
+              disabled={isSubmitting}
+            />
+            {shouldShowError('emailId') && (
+              <span className="text-red-500 text-sm mt-1">{errors.emailId}</span>
+            )}
+          </div>
+          <div className="flex flex-col w-full">
+            <Label className="!mb-1.5 text-mob-16 sm:text-tab-18 lg:text-web-22 text-primary-dark !font-bold">
+              Mobile Number
+            </Label>
+            <Input
+              name="mobileNumber"
+              placeholder="Enter your mobile number*"
+              className="bg-white"
+              variant="roundedEdgeInput"
+              onBlur={() => handleBlur('contactNo')}
+              disabled={isSubmitting}
+              type="tel"
+              inputMode="numeric"
+              pattern="[0-9]*"
+              onChange={(e) => {
+                const numericValue = e.target.value.replace(/[^0-9]/g, '');
+                const limitedValue = numericValue.slice(0, 15);
+                e.target.value = limitedValue;
+              }}
+            />
+            {shouldShowError('contactNo') && (
+              <span className="text-red-500 text-sm mt-1">{errors.contactNo}</span>
+            )}
+          </div>
+        </div>
+        <div className="flex flex-col mt-4 sm:mt-4.5 lg:mt-4.5 mb-[var(--space-26-36)]">
+          <Label className="!mb-1.5 text-mob-16 sm:text-tab-18 lg:text-web-22 text-primary-dark !font-bold">
+            Message
+          </Label>
+          <Textarea
+            name="message"
+            placeholder="Enter your message*"
+            className="bg-white rounded-3xl border border-[#A1A1A1] outline-none px-4 py-2 sm:h-36"
+            onBlur={() => handleBlur('message')}
+            disabled={isSubmitting}
+          />
+          {shouldShowError('message') && (
+            <span className="text-red-500 text-sm mt-1">{errors.message}</span>
+          )}
+        </div>
+
+        <Button
+          type="submit"
+          size={"md"}
+          variant={"primaryBtn"}
+          className="w-fit text-white"
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? "Sending..." : "Send"}
+        </Button>
+      </form>
+
+      <div className="flex flex-col sm:flex-row gap-2 mt-10 sm:items-center">
+        <Typography tag="h6" text="Need Help" className="text-primary-dark" />
+        <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+          <Button size={"small"} variant={"LinkBtnPrimaryText"} className="w-fit text-white">
+            <div className="relative">
+              <Image src="/icons/phone.svg" alt="icon" fill className="!static !w-5" />
+            </div>
+            +974-555-556-16
+          </Button>
+          <Button size={"small"} variant={"LinkBtnPrimaryText"} className="w-fit text-white lowercase">
+            <div className="relative">
+              <Image src="/icons/mail.svg" alt="icon" fill className="!static !w-5" />
+            </div>
+            info@secondnature.qa
+          </Button>
         </div>
       </div>
     </div>
+    </div >
   );
 }
