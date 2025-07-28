@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState, startTransition } from "react";
+import {  startTransition } from "react";
 import Typography from "@/components/atoms/typography/Typography";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
@@ -27,21 +27,7 @@ export default function HeroSection() {
     buttonTextColor: "#00683D",
   };
 
-  const [activeImage, setActiveImage] = useState(banner.image.mobile);
-
-  useEffect(() => {
-    const updateImage = () => {
-      if (typeof window === "undefined") return;
-      if (window.innerWidth <= 574) setActiveImage(banner.image.mobile);
-      else if (window.innerWidth <= 991) setActiveImage(banner.image.tablet);
-      else setActiveImage(banner.image.web);
-    };
-
-    updateImage();
-    window.addEventListener("resize", updateImage);
-    return () => window.removeEventListener("resize", updateImage);
-  }, []);
-
+  
   return (
     <section className="w-full overflow-hidden">
       {/* BG image */}
@@ -49,13 +35,19 @@ export default function HeroSection() {
       {/* Content */}
       <div className="relative w-full min-h-[650px] h-[90dvh] sm:min-h-[400px] lg:min-h-[520px] sm:h-[70dvh] lg:max-h-[1200px] bg-cover bg-center transition-all ">
         <div className="w-full h-full max-w-[var(--max-w)] z-[-1]">
-          <Image
-            src={activeImage}
-            alt="Healthy Ready-to-Serve"
-            className="!static !inset-0 object-cover object-center"
-            fill
-            priority
-          />
+          <picture className="!static inset-0 w-full !h-full">
+            <source media="(max-width: 574px)" srcSet={banner.image.mobile} />
+            <source media="(max-width: 991px)" srcSet={banner.image.tablet} />
+            <source media="(min-width: 992px)" srcSet={banner.image.web} />
+            <Image
+              src={banner.image.web} // fallback for older browsers or if <source> fails
+              alt={'baner'}
+              className="!static inset-0 w-full !h-full object-cover object-center"
+              fill
+              priority
+            />
+          </picture>
+
         </div>
         <div
           className="absolute  top-[60%] sm:top-[10%] lg:top-[45%] left-1/2  sm:left-[90%] lg:left-[80%] transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center sm:items-start sm:justify-center text-center sm:text-start h-fit sm:mt-[20%] lg:mt-0 w-full lg:w-[50%]"

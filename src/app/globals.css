@@ -263,7 +263,12 @@ span.subtitle2 {
   font-size: var(--fs-h1);
   font-weight: var(--fw-regular);
 }
+.h1.supporting {
+  font-size: var(--fs-h1-supporting);
+  font-weight: var(--fw-regular);
+    font-family: var(--font-dm-serif-display);
 
+}
 .h2 {
   font-size: var(--fs-h2);
   font-weight: var(--fw-regular);

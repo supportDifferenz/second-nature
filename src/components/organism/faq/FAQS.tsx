@@ -26,8 +26,8 @@ const FAQS: React.FC<FAQSPropsTypes> = ({
             <AccordionItem
               key={index}
               value={index.toString()}
-              className={`border border-secondary-1 data-[state=open]:bg-[#F9FFFD] overflow-hidden ${
-                isOpen ? "bg-[#F9FFFD]" : ""
+              className={`border border-secondary-1 transition duration-75 data-[state=open]:bg-[#FBFBFB] overflow-hidden ${
+                isOpen ? "bg-[#FBFBFB]" : "bg-white"
               } rounded-xl`}
             >
               <button
@@ -49,10 +49,10 @@ const FAQS: React.FC<FAQSPropsTypes> = ({
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3, ease: "easeInOut" }}
                     className="overflow-hidden"
+                    
                   >
-                    <div className="p-6 pt-0 pb-5 bg-[#F9FFFD] lg:w-[80%]">
+                    <div className="p-6 pt-0 pb-5 bg-[#FBFBFB] lg:w-[80%]">
                       {Array.isArray(faq.answer) ? (
                         faq.answer.map((para, idx) => (
                           <Typography

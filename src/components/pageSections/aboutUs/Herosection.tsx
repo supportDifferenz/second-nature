@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Typography from "@/components/atoms/typography/Typography";
 
@@ -24,33 +23,26 @@ export default function HeroSection() {
     buttonTextColor: "#944446",
   };
 
-  const [activeImage, setActiveImage] = useState(banner.image.mobile);
-
-  useEffect(() => {
-    const updateImage = () => {
-      if (typeof window === "undefined") return;
-      if (window.innerWidth <= 574) setActiveImage(banner.image.mobile);
-      else if (window.innerWidth <= 991) setActiveImage(banner.image.tablet);
-      else setActiveImage(banner.image.web);
-    };
-
-    updateImage();
-    window.addEventListener("resize", updateImage);
-    return () => window.removeEventListener("resize", updateImage);
-  }, []);
+  
 
   return (
     <section className="relative w-full overflow-hidden">
       <div className="relative" style={{ color: banner.bannerThemeColor }}>
         {/* Background Image */}
         <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-full h-full max-w-[var(--max-w)] z-[-1]">
-          <Image
-            src={activeImage}
-            alt={banner.title}
-            className="!static inset-0 w-full !h-full object-cover object-center"
-            fill
-            priority
-          />
+          <picture className="!static inset-0 w-full !h-full">
+            <source media="(max-width: 574px)" srcSet={banner.image.mobile} />
+            <source media="(max-width: 991px)" srcSet={banner.image.tablet} />
+            <source media="(min-width: 992px)" srcSet={banner.image.web} />
+            <Image
+              src={banner.image.web} // fallback image
+              alt={banner.title}
+              className="!static inset-0 w-full !h-full object-cover object-center"
+              fill
+              priority
+            />
+          </picture>
+
         </div>
 
         {/* Content */}

@@ -77,7 +77,14 @@ export default function OurIngredients() {
         />
       </motion.div>
 
-      <section className=" mt-[-50%] sm:mt-[-12%] lg:mt-[-50px]">
+      <section className=" mt-[-50%] sm:mt-[-12%] lg:mt-[-50px] relative">
+        <div className="absolute left-1/2 transform -translate-x-1/2 bottom-[-70px] sm:bottom-[-110px]  z-[-1] w-full max-w-[1920px] h-[60%] sm:h-[70%] lg:h-auto">
+          <picture>
+            <source media="(max-width: 991px)" srcSet="/images/ingreadients-bg-mob.webp" />
+            <source media="(min-width: 992px)" srcSet="/images/ingreadients-bg-web.webp" />
+            <img src="/images/ingreadients-bg-web.webp" alt="Delicious meal" loading="lazy" className="w-full object-contain h-full "/>
+          </picture>
+        </div>
         <div className="overflow-hidden sm:overflow-visible sm:transform sm:scale-[.7] lg:scale-100 relative z-[3] after:content-[''] after:absolute after:w-full after:h-1/2 after:left-0 after:top-0 after:bg-gradient-to-b after:from-white after:via-white/75 after:to-transparent after-z-[1]">
           <div className="h-(--space-527-690) w-[95vw] mx-auto">
             <motion.div
@@ -112,7 +119,7 @@ export default function OurIngredients() {
                         whileInView={{ opacity: 1, scale: 1 }}
                         transition={{
                           duration: 1.1,
-                          delay: 0.6 ,
+                          delay: 0.6,
                           ease: softEase,
                         }}
                         viewport={{ once: true }}
@@ -148,29 +155,27 @@ export default function OurIngredients() {
                           ease: softEase,
                         }}
                         viewport={{ once: true }}
-                        className={`sm:absolute w-(--space-156-160) ${
-                          align === "left"
-                            ? "sm:-left-[130%] sm:text-right"
-                            : align === "right"
+                        className={`sm:absolute w-(--space-156-160) ${align === "left"
+                          ? "sm:-left-[130%] sm:text-right"
+                          : align === "right"
                             ? "sm:-right-[130%] sm:text-left"
                             : align === "bottom"
-                            ? "sm:top-[100%]"
-                            : "sm:flex-col"
-                        }`}
+                              ? "sm:top-[100%]"
+                              : "sm:flex-col"
+                          }`}
                       >
                         <Typography tag="span" text={text} className="text-primary-dark" />
                       </motion.div>
                     ) : (
                       <div
-                        className={`sm:absolute w-(--space-156-160) ${
-                          align === "left"
-                            ? "sm:-left-[130%] sm:text-right"
-                            : align === "right"
+                        className={`sm:absolute w-(--space-156-160) ${align === "left"
+                          ? "sm:-left-[130%] sm:text-right"
+                          : align === "right"
                             ? "sm:-right-[130%] sm:text-left"
                             : align === "bottom"
-                            ? "sm:top-[100%]"
-                            : "sm:flex-col"
-                        }`}
+                              ? "sm:top-[100%]"
+                              : "sm:flex-col"
+                          }`}
                       >
                         <Typography tag="span" text={text} className="text-primary-dark" />
                       </div>

@@ -15,133 +15,133 @@ export default function MealCategory() {
     categoryImg: string;
     meals: MealCardPropsType[];
   }[] = [
-    {
-      category: "For Dogs",
-      categoryImg: "/images/dogs-cutout.webp",
-      meals: [
-        {
-          tag: "MEALS",
-          title: "Beef Bowl",
-          image: "/images/beef-bowl-dog.webp",
-          features: [
-            "High in Omega-3s",
-            "Probiotic-Rich",
-            "Egg Yolk For Vitality",
-            "Premium Protein Source",
-          ],
-          buttons: [
-            { label: "Get Started", route: "/location", variant: "primary" },
-            {
-              label: "Know More",
-              route: "/meals?pet=dog&protein=beef",
-              variant: "secondary",
-            },
-          ],
-        },
-        {
-          tag: "MEALS",
-          title: "Lamb Bowl",
-          image: "/images/lamb-bowl-dog.webp",
-          features: [
-            "Grass-Fed Lamb",
-            "Colorful Veggies",
-            "Spiced For Flavor",
-            "Herbal Wellness",
-          ],
-          buttons: [
-            { label: "Get Started", route: "/location", variant: "primary" },
-            {
-              label: "Know More",
-              route: "/meals?pet=dog&protein=lamb",
-              variant: "secondary",
-            },
-          ],
-        },
-        {
-          tag: "MEALS",
-          title: "Chicken Bowl",
-          image: "/images/chicken-bowl-dog.webp",
-          features: [
-            "Balanced Protein Mix",
-            "Organ Boost",
-            "Antioxidants",
-            "Micro-Minerals",
-          ],
-          buttons: [
-            { label: "Get Started", route: "/location", variant: "primary" },
-            {
-              label: "Know More",
-              route: "/meals?pet=dog&protein=chicken",
-              variant: "secondary",
-            },
-          ],
-        },
-      ],
-    },
-    {
-      category: "For Cats",
-      categoryImg: "/images/cat-cutout.webp",
-      meals: [
-        {
-          tag: "MEALS",
-          title: "Beef Bowl",
-          image: "/images/beef-bowl-cat.webp",
-          features: [
-            "Nutrient-Dense Organ Meat",
-            "Eggs for Vitality",
-            "Essential Fatty Acids",
-            "Antioxidant-Rich Vegetables",
-          ],
-          buttons: [
-            { label: "Get Started", route: "/location", variant: "primary" },
-            {
-              label: "Know More",
-              route: "/meals?pet=cat&protein=beef",
-              variant: "secondary",
-            },
-          ],
-        },
-        {
-          tag: "MEALS",
-          title: "Lamb Bowl",
-          image: "/images/lamb-bowl-cat.webp",
-          features: [
-            "Grass-Fed Lamb",
-            "Spiced For Flavor",
-            "Natural Digestive Support",
-            "Balanced Macronutrients",
-          ],
-          buttons: [
-            { label: "Get Started", route: "/location", variant: "primary" },
-            {
-              label: "Know More",
-              route: "/meals?pet=cat&protein=lamb",
-              variant: "secondary",
-            },
-          ],
-        },
-        {
-          tag: "MEALS",
-          title: "Chicken Bowl",
-          image: "/images/chicken-bowl-cat.webp",
-          features: [
-            "Balanced Protein Mix",
-            "Omega-3 Rich Oil",
-            "Calcium & Bone Support",
-            "Organ Meat Benefits",
-          ],
-          buttons: [
-            { label: "Get Started", route: "/location", variant: "primary" },
-            {
-              label: "Know More",
-              route: "/meals?pet=cat&protein=chicken",
-              variant: "secondary",
-            },
-          ],
-        },
-      ],
-    },
-  ];
+      {
+        category: "For Dogs",
+        categoryImg: "/images/dogs-cutout.webp",
+        meals: [
+          {
+            tag: "MEALS",
+            title: "Beef Bowl",
+            image: "/images/beef-bowl-dog.webp",
+            features: [
+              "High in Omega-3s",
+              "Probiotic-Rich",
+              "Egg Yolk For Vitality",
+              "Premium Protein Source",
+            ],
+            buttons: [
+              { label: "Get Started", route: "/location", variant: "primary" },
+              {
+                label: "Know More",
+                route: "/meals?pet=dog&protein=beef",
+                variant: "secondary",
+              },
+            ],
+          },
+          {
+            tag: "MEALS",
+            title: "Lamb Bowl",
+            image: "/images/lamb-bowl-dog.webp",
+            features: [
+              "Grass-Fed Lamb",
+              "Colorful Veggies",
+              "Spiced For Flavor",
+              "Herbal Wellness",
+            ],
+            buttons: [
+              { label: "Get Started", route: "/location", variant: "primary" },
+              {
+                label: "Know More",
+                route: "/meals?pet=dog&protein=lamb",
+                variant: "secondary",
+              },
+            ],
+          },
+          {
+            tag: "MEALS",
+            title: "Chicken Bowl",
+            image: "/images/chicken-bowl-dog.webp",
+            features: [
+              "Balanced Protein Mix",
+              "Organ Boost",
+              "Antioxidants",
+              "Micro-Minerals",
+            ],
+            buttons: [
+              { label: "Get Started", route: "/location", variant: "primary" },
+              {
+                label: "Know More",
+                route: "/meals?pet=dog&protein=chicken",
+                variant: "secondary",
+              },
+            ],
+          },
+        ],
+      },
+      {
+        category: "For Cats",
+        categoryImg: "/images/cat-cutout.webp",
+        meals: [
+          {
+            tag: "MEALS",
+            title: "Beef Bowl",
+            image: "/images/beef-bowl-cat.webp",
+            features: [
+              "Nutrient-Dense Organ Meat",
+              "Eggs for Vitality",
+              "Essential Fatty Acids",
+              "Antioxidant-Rich Vegetables",
+            ],
+            buttons: [
+              { label: "Get Started", route: "/location", variant: "primary" },
+              {
+                label: "Know More",
+                route: "/meals?pet=cat&protein=beef",
+                variant: "secondary",
+              },
+            ],
+          },
+          {
+            tag: "MEALS",
+            title: "Lamb Bowl",
+            image: "/images/lamb-bowl-cat.webp",
+            features: [
+              "Grass-Fed Lamb",
+              "Spiced For Flavor",
+              "Natural Digestive Support",
+              "Balanced Macronutrients",
+            ],
+            buttons: [
+              { label: "Get Started", route: "/location", variant: "primary" },
+              {
+                label: "Know More",
+                route: "/meals?pet=cat&protein=lamb",
+                variant: "secondary",
+              },
+            ],
+          },
+          {
+            tag: "MEALS",
+            title: "Chicken Bowl",
+            image: "/images/chicken-bowl-cat.webp",
+            features: [
+              "Balanced Protein Mix",
+              "Omega-3 Rich Oil",
+              "Calcium & Bone Support",
+              "Organ Meat Benefits",
+            ],
+            buttons: [
+              { label: "Get Started", route: "/location", variant: "primary" },
+              {
+                label: "Know More",
+                route: "/meals?pet=cat&protein=chicken",
+                variant: "secondary",
+              },
+            ],
+          },
+        ],
+      },
+    ];
 
   return (
     <motion.div
@@ -160,11 +160,10 @@ export default function MealCategory() {
             className="basis-[50%] sm:basis-[40%]"
           >
             <div
-              className={`shrink-0 uppercase font-normal h-[40px] min-[400px]:h-[60px] flex items-end justify-center text-white text-center rounded-xl cursor-pointer ${
-                mealCategory === categoryData.category
+              className={`shrink-0 uppercase font-normal h-[40px] min-[400px]:h-[60px] flex items-end justify-center text-white text-center rounded-xl cursor-pointer ${mealCategory === categoryData.category
                   ? "bg-primary-dark"
                   : "bg-text-color"
-              }`}
+                }`}
             >
               <div className="flex items-end">
                 <div className="relative w-[50px] h-[40px] min-[400px]:w-[80px] min-[400px]:h-[70px] overflow-hidden">
@@ -219,28 +218,30 @@ export default function MealCategory() {
         {mealsData.map((categoryData) => (
           <div
             key={categoryData.category}
-            className="mb-15 last:mb-0 sm:mb-0 sm:flex-1"
+            className="mb-15 last:mb-0 sm:mb-0 sm:flex-1  relative bg-white"
           >
             {/* Category Header */}
-            <div className="bg-primary-dark h-[60px] rounded-xl flex justify-center items-end">
-              <div className="flex items-end justify-center mb-[-1px]">
-                <div className="relative w-[110px] h-[99px]">
-                  <Image
-                    src={categoryData.categoryImg}
-                    alt="pet"
-                    fill
-                    className="object-contain"
+            <div className="bg-white sticky top-10   after:content-[''] after:w-full after:h-[130px] after:absolute after:left-0 after:bottom-0 after:bg-white after:z-[3]">
+              <div className="bg-primary-dark h-[60px] rounded-xl flex justify-center items-end relative z-[5]">
+                <div className="flex items-end justify-center mb-[-1px]">
+                  <div className="relative w-[110px] h-[99px]">
+                    <Image
+                      src={categoryData.categoryImg}
+                      alt="pet"
+                      fill
+                      className="object-contain"
+                    />
+                  </div>
+                  <Typography
+                    tag="h5"
+                    text={categoryData.category}
+                    className="uppercase font-normal text-white text-center text-lg pb-[10px]"
                   />
                 </div>
-                <Typography
-                  tag="h5"
-                  text={categoryData.category}
-                  className="uppercase font-normal text-white text-center text-lg pb-[10px]"
-                />
               </div>
             </div>
             {/* Meal Cards */}
-            <div className="grid mt-6 gap-8">
+            <div className="grid mt-6 gap-8 xl:px-4 ">
               {categoryData.meals.map((meal, mealIndex) => (
                 <MealCard key={mealIndex} {...meal} />
               ))}
