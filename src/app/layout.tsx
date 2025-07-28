@@ -5,6 +5,7 @@ import { useState } from "react";
 import "./globals.css";
 import { dmSerifDisplay, bellotaText } from "@/components/config/font";
 import { Toaster } from "sonner";
+import ScrollToTop from "@/components/organism/scrollToTop/ScrollToTop";
 
 export default function RootLayout({
   children,
@@ -26,6 +27,7 @@ export default function RootLayout({
               position="top-right"
               richColors
             />
+            <ScrollToTop/>
         </QueryClientProvider>
       </body>
     </html>
