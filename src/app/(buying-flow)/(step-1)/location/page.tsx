@@ -112,7 +112,7 @@ export default function Location() {
             >
               <SelectTrigger
                 variant="roundedEdgeInputLgSecondary"
-                className="text-primary-dark data-[placeholder]:text-[#9B9B9B] "
+                className="text-primary-dark font-medium data-[placeholder]:text-[#6b6b6b] shadow-sm"
               >
                 <SelectValue placeholder="Select a location" />
               </SelectTrigger>
@@ -145,12 +145,12 @@ export default function Location() {
             <Typography
               tag="span"
               text="Disclaimer:"
-              className="block subtitle3 text-[#9B9B9B] "
+              className="block subtitle3 font-semibold text-[#898989] "
             />
             <Typography
               tag="span"
               text="Please consult your veterinarian if your pet has specific dietary requirements, health issues, or weight targets before subscribing."
-              className="block subtitle3 text-[#9B9B9B]"
+              className="block subtitle3 text-[#9B9B9B] w-[75%] text-center mx-auto"
             />
           </div>
           <Button
