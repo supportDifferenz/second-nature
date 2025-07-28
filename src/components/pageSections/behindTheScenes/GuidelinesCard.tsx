@@ -36,7 +36,7 @@ export default function GuidelinesCard() {
                 <Typography
                   tag="h1"
                   text="Driven By Love"
-                  className="highlight  text-white text-center !text-5xl lg:!text-6xl px-4"
+                  className="highlight  text-white text-center !text-5xl lg:!text-6xl"
                 />
               </div>
 

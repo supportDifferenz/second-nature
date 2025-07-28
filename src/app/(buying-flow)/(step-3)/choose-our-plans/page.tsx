@@ -290,7 +290,7 @@ export default function Page() {
       <div className="flex flex-col gap-16 pb-[100px]">
         <Typography
           tag="h3"
-          text="Choose Our Plan"
+          text="Choose Your Plan"
           className="text-center text-primary-dark capitalize"
         />
         {/* <div className="flex items-center justify-end">
