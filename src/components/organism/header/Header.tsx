@@ -283,7 +283,7 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
                           });
                         }}
                       >
-                        Account
+                        My Account
                       </Button>
                     ) : (
                       <Button

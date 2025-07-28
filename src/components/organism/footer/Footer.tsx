@@ -71,7 +71,7 @@ const Footer = () => {
                   // router.push("/personal-information");
                 }}
               >
-                Account
+                My Account
               </Button>
             ) : (
               <Button
