@@ -115,9 +115,12 @@ export default function PlanCard({
                 label={proteinDetails.protein_name}
                 altText={proteinDetails.protein_name}
                 selectedProtein={protein === proteinDetails.protein_name}
-                setSelectedProtein={() =>
-                  setProtein && setProtein(proteinDetails.protein_name)
-                }
+                setSelectedProtein={() => {
+                  if (protein !== proteinDetails.protein_name) {
+                    if (setProtein) setProtein(proteinDetails.protein_name);
+                    if (setBowlSize) setBowlSize("full");
+                  }
+                }}
               />
             )
           )}

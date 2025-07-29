@@ -94,29 +94,6 @@ export default function Page() {
     useState<boolean>(false);
   const [isNextPetPopUpOpen, setIsNextPetPopUpOpen] = useState<boolean>(false);
 
-  // const plans = [
-  //   {
-  //     id: "regular",
-  //     heading: "Regular Plan",
-  //     description: "Auto-Renews Every 28 Days",
-  //     price: 400,
-  //     bgColour: "bg-[#FDFFF0]" as const,
-  //     offerBadge: "Enjoy 25% Off Your First Month!"
-  //   },
-  //   {
-  //     id: "trial",
-  //     heading: "Trial Plan",
-  //     description: "One-Time Purchase for 7 Days",
-  //     price: 100,
-  //     bgColour: "bg-white" as const
-  //   }
-  // ]
-
-  // useEffect(() => {
-  //   setSelectedProtein("")
-  //   setSelectedBowlSize("")
-  // },[selectedPlan])
-
   useEffect(() => {
     if (planType === "Regular") {
       setSelectedPlan("Regular");
@@ -197,23 +174,6 @@ export default function Page() {
       }
       // router.push("/add-more-pets");
     }
-
-    // if( selectedProtein && selectedBowlSize && currentPetId ) {
-    //   setPetDetails(currentPetId, { planType: selectedPlan, protein: selectedProtein, bowlSize: selectedBowlSize });
-    //   router.push("/add-more-pets");
-    // }
-
-    // if(selectedPlan === "regular" && regularProtein && regularBowlSize && currentPetId) {
-    //   setSelectedProtein(regularProtein || "");
-    //   setSelectedBowlSize(regularBowlSize);
-    //   setPetDetails(currentPetId, { planType: selectedPlan, protein: selectedProtein, bowlSize: selectedBowlSize });
-    //   router.push("/add-more-pets");
-    // } else if(selectedPlan === "trial" && trialProtein && trialBowlSize && currentPetId) {
-    //   setSelectedProtein(trialProtein || "");
-    //   setSelectedBowlSize(trialBowlSize);
-    //   setPetDetails(currentPetId, { planType: selectedPlan, protein: selectedProtein, bowlSize: selectedBowlSize });
-    //   router.push("/add-more-pets");
-    // }
   };
 
   useEffect(() => {
@@ -274,13 +234,15 @@ export default function Page() {
     regularBowlSize,
     trialProtein,
     trialBowlSize,
+    selectedPet?.currentWeight,
+    selectedPet?.activityLevel,
   ]);
 
   console.log("Selected pet in choose our plans page is", selectedPet);
+  console.log("Selected pet current weight is", selectedPet?.currentWeight);
+  console.log("Selected pet activity level is", selectedPet?.activityLevel);
   console.log("Current pet id in choose our plans page is", currentPetId);
   console.log("Selected Plan", selectedPlan);
-  // console.log("Selected Protein", selectedProtein);
-  // console.log("Selected Bowl Size", selectedBowlSize);
   console.log("Regular Protein", regularProtein);
   console.log("Regular Bowl Size", regularBowlSize);
   console.log("Trial Protein", trialProtein);
@@ -390,11 +352,6 @@ export default function Page() {
                       setSelectedPlan(plan.plan_type);
                       // setSelectedPrice(plan.price);
                     }}
-                    // onClick={() => {
-                    //   setSelectedPlan(plan.plan_type);
-                    //   setTrialProtein("");
-                    //   setTrialBowlSize("");
-                    // }}
                   />
                 )
               )}
@@ -483,36 +440,3 @@ export default function Page() {
     </BuyingFlowLayout>
   );
 }
-
-// import Typography from "@/components/atoms/typography/Typography";
-// import PlanCard from "@/components/pageSections/buyingFlow/step3/choosePlan/PlanCard";
-// import BuyingFlowLayout from "@/components/templates/BuyingFlowLayout";
-// import React from "react";
-
-// export default function page() {
-//   return (
-//     <BuyingFlowLayout step={2}>
-//       <div className="flex flex-col gap-16">
-//         <Typography
-//           tag="h3"
-//           text="Choose Our Plan"
-//           className="text-center text-primary-dark"
-//         />
-//         <div className="flex flex-col lg:flex-row justify-center gap-16 lg:gap-[var(--space-20-30)]">
-//           <PlanCard
-//             heading="Regular Plan"
-//             description="Auto-Renews Every 28 Days"
-//             price={400}
-//             bgColour="bg-[#FDFFF0]"
-//             offerBadge="Enjoy 25% Off Your First Month!"
-//           />
-//           <PlanCard bgColour="bg-white"
-//           heading="Trail Plan"
-//           description="One-Time Purchase for 7 Days"
-//           price={100}
-//           />
-//         </div>
-//       </div>
-//     </BuyingFlowLayout>
-//   );
-// }
