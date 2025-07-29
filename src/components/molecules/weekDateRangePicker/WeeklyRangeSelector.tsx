@@ -123,8 +123,8 @@ export default function RangeDatePicker({
     range.to
       ? format(endOfWeek(range.to, { weekStartsOn: 0 }), "dd MMM yyyy")
       : range.from
-      ? format(endOfWeek(range.from, { weekStartsOn: 0 }), "dd MMM yyyy")
-      : "To";
+        ? format(endOfWeek(range.from, { weekStartsOn: 0 }), "dd MMM yyyy")
+        : "To";
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -158,23 +158,30 @@ export default function RangeDatePicker({
           </div>
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-auto p-0 mt-2 bg-white">
+      <PopoverContent
+        side="bottom"           // preferred side
+        align="start"
+        sideOffset={4}
+        collisionPadding={16}
+        avoidCollisions={false}
+         className="w-auto p-0 mt-2 bg-white">
         <Calendar
           mode="single"
+
           selected={range.from ? new Date(range.from) : new Date()}
           onSelect={(date) => {
             if (date) {
               handleSelect({ from: date });
             }
           }}
-          className="rounded-md min-h-[330px]" 
+          className="rounded-md min-h-[330px]"
           modifiers={{
             selected: isDateInSelectedWeeks,
           }}
           modifiersClassNames={{
             selected: "bg-transparent text-black", // Avoid white text and background for selected weeks
           }}
-          // fromDate={minDate}
+        // fromDate={minDate}
         />
       </PopoverContent>
     </Popover>
