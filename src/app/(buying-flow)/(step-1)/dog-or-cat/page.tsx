@@ -157,11 +157,11 @@ export default function DogOrCat() {
           {/* Dog Selection */}
           <div className="flex flex-col w-[70%] lg:w-[30%] xl:w-[35%] 2xl:w-full max-w-[381px] ">
             <div
-              className={`relative  rounded-2xl w-[55%] sm:w-[90%] mx-auto   cursor-pointer overflow-hidden `}
+              className={`relative  rounded-2xl w-[90%] sm:w-[90%] mx-auto   cursor-pointer overflow-hidden `}
               onClick={() => handlePetSelection("dog")}
             >
               <div className="flex justify-center">
-                <div className="flex items-center justify-center">
+                <div className="flex items-center justify-center w-full h-full">
                   <Image
                     src="/images/dog-or-cat-section-dog-thumb.webp"
                     alt="Brown dog with white chest"
@@ -208,16 +208,16 @@ export default function DogOrCat() {
           </div>
 
           {/* Or divider */}
-          <Typography tag="span" text="Or" className="!text-[#A1A1A1] block" />
+          <Typography tag="span" text="Or" className="!text-[#A1A1A1] block mt-2.5 sm:mt-0" />
 
           {/* Cat Selection */}
           <div className="flex flex-col w-[70%] lg:w-[30%] xl:w-[35%] 2xl:w-full max-w-[381px]">
             <div
-              className={`relative rounded-2xl w-[55%] sm:w-[90%] mx-auto   cursor-pointer overflow-hidden `}
+              className={`relative rounded-2xl w-[90%] mx-auto   cursor-pointer overflow-hidden `}
               onClick={() => handlePetSelection("cat")}
             >
               <div className="flex justify-center">
-                <div className="flex items-center justify-center">
+                <div className="flex items-center justify-center w-full h-full">
                   <Image
                     src="/images/dog-or-cat-section-cat-thumb.webp"
                     alt="Cat"

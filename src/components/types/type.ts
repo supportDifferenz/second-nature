@@ -122,6 +122,7 @@ export type TitlePropsType = {
 // InputLabeledProps type
 export type InputLabeledPropsType = {
   label?: string;
+  subLabel?: string;
   className?: string; 
   inputClassName?: string;
   error?: string; 
