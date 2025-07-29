@@ -253,7 +253,8 @@ export default function AccountDetail() {
           <>
             <InputLabeled 
               name="password"
-              label="Password" 
+              label="Password"
+              subLabel={isAuthenticated ? "" : "(Minimum 8 characters, uppercase letters, lowercase letters, and numbers)"}
               placeholder="Enter your password" 
               type="password"
               variant="roundedEdgeInput" 
