@@ -94,7 +94,7 @@ const MealDropdownMenu = ({
           text={label}
           className="text-primary-dark font-extrabold"
         />
-        <div className={`w-2.5 h-fit relative sm:hidden xl:block group-hover:rotate-180 transition duration-75 ${isOpen ? 'rotate-180' : '' } `}>
+        <div className={`w-2.5 h-fit relative sm:hidden xl:block group-hover:rotate-180 transition duration-75 ${isOpen ? 'rotate-180' : ''} `}>
           <Image
             src="/icons/black-chevron-down.svg"
             alt="icon"
@@ -107,7 +107,7 @@ const MealDropdownMenu = ({
       {/* Dropdown Content */}
       {(isOpen || isResponsive) && (
         <div className="pt-2 absolute left-0 z-50  max-[1366px]:static">
-          <div className=" max-[1366px]:border-none border border-[#DADBD2] w-max max-[1366px]:max-w-full lg:max-w-[550px] max-[1366px]:rounded-none rounded-2xl shadow-secondary-1-light max-[1366px]:p-0 p-6  max-[1366px]:bg-transparent bg-[#FEFFF5]">
+          <div className=" max-[1366px]:border-none border xl:shadow-md border-[#DADBD2] w-max max-[1366px]:max-w-full lg:max-w-[550px] max-[1366px]:rounded-none rounded-2xl  max-[1366px]:p-0 p-6  max-[1366px]:bg-transparent bg-[#FEFFF5]">
             {/* <Typography
               tag="h6"
               text={dropDownContentTitle}
@@ -132,16 +132,22 @@ const MealDropdownMenu = ({
                       />
                     </div>
                   )}
-                  <span className="grow text-primary-dark font-bold subtitle">
+                  <span className="grow text-primary-dark font-bold xl:!font-normal subtitle">
                     {item.name}
                   </span>
-                  <div className="w-[10px] relative aspect-square">
-                    <Image
+                  <div className="w-[10px] xl:w-[7px] relative aspect-square">
+
+                    <picture>
+                      <source media="(max-width: 1366.98px)" srcSet="/icons/primary-dark-chevron-right.svg" />
+                      <source media="(min-width: 1367px)" srcSet="/icons/right-arrow-thin.svg" />
+                      <img src="/icons/primary-dark-chevron-right.svg" alt="Example image" />
+                    </picture>
+                    {/* <Image
                       src="/icons/primary-dark-chevron-right.svg"
                       alt="arrow"
                       fill
                       className="!static"
-                    />
+                    /> */}
                   </div>
                 </motion.div>
               ))}
