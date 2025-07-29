@@ -69,7 +69,7 @@ export default function NutritionalGuidelines() {
             <div className="absolute inset-0 rounded-full bg-white border border-primary z-0" />
 
             {/* Logo */}
-            <div className="relative z-10 sm:mt-[-100px] w-[15.6vw] sm:w-[6.6vw]">
+            <div className="relative z-10 sm:mt-[-40px] w-[15.6vw] sm:w-[6.6vw]">
               <Image
                 src="/images/fediaf.webp"
                 alt="mission"
@@ -82,7 +82,7 @@ export default function NutritionalGuidelines() {
             <div className="absolute inset-0 bg-white opacity-100 blur-[25px] z-0 w-full lg:w-[50vw] h-[25vh] lg:h-[23vh] top-2/6 lg:top-2/6 lg:-translate-x-1/6 lg:rounded-3xl">
               {" "}
             </div>
-            <div className="relative z-10 flex flex-col items-center justify-center gap-2 text-center px-4 lg:mt-10">
+            <div className="relative z-10 flex flex-col items-center justify-center gap-2 text-center px-4 lg:mt-6">
               <motion.div
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}

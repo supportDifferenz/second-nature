@@ -51,7 +51,7 @@ export default function GuidelinesCard() {
             className="w-full relative lg:w-[50%] gap-[var(--space-30-40)] p-6 sm:p-16 flex flex-col "
           >
             <div className="flex flex-col items-center max-[575px]:mt-[-75px] mt-[-100px] sm:mt-0 lg:items-center sm:flex-row gap-7">
-              <div className="w-[15.6vw] sm:w-[8.6vw] lg:w-[128px]">
+              <div className="w-[15.6vw] sm:w-[8.6vw] lg:w-[70px]">
                 <Image
                   src="/images/fediaf.webp"
                   alt="mission"

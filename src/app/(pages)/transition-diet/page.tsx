@@ -73,7 +73,8 @@ export default function TransitionDiet() {
 
                 <Typography
                   tag="h6"
-                  text="Lorem ipsum dolor sit amet consectetur. Diam pharetra id aliquet ultricies nullam. Condimentum est lacinia gravida cursus nulla. Lorem ipsum dolor sit amet consectetur. "
+                  text="Come check out our nutrient-rich, irresistibly delicious bowls for cats and dogs!
+Made with love, our recipes fuel optimal health, happiness, and tail wags for your furry babies!"
                   className="w-[72%] max-sm:mt-5 sm:w-[35%] lg:w-[38%]"
                 />
               </div>

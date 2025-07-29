@@ -153,9 +153,9 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
                   </button>
 
                   {howItWorksOpen && (
-                    <div className="pt-2 absolute left-0 top-full  z-50">
-                      <div className=" bg-[#FEFFF5] border border-[#DADBD2] overflow-hidden rounded-2xl shadow-md  min-w-[200px] whitespace-nowrap">
-                        <div className="grid grid-cols-1   ">
+                    <div className="pt-2 absolute left-0 xl:left-[-52%] top-full  z-50">
+                      <div className=" bg-[#FEFFF5] border border-[#DADBD2] overflow-hidden rounded-2xl xl:shadow-md  min-w-[200px] whitespace-nowrap xl:py-3">
+                        <div className="grid grid-cols-1   xl:text-center">
                           {[
                             { name: "Subscription", href: "/subscription" },
                             { name: "Behind The Scenes", href: "/behind-the-scenes" },
@@ -164,7 +164,7 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
                           ].map((item, index) => (
                             <span
                               key={index}
-                              className={`font-bold cursor-pointer hover:text-primary hover:bg-[#EBEDE0] px-6 py-3 transition-colors duration-200 ${isActiveRoute(item.href) ? "text-primary" : ""
+                              className={`font-bold xl:font-normal cursor-pointer hover:text-primary hover:bg-[#EBEDE0] px-6 py-3 transition-colors duration-200 ${isActiveRoute(item.href) ? "text-primary" : ""
                                 }`}
                               onClick={() => {
                                 startTransition(() => {
