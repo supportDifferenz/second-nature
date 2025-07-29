@@ -32,7 +32,7 @@ export default function BuyingFlowLayout({
           </div>
           {/* pets name */}
           { !isCheckoutPage && (
-            <ul className="flex items-center gap-5 pt-[5dvh] pb-[2dvh] sm:pb-[3dvh] ">
+            <ul className="flex bg-primary-light items-center gap-2  py-2.5 px-7 my-8  rounded-full ">
               {pets.length > 0 ? (
                 pets.map((pet, index) => (
                   <div
@@ -42,7 +42,7 @@ export default function BuyingFlowLayout({
                     <Typography
                       tag="p"
                       text={pet.name}
-                      className={`${index === selectedPetIndex ? "text-[#944446] underline capitalize underline-[#944446]" : ""}`}
+                      className={`${index === selectedPetIndex ? "text-[#944446]  font-bold capitalize" : "text-[#858585]"}`}
                     />
 
                     {/* <Button
@@ -59,7 +59,7 @@ export default function BuyingFlowLayout({
                     </Button> */}
                     <button
                       aria-label={`Remove ${pet.name}`}
-                      className="absolute -top-1.5 -right-1 cursor-pointer text-primary-dark font-bold rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                      className="absolute -top-1 -right-1 cursor-pointer text-secondary-1 font-bold rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
                       onClick={() => {
                         removePet(pet.id)
                         setSelectedPetIndex(0)
