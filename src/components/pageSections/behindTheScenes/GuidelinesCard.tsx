@@ -60,7 +60,7 @@ export default function GuidelinesCard() {
                 />
               </div>
               <Typography
-                tag="text"
+                tag="p"
                 text=""
                 className="text-primary-dark  text-center sm:text-start lg:max-w-[352px]"
               >
@@ -99,10 +99,10 @@ export default function GuidelinesCard() {
               </Typography>
             </div>
 
-            <div className="flex flex-wrap justify-center sm:justify-start gap-y-7 sm:gap-y-0">
+            <div className="flex flex-wrap justify-center sm:justify-between gap-y-7 sm:gap-y-0">
 
-              <div className="flex items-center gap-2 lg:gap-1 pr-[var(--space-8-30)] sm:pr-[var(--space-8-17)]">
-                <div className="w-6 h-6 lg:w-8 lg:h-8">
+              <div className="flex items-center gap-2 lg:gap-3 pr-[var(--space-8-30)] sm:pr-[var(--space-8-17)]">
+                <div className="w-6 h-6 lg:w-10 lg:h-10">
                   <Image
                     src="/icons/safe.svg"
                     alt="mission"
@@ -110,11 +110,13 @@ export default function GuidelinesCard() {
                     fill
                   />
                 </div>
-                <Typography tag="text" text="Safe" className="uppercase font-bold text-secondary-1 text-start lg:text-sm max-[575px]:text-[14px]" />
+                <Typography tag="p" text="Safe" className="uppercase font-bold text-secondary-1 text-start lg:text-sm max-[575px]:text-[14px]" />
               </div>
 
-              <div className="flex items-center sm:border-x border-primary px-[var(--space-8-30)] sm:px-[var(--space-8-17)] gap-2.5 lg:gap-1">
-                <div className="w-6 lg:w-8">
+              <div className="sm:border-r border-[#79D2A7] my-1.5"></div>
+
+              <div className="flex items-center px-[var(--space-8-30)] sm:px-[var(--space-8-17)]  gap-2 lg:gap-3 ">
+                <div className="w-6 h-6 lg:w-10 lg:h-10">
                   <Image
                     src="/icons/balance-scale.svg"
                     alt="mission"
@@ -125,8 +127,10 @@ export default function GuidelinesCard() {
                 <Typography tag="text" text="Balanced" className="uppercase font-bold text-secondary-1 text-start max-[575px]:text-[14px] lg:text-sm" />
               </div>
 
-              <div className="flex items-center pl-[var(--space-8-17)] gap-2.5 lg:gap-1">
-                <div className="w-6 lg:w-8">
+              <div className="sm:border-r border-[#79D2A7] my-1.5"></div>
+
+              <div className="flex items-center pl-[var(--space-8-17)]  gap-2 lg:gap-3 ">
+                <div className="w-6 h-6 lg:w-10 lg:h-10">
                   <Image
                     src="/icons/nutritional-carrot.svg"
                     alt="mission"
