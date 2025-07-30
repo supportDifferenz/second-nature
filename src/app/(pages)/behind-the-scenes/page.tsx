@@ -22,6 +22,7 @@ export default function BehindTheScenes() {
         "Check out our nutrient-rich and irresistibly delicious Cat Bowls for optimal feline health and wellness!",
       imageSrc: "/images/multiple-pet.webp",
     },
+    
   };
 
   return (
@@ -40,6 +41,7 @@ export default function BehindTheScenes() {
             mealTransition={footerCtaData.mealTransition}
             petFood={footerCtaData.petFood}
             ImageWrapperClassName="sm:w-[29.9vw]"
+            
           />
         </div>
       </MainLayout>
