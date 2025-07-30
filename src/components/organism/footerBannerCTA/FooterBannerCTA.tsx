@@ -120,7 +120,7 @@ const FooterBannerCTA: React.FC<
                 variant="secondaryBtnTextSecondary1"
                 size={"md"}
                 // className="mt-(--space-24-45)"
-                className={`mt-[var(--space-30-60)] mx-auto `}
+                className={`mt-[var(--space-30-60)] mx-auto hover:scale-105 transition-all duration-300`}
                 style={{
                   color: buttonTextColor,
                   backgroundColor: buttonBg,
