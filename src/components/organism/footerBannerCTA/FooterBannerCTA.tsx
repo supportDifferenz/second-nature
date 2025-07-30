@@ -46,7 +46,9 @@ const FooterBannerCTA: React.FC<
   paragraphColor,
   subTitle,
   buttonText,
-  // buttonTextColor,
+  buttonTextColor,
+  buttonBg,
+  buttonBorder,
   buttonLink,
   align,
 }) => {
@@ -115,10 +117,15 @@ const FooterBannerCTA: React.FC<
             )}
             {buttonText && buttonLink && (
               <Button
-                  variant="secondaryBtnTextSecondary1"
+                variant="secondaryBtnTextSecondary1"
                 size={"md"}
                 // className="mt-(--space-24-45)"
-                  className="mt-[var(--space-30-60)] mx-auto "
+                className={`mt-[var(--space-30-60)] mx-auto `}
+                style={{
+                  color: buttonTextColor,
+                  backgroundColor: buttonBg,
+                  borderColor: buttonBorder,
+                }}
                 onClick={() => {
                   startTransition(() => {
                     router.push(buttonLink);

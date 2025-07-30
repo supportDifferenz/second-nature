@@ -7,40 +7,43 @@ import { MealCard } from "@/components/organism/mealCard/MealCard";
 import { MealCardPropsType } from "@/components/types/type";
 import Typography from "@/components/atoms/typography/Typography";
 import { motion } from "framer-motion";
-
-const mealsData: MealCardPropsType[] = [
-  {
-    tag: "MEALS",
-    title: "Full bowl",
-    subTitle: "100% of your pet’s daily nutrients",
-    image: "/images/chicken-bowl-cat.webp",
-    features: [
-      "Free delivery to your doorstep",
-      "No hassle with zero trips to the shops",
-      "Completely balanced",
-    ],
-    buttons: [
-      { label: "Get Started", route: "/location", variant: "primary" },
-    ],
-  },
-  {
-    tag: "MEALS",
-    title: "Half bowl",
-    subTitle: "50% of your pet’s daily nutrients",
-    image: "/images/beef-bowl-cat.webp",
-    features: [
-      "Free delivery to your doorstep",
-      "Benefits on a budget",
-      "Mix in with existing food",
-    ],
-    buttons: [
-      { label: "Get Started", route: "/location", variant: "primary" },
-    ],
-  },
-
-];
+import useAuthStore from "@/zustand/store/authDataStore";
 
 export default function OurMealPlans() {
+
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+
+  const mealsData: MealCardPropsType[] = [
+    {
+      tag: "MEALS",
+      title: "Full bowl",
+      subTitle: "100% of your pet’s daily nutrients",
+      image: "/images/chicken-bowl-cat.webp",
+      features: [
+        "Free delivery to your doorstep",
+        "No hassle with zero trips to the shops",
+        "Completely balanced",
+      ],
+      buttons: [
+        { label: "Get Started", route: `${isAuthenticated ? "/location" : "/user-details"}`, variant: "primary" },
+      ],
+    },
+    {
+      tag: "MEALS",
+      title: "Half bowl",
+      subTitle: "50% of your pet’s daily nutrients",
+      image: "/images/beef-bowl-cat.webp",
+      features: [
+        "Free delivery to your doorstep",
+        "Benefits on a budget",
+        "Mix in with existing food",
+      ],
+      buttons: [
+        { label: "Get Started", route: `${isAuthenticated ? "/location" : "/user-details"}`, variant: "primary" },
+      ],
+    },
+  ];
+
   return (
     <section>
       <div className="container flex flex-col lg:flex-row">

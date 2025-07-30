@@ -10,6 +10,7 @@ import { cva } from "class-variance-authority";
 import Typography from "@/components/atoms/typography/Typography";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
+import useAuthStore from "@/zustand/store/authDataStore";
 
 const bannerVariants = cva(
   "relative flex pt-8 sm:pt-0 sm:items-center w-full bg-cover bg-center transition-all",
@@ -34,47 +35,6 @@ const bannerVariants = cva(
   }
 );
 
-const banners = [
-  {
-    id: "1",
-    image: {
-      web: "/images/hero-carousel-banner-web.webp",
-      tablet: "/images/hero-carousel-banner-web.webp",
-      mobile: "/images/hero-carousel-banner-mob.webp",
-    },
-    caption: "introducing",
-    captionColor: "#424242",
-    title: "real food,",
-    halfTitle: "just as nature intended",
-    paragraph:
-      "freshly prepared and delivered to your door that fuels a life full of happy tails",
-    paragraphColor: "#424242",
-    buttonText: "know more",
-    buttonTextColor: "",
-    buttonLink: "/location",
-    bannerThemeColor: "#00683D",
-  },
-  {
-    id: "2",
-    image: {
-      web: "/images/hero-carousel-banner-2-web.webp",
-      tablet: "/images/hero-carousel-banner-2-web.webp",
-      mobile: "/images/hero-carousel-banner-2-mob.webp",
-    },
-    caption: "new Offer",
-    captionColor: "#FFFFFF",
-    title: "Get 10% off,",
-    halfTitle: "On your first Subscription",
-    paragraph:
-      "Freshly prepared and delivered to your door that fuels a life full of happy tails",
-    paragraphColor: "#ffff",
-    buttonText: "Get Started",
-    buttonLink: "/location",
-    bannerThemeColor: "#ffff",
-    buttonTextColor: "#ffff",
-  },
-];
-
 const fadeUp = (delay = 0, y = 30, duration = 0.6) => ({
   initial: { opacity: 0, y },
   animate: {
@@ -90,7 +50,11 @@ const fadeUp = (delay = 0, y = 30, duration = 0.6) => ({
 });
 
 export default function HeroSection() {
+
   const router = useRouter();
+
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [
     Autoplay({ delay: 4000 }),
     Fade(),
@@ -102,6 +66,49 @@ export default function HeroSection() {
 
   const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
   const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
+
+  const banners = [
+    {
+      id: "1",
+      image: {
+        web: "/images/hero-carousel-banner-web.webp",
+        tablet: "/images/hero-carousel-banner-web.webp",
+        mobile: "/images/hero-carousel-banner-mob.webp",
+      },
+      caption: "introducing",
+      captionColor: "#424242",
+      title: "real food,",
+      halfTitle: "just as nature intended",
+      paragraph:
+        "freshly prepared and delivered to your door that fuels a life full of happy tails",
+      paragraphColor: "#424242",
+      buttonText: "know more",
+      buttonTextColor: "",
+      buttonLink: isAuthenticated ? "/location" : "/user-details",
+      // buttonLink: "/location",
+      bannerThemeColor: "#00683D",
+    },
+    {
+      id: "2",
+      image: {
+        web: "/images/hero-carousel-banner-2-web.webp",
+        tablet: "/images/hero-carousel-banner-2-web.webp",
+        mobile: "/images/hero-carousel-banner-2-mob.webp",
+      },
+      caption: "new Offer",
+      captionColor: "#FFFFFF",
+      title: "Get 10% off,",
+      halfTitle: "On your first Subscription",
+      paragraph:
+        "Freshly prepared and delivered to your door that fuels a life full of happy tails",
+      paragraphColor: "#ffff",
+      buttonText: "Get Started",
+      buttonLink: isAuthenticated ? "/location" : "/user-details",
+      // buttonLink: "/location",
+      bannerThemeColor: "#ffff",
+      buttonTextColor: "#ffff",
+    },
+  ];
 
   const onSelect = useCallback(() => {
     if (!emblaApi) return;

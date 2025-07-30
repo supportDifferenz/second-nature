@@ -6,10 +6,13 @@ import Typography from "@/components/atoms/typography/Typography";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
+import useAuthStore from "@/zustand/store/authDataStore";
 
 export default function HeroSection() {
 
   const router = useRouter();
+
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
   const banner = {
     id: "1",
@@ -23,7 +26,8 @@ export default function HeroSection() {
     subtitle: "Premium Pet Food Delivered",
     bannerThemeColor: "#00683D",
     buttonText: "Sign Up Today",
-    buttonLink: "/location",
+    buttonLink: isAuthenticated ? "/location" : "/user-details",
+    // buttonLink: "/location",
     buttonTextColor: "#00683D",
   };
 

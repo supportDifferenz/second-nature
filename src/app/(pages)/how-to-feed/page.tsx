@@ -7,8 +7,12 @@ import ReadyToServe from "@/components/pageSections/howToFeed/ReadyToServe";
 import MainLayout from "@/components/templates/MainLayout";
 import React from "react";
 import { motion } from "framer-motion";
+import useAuthStore from "@/zustand/store/authDataStore";
 
 export default function Subscription() {
+
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+
   const footerCtaData = {
     mealTransition: {
       title: "Meal",
@@ -55,9 +59,13 @@ export default function Subscription() {
           paragraph="Click below to explore our range and start your journey toward better pet nutrition today."
           paragraphColor="#FFFFFF"
           buttonText="Build your plan"
-          buttonLink="/location"
+          buttonLink={isAuthenticated ? "/location" : "/user-details"}
+          // buttonLink="/location"
           bannerThemeColor="#fff"
           align="center"
+             buttonTextColor="#FFFFFF"
+    buttonBg="#00683D"
+    buttonBorder="#FFFFFF"
         />
       </div>
 

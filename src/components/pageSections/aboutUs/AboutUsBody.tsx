@@ -15,6 +15,7 @@ import FooterCtaCard from "@/components/organism/footerCtaCard/FooterCtaCard";
 import Image from "next/image";
 import React from "react";
 import FooterBannerCTA from "@/components/organism/footerBannerCTA/FooterBannerCTA";
+import useAuthStore from "@/zustand/store/authDataStore";
 
 interface AboutUsBodyProps {
   cardTitleData?: {
@@ -65,41 +66,43 @@ const missionSpecs = [
   },
 ];
 
-export default function AboutUsBody({}: // cardTitleData,
-// cardCaptionData,
-AboutUsBodyProps) {
+export default function AboutUsBody({ }: // cardTitleData,
+  // cardCaptionData,
+  AboutUsBodyProps) {
   const ribbonRef = useRef(null);
   const isRibbonInView = useInView(ribbonRef, {
     once: true,
     margin: "0px 0px -100px 0px",
   });
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+
   return (
     <div className="overflow-x-hidden">
       <div id="our-story">
-      <motion.div
-        initial={{ opacity: 0, y: 60 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
+        <motion.div
+          initial={{ opacity: 0, y: 60 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
         >
-        <div className="flex flex-col items-center mt-[var(--space-95-195)] w-fit mx-auto">
-          <Typography
-            tag="h6"
-            text="Our Story"
-            className="uppercase text-secondary-1 mx-auto "
-          />
-          <Typography
-            tag="h2"
-            text="Inspired By Love:"
-            className="highlight text-primary-dark mt-2"
-          />
-          <Typography
-            tag="h2"
-            text="Redefining Pet Nutrition Naturally"
-            className="normalize text-center text-primary-dark"
-          />
-        </div>
-      </motion.div>
+          <div className="flex flex-col items-center mt-[var(--space-95-195)] w-fit mx-auto">
+            <Typography
+              tag="h6"
+              text="Our Story"
+              className="uppercase text-secondary-1 mx-auto "
+            />
+            <Typography
+              tag="h2"
+              text="Inspired By Love:"
+              className="highlight text-primary-dark mt-2"
+            />
+            <Typography
+              tag="h2"
+              text="Redefining Pet Nutrition Naturally"
+              className="normalize text-center text-primary-dark"
+            />
+          </div>
+        </motion.div>
       </div>
 
 
@@ -266,13 +269,11 @@ AboutUsBodyProps) {
                   ease: "easeOut",
                 }}
                 viewport={{ once: true }}
-                className={`flex flex-col sm:flex-row gap-[var(--space-10-20)] px-[var(--space-23-70)] sm:pr-0 items-center ${
-                  spec.border ? "sm:border-r-1 sm:border-[#79D2A7]" : ""
-                } ${
-                  spec.border
+                className={`flex flex-col sm:flex-row gap-[var(--space-10-20)] px-[var(--space-23-70)] sm:pr-0 items-center ${spec.border ? "sm:border-r-1 sm:border-[#79D2A7]" : ""
+                  } ${spec.border
                     ? "border border-[#79D2A7] border-y-0 sm:border-0"
                     : ""
-                } ${spec.border ? "sm:pr-[var(--space-23-70)]" : ""}`}
+                  } ${spec.border ? "sm:pr-[var(--space-23-70)]" : ""}`}
               >
                 <div className="w-[11.44vw] sm:w-[3.12vw] relative">
                   <Image
@@ -284,9 +285,8 @@ AboutUsBodyProps) {
                   />
                 </div>
                 <div
-                  className={`text-center ${
-                    spec.border ? "sm:pr-[var(--space-23-70)]" : ""
-                  }`}
+                  className={`text-center ${spec.border ? "sm:pr-[var(--space-23-70)]" : ""
+                    }`}
                 >
                   <Typography
                     tag="h6"
@@ -382,9 +382,13 @@ AboutUsBodyProps) {
           paragraph="Pets deserve better than processed kibble or canned food. Second Nature believes in nourishing your fur baby with fresh meals made from real, human-grade ingredients."
           paragraphColor="#FFFFFF"
           buttonText="Build your plan"
-          buttonLink="/location"
+          buttonLink={isAuthenticated ? "/location" : "/user-details"}
+          // buttonLink="/location"
           bannerThemeColor="#fff"
           align="center"
+          buttonTextColor="#FFFFFF"
+          buttonBg="#944446"
+          buttonBorder="#FFFFFF"
         />
       </div>
 
