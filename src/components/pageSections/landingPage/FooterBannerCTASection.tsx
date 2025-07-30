@@ -1,7 +1,11 @@
 import FooterBannerCTA from '@/components/organism/footerBannerCTA/FooterBannerCTA'
 import React from 'react'
+import useAuthStore from '@/zustand/store/authDataStore'
 
 export default function FooterBannerCTASection() {
+
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+
   return (
     <FooterBannerCTA
     id="footer-banner"
@@ -20,7 +24,8 @@ export default function FooterBannerCTASection() {
     buttonTextColor="#FFFFFF"
     buttonBg="#944446"
     buttonBorder="#FFFFFF"
-    buttonLink="/location"
+    buttonLink={isAuthenticated ? "/location" : "/user-details"}
+    // buttonLink="/location"
     bannerThemeColor="#fff"
     align="center" // Can be "left", "center", or "right"
   />

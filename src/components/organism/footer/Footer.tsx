@@ -52,9 +52,18 @@ const Footer = () => {
               variant={"primaryBtn"} 
               className="text-white"
               onClick={() => {
-                startTransition(() => {
-                  router.push("/location");
-                });
+                if (isAuthenticated) {
+                  startTransition(() => {
+                    router.push("/location");
+                  });
+                } else {
+                  startTransition(() => {
+                    router.push("/user-details");
+                  });
+                }
+                // startTransition(() => {
+                //   router.push("/location");
+                // });
               }}
             >
               Get Started

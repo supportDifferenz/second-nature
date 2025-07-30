@@ -1,7 +1,13 @@
+"use client";
+
 import FooterBannerCTA from '@/components/organism/footerBannerCTA/FooterBannerCTA'
 import React from 'react'
+import useAuthStore from '@/zustand/store/authDataStore'
 
 export default function FooterBannerCta() {
+
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+
   return (
     <FooterBannerCTA
     id="footer-banner"
@@ -17,7 +23,8 @@ export default function FooterBannerCta() {
     paragraph="Pets deserve more than processed food—that’s why Second Nature provides fresh, human-grade meals to nourish your fur baby."
     paragraphColor="#FFFFFF"
     buttonText="Build your plan"
-    buttonLink="/location"
+    buttonLink={isAuthenticated ? "/location" : "/user-details"}
+    // buttonLink="/location"
     bannerThemeColor="#fff"
     align="center" // Can be "left", "center", or "right"
        buttonTextColor="#FFFFFF"

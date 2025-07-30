@@ -8,8 +8,12 @@ import Testimonials from "@/components/pageSections/reviews/Testimonials";
 import GoogleReviews from "@/components/pageSections/reviews/GoogleReviews";
 import FooterCtaCard from "@/components/organism/footerCtaCard/FooterCtaCard";
 import FooterBannerCTA from "@/components/organism/footerBannerCTA/FooterBannerCTA";
+import useAuthStore from "@/zustand/store/authDataStore";
 
-function page() {
+function Page() {
+
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+
   const footerCtaData = {
     mealTransition: {
       title: "Meal",
@@ -70,7 +74,8 @@ function page() {
           paragraph="Have you seen the difference in your pet? We’d love to hear your story! Leave us a review and join the growing community of pet parents who trust Second Nature."
           paragraphColor="#FFFFFF"
           buttonText="Build your plan"
-          buttonLink="/location"
+          buttonLink={isAuthenticated ? "/location" : "/user-details"}
+          // buttonLink="/location"
           bannerThemeColor="#fff"
           align="center"
              buttonTextColor="#FFFFFF"
@@ -90,4 +95,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;

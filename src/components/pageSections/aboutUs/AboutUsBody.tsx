@@ -15,6 +15,7 @@ import FooterCtaCard from "@/components/organism/footerCtaCard/FooterCtaCard";
 import Image from "next/image";
 import React from "react";
 import FooterBannerCTA from "@/components/organism/footerBannerCTA/FooterBannerCTA";
+import useAuthStore from "@/zustand/store/authDataStore";
 
 interface AboutUsBodyProps {
   cardTitleData?: {
@@ -73,6 +74,8 @@ export default function AboutUsBody({ }: // cardTitleData,
     once: true,
     margin: "0px 0px -100px 0px",
   });
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+
   return (
     <div className="overflow-x-hidden">
       <div id="our-story">
@@ -379,7 +382,8 @@ export default function AboutUsBody({ }: // cardTitleData,
           paragraph="Pets deserve better than processed kibble or canned food. Second Nature believes in nourishing your fur baby with fresh meals made from real, human-grade ingredients."
           paragraphColor="#FFFFFF"
           buttonText="Build your plan"
-          buttonLink="/location"
+          buttonLink={isAuthenticated ? "/location" : "/user-details"}
+          // buttonLink="/location"
           bannerThemeColor="#fff"
           align="center"
           buttonTextColor="#FFFFFF"

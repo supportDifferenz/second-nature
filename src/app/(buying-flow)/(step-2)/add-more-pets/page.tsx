@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { usePetStore } from "@/zustand/store/petDataStore";
-import useAuthStore from '@/zustand/store/authDataStore';
+// import useAuthStore from '@/zustand/store/authDataStore';
 import { startTransition } from "react";
 
 export default function Page() {
@@ -16,9 +16,9 @@ export default function Page() {
 
   const [ checkout, setCheckout ] = useState(false);
 
-  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  // const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
-    const { selectedPetIndex, setSelectedPetIndex } = usePetStore();
+  const { selectedPetIndex, setSelectedPetIndex } = usePetStore();
 
   const handleAddAnotherPet = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -88,17 +88,23 @@ export default function Page() {
           disabled={!checkout}
           onClick={(e) => {
             e.preventDefault();
-            if(isAuthenticated){
-              startTransition(() => {
-                router.push("/checkout");
-              })
-              // router.push("/checkout");
-            } else {
-              startTransition(() => {
-                router.push("/user-details");
-              })
-              // router.push("/user-details");
-            }
+
+            startTransition(() => {
+              router.push("/checkout");
+            })
+            // router.push("/checkout");
+
+            // if(isAuthenticated){
+            //   startTransition(() => {
+            //     router.push("/checkout");
+            //   })
+            //   // router.push("/checkout");
+            // } else {
+            //   startTransition(() => {
+            //     router.push("/user-details");
+            //   })
+            //   // router.push("/user-details");
+            // }
           }}
         >
           {/* Checkout */}

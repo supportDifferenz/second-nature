@@ -1,3 +1,5 @@
+"use client";
+
 import FooterBannerCTA from "@/components/organism/footerBannerCTA/FooterBannerCTA";
 import FooterCtaCard from "@/components/organism/footerCtaCard/FooterCtaCard";
 import FaqSection from "@/components/pageSections/subscription/FaqSection";
@@ -7,8 +9,12 @@ import HowItWorks from "@/components/pageSections/subscription/HowItWorks";
 import OurMealPlans from "@/components/pageSections/subscription/OurMealPlans";
 import MainLayout from "@/components/templates/MainLayout";
 import React from "react";
+import useAuthStore from "@/zustand/store/authDataStore";
 
 export default function Subscription() {
+
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+
   const footerCtaData = {
     mealTransition: {
       title: "Meal",
@@ -56,7 +62,8 @@ export default function Subscription() {
           paragraph="Pets deserve better than processed kibble or canned food. Second Nature believes in nourishing your fur baby with fresh meals made from real, human-grade ingredients."
           paragraphColor="#FFFFFF"
           buttonText="Build your plan"
-          buttonLink="/location"
+          buttonLink={isAuthenticated ? "/location" : "/user-details"}
+          // buttonLink="/location"
           bannerThemeColor="#fff"
           align="center"
           buttonTextColor="#FFFFFF"

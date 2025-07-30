@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import BlogListCard from "@/components/pageSections/blogs/BlogListCard";
 import { useRouter } from "next/navigation";
+import useAuthStore from "@/zustand/store/authDataStore";
 
 const blogData = [
   {
@@ -28,6 +29,8 @@ const blogData = [
 function Page() {
 
   const router = useRouter();
+
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
   const socialIcons = [
     { src: "/icons/facebook-icon.svg", alt: "Facebook", href: "#" },
@@ -61,9 +64,14 @@ function Page() {
                 variant={"primaryBtn"}
                 className="w-fit text-white sm:ml-auto"
                 onClick={() => {
-                  startTransition(() => {
-                    router.push("/location");
-                  });
+                  if(isAuthenticated) {
+                    startTransition(() => router.push("/location"));
+                  } else {
+                    startTransition(() => router.push("/user-details"));
+                  }
+                  // startTransition(() => {
+                  //   router.push("/location");
+                  // });
                 }}
               >
                 Get Started
@@ -450,9 +458,14 @@ function Page() {
               variant={"primaryBtn"}
               className="w-fit text-white"
               onClick={() => {
-                startTransition(() => {
-                  router.push("/location");
-                })
+                if(isAuthenticated) {
+                  startTransition(() => router.push("/location"));
+                } else {
+                  startTransition(() => router.push("/user-details"));
+                }
+                // startTransition(() => {
+                //   router.push("/location");
+                // })
               }}
             >
               Get Started
