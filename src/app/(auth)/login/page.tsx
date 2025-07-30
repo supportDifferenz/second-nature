@@ -51,6 +51,7 @@ export default function Page() {
   }>({});
 
   const login = useAuthStore((state) => state.login);
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -337,7 +338,13 @@ export default function Page() {
             text="Don’t have an account?"
             className="!font-medium text-primary-dark"
           />
-          <div onClick={() => startTransition(() => router.push("/location"))}>
+          <div onClick={() => { 
+            if(isAuthenticated) {
+              startTransition(() => router.push("/location"));
+            } else {
+              startTransition(() => router.push("/user-details"));
+            }
+          }}>
             <Typography
               tag="h6"
               text="Build your plan"

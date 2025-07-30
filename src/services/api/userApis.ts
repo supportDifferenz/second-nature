@@ -142,3 +142,27 @@ try {
       throw error;
   }
 };
+
+export const emailVerification = async (
+  {
+    formData,
+  } : {
+    formData: {
+      name: string;
+      email: string;
+    }
+  }
+) => {
+  
+
+try {
+    const response = await userAxiosInstance.post(
+      `/api/user/emailVerification`,
+      formData
+  );
+    return response.data;
+  } catch (error) {
+      console.error("Error in change password", error);
+      throw error;
+  }
+};

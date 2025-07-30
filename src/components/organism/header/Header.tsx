@@ -251,9 +251,18 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
                       size="small"
                       className="text-secondary-1"
                       onClick={() => {
-                        startTransition(() => {
-                          router.push("/location");
-                        });
+                        if(isAuthenticated) {
+                          startTransition(() => {
+                            router.push("/location");
+                          });
+                        }else{
+                          startTransition(() => {
+                            router.push("/user-details");
+                          });
+                        }
+                        // startTransition(() => {
+                        //   router.push("/location");
+                        // });
                       }}
                     >
                       Get Started
@@ -266,9 +275,18 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
                       size="small"
                       className="text-secondary-1 hidden sm:block"
                       onClick={() => {
-                        startTransition(() => {
-                          router.push("/location");
-                        });
+                        if(isAuthenticated) {
+                          startTransition(() => {
+                            router.push("/location");
+                          });
+                        }else{
+                          startTransition(() => {
+                            router.push("/user-details");
+                          });
+                        }
+                        // startTransition(() => {
+                        //   router.push("/location");
+                        // });
                       }}
                     >
                       Get Started

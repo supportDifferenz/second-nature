@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useState, useEffect, useCallback, startTransition } from "react";
 import { motion, easeInOut } from "framer-motion";
 import useEmblaCarousel from "embla-carousel-react";
@@ -10,70 +11,7 @@ import Typography from "@/components/atoms/typography/Typography";
 import { Button } from "@/components/ui/button";
 import { AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
-
-const bannerVariants = cva(
-  "relative flex pt-8 sm:pt-0 sm:items-center w-full bg-cover bg-center transition-all",
-  {
-    variants: {
-      align: {
-        left: "text-center justify-center sm:justify-start sm:text-left",
-        center: "text-center justify-center sm:justify-center sm:[&_*_*]:mx-auto text-center",
-        right: "text-center justify-center sm:justify-end sm:text-left",
-      },
-      bannerHeight: {
-        mainHero:
-          "min-h-[400px] h-[600px] sm:min-h-[300px] sm:h-[50dvh] lg:min-h-[480px] 2xl:min-h-[720px] lg:h-[75dvh]  lg:max-h-[1000px]",
-        subHero:
-          "min-h-[500px] h-[90dvh] sm:min-h-[400px] sm:h-[50dvh] lg:min-h-[520px] sm:h-[70dvh] lg:max-h-[1200px]",
-      },
-    },
-    defaultVariants: {
-      align: "center",
-      bannerHeight: "subHero",
-    },
-  }
-);
-
-const banners = [
-  {
-    id: "1",
-    image: {
-      web: "/images/hero-carousel-banner-web.webp",
-      tablet: "/images/hero-carousel-banner-web.webp",
-      mobile: "/images/hero-carousel-banner-mob.webp",
-    },
-    caption: "introducing",
-    captionColor: "#424242",
-    title: "real food,",
-    halfTitle: "just as nature intended",
-    paragraph:
-      "freshly prepared and delivered to your door that fuels a life full of happy tails",
-    paragraphColor: "#424242",
-    buttonText: "know more",
-    buttonTextColor: "",
-    buttonLink: "/location",
-    bannerThemeColor: "#00683D",
-  },
-  {
-    id: "2",
-    image: {
-      web: "/images/hero-carousel-banner-2-web.webp",
-      tablet: "/images/hero-carousel-banner-2-web.webp",
-      mobile: "/images/hero-carousel-banner-2-mob.webp",
-    },
-    caption: "new Offer",
-    captionColor: "#FFFFFF",
-    title: "Get 10% off,",
-    halfTitle: "On your first Subscription",
-    paragraph:
-      "Freshly prepared and delivered to your door that fuels a life full of happy tails",
-    paragraphColor: "#ffff",
-    buttonText: "Get Started",
-    buttonLink: "/location",
-    bannerThemeColor: "#ffff",
-    buttonTextColor: "#ffff",
-  },
-];
+import useAuthStore from "@/zustand/store/authDataStore";
 
 // Animation helper
 const fadeUp = (delay = 0, y = 30, duration = 0.6) => ({
@@ -93,6 +31,7 @@ const fadeUp = (delay = 0, y = 30, duration = 0.6) => ({
 export default function HeroSection() {
 
   const router = useRouter();
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [
     Autoplay({ delay: 4000 }),
@@ -104,6 +43,72 @@ export default function HeroSection() {
     if (!emblaApi) return;
     setSelectedIndex(emblaApi.selectedScrollSnap());
   }, [emblaApi]);
+
+  const bannerVariants = cva(
+    "relative flex pt-8 sm:pt-0 sm:items-center w-full bg-cover bg-center transition-all",
+    {
+      variants: {
+        align: {
+          left: "text-center justify-center sm:justify-start sm:text-left",
+          center: "text-center justify-center sm:justify-center sm:[&_*_*]:mx-auto text-center",
+          right: "text-center justify-center sm:justify-end sm:text-left",
+        },
+        bannerHeight: {
+          mainHero:
+            "min-h-[400px] h-[600px] sm:min-h-[300px] sm:h-[50dvh] lg:min-h-[480px] 2xl:min-h-[720px] lg:h-[75dvh]  lg:max-h-[1000px]",
+          subHero:
+            "min-h-[500px] h-[90dvh] sm:min-h-[400px] sm:h-[50dvh] lg:min-h-[520px] sm:h-[70dvh] lg:max-h-[1200px]",
+        },
+      },
+      defaultVariants: {
+        align: "center",
+        bannerHeight: "subHero",
+      },
+    }
+  );
+
+  const banners = [
+    {
+      id: "1",
+      image: {
+        web: "/images/hero-carousel-banner-web.webp",
+        tablet: "/images/hero-carousel-banner-web.webp",
+        mobile: "/images/hero-carousel-banner-mob.webp",
+      },
+      caption: "introducing",
+      captionColor: "#424242",
+      title: "real food,",
+      halfTitle: "just as nature intended",
+      paragraph:
+        "freshly prepared and delivered to your door that fuels a life full of happy tails",
+      paragraphColor: "#424242",
+      buttonText: "know more",
+      buttonTextColor: "",
+      buttonLink: isAuthenticated ? "/location" : "/user-details",
+      // buttonLink: "/location",
+      bannerThemeColor: "#00683D",
+    },
+    {
+      id: "2",
+      image: {
+        web: "/images/hero-carousel-banner-2-web.webp",
+        tablet: "/images/hero-carousel-banner-2-web.webp",
+        mobile: "/images/hero-carousel-banner-2-mob.webp",
+      },
+      caption: "new Offer",
+      captionColor: "#FFFFFF",
+      title: "Get 10% off,",
+      halfTitle: "On your first Subscription",
+      paragraph:
+        "Freshly prepared and delivered to your door that fuels a life full of happy tails",
+      paragraphColor: "#ffff",
+      buttonText: "Get Started",
+      buttonLink: isAuthenticated ? "/location" : "/user-details",
+      // buttonLink: "/location",
+      bannerThemeColor: "#ffff",
+      buttonTextColor: "#ffff",
+    },
+  ];
 
   useEffect(() => {
     if (!emblaApi) return;

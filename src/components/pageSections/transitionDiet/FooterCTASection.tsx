@@ -1,7 +1,13 @@
+"use client";
+
 import React from 'react'
 import FooterBannerCTA from '@/components/organism/footerBannerCTA/FooterBannerCTA'
+import useAuthStore from '@/zustand/store/authDataStore'
 
 export default function FooterCTASection() {
+
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+
   return (
     <FooterBannerCTA
      id="footer-banner"
@@ -17,7 +23,8 @@ export default function FooterCTASection() {
         paragraph="Your pet deserves the best. Start their transition to a healthier, natural diet today and see the difference in their energy, health, and happiness."
         paragraphColor="#FFFFFF"
         buttonText="Build your plan"
-        buttonLink="/location"
+        buttonLink={isAuthenticated ? "/location" : "/user-details"}
+        // buttonLink="/location"
         bannerThemeColor="#fff"
         align="center" 
 

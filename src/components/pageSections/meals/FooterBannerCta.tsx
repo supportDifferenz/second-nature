@@ -3,12 +3,15 @@
 import FooterBannerCTA from '@/components/organism/footerBannerCTA/FooterBannerCTA';
 import React from 'react';
 import { useSearchParams } from 'next/navigation';
+import useAuthStore from '@/zustand/store/authDataStore';
 
 export default function FooterBannerCta() {
 
   const searchParams = useSearchParams();
   const pet = searchParams.get("pet");
   const protein = searchParams.get("protein");
+
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
   const footerBannerData = {
     dog: {
@@ -27,7 +30,8 @@ export default function FooterBannerCta() {
         subParagraph: "Subscribe to a meal plan today and give your dog the nutrition they need to thrive!",
         paragraphColor: "#FFFFFF",
         buttonText: "Build your plan",
-        buttonLink: "/location",
+        buttonLink: isAuthenticated ? "/location" : "/user-details",
+        // buttonLink: "/location",
         bannerThemeColor: "#fff",
         align: "center" as "left" | "center" | "right",
       },
@@ -46,7 +50,8 @@ export default function FooterBannerCta() {
         subParagraph: "• Light, lean, and nourishing, it’s perfect for keeping your pup active, healthy, and happy.",
         paragraphColor: "#FFFFFF",
         buttonText: "Build your plan",
-        buttonLink: "/location",
+        buttonLink: isAuthenticated ? "/location" : "/user-details",
+        // buttonLink: "/location",
         bannerThemeColor: "#fff",
         align: "center" as "left" | "center" | "right",
       },
@@ -65,7 +70,8 @@ export default function FooterBannerCta() {
         subParagraph: "Sign up for a meal plan now and treat your dog to the benefits of fresh, wholesome food!",
         paragraphColor: "#FFFFFF",
         buttonText: "Build your plan",
-        buttonLink: "/location",
+        buttonLink: isAuthenticated ? "/location" : "/user-details",
+        // buttonLink: "/location",
         bannerThemeColor: "#fff",
         align: "center" as "left" | "center" | "right",
       }
@@ -86,7 +92,8 @@ export default function FooterBannerCta() {
         subParagraph: "Subscribe to a meal plan today and give your cat the nutrition they need to thrive!",
         paragraphColor: "#FFFFFF",
         buttonText: "Build your plan",
-        buttonLink: "/location",
+        buttonLink: isAuthenticated ? "/location" : "/user-details",
+        // buttonLink: "/location",
         bannerThemeColor: "#fff",
         align: "center" as "left" | "center" | "right",
       },
@@ -105,7 +112,8 @@ export default function FooterBannerCta() {
         subParagraph: "• Light, lean, and nourishing, it’s perfect for keeping your pup active, healthy, and happy.",
         paragraphColor: "#FFFFFF",
         buttonText: "Build your plan",
-        buttonLink: "/location",
+        buttonLink: isAuthenticated ? "/location" : "/user-details",
+        // buttonLink: "/location",
         bannerThemeColor: "#fff",
         align: "center" as "left" | "center" | "right",
       },
@@ -124,7 +132,8 @@ export default function FooterBannerCta() {
         subParagraph: "Sign up for a meal plan now and treat your dog to the benefits of fresh, wholesome food!",
         paragraphColor: "#FFFFFF",
         buttonText: "Build your plan",
-        buttonLink: "/location",
+        buttonLink: isAuthenticated ? "/location" : "/user-details",
+        // buttonLink: "/location",
         bannerThemeColor: "#fff",
         align: "center" as "left" | "center" | "right",
       }
@@ -152,7 +161,8 @@ export default function FooterBannerCta() {
       subParagraph={selectedData?.subParagraph || "Subscribe to a meal plan today and give your dog the nutrition they need to thrive!"}
       paragraphColor={selectedData?.paragraphColor || "#FFFFFF"}
       buttonText={selectedData?.buttonText || "Build your plan"}
-      buttonLink={selectedData?.buttonLink || "/location"}
+      buttonLink={selectedData?.buttonLink || `${isAuthenticated ? "/location" : "/user-details"}`}
+      // buttonLink={selectedData?.buttonLink || "/location"}
       bannerThemeColor={selectedData?.bannerThemeColor || "#fff"}
       align={selectedData?.align || "center"}
     />

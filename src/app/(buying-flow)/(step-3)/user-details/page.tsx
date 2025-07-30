@@ -10,6 +10,8 @@ import { useRouter } from "next/navigation";
 import { usePetStore } from "@/zustand/store/petDataStore";
 import { useUserStore } from "@/zustand/store/userDataStore";
 import { startTransition } from "react";
+import { useEmailVerification } from "@/hooks/userHooks/emailVerificationHook";
+import { toast } from "sonner";
 
 interface FormData {
   name: string;
@@ -24,6 +26,7 @@ interface FormErrors {
 export default function Page() {
 
   const router = useRouter();
+  const { mutate: emailVerification } = useEmailVerification();
 
   const { pets, selectedPetIndex } = usePetStore();
   const selectedPet = selectedPetIndex !== null ? pets[selectedPetIndex] : null; // Handle null case for selectedPetIndex
@@ -92,13 +95,43 @@ export default function Page() {
     // For now, we'll just simulate a short delay
 
     if (formData.name && formData.email) {
-      setUserDetails({
-        firstName: formData.name,
-        emailAddress: formData.email
-      });
-      startTransition(() => {
-        router.push("/checkout");
-      })
+      // setUserDetails({
+      //   firstName: formData.name,
+      //   emailAddress: formData.email
+      // });
+
+      emailVerification(
+        { formData },
+        {
+          onSuccess: (data) => {
+
+            setUserDetails({
+              firstName: formData.name,
+              emailAddress: formData.email
+            });
+
+            if(data?.statusCode === 200) {
+              toast.success(data?.message || "Email verification successful");
+            }else{
+              toast.error(data?.message || "Email verification failed");
+            }
+            
+            startTransition(() => {
+              router.push("/location");
+            })
+
+            console.log("Email verification successful", data);
+          },
+          onError: (error) => {
+            toast.error((error as { response?: { data?: { message?: string } } })?.response?.data?.message || "Error in email verification");
+            console.error("Error in email verification", error);
+          }
+        }
+      );
+
+      // startTransition(() => {
+      //   router.push("/location");
+      // })
       // router.push("/checkout");
     }
 
@@ -207,7 +240,7 @@ export default function Page() {
           onClick={(e) => {
             e.preventDefault();
             startTransition(() => {
-              router.push("/choose-our-plans");
+              router.push("/");
             })
             // router.push("/choose-our-plans");
           }}
