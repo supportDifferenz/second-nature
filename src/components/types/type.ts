@@ -49,6 +49,8 @@ export type FooterBannerCTAPropsType = {
   subTitle?: string;
   buttonText?: string;
   buttonTextColor?: string;
+  buttonBg?: string;
+  buttonBorder?: string;
   buttonLink?: string;
   bannerThemeColor: string;
 };

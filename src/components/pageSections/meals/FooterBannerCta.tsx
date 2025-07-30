@@ -155,6 +155,9 @@ export default function FooterBannerCta() {
       buttonLink={selectedData?.buttonLink || "/location"}
       bannerThemeColor={selectedData?.bannerThemeColor || "#fff"}
       align={selectedData?.align || "center"}
+      buttonTextColor={ "#FFFFFF"}
+      buttonBg={ "#00683D"}        
+      buttonBorder={ "#FFFFFF"}
     />
 
     // <FooterBannerCTA
