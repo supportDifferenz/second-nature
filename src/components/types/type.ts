@@ -125,6 +125,7 @@ export type InputLabeledPropsType = {
   subLabel?: string;
   className?: string; 
   inputClassName?: string;
+  labelClassName?: string; 
   error?: string; 
   variant?: "default" | "roundedEdgeInput" | "dottedInput"; 
 } & InputHTMLAttributes<HTMLInputElement>;
