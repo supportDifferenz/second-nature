@@ -20,6 +20,7 @@ import { useUserStore } from "@/zustand/store/userDataStore";
 import { PauseDeliveriesPopup } from "@/components/pageSections/dashboard/orderHistory/PauseDeliveriesPopup";
 import { usePausePlan } from "@/hooks/subscriptionHooks/pausePlanHook";
 import { toast } from "sonner";
+import CancelSub from "@/components/organism/popUp/CancelSub";
 
 type PetInfo = { name: string; petId: string; subId: string };
 
@@ -136,6 +137,7 @@ const OrderHistoryCard: React.FC<
 
   const [isProteinPopupOpen, setIsProteinPopupOpen] = useState(false);
   const [isDowngradePopupOpen, setIsDowngradePopupOpen] = useState(false);
+  const [isCancelSubPopupOpen, setIsCancelSubPopupOpen] = useState(false);
   const [isCancelPopupOpen, setIsCancelPopupOpen] = useState(false);
   const [isPausePopupOpen, setIsPausePopupOpen] = useState(false);
   const [currentProtein, setCurrentProtein] = useState(protein);
@@ -647,7 +649,7 @@ const OrderHistoryCard: React.FC<
               <Button 
                 className="w-full" 
                 size="md"
-                onClick={() => setIsCancelPopupOpen(true)}
+                onClick={() => setIsCancelSubPopupOpen(true)}
               >
                 {buttons[2]} {/* Cancel */}
               </Button>
@@ -755,6 +757,18 @@ const OrderHistoryCard: React.FC<
           setIsPausePopupOpen(false);
         }}
       />
+
+      { 
+        isCancelSubPopupOpen && (
+         <CancelSub 
+            isOpen={isCancelSubPopupOpen} 
+            setIsOpen={setIsCancelSubPopupOpen}
+            setIsDowngradePopupOpen={setIsDowngradePopupOpen}
+            setIsPausePopupOpen={setIsPausePopupOpen}
+            setIsCancelPopupOpen={setIsCancelPopupOpen}
+         /> 
+        ) 
+      }
     </div>
   );
 };

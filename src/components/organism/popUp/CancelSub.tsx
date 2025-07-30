@@ -1,10 +1,18 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import Typography from "@/components/atoms/typography/Typography";
 import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-export default function CancelSub() {
-  const [isOpen, setIsOpen] = useState(true); // Popup starts open
+export interface CancelSubProps {
+  isOpen: boolean;
+  setIsOpen: (open: boolean) => void;
+  setIsDowngradePopupOpen: (open: boolean) => void;
+  setIsPausePopupOpen: (open: boolean) => void;
+  setIsCancelPopupOpen: (open: boolean) => void;
+}
+
+export default function CancelSub({ isOpen, setIsOpen, setIsDowngradePopupOpen, setIsPausePopupOpen, setIsCancelPopupOpen }: CancelSubProps) {
+  // const [isOpen, setIsOpen] = useState(true); // Popup starts open
 
   const handleClose = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
@@ -33,9 +41,34 @@ export default function CancelSub() {
           <Typography tag="h5" text="Cancel Subscription" className="text-primary-dark" />
         </div>
         <div className="flex flex-col gap-5 mt-7">
-            <Button variant={"primaryBtn"} size={"small"} className="w-full">Downgrade Your Plan</Button>
-            <Button variant={"primaryBtn"} size={"small"} className="w-full">Pause Your Plan For Few Weeks </Button>
-            <Typography tag="p" text="No, I want to Cancel" className="text-secondary-1 underline cursor-pointer" />
+            <Button 
+              variant={"primaryBtn"} 
+              size={"small"} 
+              className="w-full"
+              onClick={() => {
+                setIsOpen(false)
+                setIsDowngradePopupOpen(true);
+              }}
+            >
+              Downgrade Your Plan
+            </Button>
+            <Button 
+              variant={"primaryBtn"} 
+              size={"small"} 
+              className="w-full"
+              onClick={() => {
+                setIsOpen(false)
+                setIsPausePopupOpen(true);
+              }}
+            >
+              Pause Your Plan For Few Weeks 
+            </Button>
+            <div onClick={() => {
+              setIsOpen(false)
+              setIsCancelPopupOpen(true);
+            }}>
+              <Typography tag="p" text="No, I want to Cancel" className="text-secondary-1 underline cursor-pointer" />
+            </div>
         </div>
       </div>
     </div>
