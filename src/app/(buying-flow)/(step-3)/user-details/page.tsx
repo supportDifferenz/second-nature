@@ -112,13 +112,12 @@ export default function Page() {
 
             if(data?.statusCode === 200) {
               toast.success(data?.message || "Email verification successful");
+              startTransition(() => {
+                router.push("/location");
+              })
             }else{
               toast.error(data?.message || "Email verification failed");
             }
-            
-            startTransition(() => {
-              router.push("/location");
-            })
 
             console.log("Email verification successful", data);
           },
