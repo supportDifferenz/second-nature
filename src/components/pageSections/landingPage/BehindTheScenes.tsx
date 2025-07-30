@@ -49,12 +49,12 @@ export default function BehindTheScenes() {
 
   return (
     <section className="bg-secondary-1 text-white relative">
-      <div className="absolute top-1/2 transform -translate-y-1/2  left-0 w-full   max-w-[1920px]">
+      <div className="absolute top-1/2 transform -translate-y-1/2  left-0 w-full hidden lg:block   max-w-[1920px]">
         <picture>
           <source media="(min-width: 992px)" srcSet="/images/behind-scene-bg.webp" />
-          {/* <source media="(min-width: 640px)" srcSet="/images/hero-tablet.jpg" /> */}
+          <source media="(max-width: 991px)" srcSet="/images/hero-tablet.jpg" />
           <img
-            src="/images/hero-mobile.jpg"
+            src="/images/behind-scene-bg.webp"
             alt="Hero Banner"
             className="w-full h-auto "
           />

@@ -1,6 +1,7 @@
 "use client";
+
 import React, { useState, useEffect, useCallback, startTransition } from "react";
-import { motion, easeInOut } from "framer-motion";
+import { motion, easeInOut, AnimatePresence } from "framer-motion";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import Fade from "embla-carousel-fade";
@@ -8,7 +9,6 @@ import { cn } from "@/lib/utils";
 import { cva } from "class-variance-authority";
 import Typography from "@/components/atoms/typography/Typography";
 import { Button } from "@/components/ui/button";
-import { AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
 
 const bannerVariants = cva(
@@ -75,7 +75,6 @@ const banners = [
   },
 ];
 
-// Animation helper
 const fadeUp = (delay = 0, y = 30, duration = 0.6) => ({
   initial: { opacity: 0, y },
   animate: {
@@ -91,25 +90,31 @@ const fadeUp = (delay = 0, y = 30, duration = 0.6) => ({
 });
 
 export default function HeroSection() {
-
   const router = useRouter();
-
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [
     Autoplay({ delay: 4000 }),
     Fade(),
   ]);
-  const [selectedIndex, setSelectedIndex] = useState(0);
 
-  const updateIndex = useCallback(() => {
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [canScrollNext, setCanScrollNext] = useState(true);
+  const [canScrollPrev, setCanScrollPrev] = useState(true);
+
+  const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
+  const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
+
+  const onSelect = useCallback(() => {
     if (!emblaApi) return;
     setSelectedIndex(emblaApi.selectedScrollSnap());
+    setCanScrollPrev(emblaApi.canScrollPrev());
+    setCanScrollNext(emblaApi.canScrollNext());
   }, [emblaApi]);
 
   useEffect(() => {
     if (!emblaApi) return;
-    emblaApi.on("select", updateIndex);
-    updateIndex();
-  }, [emblaApi, updateIndex]);
+    emblaApi.on("select", onSelect);
+    onSelect();
+  }, [emblaApi, onSelect]);
 
   return (
     <section className="relative w-full overflow-hidden">
@@ -137,7 +142,6 @@ export default function HeroSection() {
                       fetchPriority="high"
                     />
                   </picture>
-
                 </div>
 
                 {/* Content */}
@@ -209,7 +213,7 @@ export default function HeroSection() {
                                     if (banner.buttonLink) {
                                       router.push(banner.buttonLink);
                                     }
-                                  })
+                                  });
                                 }}
                               >
                                 {banner.buttonText}
@@ -226,6 +230,29 @@ export default function HeroSection() {
           })}
         </div>
       </div>
+
+      {/* Navigation Buttons */}
+      <div className=" flex gap-4 ">
+        <Button
+          // variant="ghost"
+          size="icon"
+          onClick={scrollPrev}
+          disabled={!canScrollPrev}
+          className="rounded-full !border-0 text-white bg-transparent absolute top-1/2 left-[5px] lg:left-[1%] shadow-md  -translate-y-1/2 z-[5] hover:scale-110 transition-transform duration-300">
+          <img src="/icons/arrow-left-nav-white.svg" alt="arrow" className="w-[50px]"/>
+        </Button>
+        <Button
+          // variant="ghost"
+          size="icon"
+          onClick={scrollNext}
+          disabled={!canScrollNext}
+          className="rounded-full !border-0 text-white bg-transparent absolute top-1/2   -translate-y-1/2 z-[5] right-[5px] shadow-md lg:right-[1%] hover:scale-110 transition-transform duration-300"
+        >
+          <img src="/icons/arrow-right-nav-white.svg" alt="arrow" className="w-[50px]"/>
+        </Button>
+      </div>
+
+
     </section>
   );
 }
