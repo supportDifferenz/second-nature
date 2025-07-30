@@ -32,4 +32,6 @@ export const QUERY_KEYS = {
     CREATE_FAQ: "createFaq",
     GET_ALL_OFFERS: "getAllOffers",
     EMAIL_VERIFICATION: "emailVerification",
+    GET_ALL_ALLERGIES: "getAllAllergies",
+    GET_ALL_EATING_PREFERENCES: "getAllEatingPreferences",
 }   
