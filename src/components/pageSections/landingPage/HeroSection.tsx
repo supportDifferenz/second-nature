@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useCallback, startTransition } from "react";
-import { motion, easeInOut } from "framer-motion";
+import { motion, easeInOut, AnimatePresence } from "framer-motion";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import Fade from "embla-carousel-fade";
@@ -9,11 +9,72 @@ import { cn } from "@/lib/utils";
 import { cva } from "class-variance-authority";
 import Typography from "@/components/atoms/typography/Typography";
 import { Button } from "@/components/ui/button";
-import { AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
-import useAuthStore from "@/zustand/store/authDataStore";
 
-// Animation helper
+const bannerVariants = cva(
+  "relative flex pt-8 sm:pt-0 sm:items-center w-full bg-cover bg-center transition-all",
+  {
+    variants: {
+      align: {
+        left: "text-center justify-center sm:justify-start sm:text-left",
+        center: "text-center justify-center sm:justify-center sm:[&_*_*]:mx-auto text-center",
+        right: "text-center justify-center sm:justify-end sm:text-left",
+      },
+      bannerHeight: {
+        mainHero:
+          "min-h-[400px] h-[600px] sm:min-h-[300px] sm:h-[50dvh] lg:min-h-[480px] 2xl:min-h-[720px] lg:h-[75dvh]  lg:max-h-[1000px]",
+        subHero:
+          "min-h-[500px] h-[90dvh] sm:min-h-[400px] sm:h-[50dvh] lg:min-h-[520px] sm:h-[70dvh] lg:max-h-[1200px]",
+      },
+    },
+    defaultVariants: {
+      align: "center",
+      bannerHeight: "subHero",
+    },
+  }
+);
+
+const banners = [
+  {
+    id: "1",
+    image: {
+      web: "/images/hero-carousel-banner-web.webp",
+      tablet: "/images/hero-carousel-banner-web.webp",
+      mobile: "/images/hero-carousel-banner-mob.webp",
+    },
+    caption: "introducing",
+    captionColor: "#424242",
+    title: "real food,",
+    halfTitle: "just as nature intended",
+    paragraph:
+      "freshly prepared and delivered to your door that fuels a life full of happy tails",
+    paragraphColor: "#424242",
+    buttonText: "know more",
+    buttonTextColor: "",
+    buttonLink: "/location",
+    bannerThemeColor: "#00683D",
+  },
+  {
+    id: "2",
+    image: {
+      web: "/images/hero-carousel-banner-2-web.webp",
+      tablet: "/images/hero-carousel-banner-2-web.webp",
+      mobile: "/images/hero-carousel-banner-2-mob.webp",
+    },
+    caption: "new Offer",
+    captionColor: "#FFFFFF",
+    title: "Get 10% off,",
+    halfTitle: "On your first Subscription",
+    paragraph:
+      "Freshly prepared and delivered to your door that fuels a life full of happy tails",
+    paragraphColor: "#ffff",
+    buttonText: "Get Started",
+    buttonLink: "/location",
+    bannerThemeColor: "#ffff",
+    buttonTextColor: "#ffff",
+  },
+];
+
 const fadeUp = (delay = 0, y = 30, duration = 0.6) => ({
   initial: { opacity: 0, y },
   animate: {
@@ -29,92 +90,31 @@ const fadeUp = (delay = 0, y = 30, duration = 0.6) => ({
 });
 
 export default function HeroSection() {
-
   const router = useRouter();
-  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
-
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [
     Autoplay({ delay: 4000 }),
     Fade(),
   ]);
-  const [selectedIndex, setSelectedIndex] = useState(0);
 
-  const updateIndex = useCallback(() => {
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [canScrollNext, setCanScrollNext] = useState(true);
+  const [canScrollPrev, setCanScrollPrev] = useState(true);
+
+  const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
+  const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
+
+  const onSelect = useCallback(() => {
     if (!emblaApi) return;
     setSelectedIndex(emblaApi.selectedScrollSnap());
+    setCanScrollPrev(emblaApi.canScrollPrev());
+    setCanScrollNext(emblaApi.canScrollNext());
   }, [emblaApi]);
-
-  const bannerVariants = cva(
-    "relative flex pt-8 sm:pt-0 sm:items-center w-full bg-cover bg-center transition-all",
-    {
-      variants: {
-        align: {
-          left: "text-center justify-center sm:justify-start sm:text-left",
-          center: "text-center justify-center sm:justify-center sm:[&_*_*]:mx-auto text-center",
-          right: "text-center justify-center sm:justify-end sm:text-left",
-        },
-        bannerHeight: {
-          mainHero:
-            "min-h-[400px] h-[600px] sm:min-h-[300px] sm:h-[50dvh] lg:min-h-[480px] 2xl:min-h-[720px] lg:h-[75dvh]  lg:max-h-[1000px]",
-          subHero:
-            "min-h-[500px] h-[90dvh] sm:min-h-[400px] sm:h-[50dvh] lg:min-h-[520px] sm:h-[70dvh] lg:max-h-[1200px]",
-        },
-      },
-      defaultVariants: {
-        align: "center",
-        bannerHeight: "subHero",
-      },
-    }
-  );
-
-  const banners = [
-    {
-      id: "1",
-      image: {
-        web: "/images/hero-carousel-banner-web.webp",
-        tablet: "/images/hero-carousel-banner-web.webp",
-        mobile: "/images/hero-carousel-banner-mob.webp",
-      },
-      caption: "introducing",
-      captionColor: "#424242",
-      title: "real food,",
-      halfTitle: "just as nature intended",
-      paragraph:
-        "freshly prepared and delivered to your door that fuels a life full of happy tails",
-      paragraphColor: "#424242",
-      buttonText: "know more",
-      buttonTextColor: "",
-      buttonLink: isAuthenticated ? "/location" : "/user-details",
-      // buttonLink: "/location",
-      bannerThemeColor: "#00683D",
-    },
-    {
-      id: "2",
-      image: {
-        web: "/images/hero-carousel-banner-2-web.webp",
-        tablet: "/images/hero-carousel-banner-2-web.webp",
-        mobile: "/images/hero-carousel-banner-2-mob.webp",
-      },
-      caption: "new Offer",
-      captionColor: "#FFFFFF",
-      title: "Get 10% off,",
-      halfTitle: "On your first Subscription",
-      paragraph:
-        "Freshly prepared and delivered to your door that fuels a life full of happy tails",
-      paragraphColor: "#ffff",
-      buttonText: "Get Started",
-      buttonLink: isAuthenticated ? "/location" : "/user-details",
-      // buttonLink: "/location",
-      bannerThemeColor: "#ffff",
-      buttonTextColor: "#ffff",
-    },
-  ];
 
   useEffect(() => {
     if (!emblaApi) return;
-    emblaApi.on("select", updateIndex);
-    updateIndex();
-  }, [emblaApi, updateIndex]);
+    emblaApi.on("select", onSelect);
+    onSelect();
+  }, [emblaApi, onSelect]);
 
   return (
     <section className="relative w-full overflow-hidden">
@@ -142,7 +142,6 @@ export default function HeroSection() {
                       fetchPriority="high"
                     />
                   </picture>
-
                 </div>
 
                 {/* Content */}
@@ -214,7 +213,7 @@ export default function HeroSection() {
                                     if (banner.buttonLink) {
                                       router.push(banner.buttonLink);
                                     }
-                                  })
+                                  });
                                 }}
                               >
                                 {banner.buttonText}
@@ -231,6 +230,29 @@ export default function HeroSection() {
           })}
         </div>
       </div>
+
+      {/* Navigation Buttons */}
+      <div className=" flex gap-4 ">
+        <Button
+          // variant="ghost"
+          size="icon"
+          onClick={scrollPrev}
+          disabled={!canScrollPrev}
+          className="rounded-full !border-0 text-white bg-transparent absolute top-1/2 left-[5px] lg:left-[1%] shadow-md  -translate-y-1/2 z-[5] hover:scale-110 transition-transform duration-300">
+          <img src="/icons/arrow-left-nav-white.svg" alt="arrow" className="w-[50px]"/>
+        </Button>
+        <Button
+          // variant="ghost"
+          size="icon"
+          onClick={scrollNext}
+          disabled={!canScrollNext}
+          className="rounded-full !border-0 text-white bg-transparent absolute top-1/2   -translate-y-1/2 z-[5] right-[5px] shadow-md lg:right-[1%] hover:scale-110 transition-transform duration-300"
+        >
+          <img src="/icons/arrow-right-nav-white.svg" alt="arrow" className="w-[50px]"/>
+        </Button>
+      </div>
+
+
     </section>
   );
 }
