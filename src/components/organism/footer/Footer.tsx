@@ -102,15 +102,15 @@ const Footer = () => {
 
         {/* link wrapper */}
         <div className=" flex-2 border-t border-contrast-button pt-(--space-27-34)">
-          <div className="flex flex-wrap sm:flex-nowrap text-left sm:justify-between gap-7 sm:gap-4 pb-11">
-            <div className="flex-1 basis-full sm:basis-auto whitespace-nowrap  sm:flex-auto">
+          <div className="flex flex-wrap sm:flex-nowrap text-left sm:justify-between gap-y-8 sm:gap-4 pb-11">
+            <div className="flex-1 basis-full sm:basis-auto whitespace-nowrap  sm:flex-auto ">
               <Typography
                 tag="h5"
                 text="Our Food"
-                className="text-primary-dark mb-(--space-20-45)"
+                className="text-primary-dark max-[575px]:mb-4 mb-(--space-20-45)"
               />
-              <div className="flex gap-[35%] sm:gap-5">
-                <ul className="flex flex-col gap-2.5">
+              <div className="flex sm:gap-5">
+                <ul className="flex flex-col max-[575px]:flex-1 gap-2.5 ">
                   <li>
                     <BadgeTitle label="DOG" color="#00683D" />
                   </li>
@@ -118,7 +118,7 @@ const Footer = () => {
                   <li className="cursor-pointer">Treats</li>
                   <li className="cursor-pointer">Ingredients</li>
                 </ul>
-                <ul className="flex flex-col gap-2.5">
+                <ul className="flex flex-col max-[575px]:flex-1 gap-2.5 ">
                   <BadgeTitle label="CAT" color="#00683D" />
                   <li className="cursor-pointer">Meals</li>
                   <li className="cursor-pointer">Treats</li>
@@ -126,11 +126,11 @@ const Footer = () => {
                 </ul>
               </div>
             </div>
-            <div className="flex-1 whitespace-nowrap  sm:flex-auto">
+            <div className="flex-[50%] whitespace-nowrap  sm:flex-auto ">
               <Typography
                 tag="h5"
                 text="How It Works"
-                className="text-primary-dark mb-(--space-20-45)"
+                className="text-primary-dark max-[575px]:mb-4 mb-(--space-20-45)"
               />
 
               <ul className="flex flex-col gap-2.5">
@@ -176,11 +176,11 @@ const Footer = () => {
                 </li>
               </ul>
             </div>
-            <div className="flex-1 whitespace-nowrap  sm:flex-auto">
+            <div className="flex-[50%] whitespace-nowrap  sm:flex-auto ">
               <Typography
                 tag="h5"
                 text="About Us"
-                className="text-primary-dark mb-(--space-20-45)"
+                className="text-primary-dark max-[575px]:mb-4 mb-(--space-20-45)"
               />
               <ul className="flex flex-col gap-2.5">
                 <li
@@ -215,11 +215,11 @@ const Footer = () => {
                 </li>
               </ul>
             </div>
-            <div className="flex-1 whitespace-nowrap  sm:flex-auto">
+            <div className="flex-1 whitespace-nowrap  sm:flex-auto ">
               <Typography
                 tag="h5"
                 text="Other"
-                className="text-primary-dark mb-(--space-20-45)"
+                className="text-primary-dark max-[575px]:mb-4 mb-(--space-20-45)"
               />
               <ul className="flex flex-col gap-2.5">
                 <li
@@ -244,7 +244,7 @@ const Footer = () => {
                 </li>
               </ul>
             </div>
-            <div className="flex-1 whitespace-nowrap  sm:hidden sm:flex-auto">
+            <div className="flex-1 whitespace-nowrap  sm:hidden sm:flex-auto ">
               <Typography
                 tag="h5"
                 text="Need Help"
@@ -357,7 +357,7 @@ const Footer = () => {
               <Typography
                 tag="span"
                 text="European Pet Food Industry Federation guidelines to ensure complete and balanced nutrition"
-                className="text-left subtitle3 font-bold lg:!text-[15px] 2xl:!text-[16px] "
+                className="text-left subtitle3 max-[575px]:leading-[24px] !text-[16px] lg:!text-[15px] 2xl:!text-[16px] "
               />
             </div>
           </div>

@@ -27,6 +27,9 @@ export default function FooterCTASection() {
         // buttonLink="/location"
         bannerThemeColor="#fff"
         align="center" 
+           buttonTextColor="#FFFFFF"
+    buttonBg="#944446"
+    buttonBorder="#FFFFFF"
 
     />
   )

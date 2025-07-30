@@ -27,6 +27,9 @@ export default function FooterBannerCta() {
     // buttonLink="/location"
     bannerThemeColor="#fff"
     align="center" // Can be "left", "center", or "right"
+       buttonTextColor="#FFFFFF"
+    buttonBg="#944446"
+    buttonBorder="#FFFFFF"
   />
   )
 }

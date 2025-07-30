@@ -66,6 +66,9 @@ export default function Subscription() {
           // buttonLink="/location"
           bannerThemeColor="#fff"
           align="center"
+          buttonTextColor="#FFFFFF"
+          buttonBg="#00683D"
+          buttonBorder="#FFFFFF"
         />
       </div>
 

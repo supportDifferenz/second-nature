@@ -154,7 +154,7 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
 
                   {howItWorksOpen && (
                     <div className="pt-2 absolute left-0 xl:left-[-52%] top-full  z-50">
-                      <div className=" bg-[#FEFFF5] border border-[#DADBD2] overflow-hidden rounded-2xl xl:shadow-md  min-w-[200px] whitespace-nowrap xl:py-3">
+                      <div className=" bg-[#FEFFF5] border border-[#DADBD2] overflow-hidden rounded-2xl xl:shadow-md  min-w-[200px] lg:min-w-[185px] whitespace-nowrap xl:py-3">
                         <div className="grid grid-cols-1   xl:text-center">
                           {[
                             { name: "Subscription", href: "/subscription" },
