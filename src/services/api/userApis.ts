@@ -162,7 +162,7 @@ try {
   );
     return response.data;
   } catch (error) {
-      console.error("Error in change password", error);
+      console.error("Error in email verification", error);
       throw error;
   }
 };

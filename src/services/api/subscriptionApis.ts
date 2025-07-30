@@ -610,3 +610,27 @@ export const getAllOffers = async () => {
         throw error;
     }
 };
+
+export const getAllAllergies = async () => {
+  try {
+      const response = await subscriptionAxiosInstance.get(
+        `/api/subscription/getPetAllergies`,
+    );
+      return response.data;
+    } catch (error) {
+        console.error("Error in getting pet allergies", error);
+        throw error;
+    }
+};
+
+export const getAllEatingPreferences = async () => {
+  try {
+      const response = await subscriptionAxiosInstance.get(
+        `/api/subscription/getEatingPreferences`,
+    );
+      return response.data;
+    } catch (error) {
+        console.error("Error in getting pet eating preferences", error);
+        throw error;
+    }
+};
