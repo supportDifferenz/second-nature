@@ -101,8 +101,8 @@ export default function GuidelinesCard() {
 
             <div className="flex flex-wrap justify-center sm:justify-between gap-y-7 sm:gap-y-0">
 
-              <div className="flex items-center gap-2 lg:gap-3 pr-[var(--space-8-30)] sm:pr-[var(--space-8-17)]">
-                <div className="w-6 h-6 lg:w-10 lg:h-10">
+              <div className="flex items-center gap-2 lg:gap-3 pr-5 sm:pr-[var(--space-8-17)]">
+                <div className="w-10 h-10 lg:w-10 lg:h-10">
                   <Image
                     src="/icons/safe.svg"
                     alt="mission"
@@ -113,10 +113,10 @@ export default function GuidelinesCard() {
                 <Typography tag="p" text="Safe" className="uppercase font-bold text-secondary-1 text-start lg:text-sm max-[575px]:text-[14px]" />
               </div>
 
-              <div className="sm:border-r border-[#79D2A7] my-1.5"></div>
+              <div className="border-r border-[#79D2A7] my-1.5"></div>
 
-              <div className="flex items-center px-[var(--space-8-30)] sm:px-[var(--space-8-17)]  gap-2 lg:gap-3 ">
-                <div className="w-6 h-6 lg:w-10 lg:h-10">
+              <div className="flex items-center pl-5 sm:px-[var(--space-8-17)]  gap-2 lg:gap-3 ">
+                <div className="w-10 h-10 lg:w-10 lg:h-10">
                   <Image
                     src="/icons/balance-scale.svg"
                     alt="mission"
@@ -130,7 +130,7 @@ export default function GuidelinesCard() {
               <div className="sm:border-r border-[#79D2A7] my-1.5"></div>
 
               <div className="flex items-center pl-[var(--space-8-17)]  gap-2 lg:gap-3 ">
-                <div className="w-6 h-6 lg:w-10 lg:h-10">
+                <div className="w-10 h-10 lg:w-10 lg:h-10">
                   <Image
                     src="/icons/nutritional-carrot.svg"
                     alt="mission"
