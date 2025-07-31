@@ -168,6 +168,8 @@ export const createPet = async (formData: {
     ageYear: number;
     breed: string;
     crossBreeds: Array<string>;
+    allergiesOrIntolerances: Array<string>;
+    eatingPreferences: Array<string>;
     activityLevel: string;
     currentWeight: number;
     targetWeight: number;

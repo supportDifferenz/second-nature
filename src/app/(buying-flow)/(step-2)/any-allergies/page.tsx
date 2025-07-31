@@ -6,17 +6,24 @@ import { Button } from '@/components/ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ChevronDownIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { startTransition } from "react";
 import { useGetAllAllergies } from '@/hooks/subscriptionHooks/getAllAllergiesHook';
+import { usePetStore } from '@/zustand/store/petDataStore';
 
 export default function AnyAllergies() {
 
     const router = useRouter();
 
     const { data: allergies, isLoading: isAllergiesLoading } = useGetAllAllergies();
+
+    const { pets, selectedPetIndex, setPetDetails } = usePetStore();
+    const selectedPet = selectedPetIndex !== null ? pets[selectedPetIndex] : null;
+    const currentPetId = selectedPet ? selectedPet.id : null; // Get the current pet ID
+    const selectedPetName = selectedPet ? selectedPet.name : null;
+    const allergiesOrIntolerances = selectedPet ? selectedPet.allergiesOrIntolerances : []; // Get the current pet type (cat or dog)
 
     const [selectedSymptoms, setSelectedSymptoms] = useState<string[]>([]);
 
@@ -42,11 +49,18 @@ export default function AnyAllergies() {
     const handleNext = (e: React.FormEvent) => {
         // if (selectedSymptoms.length === 0) return;
         e.preventDefault();
-        startTransition(() => {
+        if(currentPetId){
+            setPetDetails(currentPetId, { allergiesOrIntolerances: selectedSymptoms });
+            startTransition(() => {
             router.push("/eating-preference");
         })
+        }
         // router.push("/eating-preference");
     };
+
+    useEffect(() => {
+        setSelectedSymptoms(allergiesOrIntolerances || []);
+    },[allergiesOrIntolerances]);
 
     return (
         <BuyingFlowLayout step={1}>
@@ -57,7 +71,7 @@ export default function AnyAllergies() {
                 >
                     <Typography
                         tag="h2"
-                        text="Does Jackey have allergies?"
+                        text={`Does ${selectedPetName} have allergies?`}
                         className="text-primary-dark portrait:mb-[5dvh] landscape:mb-[4dvh] capitalize text-center"
                     />
 
