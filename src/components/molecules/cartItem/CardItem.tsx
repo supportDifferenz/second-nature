@@ -45,7 +45,13 @@ export default function CardItem({ petName, planType, planPrice, protein }: Card
           />
         </div>
       </div>
-      <div className="ml-auto mt-[var(--space-8-30)]">
+      <div className="flex flex-col gap-2 ml-auto mt-[var(--space-8-30)]">
+        <Typography 
+          tag="h6"
+          text={`${planPrice} QAR`}
+          // text="400.00 QAR"
+          className="text-text-color line-through" 
+        />
         <Typography 
           tag="h6"
           text={`${planPrice} QAR`}
