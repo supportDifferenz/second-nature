@@ -6,16 +6,23 @@ import { Button } from '@/components/ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
-import { startTransition, useState } from 'react';
+import { startTransition, useState, useEffect } from 'react';
 import { ChevronDownIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useGetAllEatingPreferences } from '@/hooks/subscriptionHooks/getAllEatingPreferencesHook';
+import { usePetStore } from '@/zustand/store/petDataStore';
 
 export default function EatingPreferences() {
 
     const router = useRouter();
 
     const { data: allEatingPreferences, isLoading: isEatingPreferencesLoading } = useGetAllEatingPreferences();
+    
+    const { pets, selectedPetIndex, setPetDetails } = usePetStore();
+        const selectedPet = selectedPetIndex !== null ? pets[selectedPetIndex] : null;
+        const currentPetId = selectedPet ? selectedPet.id : null; // Get the current pet ID
+        const selectedPetName = selectedPet ? selectedPet.name : null;
+        const eatingPreferences = selectedPet ? selectedPet.eatingPreferences : []; // Get the current pet type (cat or dog)
 
     const [selectedPreferences, setSelectedPreferences] = useState<string[]>([]);
 
@@ -48,11 +55,18 @@ export default function EatingPreferences() {
     const handleNext = (e: React.FormEvent) => {
         // if (selectedPreferences.length === 0) return;
         e.preventDefault();
-        startTransition(() => {
-            router.push("/choose-our-plans");
-        })
+        if(currentPetId){
+            setPetDetails(currentPetId, { eatingPreferences: selectedPreferences });
+            startTransition(() => {
+                router.push("/choose-our-plans");
+            })
+        }
         // router.push("/choose-our-plans");
     };
+
+    useEffect(() => {
+        setSelectedPreferences(eatingPreferences || []);
+    },[eatingPreferences]);
 
     return (
         <BuyingFlowLayout step={1}>
@@ -63,7 +77,7 @@ export default function EatingPreferences() {
                 >
                     <Typography
                         tag="h2"
-                        text="Does Jackey have Eating Preference?"
+                        text={`Does ${selectedPetName} have Eating Preference?`}
                         className="text-primary-dark portrait:mb-[5dvh] landscape:mb-[4dvh] capitalize text-center"
                     />
 
