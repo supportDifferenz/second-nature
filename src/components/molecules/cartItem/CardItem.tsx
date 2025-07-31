@@ -13,7 +13,7 @@ interface CardItemProps {
 export default function CardItem({ petName, planType, planPrice, protein }: CardItemProps) {
   return (
     <div className="flex">
-      <div className="w-[23.3vw] lg:w-[13.22vw] h-full">
+      <div className="w-[23.3vw] lg:w-[11.22vw] h-full">
         <Image
           src="/images/cart-cardboard.webp"
           alt="meal bowl"
@@ -21,7 +21,7 @@ export default function CardItem({ petName, planType, planPrice, protein }: Card
           fill
         />
       </div>
-      <div className="flex flex-col gap-[var(--space-8-17)] mt-[var(--space-8-30)]">
+      <div className="flex flex-col gap-2 mt-[var(--space-8-30)]">
         <div>
           <Typography
             tag="h6"

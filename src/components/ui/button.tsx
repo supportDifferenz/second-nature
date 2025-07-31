@@ -20,6 +20,8 @@ const buttonVariants = cva(
 
         outlinePrimaryBtn:
           "bg-transparent border-secondary-1  hover:bg-secondary-1 hover:text-white text-secondary-1",
+        WarningRedBtn:
+          "bg-[#F15353] border-0 hover:bg-[#f03e3e] text-white ",
         outlineSecondaryBtn:
           "bg-transparent border-primary-dark hover:border-[#823234] text-primary-dark",
         outlineSecondaryBtnHover:
