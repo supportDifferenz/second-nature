@@ -152,7 +152,7 @@ export default function DogOrCat() {
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: softEase }}
-          className="flex-1 h-full flex flex-col sm:flex-row items-center justify-center w-full max-w-3xl mx-auto gap-[1dvh] sm:gap-8"
+          className="sm:flex-1 sm:h-full flex flex-col sm:flex-row items-center justify-center w-full max-w-3xl mx-auto gap-0 sm:gap-8"
         >
           {/* Dog Selection */}
           <div className="flex flex-col w-[70%] lg:w-[30%] xl:w-[35%] 2xl:w-full max-w-[381px] ">

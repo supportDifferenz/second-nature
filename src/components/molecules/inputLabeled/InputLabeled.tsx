@@ -17,17 +17,18 @@ export const InputLabeled: React.FC<InputLabeledPropsType> = ({
     <div className={`flex flex-col ${className}`}>
       <div className={`flex flex-col sm:flex-row place-items-baseline ${subLabel ? "max-sm:mb-3" : ""}`}>
         {label && <Label className={labelClassName}>{label}</Label>}
-        {subLabel && (
-          <span className="text-xs text-secondary-2 max-sm:-mt-1 sm:ml-1">
-            {subLabel}
-          </span>
-        )}
+        
       </div>
       <Input
         placeholder={placeholder}
         className={`${inputClassName} bg-white`}
         {...props}
       />
+      {subLabel && (
+          <span className="text-xs text-text-color max-sm:-mt-1 sm:ml-1">
+            {subLabel}
+          </span>
+        )}
       {error && (
         <span className="text-sm text-red-500 block">{error}</span>
       )}
