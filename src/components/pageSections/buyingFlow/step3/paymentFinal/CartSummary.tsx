@@ -19,7 +19,7 @@ export default function CartSummary() {
   const [productPrice, setProductPrice] = useState<number>(totalPrice);
 
   return (
-    <div className="bg-[#F1F5DB] lg:max-h-[95vh] py-[var(--space-30-60)] rounded-2xl border border-[#C5C5C5]">
+    <div className="bg-[#F1F5DB] min-h-min lg:max-h-[95vh] py-[var(--space-15-30)] rounded-2xl border border-[#C5C5C5]">
       <div>
         <Typography
           tag="h5"
@@ -48,7 +48,7 @@ export default function CartSummary() {
         <div className="pointer-events-none absolute bottom-0 left-0 w-full h-6 bg-gradient-to-t from-[#F1F5DB] to-transparent z-10" />
       </div>
 
-      <div className="flex flex-col gap-[var(--space-20-30)] border-y border-[#CAD585] pt-[var(--space-32-52)] pb-[var(--space-10-20)] mx-[var(--space-30-60)]">
+      <div className="flex flex-col gap-[var(--space-10-15)] border-y border-[#CAD585] pt-[var(--space-15-30)] pb-[var(--space-10-20)] mx-[var(--space-30-60)]">
         <Typography
           tag="h6"
           text="caption Promo/referal code"
@@ -60,7 +60,7 @@ export default function CartSummary() {
           setProductPrice={setProductPrice}
         />
       </div>
-      <div className="flex justify-between pt-[var(--space-33-42)] mx-[var(--space-30-60)]">
+      <div className="flex justify-between pt-[var(--space-15-30)] mx-[var(--space-30-60)]">
         <Typography
           tag="h6"
           text="Order total"
