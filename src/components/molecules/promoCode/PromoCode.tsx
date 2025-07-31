@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import React, { useState } from 'react'
 import { useGetPromoOffer } from '@/hooks/subscriptionHooks/getPromoOfferHook'
+import Typography from '@/components/atoms/typography/Typography';
 
 interface PromoCodeProps {
   totalPrice: number;
@@ -69,7 +70,7 @@ export default function PromoCode({ totalPrice, productPrice, setProductPrice }:
         />
         {isApplied ? (
           <Button 
-            variant="outlinePrimaryBtn" 
+            variant="primaryBtn" 
             className="absolute right-1"
             onClick={handleRemove}
           >
@@ -92,6 +93,27 @@ export default function PromoCode({ totalPrice, productPrice, setProductPrice }:
           {promoMessage}
         </div>
       )}
+
+      <div className='flex flex-col gap-3 lg:gap-2 pt-5'>
+        <div className='flex items-center justify-between'>
+          <Typography tag='p' text='Promotion Code' className='text-primary-dark font-semibold'/>
+          <Typography tag='p' text='-10.00 QAR' className='text-primary-dark text-end font-semibold'/>
+        </div>
+
+
+        <div className='flex items-center justify-between'>
+          <Typography tag='p' text='25% Off Your First Month' className='text-primary-dark font-semibold'/>
+          <Typography tag='p' text='-100.00 QAR' className='text-primary-dark text-end font-semibold'/>
+        </div>
+        <div className='flex items-center justify-between'>
+          <Typography tag='p' text='Shipping' className='text-primary-dark font-semibold'/>
+          <Typography tag='p' text='0 QAR' className='text-primary-dark text-end font-semibold'/>
+        </div>
+        <div className='flex items-center justify-between'>
+          <Typography tag='p' text='Tax' className='text-primary-dark font-semibold'/>
+          <Typography tag='p' text='0 QAR' className='text-primary-dark text-end font-semibold'/>
+        </div>
+      </div>
     </div>
   );
 }
