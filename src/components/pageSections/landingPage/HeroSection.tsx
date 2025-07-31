@@ -1,6 +1,12 @@
 "use client";
 
-import React, { useState, useEffect, useCallback, startTransition } from "react";
+import React, {
+  useState,
+  useEffect,
+  useCallback,
+  useRef,
+  startTransition,
+} from "react";
 import { motion, easeInOut, AnimatePresence } from "framer-motion";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
@@ -18,7 +24,8 @@ const bannerVariants = cva(
     variants: {
       align: {
         left: "text-center justify-center sm:justify-start sm:text-left",
-        center: "text-center justify-center sm:justify-center sm:[&_*_*]:mx-auto text-center",
+        center:
+          "text-center justify-center sm:justify-center sm:[&_*_*]:mx-auto text-center",
         right: "text-center justify-center sm:justify-end sm:text-left",
       },
       bannerHeight: {
@@ -50,22 +57,34 @@ const fadeUp = (delay = 0, y = 30, duration = 0.6) => ({
 });
 
 export default function HeroSection() {
-
   const router = useRouter();
-
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
+  const autoplay = Autoplay({ delay: 4000 });
+  const autoplayRef = useRef(autoplay);
+  const resumeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [
-    Autoplay({ delay: 4000 }),
     Fade(),
+    autoplay,
   ]);
 
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [canScrollNext, setCanScrollNext] = useState(true);
-  const [canScrollPrev, setCanScrollPrev] = useState(true);
+  const [, setCanScrollNext] = useState(true);
+  const [, setCanScrollPrev] = useState(true);
 
   const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
   const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
+
+  const handlePauseAndResume = useCallback(() => {
+    autoplayRef.current?.stop();
+
+    if (resumeTimeoutRef.current) clearTimeout(resumeTimeoutRef.current);
+
+    resumeTimeoutRef.current = setTimeout(() => {
+      autoplayRef.current?.play();
+    }, 20000);
+  }, []);
 
   const banners = [
     {
@@ -85,7 +104,6 @@ export default function HeroSection() {
       buttonText: "know more",
       buttonTextColor: "",
       buttonLink: isAuthenticated ? "/location" : "/user-details",
-      // buttonLink: "/location",
       bannerThemeColor: "#00683D",
     },
     {
@@ -104,7 +122,6 @@ export default function HeroSection() {
       paragraphColor: "#ffff",
       buttonText: "Get Started",
       buttonLink: isAuthenticated ? "/location" : "/user-details",
-      // buttonLink: "/location",
       bannerThemeColor: "#ffff",
       buttonTextColor: "#ffff",
     },
@@ -139,8 +156,14 @@ export default function HeroSection() {
                 {/* Background Image */}
                 <div className="h-full w-full max-w-[var(--max-w)] left-1/2 transform -translate-x-1/2 absolute top-0 z-[-1]">
                   <picture className="absolute inset-0 w-full h-full z-[-1]">
-                    <source media="(max-width: 574px)" srcSet={banner.image.mobile} />
-                    <source media="(max-width: 991px)" srcSet={banner.image.tablet} />
+                    <source
+                      media="(max-width: 574px)"
+                      srcSet={banner.image.mobile}
+                    />
+                    <source
+                      media="(max-width: 991px)"
+                      srcSet={banner.image.tablet}
+                    />
                     <img
                       src={banner.image.web}
                       alt={banner.title || "Hero Banner"}
@@ -239,27 +262,38 @@ export default function HeroSection() {
       </div>
 
       {/* Navigation Buttons */}
-      <div className=" flex gap-4 ">
+      <div className="flex gap-4">
         <Button
-          // variant="ghost"
           size="icon"
-          onClick={scrollPrev}
-          disabled={!canScrollPrev}
-          className="rounded-full !border-0 text-white bg-transparent absolute top-1/2 left-[5px] lg:left-[1%] shadow-md  -translate-y-1/2 z-[5] hover:scale-110 transition-transform duration-300">
-          <img src="/icons/arrow-left-nav-white.svg" alt="arrow" className="w-[50px]"/>
+          onClick={() => {
+            handlePauseAndResume();
+            scrollPrev();
+          }}
+          onMouseEnter={handlePauseAndResume}
+          className="rounded-full !border-0 text-white bg-transparent absolute top-1/2 left-[5px] lg:left-[1%] shadow-md -translate-y-1/2 z-[5] hover:scale-110 transition-transform duration-300"
+        >
+          <img
+            src="/icons/arrow-left-nav-white.svg"
+            alt="arrow"
+            className="w-[50px]"
+          />
         </Button>
         <Button
-          // variant="ghost"
           size="icon"
-          onClick={scrollNext}
-          disabled={!canScrollNext}
-          className="rounded-full !border-0 text-white bg-transparent absolute top-1/2   -translate-y-1/2 z-[5] right-[5px] shadow-md lg:right-[1%] hover:scale-110 transition-transform duration-300"
+          onClick={() => {
+            handlePauseAndResume();
+            scrollNext();
+          }}
+          onMouseEnter={handlePauseAndResume}
+          className="rounded-full !border-0 text-white bg-transparent absolute top-1/2 right-[5px] lg:right-[1%] shadow-md -translate-y-1/2 z-[5] hover:scale-110 transition-transform duration-300"
         >
-          <img src="/icons/arrow-right-nav-white.svg" alt="arrow" className="w-[50px]"/>
+          <img
+            src="/icons/arrow-right-nav-white.svg"
+            alt="arrow"
+            className="w-[50px]"
+          />
         </Button>
       </div>
-
-
     </section>
   );
 }
