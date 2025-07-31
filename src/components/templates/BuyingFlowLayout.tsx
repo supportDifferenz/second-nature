@@ -26,13 +26,13 @@ export default function BuyingFlowLayout({
     <>
       <Header isOnlyBrandHeader={true} />
       <main className="sm:mt-[1dvh] ">
-        <div className="portrait:min-h-[400px] portrait:h-[calc(100dvh-110px)] landscape:min-h-[430px] landscape:h-[calc(100dvh-140px)] landscape:max-h-[800px] flex flex-col items-center justify-start ">
+        <div className="portrait:min-h-[400px] portrait:h-[calc(100dvh-127px)] landscape:min-h-[430px] landscape:h-[calc(100dvh-140px)] landscape:max-h-[800px] flex flex-col items-center justify-start ">
           <div className="container  mb-4 text-center  w-full ">
             <CheckoutProgressBar currentStep={step} />
           </div>
           {/* pets name */}
           { !isCheckoutPage && (
-            <ul className={`${pets.length > 0 ? "bg-primary-light" : ""} flex items-center gap-1 lg:gap-2 py-1.5 lg:py-2.5 px-4 lg:px-7 my-6 lg:my-8 rounded-full`}>
+            <ul className={`${pets.length > 0 ? "bg-primary-light" : ""} flex items-center gap-1 lg:gap-2 py-1 lg:py-1.5 px-4 lg:px-7 my-6 lg:my-8 rounded-full`}>
               {pets.length > 0 ? (
                 pets.map((pet, index) => (
                   <div
@@ -98,7 +98,7 @@ export default function BuyingFlowLayout({
               )}
             </ul>
           )}
-          <div className="container  grow  flex flex-col   relative">{children}</div>
+          <div className="container  grow  flex flex-col   relative ">{children}</div>
         </div>
       </main>
     </>
