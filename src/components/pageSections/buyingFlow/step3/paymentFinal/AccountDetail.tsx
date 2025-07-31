@@ -1,7 +1,6 @@
 "use client";
 
 import Typography from "@/components/atoms/typography/Typography";
-import AlertBar from "@/components/molecules/alertBar/AlertBar";
 import { InputLabeled } from "@/components/molecules/inputLabeled/InputLabeled";
 import { Button } from "@/components/ui/button";
 import React, { useState } from "react";
@@ -17,7 +16,7 @@ export default function AccountDetail() {
   // const [ showShippingDetails, setShowShippingDetails ] = useState(false);
   const [accountDetailsError, setAccountDetailsError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [selectedCheckBox, setSelectedCheckBox] = useState(true);
+  // const [selectedCheckBox, setSelectedCheckBox] = useState(true);
   // const [ showContinueButton, setShowContinueButton ] = useState(true);
   // const [ isUserCreated, setIsUserCreated ] = useState(false);
 
@@ -177,7 +176,7 @@ export default function AccountDetail() {
   console.log("Form data is", formData);
 
   return (
-    <div className="flex flex-col gap-[var(--space-30-60)]">
+    <div className="flex flex-col gap-[var(--space-34-42)]">
       <div>
         <Typography
           tag="h5"
@@ -252,14 +251,14 @@ export default function AccountDetail() {
           />
         </div>
 
-        <AlertBar
+        {/* <AlertBar
           text="Email me with exclusive offers, new arrival alerts and cart reminders."
           selectedCheckBox={selectedCheckBox}
           setSelectedCheckBox={setSelectedCheckBox}
-        />
+        /> */}
 
         {!isAuthenticated && (
-          <>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-[var(--space-10-15)] gap-y-[var(--space-30-40)]">
             <InputLabeled
               name="password"
               label="Password"
@@ -270,6 +269,7 @@ export default function AccountDetail() {
               }
               placeholder="Enter your password"
               type="password"
+              labelClassName="text-primary-dark !font-medium !mb-2"
               variant="roundedEdgeInput"
               value={formData.password}
               onChange={handleChange}
@@ -281,13 +281,14 @@ export default function AccountDetail() {
               label="Repeat Password"
               placeholder="Repeat your password"
               type="password"
+              labelClassName="text-primary-dark !font-medium !mb-2"
               variant="roundedEdgeInput"
               value={formData.repeatPassword}
               onChange={handleChange}
               onBlur={handleBlur}
               error={errors.repeatPassword}
             />
-          </>
+          </div>
         )}
 
         {/* <InputLabeled 

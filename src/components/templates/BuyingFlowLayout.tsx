@@ -32,7 +32,7 @@ export default function BuyingFlowLayout({
           </div>
           {/* pets name */}
           { !isCheckoutPage && (
-            <ul className={`${pets.length > 0 ? "bg-primary-light" : ""} flex items-center gap-2 py-2.5 px-7 my-8 rounded-full`}>
+            <ul className={`${pets.length > 0 ? "bg-primary-light" : ""} flex items-center gap-1 lg:gap-2 py-1.5 lg:py-2.5 px-4 lg:px-7 my-6 lg:my-8 rounded-full`}>
               {pets.length > 0 ? (
                 pets.map((pet, index) => (
                   <div
