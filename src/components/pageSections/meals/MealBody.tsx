@@ -302,7 +302,24 @@ const mealContent = {
   }
 };
 
-const footerCtaData = {
+const footerCtaCatData = {
+  mealTransition: {
+    title: "Meal",
+    highlight: "Transition",
+    paragraph:
+      "Gradually introduce our fresh meals to ensure a smooth adjustment and lasting benefits for your furry child",
+    imageSrc: "/images/meal-transition.webp",
+  },
+  petFood: {
+    title: "Looking for",
+    highlight: "Dog Food?",
+    paragraph:
+      "Check out our nutrient-rich and irresistibly delicious dog Bowls for optimal feline health and wellness!",
+    imageSrc: "/images/dog-cta.webp",
+  },
+
+};
+const footerCtaDogData = {
   mealTransition: {
     title: "Meal",
     highlight: "Transition",
@@ -317,6 +334,7 @@ const footerCtaData = {
       "Check out our nutrient-rich and irresistibly delicious Cat Bowls for optimal feline health and wellness!",
     imageSrc: "/images/cat.webp",
   },
+
 };
 
 export default function MealBody() {
@@ -384,14 +402,17 @@ export default function MealBody() {
         </Button>
       </div> */}
 
-      <div className="flex gap-2 sm:gap-[var(--space-8-13)] mb-[var(--space-97-130)] w-fit mx-auto z-20 sticky top-5 max-sm:px-5">
+      <div className="flex gap-2 sm:gap-[var(--space-8-13)]  w-fit mx-auto z-20 sticky top-5 max-sm:px-5">
         <Button
           variant={selectedMeal === "beef" ? "primaryBtn" : "secondaryBtn"}
           className="max-sm:!px-3"
           onClick={() => {
             handleMealSwitch("beef")
             window.scrollTo({ top: 150, behavior: 'smooth' });
-
+            const element = document.getElementById('top-wrapper');
+            if (element) {
+              element.scrollIntoView({ behavior: 'smooth' });
+            }
           }}
 
         >
@@ -403,7 +424,10 @@ export default function MealBody() {
           className="max-sm:!px-3"
           onClick={() => {
             handleMealSwitch("chicken")
-              window.scrollTo({ top: 150, behavior: 'smooth' });
+            const element = document.getElementById('top-wrapper');
+            if (element) {
+              element.scrollIntoView({ behavior: 'smooth' });
+            }
 
           }}
         >
@@ -415,7 +439,10 @@ export default function MealBody() {
           className="max-sm:!px-3"
           onClick={() => {
             handleMealSwitch("lamb")
-              window.scrollTo({ top: 150, behavior: 'smooth' });
+            const element = document.getElementById('top-wrapper');
+            if (element) {
+              element.scrollIntoView({ behavior: 'smooth' });
+            }
 
           }}
         >
@@ -424,7 +451,7 @@ export default function MealBody() {
         </Button>
       </div>
 
-      <div className="w-[90%] sm:w-[62%] mx-auto mb-[var(--space-50-67)]">
+      <div className="w-[90%] pt-[var(--space-97-130)] sm:w-[62%] mx-auto mb-[var(--space-50-67)]" id="top-wrapper">
         <Image
           src="/images/meal-bowl.webp"
           alt="meal bowl"
@@ -469,9 +496,18 @@ export default function MealBody() {
 
       <div className="py-(--space-120-180)">
         <FooterCtaCard
-          mealTransition={footerCtaData.mealTransition}
-          petFood={footerCtaData.petFood}
+          mealTransition={
+            selectedPet === "dog"
+              ? footerCtaDogData.mealTransition
+              : footerCtaCatData.mealTransition
+          }
+          petFood={
+            selectedPet === "dog"
+              ? footerCtaDogData.petFood
+              : footerCtaCatData.petFood
+          }
         />
+
       </div>
 
 
