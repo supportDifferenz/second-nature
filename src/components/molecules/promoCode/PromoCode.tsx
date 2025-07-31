@@ -3,17 +3,21 @@ import { Input } from '@/components/ui/input'
 import React, { useState } from 'react'
 import { useGetPromoOffer } from '@/hooks/subscriptionHooks/getPromoOfferHook'
 import Typography from '@/components/atoms/typography/Typography';
+import { toast } from 'sonner';
 
 interface PromoCodeProps {
   totalPrice: number;
   productPrice: number;
   setProductPrice: React.Dispatch<React.SetStateAction<number>>;
+  discountPercentage: number;
+  regularPlanDiscountPrice: number;
 }
 
-export default function PromoCode({ totalPrice, productPrice, setProductPrice }: PromoCodeProps) {
+export default function PromoCode({ totalPrice, productPrice, setProductPrice, discountPercentage, regularPlanDiscountPrice }: PromoCodeProps) {
   const [promoCode, setPromoCode] = useState<string>("");
   const [isApplied, setIsApplied] = useState(false);
-  const [promoMessage, setPromoMessage] = useState<string>("");
+  const [promoCodeDiscountAmount, setPromoCodeDiscountAmount] = useState<number>(0);
+  // const [promoMessage, setPromoMessage] = useState<string>("");
   const { 
     isLoading: isPromoOfferLoading,
     refetch: refetchPromoOffer
@@ -24,12 +28,14 @@ export default function PromoCode({ totalPrice, productPrice, setProductPrice }:
     
     try {
       const { data } = await refetchPromoOffer();
-      setPromoMessage(data?.message || "");
+      // setPromoMessage(data?.message || "");
       console.log("Promo code response:", data);
       
       if (data?.result) {
         const discountAmount = calculateDiscount(productPrice, data?.result?.discount_percent);
+        setPromoCodeDiscountAmount(discountAmount);
         setProductPrice(productPrice - discountAmount);
+        toast.success("Promo code applied successfully");
         setIsApplied(true);
         console.log("Promo applied successfully. New price:", productPrice - discountAmount);
       } else {
@@ -47,9 +53,10 @@ export default function PromoCode({ totalPrice, productPrice, setProductPrice }:
   };
 
   const handleRemove = () => {
+    toast.error("Promo code removed");
     setPromoCode("");
     setIsApplied(false);
-    setPromoMessage("");
+    // setPromoMessage("");
     setProductPrice(totalPrice);
   };
 
@@ -63,7 +70,7 @@ export default function PromoCode({ totalPrice, productPrice, setProductPrice }:
           value={promoCode}
           onChange={(e) => {
             setPromoCode(e.target.value);
-            setPromoMessage("");
+            // setPromoMessage("");
           }}
           // onKeyDown={(e) => e.key === "Enter" && handleApply()}
           disabled={isApplied}
@@ -88,22 +95,22 @@ export default function PromoCode({ totalPrice, productPrice, setProductPrice }:
         )}
       </div>
 
-      {promoMessage && (
+      {/* {promoMessage && (
         <div className="w-full text-sm text-green-600 dark:text-green-400">
           {promoMessage}
         </div>
-      )}
+      )} */}
 
       <div className='flex flex-col gap-3 lg:gap-2 pt-5'>
         <div className='flex items-center justify-between'>
           <Typography tag='p' text='Promotion Code' className='text-primary-dark font-semibold'/>
-          <Typography tag='p' text='-10.00 QAR' className='text-primary-dark text-end font-semibold'/>
+          <Typography tag='p' text={`-${promoCodeDiscountAmount} QAR`} className='text-primary-dark text-end font-semibold'/>
         </div>
 
 
         <div className='flex items-center justify-between'>
-          <Typography tag='p' text='25% Off Your First Month' className='text-primary-dark font-semibold'/>
-          <Typography tag='p' text='-100.00 QAR' className='text-primary-dark text-end font-semibold'/>
+          <Typography tag='p' text={`${discountPercentage}% Off Your First Month`} className='text-primary-dark font-semibold'/>
+          <Typography tag='p' text={`-${regularPlanDiscountPrice} QAR`} className='text-primary-dark text-end font-semibold'/>
         </div>
         <div className='flex items-center justify-between'>
           <Typography tag='p' text='Shipping' className='text-primary-dark font-semibold'/>
