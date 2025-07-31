@@ -27,8 +27,9 @@ export default function CartSummary() {
           className="uppercase text-primary-dark px-[var(--space-30-60)] text-center sm:text-start "
         />
       </div>
-      <div className="relative">
-        <div className="flex flex-col gap-12 sm:gap-0 pr-[var(--space-30-60)] my-12 lg:mt-5 overflow-y-auto lg:max-h-[25vh] my-scrollbar">
+      <div className="relative my-12 lg:mt-5">
+        {/* Scrollable content */}
+        <div className="scroll-container relative z-0 flex flex-col gap-12 sm:gap-0 pr-[var(--space-30-60)] overflow-y-auto lg:max-h-[25vh] my-scrollbar">
           {pets.map((petDetails) => (
             <CardItem
               key={petDetails.id ?? ""}
@@ -39,11 +40,14 @@ export default function CartSummary() {
             />
           ))}
         </div>
-        <div className="pointer-events-none absolute top-0 left-0 w-full h-6 bg-gradient-to-b from-[#F1F5DB] to-transparent z-10"></div>
 
-        {/* Bottom gradient */}
-        <div className="pointer-events-none absolute bottom-0 left-0 w-full h-6 bg-gradient-to-t from-[#F1F5DB] to-transparent z-10"></div>
+        {/* Top gradient overlay */}
+        <div className="pointer-events-none absolute top-0 left-0 w-full h-6 bg-gradient-to-b from-[#F1F5DB] to-transparent z-10" />
+
+        {/* Bottom gradient overlay */}
+        <div className="pointer-events-none absolute bottom-0 left-0 w-full h-6 bg-gradient-to-t from-[#F1F5DB] to-transparent z-10" />
       </div>
+
       <div className="flex flex-col gap-[var(--space-20-30)] border-y border-[#CAD585] pt-[var(--space-32-52)] pb-[var(--space-10-20)] mx-[var(--space-30-60)]">
         <Typography
           tag="h6"

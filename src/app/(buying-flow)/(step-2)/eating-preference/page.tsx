@@ -6,13 +6,20 @@ import { Button } from '@/components/ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
-import { useState } from 'react';
+import { startTransition, useState } from 'react';
 import { ChevronDownIcon } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { useGetAllEatingPreferences } from '@/hooks/subscriptionHooks/getAllEatingPreferencesHook';
 
 export default function EatingPreferences() {
+
+    const router = useRouter();
+
+    const { data: allEatingPreferences, isLoading: isEatingPreferencesLoading } = useGetAllEatingPreferences();
+
     const [selectedPreferences, setSelectedPreferences] = useState<string[]>([]);
 
-    const preferencesOptions = [
+    let preferencesOptions = [
         "No Chicken",
         "Grain-Free",
         "No Dairy",
@@ -25,6 +32,10 @@ export default function EatingPreferences() {
         "Soft Food Only"
     ];
 
+    if(!isEatingPreferencesLoading){
+        preferencesOptions = allEatingPreferences?.result;
+    }
+
 
     const toggleOption = (option: string) => {
         setSelectedPreferences((prev) =>
@@ -34,9 +45,13 @@ export default function EatingPreferences() {
         );
     };
 
-    const handleNext = () => {
-        if (selectedPreferences.length === 0) return;
-        // router.push or logic here
+    const handleNext = (e: React.FormEvent) => {
+        // if (selectedPreferences.length === 0) return;
+        e.preventDefault();
+        startTransition(() => {
+            router.push("/choose-our-plans");
+        })
+        // router.push("/choose-our-plans");
     };
 
     return (
@@ -118,7 +133,15 @@ export default function EatingPreferences() {
                 <div className="pb-[3dvh] flex justify-between items-center gap-4 lg:gap-0 lg:items-end pt-[3dvh]">
                     <Button
                         variant={"outlineSecondaryBtn"}
-                        className="gap-2.5 lg:ml-[-55px] hover:scale-105 transition-transform duration-300 ease-in-out">
+                        className="gap-2.5 lg:ml-[-55px] hover:scale-105 transition-transform duration-300 ease-in-out"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            startTransition(() => {
+                                router.push("/any-allergies")
+                            })
+                            // router.push("/any-allergies");
+                        }}
+                    >
                         <div className="w-5 relative">
                             <Image
                                 src="/icons/arrow-prev-long-primary-dark.svg"

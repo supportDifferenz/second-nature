@@ -367,7 +367,7 @@ export default function Page() {
             onClick={(e) => {
               e.preventDefault();
               startTransition(() => {
-                router.push("/activity");
+                router.push("/eating-preference");
               });
               // router.push("/activity");
             }}
