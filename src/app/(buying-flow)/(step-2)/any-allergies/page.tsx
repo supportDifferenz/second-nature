@@ -8,18 +8,28 @@ import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import { useState } from 'react';
 import { ChevronDownIcon } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { startTransition } from "react";
+import { useGetAllAllergies } from '@/hooks/subscriptionHooks/getAllAllergiesHook';
 
 export default function AnyAllergies() {
+
+    const router = useRouter();
+
+    const { data: allergies, isLoading: isAllergiesLoading } = useGetAllAllergies();
+
     const [selectedSymptoms, setSelectedSymptoms] = useState<string[]>([]);
 
-    const symptomOptions = [
+    let symptomOptions = [
         "Sneezing",
         "Runny Nose",
         "Itchy, Red Or Watery Eyes",
         "Nasal Congestion",
-
-
     ];
+
+    if(!isAllergiesLoading){
+        symptomOptions = allergies?.result;
+    }
 
     const toggleOption = (option: string) => {
         setSelectedSymptoms((prev) =>
@@ -29,9 +39,13 @@ export default function AnyAllergies() {
         );
     };
 
-    const handleNext = () => {
-        if (selectedSymptoms.length === 0) return;
-        // router.push or logic here
+    const handleNext = (e: React.FormEvent) => {
+        // if (selectedSymptoms.length === 0) return;
+        e.preventDefault();
+        startTransition(() => {
+            router.push("/eating-preference");
+        })
+        // router.push("/eating-preference");
     };
 
     return (
@@ -112,7 +126,15 @@ export default function AnyAllergies() {
                 <div className="pb-[3dvh] flex justify-between items-center gap-4 lg:gap-0 lg:items-end pt-[3dvh]">
                     <Button
                         variant={"outlineSecondaryBtn"}
-                        className="gap-2.5 lg:ml-[-55px] hover:scale-105 transition-transform duration-300 ease-in-out">
+                        className="gap-2.5 lg:ml-[-55px] hover:scale-105 transition-transform duration-300 ease-in-out"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            startTransition(() => {
+                                router.push("/activity")
+                            })
+                            // router.push("/activity")
+                        }}
+                    >
                         <div className="w-5 relative">
                             <Image
                                 src="/icons/arrow-prev-long-primary-dark.svg"

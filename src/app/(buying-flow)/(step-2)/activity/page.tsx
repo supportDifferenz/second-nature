@@ -28,7 +28,8 @@ export default function Page() {
     if (selectedActivity && currentPetId) {
       setPetDetails(currentPetId, { activityLevel: selectedActivity })
       startTransition(() => {
-        router.push("/choose-our-plans");
+        router.push("/any-allergies");
+        // router.push("/choose-our-plans");
       })
       // router.push("/choose-our-plans");
     }
