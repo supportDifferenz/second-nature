@@ -14,8 +14,12 @@ import { useGetInvoiceBySubIdAndPetId } from "@/hooks/subscriptionHooks/getInvoi
 import OrderHistoryCardSkelton from "@/components/skeltons/OrderHistoryCardSkelton";
 import { useOrderHistoryStore } from "@/zustand/store/orderHistoryDataStore";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
+import { startTransition } from "react";
 
 export default function OrderHistory() {
+
+  const router = useRouter();
 
   const { selectedPetFromOrderHistory, selectedPetIndexFromOrderHistory, setSelectedPetIndexFromOrderHistory, setSelectedPetFromOrderHistory } = useOrderHistoryStore();
 
@@ -368,7 +372,16 @@ export default function OrderHistory() {
               <li className="font-bold">No Subscriptions found</li>
             )}
           </ul>
-          <Button variant={'linkSecondary'} className="underline font-normal decoration-1 hover:text-primary-dark max-[576px]:mt-8">
+          <Button 
+            variant={'linkSecondary'} 
+            className="underline font-normal decoration-1 hover:text-primary-dark max-[576px]:mt-8"
+            onClick={(e) => {
+              e.preventDefault();
+              startTransition(() => {
+                router.push("/history");
+              })
+            }}
+          >
             View previous order
           </Button>
         </div>

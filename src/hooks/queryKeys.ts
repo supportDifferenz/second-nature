@@ -34,4 +34,5 @@ export const QUERY_KEYS = {
     EMAIL_VERIFICATION: "emailVerification",
     GET_ALL_ALLERGIES: "getAllAllergies",
     GET_ALL_EATING_PREFERENCES: "getAllEatingPreferences",
+    GET_SUBSCRIPTION_HISTORY_BY_ID: "getSubscriptionHistoryById",
 }   

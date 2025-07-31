@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, startTransition } from "react";
 import Typography from "@/components/atoms/typography/Typography";
 import { useUserStore } from "@/zustand/store/userDataStore";
 import { useGetSubscriptionDetailsByUserId } from "@/hooks/subscriptionHooks/getSubscriptionDetailsByUserIdHook";
@@ -9,67 +9,71 @@ import { useOrderHistoryStore } from "@/zustand/store/orderHistoryDataStore";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useGetSubscriptionHistoryById } from "@/hooks/subscriptionHooks/getSubscriptionHistoryById";
 
-const historyData = [
-    {
-        date: "18.08.2025",
-        planType: "Regular",
-        protein: "Chicken",
-        bowlSize: "Half Bowl",
-    },
-    {
-        date: "12.07.2025",
-        planType: "Trial",
-        protein: "Beef",
-        bowlSize: "Full Bowl",
-    },
-    {
-        date: "18.08.2025",
-        planType: "Regular",
-        protein: "Chicken",
-        bowlSize: "Half Bowl",
-    },
-    {
-        date: "12.07.2025",
-        planType: "Regular",
-        protein: "Beef",
-        bowlSize: "Full Bowl",
-    },
-    {
-        date: "18.08.2025",
-        planType: "Regular",
-        protein: "Chicken",
-        bowlSize: "Half Bowl",
-    },
-    {
-        date: "12.07.2025",
-        planType: "Trial",
-        protein: "Beef",
-        bowlSize: "Full Bowl",
-    },
-    {
-        date: "18.08.2025",
-        planType: "Regular",
-        protein: "Chicken",
-        bowlSize: "Half Bowl",
-    },
+// const historyData = [
+//     {
+//         date: "18.08.2025",
+//         planType: "Regular",
+//         protein: "Chicken",
+//         bowlSize: "Half Bowl",
+//     },
+//     {
+//         date: "12.07.2025",
+//         planType: "Trial",
+//         protein: "Beef",
+//         bowlSize: "Full Bowl",
+//     },
+//     {
+//         date: "18.08.2025",
+//         planType: "Regular",
+//         protein: "Chicken",
+//         bowlSize: "Half Bowl",
+//     },
+//     {
+//         date: "12.07.2025",
+//         planType: "Regular",
+//         protein: "Beef",
+//         bowlSize: "Full Bowl",
+//     },
+//     {
+//         date: "18.08.2025",
+//         planType: "Regular",
+//         protein: "Chicken",
+//         bowlSize: "Half Bowl",
+//     },
+//     {
+//         date: "12.07.2025",
+//         planType: "Trial",
+//         protein: "Beef",
+//         bowlSize: "Full Bowl",
+//     },
+//     {
+//         date: "18.08.2025",
+//         planType: "Regular",
+//         protein: "Chicken",
+//         bowlSize: "Half Bowl",
+//     },
 
-];
-
-
+// ];
 
 export default function OrderHistory() {
 
-    const { selectedPetFromOrderHistory, selectedPetIndexFromOrderHistory, setSelectedPetIndexFromOrderHistory, setSelectedPetFromOrderHistory } = useOrderHistoryStore();
+    const router = useRouter();
 
+    const { selectedPetFromOrderHistory, selectedPetIndexFromOrderHistory, setSelectedPetIndexFromOrderHistory, setSelectedPetFromOrderHistory } = useOrderHistoryStore();
 
     const [selectedPetIndex, setselectedPetIndex] = useState(0);
     const [selectedPet, setSelectedPet] = useState<PetInfo | null>(null);
+    const [selectedPetId, setSelectedPetId] = useState<string | null>(null);
 
     const { userDetails } = useUserStore();
     const userId = userDetails?.userId;
     const { data: subscriptionDetails } = useGetSubscriptionDetailsByUserId(userId);
     const { data: subscriptionDetailsBySubIdAndPetId,  } = useGetSubscriptionDetailsByUserIdAndPetId(userId ?? "", selectedPet?.petId ?? "");
+    const { data: subscriptionHistory, refetch: refetchSubscriptionHistory } = useGetSubscriptionHistoryById({ userId: userId ?? "", petId: selectedPetId ?? selectedPet?.petId ?? "" });
+    console.log("subscriptionHistory", subscriptionHistory);
 
     const dataFromAPI = subscriptionDetailsBySubIdAndPetId?.result;
     const planDataFromAPI = subscriptionDetailsBySubIdAndPetId?.result?.pets[0]?.plan;
@@ -179,6 +183,10 @@ export default function OrderHistory() {
         }
     }, [selectedPetFromOrderHistory]);
 
+    useEffect(() => {
+        refetchSubscriptionHistory();
+    },[selectedPetId])
+
 
     return (
         <>
@@ -202,6 +210,8 @@ export default function OrderHistory() {
                                         setSelectedPetIndexFromOrderHistory(index);
                                         setSelectedPet(petData);
                                         setSelectedPetFromOrderHistory(petData);
+                                        setSelectedPetId(petData.petId);
+                                        refetchSubscriptionHistory()
                                     }}
                                 >
                                     {petData.name}
@@ -211,7 +221,16 @@ export default function OrderHistory() {
                             <li className="font-bold">No Subscriptions found</li>
                         )}
                     </ul>
-                    <Button variant={'linkSecondary'} className="underline   font-normal decoration-1 hover:text-primary-dark max-[576px]:mt-8">
+                    <Button 
+                        variant={'linkSecondary'} 
+                        className="underline font-normal decoration-1 hover:text-primary-dark max-[576px]:mt-8"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            startTransition(() => {
+                                router.push("/order-history");
+                            })
+                        }}
+                    >
                         Back to current plan
                     </Button>
                 </div>
@@ -233,7 +252,29 @@ export default function OrderHistory() {
                                     </tr>
                                 </thead>
                                 <tbody className="text-[14px] text-text-color">
-                                    {historyData.map((item, index) => (
+                                    {subscriptionHistory?.result?.map((item: { date: string; planType: string; protein: string; bowlSize: string; filePath: string }, index: number) => (
+                                        <tr key={index} className="border-b border-[#A1A1A1] last:border-0 hover:bg-[#2BB673]/5">
+                                            <td className="px-4 py-3">{item.date}</td>
+                                            <td className="px-4 py-3">{item.planType}</td>
+                                            <td className="px-4 py-3">{item.protein}</td>
+                                            <td className="px-4 py-3">{item.bowlSize}</td>
+                                            <td className="px-4 py-3">
+                                                <a
+                                                    href={item.filePath}
+                                                    target="_blank"
+                                                    className={cn(
+                                                        "flex items-center gap-1 text-green-700 hover:underline hover:text-green-800"
+                                                    )}
+                                                >
+                                                    <div className="relative">
+                                                        <Image src='/icons/download-primry.svg' width={18} height={18} alt="arrow"  />
+                                                    </div>
+                                                    INVOICE
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                    {/* {historyData.map((item, index) => (
                                         <tr key={index} className="border-b border-[#A1A1A1] last:border-0 hover:bg-[#2BB673]/5">
                                             <td className="px-4 py-3">{item.date}</td>
                                             <td className="px-4 py-3">{item.planType}</td>
@@ -253,7 +294,7 @@ export default function OrderHistory() {
                                                 </a>
                                             </td>
                                         </tr>
-                                    ))}
+                                    ))} */}
                                 </tbody>
                             </table>
                         </div>
