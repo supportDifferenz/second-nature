@@ -24,7 +24,7 @@ export default function Counter({
   className1 = '',
   className2 = '',
   className3 = '',
-  step = 0.5,
+  step = 0,
   min = 0,
   max = 1000,
 }: CounterProps) {
@@ -107,7 +107,11 @@ export default function Counter({
         <input
           type="number"
           step={step}
-          value={inputValue}
+          value={
+            parseFloat(inputValue) % 1 === 0
+              ? parseFloat(inputValue).toFixed(0)
+              : parseFloat(inputValue).toFixed(1)
+          }
           onChange={handleInputChange}
           onBlur={handleBlur}
           min={min}
