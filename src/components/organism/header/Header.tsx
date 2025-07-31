@@ -339,7 +339,7 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
       ) : (
         <div className="container py-5 flex relative">
           <div
-            className="max-[575px]:h-[9dvh] max-[575px]:w-auto sm:w-[14%] mx-auto cursor-pointer"
+            className="max-[575px]:h-[8.5dvh] max-[575px]:w-auto sm:w-[14%] mx-auto cursor-pointer"
             onClick={(e) => {
               e.preventDefault();
               startTransition(() => {

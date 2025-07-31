@@ -152,37 +152,31 @@ export default function DogOrCat() {
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: softEase }}
-          className="sm:flex-1 sm:h-full flex flex-col sm:flex-row items-center justify-center w-full max-w-3xl mx-auto gap-0 sm:gap-8"
-        >
+          className="flex-1 sm:h-full flex flex-col sm:flex-row items-center justify-center w-full max-w-3xl mx-auto gap-0 sm:gap-8 ">
           {/* Dog Selection */}
           <div className="flex flex-col w-[70%] lg:w-[30%] xl:w-[35%] 2xl:w-full max-w-[381px] ">
             <div
-              className={`relative  rounded-2xl w-[90%] sm:w-[90%] mx-auto   cursor-pointer overflow-hidden `}
+              className={`relative  rounded-2xl h-[16dvh] sm:h-[36dvh]  mx-auto w-auto max-w-[300px] max-h-[350px] cursor-pointer overflow-hidden `}
               onClick={() => handlePetSelection("dog")}
             >
-              <div className="flex justify-center">
-                <div className="flex items-center justify-center w-full h-full">
-                  <Image
-                    src="/images/dog-or-cat-section-dog-thumb.webp"
-                    alt="Brown dog with white chest"
-                    fill
-                    className="!static w-full "
-                  />
-                </div>
-              </div>
+              <Image
+                src="/images/dog-or-cat-section-dog-thumb.webp"
+                alt="Brown dog with white chest"
+                fill
+                className="!static w-full h-full object-contain"
+              />
             </div>
 
             <div
-              className="mt-[-5%] relative bg-white w-full"
+              className=" sm:mt-2 relative bg-white w-full"
               onClick={(e) => {
                 e.preventDefault();
                 handlePetSelection("dog");
               }}
             >
               <div
-                className={`${
-                  petType === "dog" ? "border-secondary-1" : "border-gray-300"
-                } flex items-center pr-1.5 lg:pr-3 w-full border rounded-full text-center`}
+                className={`${petType === "dog" ? "border-secondary-1" : "border-gray-300"
+                  } flex items-center pr-1.5 lg:pr-3 w-full border rounded-full text-center`}
               >
                 <Input
                   type="text"
@@ -208,39 +202,34 @@ export default function DogOrCat() {
           </div>
 
           {/* Or divider */}
-          <Typography tag="span" text="Or" className="!text-[#A1A1A1] block mt-2.5 sm:mt-0" />
+          <Typography tag="span" text="Or" className="!text-[#A1A1A1] block my-[0.8dvh] sm:my-0" />
 
           {/* Cat Selection */}
           <div className="flex flex-col w-[70%] lg:w-[30%] xl:w-[35%] 2xl:w-full max-w-[381px]">
             <div
-              className={`relative rounded-2xl w-[90%] mx-auto   cursor-pointer overflow-hidden `}
-              onClick={() => handlePetSelection("cat")}
-            >
-              <div className="flex justify-center">
-                <div className="flex items-center justify-center w-full h-full">
-                  <Image
-                    src="/images/dog-or-cat-section-cat-thumb.webp"
-                    alt="Cat"
-                    fill
-                    className="!static w-full "
-                  />
-                </div>
-              </div>
+              className={`relative  rounded-2xl h-[16dvh] sm:h-[36dvh]  mx-auto w-auto max-w-[300px] max-h-[350px] cursor-pointer overflow-hidden `}
+              onClick={() => handlePetSelection("cat")}>
 
-             
+              <Image
+                src="/images/dog-or-cat-section-cat-thumb.webp"
+                alt="Cat"
+                fill
+                className="!static w-full h-full object-contain"
+              />
+
+
             </div>
 
             <div
-              className="mt-[-5%] w-full relative bg-white"
+              className="sm:mt-2 w-full relative bg-white"
               onClick={(e) => {
                 e.preventDefault();
                 handlePetSelection("cat");
               }}
             >
               <div
-                className={`${
-                  petType === "cat" ? "border-secondary-1" : "border-gray-300"
-                } w-full border rounded-full text-center focus:placeholder-slate-300`}
+                className={`${petType === "cat" ? "border-secondary-1" : "border-gray-300"
+                  } w-full border rounded-full text-center focus:placeholder-slate-300`}
               >
                 <Input
                   type="text"
@@ -251,16 +240,16 @@ export default function DogOrCat() {
                   variant={"roundedEdgeInputLg"}
                   className={`w-full border-0 text-start text-primary-dark font-semibold  placeholder-[#7C7C7C] placeholder:font-medium focus:placeholder-slate-300 !pr-0`}
                 />
-                 {petType === "cat" && (
-                <div className="absolute top-1 sm:top-2 sm:right-2 right-1 w-8 h-8  rounded-full p-1">
-                  <Image
-                    src="/icons/checked.svg"
-                    alt="Brown dog with white chest"
-                    fill
-                    className="!static w-fit h-full"
-                  />
-                </div>
-              )}
+                {petType === "cat" && (
+                  <div className="absolute top-1 sm:top-2 sm:right-2 right-1 w-8 h-8  rounded-full p-1">
+                    <Image
+                      src="/icons/checked.svg"
+                      alt="Brown dog with white chest"
+                      fill
+                      className="!static w-fit h-full"
+                    />
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -291,7 +280,7 @@ export default function DogOrCat() {
         )} */}
 
         {/* navigation */}
-        <div className="pb-[3dvh] flex flex-col lg:flex-row items-center gap-4 lg:gap-0  lg:items-end pt-[3dvh]">
+        <div className="pb-[3dvh] flex flex-col lg:flex-row items-center gap-4 lg:gap-0  lg:items-end pt-[3dvh] ">
           <Button
             className="gap-2.5 lg:absolute lg:right-[-55px] lg:transform hover:scale-105 transition-transform duration-300 ease-in-out"
             disabled={isNextDisable}
