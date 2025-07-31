@@ -27,7 +27,7 @@ const menuItems = [
     icon: "/icons/payment-methods.svg",
   },
   {
-    name: "order history",
+    name: "order & history",
     href: "/order-history",
     icon: "/icons/order-history.svg",
   },

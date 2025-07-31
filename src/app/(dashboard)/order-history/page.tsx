@@ -13,6 +13,7 @@ import { useGetSubscriptionDetailsByUserIdAndPetId } from "@/hooks/subscriptionH
 import { useGetInvoiceBySubIdAndPetId } from "@/hooks/subscriptionHooks/getInvoiceDetailsBySubIdAndPetId";
 import OrderHistoryCardSkelton from "@/components/skeltons/OrderHistoryCardSkelton";
 import { useOrderHistoryStore } from "@/zustand/store/orderHistoryDataStore";
+import { Button } from "@/components/ui/button";
 
 export default function OrderHistory() {
 
@@ -339,33 +340,38 @@ export default function OrderHistory() {
     <>
       <Typography
         tag="h5"
-        text="Order History"
+        text="Orders & History"
         className="capitalize !font-normal mb-6 text-black"
       />
 
       {
-        <ul className="flex items-center gap-5 pb-[7dvh] flex-wrap">
-          {petInfoList.length > 0 ? (
-            petInfoList.map((petData, index) => (
-              <li
-                key={index}
-                className={`font-bold cursor-pointer underline ${index === selectedPetIndex ? "text-[#944446] underline-[#944446]" : ""}`}
-                onClick={() => {
-                  // setSubId(petData.subId);
-                  // setPetId(petData.petId);
-                  setselectedPetIndex(index);
-                  setSelectedPetIndexFromOrderHistory(index);
-                  setSelectedPet(petData);
-                  setSelectedPetFromOrderHistory(petData);
-                }}
-              >
-                {petData.name}
-              </li>
-            ))
-          ) : (
-            <li className="font-bold">No Subscriptions found</li>
-          )}
-        </ul>
+        <div className="pb-6 sm:pb-[7dvh] flex flex-col sm:flex-row justify-between items-start sm:items-center">
+          <ul className="flex items-center gap-5  flex-wrap">
+            {petInfoList.length > 0 ? (
+              petInfoList.map((petData, index) => (
+                <li
+                  key={index}
+                  className={`font-bold cursor-pointer uppercase underline ${index === selectedPetIndex ? "text-[#944446] underline-[#944446]" : ""}`}
+                  onClick={() => {
+                    // setSubId(petData.subId);
+                    // setPetId(petData.petId);
+                    setselectedPetIndex(index);
+                    setSelectedPetIndexFromOrderHistory(index);
+                    setSelectedPet(petData);
+                    setSelectedPetFromOrderHistory(petData);
+                  }}
+                >
+                  {petData.name}
+                </li>
+              ))
+            ) : (
+              <li className="font-bold">No Subscriptions found</li>
+            )}
+          </ul>
+          <Button variant={'linkSecondary'} className="underline font-normal decoration-1 hover:text-primary-dark max-[576px]:mt-8">
+            View previous order
+          </Button>
+        </div>
       }
 
       <div className="mb-6">
