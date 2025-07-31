@@ -3,18 +3,57 @@
 import Typography from "@/components/atoms/typography/Typography";
 import CardItem from "@/components/molecules/cartItem/CardItem";
 import PromoCode from "@/components/molecules/promoCode/PromoCode";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { usePetStore } from "@/zustand/store/petDataStore";
+import { useGetAllOffers } from "@/hooks/subscriptionHooks/getAllOffers";
 
 export default function CartSummary() {
   const { pets } = usePetStore();
-  console.log("Pets in cart summary", pets);
+  const { data: offers } = useGetAllOffers();
+  const discountPercentage = offers?.result?.[0]?.discount_percent || 0;
+  console.log("Discount percentage:", discountPercentage);
 
   const totalPrice = pets.reduce((sum, pet) => {
-    const price = Number(pet.planPrice) || 0;
-    return sum + price;
+    const price = pet.planType === "Regular"
+        ? (offers?.result?.[0]?.discount_percent
+            ? (Number(pet.planPrice) * (1 - (offers?.result?.[0]?.discount_percent / 100)))
+            : Number(pet.planPrice))
+        : Number(pet.planPrice) || 0;
+
+    return sum + (typeof price === 'number' && !isNaN(price) ? price : 0);
   }, 0);
-  console.log("Total price in cart summary", totalPrice);
+
+  const regularPlanDiscountPrice = pets.reduce((sum, pet) => {
+    const price = pet.planType === "Regular"
+        ? (offers?.result?.[0]?.discount_percent
+            ? (Number(pet.planPrice) * (offers?.result?.[0]?.discount_percent / 100))
+            : 0)
+        : 0;
+
+    return sum + (typeof price === 'number' && !isNaN(price) ? Number(price.toFixed(3)) : 0);
+  }, 0);
+
+  useEffect(() => {
+      setProductPrice(
+          pets.reduce((sum, pet) => {
+              const price = pet.planType === "Regular"
+                  ? (offers?.result?.[0]?.discount_percent
+                      ? (Number(pet.planPrice) * (1 - (offers?.result?.[0]?.discount_percent / 100)))
+                      : Number(pet.planPrice))
+                  : Number(pet.planPrice) || 0;
+  
+              return sum + (typeof price === 'number' && !isNaN(price) ? price : 0);
+          }, 0)
+      );
+  }, [pets, offers]);
+
+
+
+
+  // const totalPrice = pets.reduce((sum, pet) => {
+  //   const price = Number(pet.planPrice) || 0;
+  //   return sum + price;
+  // }, 0);
 
   const [productPrice, setProductPrice] = useState<number>(totalPrice);
 
@@ -37,6 +76,7 @@ export default function CartSummary() {
               planType={petDetails.planType ?? ""}
               planPrice={petDetails.planPrice ?? 0}
               protein={petDetails.protein ?? ""}
+              discountPercentage={discountPercentage}
             />
           ))}
         </div>
@@ -58,6 +98,8 @@ export default function CartSummary() {
           totalPrice={totalPrice}
           productPrice={productPrice}
           setProductPrice={setProductPrice}
+          discountPercentage={discountPercentage}
+          regularPlanDiscountPrice={regularPlanDiscountPrice}
         />
       </div>
       <div className="flex justify-between pt-[var(--space-15-30)] mx-[var(--space-30-60)]">

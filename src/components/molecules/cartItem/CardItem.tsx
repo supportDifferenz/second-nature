@@ -8,9 +8,13 @@ interface CardItemProps {
   planType: string;
   planPrice: number;
   protein: string;
+  discountPercentage: number;
 }
 
-export default function CardItem({ petName, planType, planPrice, protein }: CardItemProps) {
+export default function CardItem({ petName, planType, planPrice, protein, discountPercentage }: CardItemProps) {
+
+  const priceAfterDiscount = planType === "Regular" ? planPrice * (1 - (discountPercentage / 100)) : planPrice;
+
   return (
     <div className="flex">
       <div className="w-[23.3vw] lg:w-[11.22vw] h-full">
@@ -46,15 +50,20 @@ export default function CardItem({ petName, planType, planPrice, protein }: Card
         </div>
       </div>
       <div className="flex flex-col gap-2 ml-auto mt-[var(--space-8-30)]">
+        {
+          planType === "Regular" && (
+            <Typography 
+              tag="h6"
+              text={`${planPrice} QAR`}
+              // text="400.00 QAR"
+              className="text-text-color line-through" 
+            />
+          )
+        }
         <Typography 
           tag="h6"
-          text={`${planPrice} QAR`}
-          // text="400.00 QAR"
-          className="text-text-color line-through" 
-        />
-        <Typography 
-          tag="h6"
-          text={`${planPrice} QAR`}
+          text={`${priceAfterDiscount} QAR`}
+          // text={`${planPrice} QAR`}
           // text="400.00 QAR"
           className="text-primary-dark" 
         />

@@ -636,3 +636,15 @@ export const getAllEatingPreferences = async () => {
         throw error;
     }
 };
+
+export const getSubscriptionHistoryById = async ({ userId, petId }: { userId: string; petId: string }) => {
+  try {
+      const response = await subscriptionAxiosInstance.get(
+        `/api/subscription/getSubscriptionHistoryById/${userId}/${petId}`,
+    );
+      return response.data;
+    } catch (error) {
+        console.error("Error in getting subscription history", error);
+        throw error;
+    }
+};

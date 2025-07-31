@@ -118,8 +118,8 @@ export default function Age() {
             <DateOfBirthPicker dateOfBirth={dateOfBirth} setDateOfBirth={setDateOfBirth} />
           ) : (
             <div className="w-full mx-auto items-center justify-center flex flex-col lg:flex-row gap-4">
-              <Counter label="Years" min={0} max={100} value={year} setValue={setYear} />
-              <Counter label="Months" min={0} max={12} value={month} setValue={setMonth} />
+              <Counter label="Years" min={0} max={100} step={1} value={year} setValue={setYear} />
+              <Counter label="Months" min={0} max={12} step={1} value={month} setValue={setMonth} />
             </div>
           )}
         </motion.div>
