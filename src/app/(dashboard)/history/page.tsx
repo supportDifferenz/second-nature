@@ -252,28 +252,31 @@ export default function OrderHistory() {
                                     </tr>
                                 </thead>
                                 <tbody className="text-[14px] text-text-color">
-                                    {subscriptionHistory?.result?.map((item: { date: string; planType: string; protein: string; bowlSize: string; filePath: string }, index: number) => (
-                                        <tr key={index} className="border-b border-[#A1A1A1] last:border-0 hover:bg-[#2BB673]/5">
-                                            <td className="px-4 py-3">{item.date}</td>
-                                            <td className="px-4 py-3">{item.planType}</td>
-                                            <td className="px-4 py-3">{item.protein}</td>
-                                            <td className="px-4 py-3">{item.bowlSize}</td>
-                                            <td className="px-4 py-3">
-                                                <a
-                                                    href={item.filePath}
-                                                    target="_blank"
-                                                    className={cn(
-                                                        "flex items-center gap-1 text-green-700 hover:underline hover:text-green-800"
-                                                    )}
-                                                >
-                                                    <div className="relative">
-                                                        <Image src='/icons/download-primry.svg' width={18} height={18} alt="arrow"  />
-                                                    </div>
-                                                    INVOICE
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    ))}
+                                    {   subscriptionHistory?.result?.length > 0 
+                                        ? subscriptionHistory?.result?.map((item: { date: string; planType: string; protein: string; bowlSize: string; filePath: string }, index: number) => (
+                                                <tr key={index} className="border-b border-[#A1A1A1] last:border-0 hover:bg-[#2BB673]/5">
+                                                    <td className="px-4 py-3">{item.date}</td>
+                                                    <td className="px-4 py-3">{item.planType}</td>
+                                                    <td className="px-4 py-3">{item.protein}</td>
+                                                    <td className="px-4 py-3">{item.bowlSize}</td>
+                                                    <td className="px-4 py-3">
+                                                        <a
+                                                            href={item.filePath}
+                                                            target="_blank"
+                                                            className={cn(
+                                                                "flex items-center gap-1 text-green-700 hover:underline hover:text-green-800"
+                                                            )}
+                                                        >
+                                                            <div className="relative">
+                                                                <Image src='/icons/download-primry.svg' width={18} height={18} alt="arrow"  />
+                                                            </div>
+                                                            INVOICE
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            ))
+                                        : <tr><td className="px-4 py-3 text-center" colSpan={5}>No previous history found</td></tr>
+                                    }
                                     {/* {historyData.map((item, index) => (
                                         <tr key={index} className="border-b border-[#A1A1A1] last:border-0 hover:bg-[#2BB673]/5">
                                             <td className="px-4 py-3">{item.date}</td>
@@ -295,6 +298,7 @@ export default function OrderHistory() {
                                             </td>
                                         </tr>
                                     ))} */}
+                                    {/* <tr><td className="px-4 py-3 text-center" colSpan={5}>No previous history found</td></tr> */}
                                 </tbody>
                             </table>
                         </div>
