@@ -38,6 +38,8 @@ type CreatedPet = {
     ageYear: number;
     breed: string;
     crossBreeds: string[];
+    allergiesOrIntolerances: string[];
+    eatingPreferences: string[];
     activityLevel: string;
     currentWeight: number;
     targetWeight: number;
@@ -352,6 +354,8 @@ export default function Payment({ shippingFormData, billingFormData }: PaymentPr
               ageYear: pet.ageYear || 0,
               breed: pet.breed || "",
               crossBreeds: [pet.crossBreed || ""],
+              allergiesOrIntolerances: pet.allergiesOrIntolerances || [],
+              eatingPreferences: pet.eatingPreferences || [],
               activityLevel: pet.activityLevel || "",
               currentWeight: pet.currentWeight || 0,
               targetWeight: pet.targetWeight || 0,
@@ -377,6 +381,8 @@ export default function Payment({ shippingFormData, billingFormData }: PaymentPr
                   ageYear: p.ageYear,
                   breed: p.breed,
                   crossBreeds: p.crossBreeds,
+                  allergiesOrIntolerances: p.allergiesOrIntolerances,
+                  eatingPreferences: p.eatingPreferences,
                   activityLevel: p.activityLevel,
                   currentWeight: p.currentWeight,
                   targetWeight: p.targetWeight,

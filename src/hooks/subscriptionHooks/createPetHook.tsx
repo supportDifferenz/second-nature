@@ -15,6 +15,8 @@ interface PetData {
   ageYear: number;
   breed: string;
   crossBreeds: string[];
+  allergiesOrIntolerances: string[];
+  eatingPreferences: string[];
   activityLevel: string;
   currentWeight: number;
   targetWeight: number;

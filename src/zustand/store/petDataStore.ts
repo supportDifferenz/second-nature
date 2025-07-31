@@ -10,6 +10,8 @@ type PetDetails = {
   gender?: 'male' | 'female' | '';
   breed?: string;
   crossBreed?: string;
+  eatingPreferences?: Array<string>;
+  allergiesOrIntolerances?: Array<string>;
   dateOfBirth?: string;
   ageMonth?: number;
   ageYear?: number;
@@ -33,6 +35,8 @@ type createdPetDetails = {
   ageYear?: number;
   breed?: string;
   crossBreeds?: Array<string>;
+  eatingPreferences?: Array<string>;
+  allergiesOrIntolerances?: Array<string>;
   activityLevel?: string;
   currentWeight: number;
   targetWeight: number;
