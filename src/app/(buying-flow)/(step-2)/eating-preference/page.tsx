@@ -71,23 +71,24 @@ export default function EatingPreferences() {
                         {/* Custom Multi-select Dropdown with Checkbox Image */}
                         <Popover>
                             <PopoverTrigger asChild >
-                                <Button
-                                    // variant="roundedEdgeInputLgSecondary"
-                                    className={cn(
-                                        "w-full !text-left justify-between bg-white hover:bg-white font-normal !text-primary-dark  rounded-full border border-[#A1A1A1] outline-none data-[state=open]:border-secondary-1 h-13   px-4 py-2 ",
-                                        selectedPreferences.length === 0 && "text-muted-foreground"
-                                    )}
-                                >
+                                    <Button
+                                        // variant="roundedEdgeInputLgSecondary"
+                                        className={cn(
+                                            "w-full !text-left justify-between bg-white hover:bg-white font-normal !text-primary-dark  rounded-full border border-[#A1A1A1] outline-none data-[state=open]:border-secondary-1 h-13   px-4 py-2 ",
+                                            selectedPreferences.length === 0 && "text-muted-foreground"
+                                        )}
+                                    >
 
-                                    <span className='grow overflow-x-auto scrollbar-hide'>
-                                        {selectedPreferences.length > 0
-                                            ? selectedPreferences.join(", ")
-                                            : "Select symptoms"}
-                                    </span>
-                                    <ChevronDownIcon className="size-4 text-primary-dark opacity-50" />
+                                        <span className='grow overflow-x-auto scrollbar-hide'>
+                                            {selectedPreferences.length > 0
+                                                ? selectedPreferences.join(", ")
+                                                : "Select symptoms"}
+                                        </span>
+                                        <ChevronDownIcon className="size-4 text-primary-dark opacity-50" />
 
-                                </Button>
+                                    </Button>
                             </PopoverTrigger>
+                                    <span className='text-[14px]  text-[#999999] px-4 pt-1 block'>Multiple Selection possible</span>
 
                             <PopoverContent
                                 className="bg-white border-secondary-1 max-w-[800px] w-[78vw] sm:w-[41vw] lg:w-[34vw] rounded-2xl text-primary-dark z-[9999] min-w-[240px] max-h-[300px] overflow-y-auto p-1"

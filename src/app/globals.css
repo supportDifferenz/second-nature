@@ -206,7 +206,7 @@ body {
   line-height: var(--default-leading);
   color: var(--text-color);
   overflow-x: hidden;
-  
+
 }
 
 h1 {
@@ -263,12 +263,14 @@ span.subtitle2 {
   font-size: var(--fs-h1);
   font-weight: var(--fw-regular);
 }
+
 .h1.supporting {
   font-size: var(--fs-h1-supporting);
   font-weight: var(--fw-regular);
-    font-family: var(--font-dm-serif-display);
+  font-family: var(--font-dm-serif-display);
 
 }
+
 .h2 {
   font-size: var(--fs-h2);
   font-weight: var(--fw-regular);
@@ -396,12 +398,15 @@ p {
 }
 
 .scrollbar-hide {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
 
 .scrollbar-hide::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, and Opera */
+  display: none;
+  /* Chrome, Safari, and Opera */
 }
 
 
@@ -495,7 +500,8 @@ p {
 
 /* global.css */
 .my-scrollbar {
-  scrollbar-width: thin; /* Firefox */
+  scrollbar-width: thin;
+  /* Firefox */
   scrollbar-color: #c5c5c5 transparent;
 }
 
@@ -513,3 +519,14 @@ p {
 }
 
 
+/* tailwind-compatible custom class */
+.input-no-spinner::-webkit-outer-spin-button,
+.input-no-spinner::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.input-no-spinner[type='number'] {
+  -moz-appearance: textfield;
+  /* Firefox */
+}
