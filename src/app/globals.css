@@ -48,11 +48,9 @@
       100% - 2 * (clamp(20px, 10.625vw - 14px, 100.33px)),
       1600px);
 
-
   --container-lg: clamp(280px,
       calc(100% - 2 * clamp(20px, 10.625vw - 14px, 85px)),
       1748px);
-
 
   --container-one-side: clamp(280px,
       100% - 1 * (clamp(20px, 10.625vw - 14px, 190.33px)),
@@ -268,7 +266,6 @@ span.subtitle2 {
   font-size: var(--fs-h1-supporting);
   font-weight: var(--fw-regular);
   font-family: var(--font-dm-serif-display);
-
 }
 
 .h2 {
@@ -335,7 +332,6 @@ p {
   line-height: 1.4;
 }
 
-
 .container,
 .container-lg,
 .container-fluid {
@@ -399,17 +395,13 @@ p {
 
 .scrollbar-hide {
   -ms-overflow-style: none;
-  /* IE and Edge */
   scrollbar-width: none;
-  /* Firefox */
 }
 
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
   /* Chrome, Safari, and Opera */
 }
-
-
 
 .highlight {
   font-family: var(--font-dm-serif-display);
@@ -447,20 +439,6 @@ p {
     }
   }
 
-  @keyframes gradientMove {
-    0% {
-      background-position: 0% 100%;
-    }
-
-    50% {
-      background-position: 100% 0%;
-    }
-
-    100% {
-      background-position: 0% 100%;
-    }
-  }
-
   @keyframes gradient-animation {
     0% {
       background-position: 0% 50%;
@@ -475,12 +453,13 @@ p {
     }
   }
 
-
-
   .animated-gradient {
     background: linear-gradient(163deg, rgba(43, 182, 115, 0.00) 55.33%, rgba(43, 182, 115, 0.40) 100%), #FFF;
-    background-size: 120% 120%;
-    animation: gradient-animation 12s ease infinite;
+  }
+  @media (max-width: 575.98px) {
+    .animated-gradient {
+      background: linear-gradient(162deg, rgba(43, 182, 115, 0.00) 59.3%, rgba(43, 182, 115, 0.40) 89.47%), #FFF;
+    }
   }
 
   .animate-accordion-down {
@@ -498,10 +477,9 @@ p {
   }
 }
 
-/* global.css */
+/* scroll bar */
 .my-scrollbar {
   scrollbar-width: thin;
-  /* Firefox */
   scrollbar-color: #c5c5c5 transparent;
 }
 
@@ -518,8 +496,7 @@ p {
   border-radius: 4px;
 }
 
-
-/* tailwind-compatible custom class */
+/* remove input number arrow */
 .input-no-spinner::-webkit-outer-spin-button,
 .input-no-spinner::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -528,5 +505,4 @@ p {
 
 .input-no-spinner[type='number'] {
   -moz-appearance: textfield;
-  /* Firefox */
 }
