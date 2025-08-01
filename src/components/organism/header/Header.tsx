@@ -142,7 +142,7 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
                     <span className={`${isHowItWorksActive() ? "text-primary" : ""}`}>
                       How it works
                     </span>
-                    <div className={`w-2.5 h-fit relative transition duration-75 group-hover:rotate-180  ${howItWorksOpen ? 'rotate-180' : '' }`}>
+                    <div className={`w-2.5 h-fit relative transition duration-75 group-hover:rotate-180  ${howItWorksOpen ? 'rotate-180' : ''}`}>
                       <Image
                         src="/icons/black-chevron-down.svg"
                         alt="icon"
@@ -234,35 +234,21 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
 
                 {/* === BUTTON LOGIC START === */}
                 {isMobile ? (
-                  isMobileMenuOpen ? (
-                    <Button
-                      size="small"
-                      onClick={() => {
-                        startTransition(() => {
-                          router.push("/login");
-                        });
-                      }}
-                    >
-                      Log In
-                    </Button>
-                  ) : (
+                  !isMobileMenuOpen && (
                     <Button
                       variant="outlinePrimaryBtn"
                       size="small"
                       className="text-secondary-1"
                       onClick={() => {
-                        if(isAuthenticated) {
+                        if (isAuthenticated) {
                           startTransition(() => {
                             router.push("/location");
                           });
-                        }else{
+                        } else {
                           startTransition(() => {
                             router.push("/user-details");
                           });
                         }
-                        // startTransition(() => {
-                        //   router.push("/location");
-                        // });
                       }}
                     >
                       Get Started
@@ -275,18 +261,15 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
                       size="small"
                       className="text-secondary-1 hidden sm:block"
                       onClick={() => {
-                        if(isAuthenticated) {
+                        if (isAuthenticated) {
                           startTransition(() => {
                             router.push("/location");
                           });
-                        }else{
+                        } else {
                           startTransition(() => {
                             router.push("/user-details");
                           });
                         }
-                        // startTransition(() => {
-                        //   router.push("/location");
-                        // });
                       }}
                     >
                       Get Started
@@ -318,6 +301,8 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
                     )}
                   </>
                 )}
+
+
                 {/* === BUTTON LOGIC END === */}
               </div>
             </div>

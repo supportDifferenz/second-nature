@@ -79,22 +79,22 @@ const MealDropdownMenu = ({
     >
       {/* Trigger Button */}
       <button
-        className="outline-none group cursor-pointer flex items-center gap-1.5 sm:gap-3 xl:gap-1 2xl:gap-1.5 py-1.5 sm:py-1 xl:py-2 px-2.5 sm:px-13 xl:px-2.5 border border-[#DADBD2] transition duration-75  hover:border-primary rounded-full font-normal sm:bg-[#FEFFF5]"
+        className="outline-none group cursor-pointer flex items-center gap-2.5 sm:gap-3 xl:gap-1 2xl:gap-1.5 py-2 sm:py-1 xl:py-2 px-6 sm:px-13 xl:px-2.5 border border-[#DADBD2] transition duration-75  hover:border-primary rounded-full font-normal sm:bg-[#FEFFF5]"
         onClick={() => {
           if (!isResponsive) {
             setIsOpen((prev) => !prev);
           }
         }}
       >
-        <div className="w-5 sm:w-7 xl:w-5 relative ">
+        <div className="w-8 sm:w-7 xl:w-5 relative ">
           <Image src={icon} alt="icon" fill className="!static" />
         </div>
         <Typography
           tag="span"
           text={label}
-          className="text-primary-dark font-extrabold"
+          className="text-primary-dark font-extrabold max-[575px]:!text-[20px]"
         />
-        <div className={`w-2.5 h-fit relative sm:hidden xl:block group-hover:rotate-180 transition duration-75 ${isOpen ? 'rotate-180' : ''} `}>
+        <div className={`w-3 sm:w-2.5 h-fit relative sm:hidden xl:block group-hover:rotate-180 transition duration-75 ${isOpen ? 'rotate-180' : ''} `}>
           <Image
             src="/icons/black-chevron-down.svg"
             alt="icon"
@@ -119,7 +119,7 @@ const MealDropdownMenu = ({
                   whileHover={{ scale: 1.03 }}
                   transition={{ type: "spring", stiffness: 300, damping: 20 }}
                   key={index}
-                  className="flex items-center gap-2 cursor-pointer max-w-[230px] w-fit"
+                  className="flex items-center gap-3 sm:gap-2 cursor-pointer max-w-[240px] w-fit"
                   onClick={(e) => handleItemClick(item.url, e)}
                 >
                   {item.image && (
@@ -132,16 +132,13 @@ const MealDropdownMenu = ({
                       />
                     </div>
                   )}
-                  <span className="grow text-primary-dark font-bold xl:!font-normal subtitle">
+                  <span className="grow text-primary-dark max-[575px]:!text-[20px] !font-normal subtitle">
                     {item.name}
                   </span>
                   <div className="w-[10px] xl:w-[7px] relative aspect-square">
 
-                    <picture>
-                      <source media="(max-width: 1366.98px)" srcSet="/icons/primary-dark-chevron-right.svg" />
-                      <source media="(min-width: 1367px)" srcSet="/icons/right-arrow-thin.svg" />
-                      <img src="/icons/primary-dark-chevron-right.svg" alt="Example image" />
-                    </picture>
+                   
+                      <img src="/icons/right-arrow-thin.svg" alt="Example image" />
                     {/* <Image
                       src="/icons/primary-dark-chevron-right.svg"
                       alt="arrow"
