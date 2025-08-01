@@ -588,7 +588,7 @@ const OrderHistoryCard: React.FC<
           />
           <Typography
             tag="h5"
-            text={`${price} QAR`}
+            text={`${price.toFixed(3)} QAR`}
             className="text-primary-dark"
           />
         </div>
@@ -674,7 +674,7 @@ const OrderHistoryCard: React.FC<
             <>
               <Button 
                 key={i} 
-                className="w-full" 
+                className={`w-full ${btn === "Reorder" ? "hidden" : ""}`} 
                 size="md"
                 onClick={() => {
                   if (btn === "Restart Plan") {

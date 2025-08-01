@@ -134,7 +134,7 @@ export default function OrderHistory() {
         // price: 300,
         status: "cancel" as MealPlanStatus,
         hasInvoice: true,
-        cancellationTitle: "CANCELLATION DATE",
+        cancellationTitle: "CANCELLED PLAN",
         cancellationDate: "13 Mar 2025",
       },
       paymentFailedPlan: {
@@ -233,7 +233,7 @@ export default function OrderHistory() {
       },
       cancelledMealConfig: {
         planType: "regular",
-        label: "CANCELLATION DATE",
+        label: "CANCELLED PLAN",
         tagColor: "#E63946",
         buttons: ["Restart Plan"],
       },

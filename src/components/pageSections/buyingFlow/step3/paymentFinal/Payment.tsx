@@ -7,6 +7,7 @@ import { usePetStore } from '@/zustand/store/petDataStore'
 import { useCreatePetHook } from '@/hooks/subscriptionHooks/createPetHook';
 import { useCreateSubscriptionHook } from '@/hooks/subscriptionHooks/createSubscriptionHook'
 import { useRouter } from 'next/navigation'
+import { useGetAllOffers } from '@/hooks/subscriptionHooks/getAllOffers'
 
 interface ShippingFormData {
   firstName: string;
@@ -64,6 +65,8 @@ export default function Payment({ shippingFormData, billingFormData }: PaymentPr
   const { pets, clearPetDetails, createdPetsFromAPI, removeCreatedPetsFromAPI } = usePetStore();
   const { mutate: createPet } = useCreatePetHook();
   const { mutate: createSubscription } = useCreateSubscriptionHook();
+  const { data: offers } = useGetAllOffers();
+  const discountPercentage = offers?.result?.[0]?.discount_percent || 0;
 
   const [createPetError, setCreatePetError] = useState("");
   const [createSubscriptionError, setCreateSubscriptionError] = useState("");
@@ -362,7 +365,8 @@ export default function Payment({ shippingFormData, billingFormData }: PaymentPr
               plan: {
                 type: pet.planType || "",
                 duration: pet.planType === "Regular" ? "28" : "7",
-                price: pet.planPrice || 0,
+                price: pet.planType === "Regular" ? (Number(pet.planPrice) * (1 - (discountPercentage / 100))) : Number(pet.planPrice) || 0,
+                // price: pet.planPrice || 0,
                 protein: pet.protein || "",
                 bowlSize: pet.bowlSize || "",
               },

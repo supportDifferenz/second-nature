@@ -127,7 +127,7 @@ export const DowngradePlanPopup: React.FC<DowngradePlanPopupProps> = ({
             text={`${bowlSize === "half" ? "" : `${lastValidDateFormatted}`}`}
             // text={`${bowlSize === "half" ? "Upgrade to Full - Bowl" : `Downgrade to Half - Bowl effective until ${lastValidDate.toDateString()}`}`}
             // text={`${bowlSize === "half" ? "Upgrade" : "Downgrade"} to ${bowlSize === "half" ? "Full - Bowl" : "Half - Bowl"} effective until ${lastValidDate.toDateString()}`}
-            className="text-warning-meal-red text-center"
+            className="text-warning-meal-red text-center font-bold"
           />
         </div>
       </div>
