@@ -588,7 +588,7 @@ const OrderHistoryCard: React.FC<
           />
           <Typography
             tag="h5"
-            text={`${price} QAR`}
+            text={`${price.toFixed(3)} QAR`}
             className="text-primary-dark"
           />
         </div>

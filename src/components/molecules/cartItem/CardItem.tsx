@@ -54,7 +54,7 @@ export default function CardItem({ petName, planType, planPrice, protein, discou
           planType === "Regular" && (
             <Typography 
               tag="h6"
-              text={`${planPrice} QAR`}
+              text={`${planPrice.toFixed(3)} QAR`}
               // text="400.00 QAR"
               className="text-text-color line-through" 
             />
@@ -62,7 +62,7 @@ export default function CardItem({ petName, planType, planPrice, protein, discou
         }
         <Typography 
           tag="h6"
-          text={`${priceAfterDiscount} QAR`}
+          text={`${priceAfterDiscount.toFixed(3)} QAR`}
           // text={`${planPrice} QAR`}
           // text="400.00 QAR"
           className="text-primary-dark" 
