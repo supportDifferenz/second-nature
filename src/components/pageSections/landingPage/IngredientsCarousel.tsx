@@ -116,7 +116,7 @@ export default function IngredientsCarousel() {
           </AnimatePresence>
 
           {/* Navigation Buttons */}
-          <div className="flex justify-center lg:justify-start gap-3 mt-12 lg:mt-6 items-center absolute max-[575px]:bottom-[0px] max-[991px]:bottom-[-70px] bottom-[20px] max-[991px]:left-1/2 max-[991]:transform max-[991px]:-translate-x-1/2">
+          <div className="flex justify-center lg:justify-start gap-(--space-20-30) mt-12 lg:mt-6 items-center absolute max-[575px]:bottom-[0px] max-[991px]:bottom-[-70px] bottom-[20px] max-[991px]:left-1/2 max-[991]:transform max-[991px]:-translate-x-1/2">
             <Button
               onClick={prevSlide}
               className="rounded-full text-white hover:bg-white/30 relative h-[38px] w-[38px] p-0 border-none bg-transparent"
