@@ -255,7 +255,7 @@ export default function OrderHistory() {
                                     {   subscriptionHistory?.result?.length > 0 
                                         ? subscriptionHistory?.result?.map((item: { date: string; planType: string; protein: string; bowlSize: string; filePath: string }, index: number) => (
                                                 <tr key={index} className="border-b border-[#A1A1A1] last:border-0 hover:bg-[#2BB673]/5">
-                                                    <td className="px-4 py-3">{item.date}</td>
+                                                    <td className="px-4 py-3">{item.date.split('-').reverse().join('-')}</td>
                                                     <td className="px-4 py-3">{item.planType}</td>
                                                     <td className="px-4 py-3">{item.protein}</td>
                                                     <td className="px-4 py-3">{item.bowlSize}</td>
