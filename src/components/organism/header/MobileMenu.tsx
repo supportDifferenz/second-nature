@@ -122,7 +122,7 @@ const MobileMenu = ({ className, isOpen, setIsOpen }: MobileMenuProps) => {
         className={`fixed top-0 left-0 w-full z-[-1] transition-opacity duration-300 ease-in-out ${isOpen ? 'translate-y-0 opacity-100' : '-translate-y-[170%] opacity-0'
           }`}
       >
-        <div className="animated-gradient min-h-[600px] h-[100vh] overflow-y-auto max-[575px]:pt-[130px] pt-[150px] pb-[130px] sm:pb-[50px] ">
+        <div className="animated-gradient min-h-[600px] h-[100dvh] overflow-y-auto max-[575px]:pt-[130px] pt-[150px] pb-[130px] sm:pb-[50px] ">
           <motion.div
             className="flex flex-col lg:flex-row gap-6 sm:gap-[40px] lg:gap-[90px] container py-8 text-lg"
             variants={containerVariants}
@@ -258,14 +258,14 @@ const MobileMenu = ({ className, isOpen, setIsOpen }: MobileMenuProps) => {
           className='fixed sm:hidden  w-full h-[40px] top-[120px] left-0'></div>
         <div className='flex gap-4  fixed bottom-0 w-full pt-[12dvh] py-[4dvh] px-5 sm:hidden ' style={{ background: 'linear-gradient(rgb(255 255 255 / 0%) 0%, rgb(255, 255, 255) 40%)' }}>
           <Button
-            variant="outlinePrimaryBtn"
             size="small"
-            className="text-secondary-1 flex-1 py-[12px]">
+            className=" flex-1 py-[12px]">
             Get Started
           </Button>
           <Button
             size="small"
-            className="sm:px-9 flex-1 py-[12px]"
+            className="sm:px-9 flex-1 py-[12px] text-secondary-1"
+            variant="outlinePrimaryBtn"
 
           >
             Log In
