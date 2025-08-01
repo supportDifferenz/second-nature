@@ -22,7 +22,7 @@ export const orderHistoryConfig: Record<
     planType: "regular",
   },
   cancel: {
-    label: "CANCELLATION DATE",
+    label: "CANCELLED PLAN",
     tagColor: "#E63946",
     buttons: ["Restart Plan"],
     planType: "regular",
