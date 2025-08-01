@@ -124,7 +124,7 @@ const MobileMenu = ({ className, isOpen, setIsOpen }: MobileMenuProps) => {
       >
         <div className="animated-gradient min-h-[600px] h-[100dvh] overflow-y-auto max-[575px]:pt-[130px] pt-[150px] pb-[130px] sm:pb-[50px] ">
           <motion.div
-            className="flex flex-col lg:flex-row gap-6 sm:gap-[40px] lg:gap-[90px] container py-8 text-lg"
+            className="flex flex-col lg:flex-row gap-6 sm:gap-[40px] lg:gap-[90px] container py-8 pt-7 sm:py-8 text-lg"
             variants={containerVariants}
             initial="hidden"
             animate="show"
@@ -158,7 +158,7 @@ const MobileMenu = ({ className, isOpen, setIsOpen }: MobileMenuProps) => {
               />
             </motion.div>
 
-            <motion.div className="max-[575px]:!text-[22px] space-y-6 mt-4 ml-3 sm:mt-0 lg:ml-12">
+            <motion.div className="max-[575px]:!text-[22px] space-y-5 sm:space-y-6 mt-2 ml-3 sm:mt-0 lg:ml-12">
               <motion.a
                 variants={itemVariants}
                 whileHover={hoverMotion}
@@ -256,7 +256,7 @@ const MobileMenu = ({ className, isOpen, setIsOpen }: MobileMenuProps) => {
         </div>
         <div  style={{ background: 'linear-gradient(to bottom, rgb(255, 255, 255) 60%, rgba(255, 255, 255, 0) 100%)' }}
           className='fixed sm:hidden  w-full h-[40px] top-[120px] left-0'></div>
-        <div className='flex gap-4  fixed bottom-0 w-full pt-[12dvh] py-[4dvh] px-5 sm:hidden ' style={{ background: 'linear-gradient(rgb(255 255 255 / 0%) 0%, rgb(255, 255, 255) 40%)' }}>
+        <div className='flex gap-4  fixed bottom-0 w-full pt-[8dvh] py-[3dvh] px-5 sm:hidden ' style={{ background: 'linear-gradient(rgb(255 255 255 / 0%) 0%, rgb(255, 255, 255) 40%)' }}>
           <Button
             size="small"
             className=" flex-1 py-[12px]">
