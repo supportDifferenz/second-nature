@@ -270,12 +270,12 @@ export default function HeroSection() {
             scrollPrev();
           }}
           onMouseEnter={handlePauseAndResume}
-          className="rounded-full !border-0 text-white bg-transparent absolute top-1/2 left-[5px] lg:left-[1%] shadow-md -translate-y-1/2 z-[5] hover:scale-110 transition-transform duration-300"
+          className="rounded-full !border-0 text-white bg-transparent absolute top-1/2 left-[15px] lg:left-[1%] shadow-md -translate-y-1/2 z-[5] hover:scale-110 transition-transform duration-300"
         >
           <img
             src="/icons/arrow-left-nav-white.svg"
             alt="arrow"
-            className="w-[50px]"
+            className="w-[40px] sm:w-[50px]"
           />
         </Button>
         <Button
@@ -285,12 +285,12 @@ export default function HeroSection() {
             scrollNext();
           }}
           onMouseEnter={handlePauseAndResume}
-          className="rounded-full !border-0 text-white bg-transparent absolute top-1/2 right-[5px] lg:right-[1%] shadow-md -translate-y-1/2 z-[5] hover:scale-110 transition-transform duration-300"
+          className="rounded-full !border-0 text-white bg-transparent absolute top-1/2 right-[15px] lg:right-[1%] shadow-md -translate-y-1/2 z-[5] hover:scale-110 transition-transform duration-300"
         >
           <img
             src="/icons/arrow-right-nav-white.svg"
             alt="arrow"
-            className="w-[50px]"
+            className="w-[40px] sm:w-[50px]"
           />
         </Button>
       </div>
