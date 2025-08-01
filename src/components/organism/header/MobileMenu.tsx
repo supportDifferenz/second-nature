@@ -254,7 +254,7 @@ const MobileMenu = ({ className, isOpen, setIsOpen }: MobileMenuProps) => {
 
           </motion.div>
         </div>
-        <div  style={{ background: 'linear-gradient(to bottom, rgb(255, 255, 255) 60%, rgba(255, 255, 255, 0) 100%)' }}
+        <div style={{ background: 'linear-gradient(to bottom, rgb(255, 255, 255) 60%, rgba(255, 255, 255, 0) 100%)' }}
           className='fixed sm:hidden  w-full h-[40px] top-[120px] left-0'></div>
         <div className='flex gap-4  fixed bottom-0 w-full pt-[8dvh] py-[3dvh] px-5 sm:hidden ' style={{ background: 'linear-gradient(rgb(255 255 255 / 0%) 0%, rgb(255, 255, 255) 40%)' }}>
           <Button
