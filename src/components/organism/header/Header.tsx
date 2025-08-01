@@ -236,9 +236,7 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
                 {isMobile ? (
                   !isMobileMenuOpen && (
                     <Button
-                      variant="outlinePrimaryBtn"
                       size="small"
-                      className="text-secondary-1"
                       onClick={() => {
                         if (isAuthenticated) {
                           startTransition(() => {
@@ -257,9 +255,8 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
                 ) : (
                   <>
                     <Button
-                      variant="outlinePrimaryBtn"
                       size="small"
-                      className="text-secondary-1 hidden sm:block"
+                      className=" hidden sm:block"
                       onClick={() => {
                         if (isAuthenticated) {
                           startTransition(() => {
@@ -278,6 +275,8 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
                     {isAuthenticated ? (
                       <Button
                         size="small"
+                        variant="outlinePrimaryBtn"
+                        className="text-secondary-1"
                         onClick={() => {
                           startTransition(() => {
                             router.push("/personal-information");
@@ -289,7 +288,8 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
                     ) : (
                       <Button
                         size="small"
-                        className="sm:px-9"
+                         variant={"outlinePrimaryBtn"}
+                        className="sm:px-9 text-secondary-1"
                         onClick={() => {
                           startTransition(() => {
                             router.push("/login");
