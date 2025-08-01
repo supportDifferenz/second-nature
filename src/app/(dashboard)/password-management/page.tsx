@@ -42,6 +42,14 @@ export default function PasswordManagement() {
       case "newPassword":
         if (!value) return "New password is required";
         if (value.length < 8) return "Password must be at least 8 characters";
+        if (!/[A-Z]/.test(value))
+          return "Must contain at least one uppercase letter";
+        if (!/[a-z]/.test(value))
+          return "Must contain at least one lowercase letter";
+        if (!/[0-9]/.test(value)) 
+          return "Must contain at least one number";
+        if(!/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(value))
+          return "Must contain at least one special character";
         return "";
       case "confirmNewPassword":
         if (!value) return "Please confirm your new password";
@@ -59,6 +67,11 @@ export default function PasswordManagement() {
     setFormData(prev => ({
       ...prev,
       [name]: value
+    }));
+
+    setErrors(prev => ({
+      ...prev,
+      [name]: validateField(name, value)
     }));
 
     // Validate on change if the field was already touched
