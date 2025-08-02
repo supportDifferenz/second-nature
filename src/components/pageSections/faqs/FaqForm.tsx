@@ -181,7 +181,7 @@ export default function FaqForm() {
           Contact Us,
 
         </h2>
-          <h2 className=" text-primary-dark" >To Your Questions Answered</h2>
+          <h2 className=" text-primary-dark max-[576px]:!text-[30px]  max-[576px]:text-center" >To Your Questions Answered</h2>
       </div>
       <Typography
         tag="p"
