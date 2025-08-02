@@ -137,7 +137,7 @@ export default function Breed() {
       "Selected pet ID is",
       currentPetId
     );
-    if (selectedBreed && selectedCrossBreed && currentPetId) {
+    if (selectedBreed && currentPetId) {
       setPetDetails(currentPetId, {
         breed: selectedBreed,
         crossBreed: selectedCrossBreed,
@@ -332,7 +332,8 @@ export default function Breed() {
           </Button>
           <Button
             className="gap-2.5 lg:ml-auto lg:mr-[-55px] hover:scale-105 transition-transform duration-300 ease-in-out"
-            disabled={!iDontKnowBreed && !(selectedBreed && selectedCrossBreed)}
+            disabled={!iDontKnowBreed && !(selectedBreed)}
+            // disabled={!iDontKnowBreed && !(selectedBreed && selectedCrossBreed)}
             onClick={handleNext}
           >
             Next
