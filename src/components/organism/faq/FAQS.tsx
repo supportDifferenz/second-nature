@@ -26,7 +26,7 @@ const FAQS: React.FC<FAQSPropsTypes> = ({
             <AccordionItem
               key={index}
               value={index.toString()}
-              className={`border border-secondary-1 transition duration-75 data-[state=open]:bg-[#FBFBFB] overflow-hidden ${
+              className={`border border-secondary-2 transition duration-75 data-[state=open]:bg-[#F9F9F9] overflow-hidden ${
                 isOpen ? "bg-[#FBFBFB]" : "bg-white"
               } rounded-xl`}
             >
@@ -63,7 +63,7 @@ const FAQS: React.FC<FAQSPropsTypes> = ({
                           />
                         ))
                       ) : (
-                        <Typography tag="p" text={faq.answer} />
+                        <Typography tag="p" text={faq.answer} className="text-[#424242]" />
                       )}
                     </div>
                   </motion.div>

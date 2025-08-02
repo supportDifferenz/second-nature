@@ -186,7 +186,7 @@ export default function FaqForm() {
       <Typography
         tag="p"
         text="Have questions about our natural pet food? Explore our FAQ section for quick and helpful answers to common queries about ingredients, feeding, storage, and more."
-        className="font-bold text-text-color text-center lg:text-left px-3.5 sm:px-0"
+        className="font-bold text-text-color text-center sm:text-left px-3.5 sm:px-0"
       />
 
       <form

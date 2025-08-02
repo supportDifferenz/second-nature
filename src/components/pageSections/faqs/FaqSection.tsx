@@ -181,7 +181,7 @@ export default function FaqSection() {
 
   return (
     <section>
-      <div className="container flex flex-col sm:flex-row gap-[var(--space-30-60)] lg:justify-between">
+      <div className="container flex flex-col lg:flex-row gap-[var(--space-30-60)] lg:justify-between">
         <div className="relative lg:left-[4.5%]">
           <div className="lg:-ml-[2%] xl:-ml-[16%] h-fit sm:sticky top-[5%]">
             <motion.div
@@ -200,7 +200,7 @@ export default function FaqSection() {
               <div className="relative">
                 <div
                   ref={scrollContainerRef}
-                  className="flex flex-row sm:flex-col gap-[var(--space-10-15)] mt-[var(--space-34-42)] pr-11 sm:pr-0 overflow-x-auto  scrollbar-hide snap-x snap-mandatory"
+                  className="flex flex-row lg:flex-col gap-[var(--space-10-15)] mt-[var(--space-34-42)] pr-11 lg:pr-0 overflow-x-auto  scrollbar-hide snap-x snap-mandatory"
                   style={{ 
                     scrollBehavior: "smooth",
                     scrollbarWidth: "none",
@@ -224,7 +224,7 @@ export default function FaqSection() {
                   ))}
                 </div>
 
-                <div className="absolute top-0 right-[-2px] h-full w-20 sm:hidden pointer-events-none">
+                <div className="absolute top-0 right-[-2px] h-full w-20 lg:hidden pointer-events-none">
                   <div className="absolute inset-0 bg-gradient-to-l from-white via-white/80 to-transparent"></div>
                   <button
                     onClick={scrollRight}
@@ -247,6 +247,7 @@ export default function FaqSection() {
                   text="Got a question we haven't answered,"
                   className="text-secondary-1"
                 >
+                  <br className="sm:hidden"/>
                   <span onClick={handleAskUsClick} className="cursor-pointer">
                     <Typography tag="span" text=" Ask us" className="underline" />
                   </span>
