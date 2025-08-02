@@ -69,7 +69,7 @@ export default function CartSummary() {
       </div>
       <div className="relative my-12 lg:mt-5">
         {/* Scrollable content */}
-        <div className="scroll-container relative z-0 flex flex-col gap-12 sm:gap-0 pr-[var(--space-30-60)] overflow-y-auto lg:max-h-[25vh] lg:pb-4 my-scrollbar">
+        <div className="scroll-container relative z-0 flex flex-col gap-12 sm:gap-0 pr-[var(--space-30-60)] overflow-y-auto lg:max-h-[25vh] pb-2.5 lg:pb-4 my-scrollbar">
           {pets.map((petDetails) => (
             <CardItem
               key={petDetails.id ?? ""}

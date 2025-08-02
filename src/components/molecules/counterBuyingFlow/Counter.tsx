@@ -116,7 +116,7 @@ export default function Counter({
           onBlur={handleBlur}
           min={min}
           max={max}
-          className={`${colorClass} ${className3} w-12 lg:w-14 text-center font-bold text-[#7C7C7C] bg-transparent border-none input-no-spinner focus:outline-none focus:ring-0`}
+          className={`${colorClass} ${className3} w-12 lg:w-14 text-center font-bold text-[#6b6b6b] bg-transparent border-none input-no-spinner focus:outline-none focus:ring-0`}
         />
 
         <button
