@@ -71,7 +71,7 @@ const FooterBannerCTA: React.FC<
         transition={{ duration: 0.6 }}
         viewport={{ once: true }}
         id={id}
-        className={` bg-blue-500 relative py-[35%] sm:py-[9%] lg:py-[6%]`}
+        className={` bg-primary-dark relative py-[35%] sm:py-[9%] lg:py-[6%]`}
       >
         <div className="w-full absolute top-0 left-0 h-full">
           <Image
