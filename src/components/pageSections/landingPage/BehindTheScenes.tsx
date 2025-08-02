@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import {  useState } from "react";
 import { motion } from "framer-motion";
-import { cn } from "@/lib/utils";
+// import { cn } from "@/lib/utils";
 
 const slides = [
   {
@@ -117,7 +117,7 @@ export default function BehindTheScenes() {
         </div>
 
         {/* Controls */}
-        <div className="flex justify-center items-center space-x-4">
+        <div className="flex justify-center items-center gap-(--space-20-30)">
 
 
           <Button
@@ -132,7 +132,7 @@ export default function BehindTheScenes() {
             />
           </Button>
 
-          {slides.map((_, index) => (
+          {/* {slides.map((_, index) => (
             <button
               key={index}
               className={cn(
@@ -142,7 +142,7 @@ export default function BehindTheScenes() {
               onClick={() => setSelectedIndex(index)}
               aria-label={`Go to slide ${index + 1}`}
             />
-          ))}
+          ))} */}
           <Button
             onClick={scrollNext}
             className="rounded-full text-white hover:bg-white/30 relative h-[38px] w-[38px] p-0 border-none bg-transparent"

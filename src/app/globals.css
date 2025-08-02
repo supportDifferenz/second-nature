@@ -456,6 +456,7 @@ p {
   .animated-gradient {
     background: linear-gradient(163deg, rgba(43, 182, 115, 0.00) 55.33%, rgba(43, 182, 115, 0.40) 100%), #FFF;
   }
+
   @media (max-width: 575.98px) {
     .animated-gradient {
       background: linear-gradient(162deg, rgba(43, 182, 115, 0.00) 59.3%, rgba(43, 182, 115, 0.40) 89.47%), #FFF;
@@ -506,3 +507,4 @@ p {
 .input-no-spinner[type='number'] {
   -moz-appearance: textfield;
 }
+

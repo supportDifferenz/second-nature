@@ -216,19 +216,21 @@ export default function Testimonial() {
           </div>
 
           {/* Navigation Arrows */}
-          <div className="flex justify-center lg:justify-start gap-(--space-20-30) mt-(--space-30-60)">
+          <div className="flex justify-center lg:justify-start gap-(--space-20-30) mt-(--space-30-60) lg:ml-3">
             <Image
               src="/icons/secondary-1-arrow-prev.svg"
               alt="Prev"
               fill
-              className="!static !h-[38px] !w-[38px] contain cursor-pointer hover:opacity-70 transition-opacity"
+              className="!static !h-[38px] !w-[38px] contain cursor-pointer rounded-full hover:scale-105 transition"
               onClick={scrollPrev}
             />
+
+            
             <Image
               src="/icons/secondary-1-arrow-next.svg"
               alt="Next"
               fill
-              className="!static !h-[38px] !w-[38px] contain cursor-pointer hover:opacity-70 transition-opacity"
+              className="!static !h-[38px] !w-[38px] contain cursor-pointer rounded-full hover:scale-105 transition"
               onClick={scrollNext}
             />
           </div>
