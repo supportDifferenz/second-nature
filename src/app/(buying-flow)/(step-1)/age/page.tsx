@@ -93,7 +93,7 @@ export default function Age() {
             <button
               onClick={() => setMode("dob")}
               type="button"
-              className={`subtitle3 sm:h6 px-4 py-2 font-medium ${
+              className={`subtitle3 sm:h6 px-4 py-2 font-semibold ${
                 mode === "dob"
                   ? "border-b-2 border-primary-dark text-primary-dark"
                   : "text-[#818181] cursor-pointer"
@@ -104,7 +104,7 @@ export default function Age() {
             <button
               onClick={() => setMode("approx")}
               type="button"
-              className={`subtitle3 sm:h6 px-4 py-2 font-medium ${
+              className={`subtitle3 sm:h6 px-4 py-2 font-semibold ${
                 mode === "approx"
                   ? "border-b-2 border-primary-dark text-primary-dark"
                   : "text-[#818181] cursor-pointer"
@@ -124,7 +124,7 @@ export default function Age() {
           )}
         </motion.div>
         {/* Navigation */}
-        <div className="pb-[3dvh] flex  justify-between items-center gap-4 lg:gap-0 lg:items-end pt-[3dvh]">
+        <div className="pb-[3dvh] flex   justify-between items-center gap-4 lg:gap-0 lg:items-end pt-[3dvh]">
           <Button
             variant={"outlineSecondaryBtn"}
             className="gap-2.5  lg:ml-[-55px]"
