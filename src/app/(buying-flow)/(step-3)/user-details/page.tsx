@@ -153,7 +153,7 @@ export default function Page() {
   console.log("User details in user details page is", userDetails);
 
   return (
-    <BuyingFlowLayout step={3}>
+    <BuyingFlowLayout step={1}>
 
       <form onSubmit={handleNext} className="flex flex-1 flex-col items-center gap-8 bg-white">
         <Typography
