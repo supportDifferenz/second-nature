@@ -256,6 +256,7 @@ export const createSubscription = async (formData: {
       cardNumber: string;
       cardExpiry: string;
       cardCVV: string;
+      totalAmount: number;
     }
     isDeleted: boolean;
 }) => {
