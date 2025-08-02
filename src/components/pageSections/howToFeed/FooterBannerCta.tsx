@@ -23,7 +23,7 @@ export default function FooterBannerCta() {
     paragraph="Pets deserve more than processed food—that’s why Second Nature provides fresh, human-grade meals to nourish your fur baby."
     paragraphColor="#FFFFFF"
     buttonText="Build your plan"
-    buttonLink={isAuthenticated ? "/location" : "/user-details"}
+    buttonLink={isAuthenticated ? "/location" : "/verify-mail"}
     // buttonLink="/location"
     bannerThemeColor="#fff"
     align="center" // Can be "left", "center", or "right"

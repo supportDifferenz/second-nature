@@ -103,7 +103,7 @@ export default function HeroSection() {
       paragraphColor: "#424242",
       buttonText: "know more",
       buttonTextColor: "",
-      buttonLink: isAuthenticated ? "/location" : "/user-details",
+      buttonLink: isAuthenticated ? "/location" : "/verify-mail",
       bannerThemeColor: "#00683D",
     },
     {
@@ -121,7 +121,7 @@ export default function HeroSection() {
         "Freshly prepared and delivered to your door that fuels a life full of happy tails",
       paragraphColor: "#ffff",
       buttonText: "Get Started",
-      buttonLink: isAuthenticated ? "/location" : "/user-details",
+      buttonLink: isAuthenticated ? "/location" : "/verify-mail",
       bannerThemeColor: "#ffff",
       buttonTextColor: "#ffff",
     },

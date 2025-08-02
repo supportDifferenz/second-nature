@@ -23,7 +23,7 @@ export default function FooterCTASection() {
         paragraph="Your pet deserves the best. Start their transition to a healthier, natural diet today and see the difference in their energy, health, and happiness."
         paragraphColor="#FFFFFF"
         buttonText="Build your plan"
-        buttonLink={isAuthenticated ? "/location" : "/user-details"}
+        buttonLink={isAuthenticated ? "/location" : "/verify-mail"}
         // buttonLink="/location"
         bannerThemeColor="#fff"
         align="center" 

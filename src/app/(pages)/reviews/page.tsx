@@ -74,7 +74,7 @@ function Page() {
           paragraph="Have you seen the difference in your pet? We’d love to hear your story! Leave us a review and join the growing community of pet parents who trust Second Nature."
           paragraphColor="#FFFFFF"
           buttonText="Build your plan"
-          buttonLink={isAuthenticated ? "/location" : "/user-details"}
+          buttonLink={isAuthenticated ? "/location" : "/verify-mail"}
           // buttonLink="/location"
           bannerThemeColor="#fff"
           align="center"

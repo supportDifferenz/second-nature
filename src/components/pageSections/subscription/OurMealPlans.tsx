@@ -25,7 +25,7 @@ export default function OurMealPlans() {
         "Completely balanced",
       ],
       buttons: [
-        { label: "Get Started", route: `${isAuthenticated ? "/location" : "/user-details"}`, variant: "primary" },
+        { label: "Get Started", route: `${isAuthenticated ? "/location" : "/verify-mail"}`, variant: "primary" },
       ],
     },
     {
@@ -39,7 +39,7 @@ export default function OurMealPlans() {
         "Mix in with existing food",
       ],
       buttons: [
-        { label: "Get Started", route: `${isAuthenticated ? "/location" : "/user-details"}`, variant: "primary" },
+        { label: "Get Started", route: `${isAuthenticated ? "/location" : "/verify-mail"}`, variant: "primary" },
       ],
     },
   ];

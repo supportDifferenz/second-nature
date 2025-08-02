@@ -58,7 +58,7 @@ const Footer = () => {
                   });
                 } else {
                   startTransition(() => {
-                    router.push("/user-details");
+                    router.push("/verify-mail");
                   });
                 }
                 // startTransition(() => {

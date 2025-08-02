@@ -24,7 +24,7 @@ export default function FooterBannerCTASection() {
     buttonTextColor="#FFFFFF"
     buttonBg="#944446"
     buttonBorder="#FFFFFF"
-    buttonLink={isAuthenticated ? "/location" : "/user-details"}
+    buttonLink={isAuthenticated ? "/location" : "/verify-mail"}
     // buttonLink="/location"
     bannerThemeColor="#fff"
     align="center" // Can be "left", "center", or "right"

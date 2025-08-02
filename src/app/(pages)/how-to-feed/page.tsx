@@ -59,7 +59,7 @@ export default function Subscription() {
           paragraph="Click below to explore our range and start your journey toward better pet nutrition today."
           paragraphColor="#FFFFFF"
           buttonText="Build your plan"
-          buttonLink={isAuthenticated ? "/location" : "/user-details"}
+          buttonLink={isAuthenticated ? "/location" : "/verify-mail"}
           // buttonLink="/location"
           bannerThemeColor="#fff"
           align="center"

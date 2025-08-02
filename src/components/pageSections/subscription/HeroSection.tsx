@@ -26,7 +26,7 @@ export default function HeroSection() {
     subtitle: "Premium Pet Food Delivered",
     bannerThemeColor: "#00683D",
     buttonText: "Sign Up Today",
-    buttonLink: isAuthenticated ? "/location" : "/user-details",
+    buttonLink: isAuthenticated ? "/location" : "/verify-mail",
     // buttonLink: "/location",
     buttonTextColor: "#00683D",
   };
