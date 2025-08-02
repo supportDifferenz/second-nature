@@ -45,10 +45,12 @@ export default function PromoCode({ totalPrice, productPrice, setProductPrice, d
         setIsApplied(true);
         console.log("Promo applied successfully. New price:", productPrice - discountAmount);
       } else {
+        toast.error("Invalid or expired promo code");
         console.log("Invalid or expired promo code");
         // Show error to user
       }
     } catch (error) {
+      toast.error("Error applying promo code");
       console.error("Error applying promo code:", error);
       // Show error to user
     }
@@ -65,6 +67,7 @@ export default function PromoCode({ totalPrice, productPrice, setProductPrice, d
     setIsApplied(false);
     // setPromoMessage("");
     setProductPrice(totalPrice);
+    setPromoCodeDiscountAmount(0);
   };
 
   return (
