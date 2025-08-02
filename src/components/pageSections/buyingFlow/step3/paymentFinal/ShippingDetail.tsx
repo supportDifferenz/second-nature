@@ -72,6 +72,7 @@ export default function ShippingDetail() {
   const [shippingSubId, setShippingSubId] = useState<string>("");
   const [billingSubId, setBillingSubId] = useState<string>("");
   const [submittingAddressError, setSubmittingAddressError] = useState("");
+  const [useDifferentBillingClickCount, setUseDifferentBillingClickCount] = useState(0);
 
   const [shippingFormData, setShippingFormData] = useState<ShippingFormData>({
     firstName: "",
@@ -263,13 +264,39 @@ export default function ShippingDetail() {
     setIsLoading(false);
   }, [addressData, userDetails]);
 
+  console.log("Use different billing click count", useDifferentBillingClickCount);
+
   // Sync billing data when checkbox is unchecked
   useEffect(() => {
+    if(selectedCheckBox) {
+      setUseDifferentBillingClickCount(useDifferentBillingClickCount + 1);
+      if(useDifferentBillingClickCount > 3) {
+        setBillingFormData(() => ({
+        // ...shippingFormData,
+        firstName: "",
+        lastName: "",
+        mobile: "",
+        address: "",
+        aptSuite: "",
+        municipality: "",
+        useDifferentBilling: false,
+      }))
+      }
+    };
     if (!selectedCheckBox) {
-      setBillingFormData(() => ({
-        ...shippingFormData,
-        useDifferentBilling: true,
-      }));
+      setUseDifferentBillingClickCount(useDifferentBillingClickCount + 1);
+      if(useDifferentBillingClickCount > 1) {
+        setBillingFormData(() => ({
+          // ...shippingFormData,
+          firstName: shippingFormData.firstName,
+          lastName: shippingFormData.lastName,
+          mobile: shippingFormData.mobile,
+          address: shippingFormData.address,
+          aptSuite: shippingFormData.aptSuite,
+          municipality: shippingFormData.municipality,
+          useDifferentBilling: true,
+        }));
+      }
     }
   }, [selectedCheckBox, shippingFormData]);
 

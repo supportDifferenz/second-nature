@@ -130,7 +130,7 @@ export default function Counter({
         </button>
       </div>
       <div>
-        <Typography tag='label' text={label} className={`${colorClass} text-primary-dark h6`} />
+        <Typography tag='label' text={label} className={`${colorClass} text-primary-dark  text-[16px] !font-medium`} />
       </div>
     </div>
   );

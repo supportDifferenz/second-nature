@@ -90,7 +90,7 @@ export default function AnyAllergies() {
                                         <span className='grow overflow-x-auto scrollbar-hide'>
                                             {selectedSymptoms.length > 0
                                                 ? selectedSymptoms.join(", ")
-                                                : "Select symptoms"}
+                                                : "Allergies to"}
                                         </span>
                                         <ChevronDownIcon className="size-4 text-[#6b6b6b] opacity-50" />
 

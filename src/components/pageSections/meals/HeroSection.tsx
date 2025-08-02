@@ -1,7 +1,5 @@
 "use client";
 
-import Image from "next/image";
-import React, { useEffect, useState } from "react";
 import Typography from "@/components/atoms/typography/Typography";
 import { useSearchParams } from "next/navigation";
 
@@ -11,56 +9,35 @@ export default function HeroSection() {
   const selectedPet: "dog" | "cat" = (pet && ["dog", "cat"].includes(pet) ? (pet as "dog" | "cat") : "dog");
 
   const banner = {
-    id: "1",
     image: {
       web: selectedPet === "dog" ? "/images/meal-beef-banner.webp" : "/images/MealsCatWeb.webp",
-      // web: "/images/meal-beef-banner.webp",
       tablet: selectedPet === "dog" ? "/images/meal-beef-banner-mob.webp" : "/images/MealsCatMob.webp",
-      // tablet: "/images/meal-beef-banner-mob.webp",
       mobile: selectedPet === "dog" ? "/images/meal-beef-banner-mob.webp" : "/images/MealsCatMob.webp",
-      // mobile: "/images/meal-beef-banner-mob.webp",
     },
-    caption: "NEW",
-    captionColor: "#424242",
     title: "Delivering Love & Nutrition,",
     halfTitle: "One Bowl at a Time",
     paragraph: "From our kitchen to your doorstep, nutrition made simple",
     paragraphColor: "#ffffff",
     bannerThemeColor: "#ffffff",
-    buttonText: "Get Started",
-    buttonTextColor: "#944446",
   };
-
-  const [activeImage, setActiveImage] = useState(banner.image.mobile);
-
-  useEffect(() => {
-    const updateImage = () => {
-      if (typeof window === "undefined") return;
-      if (window.innerWidth <= 574) setActiveImage(banner.image.mobile);
-      else if (window.innerWidth <= 991) setActiveImage(banner.image.tablet);
-      else setActiveImage(banner.image.web);
-    };
-
-    updateImage();
-    window.addEventListener("resize", updateImage);
-    return () => window.removeEventListener("resize", updateImage);
-  }, [banner.image.mobile, banner.image.tablet, banner.image.web]);
 
   return (
     <section className="relative w-full overflow-hidden">
       <div className="relative text-center" style={{ color: banner.bannerThemeColor }}>
         {/* Background Image */}
         <div className="absolute top-0 left-0 w-full h-full z-[-1]">
-          <Image
-            src={activeImage}
-            alt={banner.title}
-            className="!static inset-0 w-full !h-full object-cover object-center"
-            fill
-            priority
-          />
+          <picture>
+            <source media="(max-width: 574px)" srcSet={banner.image.mobile} type="image/webp" />
+            <source media="(max-width: 991px)" srcSet={banner.image.tablet} type="image/webp" />
+            <img
+              src={banner.image.web}
+              alt="Banner"
+              className="w-full h-full object-cover object-center"
+            />
+          </picture>
         </div>
 
-        {/* Content Container */}
+        {/* Content */}
         <div className="relative flex flex-col items-center justify-center w-full min-h-[500px] h-[90dvh] sm:min-h-[400px] sm:h-[d50vh] lg:min-h-[520px] sm:h-[70dvh] lg:max-h-[1200px] container">
           <div className="lg:w-[55%]">
             <Typography

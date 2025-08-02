@@ -11,7 +11,7 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
     <>
       <Header />
       <main>
-        <div className="flex flex-col container lg:flex-row gap-3 sm:gap-5 lg:gap-0 lg:pt-7 justify-between ">
+        <div className="flex flex-col container lg:flex-row gap-3 sm:gap-5 lg:gap-0  justify-between ">
           {/* static banner */}
           <div className="lg:w-[52vw] lg:rounded-2xl order-2 sm:order-1">
           {/* <div className="lg:w-[46.87vw] order-2 sm:order-1"> */}

@@ -30,7 +30,7 @@ const bannerVariants = cva(
       },
       bannerHeight: {
         mainHero:
-          "min-h-[400px] h-[600px] sm:min-h-[300px] sm:h-[50dvh] lg:min-h-[480px] 2xl:min-h-[720px] lg:h-[75dvh]  lg:max-h-[1000px]",
+          "min-h-[400px] h-[600px] sm:min-h-[300px] sm:h-[50dvh] lg:min-h-[480px] 2xl:min-h-[600px] lg:h-[72dvh]  lg:max-h-[1000px]",
         subHero:
           "min-h-[500px] h-[90dvh] sm:min-h-[400px] sm:h-[50dvh] lg:min-h-[520px] sm:h-[70dvh] lg:max-h-[1200px]",
       },
