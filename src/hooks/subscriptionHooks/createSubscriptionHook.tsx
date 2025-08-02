@@ -64,6 +64,7 @@ interface SubscriptionData {
     cardNumber: string;
     cardExpiry: string;
     cardCVV: string;
+    totalAmount: number;
   };
   isDeleted: boolean;
 }

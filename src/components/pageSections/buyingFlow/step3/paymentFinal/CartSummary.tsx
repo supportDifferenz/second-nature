@@ -8,7 +8,7 @@ import { usePetStore } from "@/zustand/store/petDataStore";
 import { useGetAllOffers } from "@/hooks/subscriptionHooks/getAllOffers";
 
 export default function CartSummary() {
-  const { pets } = usePetStore();
+  const { pets, setTotalPrice } = usePetStore();
   const { data: offers } = useGetAllOffers();
   const discountPercentage = offers?.result?.[0]?.discount_percent || 0;
   console.log("Discount percentage:", discountPercentage);
@@ -47,15 +47,16 @@ export default function CartSummary() {
       );
   }, [pets, offers]);
 
-
-
-
   // const totalPrice = pets.reduce((sum, pet) => {
   //   const price = Number(pet.planPrice) || 0;
   //   return sum + price;
   // }, 0);
 
   const [productPrice, setProductPrice] = useState<number>(totalPrice);
+
+  useEffect(() => {
+    setTotalPrice(productPrice);
+  },[productPrice])
 
   return (
     <div className="bg-[#F1F5DB] min-h-min lg:max-h-[95vh] py-[var(--space-15-30)] rounded-2xl border border-[#C5C5C5]">
