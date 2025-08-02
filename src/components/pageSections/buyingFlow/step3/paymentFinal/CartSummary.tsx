@@ -92,7 +92,7 @@ export default function CartSummary() {
       <div className="flex flex-col gap-[var(--space-10-15)] border-y border-[#CAD585] pt-[var(--space-15-30)] pb-[var(--space-10-20)] mx-[var(--space-30-60)]">
         <Typography
           tag="h6"
-          text="caption Promo/referal code"
+          text="Promo/referal code"
           className="uppercase text-primary-dark"
         />
         <PromoCode
