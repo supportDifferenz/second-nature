@@ -60,8 +60,8 @@ export default function AccountDetail() {
           return "Must contain at least one lowercase letter";
         if (!/[0-9]/.test(value)) 
           return "Must contain at least one number";
-        if(!/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(value))
-          return "Must contain at least one special character";
+        // if(!/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(value))
+        //   return "Must contain at least one special character";
         return "";
       case "repeatPassword":
         if (!value) return "Please repeat your password";

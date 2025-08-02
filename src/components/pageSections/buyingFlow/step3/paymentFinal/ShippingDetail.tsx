@@ -73,6 +73,7 @@ export default function ShippingDetail() {
   const [billingSubId, setBillingSubId] = useState<string>("");
   const [submittingAddressError, setSubmittingAddressError] = useState("");
   const [useDifferentBillingClickCount, setUseDifferentBillingClickCount] = useState(0);
+  console.log("Selected check box", selectedCheckBox);
 
   const [shippingFormData, setShippingFormData] = useState<ShippingFormData>({
     firstName: "",
@@ -227,12 +228,13 @@ export default function ShippingDetail() {
           "Billing address data",
           addressData?.result?.billingAddress
         );
-        setSelectedCheckBox(
-          userDetails?.billingDetails?.useDifferentBilling ??
-            addressData?.result?.billingAddress?.[billingAddressLength]
-              ?.useDifferentBilling ??
-            true
-        );
+        // setSelectedCheckBox(
+        //   userDetails?.billingDetails?.useDifferentBilling ??
+        //     addressData?.result?.billingAddress?.[billingAddressLength]
+        //       ?.useDifferentBilling ??
+        //     false
+        // );
+        setSelectedCheckBox(false);
       }
 
       if (
@@ -270,7 +272,7 @@ export default function ShippingDetail() {
   useEffect(() => {
     if(selectedCheckBox) {
       setUseDifferentBillingClickCount(useDifferentBillingClickCount + 1);
-      if(useDifferentBillingClickCount > 3) {
+      if(useDifferentBillingClickCount > 1) {
         setBillingFormData(() => ({
         // ...shippingFormData,
         firstName: "",
