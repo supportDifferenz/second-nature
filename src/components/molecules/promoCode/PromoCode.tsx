@@ -65,7 +65,7 @@ export default function PromoCode({ totalPrice, productPrice, setProductPrice, d
       <div className="relative w-full flex items-center gap-2">
         <Input
           placeholder="Referral or promo code"
-          className="flex-1"
+          className="flex-1 bg-white"
           variant="dottedInput"
           value={promoCode}
           onChange={(e) => {
