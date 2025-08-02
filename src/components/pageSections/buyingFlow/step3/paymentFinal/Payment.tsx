@@ -62,7 +62,7 @@ export default function Payment({ shippingFormData, billingFormData }: PaymentPr
   const router = useRouter();
 
   const { userDetails } = useUserStore();
-  const { pets, clearPetDetails, createdPetsFromAPI, removeCreatedPetsFromAPI } = usePetStore();
+  const { pets, clearPetDetails, createdPetsFromAPI, removeCreatedPetsFromAPI, totalPrice, setTotalPrice, promocode } = usePetStore();
   const { mutate: createPet } = useCreatePetHook();
   const { mutate: createSubscription } = useCreateSubscriptionHook();
   const { data: offers } = useGetAllOffers();
@@ -445,7 +445,8 @@ export default function Payment({ shippingFormData, billingFormData }: PaymentPr
             useDifferentBilling: billingFormData.useDifferentBilling,
           },
           subscriptiondate: new Date().toISOString().split("T")[0],
-          promoCode: "",
+          promoCode: promocode,
+          // promoCode: "",
           subscribeToOffers: true,
           pets: createdPets.length > 0 ? createdPets : createdPetsFromAPI.map(pet => ({
             ...pet,
@@ -463,6 +464,7 @@ export default function Payment({ shippingFormData, billingFormData }: PaymentPr
             cardNumber: "4111111111111111",
             cardExpiry: "12/25",
             cardCVV: "123",
+            totalAmount: totalPrice,
           },
           isDeleted: false,
         },
@@ -471,6 +473,7 @@ export default function Payment({ shippingFormData, billingFormData }: PaymentPr
             console.log("Subscription created successfully");
             setIsSubscribing(false);
             removeCreatedPetsFromAPI();
+            setTotalPrice(0);
             router.push("/");
           },
           onError: (error) => {

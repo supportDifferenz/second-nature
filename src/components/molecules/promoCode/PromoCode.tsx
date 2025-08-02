@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import { useGetPromoOffer } from '@/hooks/subscriptionHooks/getPromoOfferHook'
 import Typography from '@/components/atoms/typography/Typography';
 import { toast } from 'sonner';
+import { usePetStore } from '@/zustand/store/petDataStore';
 
 interface PromoCodeProps {
   totalPrice: number;
@@ -14,17 +15,22 @@ interface PromoCodeProps {
 }
 
 export default function PromoCode({ totalPrice, productPrice, setProductPrice, discountPercentage, regularPlanDiscountPrice }: PromoCodeProps) {
-  const [promoCode, setPromoCode] = useState<string>("");
+
+  const { setPromocode } = usePetStore();
+  
+  const [promoCodeValue, setPromoCodeValue] = useState<string>("");
   const [isApplied, setIsApplied] = useState(false);
   const [promoCodeDiscountAmount, setPromoCodeDiscountAmount] = useState<number>(0);
   // const [promoMessage, setPromoMessage] = useState<string>("");
   const { 
     isLoading: isPromoOfferLoading,
     refetch: refetchPromoOffer
-  } = useGetPromoOffer(promoCode);
+  } = useGetPromoOffer(promoCodeValue);
 
   const handleApply = async () => {
-    if (!promoCode.trim()) return;
+    if (!promoCodeValue.trim()) return;
+
+    setPromocode(promoCodeValue);
     
     try {
       const { data } = await refetchPromoOffer();
@@ -39,10 +45,12 @@ export default function PromoCode({ totalPrice, productPrice, setProductPrice, d
         setIsApplied(true);
         console.log("Promo applied successfully. New price:", productPrice - discountAmount);
       } else {
+        toast.error("Invalid or expired promo code");
         console.log("Invalid or expired promo code");
         // Show error to user
       }
     } catch (error) {
+      toast.error("Error applying promo code");
       console.error("Error applying promo code:", error);
       // Show error to user
     }
@@ -54,10 +62,12 @@ export default function PromoCode({ totalPrice, productPrice, setProductPrice, d
 
   const handleRemove = () => {
     toast.error("Promo code removed");
-    setPromoCode("");
+    setPromoCodeValue("");
+    setPromocode("");
     setIsApplied(false);
     // setPromoMessage("");
     setProductPrice(totalPrice);
+    setPromoCodeDiscountAmount(0);
   };
 
   return (
@@ -67,9 +77,9 @@ export default function PromoCode({ totalPrice, productPrice, setProductPrice, d
           placeholder="Referral or promo code"
           className="flex-1 bg-white"
           variant="dottedInput"
-          value={promoCode}
+          value={promoCodeValue}
           onChange={(e) => {
-            setPromoCode(e.target.value);
+            setPromoCodeValue(e.target.value);
             // setPromoMessage("");
           }}
           // onKeyDown={(e) => e.key === "Enter" && handleApply()}
@@ -88,7 +98,7 @@ export default function PromoCode({ totalPrice, productPrice, setProductPrice, d
             variant="primaryBtn" 
             className="absolute right-1"
             onClick={handleApply}
-            disabled={isPromoOfferLoading || !promoCode.trim()}
+            disabled={isPromoOfferLoading || !promoCodeValue.trim()}
           >
             {isPromoOfferLoading ? "Applying..." : "APPLY"}
           </Button>

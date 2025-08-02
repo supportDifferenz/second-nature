@@ -57,8 +57,12 @@ type PetStore = {
   selectedPetIndex: number | null;
   noOfPets: number;
   createdPetsFromAPI: createdPetDetails[];
+  promocode: string;
+  totalPrice: number;
   
   setLocation: (location: string) => void;
+  setPromocode: (promocode: string) => void;
+  setTotalPrice: (price: number) => void;
   setCurrentPet: (petId: string) => void;
   setPetDetails: (petId: string, details: Partial<PetDetails>) => void;
   addNewPet: ({ catOrDog, name }: { catOrDog: 'cat' | 'dog'; name: string }) => string;
@@ -80,6 +84,8 @@ export const usePetStore = create<PetStore>()(
       currentPetId: null,
       selectedPetIndex: null,
       noOfPets: 0,
+      promocode: "",
+      totalPrice: 0,
       
       setLocation: (location) => {
         set((state) => ({
@@ -91,6 +97,10 @@ export const usePetStore = create<PetStore>()(
           noOfPets: state.pets.length
         }));
       },
+
+      setTotalPrice: (price: number) => set({ totalPrice: price }),
+
+      setPromocode: (promocode: string) => set({ promocode }),
 
       setCurrentPet: (petId) => set({ currentPetId: petId }),
 
