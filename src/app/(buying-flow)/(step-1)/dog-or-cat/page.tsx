@@ -184,7 +184,7 @@ export default function DogOrCat() {
                   onChange={handleNameChange}
                   // disabled={petType !== "dog"}
                   variant={"roundedEdgeInputLg"}
-                  className={`w-full border-0 text-start text-primary-dark font-semibold  placeholder-[#7C7C7C] placeholder:font-medium focus:placeholder-slate-300 !pr-0`}
+                  className={`w-full border-0 text-start  font-semibold  placeholder-[#7C7C7C] placeholder:font-medium focus:placeholder-slate-300 !pr-0`}
                   placeholder="Type Your Dogs’s Name"
                 />
                 {petType === "dog" && (
@@ -238,7 +238,7 @@ export default function DogOrCat() {
                   // disabled={petType !== "cat"}
                   placeholder="Type Your Cat's Name"
                   variant={"roundedEdgeInputLg"}
-                  className={`w-full border-0 text-start text-primary-dark font-semibold  placeholder-[#7C7C7C] placeholder:font-medium focus:placeholder-slate-300 !pr-0`}
+                  className={`w-full border-0 text-start  font-semibold  placeholder-[#7C7C7C] placeholder:font-medium focus:placeholder-slate-300 !pr-0`}
                 />
                 {petType === "cat" && (
                   <div className="absolute top-1 sm:top-2 sm:right-2 right-1 w-8 h-8  rounded-full p-1">
