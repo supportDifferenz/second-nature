@@ -763,7 +763,7 @@ export default function ShippingDetail() {
         </div>
 
         <AlertBar
-          text="My billing details are different from shipping address"
+          text="My billing details are different from the shipping address"
           selectedCheckBox={selectedCheckBox}
           setSelectedCheckBox={setSelectedCheckBox}
         />
