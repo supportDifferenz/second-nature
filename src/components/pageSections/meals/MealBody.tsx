@@ -120,7 +120,7 @@ const mealContent = {
         { image: "/images/BroccoliMeal.webp", name: "Broccoli" },
         { image: "/images/EggYolkMeal.webp", name: "Whole Egg" },
         { image: "/images/HempSeedMeal.webp", name: "Hempseed" },
-        { image: "/images/CodLiverOilMeal.webp", name: "Cod Liver" },
+        { image: "/images/CodLiverOilMeal.webp", name: "Cod Liver Oil" },
         { image: "/images/YeastMeal.webp", name: "Yeast" },
         { image: "/images/VitaminsMeal.webp", name: "Vitamins & Minerals" },
       ],
