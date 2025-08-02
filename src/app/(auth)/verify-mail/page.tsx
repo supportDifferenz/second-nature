@@ -6,11 +6,12 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import Image from 'next/image'
 import React, { useState } from 'react'
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 import { useUserStore } from '@/zustand/store/userDataStore';
-import { startTransition } from "react";
+// import { startTransition } from "react";
 import { useEmailVerification } from "@/hooks/userHooks/emailVerificationHook";
 import { toast } from "sonner";
+import VerificationSentPopUp from '@/components/organism/popUp/VerificationSentPopUp';
 
 interface FormData {
   name: string;
@@ -24,10 +25,12 @@ interface FormErrors {
 
 export default function VerifyEmail() {
 
-  const router = useRouter();
+  // const router = useRouter();
 
   const { mutate: emailVerification } = useEmailVerification();
   const { userDetails, setUserDetails } = useUserStore();
+
+  const [ showVerificationSentPopUp, setShowVerificationSentPopUp ] = useState(false);
 
   const [formData, setFormData] = useState<FormData>({
     name: userDetails.firstName || "",
@@ -93,10 +96,11 @@ export default function VerifyEmail() {
             });
 
             if(data?.statusCode === 200) {
-              toast.success(data?.message || "Email verification successful");
-              startTransition(() => {
-                router.push("/location");
-              })
+              setShowVerificationSentPopUp(true);
+              // toast.success(data?.message || "Email verification successful");
+              // startTransition(() => {
+              //   router.push("/location");
+              // })
             }else{
               toast.error(data?.message || "Email verification failed");
             }
@@ -199,6 +203,9 @@ export default function VerifyEmail() {
                 </div>
               </Button>
             </form>
+
+            {showVerificationSentPopUp && <VerificationSentPopUp isOpen={showVerificationSentPopUp} setIsOpen={setShowVerificationSentPopUp} />}
+
           </div>
         </div>
       </div>

@@ -144,6 +144,8 @@ const OrderHistoryCard: React.FC<
   const [changeProteinError, setChangeProteinError] = useState("");
   const [planChangeError, setPlanChangeError] = useState("");
   const [planChangeReason, setPlanChangeReason] = useState("");
+  const [restartPlanPaymentError, setRestartPlanPaymentError] = useState("");
+  const [upgradePlanPaymentError, setUpgradePlanPaymentError] = useState("");
 
   const { mutate: changeProtein, isPending: isChangeProteinPending } = useChangeProtein();
   const { mutate: downgradePlan, isPending: isDowngradeLoading } = useDowngradePlan();
@@ -233,7 +235,10 @@ const OrderHistoryCard: React.FC<
             if(data.statusCode === 200) {
               toast.success(data.message);
               refetchSubscriptionDetails?.();
-            }else{
+            } else if(data.statusCode === 402) {
+              setUpgradePlanPaymentError(data.message || "Payment required for plan upgrade");
+            }
+            else{
               toast.error(data.message);
             }
           },
@@ -304,7 +309,11 @@ const OrderHistoryCard: React.FC<
                 if (setSelectedPetFromOrderHistory) setSelectedPetFromOrderHistory(lastPet);
               }
               window.location.reload();
-            }else{
+            }else if(data.statusCode === 402) {
+              // toast.success(data.message);
+              setRestartPlanPaymentError(data.message || "Payment required for plan restart");
+            }
+            else{
               toast.error(data.message);
             }
           },
@@ -619,6 +628,11 @@ const OrderHistoryCard: React.FC<
                     >
                       { petsFromAPI[0]?.plan?.isUpgrade ? "Upgraded to Full-Bowl" : "Upgrade to Full-Bowl" }
                     </Button>
+                    <Typography
+                      tag="p"
+                      text={upgradePlanPaymentError}
+                      className="text-[#f15353] text-center"
+                    />
                   </>
                 )
                 : (
@@ -692,6 +706,11 @@ const OrderHistoryCard: React.FC<
                     : btn
                 }
               </Button>
+              <Typography
+                tag="p"
+                text={restartPlanPaymentError}
+                className="text-[#f15353] text-center"
+              />
             </> 
           ))}
         </div>
