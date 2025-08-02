@@ -244,7 +244,7 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
                           });
                         } else {
                           startTransition(() => {
-                            router.push("/user-details");
+                            router.push("/verify-mail");
                           });
                         }
                       }}
@@ -264,7 +264,7 @@ const Header: React.FC<HeaderPropsTypes> = ({ isOnlyBrandHeader = false }) => {
                           });
                         } else {
                           startTransition(() => {
-                            router.push("/user-details");
+                            router.push("/verify-mail");
                           });
                         }
                       }}

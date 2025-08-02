@@ -342,7 +342,7 @@ export default function Page() {
             if(isAuthenticated) {
               startTransition(() => router.push("/location"));
             } else {
-              startTransition(() => router.push("/user-details"));
+              startTransition(() => router.push("/verify-mail"));
             }
           }}>
             <Typography

@@ -34,7 +34,7 @@ export default function MealCategory() {
               "Premium Protein Source",
             ],
             buttons: [
-              { label: "Get Started", route: `${isAuthenticated ? "/location" : "/user-details"}`, variant: "primary" },
+              { label: "Get Started", route: `${isAuthenticated ? "/location" : "/verify-mail"}`, variant: "primary" },
               {
                 label: "Know More",
                 route: "/meals?pet=dog&protein=beef",
@@ -53,7 +53,7 @@ export default function MealCategory() {
               "Herbal Wellness",
             ],
             buttons: [
-              { label: "Get Started", route: `${isAuthenticated ? "/location" : "/user-details"}`, variant: "primary" },
+              { label: "Get Started", route: `${isAuthenticated ? "/location" : "/verify-mail"}`, variant: "primary" },
               {
                 label: "Know More",
                 route: "/meals?pet=dog&protein=lamb",
@@ -72,7 +72,7 @@ export default function MealCategory() {
               "Micro-Minerals",
             ],
             buttons: [
-              { label: "Get Started", route: `${isAuthenticated ? "/location" : "/user-details"}`, variant: "primary" },
+              { label: "Get Started", route: `${isAuthenticated ? "/location" : "/verify-mail"}`, variant: "primary" },
               {
                 label: "Know More",
                 route: "/meals?pet=dog&protein=chicken",
@@ -97,7 +97,7 @@ export default function MealCategory() {
               "Antioxidant-Rich Vegetables",
             ],
             buttons: [
-              { label: "Get Started", route: `${isAuthenticated ? "/location" : "/user-details"}`, variant: "primary" },
+              { label: "Get Started", route: `${isAuthenticated ? "/location" : "/verify-mail"}`, variant: "primary" },
               {
                 label: "Know More",
                 route: "/meals?pet=cat&protein=beef",
@@ -116,7 +116,7 @@ export default function MealCategory() {
               "Balanced Macronutrients",
             ],
             buttons: [
-              { label: "Get Started", route: `${isAuthenticated ? "/location" : "/user-details"}`, variant: "primary" },
+              { label: "Get Started", route: `${isAuthenticated ? "/location" : "/verify-mail"}`, variant: "primary" },
               {
                 label: "Know More",
                 route: "/meals?pet=cat&protein=lamb",
@@ -135,7 +135,7 @@ export default function MealCategory() {
               "Organ Meat Benefits",
             ],
             buttons: [
-              { label: "Get Started", route: `${isAuthenticated ? "/location" : "/user-details"}`, variant: "primary" },
+              { label: "Get Started", route: `${isAuthenticated ? "/location" : "/verify-mail"}`, variant: "primary" },
               {
                 label: "Know More",
                 route: "/meals?pet=cat&protein=chicken",

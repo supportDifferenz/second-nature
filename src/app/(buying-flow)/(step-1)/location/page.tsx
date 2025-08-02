@@ -8,7 +8,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 // import PetLocationForm from "@/components/organisms/petLocationForm";
 import { usePetStore } from "@/zustand/store/petDataStore";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import {
   Select,
   SelectContent,
@@ -18,10 +18,14 @@ import {
 } from "@/components/ui/select";
 import { startTransition } from "react";
 import { motion } from 'framer-motion';
+import { useSearchParams } from "next/navigation";
 
-export default function Location() {
-
+function LocationContent() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const mailVerified = searchParams.get("mailVerified");
+  console.log("Mail verified", mailVerified);
+
   const { location, setLocation } = usePetStore();
   const [error, setError] = useState("");
   const [selectedMunicipality, setSelectedMunicipality] = useState<string>("");
@@ -89,14 +93,14 @@ export default function Location() {
           className="h-full flex-1 flex flex-col justify-center items-center ">
           <Typography
             tag="h2"
-            text="Your Pet’s Location"
+            text="Your Pet's Location"
             className="text-primary-dark mb-[2.5dvh] text-center"
           />
           {/* <Input
             type="text"
             variant={"roundedEdgeInputLg"}
             className="max-w-[800px] w-[90%] sm:w-[50%] lg:w-[40%] block mx-auto bg-white"
-            placeholder="Type your pet’s location"
+            placeholder="Type your pet's location"
             value={location}
             onChange={(e) => {
               setLocation(e.target.value);
@@ -177,5 +181,13 @@ export default function Location() {
       </form>
       {/* <PetLocationForm /> */}
     </BuyingFlowLayout>
+  );
+}
+
+export default function Location() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <LocationContent />
+    </Suspense>
   );
 }
