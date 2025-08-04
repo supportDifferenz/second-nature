@@ -117,7 +117,7 @@ function LocationContent() {
             >
               <SelectTrigger
                 variant="roundedEdgeInputLgSecondary"
-                className="text-primary-dark font-medium data-[placeholder]:text-[#6b6b6b] shadow-sm"
+                className="text-primary-dark font-medium data-[placeholder]:text-[#7C7C7C] shadow-sm"
               >
                 <SelectValue placeholder="Select a location" />
               </SelectTrigger>

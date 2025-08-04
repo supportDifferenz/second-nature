@@ -25,7 +25,7 @@ export const DropDownLabeled: React.FC<DropDownLabeledProps> = ({
     <div className={`flex flex-col  w-full ${className}`}>
       {label && <Label>{label}</Label>}
       <Select value={value} onValueChange={onValueChange}>
-        <SelectTrigger className="bg-white capitalize">
+        <SelectTrigger className="bg-white capitalize text-primary-dark font-medium data-[placeholder]:text-[#7C7C7C]">
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>
         <SelectContent className="bg-white capitalize">
