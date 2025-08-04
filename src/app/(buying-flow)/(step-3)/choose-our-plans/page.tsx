@@ -17,6 +17,7 @@ import PlanCardSkeleton from "@/components/skeltons/PlanCardSkelton";
 import { startTransition } from "react";
 import NextPet from "@/components/organism/popUp/NextPet";
 import { ChevronDown } from "lucide-react";
+import { useGetAllOffers } from "@/hooks/subscriptionHooks/getAllOffers";
 
 const faqsData = [
   {
@@ -57,11 +58,14 @@ export default function Page() {
   const { data: planData, isLoading: isPlanLoading } = useGetAllPlan();
   const { data: proteinData, isLoading: isProteinLoading } = useGetAllProtein();
   const { data: bowlData, isLoading: isBowlLoading } = useGetAllBowl();
+  const { data: offers } = useGetAllOffers();
   const { mutate } = useGetPriceHook();
   // const { data: plans, isLoading, error } = useGetAllPlan();
   console.log("PlanData", planData);
   console.log("ProteinData", proteinData);
   console.log("BowlData", bowlData);
+
+  const discountPercentage = offers?.result?.[0]?.discount_percent || 10;
 
   const isLoading = isPlanLoading || isProteinLoading || isBowlLoading;
 
@@ -310,7 +314,7 @@ export default function Page() {
                     }
                     offerBadge={
                       plan.plan_type === "Regular"
-                        ? "Enjoy 25% Off Your First Month!"
+                        ? `Enjoy ${discountPercentage}% Off Your First Month!`
                         : ""
                     }
                     isSelected={selectedPlan === plan.plan_type}

@@ -1,8 +1,15 @@
+"use client";
+
 import Typography from "@/components/atoms/typography/Typography";
 import MainLayout from "@/components/templates/MainLayout";
 import React from "react";
+import { useGetAllOffers } from "@/hooks/subscriptionHooks/getAllOffers";
 
-function page() {
+function Page() {
+
+  const { data: offers } = useGetAllOffers();
+  const discountPercentage = offers?.result?.[0]?.discount_percent || 10;
+
   return (
     <MainLayout>
       <div className="my-[var(--space-40-90)]">
@@ -24,7 +31,7 @@ function page() {
           <div className="flex flex-col gap-[var(--space-10-15)]">
             <Typography
               tag="p"
-              text="Second Nature offers two main subscription options: the Regular Plan and the Trial Plan. The Regular Plan is an auto-renewing subscription that renews every 28 days and includes a 25% discount on the first month only. Customers can customize their plan by choosing the type of protein (such as chicken, beef, or lamb), selecting the portion size (Half Bowl or Full Bowl), and inputting their pet's size, which dynamically affects the price. The default selection displayed to customers is the Chicken + Full Bowl combination, as it offers optimal value and profitability. This plan is labeled as the 'Recommended Plan.'"
+              text={`Second Nature offers two main subscription options: the Regular Plan and the Trial Plan. The Regular Plan is an auto-renewing subscription that renews every 28 days and includes a ${discountPercentage}% discount on the first month only. Customers can customize their plan by choosing the type of protein (such as chicken, beef, or lamb), selecting the portion size (Half Bowl or Full Bowl), and inputting their pet's size, which dynamically affects the price. The default selection displayed to customers is the Chicken + Full Bowl combination, as it offers optimal value and profitability. This plan is labeled as the 'Recommended Plan.`}
             />
 
             <Typography
@@ -168,4 +175,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;
