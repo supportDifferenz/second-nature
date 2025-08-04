@@ -47,7 +47,7 @@ export default function Page() {
       <div className="flex flex-1 flex-col items-center justify-center gap-8 bg-white">
         <Typography tag="h3" text="Add more pets?" className="text-center text-primary-dark" />
 
-        <div className="flex items-center gap-2.5 sm:gap-8 w-full sm:w-[70%] lg:w-[30%] xl:w-[30%]  2xl:w-full max-w-[800px] ">
+        <div className="flex items-center gap-2.5 sm:gap-8 w-full sm:w-[70%] lg:w-[25%] xl:w-[21%]  2xl:w-full max-w-[800px] ">
           {options.map((option, index) => {
             const isSelected = selectedOption === option.value;
             return (
