@@ -26,7 +26,7 @@ export default function VerificationSentPopUp({ isOpen, setIsOpen }: Verificatio
 
   return (
     <div className="fixed inset-0 z-75 bg-[rgba(0,0,0,0.5)] flex items-center justify-center">
-      <div className="relative bg-[#FDFFF4] border border-[#E4E7D3] rounded-xl w-fit text-center pt-5 pb-6 px-10">
+      <div className="relative bg-[#FDFFF4] border border-[#E4E7D3] rounded-xl w-fit text-center pt-5 pb-7 px-10">
         <button
           className="absolute top-[-4%] right-[-3%] bg-[#FDFFF4] cursor-pointer text-primary-dark border border-primary-dark rounded-full hover:text-gray-700"
           onClick={handleClose}
@@ -34,36 +34,18 @@ export default function VerificationSentPopUp({ isOpen, setIsOpen }: Verificatio
           <X size={24} />
         </button>
         <div className="flex flex-col items-center gap-6">
-          <Typography tag="h5" text="Verification Sent" className="text-primary-dark font-bold" />
+          <Typography tag="h4" text="Verification Sent" className="text-primary-dark mb-4 font-bold" />
         </div>
-        <div className="flex flex-col mt-7">
-          <Typography
-            tag="h6"
-            text="We have sent a verification email"
-            className=""
-          />
-          <Typography
-            tag="h6"
-            text="to the address you provided."
-            className=""
-          />
-          <Typography
-            tag="h6"
-            text="Please open it and click the 'Verify'"
-            className=""
-          />
-          <Typography
-            tag="h6"
-            text="button. If you don't see it, kindly"
-            className=""
-          />
-          <Typography
-            tag="h6"
-            text="check your spam/trash folder."
-            className=""
-          />
+        <div className="flex flex-col">
+          <h6 className="text-text-color  !text-[16px] !font-medium leading-[22px]">
+            We have sent a verification email <br />
+            to the address you provided. <br />
+            Please open it and click the <span className="!font-bold">&apos;Verify&apos;</span> <br />
+            button. If you don&apos;t see it, kindly <br />
+            check your <span className="!font-bold">spam/trash</span> folder.
+          </h6>
         </div>
       </div>
     </div>
-  );
+  );
 }

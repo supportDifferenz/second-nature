@@ -26,7 +26,7 @@ export default function BuyingFlowLayout({
     <>
       <Header isOnlyBrandHeader={true} />
       <main className="sm:mt-[1dvh] ">
-        <div className="portrait:min-h-[400px] portrait:h-[calc(100dvh-127px)] landscape:min-h-[430px] landscape:h-[calc(100dvh-140px)] landscape:max-h-[800px] flex flex-col items-center justify-start ">
+        <div className="portrait:min-h-[400px] portrait:h-[calc(100dvh-127px)] landscape:min-h-[430px] landscape:h-[calc(100dvh-140px)] landscape:max-h-[800px] flex flex-col items-center justify-start">
           <div className="container  mb-4 text-center  w-full ">
             <CheckoutProgressBar currentStep={step} />
           </div>

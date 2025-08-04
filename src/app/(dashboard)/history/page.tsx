@@ -244,11 +244,11 @@ export default function OrderHistory() {
                             <table className="min-w-[650px] text-sm text-left w-full">
                                 <thead className="sticky top-0 z-10 bg-[#F6F6EC] border-b border-[#A1A1A1] text-[#4F4F4F]">
                                     <tr className="text-sm font-medium">
-                                        <th className="px-4 py-3 text-[15px] text-text-color bg-[#F6F6EC]">Date</th>
-                                        <th className="px-4 py-3 text-[15px] text-text-color bg-[#F6F6EC]">Plan Type</th>
-                                        <th className="px-4 py-3 text-[15px] text-text-color bg-[#F6F6EC]">Protein</th>
-                                        <th className="px-4 py-3 text-[15px] text-text-color bg-[#F6F6EC]">Bowl Size</th>
-                                        <th className="px-4 py-3 text-[15px] text-text-color bg-[#F6F6EC]">Status</th>
+                                        <th className="px-4 py-3 text-[15px] text-text-color bg-[#F6F6EC] border-r border-[#A1A1A1]">Date</th>
+                                        <th className="px-4 py-3 text-[15px] text-text-color bg-[#F6F6EC] border-r border-[#A1A1A1]">Plan Type</th>
+                                        <th className="px-4 py-3 text-[15px] text-text-color bg-[#F6F6EC] border-r border-[#A1A1A1]">Protein</th>
+                                        <th className="px-4 py-3 text-[15px] text-text-color bg-[#F6F6EC] border-r border-[#A1A1A1]">Bowl Size</th>
+                                        <th className="px-4 py-3 text-[15px] text-text-color bg-[#F6F6EC] border-r border-[#A1A1A1]">Status</th>
                                         <th className="px-4 py-3 text-[15px] text-text-color bg-[#F6F6EC]">Download Invoice</th>
                                     </tr>
                                 </thead>
@@ -256,12 +256,12 @@ export default function OrderHistory() {
                                     {   subscriptionHistory?.result?.length > 0 
                                         ? subscriptionHistory?.result?.map((item: { date: string; planType: string; protein: string; bowlSize: string; filePath: string; status: string }, index: number) => (
                                                 <tr key={index} className="border-b border-[#A1A1A1] last:border-0 hover:bg-[#2BB673]/5">
-                                                    <td className="px-4 py-3">{item.date.split('-').reverse().join('-')}</td>
-                                                    <td className="px-4 py-3">{item.planType}</td>
-                                                    <td className="px-4 py-3">{item.protein}</td>
-                                                    <td className="px-4 py-3">{item.bowlSize}</td>
-                                                    <td className="px-4 py-3">{item.status}</td>
-                                                    <td className="px-4 py-3">
+                                                    <td className="px-4 py-3 border-r border-[#A1A1A1]">{item.date.split('-').reverse().join('-')}</td>
+                                                    <td className="px-4 py-3 border-r border-[#A1A1A1] capitalize">{item.planType}</td>
+                                                    <td className="px-4 py-3 border-r border-[#A1A1A1] capitalize">{item.protein}</td>
+                                                    <td className="px-4 py-3 border-r border-[#A1A1A1] capitalize">{item.bowlSize}</td>
+                                                    <td className="px-4 py-3 border-r border-[#A1A1A1] capitalize">{item.status}</td>
+                                                    <td className="px-4 py-3 capitalize">
                                                         <a
                                                             href={item.filePath}
                                                             target="_blank"

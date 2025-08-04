@@ -173,7 +173,7 @@ export default function Testimonial() {
                 return (
                   <div
                     key={`${index}-${item.name}`}
-                    className="flex-none w-[80%] sm:w-[50%] md:w-[43.48%] px-(--space-10-20)"
+                    className="flex-none w-[80%] sm:w-[50%] md:w-[43.48%] px-(--space-10-20) py-2"
                     style={{
                       perspective: "1200px",
                       transformStyle: "preserve-3d",
