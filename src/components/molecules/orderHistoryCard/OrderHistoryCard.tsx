@@ -688,7 +688,8 @@ const OrderHistoryCard: React.FC<
             <>
               <Button 
                 key={i} 
-                className={`w-full ${btn === "Reorder" ? "hidden" : ""}`} 
+                className="w-full"
+                // className={`w-full ${btn === "Reorder" ? "hidden" : ""}`} 
                 size="md"
                 onClick={() => {
                   if (btn === "Restart Plan") {

@@ -48,8 +48,8 @@ export default function AccountDetail() {
         return "";
       case "mobile":
         if (!value) return "Mobile number is required";
-        if (!/^[0-9]{10,15}$/.test(value))
-          return "Please enter a valid mobile number (10-15 digits)";
+        if (!/^[0-9]{8}$/.test(value))
+          return "Please enter a valid mobile number (8 digits)";
         return "";
       case "password":
         if (!value) return "Password is required";
@@ -188,8 +188,8 @@ export default function AccountDetail() {
         />
         <Typography
           tag="h6"
-          text="Easily manage your plan, deliveries and profile from your online account."
-          className="!font-normal pr-2.5 text-primary-dark"
+          text="Enter your accurate information to complete your profile and manage your plans and deliveries effectively."
+          className="!font-normal pr-2.5 text-text-color"
         />
       </div>
 
@@ -239,7 +239,7 @@ export default function AccountDetail() {
           />
           <InputLabeled
             inputMode="numeric"
-            maxLength={15}
+            maxLength={8}
             name="mobile"
             label="Mobile Number"
             placeholder="Enter your mobile number"

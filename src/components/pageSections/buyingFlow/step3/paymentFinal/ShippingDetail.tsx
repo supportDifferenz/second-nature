@@ -58,7 +58,7 @@ export default function ShippingDetail() {
   const { pets } = usePetStore();
 
   const [isLoading, setIsLoading] = useState(true);
-  const [selectedCheckBox, setSelectedCheckBox] = useState(true);
+  const [selectedCheckBox, setSelectedCheckBox] = useState(false);
   const [touched, setTouched] = useState<Record<string, boolean>>({});
   const [showPaymentDetails, setShowPaymentDetails] = useState(false);
   const [isSubmittingAddress, setIsSubmittingAddress] = useState(false);
@@ -72,7 +72,6 @@ export default function ShippingDetail() {
   const [shippingSubId, setShippingSubId] = useState<string>("");
   const [billingSubId, setBillingSubId] = useState<string>("");
   const [submittingAddressError, setSubmittingAddressError] = useState("");
-  const [useDifferentBillingClickCount, setUseDifferentBillingClickCount] = useState(0);
   console.log("Selected check box", selectedCheckBox);
 
   const [shippingFormData, setShippingFormData] = useState<ShippingFormData>({
@@ -91,7 +90,7 @@ export default function ShippingDetail() {
     address: "",
     aptSuite: "",
     municipality: "",
-    useDifferentBilling: true,
+    useDifferentBilling: false,
   });
 
   const [shippingErrors, setShippingErrors] = useState<FormErrors>({
@@ -228,13 +227,13 @@ export default function ShippingDetail() {
           "Billing address data",
           addressData?.result?.billingAddress
         );
-        // setSelectedCheckBox(
-        //   userDetails?.billingDetails?.useDifferentBilling ??
-        //     addressData?.result?.billingAddress?.[billingAddressLength]
-        //       ?.useDifferentBilling ??
-        //     false
-        // );
-        setSelectedCheckBox(false);
+        setSelectedCheckBox(
+          userDetails?.billingDetails?.useDifferentBilling ??
+            addressData?.result?.billingAddress?.[billingAddressLength]
+              ?.useDifferentBilling ??
+            true
+        );
+        // setSelectedCheckBox(false);
       }
 
       if (
@@ -266,41 +265,35 @@ export default function ShippingDetail() {
     setIsLoading(false);
   }, [addressData, userDetails]);
 
-  console.log("Use different billing click count", useDifferentBillingClickCount);
-
-  // Sync billing data when checkbox is unchecked
+  // Sync billing data when checkbox state changes
   useEffect(() => {
-    if(selectedCheckBox) {
-      setUseDifferentBillingClickCount(useDifferentBillingClickCount + 1);
-      if(useDifferentBillingClickCount > 1) {
-        setBillingFormData(() => ({
-        // ...shippingFormData,
+    if (selectedCheckBox) {
+      setIsBillingEditEnabled(true);
+      // When checkbox is checked (use different billing), clear billing form data
+      setBillingFormData(prev => ({
+        ...prev,
         firstName: "",
         lastName: "",
         mobile: "",
         address: "",
         aptSuite: "",
         municipality: "",
+        useDifferentBilling: true,
+      }));
+    } else {
+      // When checkbox is unchecked, copy shipping data to billing
+      setBillingFormData(prev => ({
+        ...prev,
+        firstName: shippingFormData.firstName,
+        lastName: shippingFormData.lastName,
+        mobile: shippingFormData.mobile,
+        address: shippingFormData.address,
+        aptSuite: shippingFormData.aptSuite,
+        municipality: shippingFormData.municipality,
         useDifferentBilling: false,
-      }))
-      }
-    };
-    if (!selectedCheckBox) {
-      setUseDifferentBillingClickCount(useDifferentBillingClickCount + 1);
-      if(useDifferentBillingClickCount > 1) {
-        setBillingFormData(() => ({
-          // ...shippingFormData,
-          firstName: shippingFormData.firstName,
-          lastName: shippingFormData.lastName,
-          mobile: shippingFormData.mobile,
-          address: shippingFormData.address,
-          aptSuite: shippingFormData.aptSuite,
-          municipality: shippingFormData.municipality,
-          useDifferentBilling: true,
-        }));
-      }
+      }));
     }
-  }, [selectedCheckBox, shippingFormData]);
+  }, [selectedCheckBox]);
 
   useEffect(() => {
     if (isShippingEditEnabled || isBillingEditEnabled) {
@@ -326,8 +319,8 @@ export default function ShippingDetail() {
           return "";
         case "mobile":
           if (!trimmedValue) return "Mobile number is required";
-          if (!/^[0-9]{10,15}$/.test(trimmedValue))
-            return "Please enter a valid mobile number (10-15 digits)";
+          if (!/^[0-9]{8}$/.test(trimmedValue))
+            return "Please enter a valid mobile number (8 digits)";
           return "";
         case "address":
           if (!trimmedValue) return "Address is required";
@@ -353,9 +346,15 @@ export default function ShippingDetail() {
     const { name, value } = e.target;
 
     if (name === "mobile") {
-      // Allow only numbers and limit to 15 characters
-      const numbersOnly = value.replace(/\D/g, "").slice(0, 15);
+      // Allow only numbers and limit to 8 characters
+      const numbersOnly = value.replace(/\D/g, "").slice(0, 8);
       setShippingFormData((prev) => ({ ...prev, [name]: numbersOnly }));
+      
+      // Validate mobile number in real-time
+      setShippingErrors((prev) => ({
+        ...prev,
+        [name]: validateField(name as FormField, numbersOnly),
+      }));
       return;
     }
 
