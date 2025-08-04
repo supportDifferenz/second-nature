@@ -128,9 +128,9 @@ export default function VerifyEmail() {
 
   return (
     <div className='flex flex-col min-h-[100dvh]'>
-      <Header isOnlyBrandHeader={true} />
-      <div className='flex grow   items-center justify-center portrait:min-h-[400px] portrait:h-[calc(100dvh-127)] landscape:min-h-[430px] landscape:h-[calc(100dvh-140px)] landscape:max-h-[800px] '>
-        <div className='max-w-[800px] w-full lg:w-[75%] xl:w-[70%] xl:max-w-[1000px]  mx-auto bg-white  flex flex-col-reverse lg:flex-row justify-start lg:justify-center custom-mt items-center gap-[40px] 2xl:gap-[60px]'>
+      <Header  />
+      <div className='flex grow   items-center justify-center portrait:min-h-[400px] portrait:h-[calc(100dvh-127)] landscape:min-h-[395px] landscape:h-[calc(100dvh-144px)] landscape:max-h-[800px]'>
+        <div className='max-w-[800px] w-full lg:w-[55%] xl:w-[70%] xl:max-w-[1000px]  mx-auto bg-white  flex flex-col-reverse lg:flex-row justify-start lg:justify-center custom-mt items-center gap-[40px] 2xl:gap-[60px]'>
           <div className='relative flex-1 shrink-0 w-full '>
 
             <picture>

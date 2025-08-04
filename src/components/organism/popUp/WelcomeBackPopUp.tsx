@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, startTransition} from "react";
+import React, { useState, useEffect, startTransition } from "react";
 import { X } from "lucide-react"; // Optional, or swap it for anything you like
 import Typography from "@/components/atoms/typography/Typography";
 import { Button } from "@/components/ui/button";
@@ -14,12 +14,12 @@ const WelcomeBackPopUp = () => {
 
     useEffect(() => {
         if (isOpen) {
-        document.body.style.overflow = 'hidden';
+            document.body.style.overflow = 'hidden';
         } else {
-        document.body.style.overflow = 'auto';
+            document.body.style.overflow = 'auto';
         }
         return () => {
-        document.body.style.overflow = 'auto';
+            document.body.style.overflow = 'auto';
         };
     }, [isOpen]);
 
@@ -40,13 +40,16 @@ const WelcomeBackPopUp = () => {
                     >
                         <X size={24} />
                     </button>
-                    <Typography tag="h4" text="Welcome Back" className="text-primary-dark mb-6 font-bold" />
-                    <Typography tag="h6" text="Your email verified," className="text-text-color w-[90%]" />
-                    <Typography tag="h6" text="click here to get started." className="text-text-color w-[90%]" />
+                    <Typography tag="h4" text="Welcome Back" className="text-primary-dark mb-4 font-bold !text-[16px]" />
+                    
+                    <h6 className="text-text-color  !text-[16px] !font-medium leading-[22px]">
+                        Your email verified, <br />
+                        click here to get started.
+                    </h6>
                 </div>
                 <div className="p-5 border-t border-[#E4E7D3]">
 
-                    <Button 
+                    <Button
                         variant={"primaryBtn"}
                         className="w-full text-white"
                         onClick={() => {
