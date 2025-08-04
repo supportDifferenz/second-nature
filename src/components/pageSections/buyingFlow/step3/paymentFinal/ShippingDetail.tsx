@@ -670,7 +670,10 @@ export default function ShippingDetail() {
                 <Button
                   variant={"nullBtn"}
                   className="text-secondary-1 ml-3 "
-                  onClick={() => setIsShippingEditEnabled(false)}
+                  onClick={(e) => {
+                    handleSubmit(e);
+                    // setIsShippingEditEnabled(false);
+                  }}
                 >
                   Exit
                 </Button>
@@ -779,6 +782,7 @@ export default function ShippingDetail() {
             isBillingEditEnabled={isBillingEditEnabled}
             setIsBillingEditEnabled={setIsBillingEditEnabled}
             showEditBillControl={showEditBillControl}
+            handleSubmit={handleSubmit}
           />
         )}
 

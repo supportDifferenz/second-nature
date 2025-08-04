@@ -36,6 +36,7 @@ interface BillingDetailsProps {
   isBillingEditEnabled: boolean;
   setIsBillingEditEnabled: React.Dispatch<React.SetStateAction<boolean>>;
   showEditBillControl: boolean;
+  handleSubmit: (e: React.FormEvent) => void;
 }
 
 export default function BillingDetails({
@@ -47,6 +48,7 @@ export default function BillingDetails({
   isBillingEditEnabled,
   setIsBillingEditEnabled,
   showEditBillControl,
+  handleSubmit,
 }: BillingDetailsProps) {
   // const [errors, setErrors] = useState<Record<string, string>>({});
   const [touched, setTouched] = useState<Record<string, boolean>>({});
@@ -213,7 +215,9 @@ export default function BillingDetails({
                     <Button
                       variant={"nullBtn"}
                       className="text-secondary-1"
-                      onClick={() => setIsBillingEditEnabled(true)}
+                      onClick={() => {
+                        setIsBillingEditEnabled(true);
+                      }}
                     >
                       <Image
                         src="/icons/edit.svg"
@@ -229,7 +233,10 @@ export default function BillingDetails({
                     <Button
                       variant={"nullBtn"}
                       className="text-secondary-1 ml-3"
-                      onClick={() => setIsBillingEditEnabled(false)}
+                      onClick={(e) => {
+                        handleSubmit(e);
+                        // setIsBillingEditEnabled(false);
+                      }}
                     >
                       Exit
                     </Button>
