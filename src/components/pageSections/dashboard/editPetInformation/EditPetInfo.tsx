@@ -197,7 +197,7 @@ export default function EditPetInfo({ setIsEditPetInfo, petData }: EditPetInfoPr
           <DateOfBirthPicker 
             dateOfBirth={formData.dateOfBirth} 
             setDateOfBirth={handleDateChange} 
-            colorClass="!text-text-color" 
+            colorClass=" text-primary-dark placeholder-[#7C7C7C] placeholder:font-medium focus:placeholder-slate-300" 
             className="!w-full !h-14 !rounded-xl" 
           />
         </div>
@@ -211,7 +211,7 @@ export default function EditPetInfo({ setIsEditPetInfo, petData }: EditPetInfoPr
               max={12} 
               value={formData.ageMonth} 
               setValue={handleAgeMonthChange} 
-              colorClass="!text-text-color !font-normal"
+              colorClass=" text-primary-dark  placeholder-[#7C7C7C] placeholder:font-medium focus:placeholder-slate-300 !font-normal"
               className1="!rounded-xl !h-14 !px-3" 
               className2="!gap-1" 
               className3="!w-7" 
@@ -222,7 +222,7 @@ export default function EditPetInfo({ setIsEditPetInfo, petData }: EditPetInfoPr
               max={100} 
               value={formData.ageYear} 
               setValue={handleAgeYearChange} 
-              colorClass="!text-text-color !font-normal"
+              colorClass=" text-primary-dark  placeholder-[#7C7C7C] placeholder:font-medium focus:placeholder-slate-300 !font-normal"
               className1="!rounded-xl !h-14 !px-3"
               className2="!gap-1" className3="!w-7"
             />

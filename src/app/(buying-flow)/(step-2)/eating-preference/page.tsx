@@ -89,7 +89,7 @@ export default function EatingPreferences() {
                                         // variant="roundedEdgeInputLgSecondary"
                                         className={cn(
                                             "w-full !text-left justify-between bg-white hover:bg-white font-normal !text-primary-dark  rounded-full border border-[#A1A1A1] outline-none data-[state=open]:border-secondary-1 h-13   px-4 py-2 ",
-                                            selectedPreferences.length === 0 && "text-muted-foreground !text-[#6b6b6b]"
+                                            selectedPreferences.length === 0 && "text-muted-foreground !text-[#7C7C7C]"
                                         )}
                                     >
 
@@ -98,7 +98,7 @@ export default function EatingPreferences() {
                                                 ? selectedPreferences.join(", ")
                                                 : "Select symptoms"}
                                         </span>
-                                        <ChevronDownIcon className="size-4 text-[#6b6b6b] opacity-50" />
+                                        <ChevronDownIcon className="size-4 text-[#7C7C7C] opacity-50" />
 
                                     </Button>
                             </PopoverTrigger>
