@@ -114,11 +114,11 @@ function Calendar({
           defaultClassNames.today
         ),
         outside: cn(
-          "opacity-20 aria-selected:text-muted-foreground",
+          "opacity-[0.42] aria-selected:text-muted-foreground",
           defaultClassNames.outside
         ),
         disabled: cn(
-          "text-muted-foreground  opacity-20 ",
+          "text-muted-foreground  opacity-[0.24] ",
           defaultClassNames.disabled
         ),
         hidden: cn("invisible", defaultClassNames.hidden),
