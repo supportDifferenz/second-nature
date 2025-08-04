@@ -102,8 +102,8 @@ export default function BillingDetails({
         return "";
       case "mobile":
         if (!value) return "Mobile number is required";
-        if (!/^[0-9]{10,15}$/.test(value))
-          return "Please enter a valid mobile number (10-15 digits)";
+        if (!/^[0-9]{8}$/.test(value))
+          return "Please enter a valid mobile number (8 digits)";
         return "";
       case "address":
         if (!value.trim()) return "Address is required";
@@ -122,7 +122,7 @@ export default function BillingDetails({
     const { name, value } = e.target;
 
     if (name === "mobile") {
-      const numbersOnly = value.replace(/\D/g, "").slice(0, 15);
+      const numbersOnly = value.replace(/\D/g, "").slice(0, 8);
       setBillingFormData((prev) => ({ ...prev, [name]: numbersOnly }));
       if (touched[name]) {
         setBillingErrors((prev) => ({
