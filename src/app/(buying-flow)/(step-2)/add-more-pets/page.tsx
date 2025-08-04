@@ -47,7 +47,7 @@ export default function Page() {
       <div className="flex flex-1 flex-col items-center justify-center gap-8 bg-white">
         <Typography tag="h3" text="Add more pets?" className="text-center text-primary-dark" />
 
-        <div className="flex items-center gap-2.5 sm:gap-8 w-full sm:w-[70%] lg:w-[30%] xl:w-[28%] 2xl:w-full max-w-[800px] ">
+        <div className="flex items-center gap-2.5 sm:gap-8 w-full sm:w-[70%] lg:w-[30%] xl:w-[30%]  2xl:w-full max-w-[800px] ">
           {options.map((option, index) => {
             const isSelected = selectedOption === option.value;
             return (
@@ -84,7 +84,7 @@ export default function Page() {
                     />
                   </div>
                 </button>
-                <span className="text-[14px] text-[#999999] text-center block mt-1 max-w-[97px] mx-auto leading-snug">
+                <span className="text-[16px] text-[#808080] text-center block mt-1.5 max-w-[120px] mx-auto leading-snug">
                   {option.description}
                 </span>
               </div>
