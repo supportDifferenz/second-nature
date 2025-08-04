@@ -208,7 +208,7 @@ export default function Breed() {
               >
                 <SelectValue placeholder="Select a breed" />
               </SelectTrigger>
-              <SelectContent className="bg-white border-secondary-1 rounded-2xl text-primary-dark">
+              <SelectContent className="bg-white border-secondary-1 rounded-2xl">
                 {breedData?.result?.map((breed: string) => (
                   <SelectItem
                     key={breed}
@@ -244,7 +244,7 @@ export default function Breed() {
                 >
                   <SelectValue placeholder="Select a breed" />
                 </SelectTrigger>
-                <SelectContent className="bg-white border-secondary-1 rounded-2xl text-primary-dark">
+                <SelectContent className="bg-white border-secondary-1 rounded-2xl">
                   {crossBreedData?.result?.map((crossBreed: string) => (
                     <SelectItem
                       key={crossBreed}
