@@ -28,7 +28,7 @@ export default function AlertBar({ text, selectedCheckBox, setSelectedCheckBox }
               </div>
           }
         <div>
-            <Typography tag="span" text={text} />
+            <Typography tag="p" text={text} className='font-semibold'/>
         </div>
     </div>
   )

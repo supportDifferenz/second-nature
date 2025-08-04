@@ -107,7 +107,7 @@ export default function CartSummary() {
         <Typography
           tag="h6"
           text="Order total"
-          className="caption uppercase !font-normal text-primary-dark"
+          className="caption uppercase text-primary-dark"
         />
         <Typography
           tag="h5"

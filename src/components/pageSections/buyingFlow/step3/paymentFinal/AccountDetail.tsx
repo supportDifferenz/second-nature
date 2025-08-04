@@ -188,8 +188,8 @@ export default function AccountDetail() {
         />
         <Typography
           tag="h6"
-          text="Easily manage your plan, deliveries and profile from your online account."
-          className="!font-normal pr-2.5 text-primary-dark"
+          text="Enter your accurate information to complete your profile and manage your plans and deliveries effectively."
+          className="!font-normal pr-2.5 text-text-color"
         />
       </div>
 
