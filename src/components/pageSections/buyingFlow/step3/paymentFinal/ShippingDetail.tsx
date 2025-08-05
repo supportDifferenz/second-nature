@@ -301,6 +301,8 @@ export default function ShippingDetail() {
   useEffect(() => {
     if (isShippingEditEnabled || isBillingEditEnabled) {
       setShowPaymentDetails(false);
+    } else if(!billingFormData.firstName){
+      setShowPaymentDetails(false);
     } else {
       setShowPaymentDetails(true);
     }
@@ -442,6 +444,18 @@ export default function ShippingDetail() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    if(!selectedCheckBox){
+      setBillingFormData((prev) => ({ 
+        ...prev, 
+        firstName: shippingFormData.firstName,
+        lastName: shippingFormData.lastName,
+        mobile: shippingFormData.mobile,
+        address: shippingFormData.address,
+        aptSuite: shippingFormData.aptSuite,
+        municipality: shippingFormData.municipality,
+        useDifferentBilling: false }));
+    }
 
     const shippingValid = validateShippingForm();
     const billingValid = validateBillingForm();
