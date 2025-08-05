@@ -19,6 +19,7 @@ export default function RootLayout({
       <head>
         <title>Second Nature</title>
         <meta name="description" content="Crafted with Care for Healthier, Happier Pets" />
+        <link rel="shortcut icon" href="/images/second-nature-favicon.png" type="image/x-icon" />
       </head>
       <body className={`${dmSerifDisplay.variable} ${bellotaText.variable} antialiased dark `}>
         <QueryClientProvider client={queryClient}>

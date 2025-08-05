@@ -332,7 +332,7 @@ export default function Page() {
             </Button>
           </form>
         </div>
-        <div className="flex flex-row sm:flex-col mt-2 lg:mt-4   max-sm:justify-center">
+        <div className="flex flex-row max-[575px]:flex-wrap sm:flex-col mt-2 lg:mt-4   max-sm:justify-center">
           <Typography
             tag="h6"
             text="Don’t have an account?"
