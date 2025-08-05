@@ -211,7 +211,7 @@ export default function ShippingDetail() {
           userDetails?.billingDetails?.municipality ||
           "",
         useDifferentBilling:
-          userDetails?.billingDetails?.useDifferentBilling ?? true,
+          userDetails?.billingDetails?.useDifferentBilling ?? false,
       });
 
       // Set checkbox state based on fetched data
@@ -231,7 +231,7 @@ export default function ShippingDetail() {
           userDetails?.billingDetails?.useDifferentBilling ??
             addressData?.result?.billingAddress?.[billingAddressLength]
               ?.useDifferentBilling ??
-            true
+            false
         );
         // setSelectedCheckBox(false);
       }
@@ -670,7 +670,10 @@ export default function ShippingDetail() {
                 <Button
                   variant={"nullBtn"}
                   className="text-secondary-1 ml-3 "
-                  onClick={() => setIsShippingEditEnabled(false)}
+                  onClick={(e) => {
+                    handleSubmit(e);
+                    // setIsShippingEditEnabled(false);
+                  }}
                 >
                   Exit
                 </Button>
@@ -779,6 +782,7 @@ export default function ShippingDetail() {
             isBillingEditEnabled={isBillingEditEnabled}
             setIsBillingEditEnabled={setIsBillingEditEnabled}
             showEditBillControl={showEditBillControl}
+            handleSubmit={handleSubmit}
           />
         )}
 

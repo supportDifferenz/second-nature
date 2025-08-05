@@ -102,7 +102,7 @@ export const useUserStore = create<UserStore>()(
               address: "",
               aptSuite: "",
               municipality: "",
-              useDifferentBilling: true,
+              useDifferentBilling: false,
             },
           }
         })
