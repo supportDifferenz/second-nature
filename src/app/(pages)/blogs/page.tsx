@@ -56,11 +56,11 @@ function Page() {
       imageSrc: "/images/meal-transition.webp",
     },
     petFood: {
-      title: "Looking for",
-      highlight: "Cat Food?",
-      paragraph:
-        "Check out our nutrient-rich and irresistibly delicious Cat Bowls for optimal feline health and wellness!",
-      imageSrc: "/images/cat.webp",
+      title: "Begin Your Pet’s",
+      highlight: "Meal Journey",
+      paragraph: `Come check out our nutrient-rich, irresistibly delicious bowls for cats and dogs!
+                  Made with love, our recipes fuel optimal health, happiness, and tail wags for your furry babies!`,
+      imageSrc: "/images/multiple-pet.webp",
     },
   };
   return (
