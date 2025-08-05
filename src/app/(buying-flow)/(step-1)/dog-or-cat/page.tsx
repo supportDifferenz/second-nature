@@ -229,7 +229,7 @@ export default function DogOrCat() {
             >
               <div
                 className={`${petType === "cat" ? "border-secondary-1" : "border-gray-300"
-                  } w-full border rounded-full text-center focus:placeholder-slate-300`}
+                  } flex items-center pr-1.5 lg:pr-3 w-full border rounded-full text-center`}
               >
                 <Input
                   type="text"
@@ -241,7 +241,7 @@ export default function DogOrCat() {
                   className={`w-full border-0 text-start  font-semibold  placeholder-[#7C7C7C] placeholder:font-medium focus:placeholder-slate-300 !pr-0`}
                 />
                 {petType === "cat" && (
-                  <div className="absolute top-1 sm:top-2 sm:right-2 right-1 w-8 h-8  rounded-full p-1">
+                  <div className="w-8 h-8  rounded-full p-1">
                     <Image
                       src="/icons/checked.svg"
                       alt="Brown dog with white chest"

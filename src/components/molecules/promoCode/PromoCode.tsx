@@ -75,7 +75,7 @@ export default function PromoCode({ totalPrice, productPrice, setProductPrice, d
       <div className="relative w-full flex items-center gap-2">
         <Input
           placeholder="Referral or promo code"
-          className="flex-1 bg-white"
+          className="flex-1 bg-white max-[575px]:text-[15px]"
           variant="dottedInput"
           value={promoCodeValue}
           onChange={(e) => {
@@ -88,7 +88,7 @@ export default function PromoCode({ totalPrice, productPrice, setProductPrice, d
         {isApplied ? (
           <Button 
             variant="primaryBtn" 
-            className="absolute right-1"
+            className="absolute right-1 max-[575px]:px-3"
             onClick={handleRemove}
           >
             REMOVE
@@ -96,7 +96,7 @@ export default function PromoCode({ totalPrice, productPrice, setProductPrice, d
         ) : (
           <Button 
             variant="primaryBtn" 
-            className="absolute right-1"
+            className="absolute right-1 max-[575px]:px-3"
             onClick={handleApply}
             disabled={isPromoOfferLoading || !promoCodeValue.trim()}
           >

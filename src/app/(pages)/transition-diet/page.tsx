@@ -21,8 +21,8 @@ const footerCtaData = {
   petFood: {
     title: "Begin Your Pet’s",
     highlight: "Meal Journey",
-    paragraph:
-      "Check out our nutrient-rich and irresistibly delicious Cat Bowls for optimal feline health and wellness!",
+    paragraph: `Come check out our nutrient-rich, irresistibly delicious bowls for cats and dogs!
+                Made with love, our recipes fuel optimal health, happiness, and tail wags for your furry babies!`,
     imageSrc: "/images/multiple-pet.webp",
   },
 };
@@ -74,7 +74,7 @@ export default function TransitionDiet() {
                 <Typography
                   tag="h6"
                   text="Come check out our nutrient-rich, irresistibly delicious bowls for cats and dogs!
-Made with love, our recipes fuel optimal health, happiness, and tail wags for your furry babies!"
+                Made with love, our recipes fuel optimal health, happiness, and tail wags for your furry babies!"
                   className="w-[72%] max-sm:mt-5 sm:w-[35%] lg:w-[38%]"
                 />
               </div>

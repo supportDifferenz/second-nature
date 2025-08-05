@@ -25,7 +25,7 @@ export const InputLabeled: React.FC<InputLabeledPropsType> = ({
         {...props}
       />
       {subLabel && (
-          <span className="text-xs text-text-color max-sm:-mt-1 sm:ml-1">
+          <span className="text-xs text-text-color mt-1 sm:mt-0.5 px-1 sm:px-0 sm:ml-1">
             {subLabel}
           </span>
         )}

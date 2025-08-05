@@ -12,7 +12,7 @@ const TopHeader = () => {
       <div className="container">
         <Typography
           tag="p"
-          text={`Get ${discountPercentage}% off your first delivery -&nbsp;`}
+          text={`Get ${discountPercentage}% off your first delivery -`}
           // text="Get 30% off your first delivery -"
           className=" text-primary-light flex items-center justify-center py-2  lg:py-2.5 max-[380px]:!text-[14px]"
         >

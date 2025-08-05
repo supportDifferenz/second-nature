@@ -20,7 +20,10 @@ const mealContent = {
       description:
         "Our Beef Bowl is made up of 85% lean ground beef and nutrient-rich beef liver, is a protein-packed feast designed to fuel your dog's lifestyle enhanced with fresh carrots and spinach for fiber and antioxidants supporting healthy muscles, digestion, and a shiny coat.",
       ingredients: [
-        { image: "/images/NewLeanGroundBeefMeal.webp", name: "85% Lean Ground Beef" },
+        {
+          image: "/images/NewLeanGroundBeefMeal.webp",
+          name: "85% Lean Ground Beef",
+        },
         { image: "/images/BeefLiverMeal.webp", name: "Beef Liver" },
         { image: "/images/CarrotMeal.webp", name: "Carrots" },
         { image: "/images/SpinachMeal.webp", name: "Spinach" },
@@ -38,25 +41,24 @@ const mealContent = {
             icon: "/icons/HeartHealth.webp",
             title: "Heart Health",
             description:
-              "Rich in Coenzyme, aiding heart health and cellular energy production."
+              "Rich in Coenzyme, aiding heart health and cellular energy production.",
           },
           {
             icon: "/icons/EyeHealth.webp",
             title: "Eye Health Booster",
             description:
-              "Spinach, a natural source of lutein and beta-carotene, prevents vision issues."
+              "Spinach, a natural source of lutein and beta-carotene, prevents vision issues.",
           },
           {
             icon: "/icons/AntiInflammatory.webp",
             title: "Anti-Inflammatory",
             description:
-              "Antioxidants and omega-3s from carrots and cod liver oil reduce inflammation."
+              "Antioxidants and omega-3s from carrots and cod liver oil reduce inflammation.",
           },
           {
             icon: "/icons/Cognitive.webp",
             title: "Cognitive and Nervous System",
-            description:
-              "Choline from egg yolks support brain development."
+            description: "Choline from egg yolks support brain development.",
           },
         ],
       },
@@ -67,7 +69,10 @@ const mealContent = {
       description:
         "Our Chicken Bowl combines gently cooked chicken, nutrient-rich liver, and wholesome vegetables for a balanced, flavorful meal. Packed with essential vitamins, omega-3s, and natural calcium, it supports strong bones, digestion, and a healthy coat. Perfect nutrition to keep your dog thriving",
       ingredients: [
-        { image: "/images/ChickenBreastMeal.webp", name: "Light & Dark Chicken" },
+        {
+          image: "/images/ChickenBreastMeal.webp",
+          name: "Light & Dark Chicken",
+        },
         { image: "/images/BeefLiverMeal.webp", name: "Chicken Liver" },
         { image: "/images/CauliFlowerMeal.webp", name: "Cauliflower" },
         { image: "/images/ButternutSquashMeal.webp", name: "Squash" },
@@ -85,7 +90,7 @@ const mealContent = {
             icon: "/icons/BalancedProtein.webp",
             title: "Balanced Protein & Fats",
             description:
-              "White and dark chicken meat provides amino acids and healthy fats for sustained energy."
+              "White and dark chicken meat provides amino acids and healthy fats for sustained energy.",
           },
           {
             icon: "/icons/GutFriendly.webp",
@@ -114,7 +119,10 @@ const mealContent = {
       description:
         "Our Lamb Bowl is a delicious blend of lean lamb and liver, with sweet potatoes and broccoli to add fiber, antioxidants, and natural sweetness to every bite. This recipe offers a nutrient-dense and flavorful experience for your dog. With every bowl, your dog gets hearty, satisfying nutrition designed to keep them thriving.",
       ingredients: [
-        { image: "/images/LeanGroundLambMeal.webp", name: "85% Lean Ground Lamb" },
+        {
+          image: "/images/LeanGroundLambMeal.webp",
+          name: "85% Lean Ground Lamb",
+        },
         { image: "/images/BeefLiverMeal.webp", name: "Lamb Liver" },
         { image: "/images/SweetPotatoMeal.webp", name: "Sweet Potato" },
         { image: "/images/BroccoliMeal.webp", name: "Broccoli" },
@@ -163,7 +171,10 @@ const mealContent = {
       description:
         "Crafted with 85 % lean ground beef, taurine-rich beef heart, and nutrient-dense beef liver, our Beef Bowl for Cats delivers the species-appropriate protein and heme iron your carnivore craves. Perfectly balanced minerals and calcium from eggshell powder",
       ingredients: [
-        { image: "/images/NewLeanGroundBeefMeal.webp", name: "85% Lean Ground Beef" },
+        {
+          image: "/images/NewLeanGroundBeefMeal.webp",
+          name: "85% Lean Ground Beef",
+        },
         { image: "/images/BeefLiverMeal.webp", name: "Beef Liver" },
         { image: "/images/BeefHeartMeal.webp", name: "Beef Heart" },
         // { image: "/images/SpinachMeal.webp", name: "Spinach" },
@@ -199,8 +210,7 @@ const mealContent = {
           {
             icon: "/icons/Cognitive.webp",
             title: "Cognitive and Nervous System",
-            description:
-              "Choline from egg yolks support brain development.",
+            description: "Choline from egg yolks support brain development.",
           },
         ],
       },
@@ -229,7 +239,7 @@ const mealContent = {
             icon: "/icons/BalancedProtein.webp",
             title: "Balanced Protein & Fats",
             description:
-              "White and dark chicken meat provides amino acids and healthy fats for sustained energy."
+              "White and dark chicken meat provides amino acids and healthy fats for sustained energy.",
           },
           {
             icon: "/icons/GutFriendly.webp",
@@ -258,7 +268,10 @@ const mealContent = {
       description:
         "Succulent ground lamb with liver to supply iron and B-vitamins—ideal for cats who need a break from poultry. With zucchini ribbons and broccoli to aid digestion. A spoonful of cod-liver oil delivers sea-sourced EPA/DHA and vitamin D.Dual calcium sources ",
       ingredients: [
-        { image: "/images/LeanGroundLambMeal.webp", name: "85% Lean Ground Lamb" },
+        {
+          image: "/images/LeanGroundLambMeal.webp",
+          name: "85% Lean Ground Lamb",
+        },
         { image: "/images/BeefLiverMeal.webp", name: "Lamb Liver" },
         { image: "/images/ButternutSquashMeal.webp", name: "Squash" },
         { image: "/images/BroccoliMeal.webp", name: "Broccoli" },
@@ -299,7 +312,7 @@ const mealContent = {
         ],
       },
     },
-  }
+  },
 };
 
 const footerCtaCatData = {
@@ -317,7 +330,6 @@ const footerCtaCatData = {
       "Check out our nutrient-rich and irresistibly delicious dog Bowls for optimal feline health and wellness!",
     imageSrc: "/images/dog-cta.webp",
   },
-
 };
 const footerCtaDogData = {
   mealTransition: {
@@ -330,15 +342,13 @@ const footerCtaDogData = {
   petFood: {
     title: "Looking for",
     highlight: "Cat Food?",
-    paragraph:
-      "Check out our nutrient-rich and irresistibly delicious Cat Bowls for optimal feline health and wellness!",
+    paragraph: `Come check out our nutrient-rich, irresistibly delicious bowls for cats and dogs!
+                Made with love, our recipes fuel optimal health, happiness, and tail wags for your furry babies!`,
     imageSrc: "/images/cat.webp",
   },
-
 };
 
 export default function MealBody() {
-
   const searchParams = useSearchParams();
   const pet = searchParams.get("pet");
   console.log("Protein in meals page", pet);
@@ -346,13 +356,13 @@ export default function MealBody() {
   console.log("Protein in meals page", protein);
 
   const [selectedPet, setSelectedPet] = useState<"dog" | "cat">(
-    (pet && ["dog", "cat"].includes(pet) ? pet as "dog" | "cat" : "dog")
+    pet && ["dog", "cat"].includes(pet) ? (pet as "dog" | "cat") : "dog"
   );
   // State to manage the current selected meal type
   const [selectedMeal, setSelectedMeal] = useState<"beef" | "chicken" | "lamb">(
-    (protein && ["beef", "chicken", "lamb"].includes(protein)
-      ? protein as "beef" | "chicken" | "lamb"
-      : "beef")
+    protein && ["beef", "chicken", "lamb"].includes(protein)
+      ? (protein as "beef" | "chicken" | "lamb")
+      : "beef"
   );
 
   useEffect(() => {
@@ -407,14 +417,13 @@ export default function MealBody() {
           variant={selectedMeal === "beef" ? "primaryBtn" : "secondaryBtn"}
           className="max-sm:!px-3"
           onClick={() => {
-            handleMealSwitch("beef")
-            window.scrollTo({ top: 150, behavior: 'smooth' });
-            const element = document.getElementById('top-wrapper');
+            handleMealSwitch("beef");
+            window.scrollTo({ top: 150, behavior: "smooth" });
+            const element = document.getElementById("top-wrapper");
             if (element) {
-              element.scrollIntoView({ behavior: 'smooth' });
+              element.scrollIntoView({ behavior: "smooth" });
             }
           }}
-
         >
           {/* Beef Bowl */}
           <span className="max-sm:text-sm">Beef Bowl</span>
@@ -423,12 +432,11 @@ export default function MealBody() {
           variant={selectedMeal === "chicken" ? "primaryBtn" : "secondaryBtn"}
           className="max-sm:!px-3"
           onClick={() => {
-            handleMealSwitch("chicken")
-            const element = document.getElementById('top-wrapper');
+            handleMealSwitch("chicken");
+            const element = document.getElementById("top-wrapper");
             if (element) {
-              element.scrollIntoView({ behavior: 'smooth' });
+              element.scrollIntoView({ behavior: "smooth" });
             }
-
           }}
         >
           {/* Chicken Bowl */}
@@ -438,12 +446,11 @@ export default function MealBody() {
           variant={selectedMeal === "lamb" ? "primaryBtn" : "secondaryBtn"}
           className="max-sm:!px-3"
           onClick={() => {
-            handleMealSwitch("lamb")
-            const element = document.getElementById('top-wrapper');
+            handleMealSwitch("lamb");
+            const element = document.getElementById("top-wrapper");
             if (element) {
-              element.scrollIntoView({ behavior: 'smooth' });
+              element.scrollIntoView({ behavior: "smooth" });
             }
-
           }}
         >
           {/* Lamb Bowl */}
@@ -451,7 +458,10 @@ export default function MealBody() {
         </Button>
       </div>
 
-      <div className="w-[90%] pt-[var(--space-97-130)] sm:w-[62%] mx-auto mb-[var(--space-50-67)]" id="top-wrapper">
+      <div
+        className="w-[90%] pt-[var(--space-97-130)] sm:w-[62%] mx-auto mb-[var(--space-50-67)]"
+        id="top-wrapper"
+      >
         <Image
           src="/images/meal-bowl.webp"
           alt="meal bowl"
@@ -507,10 +517,7 @@ export default function MealBody() {
               : footerCtaCatData.petFood
           }
         />
-
       </div>
-
-
     </div>
   );
 }
