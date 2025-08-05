@@ -26,20 +26,20 @@ const MealDropdownMenu = ({
   const [isOpen, setIsOpen] = useState(false);
   const [screenSize, setScreenSize] = useState<"mobile" | "tablet" | "desktop">("desktop");
 
-  // Update screen size and open state
+  // Update screen size
   useEffect(() => {
     const handleResize = () => {
       const width = window.innerWidth;
 
       if (width <= 575) {
         setScreenSize("mobile");
-        setIsOpen(false); // closed by default on mobile
+        // Don't force close — keep user-controlled toggle
       } else if (width >= 576 && width <= 1366) {
         setScreenSize("tablet");
-        setIsOpen(true); // always open in this range
+        setIsOpen(true); // Always open on tablet
       } else {
         setScreenSize("desktop");
-        setIsOpen(false); // closed by default on desktop, open on hover only
+        setIsOpen(false); // Desktop hover-based
       }
     };
 
@@ -50,12 +50,15 @@ const MealDropdownMenu = ({
 
   const handleItemClick = (url: string, e: React.MouseEvent) => {
     e.preventDefault();
-    if (screenSize === "mobile") {
-      setIsOpen(false);
+
+    if (screenSize === "desktop") {
+      setIsOpen(false); // Close only on desktop
     }
+
     if (setIsMobileMenuOpen) {
       setIsMobileMenuOpen(false);
     }
+
     startTransition(() => {
       router.push(url);
     });
@@ -89,8 +92,7 @@ const MealDropdownMenu = ({
           className="text-primary-dark font-extrabold max-[575px]:!text-[20px]"
         />
         <div
-          className={`w-3 sm:w-2.5 h-fit relative sm:hidden xl:block group-hover:rotate-180 transition duration-75 ${isOpen ? "rotate-180" : ""
-            }`}
+          className={`w-3 sm:w-2.5 h-fit relative sm:hidden xl:block group-hover:rotate-180 transition duration-75 ${isOpen ? "rotate-180" : ""}`}
         >
           <Image
             src="/icons/black-chevron-down.svg"
@@ -126,13 +128,6 @@ const MealDropdownMenu = ({
                   <span className="grow text-primary-dark max-[575px]:!text-[20px] !font-normal subtitle">
                     {item.name}
                   </span>
-                  {/* <div className="w-[10px] xl:w-[7px] relative aspect-square">
-                    <img
-                      src="/icons/right-arrow-thin.svg"
-                      alt="arrow"
-                      className="w-full h-full"
-                    />
-                  </div> */}
                 </motion.div>
               ))}
             </div>
