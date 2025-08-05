@@ -12,7 +12,6 @@ import React from "react";
 import useAuthStore from "@/zustand/store/authDataStore";
 
 export default function Subscription() {
-
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
   const footerCtaData = {
@@ -26,8 +25,8 @@ export default function Subscription() {
     petFood: {
       title: "Begin Your Pet’s",
       highlight: "Meal Journey",
-      paragraph:
-        "Check out our nutrient-rich and irresistibly delicious Cat Bowls for optimal feline health and wellness!",
+      paragraph: `Come check out our nutrient-rich, irresistibly delicious bowls for cats and dogs!
+                  Made with love, our recipes fuel optimal health, happiness, and tail wags for your furry babies!`,
       imageSrc: "/images/multiple-pet.webp",
     },
   };

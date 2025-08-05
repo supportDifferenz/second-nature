@@ -5,6 +5,9 @@ import { Button } from '@/components/ui/button';
 import MealDropdownMenu from './MealDropdownMenu';
 import { motion } from 'framer-motion';
 import { usePathname } from 'next/navigation';
+import useAuthStore from '@/zustand/store/authDataStore';
+import { useRouter } from 'next/navigation';
+import { startTransition } from 'react';
 
 interface MobileMenuProps {
   className?: string;
@@ -89,7 +92,11 @@ const AnimatedMenuIcon = ({ isOpen }: { isOpen: boolean }) => (
 
 const MobileMenu = ({ className, isOpen, setIsOpen }: MobileMenuProps) => {
 
+  const router = useRouter();
+  
   const pathName = usePathname();
+
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
   const [isHowItWorksOpen, setIsHowItWorksOpen] = useState(false);
 
@@ -259,17 +266,60 @@ const MobileMenu = ({ className, isOpen, setIsOpen }: MobileMenuProps) => {
         <div className='flex gap-4  fixed bottom-0 w-full pt-[8dvh] py-[3dvh] px-5 sm:hidden ' style={{ background: 'linear-gradient(rgb(255 255 255 / 0%) 0%, rgb(255, 255, 255) 40%)' }}>
           <Button
             size="small"
-            className=" flex-1 py-[12px]">
+            className=" flex-1 py-[12px]"
+            onClick={() => {
+              if (isAuthenticated) {
+                startTransition(() => {
+                  router.push("/location");
+                });
+              } else {
+                startTransition(() => {
+                  router.push("/verify-mail");
+                });
+              }
+              // startTransition(() => {
+              //   router.push("/location");
+              // });
+            }}
+          >
             Get Started
           </Button>
-          <Button
+          {
+            isAuthenticated ? (
+              <Button
+                size="small"
+                className="sm:px-9 flex-1 py-[12px] text-secondary-1"
+                variant="outlinePrimaryBtn"
+                onClick={() => {
+                  startTransition(() => {
+                    router.push("/personal-information");
+                  });
+                }}
+              >
+                My Account
+              </Button>
+            ) : (
+              <Button
+                size="small"
+                className="sm:px-9 flex-1 py-[12px] text-secondary-1"
+                variant="outlinePrimaryBtn"
+                onClick={() => {
+                  startTransition(() => {
+                    router.push("/login");
+                  });
+                }}
+              >
+                Log In
+              </Button>
+            )
+          }
+          {/* <Button
             size="small"
             className="sm:px-9 flex-1 py-[12px] text-secondary-1"
             variant="outlinePrimaryBtn"
-
           >
             Log In
-          </Button>
+          </Button> */}
 
         </div>
       </div>
