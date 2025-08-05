@@ -210,8 +210,8 @@ export default function ShippingDetail() {
             ?.municipality ||
           userDetails?.billingDetails?.municipality ||
           "",
-        useDifferentBilling:
-          userDetails?.billingDetails?.useDifferentBilling ?? false,
+        useDifferentBilling: billingFormData.useDifferentBilling ?? false
+          // userDetails?.billingDetails?.useDifferentBilling ?? false,
       });
 
       // Set checkbox state based on fetched data
@@ -228,11 +228,14 @@ export default function ShippingDetail() {
           addressData?.result?.billingAddress
         );
         setSelectedCheckBox(
-          userDetails?.billingDetails?.useDifferentBilling ??
-            addressData?.result?.billingAddress?.[billingAddressLength]
-              ?.useDifferentBilling ??
-            false
-        );
+          billingFormData.useDifferentBilling ?? false
+        )
+        // setSelectedCheckBox(
+        //   userDetails?.billingDetails?.useDifferentBilling ??
+        //     addressData?.result?.billingAddress?.[billingAddressLength]
+        //       ?.useDifferentBilling ??
+        //     false
+        // );
         // setSelectedCheckBox(false);
       }
 
@@ -302,6 +305,9 @@ export default function ShippingDetail() {
       setShowPaymentDetails(true);
     }
   }, [showPaymentDetails, isShippingEditEnabled, isBillingEditEnabled]);
+
+  console.log("Shipping form data", shippingFormData);
+  console.log("Billing form data", billingFormData);
 
   const validateField = useCallback(
     (name: FormField, value: string): string => {
@@ -446,7 +452,10 @@ export default function ShippingDetail() {
       const updatedUserDetails = {
         ...userDetails,
         shippingDetails: shippingFormData,
-        billingDetails: billingFormData,
+        billingDetails: {
+          ...billingFormData,
+          useDifferentBilling: false,
+        },
       };
 
       setUserDetails(updatedUserDetails);
@@ -458,7 +467,14 @@ export default function ShippingDetail() {
               addressId: addressId,
               subId: shippingSubId,
               type: "shippingAddress",
-              formData,
+              formData: {
+                ...formData,
+                billingAddress: {
+                  ...formData.billingAddress,
+                  useDifferentBilling: false,
+                },
+              },
+              // formData,
             },
             {
               onSuccess: (response) => {
@@ -488,7 +504,14 @@ export default function ShippingDetail() {
               addressId: addressId,
               subId: billingSubId,
               type: "billingAddress",
-              formData,
+              formData: {
+                ...formData,
+                billingAddress: {
+                  ...formData.billingAddress,
+                  useDifferentBilling: false,
+                },
+              },
+              // formData,
             },
             {
               onSuccess: (response) => {
@@ -519,7 +542,14 @@ export default function ShippingDetail() {
               addressId: addressId,
               subId: shippingSubId,
               type: "shippingAddress",
-              formData,
+              formData: {
+                ...formData,
+                billingAddress: {
+                  ...formData.billingAddress,
+                  useDifferentBilling: false,
+                },
+              },
+              // formData,
             },
             {
               onSuccess: (response) => {
@@ -550,7 +580,14 @@ export default function ShippingDetail() {
               addressId: addressId,
               subId: billingSubId,
               type: "billingAddress",
-              formData,
+              formData: {
+                ...formData,
+                billingAddress: {
+                  ...formData.billingAddress,
+                  useDifferentBilling: false,
+                },
+              },
+              // formData,
             },
             {
               onSuccess: (response) => {
@@ -601,7 +638,7 @@ export default function ShippingDetail() {
                 address: billingFormData.address,
                 aptSuite: billingFormData.aptSuite,
                 municipality: billingFormData.municipality,
-                useDifferentBilling: billingFormData.useDifferentBilling,
+                useDifferentBilling: false,
               },
             ],
           },
