@@ -513,3 +513,6 @@ p {
     margin-top: -6%;
   }
 }
+input[type="password"]::-ms-reveal {
+  display: none !important;
+}
