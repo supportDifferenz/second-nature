@@ -42,8 +42,8 @@ const footerCtaData = {
   petFood: {
     title: "Begin Your Pet’s",
     highlight: "Meal Journey",
-    paragraph:
-      "Check out our nutrient-rich and irresistibly delicious Cat Bowls for optimal feline health and wellness!",
+    paragraph: `Come check out our nutrient-rich, irresistibly delicious bowls for cats and dogs!
+Made with love, our recipes fuel optimal health, happiness, and tail wags for your furry babies!`,
     imageSrc: "/images/multiple-pet.webp",
   },
 };
@@ -66,9 +66,9 @@ const missionSpecs = [
   },
 ];
 
-export default function AboutUsBody({ }: // cardTitleData,
-  // cardCaptionData,
-  AboutUsBodyProps) {
+export default function AboutUsBody({}: // cardTitleData,
+// cardCaptionData,
+AboutUsBodyProps) {
   const ribbonRef = useRef(null);
   const isRibbonInView = useInView(ribbonRef, {
     once: true,
@@ -104,7 +104,6 @@ export default function AboutUsBody({ }: // cardTitleData,
           </div>
         </motion.div>
       </div>
-
 
       <motion.div
         initial={{ opacity: 0, y: 80 }}
@@ -269,11 +268,13 @@ export default function AboutUsBody({ }: // cardTitleData,
                   ease: "easeOut",
                 }}
                 viewport={{ once: true }}
-                className={`flex flex-col sm:flex-row gap-[var(--space-10-20)] px-[var(--space-23-70)] sm:pr-0 items-center ${spec.border ? "sm:border-r-1 sm:border-[#79D2A7]" : ""
-                  } ${spec.border
+                className={`flex flex-col sm:flex-row gap-[var(--space-10-20)] px-[var(--space-23-70)] sm:pr-0 items-center ${
+                  spec.border ? "sm:border-r-1 sm:border-[#79D2A7]" : ""
+                } ${
+                  spec.border
                     ? "border border-[#79D2A7] border-y-0 sm:border-0"
                     : ""
-                  } ${spec.border ? "sm:pr-[var(--space-23-70)]" : ""}`}
+                } ${spec.border ? "sm:pr-[var(--space-23-70)]" : ""}`}
               >
                 <div className="w-[11.44vw] sm:w-[3.12vw] relative">
                   <Image
@@ -285,8 +286,9 @@ export default function AboutUsBody({ }: // cardTitleData,
                   />
                 </div>
                 <div
-                  className={`text-center ${spec.border ? "sm:pr-[var(--space-23-70)]" : ""
-                    }`}
+                  className={`text-center ${
+                    spec.border ? "sm:pr-[var(--space-23-70)]" : ""
+                  }`}
                 >
                   <Typography
                     tag="h6"
