@@ -136,7 +136,7 @@ export default function VerifyEmail() {
             <picture>
               <source srcSet="/images/verify-email.webp" media="(min-width: 992px)" />
               <source srcSet="/images/verify-email-mob.webp" media="(max-width: 991.98px)" />
-              <img src="/images/verify-email.webp" alt="Description of image" className='w-full h-[43dvh] sm:h-auto sm:max-h-[40dvh] lg:max-h-max object-cover object-top lg:object-center'/>
+              <img src="/images/verify-email.webp" alt="Description of image" className='w-full h-[36dvh] sm:h-auto sm:max-h-[40dvh] lg:max-h-max object-cover object-top lg:object-center'/>
 
             </picture>
           </div>
