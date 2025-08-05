@@ -104,7 +104,7 @@ export default function PetInfoCard({ petDetails, setIsEditPetInfo, setPetData }
           <Typography 
             tag="h6" 
             // text="4 kg"
-            text={petDetails?.currentWeight !== undefined && petDetails?.currentWeight !== null ? `${String(petDetails.currentWeight)} Kg` : ""}
+            text={petDetails?.currentWeight !== undefined && petDetails?.currentWeight !== null ? `${Number(petDetails.currentWeight).toFixed(1)} Kg` : ""}
             className="!font-medium" 
           />
         </div>
