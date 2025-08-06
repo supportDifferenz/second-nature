@@ -1,6 +1,7 @@
-import { useEffect } from "react";
+import { startTransition, useEffect } from "react";
 import Typography from "@/components/atoms/typography/Typography";
 import { X } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export interface VerificationSentPopUpProps {
   isOpen: boolean;
@@ -10,8 +11,13 @@ export interface VerificationSentPopUpProps {
 export default function VerificationSentPopUp({ isOpen, setIsOpen }: VerificationSentPopUpProps) {
   // const [isOpen, setIsOpen] = useState(true); // Popup starts open
 
+  const router = useRouter();
+
   const handleClose = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
+    startTransition(() => {
+      router.push("/");
+    })
     setIsOpen(false);
   };
 

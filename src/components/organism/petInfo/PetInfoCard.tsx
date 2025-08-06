@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import React,{ useState, useEffect } from "react";
 
-
 type PetDetails = {
   name?: string;
   gender?: string;

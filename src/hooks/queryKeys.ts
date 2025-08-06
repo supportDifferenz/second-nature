@@ -35,4 +35,5 @@ export const QUERY_KEYS = {
     GET_ALL_ALLERGIES: "getAllAllergies",
     GET_ALL_EATING_PREFERENCES: "getAllEatingPreferences",
     GET_SUBSCRIPTION_HISTORY_BY_ID: "getSubscriptionHistoryById",
+    VERIFY_OTP: "verifyOtp",
 }   

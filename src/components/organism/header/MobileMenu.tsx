@@ -291,6 +291,7 @@ const MobileMenu = ({ className, isOpen, setIsOpen }: MobileMenuProps) => {
                 className="sm:px-9 flex-1 py-[12px] text-secondary-1"
                 variant="outlinePrimaryBtn"
                 onClick={() => {
+                  setIsOpen(false);
                   startTransition(() => {
                     router.push("/personal-information");
                   });

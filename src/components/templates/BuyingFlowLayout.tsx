@@ -7,6 +7,7 @@ import { usePetStore } from "@/zustand/store/petDataStore";
 import Typography from "../atoms/typography/Typography";
 import { X } from "lucide-react";
 import { useRouter, usePathname } from "next/navigation";
+import useAuthStore from "@/zustand/store/authDataStore";
 
 export default function BuyingFlowLayout({
   children,
@@ -19,6 +20,20 @@ export default function BuyingFlowLayout({
   const router = useRouter();
   const pathname = usePathname();
   const isCheckoutPage = pathname.includes("checkout");
+  const isLocationPage = pathname.includes("location");
+  const { isAuthenticated, isEmailVerified } = useAuthStore();
+
+  if (isLocationPage) {
+    console.log("Page redirection",isAuthenticated, isEmailVerified);
+  } else if (!isAuthenticated && !isEmailVerified) {
+    console.log("Page redirection",isAuthenticated, isEmailVerified);
+    startTransition(() => {
+      router.push("/login");
+    });
+  } else {
+    console.log("Page redirection",isAuthenticated, isEmailVerified);
+  }
+  
   const { pets, selectedPetIndex, setSelectedPetIndex, removePet } = usePetStore();
   // const petNames = Object.values(pets).map((pet) => pet.name);
 
