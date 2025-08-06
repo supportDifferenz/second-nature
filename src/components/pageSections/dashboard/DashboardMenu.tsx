@@ -49,6 +49,7 @@ export default function DashboardMenu() {
   const pathname = usePathname();
   const router = useRouter()
   const logout = useAuthStore((state) => state.logout);
+  const { setIsEmailVerified } = useAuthStore();
   const { clearPetDetails } = usePetStore();
   const { clearUserDetails } = useUserStore();
 
@@ -79,6 +80,7 @@ export default function DashboardMenu() {
     logout();
     clearUserDetails();
     clearPetDetails();
+    setIsEmailVerified(false);
     startTransition(() => {
       router.push("/");
     })

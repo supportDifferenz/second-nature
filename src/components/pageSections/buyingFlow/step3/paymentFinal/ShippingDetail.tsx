@@ -179,40 +179,47 @@ export default function ShippingDetail() {
           "",
       });
 
-      setBillingFormData({
-        firstName:
-          addressData?.result?.billingAddress?.[billingAddressLength]
-            ?.firstName ||
-          userDetails?.billingDetails?.firstName ||
-          "",
-        lastName:
-          addressData?.result?.billingAddress?.[billingAddressLength]
-            ?.lastName ||
-          userDetails?.billingDetails?.lastName ||
-          "",
-        mobile:
-          addressData?.result?.billingAddress?.[billingAddressLength]
-            ?.contactNo ||
-          userDetails?.billingDetails?.mobile ||
-          "",
-        address:
-          addressData?.result?.billingAddress?.[billingAddressLength]
-            ?.address ||
-          userDetails?.billingDetails?.address ||
-          "",
-        aptSuite:
-          addressData?.result?.billingAddress?.[billingAddressLength]
-            ?.aptSuite ||
-          userDetails?.billingDetails?.aptSuite ||
-          "",
-        municipality:
-          addressData?.result?.billingAddress?.[billingAddressLength]
-            ?.municipality ||
-          userDetails?.billingDetails?.municipality ||
-          "",
-        useDifferentBilling: billingFormData.useDifferentBilling ?? false
-          // userDetails?.billingDetails?.useDifferentBilling ?? false,
-      });
+      if(!selectedCheckBox){
+        setBillingFormData({
+          ...shippingFormData,
+          useDifferentBilling: false,
+        })
+      }
+
+      // setBillingFormData({
+      //   firstName:
+      //     addressData?.result?.billingAddress?.[billingAddressLength]
+      //       ?.firstName ||
+      //     userDetails?.billingDetails?.firstName ||
+      //     "",
+      //   lastName:
+      //     addressData?.result?.billingAddress?.[billingAddressLength]
+      //       ?.lastName ||
+      //     userDetails?.billingDetails?.lastName ||
+      //     "",
+      //   mobile:
+      //     addressData?.result?.billingAddress?.[billingAddressLength]
+      //       ?.contactNo ||
+      //     userDetails?.billingDetails?.mobile ||
+      //     "",
+      //   address:
+      //     addressData?.result?.billingAddress?.[billingAddressLength]
+      //       ?.address ||
+      //     userDetails?.billingDetails?.address ||
+      //     "",
+      //   aptSuite:
+      //     addressData?.result?.billingAddress?.[billingAddressLength]
+      //       ?.aptSuite ||
+      //     userDetails?.billingDetails?.aptSuite ||
+      //     "",
+      //   municipality:
+      //     addressData?.result?.billingAddress?.[billingAddressLength]
+      //       ?.municipality ||
+      //     userDetails?.billingDetails?.municipality ||
+      //     "",
+      //   useDifferentBilling: billingFormData.useDifferentBilling ?? false
+      //     // userDetails?.billingDetails?.useDifferentBilling ?? false,
+      // });
 
       // Set checkbox state based on fetched data
       if (
@@ -410,16 +417,16 @@ export default function ShippingDetail() {
     return isValid;
   };
 
-  const validateBillingForm = (): boolean => {
+  const validateBillingForm = (data = billingFormData): boolean => {
     const newErrors: FormErrors = {} as FormErrors;
     let isValid = true;
 
-    (Object.keys(billingFormData) as (keyof BillingFormData)[]).forEach(
+    (Object.keys(data) as (keyof BillingFormData)[]).forEach(
       (key) => {
         if (key !== "useDifferentBilling") {
           const error = validateField(
             key as FormField,
-            billingFormData[key] as string
+            data[key] as string
           );
           if (error) {
             newErrors[key as FormField] = error;
@@ -445,20 +452,27 @@ export default function ShippingDetail() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if(!selectedCheckBox){
-      setBillingFormData((prev) => ({ 
-        ...prev, 
-        firstName: shippingFormData.firstName,
-        lastName: shippingFormData.lastName,
-        mobile: shippingFormData.mobile,
-        address: shippingFormData.address,
-        aptSuite: shippingFormData.aptSuite,
-        municipality: shippingFormData.municipality,
-        useDifferentBilling: false }));
+    // Merge shipping into billing if needed
+    const mergedBillingData = !selectedCheckBox
+      ? {
+          ...billingFormData,
+          firstName: shippingFormData.firstName,
+          lastName: shippingFormData.lastName,
+          mobile: shippingFormData.mobile,
+          address: shippingFormData.address,
+          aptSuite: shippingFormData.aptSuite,
+          municipality: shippingFormData.municipality,
+          useDifferentBilling: false,
+        }
+      : billingFormData;
+
+    // Optionally update state for UI
+    if (!selectedCheckBox) {
+      setBillingFormData(mergedBillingData);
     }
 
     const shippingValid = validateShippingForm();
-    const billingValid = validateBillingForm();
+    const billingValid = validateBillingForm(mergedBillingData);
 
     if (shippingValid && billingValid) {
       setIsSubmittingAddress(true);
@@ -467,7 +481,7 @@ export default function ShippingDetail() {
         ...userDetails,
         shippingDetails: shippingFormData,
         billingDetails: {
-          ...billingFormData,
+          ...mergedBillingData,
           useDifferentBilling: false,
         },
       };
@@ -646,12 +660,12 @@ export default function ShippingDetail() {
             ],
             billingAddress: [
               {
-                firstName: billingFormData.firstName,
-                lastName: billingFormData.lastName,
-                contactNo: billingFormData.mobile,
-                address: billingFormData.address,
-                aptSuite: billingFormData.aptSuite,
-                municipality: billingFormData.municipality,
+                firstName: mergedBillingData.firstName,
+                lastName: mergedBillingData.lastName,
+                contactNo: mergedBillingData.mobile,
+                address: mergedBillingData.address,
+                aptSuite: mergedBillingData.aptSuite,
+                municipality: mergedBillingData.municipality,
                 useDifferentBilling: false,
               },
             ],
