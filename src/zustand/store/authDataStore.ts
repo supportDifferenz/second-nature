@@ -5,9 +5,11 @@ import { persist } from "zustand/middleware";
 
 interface AuthState {
   isAuthenticated: boolean;
+  isEmailVerified: boolean;
   login: (accessToken: string) => void;
   logout: () => void;
   setIsAuthenticated: (isAuthenticated: boolean) => void;
+  setIsEmailVerified: (isEmailVerified: boolean) => void;
 }
 
 const getAuthStatus = () => {
@@ -21,6 +23,7 @@ const useAuthStore = create<AuthState, [["zustand/persist", AuthState]]>(
   persist(
     (set) => ({
       isAuthenticated: getAuthStatus(),
+      isEmailVerified: false,
       login: (accessToken) => {
         // localStorage.setItem("authAccessToken", accessToken);
         if (typeof window !== 'undefined') {
@@ -36,6 +39,7 @@ const useAuthStore = create<AuthState, [["zustand/persist", AuthState]]>(
         set({ isAuthenticated: false });
       },
       setIsAuthenticated: (isAuthenticated: boolean) => set({ isAuthenticated }),
+      setIsEmailVerified: (isEmailVerified: boolean) => set({ isEmailVerified }),
     }),
     {
       name: "auth",

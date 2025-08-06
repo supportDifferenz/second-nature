@@ -166,3 +166,30 @@ try {
       throw error;
   }
 };
+
+export const verifyOtp = async (
+  {
+    formData,
+  } : {
+    formData: {
+      email: string;
+      contactNo: string;
+      otp: string;
+      isWhatsapp: boolean;
+      isSubscribe: boolean;
+    }
+  }
+) => {
+  
+
+try {
+    const response = await userAxiosInstance.post(
+      `/api/user/verifyOtp`,
+      formData
+  );
+    return response.data;
+  } catch (error) {
+      console.error("Error in verify OTP", error);
+      throw error;
+  }
+};

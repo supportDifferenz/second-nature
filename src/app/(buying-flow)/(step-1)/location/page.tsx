@@ -20,12 +20,29 @@ import { startTransition } from "react";
 import { motion } from 'framer-motion';
 import { useSearchParams } from "next/navigation";
 import WelcomeBackPopUp from "@/components/organism/popUp/WelcomeBackPopUp";
+import { useVerifyOtp } from "@/hooks/userHooks/verifyOtpHook";
+import { toast } from "sonner";
+import useAuthStore from "@/zustand/store/authDataStore";
 
 function LocationContent() {
   const router = useRouter();
+  const { setIsEmailVerified } = useAuthStore();
   const searchParams = useSearchParams();
   const mailVerified = searchParams.get("mailVerified");
-  console.log("Mail verified", mailVerified);
+  const email = searchParams.get("email");
+  const code = searchParams.get("code");
+  console.log("Mail verified", mailVerified, email, code);
+  // setIsEmailVerified(true);
+
+  // useEffect(() => {
+  //   if (mailVerified === "true") {
+  //     setIsEmailVerified(true);
+  //   } else {
+  //     setIsEmailVerified(false);
+  //   }
+  // }, [mailVerified]);
+
+  const { mutate: verifyOtp } = useVerifyOtp();
 
   const { location, setLocation } = usePetStore();
   const [error, setError] = useState("");
@@ -44,6 +61,46 @@ function LocationContent() {
   ]
 
   console.log("Location ", location);
+
+  const handleVerifyOTP = () => {
+    console.log("Clicked verify otp", mailVerified, email, code);
+    verifyOtp(
+      { 
+        formData: { 
+          email: email || "", 
+          contactNo: "",
+          otp: code || "", 
+          isWhatsapp: true, 
+          isSubscribe: true, 
+        }
+      },
+    {
+      onSuccess: (data) => {
+        console.log("Data", data);
+        if(data.statusCode === 200) {
+          setIsEmailVerified(true);
+          startTransition(() => {
+            router.push("/location");
+          })
+        } else {
+          setIsEmailVerified(false);
+          startTransition(() => {
+            router.push("/")
+          })
+          toast.error(data.message || "Email verification failed");
+        }
+        // toast.success("OTP verified successfully");
+      },
+      onError: (error) => {
+        console.log("Error", error);
+        setIsEmailVerified(false);
+        startTransition(() => {
+          router.push("/")
+        })
+        toast.error((error as { response?: { data?: { message?: string } } })?.response?.data?.message || "Email verification faileddd");
+      }
+    });
+  }
 
   const handleNext = (e: React.FormEvent) => {
     e.preventDefault();
@@ -182,7 +239,7 @@ function LocationContent() {
       </form>
 
       {
-        mailVerified && <WelcomeBackPopUp />
+        mailVerified && <WelcomeBackPopUp handleVerifyOTP={handleVerifyOTP} />
       }
 
       {/* <PetLocationForm /> */}

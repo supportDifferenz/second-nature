@@ -6,7 +6,7 @@ import Typography from "@/components/atoms/typography/Typography";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 
-const WelcomeBackPopUp = () => {
+const WelcomeBackPopUp = ({ handleVerifyOTP }: { handleVerifyOTP: () => void    }) => {
 
     const router = useRouter();
 
@@ -25,6 +25,7 @@ const WelcomeBackPopUp = () => {
 
     const handleClose = () => {
         setIsOpen(false);
+        handleVerifyOTP();
         startTransition(() => {
             router.push("/location");
         });
@@ -53,9 +54,7 @@ const WelcomeBackPopUp = () => {
                         variant={"primaryBtn"}
                         className="w-full text-white"
                         onClick={() => {
-                            startTransition(() => {
-                                router.push("/location");
-                            })
+                            handleVerifyOTP();
                         }}
                     >
                         Get Started
