@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import {  useState } from "react";
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 // import { cn } from "@/lib/utils";
 
 const slides = [
@@ -26,6 +27,8 @@ const slides = [
 ];
 
 export default function BehindTheScenes() {
+
+  const router = useRouter();
   const [selectedIndex, setSelectedIndex] = useState(0);
 
   const scrollPrev = () => {
@@ -108,6 +111,9 @@ export default function BehindTheScenes() {
                   variant="secondaryBtnTextSecondary1"
                   size="md"
                   className="mt-[var(--space-30-60)] mx-auto lg:ml-0"
+                  onClick={() => {
+                    router.push("/behind-the-scenes");
+                  }}
                 >
                   Learn More
                 </Button>

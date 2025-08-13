@@ -114,15 +114,51 @@ const Footer = () => {
                   <li>
                     <BadgeTitle label="DOG" color="#00683D" />
                   </li>
-                  <li className="cursor-pointer">Meals</li>
-                  <li className="cursor-pointer">Treats</li>
-                  <li className="cursor-pointer">Ingredients</li>
+                  <li
+                  onClick={() => {
+                    startTransition(() => {
+                      router.push("/meals?pet=dog&protein=chicken");
+                    });
+                  }}
+                  className="cursor-pointer">Chicken</li>
+                  <li 
+                  onClick={() => {
+                    startTransition(() => {
+                      router.push("/meals?pet=dog&protein=beef");
+                    });
+                  }}
+                  className="cursor-pointer">Beef</li>
+                  <li
+                  onClick={() => {
+                    startTransition(() => {
+                      router.push("/meals?pet=dog&protein=lamb");
+                    });
+                  }}
+                  className="cursor-pointer">Lamb</li>
                 </ul>
                 <ul className="flex flex-col max-[575px]:flex-1 gap-2.5 ">
                   <BadgeTitle label="CAT" color="#00683D" />
-                  <li className="cursor-pointer">Meals</li>
-                  <li className="cursor-pointer">Treats</li>
-                  <li className="cursor-pointer">Ingredients</li>
+                  <li
+                  onClick={() => {
+                    startTransition(() => {
+                      router.push("/meals?pet=cat&protein=chicken");
+                    });
+                  }}
+                  className="cursor-pointer">Chicken</li>
+                  <li
+                  onClick={() => {
+                    startTransition(() => {
+                      router.push("/meals?pet=cat&protein=beef");
+                    });
+                  }}
+                  className="cursor-pointer">Beef</li>
+                  <li
+                  onClick={() => {
+                    startTransition(() => {
+                      router.push("/meals?pet=cat&protein=lamb");
+                    });
+                  }}
+                  className="cursor-pointer">Lamb</li>
                 </ul>
               </div>
             </div>
