@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import React from "react";
+import React, { startTransition } from "react";
 import {
   MealTransitionTitle,
   PetFoodLookingTitle,
@@ -23,6 +23,7 @@ interface FooterCtaCardProps {
     highlight: string;
     paragraph: string;
     imageSrc: string;
+    link?: string;
   };
   ImageWrapperClassName?: string;
 }
@@ -103,7 +104,18 @@ export default function FooterCtaCard({
               size={"md"}
               variant={"secondaryBtnTextSecondary1"}
               className="hidden sm:block"
-              onClick={() => router.push("/transition-diet")}
+              onClick={() => {
+                const link = petFood.link;
+                if(link){
+                  startTransition(() => {
+                    router.push(link);
+                  })
+                } else {
+                  startTransition(() => {
+                    router.push("/transition-diet");
+                  })
+                }
+              }}
             >
               Learn More
             </Button>

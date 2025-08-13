@@ -79,23 +79,30 @@ export default function BuyingFlowLayout({
                         removePet(pet.id)
                         // setSelectedPetIndex(0)
                         // startTransition(() => {
-                        if (selectedPetIndex !== null && selectedPetIndex === index && pets.length === 1) {
-                          setSelectedPetIndex(0);
+                        if(selectedPetIndex !== null && selectedPetIndex < pets.length - 1) {
+                          setSelectedPetIndex(0)
                           startTransition(() => {
-                            router.push("/dog-or-cat");
-                          });
-                        } else if (selectedPetIndex !== null && selectedPetIndex === index && pets.length > 1) {
-                          setSelectedPetIndex(index - 1);
-                          startTransition(() => {
-                            router.push("/add-more-pets");
-                          });
-                        } else if (selectedPetIndex !== null && selectedPetIndex > index) {
-                          setSelectedPetIndex(selectedPetIndex - 1);
+                            router.push("/gender")
+                          })
                         } else {
-                          setSelectedPetIndex(0);
-                          startTransition(() => {
-                            router.push("/dog-or-cat");
-                          });
+                          if (selectedPetIndex !== null && selectedPetIndex === index && pets.length === 1) {
+                            setSelectedPetIndex(0);
+                            startTransition(() => {
+                              router.push("/dog-or-cat");
+                            });
+                          } else if (selectedPetIndex !== null && selectedPetIndex === index && pets.length > 1) {
+                            setSelectedPetIndex(index - 1);
+                            startTransition(() => {
+                              router.push("/add-more-pets");
+                            });
+                          } else if (selectedPetIndex !== null && selectedPetIndex > index) {
+                            setSelectedPetIndex(selectedPetIndex - 1);
+                          } else {
+                            setSelectedPetIndex(0);
+                            startTransition(() => {
+                              router.push("/dog-or-cat");
+                            });
+                          }
                         }
 
                       }}
