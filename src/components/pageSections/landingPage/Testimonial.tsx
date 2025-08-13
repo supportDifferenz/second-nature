@@ -1,10 +1,11 @@
 "use client";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { startTransition, useCallback, useEffect, useState } from "react";
 import Image from "next/image";
 import { SecondaryBlockTitle } from "@/components/molecules/titleSyles/Title";
 import { Button } from "@/components/ui/button";
 import useEmblaCarousel from "embla-carousel-react";
 import Typography from "@/components/atoms/typography/Typography";
+import { useRouter } from "next/navigation";
 // import Autoplay from "embla-carousel-autoplay";
 
 const testimonials = [
@@ -41,25 +42,25 @@ const testimonials = [
 ];
 
 export default function Testimonial() {
+
+  const router = useRouter();
   const [, setAutoplayEnabled] = useState(true);
-  
+
   // Conditionally create autoplay plugin
-  // const plugins = autoplayEnabled ? [Autoplay({ 
-  //   delay: 4000, 
+  // const plugins = autoplayEnabled ? [Autoplay({
+  //   delay: 4000,
   //   stopOnInteraction: true,
   //   stopOnMouseEnter: true
   // })] : [];
 
-  const [emblaRef, emblaApi] = useEmblaCarousel(
-    {
-      loop: true,
-      align: "start",
-      slidesToScroll: 1,
-      skipSnaps: false,
-      dragFree: false,
-      containScroll: "trimSnaps",
-    },
-  );
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    loop: true,
+    align: "start",
+    slidesToScroll: 1,
+    skipSnaps: false,
+    dragFree: false,
+    containScroll: "trimSnaps",
+  });
 
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [, setIsTransitioning] = useState(false);
@@ -79,13 +80,13 @@ export default function Testimonial() {
 
   useEffect(() => {
     if (!emblaApi) return;
-    
+
     emblaApi.on("select", onSelect);
     emblaApi.on("settle", onSettle);
     emblaApi.on("init", onInit);
-    
+
     onSelect();
-    
+
     return () => {
       emblaApi.off("select", onSelect);
       emblaApi.off("settle", onSettle);
@@ -123,7 +124,15 @@ export default function Testimonial() {
             textAlign="text-center lg:text-left"
             className="ml-0 mb-(--space-8-30)"
           />
-          <Button variant="linkSecondary" className="mx-auto lg:-ml-0">
+          <Button
+            variant="linkSecondary"
+            onClick={() => {
+              startTransition(() => {
+                router.push("/reviews");
+              });
+            }}
+            className="mx-auto lg:-ml-0"
+          >
             More Reviews
             <Image
               src="/icons/secondary-1-chevron-right.svg"
@@ -157,18 +166,23 @@ export default function Testimonial() {
                 // Calculate position relative to active slide
                 const distance = (() => {
                   const diff = index - activeIndex;
-                  const altDiff = diff > 0
-                    ? diff - totalSlides
-                    : diff + totalSlides;
+                  const altDiff =
+                    diff > 0 ? diff - totalSlides : diff + totalSlides;
                   return Math.abs(diff) < Math.abs(altDiff) ? diff : altDiff;
                 })();
 
                 // Enhanced 3D effect calculations
                 const isActive = distance === 0;
-                const rotateY = isActive ? "0deg" : distance > 0 ? "-25deg" : "25deg";
+                const rotateY = isActive
+                  ? "0deg"
+                  : distance > 0
+                  ? "-25deg"
+                  : "25deg";
                 const translateZ = isActive ? "0px" : "-30px";
                 const opacity = isActive ? 1 : 0.7;
-                const zIndex = isActive ? 10 : Math.max(5 - Math.abs(distance), 1);
+                const zIndex = isActive
+                  ? 10
+                  : Math.max(5 - Math.abs(distance), 1);
 
                 return (
                   <div
@@ -225,7 +239,6 @@ export default function Testimonial() {
               onClick={scrollPrev}
             />
 
-            
             <Image
               src="/icons/secondary-1-arrow-next.svg"
               alt="Next"
