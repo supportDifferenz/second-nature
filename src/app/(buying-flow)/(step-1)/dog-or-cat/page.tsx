@@ -141,8 +141,10 @@ export default function DogOrCat() {
     // setSelectedPetIndex(0); // Reset selected pet index to 0
   };
 
-  const isNextDisable =
-    pets?.length > 0 ? false : !(petType && petName.trim() !== "");
+  // const isNextDisable =
+  //   pets?.length > 0 ? false : !(petType && petName.trim() !== "");
+
+  const isNextDisable = !(petType && petName.trim() !== "");
 
   return (
     <BuyingFlowLayout step={1}>

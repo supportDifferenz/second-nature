@@ -28,7 +28,7 @@ export default function BuyingFlowLayout({
   } else if (!isAuthenticated && !isEmailVerified) {
     console.log("Page redirection",isAuthenticated, isEmailVerified);
     startTransition(() => {
-      router.push("/login");
+      router.push("/verify-mail");
     });
   } else {
     console.log("Page redirection",isAuthenticated, isEmailVerified);
@@ -77,11 +77,35 @@ export default function BuyingFlowLayout({
                       className="absolute -top-1 -right-1 cursor-pointer text-secondary-1 font-bold rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
                       onClick={() => {
                         removePet(pet.id)
-                        setSelectedPetIndex(0)
-                        startTransition(() => {
-                          router.push("/dog-or-cat")
-                        })
+                        // setSelectedPetIndex(0)
+                        // startTransition(() => {
+                        if (selectedPetIndex !== null && selectedPetIndex === index && pets.length === 1) {
+                          setSelectedPetIndex(0);
+                          startTransition(() => {
+                            router.push("/dog-or-cat");
+                          });
+                        } else if (selectedPetIndex !== null && selectedPetIndex === index && pets.length > 1) {
+                          setSelectedPetIndex(index - 1);
+                          startTransition(() => {
+                            router.push("/add-more-pets");
+                          });
+                        } else if (selectedPetIndex !== null && selectedPetIndex > index) {
+                          setSelectedPetIndex(selectedPetIndex - 1);
+                        } else {
+                          setSelectedPetIndex(0);
+                          startTransition(() => {
+                            router.push("/dog-or-cat");
+                          });
+                        }
+
                       }}
+                      // onClick={() => {
+                      //   removePet(pet.id)
+                      //   setSelectedPetIndex(0)
+                      //   startTransition(() => {
+                      //     router.push("/dog-or-cat")
+                      //   })
+                      // }}
                     >
                       <X size={12} />
                     </button>
