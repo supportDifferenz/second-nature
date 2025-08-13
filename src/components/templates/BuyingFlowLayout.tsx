@@ -80,10 +80,25 @@ export default function BuyingFlowLayout({
                         // setSelectedPetIndex(0)
                         // startTransition(() => {
                         if(selectedPetIndex !== null && selectedPetIndex < pets.length - 1) {
-                          setSelectedPetIndex(0)
-                          startTransition(() => {
-                            router.push("/gender")
-                          })
+                          if(selectedPetIndex === index) {
+                            if(selectedPetIndex === 0){
+                              setSelectedPetIndex(0)
+                            } else {
+                              setSelectedPetIndex(selectedPetIndex - 1)
+                            }
+                            startTransition(() => {
+                              router.push("/gender");
+                            });
+                          } else if (selectedPetIndex > index) {
+                            setSelectedPetIndex(selectedPetIndex - 1);
+                          } else if (selectedPetIndex < index) {
+                            setSelectedPetIndex(selectedPetIndex);
+                          } else {
+                            setSelectedPetIndex(0)
+                            startTransition(() => {
+                              router.push("/gender")
+                            })
+                          }
                         } else {
                           if (selectedPetIndex !== null && selectedPetIndex === index && pets.length === 1) {
                             setSelectedPetIndex(0);
