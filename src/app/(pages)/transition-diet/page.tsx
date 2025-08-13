@@ -7,8 +7,9 @@ import TransitionPlan from "@/components/pageSections/transitionDiet/TransitionP
 import MainLayout from "@/components/templates/MainLayout";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import React from "react";
+import React, { startTransition } from "react";
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 const footerCtaData = {
   mealTransition: {
@@ -28,6 +29,7 @@ const footerCtaData = {
 };
 
 export default function TransitionDiet() {
+  const router = useRouter();
   const petFood = footerCtaData.petFood;
 
   return (
@@ -81,8 +83,13 @@ export default function TransitionDiet() {
               <Button
                 variant={"primaryBtn"}
                 className="mx-auto max-sm:mt-7 mt-[8.4vw] sm:hidden"
+                onClick={() => {
+                  startTransition(() => {
+                    router.push("/location");
+                  });
+                }}
               >
-                Know More
+                Get Started
               </Button>
             </div>
             <div className="flex items-center px-[3.12vw]  sm:sm:px-[3.12vw] w-full h-[20%] lg:h-[30%] rounded-b-2xl bg-secondary-1">
@@ -90,10 +97,15 @@ export default function TransitionDiet() {
               <Button
                 size={"md"}
                 variant={"secondaryBtnTextSecondary1"}
+                onClick={() => {
+                  startTransition(() => {
+                    router.push("/location");
+                  });
+                }}
                 className="hidden sm:block"
                 // className="hidden sm:block lg:ml-[35%]"
               >
-                Learn More
+                Get Started
               </Button>
             </div>
             <div className="absolute top-[62%] sm:top-auto left-[16%] sm:left-auto sm:right-[-5%] bottom-[-5%] sm:bottom-[-10%] inset-0 w-[60.5vw] sm:w-[36vw] lg:w-[28.22vw]">

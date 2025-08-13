@@ -1,10 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { startTransition, useState } from "react";
 import { Button } from "@/components/ui/button";
 import Typography from "@/components/atoms/typography/Typography";
 import { AnimatePresence, motion } from "framer-motion";
+import { useRouter } from "next/navigation";
+import useAuthStore from "@/zustand/store/authDataStore";
 
 export const ingredientSlides = [
   {
@@ -12,7 +14,7 @@ export const ingredientSlides = [
     description:
       "Your food uses fresh, human-grade ingredients, while kibble often contains fillers like corn, wheat, and soy.",
     image: "/images/ingredients-section-1-thumb.webp",
-    buttonLabel: "Explore Ingredients",
+    buttonLabel: "Get Started",
     buttonLink: "#",
   },
   {
@@ -20,7 +22,7 @@ export const ingredientSlides = [
     description:
       "Your meals are gently cooked to preserve nutrients, unlike kibble, which is processed at high temperatures, reducing nutritional value.",
     image: "/images/ingredients-section-2-thumb.webp",
-    buttonLabel: "How it works",
+    buttonLabel: "Get Started",
     buttonLink: "#",
   },
   {
@@ -34,6 +36,9 @@ export const ingredientSlides = [
 ];
 
 export default function IngredientsCarousel() {
+  const router = useRouter();
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const nextSlide = () =>
@@ -49,14 +54,23 @@ export default function IngredientsCarousel() {
   return (
     <div className="container relative ">
       {/* Green Card */}
-      <div
-        className="w-full shadow-[inset_6px_6px_16px_0px_rgba(0,0,0,0.55)] bg-primary-dark rounded-full p-6 pb-[37px] sm:pb-[150px] lg:pb-6 flex flex-col lg:flex-row gap-[30px] sm:gap-[50px] lg:gap-[3%] items-stretch lg:place-items-stretch sm:max-w-[400px] mx-auto lg:max-w-max h-[730px] sm:h-auto relative"
-      >
+      <div className="w-full shadow-[inset_6px_6px_16px_0px_rgba(0,0,0,0.55)] bg-primary-dark rounded-full p-6 pb-[37px] sm:pb-[150px] lg:pb-6 flex flex-col lg:flex-row gap-[30px] sm:gap-[50px] lg:gap-[3%] items-stretch lg:place-items-stretch sm:max-w-[400px] mx-auto lg:max-w-max h-[730px] sm:h-auto relative">
         <div className="absolute max-w-[794px] w-[50%] right-[30px] top-[55%] sm:top-1/2 transform -translate-y-1/2">
           <picture>
-            <source media="(max-width: 991px)" srcSet="/images/ingredients-carousel-mob-bg.webp" />
-            <source media="(min-width: 992px)" srcSet="/images/ingredients-carousel-bg.webp" />
-            <img src="/images/ingredients-carousel-bg.webp" alt="Delicious meal" loading="lazy" className="object-contain w-full h-full" />
+            <source
+              media="(max-width: 991px)"
+              srcSet="/images/ingredients-carousel-mob-bg.webp"
+            />
+            <source
+              media="(min-width: 992px)"
+              srcSet="/images/ingredients-carousel-bg.webp"
+            />
+            <img
+              src="/images/ingredients-carousel-bg.webp"
+              alt="Delicious meal"
+              loading="lazy"
+              className="object-contain w-full h-full"
+            />
           </picture>
         </div>
 
@@ -103,7 +117,15 @@ export default function IngredientsCarousel() {
                 text={currentSlide.description}
                 className="!font-normal mb-9 max-w-[90%] lg:max-w-[80%] mx-auto sm:max-w-max sm:mx-0"
               />
-              <Button variant="linkContrastBtn" className="mx-auto lg:mx-0">
+              <Button
+                variant="linkContrastBtn"
+                onClick={() => {
+                  startTransition(() => {
+                    router.push(isAuthenticated ? "/location" : "/verify-mail");
+                  });
+                }}
+                className="mx-auto lg:mx-0"
+              >
                 {currentSlide.buttonLabel}
                 <Image
                   src="/icons/contrast-button-chevron-right.svg"
